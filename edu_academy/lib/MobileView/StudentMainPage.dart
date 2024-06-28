@@ -19,15 +19,16 @@ class _StudentMainPageState extends State<StudentMainPage> {
         child: Column(
           children: [
             Container(
-              height: 50,
+              height: 70,
               decoration: BoxDecoration(color: Color.fromARGB(255, 74, 193, 241),borderRadius: BorderRadius.circular(10)),
               child: Row(
                 children: [
                   Expanded(
                       flex: 1,
                       child: Container(
+                        
                           height: 50,
-                          padding: EdgeInsets.all(10),
+                          padding: EdgeInsets.only(top: 20),
                           alignment: Alignment.center,
                           child: InkWell(
                               onTap: () {
@@ -61,6 +62,7 @@ class _StudentMainPageState extends State<StudentMainPage> {
                       child: InkWell(
                         onTap: () {},
                         child: Container(
+                          padding: EdgeInsets.only(top: 20),
                           decoration: BoxDecoration(color: Color.fromARGB(255, 74, 193, 241),borderRadius: BorderRadius.circular(10)),
                           height: 50,
                           child: Icon(Icons.notifications),

@@ -18,12 +18,12 @@ class _SplashViewPageState extends State<SplashViewPage>
   void initState() {
     super.initState();
     animationController = AnimationController(
-        vsync: this, duration: Duration(milliseconds: 2000));
+        vsync: this, duration: Duration(milliseconds: 3000));
     fading = Tween<double>(begin: 0, end: 1).animate(animationController!)
       ..addListener(() {
         setState(() {
           if (animationController!.isCompleted) {
-            Timer(Duration(seconds: 1), () {
+            Timer(Duration(milliseconds: 300), () {
               Navigator.pushReplacementNamed(context, "LogInPage");
             });
           }
@@ -38,11 +38,14 @@ class _SplashViewPageState extends State<SplashViewPage>
       body: Container(
         height: double.infinity,
         width: double.infinity,
-        decoration: BoxDecoration(gradient: LinearGradient(begin: Alignment.bottomLeft,end: Alignment.topRight,colors: [
-        Color.fromARGB(255, 8, 125, 159),
-        Color.fromARGB(255, 74, 193, 241)
-      ])
-        ),
+        decoration: BoxDecoration(
+            gradient: LinearGradient(
+                begin: Alignment.bottomLeft,
+                end: Alignment.topRight,
+                colors: [
+              Color.fromARGB(255, 8, 125, 159),
+              Color.fromARGB(255, 74, 193, 241)
+            ])),
         alignment: Alignment.center,
         child: Padding(
           padding: const EdgeInsets.all(10.0),

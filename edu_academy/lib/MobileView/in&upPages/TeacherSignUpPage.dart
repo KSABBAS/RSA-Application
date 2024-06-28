@@ -39,7 +39,7 @@ class _TeacherSignUpPageState extends State<TeacherSignUpPage> {
                           child: Row(
                         children: [
                           Expanded(
-                            flex: 10,
+                            flex: 4,
                             child: Column(
                               children: [
                                 Expanded(
@@ -54,21 +54,22 @@ class _TeacherSignUpPageState extends State<TeacherSignUpPage> {
                                         icon: Icon(Icons.arrow_back)),
                                   ),
                                 ),
-                                Expanded(
+                                Expanded(flex: 2,
                                   child: Container(
                                       alignment: Alignment.bottomLeft,
                                       child: Container(
-                                        padding: EdgeInsets.fromLTRB(20, 20, 20, 10),
+                                        padding: EdgeInsets.fromLTRB(0, 40, 20, 0),
                                         alignment: Alignment.center,
                                         child: Text(
                                           "Sign up",
                                           style: TextStyle(
-                                              fontSize: 20,
+                                              fontSize: 35,
                                               color:
                                                   Color.fromARGB(255, 8, 125, 159),
                                               fontWeight: FontWeight.w700),
                                         ),
-                                        width: 120,
+                                        width: 160,
+                                        height: 160,
                                         decoration: BoxDecoration(
                                           borderRadius: BorderRadius.only(
                                               bottomLeft: Radius.zero,
@@ -83,15 +84,21 @@ class _TeacherSignUpPageState extends State<TeacherSignUpPage> {
                               ],
                             ),
                           ),
-                          Expanded(
-                              flex: 12,
-                              child: Container(
-                                  height: double.infinity,
-                                  alignment: Alignment.topCenter,
-                                  child: Image.asset(
-                                    "images/Logo.png",
-                                    fit: BoxFit.fill,
-                                  )))
+                          Expanded(flex: 3,
+                          child: Column(
+                            children: [
+                              Expanded(child: Container(),),
+                              Expanded(flex: 3,
+                                child: Container(
+                                    height: double.infinity,
+                                    alignment: Alignment.topCenter,
+                                    child: Image.asset(
+                                      "images/Logo.png",
+                                      fit: BoxFit.fill,
+                                    )),
+                              ),
+                            ],
+                          ))
                         ],
                       )),
                     ],
@@ -103,7 +110,7 @@ class _TeacherSignUpPageState extends State<TeacherSignUpPage> {
             Expanded(
               child: Container(
                 color: const Color.fromARGB(255, 255, 255, 255),
-                height: 1000,
+                height: 1050,
                 width: 300,
                 child: Padding(
                   padding: const EdgeInsets.only(left: 30, right: 30),
@@ -191,7 +198,6 @@ class _TeacherSignUpPageState extends State<TeacherSignUpPage> {
                               style: TextStyle(
                                   fontSize: 18, fontWeight: FontWeight.w600),
                             ),
-                            icon: Icon(Icons.password),
                             enabledBorder: OutlineInputBorder(
                                 borderSide: BorderSide(
                                     color: Color.fromARGB(255, 192, 192, 192)),
@@ -212,48 +218,50 @@ class _TeacherSignUpPageState extends State<TeacherSignUpPage> {
                         ),
                       ),
                     ),
-                    Padding(padding: EdgeInsets.only(top: 20)),
+                    Expanded(child: Container()),
                     Row(
                       children: [
                         Expanded(child: Container()),
-                        Expanded(child:Container(
-                          
+                        Expanded(flex: 5,child:Container(
                           child: TextField(
+                            style: TextStyle(fontSize: 16),
                             onChanged: (value) {
                               TeacherDayOfBirth = value;
                               TeacherDateOfBirth =
                                   "$TeacherDayOfBirth/$TeacherMonthOfBirth/$TeacherYearOfBirth";
                             },
-                            decoration: InputDecoration(label: Text("Day")),style: TextStyle(fontSize: 10),
+                            decoration: InputDecoration(label: Text("Day",style: TextStyle(fontSize: 12),))
                           ),
                         )),
                         Text(
                           "  /  ",
                           style: TextStyle(fontSize: 30),
                         ),
-                        Expanded(child:Container(
+                        Expanded(flex: 5,child:Container(
                           child: TextField(
+                            style: TextStyle(fontSize: 16),
                             onChanged: (value) {
                               TeacherMonthOfBirth = value;
                               TeacherDateOfBirth =
                                   "$TeacherDayOfBirth/$TeacherMonthOfBirth/$TeacherYearOfBirth";
                             },
-                            decoration: InputDecoration(label: Text("Month",style: TextStyle(fontSize: 10))),
+                            decoration: InputDecoration(label: Text("Month",style: TextStyle(fontSize: 12))),
                           ),
                         )),
                         Text(
                           "  /  ",
                           style: TextStyle(fontSize: 30),
                         ),
-                        Expanded(
+                        Expanded(flex: 5,
                           child: Container(
                             child: TextField(
+                              style: TextStyle(fontSize: 16),
                               onChanged: (value) {
                               TeacherYearOfBirth = value;
                                 TeacherDateOfBirth =
                                     "$TeacherDayOfBirth/$TeacherMonthOfBirth/$TeacherYearOfBirth";
                               },
-                              decoration: InputDecoration(label: Text("Year",style: TextStyle(fontSize: 10))),
+                              decoration: InputDecoration(label: Text("Year",style: TextStyle(fontSize: 12))),
                             ),
                           ),
                         ),
@@ -272,11 +280,10 @@ class _TeacherSignUpPageState extends State<TeacherSignUpPage> {
                     Expanded(child:Container()),
                     Row(
                       children: [
-                    
                         Expanded(
                             child: Container(decoration: BoxDecoration(borderRadius: BorderRadius.circular(20),color: const Color.fromARGB(96, 216, 216, 216),),child:RadioListTile(
                                 activeColor: Color.fromARGB(255, 74, 193, 241),
-                                title: Text("Male",style: TextStyle(fontSize: 13,fontWeight: FontWeight.w500),),
+                                title: Text("Male",style: TextStyle(fontSize: 10,fontWeight: FontWeight.w500),),
                                 value: "Male",
                                 groupValue: TeacherGeneder,
                                 onChanged: (val) {
@@ -288,7 +295,7 @@ class _TeacherSignUpPageState extends State<TeacherSignUpPage> {
                         Expanded(
                             child: Container(decoration: BoxDecoration(borderRadius: BorderRadius.circular(20),color: const Color.fromARGB(96, 216, 216, 216),),child:RadioListTile(
                                 activeColor: Color.fromARGB(255, 74, 193, 241),
-                                title: Text("Female",style: TextStyle(fontSize: 13,fontWeight: FontWeight.w500)),
+                                title: Text("Female",style: TextStyle(fontSize: 10,fontWeight: FontWeight.w500)),
                                 value: "Female",
                                 groupValue: TeacherGeneder,
                                 onChanged: (val) {
