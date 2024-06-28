@@ -1,4 +1,5 @@
 import 'package:edu_academy/MobileView/StudentHomePage.dart';
+import 'package:edu_academy/MobileView/SubjectPage.dart';
 import 'package:edu_academy/MobileView/in&upPages/ParentSignUpPage.dart';
 import 'package:edu_academy/MobileView/in&upPages/StudentMobileSignUpPage.dart';
 import 'package:edu_academy/MobileView/in&upPages/TeacherSignUpPage.dart';

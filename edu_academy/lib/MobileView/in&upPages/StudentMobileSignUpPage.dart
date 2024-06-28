@@ -422,10 +422,10 @@ class _StudentMobileSignUpPageState extends State<StudentMobileSignUpPage> {
                                     child: Text("Grade 12"),
                                     value: "Grade 12",
                                   ),
-                                  // DropdownMenuItem(
-                                  //   child: Text("others"),
-                                  //   value: "others",
-                                  // ),
+                                  DropdownMenuItem(
+                                    child: Text("others"),
+                                    value: "others",
+                                  ),
                                 ],
                                 onChanged: (val) {
                                   setState(() {
