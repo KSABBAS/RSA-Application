@@ -182,6 +182,7 @@ class _WhatAreYouPageState extends State<WhatAreYouPage> {
                               Expanded(flex: 2, child: Container()),
                               InkWell(
                                 onTap: () {
+                                  if (as!="")
                                   Navigator.pushNamed(context, as);
                                 },
                                 child: Container(

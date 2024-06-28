@@ -87,7 +87,6 @@ class _StudentMainPageState extends State<StudentMainPage> {
                   Expanded(
                       flex: 1,
                       child: Container(
-                        
                           height: 50,
                           padding: EdgeInsets.only(top: 20),
                           alignment: Alignment.center,
@@ -132,7 +131,9 @@ class _StudentMainPageState extends State<StudentMainPage> {
                 ],
               ),
             ),
-            Expanded(flex: 8, child: Container()),
+            Expanded(flex: 8, child: Container(
+
+            )),
           ],
         ),
       ),
@@ -265,7 +266,7 @@ class _StudentMainPageState extends State<StudentMainPage> {
         color: Color.fromARGB(255, 74, 193, 241),
         backgroundColor: const Color.fromARGB(255, 255, 255, 255),
           index: PageIndex,
-          height: 60,
+          height: 75,
           onTap: (val) {
             setState(() {
               PageIndex = val;
@@ -277,11 +278,11 @@ class _StudentMainPageState extends State<StudentMainPage> {
                   color: Colors.black,
                 ),
             Icon(
-                  Icons.book,
+                  Icons.menu_book,
                   color: Colors.black,
                 ),
             Icon(
-                  Icons.menu_book,
+                  Icons.book,
                   color: Colors.black,
                 ),
              Icon(

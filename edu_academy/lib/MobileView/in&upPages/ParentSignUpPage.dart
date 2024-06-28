@@ -13,8 +13,6 @@ List ll = [2.2];
 class _ParentSignUpPageState extends State<ParentSignUpPage> {
   @override
   Widget build(BuildContext context) {
-    SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual,
-        overlays: [SystemUiOverlay.bottom]);
     final Sheigt = MediaQuery.of(context).size.height;
     ll.add(Sheigt);
     double Sheight = ll[1];
