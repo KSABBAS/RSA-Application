@@ -24,5 +24,5 @@ void main() {
         "TeacherSignUpPage": (context) => TeacherSignUpPage(),
       },
       home: SplashViewPage()));
-  SystemChrome.setEnabledSystemUIMode(SystemUiMode.leanBack);
+  SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersiveSticky);
 }

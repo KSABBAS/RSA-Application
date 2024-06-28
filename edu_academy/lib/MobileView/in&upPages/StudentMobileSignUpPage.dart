@@ -338,7 +338,7 @@ class _StudentMobileSignUpPageState extends State<StudentMobileSignUpPage> {
                       Expanded(
                           child: Container(decoration: BoxDecoration(borderRadius: BorderRadius.circular(20),color: const Color.fromARGB(96, 216, 216, 216),),child:RadioListTile(
                               activeColor: Color.fromARGB(255, 74, 193, 241),
-                              title: Text("Female",style: TextStyle(fontSize: 13,fontWeight: FontWeight.w500)),
+                              title: Text("Female",style: TextStyle(fontSize: 10,fontWeight: FontWeight.w500)),
                               value: "Female",
                               groupValue: StudentGender,
                               onChanged: (val) {
@@ -366,6 +366,14 @@ class _StudentMobileSignUpPageState extends State<StudentMobileSignUpPage> {
                                 underline: Container(),
                                 value: StudentGrade,
                                 items: [
+                                  DropdownMenuItem(
+                                    child: Text("KG 1"),
+                                    value: "Grade 1",
+                                  ),
+                                  DropdownMenuItem(
+                                    child: Text("KG 2"),
+                                    value: "Grade 2",
+                                  ),
                                   DropdownMenuItem(
                                     child: Text("Grade 1"),
                                     value: "Grade 1",
@@ -413,6 +421,10 @@ class _StudentMobileSignUpPageState extends State<StudentMobileSignUpPage> {
                                   DropdownMenuItem(
                                     child: Text("Grade 12"),
                                     value: "Grade 12",
+                                  ),
+                                  DropdownMenuItem(
+                                    child: Text("others"),
+                                    value: "others",
                                   ),
                                 ],
                                 onChanged: (val) {
@@ -468,7 +480,7 @@ class _StudentMobileSignUpPageState extends State<StudentMobileSignUpPage> {
                           alignment: Alignment.centerLeft,
                           child: TextButton(
                             onPressed: () {
-                              Navigator.pushNamed(context, "WhatAreYouPage");
+                              Navigator.pushNamed(context, "LogInPage");
                             },
                             child: Text(
                               "Log in",

@@ -54,22 +54,23 @@ class _ParentSignUpPageState extends State<ParentSignUpPage> {
                                       icon: Icon(Icons.arrow_back)),
                                 ),
                               ),
-                              Expanded(
+                              Expanded(flex: 2,
                                 child: Container(
                                     alignment: Alignment.bottomLeft,
                                     child: Container(
                                       padding:
-                                          EdgeInsets.fromLTRB(20, 20, 20, 10),
+                                          EdgeInsets.fromLTRB(0, 40, 20, 0),
                                       alignment: Alignment.center,
                                       child: Text(
                                         "Sign up",
                                         style: TextStyle(
-                                            fontSize: 40,
+                                            fontSize: 35,
                                             color: Color.fromARGB(
                                                 255, 8, 125, 159),
                                             fontWeight: FontWeight.w700),
                                       ),
-                                      width: 120,
+                                      width: 160,
+                                      height: 160,
                                       decoration: BoxDecoration(
                                         borderRadius: BorderRadius.only(
                                             bottomLeft: Radius.zero,
@@ -279,7 +280,7 @@ class _ParentSignUpPageState extends State<ParentSignUpPage> {
                           alignment: Alignment.centerLeft,
                           child: TextButton(
                             onPressed: () {
-                              Navigator.pushNamed(context, "WhatAreYouPage");
+                              Navigator.pushNamed(context, "LogInPage");
                             },
                             child: Text(
                               "Log in",

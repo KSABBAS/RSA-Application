@@ -364,7 +364,7 @@ class _TeacherSignUpPageState extends State<TeacherSignUpPage> {
                             alignment: Alignment.centerLeft,
                             child: TextButton(
                               onPressed: () {
-                                Navigator.pushNamed(context, "WhatAreYouPage");
+                                Navigator.pushNamed(context, "LogInPage");
                               },
                               child: Text(
                                 "Log in",
