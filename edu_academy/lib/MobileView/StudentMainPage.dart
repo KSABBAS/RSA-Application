@@ -395,6 +395,7 @@ class _StudentMainPageState extends State<StudentMainPage> {
                   SubjectIndex: SubjectOpend,
                   Subjects: Subjects,
                 )),
+                Padding(padding: EdgeInsets.only(bottom: 10))
           ],
         ),
       ),
