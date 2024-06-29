@@ -114,7 +114,7 @@ class _SubjectPageState extends State<SubjectPage> {
                         MaterialButton(color: Color.fromARGB(255, 18, 207, 60),onPressed: (){},
                         child: Text(
                           "تشغيل",
-                          // 
+                          
                           style: TextStyle(
                               fontSize: 15,
                               fontWeight: FontWeight.w600,
