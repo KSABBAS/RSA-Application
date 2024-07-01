@@ -257,7 +257,6 @@ class _StudentMainPageState extends State<StudentMainPage> {
             ),
             Padding(padding: EdgeInsets.only(top: 10)),
             Expanded(
-              child: Container(
                 child: GridView.builder(
                   itemCount: Subjects.length,
                   gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
@@ -310,7 +309,6 @@ class _StudentMainPageState extends State<StudentMainPage> {
                   },
                 ),
               ),
-            ),
             Padding(padding: EdgeInsets.only(bottom: 10))
           ],
         ),
@@ -395,7 +393,7 @@ class _StudentMainPageState extends State<StudentMainPage> {
                   SubjectIndex: SubjectOpend,
                   Subjects: Subjects,
                 )),
-                Padding(padding: EdgeInsets.only(bottom: 10))
+                Padding(padding: EdgeInsets.only(bottom: 10)),
           ],
         ),
       ),

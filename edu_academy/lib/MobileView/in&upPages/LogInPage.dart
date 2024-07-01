@@ -159,6 +159,7 @@ class _LoginPageState extends State<LogInPage> {
                   onTap: () {
                     setState(() {
                       loggedIn = true;
+                      // 
                     });
                     if (loggedIn) {
                       Navigator.pushReplacementNamed(

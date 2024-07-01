@@ -10,7 +10,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:edu_academy/SplashViewPage.dart';
-
 void main() {
   runApp(
     

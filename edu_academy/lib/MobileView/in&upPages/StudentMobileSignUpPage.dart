@@ -362,7 +362,7 @@ class _StudentMobileSignUpPageState extends State<StudentMobileSignUpPage> {
                           child: Container(
                             height: 30,
                             width: 100,
-                            child: DropdownButton<String>(
+                            child: DropdownButton(
                                 underline: Container(),
                                 value: StudentGrade,
                                 items: [
