@@ -1,5 +1,5 @@
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
-import 'package:edu_academy/MobileView/SubjectPage.dart';
+import 'package:edu_academy/MobileView/SecondPage.dart';
 import 'package:flutter/material.dart';
 import 'package:edu_academy/MobileView/in&upPages/LogInPage.dart';
 
@@ -11,7 +11,6 @@ class StudentMainPage extends StatefulWidget {
 }
 
 int PageIndex = 0;
-int SubjectOpend = 0;
 List<List<Color>> col = [
   [Color.fromARGB(255, 9, 220, 206), Color.fromARGB(255, 146, 206, 22)],
   [Color.fromARGB(255, 247, 68, 110), Color.fromARGB(255, 148, 80, 225)],
@@ -233,82 +232,7 @@ class _StudentMainPageState extends State<StudentMainPage> {
               ),
             ),
             Padding(padding: EdgeInsets.only(top: 15)),
-            Container(
-              alignment: Alignment.center,
-              width: double.infinity,
-              height: 50,
-              decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(15),
-                  gradient: LinearGradient(
-                      begin: Alignment.centerLeft,
-                      end: Alignment.centerRight,
-                      colors: [
-                        Color.fromARGB(255, 180, 18, 134),
-                        Color.fromARGB(255, 89, 8, 66),
-                        const Color.fromARGB(255, 180, 18, 134),
-                      ])),
-              child: Text(
-                "الكتب الدراسية",
-                style: TextStyle(
-                    fontSize: 30,
-                    color: const Color.fromARGB(255, 255, 255, 255),
-                    fontWeight: FontWeight.w600),
-              ),
-            ),
-            Padding(padding: EdgeInsets.only(top: 10)),
-            Expanded(
-                child: GridView.builder(
-                  itemCount: Subjects.length,
-                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                      crossAxisCount: 2,
-                      mainAxisSpacing: 10,
-                      crossAxisSpacing: 10),
-                  itemBuilder: (context, index) {
-                    return InkWell(
-                      onTap: () {
-                        setState(() {
-                          PageIndex = 2;
-                          SubjectOpend = index;
-                        });
-                      },
-                      child: Container(
-                        padding: EdgeInsets.all(10),
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(10),
-                          gradient: LinearGradient(
-                              begin: Alignment.bottomLeft,
-                              end: Alignment.topRight,
-                              colors: [
-                                col[index][0],
-                                col[index][1],
-                              ]),
-                        ),
-                        child: Column(
-                          children: [
-                            Expanded(
-                                child: Container(
-                              alignment: Alignment.centerRight,
-                              child: Text(
-                                Subjects[index][1],
-                                style: TextStyle(
-                                    fontSize: 17,
-                                    fontWeight: FontWeight.w700,
-                                    color: Colors.white),
-                              ),
-                            )),
-                            Expanded(
-                              child: Container(
-                                  width: double.infinity,
-                                  alignment: Alignment.centerLeft,
-                                  child: Image.asset(Subjects[index][0])),
-                            ),
-                          ],
-                        ),
-                      ),
-                    );
-                  },
-                ),
-              ),
+            SecondPage(),
             Padding(padding: EdgeInsets.only(bottom: 10))
           ],
         ),
@@ -389,10 +313,8 @@ class _StudentMainPageState extends State<StudentMainPage> {
             ),
             Expanded(
                 flex: 8,
-                child: SubjectPage(
-                  SubjectIndex: SubjectOpend,
-                  Subjects: Subjects,
-                )),
+                child: Container()
+                ),
                 Padding(padding: EdgeInsets.only(bottom: 10)),
           ],
         ),
