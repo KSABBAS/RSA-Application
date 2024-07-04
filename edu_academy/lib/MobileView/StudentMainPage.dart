@@ -1,7 +1,10 @@
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:edu_academy/MobileView/SecondPage.dart';
+import 'package:edu_academy/MobileView/ThirdPage.dart';
+import 'package:edu_academy/MyTools.dart';
 import 'package:flutter/material.dart';
 import 'package:edu_academy/MobileView/in&upPages/LogInPage.dart';
+import 'package:flutter/rendering.dart';
 
 class StudentMainPage extends StatefulWidget {
   const StudentMainPage({super.key});
@@ -313,7 +316,10 @@ class _StudentMainPageState extends State<StudentMainPage> {
             ),
             Expanded(
                 flex: 8,
-                child: Container()
+                child: Container(
+                  padding: EdgeInsets.symmetric(horizontal: 15),
+                  child: ThirdPage()
+                )
                 ),
                 Padding(padding: EdgeInsets.only(bottom: 10)),
           ],
