@@ -317,7 +317,7 @@ class _StudentMainPageState extends State<StudentMainPage> {
             Expanded(
                 flex: 8,
                 child: Container(
-                  padding: EdgeInsets.symmetric(horizontal: 15),
+                  
                   child: ThirdPage()
                 )
                 ),
