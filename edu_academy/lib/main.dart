@@ -21,7 +21,7 @@ void main() {
         "StudentMainPage": (context) => StudentMainPage(),
         "WhatAreYouPage": (context) => WhatAreYouPage(),
         "ParentSignUpPage": (context) => ParentSignUpPage(),
-        "TeacherSignUpPage": (context) => TeacherSignUpPage(),
+        "TeacherSignUpPage": (context) => TeacherSignUpPage()
       },
       home: SplashViewPage()));
   SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersiveSticky);

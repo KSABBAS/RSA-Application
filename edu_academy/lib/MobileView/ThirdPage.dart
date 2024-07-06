@@ -161,11 +161,16 @@ class _ThirdPageState extends State<ThirdPage> {
                       fontSize: 15,
                       fontWeight: FontWeight.w600,
                       color: const Color.fromARGB(255, 0, 0, 0))),
-                      ],));
-                    })),
+                      ],
+                    ),
+                  );
+                }
+              )
+            ),
           )
         ],
-      ));
+      ),
+      );
     } else
       return Padding(
         padding: const EdgeInsets.symmetric(horizontal: 15),
@@ -178,7 +183,7 @@ class _ThirdPageState extends State<ThirdPage> {
                   children: [
                     Expanded(
                         child: CMaker(
-                      height: 20,
+                      height: 30,
                       color: Color.fromARGB(255, 6, 122, 153),
                       child: Center(
                           child: Image.asset(
@@ -188,7 +193,7 @@ class _ThirdPageState extends State<ThirdPage> {
                     )),
                     Expanded(
                         child: CMaker(
-                      height: 20,
+                      height: 30,
                       border: Border(
                           right: BorderSide(width: .5),
                           bottom: BorderSide(width: .5)),
@@ -196,13 +201,13 @@ class _ThirdPageState extends State<ThirdPage> {
                       child: Center(
                           child: TMaker(
                               text: "",
-                              fontSize: 10,
+                              fontSize: 15,
                               fontWeight: FontWeight.w500,
                               color: Colors.white)),
                     )),
                     Expanded(
                         child: CMaker(
-                      height: 20,
+                      height: 30,
                       border: Border(
                           right: BorderSide(width: .5),
                           bottom: BorderSide(width: .5)),
@@ -210,13 +215,13 @@ class _ThirdPageState extends State<ThirdPage> {
                       child: Center(
                           child: TMaker(
                               text: "",
-                              fontSize: 10,
+                              fontSize: 15,
                               fontWeight: FontWeight.w500,
                               color: Colors.white)),
                     )),
                     Expanded(
                         child: CMaker(
-                      height: 20,
+                      height: 30,
                       border: Border(
                           right: BorderSide(width: .5),
                           bottom: BorderSide(width: .5)),
@@ -224,13 +229,13 @@ class _ThirdPageState extends State<ThirdPage> {
                       child: Center(
                           child: TMaker(
                               text: "",
-                              fontSize: 10,
+                              fontSize: 15,
                               fontWeight: FontWeight.w500,
                               color: Colors.white)),
                     )),
                     Expanded(
                         child: CMaker(
-                      height: 20,
+                      height: 30,
                       border: Border(
                           right: BorderSide(width: .5),
                           bottom: BorderSide(width: .5)),
@@ -238,13 +243,13 @@ class _ThirdPageState extends State<ThirdPage> {
                       child: Center(
                           child: TMaker(
                               text: "",
-                              fontSize: 10,
+                              fontSize: 15,
                               fontWeight: FontWeight.w500,
                               color: Colors.white)),
                     )),
                     Expanded(
                         child: CMaker(
-                      height: 20,
+                      height: 30,
                       border: Border(
                           right: BorderSide(width: 2),
                           bottom: BorderSide(width: .5)),
@@ -252,7 +257,7 @@ class _ThirdPageState extends State<ThirdPage> {
                       child: Center(
                           child: TMaker(
                               text: "",
-                              fontSize: 10,
+                              fontSize: 15,
                               fontWeight: FontWeight.w500,
                               color: Colors.white)),
                     )),
@@ -262,7 +267,7 @@ class _ThirdPageState extends State<ThirdPage> {
                   children: [
                     Expanded(
                         child: CMaker(
-                      height: 20,
+                      height: 30,
                       border: Border(
                           right: BorderSide(width: .5),
                           bottom: BorderSide(width: .5)),
@@ -270,13 +275,13 @@ class _ThirdPageState extends State<ThirdPage> {
                       child: Center(
                           child: TMaker(
                               text: "الأحد",
-                              fontSize: 10,
+                              fontSize: 15,
                               fontWeight: FontWeight.w500,
                               color: const Color.fromARGB(255, 255, 255, 255))),
                     )),
                     Expanded(
                         child: CMaker(
-                      height: 20,
+                      height: 30,
                       border: Border(
                           right: BorderSide(width: .5),
                           bottom: BorderSide(width: .5)),
@@ -284,13 +289,13 @@ class _ThirdPageState extends State<ThirdPage> {
                       child: Center(
                           child: TMaker(
                               text: "",
-                              fontSize: 10,
+                              fontSize: 15,
                               fontWeight: FontWeight.w500,
                               color: Colors.black)),
                     )),
                     Expanded(
                         child: CMaker(
-                      height: 20,
+                      height: 30,
                       border: Border(
                           right: BorderSide(width: .5),
                           bottom: BorderSide(width: .5)),
@@ -298,13 +303,13 @@ class _ThirdPageState extends State<ThirdPage> {
                       child: Center(
                           child: TMaker(
                               text: "",
-                              fontSize: 10,
+                              fontSize: 15,
                               fontWeight: FontWeight.w500,
                               color: Colors.black)),
                     )),
                     Expanded(
                         child: CMaker(
-                      height: 20,
+                      height: 30,
                       border: Border(
                           right: BorderSide(width: .5),
                           bottom: BorderSide(width: .5)),
@@ -312,13 +317,13 @@ class _ThirdPageState extends State<ThirdPage> {
                       child: Center(
                           child: TMaker(
                               text: "",
-                              fontSize: 10,
+                              fontSize: 15,
                               fontWeight: FontWeight.w500,
                               color: Colors.black)),
                     )),
                     Expanded(
                         child: CMaker(
-                      height: 20,
+                      height: 30,
                       border: Border(
                           right: BorderSide(width: .5),
                           bottom: BorderSide(width: .5)),
@@ -326,13 +331,13 @@ class _ThirdPageState extends State<ThirdPage> {
                       child: Center(
                           child: TMaker(
                               text: "",
-                              fontSize: 10,
+                              fontSize: 15,
                               fontWeight: FontWeight.w500,
                               color: Colors.black)),
                     )),
                     Expanded(
                         child: CMaker(
-                      height: 20,
+                      height: 30,
                       border: Border(
                           right: BorderSide(width: 2),
                           bottom: BorderSide(width: .5)),
@@ -340,7 +345,7 @@ class _ThirdPageState extends State<ThirdPage> {
                       child: Center(
                           child: TMaker(
                               text: "",
-                              fontSize: 10,
+                              fontSize: 15,
                               fontWeight: FontWeight.w500,
                               color: Colors.black)),
                     )),
@@ -350,7 +355,7 @@ class _ThirdPageState extends State<ThirdPage> {
                   children: [
                     Expanded(
                         child: CMaker(
-                      height: 20,
+                      height: 30,
                       border: Border(
                           right: BorderSide(width: .5),
                           bottom: BorderSide(width: .5)),
@@ -358,13 +363,13 @@ class _ThirdPageState extends State<ThirdPage> {
                       child: Center(
                           child: TMaker(
                               text: "الأثنين",
-                              fontSize: 10,
+                              fontSize: 15,
                               fontWeight: FontWeight.w500,
                               color: const Color.fromARGB(255, 255, 255, 255))),
                     )),
                     Expanded(
                         child: CMaker(
-                      height: 20,
+                      height: 30,
                       border: Border(
                           right: BorderSide(width: .5),
                           bottom: BorderSide(width: .5)),
@@ -372,13 +377,13 @@ class _ThirdPageState extends State<ThirdPage> {
                       child: Center(
                           child: TMaker(
                               text: "",
-                              fontSize: 10,
+                              fontSize: 15,
                               fontWeight: FontWeight.w500,
                               color: Colors.black)),
                     )),
                     Expanded(
                         child: CMaker(
-                      height: 20,
+                      height: 30,
                       border: Border(
                           right: BorderSide(width: .5),
                           bottom: BorderSide(width: .5)),
@@ -386,13 +391,13 @@ class _ThirdPageState extends State<ThirdPage> {
                       child: Center(
                           child: TMaker(
                               text: "",
-                              fontSize: 10,
+                              fontSize: 15,
                               fontWeight: FontWeight.w500,
                               color: Colors.black)),
                     )),
                     Expanded(
                         child: CMaker(
-                      height: 20,
+                      height: 30,
                       border: Border(
                           right: BorderSide(width: .5),
                           bottom: BorderSide(width: .5)),
@@ -400,13 +405,13 @@ class _ThirdPageState extends State<ThirdPage> {
                       child: Center(
                           child: TMaker(
                               text: "",
-                              fontSize: 10,
+                              fontSize: 15,
                               fontWeight: FontWeight.w500,
                               color: Colors.black)),
                     )),
                     Expanded(
                         child: CMaker(
-                      height: 20,
+                      height: 30,
                       border: Border(
                           right: BorderSide(width: .5),
                           bottom: BorderSide(width: .5)),
@@ -414,13 +419,13 @@ class _ThirdPageState extends State<ThirdPage> {
                       child: Center(
                           child: TMaker(
                               text: "",
-                              fontSize: 10,
+                              fontSize: 15,
                               fontWeight: FontWeight.w500,
                               color: Colors.black)),
                     )),
                     Expanded(
                         child: CMaker(
-                      height: 20,
+                      height: 30,
                       border: Border(
                           right: BorderSide(width: 2),
                           bottom: BorderSide(width: .5)),
@@ -428,7 +433,7 @@ class _ThirdPageState extends State<ThirdPage> {
                       child: Center(
                           child: TMaker(
                               text: "",
-                              fontSize: 10,
+                              fontSize: 15,
                               fontWeight: FontWeight.w500,
                               color: Colors.black)),
                     )),
@@ -438,7 +443,7 @@ class _ThirdPageState extends State<ThirdPage> {
                   children: [
                     Expanded(
                         child: CMaker(
-                      height: 20,
+                      height: 30,
                       border: Border(
                           right: BorderSide(width: .5),
                           bottom: BorderSide(width: .5)),
@@ -446,13 +451,13 @@ class _ThirdPageState extends State<ThirdPage> {
                       child: Center(
                           child: TMaker(
                               text: "الثلاثاء",
-                              fontSize: 10,
+                              fontSize: 15,
                               fontWeight: FontWeight.w500,
                               color: const Color.fromARGB(255, 255, 255, 255))),
                     )),
                     Expanded(
                         child: CMaker(
-                      height: 20,
+                      height: 30,
                       border: Border(
                           right: BorderSide(width: .5),
                           bottom: BorderSide(width: .5)),
@@ -460,13 +465,13 @@ class _ThirdPageState extends State<ThirdPage> {
                       child: Center(
                           child: TMaker(
                               text: "",
-                              fontSize: 10,
+                              fontSize: 15,
                               fontWeight: FontWeight.w500,
                               color: Colors.black)),
                     )),
                     Expanded(
                         child: CMaker(
-                      height: 20,
+                      height: 30,
                       border: Border(
                           right: BorderSide(width: .5),
                           bottom: BorderSide(width: .5)),
@@ -474,13 +479,13 @@ class _ThirdPageState extends State<ThirdPage> {
                       child: Center(
                           child: TMaker(
                               text: "",
-                              fontSize: 10,
+                              fontSize: 15,
                               fontWeight: FontWeight.w500,
                               color: Colors.black)),
                     )),
                     Expanded(
                         child: CMaker(
-                      height: 20,
+                      height: 30,
                       border: Border(
                           right: BorderSide(width: .5),
                           bottom: BorderSide(width: .5)),
@@ -488,13 +493,13 @@ class _ThirdPageState extends State<ThirdPage> {
                       child: Center(
                           child: TMaker(
                               text: "",
-                              fontSize: 10,
+                              fontSize: 15,
                               fontWeight: FontWeight.w500,
                               color: Colors.black)),
                     )),
                     Expanded(
                         child: CMaker(
-                      height: 20,
+                      height: 30,
                       border: Border(
                           right: BorderSide(width: .5),
                           bottom: BorderSide(width: .5)),
@@ -502,13 +507,13 @@ class _ThirdPageState extends State<ThirdPage> {
                       child: Center(
                           child: TMaker(
                               text: "",
-                              fontSize: 10,
+                              fontSize: 15,
                               fontWeight: FontWeight.w500,
                               color: Colors.black)),
                     )),
                     Expanded(
                         child: CMaker(
-                      height: 20,
+                      height: 30,
                       border: Border(
                           right: BorderSide(width: 2),
                           bottom: BorderSide(width: .5)),
@@ -516,7 +521,7 @@ class _ThirdPageState extends State<ThirdPage> {
                       child: Center(
                           child: TMaker(
                               text: "",
-                              fontSize: 10,
+                              fontSize: 15,
                               fontWeight: FontWeight.w500,
                               color: Colors.black)),
                     )),
@@ -526,7 +531,7 @@ class _ThirdPageState extends State<ThirdPage> {
                   children: [
                     Expanded(
                         child: CMaker(
-                      height: 20,
+                      height: 30,
                       border: Border(
                           right: BorderSide(width: .5),
                           bottom: BorderSide(width: .5)),
@@ -534,13 +539,13 @@ class _ThirdPageState extends State<ThirdPage> {
                       child: Center(
                           child: TMaker(
                               text: "الأربعاء",
-                              fontSize: 10,
+                              fontSize: 15,
                               fontWeight: FontWeight.w500,
                               color: const Color.fromARGB(255, 255, 255, 255))),
                     )),
                     Expanded(
                         child: CMaker(
-                      height: 20,
+                      height: 30,
                       border: Border(
                           right: BorderSide(width: .5),
                           bottom: BorderSide(width: .5)),
@@ -548,13 +553,13 @@ class _ThirdPageState extends State<ThirdPage> {
                       child: Center(
                           child: TMaker(
                               text: "",
-                              fontSize: 10,
+                              fontSize: 15,
                               fontWeight: FontWeight.w500,
                               color: Colors.black)),
                     )),
                     Expanded(
                         child: CMaker(
-                      height: 20,
+                      height: 30,
                       border: Border(
                           right: BorderSide(width: .5),
                           bottom: BorderSide(width: .5)),
@@ -562,13 +567,13 @@ class _ThirdPageState extends State<ThirdPage> {
                       child: Center(
                           child: TMaker(
                               text: "",
-                              fontSize: 10,
+                              fontSize: 15,
                               fontWeight: FontWeight.w500,
                               color: Colors.black)),
                     )),
                     Expanded(
                         child: CMaker(
-                      height: 20,
+                      height: 30,
                       border: Border(
                           right: BorderSide(width: .5),
                           bottom: BorderSide(width: .5)),
@@ -576,13 +581,13 @@ class _ThirdPageState extends State<ThirdPage> {
                       child: Center(
                           child: TMaker(
                               text: "",
-                              fontSize: 10,
+                              fontSize: 15,
                               fontWeight: FontWeight.w500,
                               color: Colors.black)),
                     )),
                     Expanded(
                         child: CMaker(
-                      height: 20,
+                      height: 30,
                       border: Border(
                           right: BorderSide(width: .5),
                           bottom: BorderSide(width: .5)),
@@ -590,13 +595,13 @@ class _ThirdPageState extends State<ThirdPage> {
                       child: Center(
                           child: TMaker(
                               text: "",
-                              fontSize: 10,
+                              fontSize: 15,
                               fontWeight: FontWeight.w500,
                               color: Colors.black)),
                     )),
                     Expanded(
                         child: CMaker(
-                      height: 20,
+                      height: 30,
                       border: Border(
                           right: BorderSide(width: 2),
                           bottom: BorderSide(width: .5)),
@@ -604,7 +609,7 @@ class _ThirdPageState extends State<ThirdPage> {
                       child: Center(
                           child: TMaker(
                               text: "",
-                              fontSize: 10,
+                              fontSize: 15,
                               fontWeight: FontWeight.w500,
                               color: Colors.black)),
                     )),
@@ -614,7 +619,7 @@ class _ThirdPageState extends State<ThirdPage> {
                   children: [
                     Expanded(
                         child: CMaker(
-                      height: 20,
+                      height: 30,
                       border: Border(
                           right: BorderSide(width: .5),
                           bottom: BorderSide(width: .5)),
@@ -622,13 +627,13 @@ class _ThirdPageState extends State<ThirdPage> {
                       child: Center(
                           child: TMaker(
                               text: "الخميس",
-                              fontSize: 10,
+                              fontSize: 15,
                               fontWeight: FontWeight.w500,
                               color: const Color.fromARGB(255, 255, 255, 255))),
                     )),
                     Expanded(
                         child: CMaker(
-                      height: 20,
+                      height: 30,
                       border: Border(
                           right: BorderSide(width: .5),
                           bottom: BorderSide(width: .5)),
@@ -636,13 +641,13 @@ class _ThirdPageState extends State<ThirdPage> {
                       child: Center(
                           child: TMaker(
                               text: "",
-                              fontSize: 10,
+                              fontSize: 15,
                               fontWeight: FontWeight.w500,
                               color: Colors.black)),
                     )),
                     Expanded(
                         child: CMaker(
-                      height: 20,
+                      height: 30,
                       border: Border(
                           right: BorderSide(width: .5),
                           bottom: BorderSide(width: .5)),
@@ -650,13 +655,13 @@ class _ThirdPageState extends State<ThirdPage> {
                       child: Center(
                           child: TMaker(
                               text: "",
-                              fontSize: 10,
+                              fontSize: 15,
                               fontWeight: FontWeight.w500,
                               color: Colors.black)),
                     )),
                     Expanded(
                         child: CMaker(
-                      height: 20,
+                      height: 30,
                       border: Border(
                           right: BorderSide(width: .5),
                           bottom: BorderSide(width: .5)),
@@ -664,13 +669,13 @@ class _ThirdPageState extends State<ThirdPage> {
                       child: Center(
                           child: TMaker(
                               text: "",
-                              fontSize: 10,
+                              fontSize: 15,
                               fontWeight: FontWeight.w500,
                               color: Colors.black)),
                     )),
                     Expanded(
                         child: CMaker(
-                      height: 20,
+                      height: 30,
                       border: Border(
                           right: BorderSide(width: .5),
                           bottom: BorderSide(width: .5)),
@@ -678,13 +683,13 @@ class _ThirdPageState extends State<ThirdPage> {
                       child: Center(
                           child: TMaker(
                               text: "",
-                              fontSize: 10,
+                              fontSize: 15,
                               fontWeight: FontWeight.w500,
                               color: Colors.black)),
                     )),
                     Expanded(
                         child: CMaker(
-                      height: 20,
+                      height: 30,
                       border: Border(
                           right: BorderSide(width: 2),
                           bottom: BorderSide(width: .5)),
@@ -692,7 +697,7 @@ class _ThirdPageState extends State<ThirdPage> {
                       child: Center(
                           child: TMaker(
                               text: "",
-                              fontSize: 10,
+                              fontSize: 15,
                               fontWeight: FontWeight.w500,
                               color: Colors.black)),
                     )),
@@ -702,7 +707,7 @@ class _ThirdPageState extends State<ThirdPage> {
                   children: [
                     Expanded(
                         child: CMaker(
-                      height: 20,
+                      height: 30,
                       border: Border(
                           right: BorderSide(width: .5),
                           bottom: BorderSide(width: .5)),
@@ -710,13 +715,13 @@ class _ThirdPageState extends State<ThirdPage> {
                       child: Center(
                           child: TMaker(
                               text: "الجمعة",
-                              fontSize: 10,
+                              fontSize: 15,
                               fontWeight: FontWeight.w500,
                               color: const Color.fromARGB(255, 255, 255, 255))),
                     )),
                     Expanded(
                         child: CMaker(
-                      height: 20,
+                      height: 30,
                       border: Border(
                           right: BorderSide(width: .5),
                           bottom: BorderSide(width: .5)),
@@ -724,13 +729,13 @@ class _ThirdPageState extends State<ThirdPage> {
                       child: Center(
                           child: TMaker(
                               text: "",
-                              fontSize: 10,
+                              fontSize: 15,
                               fontWeight: FontWeight.w500,
                               color: Colors.black)),
                     )),
                     Expanded(
                         child: CMaker(
-                      height: 20,
+                      height: 30,
                       border: Border(
                           right: BorderSide(width: .5),
                           bottom: BorderSide(width: .5)),
@@ -738,13 +743,13 @@ class _ThirdPageState extends State<ThirdPage> {
                       child: Center(
                           child: TMaker(
                               text: "",
-                              fontSize: 10,
+                              fontSize: 15,
                               fontWeight: FontWeight.w500,
                               color: Colors.black)),
                     )),
                     Expanded(
                         child: CMaker(
-                      height: 20,
+                      height: 30,
                       border: Border(
                           right: BorderSide(width: .5),
                           bottom: BorderSide(width: .5)),
@@ -752,13 +757,13 @@ class _ThirdPageState extends State<ThirdPage> {
                       child: Center(
                           child: TMaker(
                               text: "",
-                              fontSize: 10,
+                              fontSize: 15,
                               fontWeight: FontWeight.w500,
                               color: Colors.black)),
                     )),
                     Expanded(
                         child: CMaker(
-                      height: 20,
+                      height: 30,
                       border: Border(
                           right: BorderSide(width: .5),
                           bottom: BorderSide(width: .5)),
@@ -766,13 +771,13 @@ class _ThirdPageState extends State<ThirdPage> {
                       child: Center(
                           child: TMaker(
                               text: "",
-                              fontSize: 10,
+                              fontSize: 15,
                               fontWeight: FontWeight.w500,
                               color: Colors.black)),
                     )),
                     Expanded(
                         child: CMaker(
-                      height: 20,
+                      height: 30,
                       border: Border(
                           right: BorderSide(width: 2),
                           bottom: BorderSide(width: .5)),
@@ -780,7 +785,7 @@ class _ThirdPageState extends State<ThirdPage> {
                       child: Center(
                           child: TMaker(
                               text: "",
-                              fontSize: 10,
+                              fontSize: 15,
                               fontWeight: FontWeight.w500,
                               color: Colors.black)),
                     )),
@@ -793,7 +798,7 @@ class _ThirdPageState extends State<ThirdPage> {
               circularRadius: 8,
               margin: EdgeInsets.only(top: 30, bottom: 15, left: 15, right: 15),
               width: double.infinity,
-              height: (PageHeight(context) - 360),
+              height: (PageHeight(context) - 430),
               color: Color.fromARGB(255, 6, 122, 153),
               child: Column(
                 children: [
@@ -814,7 +819,7 @@ class _ThirdPageState extends State<ThirdPage> {
                               fontWeight: FontWeight.w800,
                               color: Color.fromARGB(255, 20, 206, 61)))),
                   CMaker(
-                    height: PageHeight(context) - 420,
+                    height: PageHeight(context) - 490,
                     child: ListView.builder(
                         itemCount: HomeWorks.length,
                         itemBuilder: (context, index) {
@@ -824,7 +829,7 @@ class _ThirdPageState extends State<ThirdPage> {
                               margin: EdgeInsets.only(
                                   left: 20, right: 20, bottom: 30),
                               width: double.infinity,
-                              height: 90,
+                              height: 95,
                               child: Column(
                                 children: [
                                   Row(
@@ -848,17 +853,17 @@ class _ThirdPageState extends State<ThirdPage> {
                                       )
                                     ],
                                   ),
-                                  Padding(padding: EdgeInsets.only(bottom: 10)),
+                                  Padding(padding: EdgeInsets.only(bottom: 2)),
                                   CMaker(
                                       alignment: Alignment.centerRight,
                                       padding: EdgeInsets.only(right: 10),
                                       child: TMaker(
                                           text: "واجب محلول : 3",
-                                          fontSize: 10,
+                                          fontSize: 13,
                                           fontWeight: FontWeight.w500,
                                           color: Color.fromARGB(
                                               255, 101, 239, 106))),
-                                  Padding(padding: EdgeInsets.only(bottom: 5)),
+                                  Padding(padding: EdgeInsets.only(bottom: 2)),
                                   Row(
                                     children: [
                                       InkWell(
@@ -892,7 +897,7 @@ class _ThirdPageState extends State<ThirdPage> {
                                         padding: EdgeInsets.only(right: 10),
                                         child: TMaker(
                                             text: "واجب غير محلول : 0",
-                                            fontSize: 10,
+                                            fontSize: 13,
                                             fontWeight: FontWeight.w500,
                                             color: Color.fromARGB(
                                                 255, 255, 36, 36)),
@@ -900,8 +905,10 @@ class _ThirdPageState extends State<ThirdPage> {
                                     ],
                                   )
                                 ],
-                              ));
-                        }),
+                              ),
+                            );
+                        }
+                      ),
                   ),
                 ],
               ),

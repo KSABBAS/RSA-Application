@@ -276,18 +276,19 @@ class _SecondPageState extends State<SecondPage> {
           Padding(
             padding: const EdgeInsets.all(15.0),
             child: CMaker(
-              height: 80,
+              height: 95,
               color: Color.fromARGB(255, 6, 122, 153),
               circularRadius: 8,
                 alignment: Alignment.center,
                 child: Column(
                   children: [
+                        Padding(padding: EdgeInsets.only(top: 5)),
                     TMaker(
                         text: "File ${bookOpend} book.pdf",
                         fontSize: 20,
                         fontWeight: FontWeight.w600,
                         color: Color.fromARGB(255, 255, 255, 255)),
-                        Padding(padding: EdgeInsets.only(top: 10)),
+                        Padding(padding: EdgeInsets.only(top: 5)),
                         MaterialButton(
                             child: TMaker(
                                 text: "تنزيل",
@@ -301,7 +302,7 @@ class _SecondPageState extends State<SecondPage> {
                   ],
                 )),
           ),
-          Padding(padding: EdgeInsets.symmetric(horizontal: 15),child: CMaker(border: Border.all(width: .5),alignment: Alignment.center,circularRadius: 8,color: Color.fromARGB(255,217,216,216),width: double.infinity,height: (PageHeight(context)-350),child: TMaker(text: "file view", fontSize: 30, fontWeight:FontWeight.w400, color: Colors.black),),)
+          Padding(padding: EdgeInsets.symmetric(horizontal: 15),child: CMaker(border: Border.all(width: .5),alignment: Alignment.center,circularRadius: 8,color: Color.fromARGB(255,217,216,216),width: double.infinity,height: (PageHeight(context)-380),child: TMaker(text: "file view", fontSize: 30, fontWeight:FontWeight.w400, color: Colors.black),),)
         ],
       );
     } else {
