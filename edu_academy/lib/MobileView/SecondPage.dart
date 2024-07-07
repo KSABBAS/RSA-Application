@@ -56,7 +56,7 @@ class _SecondPageState extends State<SecondPage> {
           ),
           CMaker(
               color: Color.fromARGB(255, 159, 207, 19),
-              height: 40,
+              height: 60,
               padding: EdgeInsets.symmetric(vertical: 5, horizontal: 10),
               child: Row(
                 children: [
@@ -103,7 +103,7 @@ class _SecondPageState extends State<SecondPage> {
               )),
           Padding(padding: EdgeInsets.only(top: 10)),
           Container(
-            height: PageHeight(context) - (330),
+            height: PageHeight(context) - (350),
             child: ListView.builder(
                 itemCount: 20,
                 scrollDirection: Axis.vertical,
@@ -334,56 +334,59 @@ class _SecondPageState extends State<SecondPage> {
             ),
             Padding(padding: EdgeInsets.only(top: 10)),
             Expanded(
-              child: GridView.builder(
-                itemCount: Subjects.length,
-                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                    crossAxisCount: 2,
-                    mainAxisSpacing: 10,
-                    crossAxisSpacing: 10),
-                itemBuilder: (context, index) {
-                  return InkWell(
-                    onTap: () {
-                      setState(() {
-                        SubjectSelected = index;
-                        anySubjectSelected = true;
-                      });
-                    },
-                    child: Container(
-                      padding: EdgeInsets.all(10),
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(10),
-                        gradient: LinearGradient(
-                            begin: Alignment.bottomLeft,
-                            end: Alignment.topRight,
-                            colors: [
-                              col[index][0],
-                              col[index][1],
-                            ]),
-                      ),
-                      child: Column(
-                        children: [
-                          Expanded(
+              child: Container(
+                margin: EdgeInsets.symmetric(horizontal: 20),
+                child: GridView.builder(
+                  itemCount: Subjects.length,
+                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                      crossAxisCount: 2,
+                      mainAxisSpacing: 10,
+                      crossAxisSpacing: 10),
+                  itemBuilder: (context, index) {
+                    return InkWell(
+                      onTap: () {
+                        setState(() {
+                          SubjectSelected = index;
+                          anySubjectSelected = true;
+                        });
+                      },
+                      child: Container(
+                        padding: EdgeInsets.all(10),
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(10),
+                          gradient: LinearGradient(
+                              begin: Alignment.bottomLeft,
+                              end: Alignment.topRight,
+                              colors: [
+                                col[index][0],
+                                col[index][1],
+                              ]),
+                        ),
+                        child: Column(
+                          children: [
+                            Expanded(
+                                child: Container(
+                              alignment: Alignment.centerRight,
+                              child: Text(
+                                Subjects[index][1],
+                                style: TextStyle(
+                                    fontSize: 17,
+                                    fontWeight: FontWeight.w700,
+                                    color: Colors.white),
+                              ),
+                            )),
+                            Expanded(
                               child: Container(
-                            alignment: Alignment.centerRight,
-                            child: Text(
-                              Subjects[index][1],
-                              style: TextStyle(
-                                  fontSize: 17,
-                                  fontWeight: FontWeight.w700,
-                                  color: Colors.white),
+                                  width: double.infinity,
+                                  alignment: Alignment.centerLeft,
+                                  child: Image.asset(Subjects[index][0])),
                             ),
-                          )),
-                          Expanded(
-                            child: Container(
-                                width: double.infinity,
-                                alignment: Alignment.centerLeft,
-                                child: Image.asset(Subjects[index][0])),
-                          ),
-                        ],
+                          ],
+                        ),
                       ),
-                    ),
-                  );
-                },
+                    );
+                  },
+                ),
               ),
             ),
           ],
