@@ -22,10 +22,10 @@ class _TeacherSignUpPageState extends State<TeacherSignUpPage> {
         body: ListView(
           children: [
             Expanded(
-              child: Container(
+              child: SizedBox(
                 height: 250,
                 child: Container(
-                  decoration: BoxDecoration(
+                  decoration: const BoxDecoration(
                       gradient: LinearGradient(
                           begin: Alignment.bottomLeft,
                           end: Alignment.topRight,
@@ -46,38 +46,38 @@ class _TeacherSignUpPageState extends State<TeacherSignUpPage> {
                                   child: Container(
                                     width: double.infinity,
                                     alignment: Alignment.centerLeft,
-                                    padding: EdgeInsets.only(left: 20),
+                                    padding: const EdgeInsets.only(left: 20),
                                     child: IconButton(
                                         onPressed: () {
                                           Navigator.pop(context);
                                         },
-                                        icon: Icon(Icons.arrow_back)),
+                                        icon: const Icon(Icons.arrow_back)),
                                   ),
                                 ),
                                 Expanded(flex: 2,
                                   child: Container(
                                       alignment: Alignment.bottomLeft,
                                       child: Container(
-                                        padding: EdgeInsets.fromLTRB(0, 40, 20, 0),
+                                        padding: const EdgeInsets.fromLTRB(0, 40, 20, 0),
                                         alignment: Alignment.center,
-                                        child: Text(
+                                        width: 160,
+                                        height: 160,
+                                        decoration: const BoxDecoration(
+                                          borderRadius: BorderRadius.only(
+                                              bottomLeft: Radius.zero,
+                                              topLeft: Radius.circular(10),
+                                              topRight: Radius.circular(23000),
+                                              bottomRight: Radius.circular(10)),
+                                          color: Color.fromARGB(
+                                              255, 255, 255, 255),
+                                        ),
+                                        child: const Text(
                                           "Sign up",
                                           style: TextStyle(
                                               fontSize: 35,
                                               color:
                                                   Color.fromARGB(255, 8, 125, 159),
                                               fontWeight: FontWeight.w700),
-                                        ),
-                                        width: 160,
-                                        height: 160,
-                                        decoration: BoxDecoration(
-                                          borderRadius: BorderRadius.only(
-                                              bottomLeft: Radius.zero,
-                                              topLeft: Radius.circular(10),
-                                              topRight: Radius.circular(23000),
-                                              bottomRight: Radius.circular(10)),
-                                          color: const Color.fromARGB(
-                                              255, 255, 255, 255),
                                         ),
                                       )),
                                 ),
@@ -120,67 +120,67 @@ class _TeacherSignUpPageState extends State<TeacherSignUpPage> {
                           width: double.infinity,
                           child: Row(
                             children: [
-                              Container(alignment: Alignment.bottomLeft,child: Text("Teacher  ",style: TextStyle(fontSize: 28,fontWeight: FontWeight.w600,color:Color.fromARGB(255, 8, 125, 159) ))),
-                              Container(height: 15,alignment: Alignment.bottomLeft,child: Icon(Icons.arrow_forward,color: Color.fromARGB(255, 8, 125, 159),)),
+                              Container(alignment: Alignment.bottomLeft,child: const Text("Teacher  ",style: TextStyle(fontSize: 28,fontWeight: FontWeight.w600,color:Color.fromARGB(255, 8, 125, 159) ))),
+                              Container(height: 15,alignment: Alignment.bottomLeft,child: const Icon(Icons.arrow_forward,color: Color.fromARGB(255, 8, 125, 159),)),
                             ],
                           ),
                         ),
                     Expanded(child:Container()),
-                    Container(
+                    SizedBox(
                       height: 40,
                       child: TextField(
                         decoration: InputDecoration(
-                            label: Text(
+                            label: const Text(
                               "Full Name",
                               style: TextStyle(
                                   fontSize: 18, fontWeight: FontWeight.w600),
                             ),
                             enabledBorder: OutlineInputBorder(
-                                borderSide: BorderSide(
+                                borderSide: const BorderSide(
                                     color: Color.fromARGB(255, 192, 192, 192)),
                                 borderRadius: BorderRadius.circular(30)),
                             focusedBorder: OutlineInputBorder(
                                 borderRadius: BorderRadius.circular(15))),
                       ),
                     ),
-                    Padding(padding: EdgeInsets.only(top: 30)),
-                    Container(
+                    const Padding(padding: EdgeInsets.only(top: 30)),
+                    SizedBox(
                       height: 40,
                       child: TextField(
                         decoration: InputDecoration(
-                            label: Text(
+                            label: const Text(
                               "Phone Number",
                               style: TextStyle(
                                   fontSize: 18, fontWeight: FontWeight.w600),
                             ),
                             enabledBorder: OutlineInputBorder(
-                                borderSide: BorderSide(
+                                borderSide: const BorderSide(
                                     color: Color.fromARGB(255, 192, 192, 192)),
                                 borderRadius: BorderRadius.circular(30)),
                             focusedBorder: OutlineInputBorder(
                                 borderRadius: BorderRadius.circular(15))),
                       ),
                     ),
-                    Padding(padding: EdgeInsets.only(top: 30)),
-                    Container(
+                    const Padding(padding: EdgeInsets.only(top: 30)),
+                    SizedBox(
                       height: 40,
                       child: TextField(
                         decoration: InputDecoration(
-                            label: Text(
+                            label: const Text(
                               "Email",
                               style: TextStyle(
                                   fontSize: 18, fontWeight: FontWeight.w600),
                             ),
                             enabledBorder: OutlineInputBorder(
-                                borderSide: BorderSide(
+                                borderSide: const BorderSide(
                                     color: Color.fromARGB(255, 192, 192, 192)),
                                 borderRadius: BorderRadius.circular(30)),
                             focusedBorder: OutlineInputBorder(
                                 borderRadius: BorderRadius.circular(15))),
                       ),
                     ),
-                    Padding(padding: EdgeInsets.only(top: 30)),
-                    Container(
+                    const Padding(padding: EdgeInsets.only(top: 30)),
+                    SizedBox(
                       height: 40,
                       child: TextField(
                         obscureText: obscureText,
@@ -191,27 +191,27 @@ class _TeacherSignUpPageState extends State<TeacherSignUpPage> {
                                   obscureText = !obscureText;
                                 });
                               },
-                              child: Icon(Icons.remove_red_eye_outlined),
+                              child: const Icon(Icons.remove_red_eye_outlined),
                             ),
-                            label: Text(
+                            label: const Text(
                               "Password",
                               style: TextStyle(
                                   fontSize: 18, fontWeight: FontWeight.w600),
                             ),
                             enabledBorder: OutlineInputBorder(
-                                borderSide: BorderSide(
+                                borderSide: const BorderSide(
                                     color: Color.fromARGB(255, 192, 192, 192)),
                                 borderRadius: BorderRadius.circular(30)),
                             focusedBorder: OutlineInputBorder(
                                 borderRadius: BorderRadius.circular(15))),
                       ),
                     ),
-                    Padding(padding: EdgeInsets.only(top: 30)),
-                    Padding(padding: EdgeInsets.only(top: 10)),
+                    const Padding(padding: EdgeInsets.only(top: 30)),
+                    const Padding(padding: EdgeInsets.only(top: 10)),
                     Expanded(
                       child: Container(
                         alignment: Alignment.centerLeft,
-                        child: Text(
+                        child: const Text(
                           "Date of birth",
                           style:
                               TextStyle(fontSize: 25, fontWeight: FontWeight.w600),
@@ -224,44 +224,44 @@ class _TeacherSignUpPageState extends State<TeacherSignUpPage> {
                         Expanded(child: Container()),
                         Expanded(flex: 5,child:Container(
                           child: TextField(
-                            style: TextStyle(fontSize: 16),
+                            style: const TextStyle(fontSize: 16),
                             onChanged: (value) {
                               TeacherDayOfBirth = value;
                               TeacherDateOfBirth =
                                   "$TeacherDayOfBirth/$TeacherMonthOfBirth/$TeacherYearOfBirth";
                             },
-                            decoration: InputDecoration(label: Text("Day",style: TextStyle(fontSize: 12),))
+                            decoration: const InputDecoration(label: Text("Day",style: TextStyle(fontSize: 12),))
                           ),
                         )),
-                        Text(
+                        const Text(
                           "  /  ",
                           style: TextStyle(fontSize: 30),
                         ),
                         Expanded(flex: 5,child:Container(
                           child: TextField(
-                            style: TextStyle(fontSize: 16),
+                            style: const TextStyle(fontSize: 16),
                             onChanged: (value) {
                               TeacherMonthOfBirth = value;
                               TeacherDateOfBirth =
                                   "$TeacherDayOfBirth/$TeacherMonthOfBirth/$TeacherYearOfBirth";
                             },
-                            decoration: InputDecoration(label: Text("Month",style: TextStyle(fontSize: 12))),
+                            decoration: const InputDecoration(label: Text("Month",style: TextStyle(fontSize: 12))),
                           ),
                         )),
-                        Text(
+                        const Text(
                           "  /  ",
                           style: TextStyle(fontSize: 30),
                         ),
                         Expanded(flex: 5,
                           child: Container(
                             child: TextField(
-                              style: TextStyle(fontSize: 16),
+                              style: const TextStyle(fontSize: 16),
                               onChanged: (value) {
                               TeacherYearOfBirth = value;
                                 TeacherDateOfBirth =
                                     "$TeacherDayOfBirth/$TeacherMonthOfBirth/$TeacherYearOfBirth";
                               },
-                              decoration: InputDecoration(label: Text("Year",style: TextStyle(fontSize: 12))),
+                              decoration: const InputDecoration(label: Text("Year",style: TextStyle(fontSize: 12))),
                             ),
                           ),
                         ),
@@ -271,7 +271,7 @@ class _TeacherSignUpPageState extends State<TeacherSignUpPage> {
                     Expanded(child:Container()),
                         Container(
                           alignment: Alignment.centerLeft,
-                          child: Text(
+                          child: const Text(
                             "Geneder",
                             style: TextStyle(
                                 fontSize: 25, fontWeight: FontWeight.w600),
@@ -282,8 +282,8 @@ class _TeacherSignUpPageState extends State<TeacherSignUpPage> {
                       children: [
                         Expanded(
                             child: Container(decoration: BoxDecoration(borderRadius: BorderRadius.circular(20),color: const Color.fromARGB(96, 216, 216, 216),),child:RadioListTile(
-                                activeColor: Color.fromARGB(255, 74, 193, 241),
-                                title: Text("Male",style: TextStyle(fontSize: 10,fontWeight: FontWeight.w500),),
+                                activeColor: const Color.fromARGB(255, 74, 193, 241),
+                                title: const Text("Male",style: TextStyle(fontSize: 10,fontWeight: FontWeight.w500),),
                                 value: "Male",
                                 groupValue: TeacherGeneder,
                                 onChanged: (val) {
@@ -291,11 +291,11 @@ class _TeacherSignUpPageState extends State<TeacherSignUpPage> {
                                     TeacherGeneder = val.toString();
                                   });
                                 }))),
-                                Padding(padding: EdgeInsets.only(left: 20)),
+                                const Padding(padding: EdgeInsets.only(left: 20)),
                         Expanded(
                             child: Container(decoration: BoxDecoration(borderRadius: BorderRadius.circular(20),color: const Color.fromARGB(96, 216, 216, 216),),child:RadioListTile(
-                                activeColor: Color.fromARGB(255, 74, 193, 241),
-                                title: Text("Female",style: TextStyle(fontSize: 10,fontWeight: FontWeight.w500)),
+                                activeColor: const Color.fromARGB(255, 74, 193, 241),
+                                title: const Text("Female",style: TextStyle(fontSize: 10,fontWeight: FontWeight.w500)),
                                 value: "Female",
                                 groupValue: TeacherGeneder,
                                 onChanged: (val) {
@@ -306,7 +306,7 @@ class _TeacherSignUpPageState extends State<TeacherSignUpPage> {
                       ],
                     ),
                     Expanded(child:Container()),
-                    Container(
+                    SizedBox(
                       height:210,
                       child: TextField(
                         maxLines: 8,
@@ -314,7 +314,7 @@ class _TeacherSignUpPageState extends State<TeacherSignUpPage> {
                             hintText:
                               "Tell us a preif about yourself",
                             enabledBorder: OutlineInputBorder(
-                                borderSide: BorderSide(
+                                borderSide: const BorderSide(
                                     color: Color.fromARGB(255, 192, 192, 192)),
                                 borderRadius: BorderRadius.circular(30)),
                             focusedBorder: OutlineInputBorder(
@@ -329,18 +329,18 @@ class _TeacherSignUpPageState extends State<TeacherSignUpPage> {
                       },
                       child: Container(
                         alignment: Alignment.center,
-                        child: Text(
+                        height: 50,
+                        width: 120,
+                        decoration: BoxDecoration(
+                            color: const Color.fromARGB(255, 74, 193, 241),
+                            borderRadius: BorderRadius.circular(30)),
+                        child: const Text(
                           "sign up",
                           style: TextStyle(
                               fontSize: 20,
                               color: Color.fromARGB(255, 255, 255, 255),
                               fontWeight: FontWeight.w700),
                         ),
-                        height: 50,
-                        width: 120,
-                        decoration: BoxDecoration(
-                            color: Color.fromARGB(255, 74, 193, 241),
-                            borderRadius: BorderRadius.circular(30)),
                       ),
                     ),
                     Expanded(child:Container()),
@@ -350,7 +350,7 @@ class _TeacherSignUpPageState extends State<TeacherSignUpPage> {
                             flex: 2,
                             child: Container(
                               alignment: Alignment.centerRight,
-                              child: Text(
+                              child: const Text(
                                 "Already have an account ? ",
                                 style: TextStyle(
                                     fontSize: 15,
@@ -360,13 +360,13 @@ class _TeacherSignUpPageState extends State<TeacherSignUpPage> {
                             )),
                         Expanded(
                           child: Container(
-                            margin: EdgeInsets.only(left: 20),
+                            margin: const EdgeInsets.only(left: 20),
                             alignment: Alignment.centerLeft,
                             child: TextButton(
                               onPressed: () {
                                 Navigator.pushNamed(context, "LogInPage");
                               },
-                              child: Text(
+                              child: const Text(
                                 "Log in",
                                 style: TextStyle(
                                     fontSize: 15,

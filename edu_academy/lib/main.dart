@@ -14,15 +14,15 @@ void main() {
     GetMaterialApp(
       debugShowCheckedModeBanner: false,
       routes: {
-        "StudentHomePage": (context) => StudentHomePage(),
-        "SplashView": (context) => SplashViewPage(),
-        "StudentMobileSignUpPage": (context) => StudentMobileSignUpPage(),
-        "LogInPage": (context) => LogInPage(),
-        "StudentMainPage": (context) => StudentMainPage(),
-        "WhatAreYouPage": (context) => WhatAreYouPage(),
-        "ParentSignUpPage": (context) => ParentSignUpPage(),
-        "TeacherSignUpPage": (context) => TeacherSignUpPage()
+        "StudentHomePage": (context) => const StudentHomePage(),
+        "SplashView": (context) => const SplashViewPage(),
+        "StudentMobileSignUpPage": (context) => const StudentMobileSignUpPage(),
+        "LogInPage": (context) => const LogInPage(),
+        "StudentMainPage": (context) => const StudentMainPage(),
+        "WhatAreYouPage": (context) => const WhatAreYouPage(),
+        "ParentSignUpPage": (context) => const ParentSignUpPage(),
+        "TeacherSignUpPage": (context) => const TeacherSignUpPage()
       },
-      home: SplashViewPage()));
+      home: const SplashViewPage()));
   SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersiveSticky);
 }

@@ -13,12 +13,12 @@ class _WhatAreYouPageState extends State<WhatAreYouPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        backgroundColor: Color.fromARGB(255, 255, 255, 255),
+        backgroundColor: const Color.fromARGB(255, 255, 255, 255),
         body: Column(children: [
           Expanded(
             flex: 1,
             child: Container(
-              decoration: BoxDecoration(
+              decoration: const BoxDecoration(
                   gradient: LinearGradient(
                       begin: Alignment.bottomLeft,
                       end: Alignment.topRight,
@@ -39,38 +39,38 @@ class _WhatAreYouPageState extends State<WhatAreYouPage> {
                                   child: Container(
                                     width: double.infinity,
                                     alignment: Alignment.centerLeft,
-                                    padding: EdgeInsets.only(left: 20),
+                                    padding: const EdgeInsets.only(left: 20),
                                     child: IconButton(
                                         onPressed: () {
                                           Navigator.pop(context);
                                         },
-                                        icon: Icon(Icons.arrow_back)),
+                                        icon: const Icon(Icons.arrow_back)),
                                   ),
                                 ),
                                 Expanded(flex: 2,
                                   child: Container(
                                       alignment: Alignment.bottomLeft,
                                       child: Container(
-                                        padding: EdgeInsets.fromLTRB(0, 40, 20, 0),
+                                        padding: const EdgeInsets.fromLTRB(0, 40, 20, 0),
                                         alignment: Alignment.center,
-                                        child: Text(
+                                        width: 160,
+                                        height: 160,
+                                        decoration: const BoxDecoration(
+                                          borderRadius: BorderRadius.only(
+                                              bottomLeft: Radius.zero,
+                                              topLeft: Radius.circular(10),
+                                              topRight: Radius.circular(23000),
+                                              bottomRight: Radius.circular(10)),
+                                          color: Color.fromARGB(
+                                              255, 255, 255, 255),
+                                        ),
+                                        child: const Text(
                                           "Sign up",
                                           style: TextStyle(
                                               fontSize: 35,
                                               color:
                                                   Color.fromARGB(255, 8, 125, 159),
                                               fontWeight: FontWeight.w700),
-                                        ),
-                                        width: 160,
-                                        height: 160,
-                                        decoration: BoxDecoration(
-                                          borderRadius: BorderRadius.only(
-                                              bottomLeft: Radius.zero,
-                                              topLeft: Radius.circular(10),
-                                              topRight: Radius.circular(23000),
-                                              bottomRight: Radius.circular(10)),
-                                          color: const Color.fromARGB(
-                                              255, 255, 255, 255),
                                         ),
                                       )),
                                 ),
@@ -105,7 +105,7 @@ class _WhatAreYouPageState extends State<WhatAreYouPage> {
               flex: 2,
               child: Container(
                   alignment: Alignment.centerLeft,
-                  padding: EdgeInsets.only(left: 50, right: 50, top: 20),
+                  padding: const EdgeInsets.only(left: 50, right: 50, top: 20),
                   child: Column(
                     children: [
                       Expanded(
@@ -121,7 +121,7 @@ class _WhatAreYouPageState extends State<WhatAreYouPage> {
                                 child: Container(
                                     width: double.infinity,
                                     alignment: Alignment.topLeft,
-                                    child: Text("Sign up as :  ",
+                                    child: const Text("Sign up as :  ",
                                         style: TextStyle(
                                             fontSize: 20,
                                             fontWeight: FontWeight.w600,
@@ -136,7 +136,7 @@ class _WhatAreYouPageState extends State<WhatAreYouPage> {
                                     color: const Color.fromARGB(
                                         115, 194, 194, 194)),
                                 child: RadioListTile(
-                                    title: Text("Student"),
+                                    title: const Text("Student"),
                                     value: "StudentMobileSignUpPage",
                                     groupValue: as,
                                     onChanged: (val) {
@@ -153,7 +153,7 @@ class _WhatAreYouPageState extends State<WhatAreYouPage> {
                                     color: const Color.fromARGB(
                                         115, 194, 194, 194)),
                                 child: RadioListTile(
-                                    title: Text("Gardian"),
+                                    title: const Text("Gardian"),
                                     value: "ParentSignUpPage",
                                     groupValue: as,
                                     onChanged: (val) {
@@ -170,7 +170,7 @@ class _WhatAreYouPageState extends State<WhatAreYouPage> {
                                     color: const Color.fromARGB(
                                         115, 194, 194, 194)),
                                 child: RadioListTile(
-                                    title: Text("Teacher"),
+                                    title: const Text("Teacher"),
                                     value: "TeacherSignUpPage",
                                     groupValue: as,
                                     onChanged: (val) {
@@ -182,22 +182,23 @@ class _WhatAreYouPageState extends State<WhatAreYouPage> {
                               Expanded(flex: 2, child: Container()),
                               InkWell(
                                 onTap: () {
-                                  if (as!="")
-                                  Navigator.pushNamed(context, as);
+                                  if (as!="") {
+                                    Navigator.pushNamed(context, as);
+                                  }
                                 },
                                 child: Container(
                                   alignment: Alignment.center,
-                                  child: Text("Go",
+                                  height: 50,
+                                  width: 120,
+                                  decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(15),
+                                      color: const Color.fromARGB(255, 74, 193, 241)),
+                                  child: const Text("Go",
                                       style: TextStyle(
                                           fontSize: 20,
                                           fontWeight: FontWeight.w600,
                                           color: Color.fromARGB(
                                               255, 255, 255, 255))),
-                                  height: 50,
-                                  width: 120,
-                                  decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(15),
-                                      color: Color.fromARGB(255, 74, 193, 241)),
                                 ),
                               ),
                               Expanded(flex: 2, child: Container())

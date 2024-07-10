@@ -1,10 +1,7 @@
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:edu_academy/MobileView/SecondPage.dart';
 import 'package:edu_academy/MobileView/ThirdPage.dart';
-import 'package:edu_academy/MyTools.dart';
 import 'package:flutter/material.dart';
-import 'package:edu_academy/MobileView/in&upPages/LogInPage.dart';
-import 'package:flutter/rendering.dart';
 
 class StudentMainPage extends StatefulWidget {
   const StudentMainPage({super.key});
@@ -15,36 +12,36 @@ class StudentMainPage extends StatefulWidget {
 
 int PageIndex = 0;
 List<List<Color>> col = [
-  [Color.fromARGB(255, 9, 220, 206), Color.fromARGB(255, 146, 206, 22)],
-  [Color.fromARGB(255, 247, 68, 110), Color.fromARGB(255, 148, 80, 225)],
-  [Color.fromARGB(255, 214, 128, 12), Color.fromARGB(255, 254, 197, 44)],
-  [Color.fromARGB(255, 248, 67, 114), Color.fromARGB(255, 248, 152, 68)],
-  [Color.fromARGB(255, 254, 165, 41), Color.fromARGB(255, 251, 99, 26)],
-  [Color.fromARGB(255, 31, 229, 175), Color.fromARGB(255, 55, 114, 242)],
-  [Color.fromARGB(255, 9, 220, 206), Color.fromARGB(255, 146, 206, 22)],
-  [Color.fromARGB(255, 247, 68, 110), Color.fromARGB(255, 148, 80, 225)],
-  [Color.fromARGB(255, 214, 128, 12), Color.fromARGB(255, 254, 197, 44)],
-  [Color.fromARGB(255, 248, 67, 114), Color.fromARGB(255, 248, 152, 68)],
-  [Color.fromARGB(255, 254, 165, 41), Color.fromARGB(255, 251, 99, 26)],
-  [Color.fromARGB(255, 31, 229, 175), Color.fromARGB(255, 55, 114, 242)],
-  [Color.fromARGB(255, 9, 220, 206), Color.fromARGB(255, 146, 206, 22)],
-  [Color.fromARGB(255, 247, 68, 110), Color.fromARGB(255, 148, 80, 225)],
-  [Color.fromARGB(255, 214, 128, 12), Color.fromARGB(255, 254, 197, 44)],
-  [Color.fromARGB(255, 248, 67, 114), Color.fromARGB(255, 248, 152, 68)],
-  [Color.fromARGB(255, 254, 165, 41), Color.fromARGB(255, 251, 99, 26)],
-  [Color.fromARGB(255, 31, 229, 175), Color.fromARGB(255, 55, 114, 242)],
-  [Color.fromARGB(255, 9, 220, 206), Color.fromARGB(255, 146, 206, 22)],
-  [Color.fromARGB(255, 247, 68, 110), Color.fromARGB(255, 148, 80, 225)],
-  [Color.fromARGB(255, 214, 128, 12), Color.fromARGB(255, 254, 197, 44)],
-  [Color.fromARGB(255, 248, 67, 114), Color.fromARGB(255, 248, 152, 68)],
-  [Color.fromARGB(255, 254, 165, 41), Color.fromARGB(255, 251, 99, 26)],
-  [Color.fromARGB(255, 31, 229, 175), Color.fromARGB(255, 55, 114, 242)],
-  [Color.fromARGB(255, 9, 220, 206), Color.fromARGB(255, 146, 206, 22)],
-  [Color.fromARGB(255, 247, 68, 110), Color.fromARGB(255, 148, 80, 225)],
-  [Color.fromARGB(255, 214, 128, 12), Color.fromARGB(255, 254, 197, 44)],
-  [Color.fromARGB(255, 248, 67, 114), Color.fromARGB(255, 248, 152, 68)],
-  [Color.fromARGB(255, 254, 165, 41), Color.fromARGB(255, 251, 99, 26)],
-  [Color.fromARGB(255, 31, 229, 175), Color.fromARGB(255, 55, 114, 242)],
+  [const Color.fromARGB(255, 9, 220, 206), const Color.fromARGB(255, 146, 206, 22)],
+  [const Color.fromARGB(255, 247, 68, 110), const Color.fromARGB(255, 148, 80, 225)],
+  [const Color.fromARGB(255, 214, 128, 12), const Color.fromARGB(255, 254, 197, 44)],
+  [const Color.fromARGB(255, 248, 67, 114), const Color.fromARGB(255, 248, 152, 68)],
+  [const Color.fromARGB(255, 254, 165, 41), const Color.fromARGB(255, 251, 99, 26)],
+  [const Color.fromARGB(255, 31, 229, 175), const Color.fromARGB(255, 55, 114, 242)],
+  [const Color.fromARGB(255, 9, 220, 206), const Color.fromARGB(255, 146, 206, 22)],
+  [const Color.fromARGB(255, 247, 68, 110), const Color.fromARGB(255, 148, 80, 225)],
+  [const Color.fromARGB(255, 214, 128, 12), const Color.fromARGB(255, 254, 197, 44)],
+  [const Color.fromARGB(255, 248, 67, 114), const Color.fromARGB(255, 248, 152, 68)],
+  [const Color.fromARGB(255, 254, 165, 41), const Color.fromARGB(255, 251, 99, 26)],
+  [const Color.fromARGB(255, 31, 229, 175), const Color.fromARGB(255, 55, 114, 242)],
+  [const Color.fromARGB(255, 9, 220, 206), const Color.fromARGB(255, 146, 206, 22)],
+  [const Color.fromARGB(255, 247, 68, 110), const Color.fromARGB(255, 148, 80, 225)],
+  [const Color.fromARGB(255, 214, 128, 12), const Color.fromARGB(255, 254, 197, 44)],
+  [const Color.fromARGB(255, 248, 67, 114), const Color.fromARGB(255, 248, 152, 68)],
+  [const Color.fromARGB(255, 254, 165, 41), const Color.fromARGB(255, 251, 99, 26)],
+  [const Color.fromARGB(255, 31, 229, 175), const Color.fromARGB(255, 55, 114, 242)],
+  [const Color.fromARGB(255, 9, 220, 206), const Color.fromARGB(255, 146, 206, 22)],
+  [const Color.fromARGB(255, 247, 68, 110), const Color.fromARGB(255, 148, 80, 225)],
+  [const Color.fromARGB(255, 214, 128, 12), const Color.fromARGB(255, 254, 197, 44)],
+  [const Color.fromARGB(255, 248, 67, 114), const Color.fromARGB(255, 248, 152, 68)],
+  [const Color.fromARGB(255, 254, 165, 41), const Color.fromARGB(255, 251, 99, 26)],
+  [const Color.fromARGB(255, 31, 229, 175), const Color.fromARGB(255, 55, 114, 242)],
+  [const Color.fromARGB(255, 9, 220, 206), const Color.fromARGB(255, 146, 206, 22)],
+  [const Color.fromARGB(255, 247, 68, 110), const Color.fromARGB(255, 148, 80, 225)],
+  [const Color.fromARGB(255, 214, 128, 12), const Color.fromARGB(255, 254, 197, 44)],
+  [const Color.fromARGB(255, 248, 67, 114), const Color.fromARGB(255, 248, 152, 68)],
+  [const Color.fromARGB(255, 254, 165, 41), const Color.fromARGB(255, 251, 99, 26)],
+  [const Color.fromARGB(255, 31, 229, 175), const Color.fromARGB(255, 55, 114, 242)],
 ];
 List<List> Subjects = [
   ["images/SubjectsIcons/ألماني.png", "ألماني"],
@@ -87,11 +84,11 @@ class _StudentMainPageState extends State<StudentMainPage> {
           children: [
             Container(
               height: 70,
-              decoration: BoxDecoration(
+              decoration: const BoxDecoration(
                   boxShadow: [
                     BoxShadow(
                         blurRadius: 10,
-                        color: const Color.fromARGB(115, 0, 0, 0))
+                        color: Color.fromARGB(115, 0, 0, 0))
                   ],
                   color: Color.fromARGB(255, 213, 212, 208),
                   borderRadius: BorderRadius.only(
@@ -103,7 +100,7 @@ class _StudentMainPageState extends State<StudentMainPage> {
                       flex: 1,
                       child: Container(
                           height: 50,
-                          padding: EdgeInsets.only(top: 20, right: 30),
+                          padding: const EdgeInsets.only(top: 20, right: 30),
                           alignment: Alignment.center,
                           child: InkWell(
                               onTap: () {
@@ -118,7 +115,7 @@ class _StudentMainPageState extends State<StudentMainPage> {
                           flex: 2,
                           child: Container(
                             alignment: Alignment.bottomCenter,
-                            child: Text(
+                            child: const Text(
                               "kareem said",
                               style: TextStyle(
                                   fontSize: 17,
@@ -130,7 +127,7 @@ class _StudentMainPageState extends State<StudentMainPage> {
                           flex: 2,
                           child: Container(
                             alignment: Alignment.center,
-                            child: Text(
+                            child: const Text(
                               "Grade 12",
                               style: TextStyle(
                                   fontSize: 16,
@@ -145,12 +142,12 @@ class _StudentMainPageState extends State<StudentMainPage> {
                       child: InkWell(
                         onTap: () {},
                         child: Container(
-                          padding: EdgeInsets.only(top: 20, left: 30),
+                          padding: const EdgeInsets.only(top: 20, left: 30),
                           decoration: BoxDecoration(
-                              color: Color.fromARGB(255, 213, 212, 208),
+                              color: const Color.fromARGB(255, 213, 212, 208),
                               borderRadius: BorderRadius.circular(10)),
                           height: 50,
-                          child: Icon(Icons.notifications),
+                          child: const Icon(Icons.notifications),
                         ),
                       )),
                 ],
@@ -165,11 +162,11 @@ class _StudentMainPageState extends State<StudentMainPage> {
           children: [
             Container(
               height: 70,
-              decoration: BoxDecoration(
+              decoration: const BoxDecoration(
                   boxShadow: [
                     BoxShadow(
                         blurRadius: 10,
-                        color: const Color.fromARGB(115, 0, 0, 0))
+                        color: Color.fromARGB(115, 0, 0, 0))
                   ],
                   color: Color.fromARGB(255, 213, 212, 208),
                   borderRadius: BorderRadius.only(
@@ -181,7 +178,7 @@ class _StudentMainPageState extends State<StudentMainPage> {
                       flex: 1,
                       child: Container(
                           height: 50,
-                          padding: EdgeInsets.only(top: 20, right: 30),
+                          padding: const EdgeInsets.only(top: 20, right: 30),
                           alignment: Alignment.center,
                           child: InkWell(
                               onTap: () {
@@ -196,7 +193,7 @@ class _StudentMainPageState extends State<StudentMainPage> {
                           flex: 2,
                           child: Container(
                             alignment: Alignment.bottomCenter,
-                            child: Text(
+                            child: const Text(
                               "kareem said",
                               style: TextStyle(
                                   fontSize: 17,
@@ -208,7 +205,7 @@ class _StudentMainPageState extends State<StudentMainPage> {
                           flex: 2,
                           child: Container(
                             alignment: Alignment.center,
-                            child: Text(
+                            child: const Text(
                               "Grade 12",
                               style: TextStyle(
                                   fontSize: 16,
@@ -223,20 +220,20 @@ class _StudentMainPageState extends State<StudentMainPage> {
                       child: InkWell(
                         onTap: () {},
                         child: Container(
-                          padding: EdgeInsets.only(top: 20, left: 30),
+                          padding: const EdgeInsets.only(top: 20, left: 30),
                           decoration: BoxDecoration(
-                              color: Color.fromARGB(255, 213, 212, 208),
+                              color: const Color.fromARGB(255, 213, 212, 208),
                               borderRadius: BorderRadius.circular(10)),
                           height: 50,
-                          child: Icon(Icons.notifications),
+                          child: const Icon(Icons.notifications),
                         ),
                       )),
                 ],
               ),
             ),
-            Padding(padding: EdgeInsets.only(top: 15)),
-            SecondPage(),
-            Padding(padding: EdgeInsets.only(bottom: 10))
+            const Padding(padding: EdgeInsets.only(top: 15)),
+            const SecondPage(),
+            const Padding(padding: EdgeInsets.only(bottom: 10))
           ],
         ),
       ),
@@ -245,11 +242,11 @@ class _StudentMainPageState extends State<StudentMainPage> {
           children: [
             Container(
               height: 70,
-              decoration: BoxDecoration(
+              decoration: const BoxDecoration(
                   boxShadow: [
                     BoxShadow(
                         blurRadius: 10,
-                        color: const Color.fromARGB(115, 0, 0, 0))
+                        color: Color.fromARGB(115, 0, 0, 0))
                   ],
                   color: Color.fromARGB(255, 213, 212, 208),
                   borderRadius: BorderRadius.only(
@@ -261,7 +258,7 @@ class _StudentMainPageState extends State<StudentMainPage> {
                       flex: 1,
                       child: Container(
                           height: 50,
-                          padding: EdgeInsets.only(top: 20, right: 30),
+                          padding: const EdgeInsets.only(top: 20, right: 30),
                           alignment: Alignment.center,
                           child: InkWell(
                               onTap: () {
@@ -276,7 +273,7 @@ class _StudentMainPageState extends State<StudentMainPage> {
                           flex: 2,
                           child: Container(
                             alignment: Alignment.bottomCenter,
-                            child: Text(
+                            child: const Text(
                               "kareem said",
                               style: TextStyle(
                                   fontSize: 17,
@@ -288,7 +285,7 @@ class _StudentMainPageState extends State<StudentMainPage> {
                           flex: 2,
                           child: Container(
                             alignment: Alignment.center,
-                            child: Text(
+                            child: const Text(
                               "Grade 12",
                               style: TextStyle(
                                   fontSize: 16,
@@ -303,12 +300,12 @@ class _StudentMainPageState extends State<StudentMainPage> {
                       child: InkWell(
                         onTap: () {},
                         child: Container(
-                          padding: EdgeInsets.only(top: 20, left: 30),
+                          padding: const EdgeInsets.only(top: 20, left: 30),
                           decoration: BoxDecoration(
-                              color: Color.fromARGB(255, 213, 212, 208),
+                              color: const Color.fromARGB(255, 213, 212, 208),
                               borderRadius: BorderRadius.circular(10)),
                           height: 50,
-                          child: Icon(Icons.notifications),
+                          child: const Icon(Icons.notifications),
                         ),
                       )),
                 ],
@@ -318,10 +315,10 @@ class _StudentMainPageState extends State<StudentMainPage> {
                 flex: 8,
                 child: Container(
                   
-                  child: ThirdPage()
+                  child: const ThirdPage()
                 )
                 ),
-                Padding(padding: EdgeInsets.only(bottom: 10)),
+                const Padding(padding: EdgeInsets.only(bottom: 10)),
           ],
         ),
       ),
@@ -330,11 +327,11 @@ class _StudentMainPageState extends State<StudentMainPage> {
           children: [
             Container(
               height: 70,
-              decoration: BoxDecoration(
+              decoration: const BoxDecoration(
                   boxShadow: [
                     BoxShadow(
                         blurRadius: 10,
-                        color: const Color.fromARGB(115, 0, 0, 0))
+                        color: Color.fromARGB(115, 0, 0, 0))
                   ],
                   color: Color.fromARGB(255, 213, 212, 208),
                   borderRadius: BorderRadius.only(
@@ -346,7 +343,7 @@ class _StudentMainPageState extends State<StudentMainPage> {
                       flex: 1,
                       child: Container(
                           height: 50,
-                          padding: EdgeInsets.only(top: 20, right: 30),
+                          padding: const EdgeInsets.only(top: 20, right: 30),
                           alignment: Alignment.center,
                           child: InkWell(
                               onTap: () {
@@ -361,7 +358,7 @@ class _StudentMainPageState extends State<StudentMainPage> {
                           flex: 2,
                           child: Container(
                             alignment: Alignment.bottomCenter,
-                            child: Text(
+                            child: const Text(
                               "kareem said",
                               style: TextStyle(
                                   fontSize: 17,
@@ -373,7 +370,7 @@ class _StudentMainPageState extends State<StudentMainPage> {
                           flex: 2,
                           child: Container(
                             alignment: Alignment.center,
-                            child: Text(
+                            child: const Text(
                               "Grade 12",
                               style: TextStyle(
                                   fontSize: 16,
@@ -388,12 +385,12 @@ class _StudentMainPageState extends State<StudentMainPage> {
                       child: InkWell(
                         onTap: () {},
                         child: Container(
-                          padding: EdgeInsets.only(top: 20, left: 30),
+                          padding: const EdgeInsets.only(top: 20, left: 30),
                           decoration: BoxDecoration(
-                              color: Color.fromARGB(255, 213, 212, 208),
+                              color: const Color.fromARGB(255, 213, 212, 208),
                               borderRadius: BorderRadius.circular(10)),
                           height: 50,
-                          child: Icon(Icons.notifications),
+                          child: const Icon(Icons.notifications),
                         ),
                       )),
                 ],
@@ -406,7 +403,7 @@ class _StudentMainPageState extends State<StudentMainPage> {
     ];
     return Scaffold(
       bottomNavigationBar: CurvedNavigationBar(
-          color: Color.fromARGB(255, 213, 212, 208),
+          color: const Color.fromARGB(255, 213, 212, 208),
           backgroundColor: const Color.fromARGB(255, 255, 255, 255),
           index: PageIndex,
           height: 75,
@@ -415,7 +412,7 @@ class _StudentMainPageState extends State<StudentMainPage> {
               PageIndex = val;
             });
           },
-          items: [
+          items: const [
             Icon(
               Icons.home,
               color: Colors.black,

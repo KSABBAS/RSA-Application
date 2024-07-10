@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 
 class LogInPage extends StatefulWidget {
   const LogInPage({super.key});
@@ -23,7 +22,7 @@ class _LoginPageState extends State<LogInPage> {
       body: ListView(children: [
         Container(
           height: Sheight * (5 / 13),
-          decoration: BoxDecoration(
+          decoration: const BoxDecoration(
               gradient: LinearGradient(
                   begin: Alignment.bottomLeft,
                   end: Alignment.topRight,
@@ -39,24 +38,24 @@ class _LoginPageState extends State<LogInPage> {
                   Container(
                       alignment: Alignment.bottomLeft,
                       child: Container(
-                        padding: EdgeInsets.fromLTRB(0, 40, 20, 0),
+                        padding: const EdgeInsets.fromLTRB(0, 40, 20, 0),
                         alignment: Alignment.center,
-                        child: Text(
-                          "Log in",
-                          style: TextStyle(
-                              fontSize: 35,
-                              color: Color.fromARGB(255, 8, 125, 159),
-                              fontWeight: FontWeight.w700),
-                        ),
                         height: 160,
                         width: 160,
-                        decoration: BoxDecoration(
+                        decoration: const BoxDecoration(
                           borderRadius: BorderRadius.only(
                               bottomLeft: Radius.zero,
                               topLeft: Radius.circular(10),
                               topRight: Radius.circular(23000),
                               bottomRight: Radius.circular(10)),
-                          color: const Color.fromARGB(255, 255, 255, 255),
+                          color: Color.fromARGB(255, 255, 255, 255),
+                        ),
+                        child: const Text(
+                          "Log in",
+                          style: TextStyle(
+                              fontSize: 35,
+                              color: Color.fromARGB(255, 8, 125, 159),
+                              fontWeight: FontWeight.w700),
                         ),
                       )),
                   Expanded(
@@ -92,14 +91,14 @@ class _LoginPageState extends State<LogInPage> {
               children: [
                 TextField(
                   decoration: InputDecoration(
-                      label: Text(
+                      label: const Text(
                         "Full Name",
                         style: TextStyle(
                             fontSize: 18, fontWeight: FontWeight.w600),
                       ),
-                      icon: Icon(Icons.person_sharp),
+                      icon: const Icon(Icons.person_sharp),
                       enabledBorder: OutlineInputBorder(
-                          borderSide: BorderSide(
+                          borderSide: const BorderSide(
                               color: Color.fromARGB(255, 192, 192, 192)),
                           borderRadius: BorderRadius.circular(30)),
                       focusedBorder: OutlineInputBorder(
@@ -115,16 +114,16 @@ class _LoginPageState extends State<LogInPage> {
                             obscureText = !obscureText;
                           });
                         },
-                        child: Icon(Icons.remove_red_eye_outlined),
+                        child: const Icon(Icons.remove_red_eye_outlined),
                       ),
-                      label: Text(
+                      label: const Text(
                         "Password",
                         style: TextStyle(
                             fontSize: 18, fontWeight: FontWeight.w600),
                       ),
-                      icon: Icon(Icons.password),
+                      icon: const Icon(Icons.password),
                       enabledBorder: OutlineInputBorder(
-                          borderSide: BorderSide(
+                          borderSide: const BorderSide(
                               color: Color.fromARGB(255, 192, 192, 192)),
                           borderRadius: BorderRadius.circular(30)),
                       focusedBorder: OutlineInputBorder(
@@ -135,7 +134,7 @@ class _LoginPageState extends State<LogInPage> {
             ),
           ),
         ),
-        Container(
+        SizedBox(
           height: Sheight * (3 / 13),
           child: Column(
             children: [
@@ -143,18 +142,18 @@ class _LoginPageState extends State<LogInPage> {
               InkWell(
                   child: Container(
                     alignment: Alignment.center,
-                    child: Text(
+                    height: 50,
+                    width: 120,
+                    decoration: BoxDecoration(
+                        color: const Color.fromARGB(255, 74, 193, 241),
+                        borderRadius: BorderRadius.circular(30)),
+                    child: const Text(
                       "Log in",
                       style: TextStyle(
                           fontSize: 20,
                           color: Color.fromARGB(255, 255, 255, 255),
                           fontWeight: FontWeight.w700),
                     ),
-                    height: 50,
-                    width: 120,
-                    decoration: BoxDecoration(
-                        color: Color.fromARGB(255, 74, 193, 241),
-                        borderRadius: BorderRadius.circular(30)),
                   ),
                   onTap: () {
                     setState(() {
@@ -172,7 +171,7 @@ class _LoginPageState extends State<LogInPage> {
                   Expanded(
                       child: Container(
                     alignment: Alignment.centerRight,
-                    child: Text(
+                    child: const Text(
                       "New User ? ",
                       style: TextStyle(
                           fontSize: 15,
@@ -182,13 +181,13 @@ class _LoginPageState extends State<LogInPage> {
                   )),
                   Expanded(
                       child: Container(
-                    margin: EdgeInsets.only(left: 20),
+                    margin: const EdgeInsets.only(left: 20),
                     alignment: Alignment.centerLeft,
                     child: TextButton(
                         onPressed: () {
                           Navigator.pushNamed(context, "WhatAreYouPage");
                         },
-                        child: Text(
+                        child: const Text(
                           "Sign up",
                           style: TextStyle(
                               fontSize: 15,
@@ -198,7 +197,7 @@ class _LoginPageState extends State<LogInPage> {
                   )),
                 ],
               ),
-              Padding(padding: EdgeInsets.only(top: 20)),
+              const Padding(padding: EdgeInsets.only(top: 20)),
             ],
           ),
         ),
