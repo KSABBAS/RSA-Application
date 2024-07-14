@@ -5,13 +5,17 @@ import 'package:edu_academy/MobileView/in&upPages/TeacherSignUpPage.dart';
 import 'package:edu_academy/WhatAreYouPage.dart';
 import 'package:edu_academy/MobileView/in&upPages/LogInPage.dart';
 import 'package:edu_academy/MobileView/StudentMainPage.dart';
+import 'package:edu_academy/firebase_options.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:edu_academy/SplashViewPage.dart';
-void main() {
-  runApp(
-    GetMaterialApp(
+
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
+  runApp(GetMaterialApp(
       debugShowCheckedModeBanner: false,
       routes: {
         "StudentHomePage": (context) => const StudentHomePage(),
