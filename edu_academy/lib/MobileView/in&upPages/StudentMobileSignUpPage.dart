@@ -1,29 +1,34 @@
 import 'package:flutter/material.dart';
+import 'package:edu_academy/service/Databse_Service.dart';
 
 class StudentMobileSignUpPage extends StatefulWidget {
+
   const StudentMobileSignUpPage({super.key});
 
   @override
   State<StudentMobileSignUpPage> createState() =>
       _StudentMobileSignUpPageState();
 }
+
 var obscureText = true;
 String StudentDayOfBirth = "";
 String StudentMonthOfBirth = "";
 String StudentYearOfBirth = "";
-String StudentGender = "";
+
 String StudentName = "";
-String StudentGrade = "Grade 1";
+String StudentParentMobileNumber = "";
+String StudentMobileNumber = "";
 String StudentEmail = "";
 String StudentPassword = "";
-String StudentConfirmPassword = "";
-String StudentMobileNumber = "";
-String StudentParentMobileNumber = "";
+String StudentConfirmPassword = ""; // add to desgin 
 String StudentDateOfBirth = "";
-int StudentAge = 6;
+String StudentGender = "";
+String StudentGrade = "Choose";
+
 var now = DateTime.now();
 
 class _StudentMobileSignUpPageState extends State<StudentMobileSignUpPage> {
+  final dbService = DatabaseService();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -63,11 +68,13 @@ class _StudentMobileSignUpPageState extends State<StudentMobileSignUpPage> {
                                         icon: const Icon(Icons.arrow_back)),
                                   ),
                                 ),
-                                Expanded(flex: 2,
+                                Expanded(
+                                  flex: 2,
                                   child: Container(
                                       alignment: Alignment.bottomLeft,
                                       child: Container(
-                                        padding: const EdgeInsets.fromLTRB(0, 40, 20, 0),
+                                        padding: const EdgeInsets.fromLTRB(
+                                            0, 40, 20, 0),
                                         alignment: Alignment.center,
                                         width: 160,
                                         height: 160,
@@ -84,8 +91,8 @@ class _StudentMobileSignUpPageState extends State<StudentMobileSignUpPage> {
                                           "Sign up",
                                           style: TextStyle(
                                               fontSize: 35,
-                                              color:
-                                                  Color.fromARGB(255, 8, 125, 159),
+                                              color: Color.fromARGB(
+                                                  255, 8, 125, 159),
                                               fontWeight: FontWeight.w700),
                                         ),
                                       )),
@@ -93,21 +100,25 @@ class _StudentMobileSignUpPageState extends State<StudentMobileSignUpPage> {
                               ],
                             ),
                           ),
-                          Expanded(flex: 3,
-                          child: Column(
-                            children: [
-                              Expanded(child: Container(),),
-                              Expanded(flex: 3,
-                                child: Container(
-                                    height: double.infinity,
-                                    alignment: Alignment.topCenter,
-                                    child: Image.asset(
-                                      "images/Logo.png",
-                                      fit: BoxFit.fill,
-                                    )),
-                              ),
-                            ],
-                          ))
+                          Expanded(
+                              flex: 3,
+                              child: Column(
+                                children: [
+                                  Expanded(
+                                    child: Container(),
+                                  ),
+                                  Expanded(
+                                    flex: 3,
+                                    child: Container(
+                                        height: double.infinity,
+                                        alignment: Alignment.topCenter,
+                                        child: Image.asset(
+                                          "images/Logo.png",
+                                          fit: BoxFit.fill,
+                                        )),
+                                  ),
+                                ],
+                              ))
                         ],
                       )),
                     ],
@@ -126,8 +137,21 @@ class _StudentMobileSignUpPageState extends State<StudentMobileSignUpPage> {
                   Container(
                     child: Row(
                       children: [
-                        Container(alignment: Alignment.centerLeft,child: const Text("Student  ",style: TextStyle(fontSize: 25,fontWeight: FontWeight.w600,color:Color.fromARGB(255, 8, 125, 159) ))),
-                        Expanded(child: Container(height: 35,alignment: Alignment.bottomLeft,child: const Icon(Icons.arrow_forward,color: Color.fromARGB(255, 8, 125, 159),))),
+                        Container(
+                            alignment: Alignment.centerLeft,
+                            child: const Text("Student  ",
+                                style: TextStyle(
+                                    fontSize: 25,
+                                    fontWeight: FontWeight.w600,
+                                    color: Color.fromARGB(255, 8, 125, 159)))),
+                        Expanded(
+                            child: Container(
+                                height: 35,
+                                alignment: Alignment.bottomLeft,
+                                child: const Icon(
+                                  Icons.arrow_forward,
+                                  color: Color.fromARGB(255, 8, 125, 159),
+                                ))),
                       ],
                     ),
                   ),
@@ -136,11 +160,13 @@ class _StudentMobileSignUpPageState extends State<StudentMobileSignUpPage> {
                     width: 300,
                     height: 40,
                     child: TextField(
+                      onChanged: (value) { StudentName = value;},
                       decoration: InputDecoration(
                           label: const Text(
                             "Full Name",
                             style: TextStyle(
                                 fontSize: 15, fontWeight: FontWeight.w600),
+                                
                           ),
                           enabledBorder: OutlineInputBorder(
                               borderSide: const BorderSide(
@@ -155,6 +181,7 @@ class _StudentMobileSignUpPageState extends State<StudentMobileSignUpPage> {
                     width: 300,
                     height: 40,
                     child: TextField(
+                      onChanged: (value) { StudentParentMobileNumber = value;},
                       decoration: InputDecoration(
                           label: const Text(
                             "Gardian Phone Number",
@@ -174,6 +201,7 @@ class _StudentMobileSignUpPageState extends State<StudentMobileSignUpPage> {
                     width: 300,
                     height: 40,
                     child: TextField(
+                      onChanged: (value) { StudentMobileNumber = value;},
                       decoration: InputDecoration(
                           label: const Row(
                             mainAxisSize: MainAxisSize.min,
@@ -188,8 +216,7 @@ class _StudentMobileSignUpPageState extends State<StudentMobileSignUpPage> {
                                 style: TextStyle(
                                     fontSize: 12,
                                     fontWeight: FontWeight.w500,
-                                    color: Color.fromARGB(
-                                        255, 183, 183, 183)),
+                                    color: Color.fromARGB(255, 183, 183, 183)),
                               ),
                             ],
                           ),
@@ -206,6 +233,7 @@ class _StudentMobileSignUpPageState extends State<StudentMobileSignUpPage> {
                     width: 300,
                     height: 40,
                     child: TextField(
+                      onChanged: (value) { StudentEmail = value;},
                       decoration: InputDecoration(
                           label: const Text(
                             "Email",
@@ -225,6 +253,7 @@ class _StudentMobileSignUpPageState extends State<StudentMobileSignUpPage> {
                     width: 300,
                     height: 40,
                     child: TextField(
+                      onChanged: (value) { StudentPassword = value;},
                       obscureText: obscureText,
                       decoration: InputDecoration(
                           suffix: InkWell(
@@ -255,97 +284,129 @@ class _StudentMobileSignUpPageState extends State<StudentMobileSignUpPage> {
                       alignment: Alignment.centerLeft,
                       child: const Text(
                         "Date of birth",
-                        style:
-                            TextStyle(fontSize: 25, fontWeight: FontWeight.w600),
+                        style: TextStyle(
+                            fontSize: 25, fontWeight: FontWeight.w600),
                       ),
                     ),
                   ),
                   const Padding(padding: EdgeInsets.only(top: 20)),
                   Row(
-                      children: [
-                        Expanded(child: Container()),
-                        Expanded(flex: 5,child:Container(
-                          child: TextField(
-                            style: const TextStyle(fontSize: 16),
-                            onChanged: (value) {
-                              StudentDayOfBirth = value;
-                              StudentDateOfBirth =
-                                  "$StudentDayOfBirth/$StudentMonthOfBirth/$StudentYearOfBirth";
-                            },
-                            decoration: const InputDecoration(label: Text("Day",style: TextStyle(fontSize: 12),))
-                          ),
-                        )),
-                        const Text(
-                          "  /  ",
-                          style: TextStyle(fontSize: 30),
-                        ),
-                        Expanded(flex: 5,child:Container(
-                          child: TextField(
-                            style: const TextStyle(fontSize: 16),
-                            onChanged: (value) {
-                              StudentMonthOfBirth = value;
-                              StudentDateOfBirth =
-                                  "$StudentDayOfBirth/$StudentMonthOfBirth/$StudentYearOfBirth";
-                            },
-                            decoration: const InputDecoration(label: Text("Month",style: TextStyle(fontSize: 12))),
-                          ),
-                        )),
-                        const Text(
-                          "  /  ",
-                          style: TextStyle(fontSize: 30),
-                        ),
-                        Expanded(flex: 5,
+                    children: [
+                      Expanded(child: Container()),
+                      Expanded(
+                          flex: 5,
+                          child: Container(
+                            child: TextField(
+                                style: const TextStyle(fontSize: 16),
+                                onChanged: (value) {
+                                  StudentDayOfBirth = value;
+                                  StudentDateOfBirth =
+                                      "$StudentDayOfBirth/$StudentMonthOfBirth/$StudentYearOfBirth";
+                                },
+                                decoration: const InputDecoration(
+                                    label: Text(
+                                  "Day",
+                                  style: TextStyle(fontSize: 12),
+                                ))),
+                          )),
+                      const Text(
+                        "  /  ",
+                        style: TextStyle(fontSize: 30),
+                      ),
+                      Expanded(
+                          flex: 5,
                           child: Container(
                             child: TextField(
                               style: const TextStyle(fontSize: 16),
                               onChanged: (value) {
-                              StudentYearOfBirth = value;
+                                StudentMonthOfBirth = value;
                                 StudentDateOfBirth =
                                     "$StudentDayOfBirth/$StudentMonthOfBirth/$StudentYearOfBirth";
                               },
-                              decoration: const InputDecoration(label: Text("Year",style: TextStyle(fontSize: 12))),
+                              decoration: const InputDecoration(
+                                  label: Text("Month",
+                                      style: TextStyle(fontSize: 12))),
                             ),
+                          )),
+                      const Text(
+                        "  /  ",
+                        style: TextStyle(fontSize: 30),
+                      ),
+                      Expanded(
+                        flex: 5,
+                        child: Container(
+                          child: TextField(
+                            style: const TextStyle(fontSize: 16),
+                            onChanged: (value) {
+                              StudentYearOfBirth = value;
+                              StudentDateOfBirth =
+                                  "$StudentDayOfBirth/$StudentMonthOfBirth/$StudentYearOfBirth";
+                            },
+                            decoration: const InputDecoration(
+                                label: Text("Year",
+                                    style: TextStyle(fontSize: 12))),
                           ),
                         ),
-                        Expanded(child: Container()),
-                    ],
-                    ),
-                  const Padding(padding: EdgeInsets.only(top: 40)),
-                      Container(
-                        alignment: Alignment.centerLeft,
-                        child: const Text(
-                          "Geneder",
-                          style: TextStyle(
-                              fontSize: 25, fontWeight: FontWeight.w600),
-                        ),
                       ),
+                      Expanded(child: Container()),
+                    ],
+                  ),
+                  const Padding(padding: EdgeInsets.only(top: 40)),
+                  Container(
+                    alignment: Alignment.centerLeft,
+                    child: const Text(
+                      "Geneder",
+                      style:
+                          TextStyle(fontSize: 25, fontWeight: FontWeight.w600),
+                    ),
+                  ),
                   const Padding(padding: EdgeInsets.only(top: 40)),
                   Row(
                     children: [
-                  const Padding(padding: EdgeInsets.only(top: 40)),
+                      const Padding(padding: EdgeInsets.only(top: 40)),
                       Expanded(
-                          child: Container(decoration: BoxDecoration(borderRadius: BorderRadius.circular(20),color: const Color.fromARGB(96, 216, 216, 216),),child:RadioListTile(
-                              activeColor: const Color.fromARGB(255, 74, 193, 241),
-                              title: const Text("Male",style: TextStyle(fontSize: 10,fontWeight: FontWeight.w500),),
-                              value: "Male",
-                              groupValue: StudentGender,
-                              onChanged: (val) {
-                                setState(() {
-                                  StudentGender = val.toString();
-                                });
-                              }))),
-                              const Padding(padding: EdgeInsets.only(left: 20)),
+                          child: Container(
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(20),
+                                color: const Color.fromARGB(96, 216, 216, 216),
+                              ),
+                              child: RadioListTile(
+                                  activeColor:
+                                      const Color.fromARGB(255, 74, 193, 241),
+                                  title: const Text(
+                                    "Male",
+                                    style: TextStyle(
+                                        fontSize: 10,
+                                        fontWeight: FontWeight.w500),
+                                  ),
+                                  value: "Male",
+                                  groupValue: StudentGender,
+                                  onChanged: (val) {
+                                    setState(() {
+                                      StudentGender = val.toString();
+                                    });
+                                  }))),
+                      const Padding(padding: EdgeInsets.only(left: 20)),
                       Expanded(
-                          child: Container(decoration: BoxDecoration(borderRadius: BorderRadius.circular(20),color: const Color.fromARGB(96, 216, 216, 216),),child:RadioListTile(
-                              activeColor: const Color.fromARGB(255, 74, 193, 241),
-                              title: const Text("Female",style: TextStyle(fontSize: 10,fontWeight: FontWeight.w500)),
-                              value: "Female",
-                              groupValue: StudentGender,
-                              onChanged: (val) {
-                                setState(() {
-                                  StudentGender = val.toString();
-                                });
-                              })))
+                          child: Container(
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(20),
+                                color: const Color.fromARGB(96, 216, 216, 216),
+                              ),
+                              child: RadioListTile(
+                                  activeColor:
+                                      const Color.fromARGB(255, 74, 193, 241),
+                                  title: const Text("Female",
+                                      style: TextStyle(
+                                          fontSize: 10,
+                                          fontWeight: FontWeight.w500)),
+                                  value: "Female",
+                                  groupValue: StudentGender,
+                                  onChanged: (val) {
+                                    setState(() {
+                                      StudentGender = val.toString();
+                                    });
+                                  })))
                     ],
                   ),
                   const Padding(padding: EdgeInsets.only(top: 30)),
@@ -366,6 +427,10 @@ class _StudentMobileSignUpPageState extends State<StudentMobileSignUpPage> {
                                 underline: Container(),
                                 value: StudentGrade,
                                 items: const [
+                                  DropdownMenuItem(
+                                    value: "Choose",
+                                    child: Text("Choose"),
+                                  ),
                                   DropdownMenuItem(
                                     value: "KG 1",
                                     child: Text("KG 1"),
@@ -440,8 +505,8 @@ class _StudentMobileSignUpPageState extends State<StudentMobileSignUpPage> {
                   const Padding(padding: EdgeInsets.only(top: 40)),
                   InkWell(
                     onTap: () {
-                      Navigator.pushNamedAndRemoveUntil(
-                          context, "StudentMainPage", (route) => false);
+                      dbService.rlCreate({"name": StudentName,"phone": StudentMobileNumber,"par_phone": StudentParentMobileNumber,"email": StudentEmail,"password": StudentPassword,"birth_date": StudentDateOfBirth,"gender": StudentGender,"grade": StudentGrade,"state":true});
+                      // Navigator.pushNamedAndRemoveUntil(context, "StudentMainPage", (route) => false);
                     },
                     child: Container(
                       alignment: Alignment.center,
