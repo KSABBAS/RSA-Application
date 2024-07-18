@@ -119,7 +119,6 @@ String GardianDemoConfirmPassword="";
                   ),
                 ),
               ),
-              const Padding(padding: EdgeInsets.only(top: 30)),
               Container(
                 color: const Color.fromARGB(255, 255, 255, 255),
                 height: PageHeight(context)-50,
@@ -143,7 +142,8 @@ String GardianDemoConfirmPassword="";
                                         color:
                                             Color.fromARGB(255, 8, 125, 159)))),
                             Container(
-                                height: 8,
+                              margin: EdgeInsets.only(top:13),
+                                height: 3,
                                 alignment: Alignment.bottomLeft,
                                 child: const Icon(
                                   Icons.arrow_forward,
@@ -153,7 +153,7 @@ String GardianDemoConfirmPassword="";
                         ),
                       ),
                     ),
-                    Expanded(child: Container()),
+                    const Padding(padding:EdgeInsets.only(top: 20)),
                     SizedBox(
                           height: 80,
                           child: TextFormField(
@@ -194,7 +194,7 @@ String GardianDemoConfirmPassword="";
                                     borderRadius: BorderRadius.circular(15))),
                           ),
                         ),
-                    Expanded(child: Container()),
+                    const Padding(padding:EdgeInsets.only(top: 20)),
                     SizedBox(
                           height: 80,
                           child: TextFormField(
@@ -238,7 +238,7 @@ String GardianDemoConfirmPassword="";
                                 borderRadius: BorderRadius.circular(15))),
                       ),
                         ),
-                    Expanded(child: Container()),
+                    const Padding(padding:EdgeInsets.only(top: 20)),
                     SizedBox(
                           height: 80,
                           child: TextFormField(
@@ -278,7 +278,7 @@ String GardianDemoConfirmPassword="";
                                 borderRadius: BorderRadius.circular(15))),
                       ),
                         ),
-                    Expanded(child: Container()),
+                    const Padding(padding:EdgeInsets.only(top: 20)),
                     SizedBox(
                           height: 80,
                           child: TextFormField(
@@ -328,11 +328,8 @@ String GardianDemoConfirmPassword="";
                                 borderRadius: BorderRadius.circular(15))),
                       ),
                         ),
-                    Expanded(child: Container()),
+                    const Padding(padding:EdgeInsets.only(top: 20)),
                     SizedBox(
-                          height: 80,
-                          child: SizedBox(
-                      width: 300,
                       height: 80,
                       child: TextFormField(
                         onSaved: (newValue) {
@@ -380,7 +377,7 @@ String GardianDemoConfirmPassword="";
                             focusedBorder: OutlineInputBorder(
                                 borderRadius: BorderRadius.circular(15))),
                       ),
-                        )),
+                        ),
                     Expanded(child: Container()),
                     InkWell(
                       onTap: () {

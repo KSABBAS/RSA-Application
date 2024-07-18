@@ -133,11 +133,11 @@ class _StudentMobileSignUpPageState extends State<StudentMobileSignUpPage> {
                   ),
                 ),
               ),
-              const Padding(padding: EdgeInsets.only(top: 40)),
+              const Padding(padding: EdgeInsets.only(top: 30)),
               Container(
                 color: const Color.fromARGB(255, 255, 255, 255),
-                height: PageHeight(context) + 514,
-                width: 300,
+                height: PageHeight(context) + 400,
+                
                 child: Padding(
                   padding: const EdgeInsets.only(left: 30, right: 30),
                   child: Column(children: [
@@ -154,7 +154,8 @@ class _StudentMobileSignUpPageState extends State<StudentMobileSignUpPage> {
                                           Color.fromARGB(255, 8, 125, 159)))),
                           Expanded(
                               child: Container(
-                                  height: 35,
+                                margin: EdgeInsets.only(bottom: 20),
+                                  height: 5,
                                   alignment: Alignment.bottomLeft,
                                   child: const Icon(
                                     Icons.arrow_forward,
@@ -163,9 +164,9 @@ class _StudentMobileSignUpPageState extends State<StudentMobileSignUpPage> {
                         ],
                       ),
                     ),
-                    const Padding(padding: EdgeInsets.only(top: 40)),
+                    const Padding(padding: EdgeInsets.only(top: 20)),
                     SizedBox(
-                      width: 300,
+                      
                       height: 80,
                       child: TextFormField(
                         onSaved: (newValue) {
@@ -201,9 +202,9 @@ class _StudentMobileSignUpPageState extends State<StudentMobileSignUpPage> {
                                 borderRadius: BorderRadius.circular(15))),
                       ),
                     ),
-                    const Padding(padding: EdgeInsets.only(top: 30)),
+                    const Padding(padding: EdgeInsets.only(top: 10)),
                     SizedBox(
-                      width: 300,
+                      
                       height: 80,
                       child: TextFormField(
                         onSaved: (newValue) {
@@ -246,9 +247,9 @@ class _StudentMobileSignUpPageState extends State<StudentMobileSignUpPage> {
                                 borderRadius: BorderRadius.circular(15))),
                       ),
                     ),
-                    const Padding(padding: EdgeInsets.only(top: 30)),
+                    const Padding(padding: EdgeInsets.only(top: 10)),
                     SizedBox(
-                      width: 300,
+                      
                       height: 80,
                       child: TextFormField(
                         onSaved: (newValue) {
@@ -304,9 +305,9 @@ class _StudentMobileSignUpPageState extends State<StudentMobileSignUpPage> {
                                 borderRadius: BorderRadius.circular(15))),
                       ),
                     ),
-                    const Padding(padding: EdgeInsets.only(top: 30)),
+                    const Padding(padding: EdgeInsets.only(top: 10)),
                     SizedBox(
-                      width: 300,
+                      
                       height: 80,
                       child: TextFormField(
                         onSaved: (newValue) {
@@ -345,9 +346,9 @@ class _StudentMobileSignUpPageState extends State<StudentMobileSignUpPage> {
                                 borderRadius: BorderRadius.circular(15))),
                       ),
                     ),
-                    const Padding(padding: EdgeInsets.only(top: 30)),
+                    const Padding(padding: EdgeInsets.only(top: 10)),
                     SizedBox(
-                      width: 300,
+                      
                       height: 80,
                       child: TextFormField(
                         onSaved: (newValue) {
@@ -396,9 +397,9 @@ class _StudentMobileSignUpPageState extends State<StudentMobileSignUpPage> {
                                 borderRadius: BorderRadius.circular(15))),
                       ),
                     ),
-                    const Padding(padding: EdgeInsets.only(top: 30)),
+                    const Padding(padding: EdgeInsets.only(top: 10)),
                     SizedBox(
-                      width: 300,
+                      
                       height: 80,
                       child: TextFormField(
                         onSaved: (newValue) {
@@ -447,8 +448,6 @@ class _StudentMobileSignUpPageState extends State<StudentMobileSignUpPage> {
                                 borderRadius: BorderRadius.circular(15))),
                       ),
                     ),
-                    const Padding(padding: EdgeInsets.only(top: 30)),
-                    const Padding(padding: EdgeInsets.only(top: 10)),
                     Expanded(
                       child: Container(
                         alignment: Alignment.centerLeft,
@@ -459,7 +458,6 @@ class _StudentMobileSignUpPageState extends State<StudentMobileSignUpPage> {
                         ),
                       ),
                     ),
-                    const Padding(padding: EdgeInsets.only(top: 20)),
                     Row(
                       children: [
                         Expanded(child: Container()),
