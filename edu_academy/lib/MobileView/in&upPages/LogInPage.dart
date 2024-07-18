@@ -1,3 +1,4 @@
+import 'package:edu_academy/service/Databse_Service.dart';
 import 'package:flutter/material.dart';
 
 class LogInPage extends StatefulWidget {
@@ -11,7 +12,11 @@ var obscureText = true;
 bool loggedIn = false;
 List l = [2.2];
 
+String Login_Email = "";
+String Login_Password = "";
+
 class _LoginPageState extends State<LogInPage> {
+  final dbService = DatabaseService();
   @override
   Widget build(BuildContext context) {
     final Sheigt = MediaQuery.of(context).size.height;
@@ -90,9 +95,12 @@ class _LoginPageState extends State<LogInPage> {
             child: Column(
               children: [
                 TextField(
+                  onChanged: (value) {
+                    Login_Email = value;
+                  },
                   decoration: InputDecoration(
                       label: const Text(
-                        "Full Name",
+                        "Email or Phone number",
                         style: TextStyle(
                             fontSize: 18, fontWeight: FontWeight.w600),
                       ),
@@ -106,6 +114,9 @@ class _LoginPageState extends State<LogInPage> {
                 ),
                 Expanded(child: Container()),
                 TextField(
+                  onChanged: (value) {
+                    Login_Password = value;
+                  },
                   obscureText: obscureText,
                   decoration: InputDecoration(
                       suffix: InkWell(
@@ -158,11 +169,12 @@ class _LoginPageState extends State<LogInPage> {
                   onTap: () {
                     setState(() {
                       loggedIn = true;
-                      // 
+                      //
                     });
+
                     if (loggedIn) {
-                      Navigator.pushReplacementNamed(
-                          context, "StudentMainPage");
+                      dbService.rlRead_ForLogin();
+                      // Navigator.pushReplacementNamed(context, "StudentMainPage");
                     }
                   }),
               Expanded(child: Container()),

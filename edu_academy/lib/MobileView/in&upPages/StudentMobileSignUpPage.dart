@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:edu_academy/service/Databse_Service.dart';
 
 class StudentMobileSignUpPage extends StatefulWidget {
-
   const StudentMobileSignUpPage({super.key});
 
   @override
@@ -20,7 +19,7 @@ String StudentParentMobileNumber = "";
 String StudentMobileNumber = "";
 String StudentEmail = "";
 String StudentPassword = "";
-String StudentConfirmPassword = ""; // add to desgin 
+String StudentConfirmPassword = ""; // add to desgin
 String StudentDateOfBirth = "";
 String StudentGender = "";
 String StudentGrade = "Choose";
@@ -160,13 +159,14 @@ class _StudentMobileSignUpPageState extends State<StudentMobileSignUpPage> {
                     width: 300,
                     height: 40,
                     child: TextField(
-                      onChanged: (value) { StudentName = value;},
+                      onChanged: (value) {
+                        StudentName = value;
+                      },
                       decoration: InputDecoration(
                           label: const Text(
                             "Full Name",
                             style: TextStyle(
                                 fontSize: 15, fontWeight: FontWeight.w600),
-                                
                           ),
                           enabledBorder: OutlineInputBorder(
                               borderSide: const BorderSide(
@@ -181,10 +181,12 @@ class _StudentMobileSignUpPageState extends State<StudentMobileSignUpPage> {
                     width: 300,
                     height: 40,
                     child: TextField(
-                      onChanged: (value) { StudentParentMobileNumber = value;},
+                      onChanged: (value) {
+                        StudentParentMobileNumber = value;
+                      },
                       decoration: InputDecoration(
                           label: const Text(
-                            "Gardian Phone Number",
+                            "Parent Phone Number",
                             style: TextStyle(
                                 fontSize: 15, fontWeight: FontWeight.w600),
                           ),
@@ -201,7 +203,9 @@ class _StudentMobileSignUpPageState extends State<StudentMobileSignUpPage> {
                     width: 300,
                     height: 40,
                     child: TextField(
-                      onChanged: (value) { StudentMobileNumber = value;},
+                      onChanged: (value) {
+                        StudentMobileNumber = value;
+                      },
                       decoration: InputDecoration(
                           label: const Row(
                             mainAxisSize: MainAxisSize.min,
@@ -233,7 +237,9 @@ class _StudentMobileSignUpPageState extends State<StudentMobileSignUpPage> {
                     width: 300,
                     height: 40,
                     child: TextField(
-                      onChanged: (value) { StudentEmail = value;},
+                      onChanged: (value) {
+                        StudentEmail = value;
+                      },
                       decoration: InputDecoration(
                           label: const Text(
                             "Email",
@@ -253,7 +259,9 @@ class _StudentMobileSignUpPageState extends State<StudentMobileSignUpPage> {
                     width: 300,
                     height: 40,
                     child: TextField(
-                      onChanged: (value) { StudentPassword = value;},
+                      onChanged: (value) {
+                        StudentPassword = value;
+                      },
                       obscureText: obscureText,
                       decoration: InputDecoration(
                           suffix: InkWell(
@@ -505,7 +513,17 @@ class _StudentMobileSignUpPageState extends State<StudentMobileSignUpPage> {
                   const Padding(padding: EdgeInsets.only(top: 40)),
                   InkWell(
                     onTap: () {
-                      dbService.rlCreate({"name": StudentName,"phone": StudentMobileNumber,"par_phone": StudentParentMobileNumber,"email": StudentEmail,"password": StudentPassword,"birth_date": StudentDateOfBirth,"gender": StudentGender,"grade": StudentGrade,"state":true});
+                      dbService.rlCreate('Students', {
+                        "name": StudentName,
+                        "phone": StudentMobileNumber,
+                        "par_phone": StudentParentMobileNumber,
+                        "email": StudentEmail,
+                        "password": StudentPassword,
+                        "birth_date": StudentDateOfBirth,
+                        "gender": StudentGender,
+                        "grade": StudentGrade,
+                        "state": true
+                      });
                       // Navigator.pushNamedAndRemoveUntil(context, "StudentMainPage", (route) => false);
                     },
                     child: Container(

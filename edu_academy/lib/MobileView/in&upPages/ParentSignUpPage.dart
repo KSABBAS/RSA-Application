@@ -1,3 +1,4 @@
+import 'package:edu_academy/service/Databse_Service.dart';
 import 'package:flutter/material.dart';
 
 class ParentSignUpPage extends StatefulWidget {
@@ -8,8 +9,15 @@ class ParentSignUpPage extends StatefulWidget {
 
 var obscureText = true;
 List ll = [2.2];
+String ParentName ="";
+String ParentPhone ="";
+String ParentEmail ="";
+String ParentPassword ="";
+String ParentGeneder ="";
 
 class _ParentSignUpPageState extends State<ParentSignUpPage> {
+  final dbService = DatabaseService();
+
   @override
   Widget build(BuildContext context) {
     final Sheigt = MediaQuery.of(context).size.height;
@@ -123,7 +131,7 @@ class _ParentSignUpPageState extends State<ParentSignUpPage> {
                         children: [
                           Container(
                               alignment: Alignment.bottomLeft,
-                              child: const Text("Student Gardian  ",
+                              child: const Text("Student Parent  ",
                                   style: TextStyle(
                                       fontSize: 22,
                                       fontWeight: FontWeight.w600,
@@ -146,6 +154,7 @@ class _ParentSignUpPageState extends State<ParentSignUpPage> {
                       child: SizedBox(
                         height: 40,
                         child: TextField(
+                          onChanged: (value) { ParentName = value;},
                           decoration: InputDecoration(
                               label: const Text(
                                 "Full Name",
@@ -167,6 +176,7 @@ class _ParentSignUpPageState extends State<ParentSignUpPage> {
                       child: SizedBox(
                         height: 40,
                         child: TextField(
+                          onChanged: (value) { ParentPhone = value;},
                           decoration: InputDecoration(
                               label: const Text(
                                 "Phone Number",
@@ -188,6 +198,7 @@ class _ParentSignUpPageState extends State<ParentSignUpPage> {
                       child: SizedBox(
                         height: 40,
                         child: TextField(
+                          onChanged: (value) { ParentEmail = value;},
                           decoration: InputDecoration(
                               label: const Text(
                                 "Email",
@@ -209,6 +220,7 @@ class _ParentSignUpPageState extends State<ParentSignUpPage> {
                       child: SizedBox(
                         height: 40,
                         child: TextField(
+                          onChanged: (value) { ParentPassword = value;},
                           obscureText: obscureText,
                           decoration: InputDecoration(
                               suffix: InkWell(
@@ -237,8 +249,8 @@ class _ParentSignUpPageState extends State<ParentSignUpPage> {
                   Expanded(child: Container()),
                   InkWell(
                     onTap: () {
-                      Navigator.pushNamedAndRemoveUntil(
-                          context, "StudentMainPage", (route) => false);
+                      dbService.rlCreate('Parent',{"name": ParentName,"phone": ParentPhone,"email": ParentEmail,"password": ParentPassword,"gender": "not added yet","state":true});
+                      // Navigator.pushNamedAndRemoveUntil(context, "StudentMainPage", (route) => false);
                     },
                     child: Container(
                       alignment: Alignment.center,

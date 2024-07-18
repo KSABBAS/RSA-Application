@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:edu_academy/service/Databse_Service.dart';
+
 
 class TeacherSignUpPage extends StatefulWidget {
   const TeacherSignUpPage({super.key});
@@ -8,13 +10,21 @@ class TeacherSignUpPage extends StatefulWidget {
 }
 
 var obscureText = true;
-String TeacherGeneder = "";
 String TeacherDayOfBirth = "";
-String TeacherDateOfBirth = "";
 String TeacherMonthOfBirth = "";
 String TeacherYearOfBirth = "";
+String TeacherDateOfBirth = "";
+
+String TeacherGeneder = "";
+String TeachertName ="";
+String TeachertPhone ="";
+String TeachertEmail ="";
+String TeachertPassword ="";
+String TeachertDescription ="";
 
 class _TeacherSignUpPageState extends State<TeacherSignUpPage> {
+  final dbService = DatabaseService();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -129,6 +139,7 @@ class _TeacherSignUpPageState extends State<TeacherSignUpPage> {
                     SizedBox(
                       height: 40,
                       child: TextField(
+                        onChanged: (value) { TeachertName = value;},
                         decoration: InputDecoration(
                             label: const Text(
                               "Full Name",
@@ -147,6 +158,7 @@ class _TeacherSignUpPageState extends State<TeacherSignUpPage> {
                     SizedBox(
                       height: 40,
                       child: TextField(
+                        onChanged: (value) { TeachertPhone = value;},
                         decoration: InputDecoration(
                             label: const Text(
                               "Phone Number",
@@ -165,6 +177,7 @@ class _TeacherSignUpPageState extends State<TeacherSignUpPage> {
                     SizedBox(
                       height: 40,
                       child: TextField(
+                        onChanged: (value) { TeachertEmail = value;},
                         decoration: InputDecoration(
                             label: const Text(
                               "Email",
@@ -183,6 +196,7 @@ class _TeacherSignUpPageState extends State<TeacherSignUpPage> {
                     SizedBox(
                       height: 40,
                       child: TextField(
+                        onChanged: (value) { TeachertPassword = value;},
                         obscureText: obscureText,
                         decoration: InputDecoration(
                             suffix: InkWell(
@@ -309,6 +323,7 @@ class _TeacherSignUpPageState extends State<TeacherSignUpPage> {
                     SizedBox(
                       height:210,
                       child: TextField(
+                        onChanged: (value) { TeachertDescription = value;},
                         maxLines: 8,
                         decoration: InputDecoration(
                             hintText:
@@ -324,8 +339,9 @@ class _TeacherSignUpPageState extends State<TeacherSignUpPage> {
                     Expanded(child:Container()),
                     InkWell(
                       onTap: () {
-                        Navigator.pushNamedAndRemoveUntil(
-                            context, "StudentMainPage", (route) => false);
+                        dbService.rlCreate('Teacher',{"name": TeachertName,"phone": TeachertPhone,"email": TeachertEmail,"password": TeachertPassword,"birth_date": TeacherDateOfBirth,"gender": TeacherGeneder,"Description": TeachertDescription,"state":true});
+
+                        // Navigator.pushNamedAndRemoveUntil(context, "StudentMainPage", (route) => false);
                       },
                       child: Container(
                         alignment: Alignment.center,
