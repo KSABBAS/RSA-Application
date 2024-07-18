@@ -16,7 +16,7 @@ String GardianConfirmPassword="";
 
 var obscureText = true;
 List ll = [2.2];
-
+GlobalKey<FormState> key2 = GlobalKey();
 class _ParentSignUpPageState extends State<ParentSignUpPage> {
   String GardianDemoPassword="";
 String GardianDemoConfirmPassword="";
@@ -28,7 +28,7 @@ String GardianDemoConfirmPassword="";
     return Scaffold(
         backgroundColor: const Color.fromARGB(255, 255, 255, 255),
         body: Form(
-          key: key,
+          key: key2,
           child: ListView(
             children: [
               SizedBox(
@@ -383,8 +383,8 @@ String GardianDemoConfirmPassword="";
                       onTap: () {
                         // Navigator.pushNamedAndRemoveUntil(
                         //     context, "StudentMainPage", (route) => false);
-                        if (key.currentState!.validate()) {
-                          key.currentState!.save();
+                        if (key2.currentState!.validate()) {
+                          key2.currentState!.save();
                         }
                       },
                       child: Container(

@@ -13,17 +13,17 @@ String Password = "";
 var obscureText = true;
 bool loggedIn = false;
 List l = [2.2];
-
+GlobalKey<FormState> key1 = GlobalKey();
 class _LoginPageState extends State<LogInPage> {
   @override
   Widget build(BuildContext context) {
     final Sheigt = MediaQuery.of(context).size.height;
-    l.add(Sheigt);s
+    l.add(Sheigt);
     double Sheight = l[1];
     return Scaffold(
       backgroundColor: const Color.fromARGB(255, 255, 255, 255),
       body: Form(
-        key: key,
+        key: key1,
         child: ListView(children: [
           Container(
             height: Sheight * (5 / 13),
@@ -204,8 +204,8 @@ class _LoginPageState extends State<LogInPage> {
                         loggedIn = true;
                       });
                       if (loggedIn) {
-                        if (key.currentState!.validate()) {
-                          key.currentState!.save();
+                        if (key1.currentState!.validate()) {
+                          key1.currentState!.save();
                         }
                         // Navigator.pushReplacementNamed(
                         //     context, "StudentMainPage");

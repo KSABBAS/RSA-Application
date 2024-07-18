@@ -21,7 +21,7 @@ String TeacherDayOfBirth = "";
 String TeacherDateOfBirth = "";
 String TeacherMonthOfBirth = "";
 String TeacherYearOfBirth = "";
-
+GlobalKey<FormState> key3 = GlobalKey();
 class _TeacherSignUpPageState extends State<TeacherSignUpPage> {
 String TeacherDemoPassword = "";
 String TeacherDemoConfirmPassword = "";
@@ -30,7 +30,7 @@ String TeacherDemoConfirmPassword = "";
     return Scaffold(
         backgroundColor: const Color.fromARGB(255, 255, 255, 255),
         body: Form(
-          key: key,
+          key: key3,
           child: ListView(
             children: [
               Expanded(
@@ -538,8 +538,8 @@ String TeacherDemoConfirmPassword = "";
                         onTap: () {
                           // Navigator.pushNamedAndRemoveUntil(
                           //     context, "StudentMainPage", (route) => false);
-                          if (key.currentState!.validate()) {
-                            key.currentState!.save();
+                          if (key3.currentState!.validate()) {
+                            key3.currentState!.save();
                           }
                         },
                         child: Container(
