@@ -1,19 +1,28 @@
 import 'dart:async';
-
+import 'dart:convert';
+import 'package:get/get.dart';
+// import 'package:http/http.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
-
+// import 'package:http/http.dart' as http;
+// import 'package:html/parser.dart' as Parser;
+// import 'package:html/dom.dart' as dom;
+// import 'package:html/dom_parsing.dart';
+// import 'package:html/html_escape.dart';
+// import 'package:beautiful_soup_dart/beautiful_soup.dart';
+// import 'package:geolocator/geolocator.dart';
+// import 'package:lottie/lottie.dart';
+// import 'package:connectivity_plus/connectivity_plus.dart';
 
 class CMaker extends StatefulWidget {
   CMaker(
       {super.key,
       required this.child,
       this.height,
+      this.width,
       this.boxShadow,
       this.border,
       this.BackGroundimage,
       this.margin,
-      this.width,
       this.padding,
       this.alignment,
       this.color,
@@ -21,6 +30,7 @@ class CMaker extends StatefulWidget {
       this.circularRadius});
   Color? color;
   double? height;
+  double? width;
   AlignmentGeometry? alignment;
   EdgeInsetsGeometry? padding;
   EdgeInsetsGeometry? margin;
@@ -28,12 +38,12 @@ class CMaker extends StatefulWidget {
   List<BoxShadow>? boxShadow;
   Gradient? gradient;
   BoxBorder? border;
-  double? width;
   double? circularRadius;
   Widget child;
   @override
   State<CMaker> createState() => _CMakerState();
 }
+
 class _CMakerState extends State<CMaker> {
   @override
   Widget build(BuildContext context) {
@@ -57,52 +67,48 @@ class _CMakerState extends State<CMaker> {
   }
 }
 
-
 class TMaker extends StatelessWidget {
-  TMaker({
-    super.key,
-    required this.text,
-    required this.fontSize,
-    required this.fontWeight,
-    required this.color,
-  });
+  TMaker(
+      {super.key,
+      required this.text,
+      required this.fontSize,
+      required this.fontWeight,
+      required this.color,
+      this.textAlign});
   String text;
   double fontSize;
   FontWeight fontWeight;
   Color color;
+  TextAlign? textAlign;
   @override
   Widget build(BuildContext context) {
     return Text(
       text,
+      textAlign: textAlign ?? TextAlign.center,
       style:
           TextStyle(fontSize: fontSize, fontWeight: fontWeight, color: color),
     );
   }
 }
 
-
 dynamic TStyle(double fontSize, FontWeight fontWeight, Color color) {
   return TextStyle(fontSize: fontSize, fontWeight: fontWeight, color: color);
 }
 
-
 class TFMaker extends StatefulWidget {
   TFMaker(
       {super.key,
-      this.prefix,
-      this.disabledBorderwidth,
-      this.enabledBorderwidth,
-      this.focusedBorderwidth,
-      this.disabledBorderColor,
-      this.enabledBorderColor,
-      this.focusedBorderColor,
-      this.suffix,
-      this.focusedCircularRadius,
-      this.disabledCircularRadius,
-      this.enabledCircularRadius,
-      this.hintText,
-      this.hintStyle,
-      this.label});
+      required this.prefix,
+      required this.enabledBorderwidth,
+      required this.focusedBorderwidth,
+      required this.enabledBorderColor,
+      required this.focusedBorderColor,
+      required this.suffix,
+      required this.focusedCircularRadius,
+      required this.enabledCircularRadius,
+      required this.hintText,
+      required this.hintStyle,
+      required this.label});
   Widget? prefix;
   Widget? suffix;
   String? hintText;
@@ -120,6 +126,7 @@ class TFMaker extends StatefulWidget {
   @override
   State<TFMaker> createState() => _TFMakerState();
 }
+
 class _TFMakerState extends State<TFMaker> {
   @override
   Widget build(BuildContext context) {
@@ -137,13 +144,6 @@ class _TFMakerState extends State<TFMaker> {
             borderRadius:
                 BorderRadius.circular(widget.enabledCircularRadius ?? 0),
           ),
-          disabledBorder: OutlineInputBorder(
-            borderSide: BorderSide(
-                color: widget.disabledBorderColor!,
-                width: widget.disabledBorderwidth!),
-            borderRadius:
-                BorderRadius.circular(widget.disabledCircularRadius ?? 0),
-          ),
           focusedBorder: OutlineInputBorder(
             borderSide: BorderSide(
                 color: widget.focusedBorderColor!,
@@ -155,13 +155,13 @@ class _TFMakerState extends State<TFMaker> {
   }
 }
 
-
 double PageHeight(BuildContext context) {
   List l = [2.2];
   final Sheigt = MediaQuery.of(context).size.height;
   l.add(Sheigt);
   return l[1];
 }
+
 double PageWidth(BuildContext context) {
   List l = [2.2];
   final Swidth = MediaQuery.of(context).size.width;
@@ -169,18 +169,16 @@ double PageWidth(BuildContext context) {
   return l[1];
 }
 
-
 // status bar code , inset it in the runApp (SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersiveSticky);)
 
-
 // to remove the red debug , insert it inside the materialApp (debugShowCheckedModeBanner: false,)
-
 
 class SplashViewPage extends StatefulWidget {
   const SplashViewPage({super.key});
   @override
   State<SplashViewPage> createState() => _SplashViewPageState();
 }
+
 class _SplashViewPageState extends State<SplashViewPage>
     with SingleTickerProviderStateMixin {
   AnimationController? animationController;
@@ -250,29 +248,55 @@ class _SplashViewPageState extends State<SplashViewPage>
   }
 }
 
-
 class GVBuilder extends StatefulWidget {
   GVBuilder(
       {super.key,
+      required this.scroll,
       required this.list,
-      required this.child,
       required this.crossAxisCount,
       this.mainAxisSpacing,
       this.crossAxisSpacing,
-      required this.onTap});
+      required this.onTap,
+      this.boxShadow,
+      this.border,
+      this.BackGroundimage,
+      this.margin,
+      this.padding,
+      this.alignment,
+      this.color,
+      this.gradient,
+      this.circularRadius});
+  bool? scroll;
   List list;
-  Widget child;
+  Color? color;
   int? crossAxisCount;
   double? mainAxisSpacing;
   double? crossAxisSpacing;
   void Function()? onTap;
+  AlignmentGeometry? alignment;
+  EdgeInsetsGeometry? padding;
+  EdgeInsetsGeometry? margin;
+  DecorationImage? BackGroundimage;
+  List<BoxShadow>? boxShadow;
+  Gradient? gradient;
+  BoxBorder? border;
+  double? circularRadius;
   @override
   State<GVBuilder> createState() => _GVBuilderState();
 }
+
 class _GVBuilderState extends State<GVBuilder> {
   @override
   Widget build(BuildContext context) {
+    ScrollPhysics? physi;
+    if (widget.scroll ?? true) {
+      physi = null;
+    } else {
+      physi = NeverScrollableScrollPhysics();
+    }
     return GridView.builder(
+      shrinkWrap: widget.scroll!,
+      physics: physi,
       itemCount: widget.list.length,
       gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
           crossAxisCount: widget.crossAxisCount ?? 1,
@@ -285,12 +309,24 @@ class _GVBuilderState extends State<GVBuilder> {
                 widget.onTap;
               });
             },
-            child: widget.child);
+            child: Container(
+                alignment: widget.alignment,
+                padding: widget.padding,
+                margin: widget.margin,
+                decoration: BoxDecoration(
+                    gradient: widget.gradient,
+                    image: widget.BackGroundimage,
+                    border: widget.border,
+                    color: widget.color,
+                    boxShadow: widget.boxShadow,
+                    borderRadius: BorderRadius.circular(
+                      widget.circularRadius ?? 0,
+                    )),
+                child: widget.list[index]));
       },
     );
   }
 }
-
 
 class DDButton extends StatefulWidget {
   DDButton({super.key, required this.values});
@@ -300,6 +336,7 @@ class DDButton extends StatefulWidget {
   @override
   State<DDButton> createState() => _DDButtonState();
 }
+
 class _DDButtonState extends State<DDButton> {
   @override
   Widget build(BuildContext context) {
@@ -329,7 +366,6 @@ class _DDButtonState extends State<DDButton> {
   }
 }
 
-
 class RButton extends StatefulWidget {
   RButton({
     super.key,
@@ -345,7 +381,9 @@ class RButton extends StatefulWidget {
   @override
   State<RButton> createState() => _RButtonState();
 }
+
 var selected = "";
+
 class _RButtonState extends State<RButton> {
   @override
   Widget build(BuildContext context) {
@@ -382,3 +420,89 @@ class _RButtonState extends State<RButton> {
     );
   }
 }
+
+// Future<List> getjasonData(String link) async {
+//   var res = await get(Uri.parse("$link"));
+//   List resDecoded = jsonDecode(res.body);
+//   return resDecoded;
+// }
+
+// class GetAndDisplayTextJsonData extends StatefulWidget {
+//   GetAndDisplayTextJsonData({super.key, required this.link, required this.tag});
+//   String link;
+//   String tag;
+//   @override
+//   State<GetAndDisplayTextJsonData> createState() =>
+//       _GetAndDisplayTextJsonDataState();
+// }
+
+// class _GetAndDisplayTextJsonDataState extends State<GetAndDisplayTextJsonData> {
+//   @override
+//   Widget build(BuildContext context) {
+//     return FutureBuilder<List>(
+//         future: getjasonData("${widget.link}"),
+//         builder: (context, t) {
+//           if (t.connectionState == ConnectionState.waiting) {
+//             return Center(child: Expanded(child: CircularProgressIndicator()));
+//           } else {
+//             return ListView.builder(
+//                 itemCount: t.data!.length,
+//                 itemBuilder: (context, ind) {
+//                   return Card(
+//                     child: Container(
+//                         margin: EdgeInsets.all(10),
+//                         alignment: Alignment.center,
+//                         child: Text("${t.data![ind]["${widget.tag}"]}")),
+//                   );
+//                 });
+//           }
+//         });
+//   }
+// }
+
+// Future<List> ScrapeByClass(String link, String tag, String class_) async {
+//   String html = "";
+//   List result = [];
+//   http.Response t = await http.get(Uri.parse(link));
+//   html = dom.Document.html(t.body).outerHtml;
+//   BeautifulSoup soup = BeautifulSoup(html);
+//   for (var vercs in soup.findAll(tag, class_: class_)) {
+//     result.add(vercs.text);
+//   }
+//   return result;
+// }
+
+// class Scrape extends StatefulWidget {
+//   Scrape(
+//       {super.key, required this.link, required this.tag, required this.class_});
+//   String link;
+//   String tag;
+//   String class_;
+//   @override
+//   State<Scrape> createState() => _ScrapeState();
+// }
+
+// class _ScrapeState extends State<Scrape> {
+//   @override
+//   Widget build(BuildContext context) {
+//     return FutureBuilder<List>(
+//         future: ScrapeByClass(widget.link, widget.tag, widget.class_),
+//         builder: (context, snapshot) {
+//           if (snapshot.connectionState == ConnectionState.waiting) {
+//             return Center(child: CircularProgressIndicator());
+//           } else {
+//             return Container();
+//           }
+//         });
+//   }
+// }
+
+// bool IsConnectedToInternet() {
+//   Future<bool> check() async {
+//     var state = await Connectivity().checkConnectivity();
+//     print(state.first);
+//     return state.first.toString() == "ConnectivityResult.none";
+//   }
+//   return true;
+// }
+

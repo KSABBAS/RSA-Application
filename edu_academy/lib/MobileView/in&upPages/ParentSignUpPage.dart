@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 
 class ParentSignUpPage extends StatefulWidget {
   const ParentSignUpPage({super.key});
@@ -20,10 +19,10 @@ class _ParentSignUpPageState extends State<ParentSignUpPage> {
         backgroundColor: const Color.fromARGB(255, 255, 255, 255),
         body: ListView(
           children: [
-            Container(
+            SizedBox(
               height: Sheight / 3,
               child: Container(
-                decoration: BoxDecoration(
+                decoration: const BoxDecoration(
                     gradient: LinearGradient(
                         begin: Alignment.bottomLeft,
                         end: Alignment.topRight,
@@ -44,12 +43,12 @@ class _ParentSignUpPageState extends State<ParentSignUpPage> {
                                 child: Container(
                                   width: double.infinity,
                                   alignment: Alignment.centerLeft,
-                                  padding: EdgeInsets.only(left: 20),
+                                  padding: const EdgeInsets.only(left: 20),
                                   child: IconButton(
                                       onPressed: () {
                                         Navigator.pop(context);
                                       },
-                                      icon: Icon(Icons.arrow_back)),
+                                      icon: const Icon(Icons.arrow_back)),
                                 ),
                               ),
                               Expanded(flex: 2,
@@ -57,26 +56,26 @@ class _ParentSignUpPageState extends State<ParentSignUpPage> {
                                     alignment: Alignment.bottomLeft,
                                     child: Container(
                                       padding:
-                                          EdgeInsets.fromLTRB(0, 40, 20, 0),
+                                          const EdgeInsets.fromLTRB(0, 40, 20, 0),
                                       alignment: Alignment.center,
-                                      child: Text(
+                                      width: 160,
+                                      height: 160,
+                                      decoration: const BoxDecoration(
+                                        borderRadius: BorderRadius.only(
+                                            bottomLeft: Radius.zero,
+                                            topLeft: Radius.circular(10),
+                                            topRight: Radius.circular(23000),
+                                            bottomRight: Radius.circular(10)),
+                                        color: Color.fromARGB(
+                                            255, 255, 255, 255),
+                                      ),
+                                      child: const Text(
                                         "Sign up",
                                         style: TextStyle(
                                             fontSize: 35,
                                             color: Color.fromARGB(
                                                 255, 8, 125, 159),
                                             fontWeight: FontWeight.w700),
-                                      ),
-                                      width: 160,
-                                      height: 160,
-                                      decoration: BoxDecoration(
-                                        borderRadius: BorderRadius.only(
-                                            bottomLeft: Radius.zero,
-                                            topLeft: Radius.circular(10),
-                                            topRight: Radius.circular(23000),
-                                            bottomRight: Radius.circular(10)),
-                                        color: const Color.fromARGB(
-                                            255, 255, 255, 255),
                                       ),
                                     )),
                               ),
@@ -107,7 +106,7 @@ class _ParentSignUpPageState extends State<ParentSignUpPage> {
                 ),
               ),
             ),
-            Padding(padding: EdgeInsets.only(top: 30)),
+            const Padding(padding: EdgeInsets.only(top: 30)),
             Container(
               color: const Color.fromARGB(255, 255, 255, 255),
               height: Sheight * (2 / 3),
@@ -124,7 +123,7 @@ class _ParentSignUpPageState extends State<ParentSignUpPage> {
                         children: [
                           Container(
                               alignment: Alignment.bottomLeft,
-                              child: Text("Student Gardian  ",
+                              child: const Text("Student Gardian  ",
                                   style: TextStyle(
                                       fontSize: 22,
                                       fontWeight: FontWeight.w600,
@@ -133,7 +132,7 @@ class _ParentSignUpPageState extends State<ParentSignUpPage> {
                           Container(
                               height: 8,
                               alignment: Alignment.bottomLeft,
-                              child: Icon(
+                              child: const Icon(
                                 Icons.arrow_forward,
                                 color: Color.fromARGB(255, 8, 125, 159),
                               )),
@@ -144,17 +143,17 @@ class _ParentSignUpPageState extends State<ParentSignUpPage> {
                   Expanded(child: Container()),
                   Expanded(
                       flex: 2,
-                      child: Container(
+                      child: SizedBox(
                         height: 40,
                         child: TextField(
                           decoration: InputDecoration(
-                              label: Text(
+                              label: const Text(
                                 "Full Name",
                                 style: TextStyle(
                                     fontSize: 18, fontWeight: FontWeight.w600),
                               ),
                               enabledBorder: OutlineInputBorder(
-                                  borderSide: BorderSide(
+                                  borderSide: const BorderSide(
                                       color:
                                           Color.fromARGB(255, 192, 192, 192)),
                                   borderRadius: BorderRadius.circular(30)),
@@ -165,17 +164,17 @@ class _ParentSignUpPageState extends State<ParentSignUpPage> {
                   Expanded(child: Container()),
                   Expanded(
                       flex: 2,
-                      child: Container(
+                      child: SizedBox(
                         height: 40,
                         child: TextField(
                           decoration: InputDecoration(
-                              label: Text(
+                              label: const Text(
                                 "Phone Number",
                                 style: TextStyle(
                                     fontSize: 18, fontWeight: FontWeight.w600),
                               ),
                               enabledBorder: OutlineInputBorder(
-                                  borderSide: BorderSide(
+                                  borderSide: const BorderSide(
                                       color:
                                           Color.fromARGB(255, 192, 192, 192)),
                                   borderRadius: BorderRadius.circular(30)),
@@ -186,17 +185,17 @@ class _ParentSignUpPageState extends State<ParentSignUpPage> {
                   Expanded(child: Container()),
                   Expanded(
                       flex: 2,
-                      child: Container(
+                      child: SizedBox(
                         height: 40,
                         child: TextField(
                           decoration: InputDecoration(
-                              label: Text(
+                              label: const Text(
                                 "Email",
                                 style: TextStyle(
                                     fontSize: 18, fontWeight: FontWeight.w600),
                               ),
                               enabledBorder: OutlineInputBorder(
-                                  borderSide: BorderSide(
+                                  borderSide: const BorderSide(
                                       color:
                                           Color.fromARGB(255, 192, 192, 192)),
                                   borderRadius: BorderRadius.circular(30)),
@@ -207,7 +206,7 @@ class _ParentSignUpPageState extends State<ParentSignUpPage> {
                   Expanded(child: Container()),
                   Expanded(
                       flex: 2,
-                      child: Container(
+                      child: SizedBox(
                         height: 40,
                         child: TextField(
                           obscureText: obscureText,
@@ -218,16 +217,16 @@ class _ParentSignUpPageState extends State<ParentSignUpPage> {
                                     obscureText = !obscureText;
                                   });
                                 },
-                                child: Icon(Icons.remove_red_eye_outlined),
+                                child: const Icon(Icons.remove_red_eye_outlined),
                               ),
-                              label: Text(
+                              label: const Text(
                                 "Password",
                                 style: TextStyle(
                                     fontSize: 18, fontWeight: FontWeight.w600),
                               ),
-                              icon: Icon(Icons.password),
+                              icon: const Icon(Icons.password),
                               enabledBorder: OutlineInputBorder(
-                                  borderSide: BorderSide(
+                                  borderSide: const BorderSide(
                                       color:
                                           Color.fromARGB(255, 192, 192, 192)),
                                   borderRadius: BorderRadius.circular(30)),
@@ -243,18 +242,18 @@ class _ParentSignUpPageState extends State<ParentSignUpPage> {
                     },
                     child: Container(
                       alignment: Alignment.center,
-                      child: Text(
+                      height: 50,
+                      width: 120,
+                      decoration: BoxDecoration(
+                          color: const Color.fromARGB(255, 74, 193, 241),
+                          borderRadius: BorderRadius.circular(30)),
+                      child: const Text(
                         "sign up",
                         style: TextStyle(
                             fontSize: 20,
                             color: Color.fromARGB(255, 255, 255, 255),
                             fontWeight: FontWeight.w700),
                       ),
-                      height: 50,
-                      width: 120,
-                      decoration: BoxDecoration(
-                          color: Color.fromARGB(255, 74, 193, 241),
-                          borderRadius: BorderRadius.circular(30)),
                     ),
                   ),
                   Expanded(child: Container()),
@@ -264,7 +263,7 @@ class _ParentSignUpPageState extends State<ParentSignUpPage> {
                           flex: 2,
                           child: Container(
                             alignment: Alignment.centerRight,
-                            child: Text(
+                            child: const Text(
                               "Already have an account ? ",
                               style: TextStyle(
                                   fontSize: 15,
@@ -274,13 +273,13 @@ class _ParentSignUpPageState extends State<ParentSignUpPage> {
                           )),
                       Expanded(
                         child: Container(
-                          margin: EdgeInsets.only(left: 20),
+                          margin: const EdgeInsets.only(left: 20),
                           alignment: Alignment.centerLeft,
                           child: TextButton(
                             onPressed: () {
                               Navigator.pushNamed(context, "LogInPage");
                             },
-                            child: Text(
+                            child: const Text(
                               "Log in",
                               style: TextStyle(
                                   fontSize: 15,

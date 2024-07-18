@@ -17,12 +17,12 @@ class _SplashViewPageState extends State<SplashViewPage>
   void initState() {
     super.initState();
     animationController = AnimationController(
-        vsync: this, duration: Duration(milliseconds: 3000));
+        vsync: this, duration: const Duration(milliseconds: 3000));
     fading = Tween<double>(begin: 0, end: 1).animate(animationController!)
       ..addListener(() {
         setState(() {
           if (animationController!.isCompleted) {
-            Timer(Duration(milliseconds: 300), () {
+            Timer(const Duration(milliseconds: 300), () {
               Navigator.pushReplacementNamed(context, "LogInPage");
             });
           }
@@ -37,7 +37,7 @@ class _SplashViewPageState extends State<SplashViewPage>
       body: Container(
         height: double.infinity,
         width: double.infinity,
-        decoration: BoxDecoration(
+        decoration: const BoxDecoration(
             gradient: LinearGradient(
                 begin: Alignment.bottomLeft,
                 end: Alignment.topRight,
@@ -61,10 +61,10 @@ class _SplashViewPageState extends State<SplashViewPage>
                           child: Opacity(
                             opacity: fading?.value,
                             child: Container(
-                              child: Image.asset("images/Logo.png"),
                               decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(10),
                               ),
+                              child: Image.asset("images/Logo.png"),
                             ),
                           )),
                     ],
@@ -75,6 +75,5 @@ class _SplashViewPageState extends State<SplashViewPage>
         ),
       ),
     );
-    ;
   }
 }

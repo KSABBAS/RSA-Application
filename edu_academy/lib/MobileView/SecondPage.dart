@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:edu_academy/MobileView/StudentMainPage.dart';
 
 class SecondPage extends StatefulWidget {
-  SecondPage({super.key});
+  const SecondPage({super.key});
   @override
   State<SecondPage> createState() => _SecondPageState();
 }
@@ -33,12 +33,12 @@ class _SecondPageState extends State<SecondPage> {
                           OpenBook = false;
                         });
                       },
-                      icon: Icon(Icons.arrow_back)),
+                      icon: const Icon(Icons.arrow_back)),
                   Expanded(child: Container()),
                   Row(
                     children: [
                       Image.asset(Subjects[SubjectSelected][0]),
-                      Padding(padding: EdgeInsets.only(left: 5)),
+                      const Padding(padding: EdgeInsets.only(left: 5)),
                       TMaker(
                           text: Subjects[SubjectSelected][1],
                           fontSize: 20,
@@ -51,13 +51,13 @@ class _SecondPageState extends State<SecondPage> {
               ),
             ),
           ),
-          Padding(
+          const Padding(
             padding: EdgeInsets.only(bottom: 10),
           ),
           CMaker(
-              color: Color.fromARGB(255, 159, 207, 19),
+              color: const Color.fromARGB(255, 159, 207, 19),
               height: 60,
-              padding: EdgeInsets.symmetric(vertical: 5, horizontal: 10),
+              padding: const EdgeInsets.symmetric(vertical: 5, horizontal: 10),
               child: Row(
                 children: [
                   MaterialButton(
@@ -68,7 +68,7 @@ class _SecondPageState extends State<SecondPage> {
                         anySubjectSelected = false;
                       });
                     },
-                    color: Color.fromARGB(255, 217, 216, 216),
+                    color: const Color.fromARGB(255, 217, 216, 216),
                     child: TMaker(
                         text: "فتح",
                         fontSize: 15,
@@ -92,39 +92,39 @@ class _SecondPageState extends State<SecondPage> {
                 children: [
                   Expanded(child: Container()),
                   Image.asset("images/webinar.png"),
-                  Padding(padding: EdgeInsets.only(left: 5)),
+                  const Padding(padding: EdgeInsets.only(left: 5)),
                   TMaker(
                       text: "الحصص المسجلة",
                       fontSize: 20,
                       fontWeight: FontWeight.w600,
-                      color: Color.fromARGB(255, 6, 122, 153)),
+                      color: const Color.fromARGB(255, 6, 122, 153)),
                   Expanded(child: Container())
                 ],
               )),
-          Padding(padding: EdgeInsets.only(top: 10)),
-          Container(
+          const Padding(padding: EdgeInsets.only(top: 10)),
+          SizedBox(
             height: PageHeight(context) - (350),
             child: ListView.builder(
                 itemCount: 20,
                 scrollDirection: Axis.vertical,
                 itemBuilder: (context, index) {
                   return CMaker(
-                      padding: EdgeInsets.symmetric(horizontal: 20),
+                      padding: const EdgeInsets.symmetric(horizontal: 20),
                       circularRadius: 15,
-                      margin: EdgeInsets.only(left: 10, right: 10, bottom: 15),
-                      color: Color.fromARGB(255, 6, 122, 153),
+                      margin: const EdgeInsets.only(left: 10, right: 10, bottom: 15),
+                      color: const Color.fromARGB(255, 6, 122, 153),
                       height: 60,
                       child: Row(
                         children: [
                           MaterialButton(
+                            minWidth: 70,
+                            onPressed: () {},
+                            color: const Color.fromARGB(255, 18, 207, 60),
                             child: TMaker(
                                 text: "تشغيل",
                                 fontSize: 15,
                                 fontWeight: FontWeight.w500,
                                 color: Colors.white),
-                            minWidth: 70,
-                            onPressed: () {},
-                            color: Color.fromARGB(255, 18, 207, 60),
                           ),
                           Expanded(
                             child: Container(),
@@ -165,12 +165,12 @@ class _SecondPageState extends State<SecondPage> {
                           OpenBook = false;
                         });
                       },
-                      icon: Icon(Icons.arrow_back)),
+                      icon: const Icon(Icons.arrow_back)),
                   Expanded(child: Container()),
                   Row(
                     children: [
                       Image.asset(Subjects[SubjectSelected][0]),
-                      Padding(padding: EdgeInsets.only(left: 5)),
+                      const Padding(padding: EdgeInsets.only(left: 5)),
                       TMaker(
                           text: Subjects[SubjectSelected][1],
                           fontSize: 20,
@@ -183,7 +183,7 @@ class _SecondPageState extends State<SecondPage> {
               ),
             ),
           ),
-          Padding(
+          const Padding(
             padding: EdgeInsets.only(bottom: 10),
           ),
           CMaker(
@@ -194,10 +194,10 @@ class _SecondPageState extends State<SecondPage> {
                   fontSize: 20,
                   fontWeight: FontWeight.w500,
                   color: Colors.black)),
-          Padding(
+          const Padding(
             padding: EdgeInsets.only(bottom: 10),
           ),
-          Container(
+          SizedBox(
             height: PageHeight(context) - (310),
             child: ListView.builder(
                 itemCount: 20,
@@ -216,18 +216,18 @@ class _SecondPageState extends State<SecondPage> {
                           },
                           child: CMaker(
                               alignment: Alignment.centerLeft,
-                              padding: EdgeInsets.symmetric(horizontal: 20),
+                              padding: const EdgeInsets.symmetric(horizontal: 20),
                               circularRadius: 5,
-                              color: Color.fromARGB(255, 217, 216, 216),
-                              margin: EdgeInsets.symmetric(horizontal: 15),
+                              color: const Color.fromARGB(255, 217, 216, 216),
+                              margin: const EdgeInsets.symmetric(horizontal: 15),
                               height: 40,
                               width: double.infinity,
                               child: TMaker(
                                   text: "File ${index+1} book.pdf",
                                   fontSize: 20,
                                   fontWeight: FontWeight.w500,
-                                  color: Color.fromARGB(255, 55, 114, 242)))),
-                      Padding(
+                                  color: const Color.fromARGB(255, 55, 114, 242)))),
+                      const Padding(
                         padding: EdgeInsets.only(bottom: 40),
                       )
                     ],
@@ -252,12 +252,12 @@ class _SecondPageState extends State<SecondPage> {
                           OpenBook = false;
                         });
                       },
-                      icon: Icon(Icons.arrow_back)),
+                      icon: const Icon(Icons.arrow_back)),
                   Expanded(child: Container()),
                   Row(
                     children: [
                       Image.asset(Subjects[SubjectSelected][0]),
-                      Padding(padding: EdgeInsets.only(left: 5)),
+                      const Padding(padding: EdgeInsets.only(left: 5)),
                       TMaker(
                           text: Subjects[SubjectSelected][1],
                           fontSize: 20,
@@ -270,39 +270,39 @@ class _SecondPageState extends State<SecondPage> {
               ),
             ),
           ),
-          Padding(
+          const Padding(
             padding: EdgeInsets.only(bottom: 20),
           ),
           Padding(
             padding: const EdgeInsets.all(15.0),
             child: CMaker(
               height: 95,
-              color: Color.fromARGB(255, 6, 122, 153),
+              color: const Color.fromARGB(255, 6, 122, 153),
               circularRadius: 8,
                 alignment: Alignment.center,
                 child: Column(
                   children: [
-                        Padding(padding: EdgeInsets.only(top: 5)),
+                        const Padding(padding: EdgeInsets.only(top: 5)),
                     TMaker(
-                        text: "File ${bookOpend} book.pdf",
+                        text: "File $bookOpend book.pdf",
                         fontSize: 20,
                         fontWeight: FontWeight.w600,
-                        color: Color.fromARGB(255, 255, 255, 255)),
-                        Padding(padding: EdgeInsets.only(top: 5)),
+                        color: const Color.fromARGB(255, 255, 255, 255)),
+                        const Padding(padding: EdgeInsets.only(top: 5)),
                         MaterialButton(
+                            minWidth: 70,
+                            onPressed: () {},
+                            color: const Color.fromARGB(255, 18, 207, 60),
                             child: TMaker(
                                 text: "تنزيل",
                                 fontSize: 15,
                                 fontWeight: FontWeight.w500,
                                 color: Colors.white),
-                            minWidth: 70,
-                            onPressed: () {},
-                            color: Color.fromARGB(255, 18, 207, 60),
                           ),
                   ],
                 )),
           ),
-          Padding(padding: EdgeInsets.symmetric(horizontal: 15),child: CMaker(border: Border.all(width: .5),alignment: Alignment.center,circularRadius: 8,color: Color.fromARGB(255,217,216,216),width: double.infinity,height: (PageHeight(context)-380),child: TMaker(text: "file view", fontSize: 30, fontWeight:FontWeight.w400, color: Colors.black),),)
+          Padding(padding: const EdgeInsets.symmetric(horizontal: 15),child: CMaker(border: Border.all(width: .5),alignment: Alignment.center,circularRadius: 8,color: const Color.fromARGB(255,217,216,216),width: double.infinity,height: (PageHeight(context)-380),child: TMaker(text: "file view", fontSize: 30, fontWeight:FontWeight.w400, color: Colors.black),),)
         ],
       );
     } else {
@@ -316,29 +316,29 @@ class _SecondPageState extends State<SecondPage> {
               height: 50,
               decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(15),
-                  gradient: LinearGradient(
+                  gradient: const LinearGradient(
                       begin: Alignment.centerLeft,
                       end: Alignment.centerRight,
                       colors: [
                         Color.fromARGB(255, 180, 18, 134),
                         Color.fromARGB(255, 89, 8, 66),
-                        const Color.fromARGB(255, 180, 18, 134),
+                        Color.fromARGB(255, 180, 18, 134),
                       ])),
-              child: Text(
+              child: const Text(
                 "الكتب الدراسية",
                 style: TextStyle(
                     fontSize: 30,
-                    color: const Color.fromARGB(255, 255, 255, 255),
+                    color: Color.fromARGB(255, 255, 255, 255),
                     fontWeight: FontWeight.w600),
               ),
             ),
-            Padding(padding: EdgeInsets.only(top: 10)),
+            const Padding(padding: EdgeInsets.only(top: 10)),
             Expanded(
               child: Container(
-                margin: EdgeInsets.symmetric(horizontal: 20),
+                margin: const EdgeInsets.symmetric(horizontal: 20),
                 child: GridView.builder(
                   itemCount: Subjects.length,
-                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                  gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                       crossAxisCount: 2,
                       mainAxisSpacing: 10,
                       crossAxisSpacing: 10),
@@ -351,7 +351,7 @@ class _SecondPageState extends State<SecondPage> {
                         });
                       },
                       child: Container(
-                        padding: EdgeInsets.all(10),
+                        padding: const EdgeInsets.all(10),
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(10),
                           gradient: LinearGradient(
@@ -369,7 +369,7 @@ class _SecondPageState extends State<SecondPage> {
                               alignment: Alignment.centerRight,
                               child: Text(
                                 Subjects[index][1],
-                                style: TextStyle(
+                                style: const TextStyle(
                                     fontSize: 17,
                                     fontWeight: FontWeight.w700,
                                     color: Colors.white),
