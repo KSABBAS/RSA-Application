@@ -173,7 +173,7 @@ class _LoginPageState extends State<LogInPage> {
                     });
 
                     if (loggedIn) {
-                      dbService.rlRead_ForLogin();
+                      dbService.rlRead_ForLogin(Login_Email,Login_Password);
                       // Navigator.pushReplacementNamed(context, "StudentMainPage");
                     }
                   }),
