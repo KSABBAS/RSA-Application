@@ -34,7 +34,7 @@ class _StudentMobileSignUpPageState extends State<StudentMobileSignUpPage> {
   String StudentDemoConfirmPassword = "";
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return Scaffold( 
         backgroundColor: const Color.fromARGB(255, 255, 255, 255),
         body: Form(
           key: key,
