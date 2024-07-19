@@ -43,7 +43,7 @@ class _SecondPageState extends State<SecondPage> {
                           text: Subjects[SubjectSelected][1],
                           fontSize: 20,
                           fontWeight: FontWeight.w700,
-                          color: Color.fromARGB(255, 96, 123, 137),),
+                          color: const Color.fromARGB(255, 96, 123, 137),),
                     ],
                   ),
                   Expanded(child: Container())
@@ -175,7 +175,7 @@ class _SecondPageState extends State<SecondPage> {
                           text: Subjects[SubjectSelected][1],
                           fontSize: 20,
                           fontWeight: FontWeight.w500,
-                          color: Color.fromARGB(255, 104, 202, 255),),
+                          color: const Color.fromARGB(255, 104, 202, 255),),
                     ],
                   ),
                   Expanded(child: Container())
@@ -262,7 +262,7 @@ class _SecondPageState extends State<SecondPage> {
                           text: Subjects[SubjectSelected][1],
                           fontSize: 20,
                           fontWeight: FontWeight.w500,
-                          color: Color.fromARGB(255, 104, 202, 255),),
+                          color: const Color.fromARGB(255, 104, 202, 255),),
                     ],
                   ),
                   Expanded(child: Container())
@@ -316,7 +316,7 @@ class _SecondPageState extends State<SecondPage> {
               height: 50,
               decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(15),
-                  color: Color.fromARGB(255, 104, 202, 255),
+                  color: const Color.fromARGB(255, 104, 202, 255),
                   ),
               child: const Text(
                 "الكتب الدراسية",

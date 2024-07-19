@@ -1,4 +1,3 @@
-import 'package:edu_academy/MobileView/in&upPages/StudentMobileSignUpPage.dart';
 import 'package:edu_academy/MyTools.dart';
 import 'package:flutter/material.dart';
 
@@ -169,9 +168,10 @@ String TeacherDemoConfirmPassword = "";
                               if (value!.isEmpty) {
                                 return "الحقل فارغ";
                               }
-                              if (value!.split(" ").length < 3) {
+                              if (value.split(" ").length < 3) {
                                 return "الاسم يجب ان يكون ثلاثى او رباعى";
                               }
+                              return null;
                             },
                             decoration: InputDecoration(
                                 focusedErrorBorder: OutlineInputBorder(
@@ -220,6 +220,7 @@ String TeacherDemoConfirmPassword = "";
                           if (value.startsWith("05") && value.length != 10) {
                             return "الرقم يجب ان يكون 10 رقم";
                           }
+                          return null;
                         },
                         decoration: InputDecoration(
                             focusedErrorBorder: OutlineInputBorder(
@@ -260,6 +261,7 @@ String TeacherDemoConfirmPassword = "";
                                   !(value.length > 10))) {
                             return "صيغة الايميل ليسة صحيحة";
                           }
+                          return null;
                         },
                         decoration: InputDecoration(
                             focusedErrorBorder: OutlineInputBorder(
@@ -301,6 +303,7 @@ String TeacherDemoConfirmPassword = "";
                               TeacherDemoConfirmPassword) {
                             return "الكلمتان السريتان غير متشابهتان";
                           }
+                          return null;
                         },
                         obscureText: obscureText,
                         decoration: InputDecoration(
@@ -352,6 +355,7 @@ String TeacherDemoConfirmPassword = "";
                               TeacherDemoConfirmPassword) {
                             return "الكلمتان السريتان غير متشابهتان";
                           }
+                          return null;
                         },
                         obscureText: obscureText,
                         decoration: InputDecoration(

@@ -1,8 +1,6 @@
-import 'dart:ffi';
 
 import 'package:edu_academy/MyTools.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 
 class StudentMobileSignUpPage extends StatefulWidget {
   const StudentMobileSignUpPage({super.key});
@@ -153,7 +151,7 @@ class _StudentMobileSignUpPageState extends State<StudentMobileSignUpPage> {
                                           Color.fromARGB(255, 8, 125, 159)))),
                           Expanded(
                               child: Container(
-                                margin: EdgeInsets.only(bottom: 20),
+                                margin: const EdgeInsets.only(bottom: 20),
                                   height: 5,
                                   alignment: Alignment.bottomLeft,
                                   child: const Icon(
@@ -175,9 +173,10 @@ class _StudentMobileSignUpPageState extends State<StudentMobileSignUpPage> {
                           if (value!.isEmpty) {
                             return "الحقل فارغ";
                           }
-                          if (value!.split(" ").length < 3) {
+                          if (value.split(" ").length < 3) {
                             return "الاسم يجب ان يكون ثلاثى او رباعى";
                           }
+                          return null;
                         },
                         decoration: InputDecoration(
                             focusedErrorBorder: OutlineInputBorder(
@@ -222,6 +221,7 @@ class _StudentMobileSignUpPageState extends State<StudentMobileSignUpPage> {
                           if (value.startsWith("05") && value.length != 10) {
                             return "الرقم يجب ان يكون 10 رقم";
                           }
+                          return null;
                         },
                         decoration: InputDecoration(
                             focusedErrorBorder: OutlineInputBorder(
@@ -266,6 +266,7 @@ class _StudentMobileSignUpPageState extends State<StudentMobileSignUpPage> {
                               return "الرقم يجب ان يكون 10 رقم";
                             }
                           }
+                          return null;
                         },
                         decoration: InputDecoration(
                             focusedErrorBorder: OutlineInputBorder(
@@ -321,6 +322,7 @@ class _StudentMobileSignUpPageState extends State<StudentMobileSignUpPage> {
                                   !(value.length > 10))) {
                             return "صيغة الايميل ليسة صحيحة";
                           }
+                          return null;
                         },
                         decoration: InputDecoration(
                             focusedErrorBorder: OutlineInputBorder(
@@ -363,6 +365,7 @@ class _StudentMobileSignUpPageState extends State<StudentMobileSignUpPage> {
                               StudentDemoConfirmPassword) {
                             return "الكلمتان السريتان غير متشابهتان";
                           }
+                          return null;
                         },
                         obscureText: obscureText,
                         decoration: InputDecoration(
@@ -414,6 +417,7 @@ class _StudentMobileSignUpPageState extends State<StudentMobileSignUpPage> {
                               StudentDemoConfirmPassword) {
                             return "الكلمتان السريتان غير متشابهتان";
                           }
+                          return null;
                         },
                         obscureText: obscureText,
                         decoration: InputDecoration(
@@ -477,6 +481,7 @@ class _StudentMobileSignUpPageState extends State<StudentMobileSignUpPage> {
                                         int.parse(value) > 30) {
                                       return "1 to 30 only";
                                     }
+                                    return null;
                                   },
                                   style: const TextStyle(fontSize: 16),
                                   onChanged: (value) {
@@ -512,6 +517,7 @@ class _StudentMobileSignUpPageState extends State<StudentMobileSignUpPage> {
                                         int.parse(value) > 12) {
                                       return "1 to 12 only";
                                     }
+                                    return null;
                                 },
                                 style: const TextStyle(fontSize: 16),
                                 onChanged: (value) {
@@ -546,6 +552,7 @@ class _StudentMobileSignUpPageState extends State<StudentMobileSignUpPage> {
                                         int.parse(value) > now.year-3) {
                                       return "not allowed";
                                     }
+                                    return null;
                               },
                               style: const TextStyle(fontSize: 16),
                               onChanged: (value) {
@@ -721,7 +728,6 @@ class _StudentMobileSignUpPageState extends State<StudentMobileSignUpPage> {
                           Navigator.pushNamedAndRemoveUntil(
                             context, "StudentMainPage", (route) => false);
                         }
-                        ;
                       },
                       child: Container(
                         alignment: Alignment.center,

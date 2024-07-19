@@ -1,8 +1,5 @@
-import 'dart:developer';
 import 'package:edu_academy/MyTools.dart';
-import 'package:get/get_connect/http/src/utils/utils.dart';
 import 'package:panara_dialogs/panara_dialogs.dart';
-import 'package:edu_academy/MobileView/in&upPages/StudentMobileSignUpPage.dart';
 import 'package:flutter/material.dart';
 import 'package:overlay_loading_progress/overlay_loading_progress.dart';
 
@@ -20,7 +17,7 @@ bool loggedIn = false;
 List l = [2.2];
 GlobalKey<FormState> key1 = GlobalKey();
 fo() async {
-  await Future.delayed(Duration(seconds: 2));
+  await Future.delayed(const Duration(seconds: 2));
   return [true, "student"];
 }
 
@@ -203,13 +200,13 @@ class _LoginPageState extends State<LogInPage> {
                           context,
                           widget: CMaker(
                             circularRadius: 15,
-                            color: Color.fromARGB(198, 255, 255, 255),
+                            color: const Color.fromARGB(198, 255, 255, 255),
                             width: MediaQuery.of(context).size.width / 3.6,
                             padding: EdgeInsets.all(
                                 MediaQuery.of(context).size.width / 13),
                             child: const AspectRatio(
                               aspectRatio: 1,
-                              child: const CircularProgressIndicator(
+                              child: CircularProgressIndicator(
                                 color: Colors.blue,
                               ),
                             ),

@@ -1,4 +1,3 @@
-import 'package:edu_academy/MobileView/in&upPages/StudentMobileSignUpPage.dart';
 import 'package:edu_academy/MyTools.dart';
 import 'package:flutter/material.dart';
 
@@ -142,7 +141,7 @@ String GardianDemoConfirmPassword="";
                                         color:
                                             Color.fromARGB(255, 8, 125, 159)))),
                             Container(
-                              margin: EdgeInsets.only(top:13),
+                              margin: const EdgeInsets.only(top:13),
                                 height: 3,
                                 alignment: Alignment.bottomLeft,
                                 child: const Icon(
@@ -164,9 +163,10 @@ String GardianDemoConfirmPassword="";
                               if (value!.isEmpty) {
                                 return "الحقل فارغ";
                               }
-                              if (value!.split(" ").length < 3) {
+                              if (value.split(" ").length < 3) {
                                 return "الاسم يجب ان يكون ثلاثى او رباعى";
                               }
+                              return null;
                             },
                             decoration: InputDecoration(
                                 focusedErrorBorder: OutlineInputBorder(
@@ -215,6 +215,7 @@ String GardianDemoConfirmPassword="";
                           if (value.startsWith("05") && value.length != 10) {
                             return "الرقم يجب ان يكون 10 رقم";
                           }
+                          return null;
                         },
                         decoration: InputDecoration(
                             focusedErrorBorder: OutlineInputBorder(
@@ -255,6 +256,7 @@ String GardianDemoConfirmPassword="";
                                   !(value.length > 10))) {
                             return "صيغة الايميل ليسة صحيحة";
                           }
+                          return null;
                         },
                         decoration: InputDecoration(
                             focusedErrorBorder: OutlineInputBorder(
@@ -296,6 +298,7 @@ String GardianDemoConfirmPassword="";
                               GardianDemoConfirmPassword) {
                             return "الكلمتان السريتان غير متشابهتان";
                           }
+                          return null;
                         },
                         obscureText: obscureText,
                         decoration: InputDecoration(
@@ -346,6 +349,7 @@ String GardianDemoConfirmPassword="";
                               GardianDemoConfirmPassword) {
                             return "الكلمتان السريتان غير متشابهتان";
                           }
+                          return null;
                         },
                         obscureText: obscureText,
                         decoration: InputDecoration(
