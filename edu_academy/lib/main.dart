@@ -11,10 +11,16 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:edu_academy/SplashViewPage.dart';
+
 void main() {
+  WidgetsFlutterBinding.ensureInitialized();
+  SystemChrome.setPreferredOrientations([
+    DeviceOrientation.portraitUp,
+    DeviceOrientation.portraitDown,
+  ]);
+  
   //dart fix --dry-run
-  runApp(
-    GetMaterialApp(
+  runApp(GetMaterialApp(
       debugShowCheckedModeBanner: false,
       routes: {
         "SplashView": (context) => const SplashViewPage(),

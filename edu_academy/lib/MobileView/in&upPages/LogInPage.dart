@@ -20,7 +20,6 @@ GlobalKey<FormState> key1 = GlobalKey();
 fo() async {
   return [true, "student"];
 }
-
 class _LoginPageState extends State<LogInPage> {
   @override
   Widget build(BuildContext context) {
