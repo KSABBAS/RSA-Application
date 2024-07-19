@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:edu_academy/MobileView/in&upPages/StudentMobileSignUpPage.dart';
 import 'package:flutter/material.dart';
 
@@ -14,6 +16,10 @@ var obscureText = true;
 bool loggedIn = false;
 List l = [2.2];
 GlobalKey<FormState> key1 = GlobalKey();
+fo() async {
+  return [true, "Student"];
+}
+
 class _LoginPageState extends State<LogInPage> {
   @override
   Widget build(BuildContext context) {
@@ -95,84 +101,67 @@ class _LoginPageState extends State<LogInPage> {
               child: Column(
                 children: [
                   TextFormField(
-                            onSaved: (newValue) {
-                              FullName = newValue!;
-                            },
-                            validator: (value) {
-                              if (value!.isEmpty) {
-                                return "الحقل فارغ";
-                              }
-                              if (value!.split(" ").length < 3) {
-                                return "الاسم يجب ان يكون ثلاثى او رباعى";
-                              }
-                            },
-                            decoration: InputDecoration(
-                              icon: const Icon(Icons.person_sharp),
-                                focusedErrorBorder: OutlineInputBorder(
-                                    borderSide: const BorderSide(
-                                        color:
-                                            Color.fromARGB(255, 192, 192, 192)),
-                                    borderRadius: BorderRadius.circular(30)),
-                                errorBorder: OutlineInputBorder(
-                                    borderSide: const BorderSide(
-                                        color:
-                                            Color.fromARGB(255, 192, 192, 192)),
-                                    borderRadius: BorderRadius.circular(30)),
-                                label: const Text(
-                                  "Full Name",
-                                  style: TextStyle(
-                                      fontSize: 15,
-                                      fontWeight: FontWeight.w600),
-                                ),
-                                enabledBorder: OutlineInputBorder(
-                                    borderSide: const BorderSide(
-                                        color:
-                                            Color.fromARGB(255, 192, 192, 192)),
-                                    borderRadius: BorderRadius.circular(30)),
-                                focusedBorder: OutlineInputBorder(
-                                    borderRadius: BorderRadius.circular(15))),
-                          ),
+                    onSaved: (newValue) {
+                      FullName = newValue!;
+                    },
+                    decoration: InputDecoration(
+                        icon: const Icon(Icons.person_sharp),
+                        focusedErrorBorder: OutlineInputBorder(
+                            borderSide: const BorderSide(
+                                color: Color.fromARGB(255, 192, 192, 192)),
+                            borderRadius: BorderRadius.circular(30)),
+                        errorBorder: OutlineInputBorder(
+                            borderSide: const BorderSide(
+                                color: Color.fromARGB(255, 192, 192, 192)),
+                            borderRadius: BorderRadius.circular(30)),
+                        label: const Text(
+                          "Full Name",
+                          style: TextStyle(
+                              fontSize: 15, fontWeight: FontWeight.w600),
+                        ),
+                        enabledBorder: OutlineInputBorder(
+                            borderSide: const BorderSide(
+                                color: Color.fromARGB(255, 192, 192, 192)),
+                            borderRadius: BorderRadius.circular(30)),
+                        focusedBorder: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(15))),
+                  ),
                   Expanded(child: Container()),
                   TextFormField(
-                        onSaved: (newValue) {
-                          Password = newValue!;
-                        },
-                        validator: (value) {
-                          if (value!.length < 4) {
-                            return "يجب ان يكون الرقم السرى اكبر من 3 (حروف او ارقام)";
-                          }
-                        },
-                        obscureText: obscureText,
-                        decoration: InputDecoration(
-                          icon: const Icon(Icons.password),
-                            focusedErrorBorder: OutlineInputBorder(
-                                borderSide: const BorderSide(
-                                    color: Color.fromARGB(255, 192, 192, 192)),
-                                borderRadius: BorderRadius.circular(30)),
-                            errorBorder: OutlineInputBorder(
-                                borderSide: const BorderSide(
-                                    color: Color.fromARGB(255, 192, 192, 192)),
-                                borderRadius: BorderRadius.circular(30)),
-                            suffix: InkWell(
-                              onTap: () {
-                                setState(() {
-                                  obscureText = !obscureText;
-                                });
-                              },
-                              child: const Icon(Icons.remove_red_eye_outlined),
-                            ),
-                            label: const Text(
-                              "Password",
-                              style: TextStyle(
-                                  fontSize: 15, fontWeight: FontWeight.w600),
-                            ),
-                            enabledBorder: OutlineInputBorder(
-                                borderSide: const BorderSide(
-                                    color: Color.fromARGB(255, 192, 192, 192)),
-                                borderRadius: BorderRadius.circular(30)),
-                            focusedBorder: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(15))),
-                      ),
+                    onSaved: (newValue) {
+                      Password = newValue!;
+                    },
+                    obscureText: obscureText,
+                    decoration: InputDecoration(
+                        icon: const Icon(Icons.password),
+                        focusedErrorBorder: OutlineInputBorder(
+                            borderSide: const BorderSide(
+                                color: Color.fromARGB(255, 192, 192, 192)),
+                            borderRadius: BorderRadius.circular(30)),
+                        errorBorder: OutlineInputBorder(
+                            borderSide: const BorderSide(
+                                color: Color.fromARGB(255, 192, 192, 192)),
+                            borderRadius: BorderRadius.circular(30)),
+                        suffix: InkWell(
+                          onTap: () {
+                            setState(() {
+                              obscureText = !obscureText;
+                            });
+                          },
+                          child: const Icon(Icons.remove_red_eye_outlined),
+                        ),
+                        label: const Text(
+                          "Password",
+                          style: TextStyle(
+                              fontSize: 15, fontWeight: FontWeight.w600),
+                        ),
+                        enabledBorder: OutlineInputBorder(
+                            borderSide: const BorderSide(
+                                color: Color.fromARGB(255, 192, 192, 192)),
+                            borderRadius: BorderRadius.circular(30)),
+                        focusedBorder: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(15))),
+                  ),
                   Expanded(child: Container()),
                 ],
               ),
@@ -199,16 +188,27 @@ class _LoginPageState extends State<LogInPage> {
                             fontWeight: FontWeight.w700),
                       ),
                     ),
-                    onTap: () {
+                    onTap: () async {
                       setState(() {
                         loggedIn = true;
                       });
                       if (loggedIn) {
-                        if (key1.currentState!.validate()) {
-                          key1.currentState!.save();
+                        key1.currentState!.save();
+                        // send data to data base
+                        List data = await fo();
+                        if(data[0]){
+                          if(data[1]=="student"){
+                            Navigator.pushReplacementNamed(context, "StudentMainPage");
+                          }else if(data[1]=="teacher"){
+                            Navigator.pushReplacementNamed(context, "TeacherMainPage");
+                          }else if(data[1]=="parent"){
+                            Navigator.pushReplacementNamed(context, "ParentMainPage");
+                          }else if(data[1]=="admin"){
+                            Navigator.pushReplacementNamed(context, "AdminMainPage");
+                          }
+                        }else{
+                          // make an error message
                         }
-                        // Navigator.pushReplacementNamed(
-                        //     context, "StudentMainPage");
                       }
                     }),
                 Expanded(child: Container()),

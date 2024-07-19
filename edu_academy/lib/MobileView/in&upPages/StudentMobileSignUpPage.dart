@@ -203,7 +203,6 @@ class _StudentMobileSignUpPageState extends State<StudentMobileSignUpPage> {
                     ),
                     const Padding(padding: EdgeInsets.only(top: 10)),
                     SizedBox(
-                      
                       height: 80,
                       child: TextFormField(
                         onSaved: (newValue) {
@@ -715,10 +714,12 @@ class _StudentMobileSignUpPageState extends State<StudentMobileSignUpPage> {
                     const Padding(padding: EdgeInsets.only(top: 40)),
                     InkWell(
                       onTap: () {
-                        // Navigator.pushNamedAndRemoveUntil(
-                        //     context, "StudentMainPage", (route) => false);
+                        
                         if (key.currentState!.validate()) {
                           key.currentState!.save();
+                          // send data to data base
+                          Navigator.pushNamedAndRemoveUntil(
+                            context, "StudentMainPage", (route) => false);
                         }
                         ;
                       },

@@ -1,4 +1,7 @@
+import 'package:edu_academy/MobileView/AdminMainPage.dart';
 import 'package:edu_academy/MobileView/StudentHomePage.dart';
+import 'package:edu_academy/MobileView/ParentMainPage.dart';
+import 'package:edu_academy/MobileView/TeacherMainPage.dart';
 import 'package:edu_academy/MobileView/in&upPages/ParentSignUpPage.dart';
 import 'package:edu_academy/MobileView/in&upPages/StudentMobileSignUpPage.dart';
 import 'package:edu_academy/MobileView/in&upPages/TeacherSignUpPage.dart';
@@ -20,6 +23,9 @@ void main() {
         "StudentMobileSignUpPage": (context) => const StudentMobileSignUpPage(),
         "LogInPage": (context) => const LogInPage(),
         "StudentMainPage": (context) => const StudentMainPage(),
+        "ParentMainPage": (context) => const ParentMainPage(),
+        "TeacherMainPage": (context) => const TeacherMainPage(),
+        "AdminMainPage": (context) => const AdminMainPage(),
         "WhatAreYouPage": (context) => const WhatAreYouPage(),
         "ParentSignUpPage": (context) => const ParentSignUpPage(),
         "TeacherSignUpPage": (context) => const TeacherSignUpPage()

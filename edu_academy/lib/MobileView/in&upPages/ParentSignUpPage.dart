@@ -381,10 +381,11 @@ String GardianDemoConfirmPassword="";
                     Expanded(child: Container()),
                     InkWell(
                       onTap: () {
-                        // Navigator.pushNamedAndRemoveUntil(
-                        //     context, "StudentMainPage", (route) => false);
                         if (key2.currentState!.validate()) {
                           key2.currentState!.save();
+                          // send data to data base
+                        Navigator.pushNamedAndRemoveUntil(
+                            context, "StudentMainPage", (route) => false);
                         }
                       },
                       child: Container(

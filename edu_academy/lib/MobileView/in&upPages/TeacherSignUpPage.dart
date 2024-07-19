@@ -536,10 +536,11 @@ String TeacherDemoConfirmPassword = "";
                       Expanded(child: Container()),
                       InkWell(
                         onTap: () {
-                          // Navigator.pushNamedAndRemoveUntil(
-                          //     context, "StudentMainPage", (route) => false);
                           if (key3.currentState!.validate()) {
                             key3.currentState!.save();
+                            // send data to data base
+                          Navigator.pushNamedAndRemoveUntil(
+                              context, "StudentMainPage", (route) => false);
                           }
                         },
                         child: Container(
