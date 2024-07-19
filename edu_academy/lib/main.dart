@@ -18,7 +18,6 @@ void main() {
     DeviceOrientation.portraitUp,
     DeviceOrientation.portraitDown,
   ]);
-  
   //dart fix --dry-run
   runApp(GetMaterialApp(
       debugShowCheckedModeBanner: false,

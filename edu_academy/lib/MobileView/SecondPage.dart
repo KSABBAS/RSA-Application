@@ -42,8 +42,8 @@ class _SecondPageState extends State<SecondPage> {
                       TMaker(
                           text: Subjects[SubjectSelected][1],
                           fontSize: 20,
-                          fontWeight: FontWeight.w500,
-                          color: const Color.fromARGB(255, 189, 19, 143)),
+                          fontWeight: FontWeight.w700,
+                          color: Color.fromARGB(255, 96, 123, 137),),
                     ],
                   ),
                   Expanded(child: Container())
@@ -175,7 +175,7 @@ class _SecondPageState extends State<SecondPage> {
                           text: Subjects[SubjectSelected][1],
                           fontSize: 20,
                           fontWeight: FontWeight.w500,
-                          color: const Color.fromARGB(255, 189, 19, 143)),
+                          color: Color.fromARGB(255, 104, 202, 255),),
                     ],
                   ),
                   Expanded(child: Container())
@@ -262,7 +262,7 @@ class _SecondPageState extends State<SecondPage> {
                           text: Subjects[SubjectSelected][1],
                           fontSize: 20,
                           fontWeight: FontWeight.w500,
-                          color: const Color.fromARGB(255, 189, 19, 143)),
+                          color: Color.fromARGB(255, 104, 202, 255),),
                     ],
                   ),
                   Expanded(child: Container())
@@ -316,14 +316,8 @@ class _SecondPageState extends State<SecondPage> {
               height: 50,
               decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(15),
-                  gradient: const LinearGradient(
-                      begin: Alignment.centerLeft,
-                      end: Alignment.centerRight,
-                      colors: [
-                        Color.fromARGB(255, 180, 18, 134),
-                        Color.fromARGB(255, 89, 8, 66),
-                        Color.fromARGB(255, 180, 18, 134),
-                      ])),
+                  color: Color.fromARGB(255, 104, 202, 255),
+                  ),
               child: const Text(
                 "الكتب الدراسية",
                 style: TextStyle(
