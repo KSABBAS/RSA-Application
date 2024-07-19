@@ -153,7 +153,7 @@ class _WhatAreYouPageState extends State<WhatAreYouPage> {
                                     color: const Color.fromARGB(
                                         115, 194, 194, 194)),
                                 child: RadioListTile(
-                                    title: const Text("Gardian"),
+                                    title: const Text(" Parent"),
                                     value: "ParentSignUpPage",
                                     groupValue: as,
                                     onChanged: (val) {

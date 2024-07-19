@@ -9,7 +9,6 @@ class ParentMainPage extends StatefulWidget {
   @override
   State<ParentMainPage> createState() => _ParentMainPageState();
 }
-
 int PageIndex = 0;
 List<List<Color>> col = [
   [const Color.fromARGB(255, 9, 220, 206), const Color.fromARGB(255, 146, 206, 22)],

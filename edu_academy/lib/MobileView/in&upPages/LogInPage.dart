@@ -1,5 +1,6 @@
 import 'dart:developer';
-
+import 'package:get/get_connect/http/src/utils/utils.dart';
+import 'package:panara_dialogs/panara_dialogs.dart';
 import 'package:edu_academy/MobileView/in&upPages/StudentMobileSignUpPage.dart';
 import 'package:flutter/material.dart';
 
@@ -17,7 +18,7 @@ bool loggedIn = false;
 List l = [2.2];
 GlobalKey<FormState> key1 = GlobalKey();
 fo() async {
-  return [true, "Student"];
+  return [true, "student"];
 }
 
 class _LoginPageState extends State<LogInPage> {
@@ -195,19 +196,49 @@ class _LoginPageState extends State<LogInPage> {
                       if (loggedIn) {
                         key1.currentState!.save();
                         // send data to data base
+                        // متعملش اى تعديل خالص غير انك تضيف الداله بتاعتك
                         List data = await fo();
-                        if(data[0]){
-                          if(data[1]=="student"){
-                            Navigator.pushReplacementNamed(context, "StudentMainPage");
-                          }else if(data[1]=="teacher"){
-                            Navigator.pushReplacementNamed(context, "TeacherMainPage");
-                          }else if(data[1]=="parent"){
-                            Navigator.pushReplacementNamed(context, "ParentMainPage");
-                          }else if(data[1]=="admin"){
-                            Navigator.pushReplacementNamed(context, "AdminMainPage");
-                          }
-                        }else{
-                          // make an error message
+
+                        if (data[0]) {
+                          PanaraInfoDialog.show(
+                            context,
+                            title: "Success",
+                            message: "Now you are good to go",
+                            buttonText: "Okay",
+                            onTapDismiss: () {
+                              Navigator.pop(context);
+                              if (data[1] == "student") {
+                                Navigator.pushReplacementNamed(
+                                    context, "StudentMainPage");
+                              } else if (data[1] == "teacher") {
+                                Navigator.pushReplacementNamed(
+                                    context, "TeacherMainPage");
+                              } else if (data[1] == "parent") {
+                                Navigator.pushReplacementNamed(
+                                    context, "ParentMainPage");
+                              } else if (data[1] == "admin") {
+                                Navigator.pushReplacementNamed(
+                                    context, "AdminMainPage");
+                              }
+                            },
+                            panaraDialogType: PanaraDialogType.success,
+                            barrierDismissible: false,
+                          );
+                        } else {
+                          PanaraInfoDialog.show(
+                            context,
+                            title: "Sorry",
+                            message:
+                                "Email or name does not exist \n or the password is wrong",
+                            buttonText: "Okay",
+                            onTapDismiss: () {
+                              Navigator.pop(context);
+                              FullName = "";
+                              Password = "";
+                            },
+                            panaraDialogType: PanaraDialogType.error,
+                            barrierDismissible: true,
+                          );
                         }
                       }
                     }),

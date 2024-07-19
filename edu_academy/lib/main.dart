@@ -1,5 +1,4 @@
 import 'package:edu_academy/MobileView/AdminMainPage.dart';
-import 'package:edu_academy/MobileView/StudentHomePage.dart';
 import 'package:edu_academy/MobileView/ParentMainPage.dart';
 import 'package:edu_academy/MobileView/TeacherMainPage.dart';
 import 'package:edu_academy/MobileView/in&upPages/ParentSignUpPage.dart';
@@ -18,7 +17,6 @@ void main() {
     GetMaterialApp(
       debugShowCheckedModeBanner: false,
       routes: {
-        "StudentHomePage": (context) => const StudentHomePage(),
         "SplashView": (context) => const SplashViewPage(),
         "StudentMobileSignUpPage": (context) => const StudentMobileSignUpPage(),
         "LogInPage": (context) => const LogInPage(),
