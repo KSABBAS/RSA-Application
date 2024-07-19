@@ -1,4 +1,5 @@
 import 'package:edu_academy/MyTools.dart';
+import 'package:edu_academy/service/Databse_Service.dart';
 import 'package:flutter/material.dart';
 
 class TeacherSignUpPage extends StatefulWidget {
@@ -21,9 +22,12 @@ String TeacherDateOfBirth = "";
 String TeacherMonthOfBirth = "";
 String TeacherYearOfBirth = "";
 GlobalKey<FormState> key3 = GlobalKey();
+
 class _TeacherSignUpPageState extends State<TeacherSignUpPage> {
-String TeacherDemoPassword = "";
-String TeacherDemoConfirmPassword = "";
+  String TeacherDemoPassword = "";
+  String TeacherDemoConfirmPassword = "";
+  final dbService = DatabaseService();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -125,11 +129,11 @@ String TeacherDemoConfirmPassword = "";
                   ),
                 ),
               ),
-              const Padding(padding:EdgeInsets.only(top: 20)),
+              const Padding(padding: EdgeInsets.only(top: 20)),
               Expanded(
                 child: Container(
                   color: const Color.fromARGB(255, 255, 255, 255),
-                  height: PageHeight(context)+500,
+                  height: PageHeight(context) + 500,
                   width: 300,
                   child: Padding(
                     padding: const EdgeInsets.only(left: 30, right: 30),
@@ -161,232 +165,244 @@ String TeacherDemoConfirmPassword = "";
                       SizedBox(
                         height: 80,
                         child: TextFormField(
-                            onSaved: (newValue) {
-                              TeacherName = newValue!;
-                            },
-                            validator: (value) {
-                              if (value!.isEmpty) {
-                                return "الحقل فارغ";
-                              }
-                              if (value.split(" ").length < 3) {
-                                return "الاسم يجب ان يكون ثلاثى او رباعى";
-                              }
-                              return null;
-                            },
-                            decoration: InputDecoration(
-                                focusedErrorBorder: OutlineInputBorder(
-                                    borderSide: const BorderSide(
-                                        color:
-                                            Color.fromARGB(255, 192, 192, 192)),
-                                    borderRadius: BorderRadius.circular(30)),
-                                errorBorder: OutlineInputBorder(
-                                    borderSide: const BorderSide(
-                                        color:
-                                            Color.fromARGB(255, 192, 192, 192)),
-                                    borderRadius: BorderRadius.circular(30)),
-                                label: const Text(
-                                  "Full Name",
-                                  style: TextStyle(
-                                      fontSize: 15,
-                                      fontWeight: FontWeight.w600),
-                                ),
-                                enabledBorder: OutlineInputBorder(
-                                    borderSide: const BorderSide(
-                                        color:
-                                            Color.fromARGB(255, 192, 192, 192)),
-                                    borderRadius: BorderRadius.circular(30)),
-                                focusedBorder: OutlineInputBorder(
-                                    borderRadius: BorderRadius.circular(15))),
-                          ),
-                      ),
-                      const Padding(padding: EdgeInsets.only(top: 20)),
-                      SizedBox(
-                        height: 80,
-                        child:TextFormField(
-                        onSaved: (newValue) {
-                          TeacherNumber = newValue!;
-                        },
-                        validator: (value) {
-                          if (value!.isEmpty) {
-                            return "الحقل فارغ";
-                          }
-                          if (!value.startsWith("01") &&
-                              !value.startsWith("05")) {
-                            return "الرقم يجب ان يبدا الرقمين 01 او 05";
-                          }
-                          if (value.startsWith("01") && value.length != 11) {
-                            return "الرقم يجب ان يكون 11 رقم";
-                          }
-                          if (value.startsWith("05") && value.length != 10) {
-                            return "الرقم يجب ان يكون 10 رقم";
-                          }
-                          return null;
-                        },
-                        decoration: InputDecoration(
-                            focusedErrorBorder: OutlineInputBorder(
-                                borderSide: const BorderSide(
-                                    color: Color.fromARGB(255, 192, 192, 192)),
-                                borderRadius: BorderRadius.circular(30)),
-                            errorBorder: OutlineInputBorder(
-                                borderSide: const BorderSide(
-                                    color: Color.fromARGB(255, 192, 192, 192)),
-                                borderRadius: BorderRadius.circular(30)),
-                            label: const Text(
-                              "Phone Number",
-                              style: TextStyle(
-                                  fontSize: 15, fontWeight: FontWeight.w600),
-                            ),
-                            enabledBorder: OutlineInputBorder(
-                                borderSide: const BorderSide(
-                                    color: Color.fromARGB(255, 192, 192, 192)),
-                                borderRadius: BorderRadius.circular(30)),
-                            focusedBorder: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(15))),
-                      ),
-                      ),
-                      const Padding(padding: EdgeInsets.only(top: 20)),
-                      SizedBox(
-                        height: 80,
-                          child: TextFormField(
-                        onSaved: (newValue) {
-                          TeacherEmail = newValue!;
-                        },
-                        validator: (value) {
-                          if (value!.isEmpty) {
-                            return "الحقل فارغ";
-                          }
-                          if ((!value.endsWith("@gmail.com") ||
-                                  !(value.length > 10)) &&
-                              (!value.endsWith("@yahoo.com") ||
-                                  !(value.length > 10))) {
-                            return "صيغة الايميل ليسة صحيحة";
-                          }
-                          return null;
-                        },
-                        decoration: InputDecoration(
-                            focusedErrorBorder: OutlineInputBorder(
-                                borderSide: const BorderSide(
-                                    color: Color.fromARGB(255, 192, 192, 192)),
-                                borderRadius: BorderRadius.circular(30)),
-                            errorBorder: OutlineInputBorder(
-                                borderSide: const BorderSide(
-                                    color: Color.fromARGB(255, 192, 192, 192)),
-                                borderRadius: BorderRadius.circular(30)),
-                            label: const Text(
-                              "Email",
-                              style: TextStyle(
-                                  fontSize: 15, fontWeight: FontWeight.w600),
-                            ),
-                            enabledBorder: OutlineInputBorder(
-                                borderSide: const BorderSide(
-                                    color: Color.fromARGB(255, 192, 192, 192)),
-                                borderRadius: BorderRadius.circular(30)),
-                            focusedBorder: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(15))),
-                      ),
+                          onSaved: (newValue) {
+                            TeacherName = newValue!;
+                          },
+                          validator: (value) {
+                            if (value!.isEmpty) {
+                              return "الحقل فارغ";
+                            }
+                            if (value.split(" ").length < 3) {
+                              return "الاسم يجب ان يكون ثلاثى او رباعى";
+                            }
+                            return null;
+                          },
+                          decoration: InputDecoration(
+                              focusedErrorBorder: OutlineInputBorder(
+                                  borderSide: const BorderSide(
+                                      color:
+                                          Color.fromARGB(255, 192, 192, 192)),
+                                  borderRadius: BorderRadius.circular(30)),
+                              errorBorder: OutlineInputBorder(
+                                  borderSide: const BorderSide(
+                                      color:
+                                          Color.fromARGB(255, 192, 192, 192)),
+                                  borderRadius: BorderRadius.circular(30)),
+                              label: const Text(
+                                "Full Name",
+                                style: TextStyle(
+                                    fontSize: 15, fontWeight: FontWeight.w600),
+                              ),
+                              enabledBorder: OutlineInputBorder(
+                                  borderSide: const BorderSide(
+                                      color:
+                                          Color.fromARGB(255, 192, 192, 192)),
+                                  borderRadius: BorderRadius.circular(30)),
+                              focusedBorder: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(15))),
+                        ),
                       ),
                       const Padding(padding: EdgeInsets.only(top: 20)),
                       SizedBox(
                         height: 80,
                         child: TextFormField(
-                        onSaved: (newValue) {
-                          TeacherPassword = newValue!;
-                        },
-                        onChanged: (value) {
-                          TeacherDemoPassword = value;
-                        },
-                        validator: (value) {
-                          if (value!.length < 4) {
-                            return "يجب ان يكون الرقم السرى اكبر من 3 (حروف او ارقام)";
-                          }
-                          if (TeacherDemoPassword !=
-                              TeacherDemoConfirmPassword) {
-                            return "الكلمتان السريتان غير متشابهتان";
-                          }
-                          return null;
-                        },
-                        obscureText: obscureText,
-                        decoration: InputDecoration(
-                            focusedErrorBorder: OutlineInputBorder(
-                                borderSide: const BorderSide(
-                                    color: Color.fromARGB(255, 192, 192, 192)),
-                                borderRadius: BorderRadius.circular(30)),
-                            errorBorder: OutlineInputBorder(
-                                borderSide: const BorderSide(
-                                    color: Color.fromARGB(255, 192, 192, 192)),
-                                borderRadius: BorderRadius.circular(30)),
-                            suffix: InkWell(
-                              onTap: () {
-                                setState(() {
-                                  obscureText = !obscureText;
-                                });
-                              },
-                              child: const Icon(Icons.remove_red_eye_outlined),
-                            ),
-                            label: const Text(
-                              "Password",
-                              style: TextStyle(
-                                  fontSize: 15, fontWeight: FontWeight.w600),
-                            ),
-                            enabledBorder: OutlineInputBorder(
-                                borderSide: const BorderSide(
-                                    color: Color.fromARGB(255, 192, 192, 192)),
-                                borderRadius: BorderRadius.circular(30)),
-                            focusedBorder: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(15))),
-                      ),
+                          onSaved: (newValue) {
+                            TeacherNumber = newValue!;
+                          },
+                          validator: (value) {
+                            if (value!.isEmpty) {
+                              return "الحقل فارغ";
+                            }
+                            if (!value.startsWith("01") &&
+                                !value.startsWith("05")) {
+                              return "الرقم يجب ان يبدا الرقمين 01 او 05";
+                            }
+                            if (value.startsWith("01") && value.length != 11) {
+                              return "الرقم يجب ان يكون 11 رقم";
+                            }
+                            if (value.startsWith("05") && value.length != 10) {
+                              return "الرقم يجب ان يكون 10 رقم";
+                            }
+                            return null;
+                          },
+                          decoration: InputDecoration(
+                              focusedErrorBorder: OutlineInputBorder(
+                                  borderSide: const BorderSide(
+                                      color:
+                                          Color.fromARGB(255, 192, 192, 192)),
+                                  borderRadius: BorderRadius.circular(30)),
+                              errorBorder: OutlineInputBorder(
+                                  borderSide: const BorderSide(
+                                      color:
+                                          Color.fromARGB(255, 192, 192, 192)),
+                                  borderRadius: BorderRadius.circular(30)),
+                              label: const Text(
+                                "Phone Number",
+                                style: TextStyle(
+                                    fontSize: 15, fontWeight: FontWeight.w600),
+                              ),
+                              enabledBorder: OutlineInputBorder(
+                                  borderSide: const BorderSide(
+                                      color:
+                                          Color.fromARGB(255, 192, 192, 192)),
+                                  borderRadius: BorderRadius.circular(30)),
+                              focusedBorder: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(15))),
                         ),
-                      const Padding(padding: EdgeInsets.only(top: 20)),
-                    SizedBox(
-                          
-                      height: 80,
-                      child: TextFormField(
-                        onSaved: (newValue) {
-                          TeacherConfirmPassword = newValue!;
-                        },
-                        onChanged: (value) {
-                          TeacherDemoConfirmPassword = value;
-                        },
-                        validator: (value) {
-                          if (value!.length < 4) {
-                            return "يجب ان يكون الرقم السرى اكبر من 3 (حروف او ارقام)";
-                          }
-                          if (TeacherDemoPassword !=
-                              TeacherDemoConfirmPassword) {
-                            return "الكلمتان السريتان غير متشابهتان";
-                          }
-                          return null;
-                        },
-                        obscureText: obscureText,
-                        decoration: InputDecoration(
-                            focusedErrorBorder: OutlineInputBorder(
-                                borderSide: const BorderSide(
-                                    color: Color.fromARGB(255, 192, 192, 192)),
-                                borderRadius: BorderRadius.circular(30)),
-                            errorBorder: OutlineInputBorder(
-                                borderSide: const BorderSide(
-                                    color: Color.fromARGB(255, 192, 192, 192)),
-                                borderRadius: BorderRadius.circular(30)),
-                            suffix: InkWell(
-                              onTap: () {
-                                setState(() {
-                                  obscureText = !obscureText;
-                                });
-                              },
-                              child: const Icon(Icons.remove_red_eye_outlined),
-                            ),
-                            label: const Text(
-                              "Confirm Password",
-                              style: TextStyle(
-                                  fontSize: 15, fontWeight: FontWeight.w600),
-                            ),
-                            enabledBorder: OutlineInputBorder(
-                                borderSide: const BorderSide(
-                                    color: Color.fromARGB(255, 192, 192, 192)),
-                                borderRadius: BorderRadius.circular(30)),
-                            focusedBorder: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(15))),
                       ),
+                      const Padding(padding: EdgeInsets.only(top: 20)),
+                      SizedBox(
+                        height: 80,
+                        child: TextFormField(
+                          onSaved: (newValue) {
+                            TeacherEmail = newValue!;
+                          },
+                          validator: (value) {
+                            if (value!.isEmpty) {
+                              return "الحقل فارغ";
+                            }
+                            if ((!value.endsWith("@gmail.com") ||
+                                    !(value.length > 10)) &&
+                                (!value.endsWith("@yahoo.com") ||
+                                    !(value.length > 10))) {
+                              return "صيغة الايميل ليسة صحيحة";
+                            }
+                            return null;
+                          },
+                          decoration: InputDecoration(
+                              focusedErrorBorder: OutlineInputBorder(
+                                  borderSide: const BorderSide(
+                                      color:
+                                          Color.fromARGB(255, 192, 192, 192)),
+                                  borderRadius: BorderRadius.circular(30)),
+                              errorBorder: OutlineInputBorder(
+                                  borderSide: const BorderSide(
+                                      color:
+                                          Color.fromARGB(255, 192, 192, 192)),
+                                  borderRadius: BorderRadius.circular(30)),
+                              label: const Text(
+                                "Email",
+                                style: TextStyle(
+                                    fontSize: 15, fontWeight: FontWeight.w600),
+                              ),
+                              enabledBorder: OutlineInputBorder(
+                                  borderSide: const BorderSide(
+                                      color:
+                                          Color.fromARGB(255, 192, 192, 192)),
+                                  borderRadius: BorderRadius.circular(30)),
+                              focusedBorder: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(15))),
+                        ),
+                      ),
+                      const Padding(padding: EdgeInsets.only(top: 20)),
+                      SizedBox(
+                        height: 80,
+                        child: TextFormField(
+                          onSaved: (newValue) {
+                            TeacherPassword = newValue!;
+                          },
+                          onChanged: (value) {
+                            TeacherDemoPassword = value;
+                          },
+                          validator: (value) {
+                            if (value!.length < 4) {
+                              return "يجب ان يكون الرقم السرى اكبر من 3 (حروف او ارقام)";
+                            }
+                            if (TeacherDemoPassword !=
+                                TeacherDemoConfirmPassword) {
+                              return "الكلمتان السريتان غير متشابهتان";
+                            }
+                            return null;
+                          },
+                          obscureText: obscureText,
+                          decoration: InputDecoration(
+                              focusedErrorBorder: OutlineInputBorder(
+                                  borderSide: const BorderSide(
+                                      color:
+                                          Color.fromARGB(255, 192, 192, 192)),
+                                  borderRadius: BorderRadius.circular(30)),
+                              errorBorder: OutlineInputBorder(
+                                  borderSide: const BorderSide(
+                                      color:
+                                          Color.fromARGB(255, 192, 192, 192)),
+                                  borderRadius: BorderRadius.circular(30)),
+                              suffix: InkWell(
+                                onTap: () {
+                                  setState(() {
+                                    obscureText = !obscureText;
+                                  });
+                                },
+                                child:
+                                    const Icon(Icons.remove_red_eye_outlined),
+                              ),
+                              label: const Text(
+                                "Password",
+                                style: TextStyle(
+                                    fontSize: 15, fontWeight: FontWeight.w600),
+                              ),
+                              enabledBorder: OutlineInputBorder(
+                                  borderSide: const BorderSide(
+                                      color:
+                                          Color.fromARGB(255, 192, 192, 192)),
+                                  borderRadius: BorderRadius.circular(30)),
+                              focusedBorder: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(15))),
+                        ),
+                      ),
+                      const Padding(padding: EdgeInsets.only(top: 20)),
+                      SizedBox(
+                        height: 80,
+                        child: TextFormField(
+                          onSaved: (newValue) {
+                            TeacherConfirmPassword = newValue!;
+                          },
+                          onChanged: (value) {
+                            TeacherDemoConfirmPassword = value;
+                          },
+                          validator: (value) {
+                            if (value!.length < 4) {
+                              return "يجب ان يكون الرقم السرى اكبر من 3 (حروف او ارقام)";
+                            }
+                            if (TeacherDemoPassword !=
+                                TeacherDemoConfirmPassword) {
+                              return "الكلمتان السريتان غير متشابهتان";
+                            }
+                            return null;
+                          },
+                          obscureText: obscureText,
+                          decoration: InputDecoration(
+                              focusedErrorBorder: OutlineInputBorder(
+                                  borderSide: const BorderSide(
+                                      color:
+                                          Color.fromARGB(255, 192, 192, 192)),
+                                  borderRadius: BorderRadius.circular(30)),
+                              errorBorder: OutlineInputBorder(
+                                  borderSide: const BorderSide(
+                                      color:
+                                          Color.fromARGB(255, 192, 192, 192)),
+                                  borderRadius: BorderRadius.circular(30)),
+                              suffix: InkWell(
+                                onTap: () {
+                                  setState(() {
+                                    obscureText = !obscureText;
+                                  });
+                                },
+                                child:
+                                    const Icon(Icons.remove_red_eye_outlined),
+                              ),
+                              label: const Text(
+                                "Confirm Password",
+                                style: TextStyle(
+                                    fontSize: 15, fontWeight: FontWeight.w600),
+                              ),
+                              enabledBorder: OutlineInputBorder(
+                                  borderSide: const BorderSide(
+                                      color:
+                                          Color.fromARGB(255, 192, 192, 192)),
+                                  borderRadius: BorderRadius.circular(30)),
+                              focusedBorder: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(15))),
+                        ),
                       ),
                       const Padding(padding: EdgeInsets.only(top: 20)),
                       const Padding(padding: EdgeInsets.only(top: 10)),
@@ -542,9 +558,18 @@ String TeacherDemoConfirmPassword = "";
                         onTap: () {
                           if (key3.currentState!.validate()) {
                             key3.currentState!.save();
-                            // send data to data base
-                          Navigator.pushNamedAndRemoveUntil(
-                              context, "StudentMainPage", (route) => false);
+                            dbService.rlCreate('Teacher', {
+                              "name": TeacherName,
+                              "phone": TeacherNumber,
+                              "email": TeacherEmail,
+                              "password": TeacherPassword,
+                              "birth_date": TeacherDateOfBirth,
+                              "gender": TeacherGeneder,
+                              "Description": "TeachertDescription",
+                              "state": true
+                            });
+                            Navigator.pushNamedAndRemoveUntil(
+                                context, "StudentMainPage", (route) => false);
                           }
                         },
                         child: Container(

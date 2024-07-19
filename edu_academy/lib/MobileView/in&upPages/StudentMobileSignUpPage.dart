@@ -1,5 +1,5 @@
-
 import 'package:edu_academy/MyTools.dart';
+import 'package:edu_academy/service/Databse_Service.dart';
 import 'package:flutter/material.dart';
 
 class StudentMobileSignUpPage extends StatefulWidget {
@@ -30,6 +30,9 @@ GlobalKey<FormState> key = GlobalKey();
 class _StudentMobileSignUpPageState extends State<StudentMobileSignUpPage> {
   String StudentDemoPassword = "";
   String StudentDemoConfirmPassword = "";
+
+  final dbService = DatabaseService();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -151,7 +154,7 @@ class _StudentMobileSignUpPageState extends State<StudentMobileSignUpPage> {
                                           Color.fromARGB(255, 8, 125, 159)))),
                           Expanded(
                               child: Container(
-                                margin: const EdgeInsets.only(bottom: 20),
+                                  margin: const EdgeInsets.only(bottom: 20),
                                   height: 5,
                                   alignment: Alignment.bottomLeft,
                                   child: const Icon(
@@ -163,7 +166,6 @@ class _StudentMobileSignUpPageState extends State<StudentMobileSignUpPage> {
                     ),
                     const Padding(padding: EdgeInsets.only(top: 20)),
                     SizedBox(
-                      
                       height: 80,
                       child: TextFormField(
                         onSaved: (newValue) {
@@ -247,7 +249,6 @@ class _StudentMobileSignUpPageState extends State<StudentMobileSignUpPage> {
                     ),
                     const Padding(padding: EdgeInsets.only(top: 10)),
                     SizedBox(
-                      
                       height: 80,
                       child: TextFormField(
                         onSaved: (newValue) {
@@ -306,7 +307,6 @@ class _StudentMobileSignUpPageState extends State<StudentMobileSignUpPage> {
                     ),
                     const Padding(padding: EdgeInsets.only(top: 10)),
                     SizedBox(
-                      
                       height: 80,
                       child: TextFormField(
                         onSaved: (newValue) {
@@ -348,7 +348,6 @@ class _StudentMobileSignUpPageState extends State<StudentMobileSignUpPage> {
                     ),
                     const Padding(padding: EdgeInsets.only(top: 10)),
                     SizedBox(
-                      
                       height: 80,
                       child: TextFormField(
                         onSaved: (newValue) {
@@ -400,7 +399,6 @@ class _StudentMobileSignUpPageState extends State<StudentMobileSignUpPage> {
                     ),
                     const Padding(padding: EdgeInsets.only(top: 10)),
                     SizedBox(
-                      
                       height: 80,
                       child: TextFormField(
                         onSaved: (newValue) {
@@ -511,13 +509,13 @@ class _StudentMobileSignUpPageState extends State<StudentMobileSignUpPage> {
                                     return "الحقل فارغ";
                                   }
                                   if (int.tryParse(value) == null) {
-                                      return "ادخل رقم";
-                                    }
-                                    if (int.parse(value) <= 0 ||
-                                        int.parse(value) > 12) {
-                                      return "1 to 12 only";
-                                    }
-                                    return null;
+                                    return "ادخل رقم";
+                                  }
+                                  if (int.parse(value) <= 0 ||
+                                      int.parse(value) > 12) {
+                                    return "1 to 12 only";
+                                  }
+                                  return null;
                                 },
                                 style: const TextStyle(fontSize: 16),
                                 onChanged: (value) {
@@ -546,13 +544,13 @@ class _StudentMobileSignUpPageState extends State<StudentMobileSignUpPage> {
                                   return "الحقل فارغ";
                                 }
                                 if (int.tryParse(value) == null) {
-                                      return "ادخل رقم";
-                                    }
-                                    if (int.parse(value) <= 1980 ||
-                                        int.parse(value) > now.year-3) {
-                                      return "not allowed";
-                                    }
-                                    return null;
+                                  return "ادخل رقم";
+                                }
+                                if (int.parse(value) <= 1980 ||
+                                    int.parse(value) > now.year - 3) {
+                                  return "not allowed";
+                                }
+                                return null;
                               },
                               style: const TextStyle(fontSize: 16),
                               onChanged: (value) {
@@ -721,12 +719,21 @@ class _StudentMobileSignUpPageState extends State<StudentMobileSignUpPage> {
                     const Padding(padding: EdgeInsets.only(top: 40)),
                     InkWell(
                       onTap: () {
-                        
                         if (key.currentState!.validate()) {
                           key.currentState!.save();
-                          // send data to data base
+                          dbService.rlCreate('Students', {
+                            "name": StudentName,
+                            "phone": StudentMobileNumber,
+                            "par_phone": StudentParentMobileNumber,
+                            "email": StudentEmail,
+                            "password": StudentPassword,
+                            "birth_date": StudentDateOfBirth,
+                            "gender": StudentGender,
+                            "grade": StudentGrade,
+                            "state": true
+                          });
                           Navigator.pushNamedAndRemoveUntil(
-                            context, "StudentMainPage", (route) => false);
+                              context, "StudentMainPage", (route) => false);
                         }
                       },
                       child: Container(

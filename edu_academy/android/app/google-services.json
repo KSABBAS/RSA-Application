@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "683845387878",
+    "project_id": "rsa-app-3ec3f",
+    "storage_bucket": "rsa-app-3ec3f.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:683845387878:android:d8b83d6641ae0aafba0fa7",
+        "android_client_info": {
+          "package_name": "com.example.edu_academy"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyACZEenMlS1ugJWpqeCTvix5cIhkGpq2Yo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

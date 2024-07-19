@@ -1,4 +1,5 @@
 import 'package:edu_academy/MyTools.dart';
+import 'package:edu_academy/service/Databse_Service.dart';
 import 'package:flutter/material.dart';
 
 class ParentSignUpPage extends StatefulWidget {
@@ -7,18 +8,21 @@ class ParentSignUpPage extends StatefulWidget {
   State<ParentSignUpPage> createState() => _ParentSignUpPageState();
 }
 
-String GardianName="";
-String GardianNumber="";
-String GardianEmail="";
-String GardianPassword="";
-String GardianConfirmPassword="";
+String ParentName = "";
+String ParentNumber = "";
+String ParentEmail = "";
+String ParentPassword = "";
+String ParentConfirmPassword = "";
 
 var obscureText = true;
 List ll = [2.2];
 GlobalKey<FormState> key2 = GlobalKey();
+
 class _ParentSignUpPageState extends State<ParentSignUpPage> {
-  String GardianDemoPassword="";
-String GardianDemoConfirmPassword="";
+  String ParentDemoPassword = "";
+  String ParentDemoConfirmPassword = "";
+  final dbService = DatabaseService();
+
   @override
   Widget build(BuildContext context) {
     final Sheigt = MediaQuery.of(context).size.height;
@@ -120,7 +124,7 @@ String GardianDemoConfirmPassword="";
               ),
               Container(
                 color: const Color.fromARGB(255, 255, 255, 255),
-                height: PageHeight(context)-50,
+                height: PageHeight(context) - 50,
                 width: 400,
                 child: Padding(
                   padding: const EdgeInsets.only(left: 30, right: 30),
@@ -134,14 +138,14 @@ String GardianDemoConfirmPassword="";
                           children: [
                             Container(
                                 alignment: Alignment.bottomLeft,
-                                child: const Text("Student Gardian  ",
+                                child: const Text("Student Parent  ",
                                     style: TextStyle(
                                         fontSize: 22,
                                         fontWeight: FontWeight.w600,
                                         color:
                                             Color.fromARGB(255, 8, 125, 159)))),
                             Container(
-                              margin: const EdgeInsets.only(top:13),
+                                margin: const EdgeInsets.only(top: 13),
                                 height: 3,
                                 alignment: Alignment.bottomLeft,
                                 child: const Icon(
@@ -152,54 +156,50 @@ String GardianDemoConfirmPassword="";
                         ),
                       ),
                     ),
-                    const Padding(padding:EdgeInsets.only(top: 20)),
+                    const Padding(padding: EdgeInsets.only(top: 20)),
                     SizedBox(
-                          height: 80,
-                          child: TextFormField(
-                            onSaved: (newValue) {
-                              GardianName = newValue!;
-                            },
-                            validator: (value) {
-                              if (value!.isEmpty) {
-                                return "الحقل فارغ";
-                              }
-                              if (value.split(" ").length < 3) {
-                                return "الاسم يجب ان يكون ثلاثى او رباعى";
-                              }
-                              return null;
-                            },
-                            decoration: InputDecoration(
-                                focusedErrorBorder: OutlineInputBorder(
-                                    borderSide: const BorderSide(
-                                        color:
-                                            Color.fromARGB(255, 192, 192, 192)),
-                                    borderRadius: BorderRadius.circular(30)),
-                                errorBorder: OutlineInputBorder(
-                                    borderSide: const BorderSide(
-                                        color:
-                                            Color.fromARGB(255, 192, 192, 192)),
-                                    borderRadius: BorderRadius.circular(30)),
-                                label: const Text(
-                                  "Full Name",
-                                  style: TextStyle(
-                                      fontSize: 15,
-                                      fontWeight: FontWeight.w600),
-                                ),
-                                enabledBorder: OutlineInputBorder(
-                                    borderSide: const BorderSide(
-                                        color:
-                                            Color.fromARGB(255, 192, 192, 192)),
-                                    borderRadius: BorderRadius.circular(30)),
-                                focusedBorder: OutlineInputBorder(
-                                    borderRadius: BorderRadius.circular(15))),
-                          ),
-                        ),
-                    const Padding(padding:EdgeInsets.only(top: 20)),
-                    SizedBox(
-                          height: 80,
-                          child: TextFormField(
+                      height: 80,
+                      child: TextFormField(
                         onSaved: (newValue) {
-                          GardianNumber = newValue!;
+                          ParentName = newValue!;
+                        },
+                        validator: (value) {
+                          if (value!.isEmpty) {
+                            return "الحقل فارغ";
+                          }
+                          if (value.split(" ").length < 3) {
+                            return "الاسم يجب ان يكون ثلاثى او رباعى";
+                          }
+                          return null;
+                        },
+                        decoration: InputDecoration(
+                            focusedErrorBorder: OutlineInputBorder(
+                                borderSide: const BorderSide(
+                                    color: Color.fromARGB(255, 192, 192, 192)),
+                                borderRadius: BorderRadius.circular(30)),
+                            errorBorder: OutlineInputBorder(
+                                borderSide: const BorderSide(
+                                    color: Color.fromARGB(255, 192, 192, 192)),
+                                borderRadius: BorderRadius.circular(30)),
+                            label: const Text(
+                              "Full Name",
+                              style: TextStyle(
+                                  fontSize: 15, fontWeight: FontWeight.w600),
+                            ),
+                            enabledBorder: OutlineInputBorder(
+                                borderSide: const BorderSide(
+                                    color: Color.fromARGB(255, 192, 192, 192)),
+                                borderRadius: BorderRadius.circular(30)),
+                            focusedBorder: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(15))),
+                      ),
+                    ),
+                    const Padding(padding: EdgeInsets.only(top: 20)),
+                    SizedBox(
+                      height: 80,
+                      child: TextFormField(
+                        onSaved: (newValue) {
+                          ParentNumber = newValue!;
                         },
                         validator: (value) {
                           if (value!.isEmpty) {
@@ -238,13 +238,13 @@ String GardianDemoConfirmPassword="";
                             focusedBorder: OutlineInputBorder(
                                 borderRadius: BorderRadius.circular(15))),
                       ),
-                        ),
-                    const Padding(padding:EdgeInsets.only(top: 20)),
+                    ),
+                    const Padding(padding: EdgeInsets.only(top: 20)),
                     SizedBox(
-                          height: 80,
-                          child: TextFormField(
+                      height: 80,
+                      child: TextFormField(
                         onSaved: (newValue) {
-                          GardianEmail = newValue!;
+                          ParentEmail = newValue!;
                         },
                         validator: (value) {
                           if (value!.isEmpty) {
@@ -279,23 +279,23 @@ String GardianDemoConfirmPassword="";
                             focusedBorder: OutlineInputBorder(
                                 borderRadius: BorderRadius.circular(15))),
                       ),
-                        ),
-                    const Padding(padding:EdgeInsets.only(top: 20)),
+                    ),
+                    const Padding(padding: EdgeInsets.only(top: 20)),
                     SizedBox(
-                          height: 80,
-                          child: TextFormField(
+                      height: 80,
+                      child: TextFormField(
                         onSaved: (newValue) {
-                          GardianPassword = newValue!;
+                          ParentPassword = newValue!;
                         },
                         onChanged: (value) {
-                          GardianDemoPassword = value;
+                          ParentDemoPassword = value;
                         },
                         validator: (value) {
                           if (value!.length < 4) {
                             return "يجب ان يكون الرقم السرى اكبر من 3 (حروف او ارقام)";
                           }
-                          if (GardianDemoPassword !=
-                              GardianDemoConfirmPassword) {
+                          if (ParentDemoPassword !=
+                              ParentDemoConfirmPassword) {
                             return "الكلمتان السريتان غير متشابهتان";
                           }
                           return null;
@@ -330,23 +330,23 @@ String GardianDemoConfirmPassword="";
                             focusedBorder: OutlineInputBorder(
                                 borderRadius: BorderRadius.circular(15))),
                       ),
-                        ),
-                    const Padding(padding:EdgeInsets.only(top: 20)),
+                    ),
+                    const Padding(padding: EdgeInsets.only(top: 20)),
                     SizedBox(
                       height: 80,
                       child: TextFormField(
                         onSaved: (newValue) {
-                          GardianConfirmPassword = newValue!;
+                          ParentConfirmPassword = newValue!;
                         },
                         onChanged: (value) {
-                          GardianDemoConfirmPassword = value;
+                          ParentDemoConfirmPassword = value;
                         },
                         validator: (value) {
                           if (value!.length < 4) {
                             return "يجب ان يكون الرقم السرى اكبر من 3 (حروف او ارقام)";
                           }
-                          if (GardianDemoPassword !=
-                              GardianDemoConfirmPassword) {
+                          if (ParentDemoPassword !=
+                              ParentDemoConfirmPassword) {
                             return "الكلمتان السريتان غير متشابهتان";
                           }
                           return null;
@@ -381,15 +381,22 @@ String GardianDemoConfirmPassword="";
                             focusedBorder: OutlineInputBorder(
                                 borderRadius: BorderRadius.circular(15))),
                       ),
-                        ),
+                    ),
                     Expanded(child: Container()),
                     InkWell(
                       onTap: () {
                         if (key2.currentState!.validate()) {
                           key2.currentState!.save();
-                          // send data to data base
-                        Navigator.pushNamedAndRemoveUntil(
-                            context, "StudentMainPage", (route) => false);
+                          dbService.rlCreate('Parent', {
+                            "name": ParentName,
+                            "phone": ParentNumber,
+                            "email": ParentEmail,
+                            "password": ParentPassword,
+                            "gender": "not added yet",
+                            "state": true
+                          });
+                          Navigator.pushNamedAndRemoveUntil(
+                              context, "ParentMainPage", (route) => false);
                         }
                       },
                       child: Container(
