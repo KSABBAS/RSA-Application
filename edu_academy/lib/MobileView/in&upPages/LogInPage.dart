@@ -190,10 +190,7 @@ class _LoginPageState extends State<LogInPage> {
                       ),
                     ),
                     onTap: () async {
-                      setState(() {
-                        loggedIn = true;
-                      });
-                      if (loggedIn) {
+                      
                         key1.currentState!.save();
                         // send data to data base
                         OverlayLoadingProgress.start(
@@ -255,7 +252,7 @@ class _LoginPageState extends State<LogInPage> {
                             barrierDismissible: true,
                           );
                         }
-                      }
+                      
                     }),
                 Expanded(child: Container()),
                 Row(

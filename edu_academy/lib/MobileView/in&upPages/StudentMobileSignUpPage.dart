@@ -1,6 +1,7 @@
 import 'package:edu_academy/MyTools.dart';
 import 'package:edu_academy/service/Databse_Service.dart';
 import 'package:flutter/material.dart';
+import 'package:overlay_loading_progress/overlay_loading_progress.dart';
 
 class StudentMobileSignUpPage extends StatefulWidget {
   const StudentMobileSignUpPage({super.key});
@@ -718,10 +719,26 @@ class _StudentMobileSignUpPageState extends State<StudentMobileSignUpPage> {
                     ),
                     const Padding(padding: EdgeInsets.only(top: 40)),
                     InkWell(
-                      onTap: () {
+                      onTap: () async{
                         if (key.currentState!.validate()) {
                           key.currentState!.save();
-                          dbService.rlCreate('Students', {
+                          OverlayLoadingProgress.start(
+                            context,
+                            widget: CMaker(
+                              circularRadius: 15,
+                              color: const Color.fromARGB(198, 255, 255, 255),
+                              width: MediaQuery.of(context).size.width / 3.6,
+                              padding: EdgeInsets.all(
+                                  MediaQuery.of(context).size.width / 13),
+                              child: const AspectRatio(
+                                aspectRatio: 1,
+                                child: CircularProgressIndicator(
+                                  color: Colors.blue,
+                                ),
+                              ),
+                            ),
+                          );
+                          await dbService.rlCreate('Students', {
                             "name": StudentName,
                             "phone": StudentMobileNumber,
                             "par_phone": StudentParentMobileNumber,
@@ -732,6 +749,7 @@ class _StudentMobileSignUpPageState extends State<StudentMobileSignUpPage> {
                             "grade": StudentGrade,
                             "state": true
                           });
+                          OverlayLoadingProgress.stop();
                           Navigator.pushNamedAndRemoveUntil(
                               context, "StudentMainPage", (route) => false);
                         }
