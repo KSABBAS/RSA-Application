@@ -1,7 +1,9 @@
 import 'package:edu_academy/MyTools.dart';
+import 'package:edu_academy/service/Databse_Service.dart';
 import 'package:panara_dialogs/panara_dialogs.dart';
 import 'package:flutter/material.dart';
 import 'package:overlay_loading_progress/overlay_loading_progress.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class LogInPage extends StatefulWidget {
   const LogInPage({super.key});
@@ -22,6 +24,9 @@ fo() async {
 }
 
 class _LoginPageState extends State<LogInPage> {
+  final dbService = DatabaseService();
+  
+
   @override
   Widget build(BuildContext context) {
     final Sheigt = MediaQuery.of(context).size.height;
@@ -191,6 +196,11 @@ class _LoginPageState extends State<LogInPage> {
                     ),
                     onTap: () async {
                       
+                      final SharedPreferences prefs = await SharedPreferences.getInstance();
+                      setState(() {
+                        loggedIn = true;
+                      });
+                      if (loggedIn) {
                         key1.currentState!.save();
                         // send data to data base
                         OverlayLoadingProgress.start(
@@ -209,9 +219,10 @@ class _LoginPageState extends State<LogInPage> {
                             ),
                           ),
                         );
-                        List data = await fo(); // ضيف الداله بتاعتك
+                        List data = await dbService.rlRead_ForLogin(FullName,Password);
                         OverlayLoadingProgress.stop();
-                        if (data[0]) {
+                        if (data[0])  {
+                          await prefs.setString('id', '$data[2]');
                           PanaraInfoDialog.show(
                             context,
                             title: "Success",
@@ -219,16 +230,16 @@ class _LoginPageState extends State<LogInPage> {
                             buttonText: "Okay",
                             onTapDismiss: () {
                               Navigator.pop(context);
-                              if (data[1] == "student") {
+                              if (data[1] == "Student") {
                                 Navigator.pushReplacementNamed(
                                     context, "StudentMainPage");
-                              } else if (data[1] == "teacher") {
+                              } else if (data[1] == "Teacher") {
                                 Navigator.pushReplacementNamed(
                                     context, "TeacherMainPage");
-                              } else if (data[1] == "parent") {
+                              } else if (data[1] == "Parent") {
                                 Navigator.pushReplacementNamed(
                                     context, "ParentMainPage");
-                              } else if (data[1] == "admin") {
+                              } else if (data[1] == "Admin") {
                                 Navigator.pushReplacementNamed(
                                     context, "AdminMainPage");
                               }
