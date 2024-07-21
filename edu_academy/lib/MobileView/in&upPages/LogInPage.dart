@@ -25,7 +25,6 @@ fo() async {
 
 class _LoginPageState extends State<LogInPage> {
   final dbService = DatabaseService();
-  
 
   @override
   Widget build(BuildContext context) {
@@ -195,75 +194,76 @@ class _LoginPageState extends State<LogInPage> {
                       ),
                     ),
                     onTap: () async {
-                      
-                      final SharedPreferences prefs = await SharedPreferences.getInstance();
+                      final SharedPreferences prefs =
+                          await SharedPreferences.getInstance();
                       setState(() {
                         loggedIn = true;
                       });
                       if (loggedIn) {
                         key1.currentState!.save();
-                        // send data to data base
-                        OverlayLoadingProgress.start(
-                          context,
-                          widget: CMaker(
-                            circularRadius: 15,
-                            color: const Color.fromARGB(198, 255, 255, 255),
-                            width: MediaQuery.of(context).size.width / 3.6,
-                            padding: EdgeInsets.all(
-                                MediaQuery.of(context).size.width / 13),
-                            child: const AspectRatio(
-                              aspectRatio: 1,
-                              child: CircularProgressIndicator(
-                                color: Colors.blue,
-                              ),
+                      }
+                      // send data to data base
+                      OverlayLoadingProgress.start(
+                        context,
+                        widget: CMaker(
+                          circularRadius: 15,
+                          color: const Color.fromARGB(198, 255, 255, 255),
+                          width: MediaQuery.of(context).size.width / 3.6,
+                          padding: EdgeInsets.all(
+                              MediaQuery.of(context).size.width / 13),
+                          child: const AspectRatio(
+                            aspectRatio: 1,
+                            child: CircularProgressIndicator(
+                              color: Colors.blue,
                             ),
                           ),
+                        ),
+                      );
+                      List data =
+                          await dbService.rlRead_ForLogin(FullName, Password);
+                      OverlayLoadingProgress.stop();
+                      if (data[0]) {
+                        await prefs.setString('id', '$data[2]');
+                        PanaraInfoDialog.show(
+                          context,
+                          title: "Success",
+                          message: "Now you are good to go",
+                          buttonText: "Okay",
+                          onTapDismiss: () {
+                            Navigator.pop(context);
+                            if (data[1] == "Student") {
+                              Navigator.pushReplacementNamed(
+                                  context, "StudentMainPage");
+                            } else if (data[1] == "Teacher") {
+                              Navigator.pushReplacementNamed(
+                                  context, "TeacherMainPage");
+                            } else if (data[1] == "Parent") {
+                              Navigator.pushReplacementNamed(
+                                  context, "ParentMainPage");
+                            } else if (data[1] == "Admin") {
+                              Navigator.pushReplacementNamed(
+                                  context, "AdminMainPage");
+                            }
+                          },
+                          panaraDialogType: PanaraDialogType.success,
+                          barrierDismissible: false,
                         );
-                        List data = await dbService.rlRead_ForLogin(FullName,Password);
-                        OverlayLoadingProgress.stop();
-                        if (data[0])  {
-                          await prefs.setString('id', '$data[2]');
-                          PanaraInfoDialog.show(
-                            context,
-                            title: "Success",
-                            message: "Now you are good to go",
-                            buttonText: "Okay",
-                            onTapDismiss: () {
-                              Navigator.pop(context);
-                              if (data[1] == "Student") {
-                                Navigator.pushReplacementNamed(
-                                    context, "StudentMainPage");
-                              } else if (data[1] == "Teacher") {
-                                Navigator.pushReplacementNamed(
-                                    context, "TeacherMainPage");
-                              } else if (data[1] == "Parent") {
-                                Navigator.pushReplacementNamed(
-                                    context, "ParentMainPage");
-                              } else if (data[1] == "Admin") {
-                                Navigator.pushReplacementNamed(
-                                    context, "AdminMainPage");
-                              }
-                            },
-                            panaraDialogType: PanaraDialogType.success,
-                            barrierDismissible: false,
-                          );
-                        } else {
-                          PanaraInfoDialog.show(
-                            context,
-                            title: "Sorry",
-                            message:
-                                "Email or name does not exist \n or the password is wrong",
-                            buttonText: "Okay",
-                            onTapDismiss: () {
-                              Navigator.pop(context);
-                              FullName = "";
-                              Password = "";
-                            },
-                            panaraDialogType: PanaraDialogType.error,
-                            barrierDismissible: true,
-                          );
-                        }
-                      
+                      } else {
+                        PanaraInfoDialog.show(
+                          context,
+                          title: "Sorry",
+                          message:
+                              "Email or name does not exist \n or the password is wrong",
+                          buttonText: "Okay",
+                          onTapDismiss: () {
+                            Navigator.pop(context);
+                            FullName = "";
+                            Password = "";
+                          },
+                          panaraDialogType: PanaraDialogType.error,
+                          barrierDismissible: true,
+                        );
+                      }
                     }),
                 Expanded(child: Container()),
                 Row(

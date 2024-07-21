@@ -719,7 +719,7 @@ class _StudentMobileSignUpPageState extends State<StudentMobileSignUpPage> {
                     ),
                     const Padding(padding: EdgeInsets.only(top: 40)),
                     InkWell(
-                      onTap: () {
+                      onTap: () async {
                         if (true) {//key.currentState!.validate()) {
                           key.currentState!.save();
                           OverlayLoadingProgress.start(
