@@ -719,7 +719,7 @@ class _StudentMobileSignUpPageState extends State<StudentMobileSignUpPage> {
                     const Padding(padding: EdgeInsets.only(top: 40)),
                     InkWell(
                       onTap: () {
-                        if (key.currentState!.validate()) {
+                        if (true) {//key.currentState!.validate()) {
                           key.currentState!.save();
                           dbService.rlCreate('Students', {
                             "name": StudentName,

@@ -23,6 +23,7 @@ class _SplashViewPageState extends State<SplashViewPage>
         setState(() {
           if (animationController!.isCompleted) {
             Timer(const Duration(milliseconds: 300), () {
+              
               Navigator.pushReplacementNamed(context, "LogInPage");
             });
           }
