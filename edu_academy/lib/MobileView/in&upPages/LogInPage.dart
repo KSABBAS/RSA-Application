@@ -220,10 +220,11 @@ class _LoginPageState extends State<LogInPage> {
                         ),
                       );
                       List data =
-                          await dbService.rlRead_ForLogin(FullName, Password);
+                          await dbService.fiRead_ForLogin(FullName, Password);
                       OverlayLoadingProgress.stop();
                       if (data[0]) {
-                        await prefs.setStringList('id', <String>['${data[1]}', '${data[2]}','${data[3]}']);
+                        await prefs.setStringList('id',
+                            <String>['${data[1]}', '${data[2]}', '${data[3]}']);
                         PanaraInfoDialog.show(
                           context,
                           title: "Success",

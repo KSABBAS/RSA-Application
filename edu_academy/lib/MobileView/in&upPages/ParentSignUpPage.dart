@@ -294,8 +294,7 @@ class _ParentSignUpPageState extends State<ParentSignUpPage> {
                           if (value!.length < 4) {
                             return "يجب ان يكون الرقم السرى اكبر من 3 (حروف او ارقام)";
                           }
-                          if (ParentDemoPassword !=
-                              ParentDemoConfirmPassword) {
+                          if (ParentDemoPassword != ParentDemoConfirmPassword) {
                             return "الكلمتان السريتان غير متشابهتان";
                           }
                           return null;
@@ -345,8 +344,7 @@ class _ParentSignUpPageState extends State<ParentSignUpPage> {
                           if (value!.length < 4) {
                             return "يجب ان يكون الرقم السرى اكبر من 3 (حروف او ارقام)";
                           }
-                          if (ParentDemoPassword !=
-                              ParentDemoConfirmPassword) {
+                          if (ParentDemoPassword != ParentDemoConfirmPassword) {
                             return "الكلمتان السريتان غير متشابهتان";
                           }
                           return null;
@@ -387,7 +385,7 @@ class _ParentSignUpPageState extends State<ParentSignUpPage> {
                       onTap: () {
                         if (key2.currentState!.validate()) {
                           key2.currentState!.save();
-                          dbService.rlCreate('Parent', {
+                          dbService.fiCreate('Parent', {
                             "name": ParentName,
                             "phone": ParentNumber,
                             "email": ParentEmail,

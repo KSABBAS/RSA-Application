@@ -739,7 +739,7 @@ class _StudentMobileSignUpPageState extends State<StudentMobileSignUpPage> {
                               ),
                             ),
                           );
-                          await dbService.rlCreate('Students', {
+                          await dbService.fiCreate('Students', {
                             "name": StudentName,
                             "phone": StudentMobileNumber,
                             "par_phone": StudentParentMobileNumber,
@@ -752,18 +752,17 @@ class _StudentMobileSignUpPageState extends State<StudentMobileSignUpPage> {
                           });
                           OverlayLoadingProgress.stop();
                           PanaraInfoDialog.show(
-                          context,
-                          title: "Done that save correct",
-                          message:
-                              "Now you can click LogIn",
-                          buttonText: "Go to Login",
-                          onTapDismiss: () {
-                            Navigator.pushNamedAndRemoveUntil(context, "LogInPage",(rout)=>false);
-                          },
-                          panaraDialogType: PanaraDialogType.success,
-                          barrierDismissible: false,
-                        );
-                          
+                            context,
+                            title: "Done that save correct",
+                            message: "Now you can click LogIn",
+                            buttonText: "Go to Login",
+                            onTapDismiss: () {
+                              Navigator.pushNamedAndRemoveUntil(
+                                  context, "LogInPage", (rout) => false);
+                            },
+                            panaraDialogType: PanaraDialogType.success,
+                            barrierDismissible: false,
+                          );
                         }
                       },
                       child: Container(

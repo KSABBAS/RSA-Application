@@ -558,7 +558,7 @@ class _TeacherSignUpPageState extends State<TeacherSignUpPage> {
                         onTap: () {
                           if (key3.currentState!.validate()) {
                             key3.currentState!.save();
-                            dbService.rlCreate('Teacher', {
+                            dbService.fiCreate('Teacher', {
                               "name": TeacherName,
                               "phone": TeacherNumber,
                               "email": TeacherEmail,
