@@ -2,6 +2,7 @@ import 'package:edu_academy/MyTools.dart';
 import 'package:edu_academy/service/Databse_Service.dart';
 import 'package:flutter/material.dart';
 import 'package:overlay_loading_progress/overlay_loading_progress.dart';
+import 'package:panara_dialogs/panara_dialogs.dart';
 
 class StudentMobileSignUpPage extends StatefulWidget {
   const StudentMobileSignUpPage({super.key});
@@ -467,7 +468,7 @@ class _StudentMobileSignUpPageState extends State<StudentMobileSignUpPage> {
                             child: Container(
                               child: TextFormField(
                                   onSaved: (newValue) {
-                                    StudentName = newValue!;
+                                    StudentDayOfBirth = newValue!;
                                   },
                                   validator: (value) {
                                     if (value!.isEmpty) {
@@ -503,7 +504,7 @@ class _StudentMobileSignUpPageState extends State<StudentMobileSignUpPage> {
                             child: Container(
                               child: TextFormField(
                                 onSaved: (newValue) {
-                                  StudentName = newValue!;
+                                  StudentMonthOfBirth = newValue!;
                                 },
                                 validator: (value) {
                                   if (value!.isEmpty) {
@@ -538,7 +539,7 @@ class _StudentMobileSignUpPageState extends State<StudentMobileSignUpPage> {
                           child: Container(
                             child: TextFormField(
                               onSaved: (newValue) {
-                                StudentName = newValue!;
+                                StudentYearOfBirth = newValue!;
                               },
                               validator: (value) {
                                 if (value!.isEmpty) {
@@ -720,7 +721,7 @@ class _StudentMobileSignUpPageState extends State<StudentMobileSignUpPage> {
                     const Padding(padding: EdgeInsets.only(top: 40)),
                     InkWell(
                       onTap: () async {
-                        if (true) {//key.currentState!.validate()) {
+                        if (key.currentState!.validate()) {
                           key.currentState!.save();
                           OverlayLoadingProgress.start(
                             context,
@@ -747,11 +748,22 @@ class _StudentMobileSignUpPageState extends State<StudentMobileSignUpPage> {
                             "birth_date": StudentDateOfBirth,
                             "gender": StudentGender,
                             "grade": StudentGrade,
-                            "state": true
+                            "state": "false"
                           });
                           OverlayLoadingProgress.stop();
-                          Navigator.pushNamedAndRemoveUntil(
-                              context, "StudentMainPage", (route) => false);
+                          PanaraInfoDialog.show(
+                          context,
+                          title: "Done that save correct",
+                          message:
+                              "Now you can click LogIn",
+                          buttonText: "Go to Login",
+                          onTapDismiss: () {
+                            Navigator.pushNamedAndRemoveUntil(context, "LogInPage",(rout)=>false);
+                          },
+                          panaraDialogType: PanaraDialogType.success,
+                          barrierDismissible: false,
+                        );
+                          
                         }
                       },
                       child: Container(

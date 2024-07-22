@@ -1,9 +1,13 @@
+// import 'dart:convert';
+import 'dart:developer';
+
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:edu_academy/MobileView/SecondPage.dart';
 import 'package:edu_academy/MobileView/ThirdPage.dart';
 import 'package:edu_academy/MyTools.dart';
 import 'package:flutter/material.dart';
-// import 'package:shared_preferences/shared_preferences.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:string_extensions/string_extensions.dart';
 
 class StudentMainPage extends StatefulWidget {
   const StudentMainPage({super.key});
@@ -167,11 +171,30 @@ List<List> Subjects = [
   ["images/SubjectsIcons/هندسة.png", "هندسة"],
 ];
 
-class _StudentMainPageState extends State<StudentMainPage>  {
+class _StudentMainPageState extends State<StudentMainPage> {
+  String name = '';
+  String grade = "";
+
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((_) async {
+      final SharedPreferences prefs = await SharedPreferences.getInstance();
+      final List<String>? items = prefs.getStringList('id');
+      log(items.toString());
+      if (items != null && items.isNotEmpty) {
+        setState(() {
+          name = items[2].split("-")[0] as String;
+          name = "${name.split(" ")[0]} ${name.split(" ")[1]}".toTitleCase;
+          grade = items[2].split("-")[1] as String;
+          // userData = jsonDecode(items[2]) as Map<String, dynamic>;
+        });
+      }
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
-    
-    
     List<Widget> Pages = [
       Container(
         child: Column(
@@ -209,10 +232,10 @@ class _StudentMainPageState extends State<StudentMainPage>  {
                     children: [
                       Expanded(
                           flex: 2,
-                          child: Container  (
+                          child: Container(
                             alignment: Alignment.bottomCenter,
-                            child: const Text(
-                              "My Name",
+                            child: Text(
+                              name,
                               style: TextStyle(
                                   fontSize: 17,
                                   fontWeight: FontWeight.w500,
@@ -223,8 +246,8 @@ class _StudentMainPageState extends State<StudentMainPage>  {
                           flex: 2,
                           child: Container(
                             alignment: Alignment.center,
-                            child: const Text(
-                              "Grade 12",
+                            child: Text(
+                              grade,
                               style: TextStyle(
                                   fontSize: 16,
                                   fontWeight: FontWeight.w500,
@@ -545,8 +568,8 @@ class _StudentMainPageState extends State<StudentMainPage>  {
                           flex: 2,
                           child: Container(
                             alignment: Alignment.bottomCenter,
-                            child: const Text(
-                              "My Name",
+                            child: Text(
+                              name,
                               style: TextStyle(
                                   fontSize: 17,
                                   fontWeight: FontWeight.w500,
@@ -557,8 +580,8 @@ class _StudentMainPageState extends State<StudentMainPage>  {
                           flex: 2,
                           child: Container(
                             alignment: Alignment.center,
-                            child: const Text(
-                              "Grade 12",
+                            child: Text(
+                              grade,
                               style: TextStyle(
                                   fontSize: 16,
                                   fontWeight: FontWeight.w500,
@@ -627,8 +650,8 @@ class _StudentMainPageState extends State<StudentMainPage>  {
                           flex: 2,
                           child: Container(
                             alignment: Alignment.bottomCenter,
-                            child: const Text(
-                              "My Name",
+                            child: Text(
+                              name,
                               style: TextStyle(
                                   fontSize: 17,
                                   fontWeight: FontWeight.w500,
@@ -639,8 +662,8 @@ class _StudentMainPageState extends State<StudentMainPage>  {
                           flex: 2,
                           child: Container(
                             alignment: Alignment.center,
-                            child: const Text(
-                              "Grade 12",
+                            child: Text(
+                              grade,
                               style: TextStyle(
                                   fontSize: 16,
                                   fontWeight: FontWeight.w500,
@@ -708,8 +731,8 @@ class _StudentMainPageState extends State<StudentMainPage>  {
                           flex: 2,
                           child: Container(
                             alignment: Alignment.bottomCenter,
-                            child: const Text(
-                              "My Name",
+                            child: Text(
+                              name,
                               style: TextStyle(
                                   fontSize: 17,
                                   fontWeight: FontWeight.w500,
@@ -720,8 +743,8 @@ class _StudentMainPageState extends State<StudentMainPage>  {
                           flex: 2,
                           child: Container(
                             alignment: Alignment.center,
-                            child: const Text(
-                              "Grade 12",
+                            child: Text(
+                              grade,
                               style: TextStyle(
                                   fontSize: 16,
                                   fontWeight: FontWeight.w500,
@@ -733,14 +756,23 @@ class _StudentMainPageState extends State<StudentMainPage>  {
                   Expanded(
                       flex: 1,
                       child: InkWell(
-                        onTap: () {},
+                        onTap: () async {
+                          final SharedPreferences prefs =
+                              await SharedPreferences.getInstance();
+                          await prefs.remove('id');
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => const SplashViewPage()),
+                          );
+                        },
                         child: Container(
                           padding: const EdgeInsets.only(top: 20, left: 30),
                           decoration: BoxDecoration(
                               color: const Color.fromARGB(255, 255, 255, 255),
                               borderRadius: BorderRadius.circular(10)),
                           height: 50,
-                          child: const Icon(Icons.notifications),
+                          child: const Icon(Icons.logout_sharp),
                         ),
                       )),
                 ],

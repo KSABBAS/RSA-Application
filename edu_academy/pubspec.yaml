@@ -41,6 +41,7 @@ dependencies:
   overlay_loading_progress: ^1.0.1
   panara_dialogs: ^0.1.5
   shared_preferences: ^2.2.3
+  string_extensions: ^0.7.2
 dev_dependencies:
   flutter_lints: ^4.0.0
   flutter_test:

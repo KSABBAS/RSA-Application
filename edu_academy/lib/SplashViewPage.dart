@@ -1,6 +1,8 @@
 import 'dart:async';
+import 'dart:developer';
 
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class SplashViewPage extends StatefulWidget {
   const SplashViewPage({super.key});
@@ -22,9 +24,27 @@ class _SplashViewPageState extends State<SplashViewPage>
       ..addListener(() {
         setState(() {
           if (animationController!.isCompleted) {
-            Timer(const Duration(milliseconds: 300), () {
-              
-              Navigator.pushReplacementNamed(context, "LogInPage");
+            Timer(const Duration(milliseconds: 300), () async {
+              final SharedPreferences prefs =
+                  await SharedPreferences.getInstance();
+              final List<String>? data = prefs.getStringList('id');
+              log(data.toString());
+
+              if (data != null) {
+                if (data[0] == "Student") {
+                  Navigator.pushReplacementNamed(context, "StudentMainPage");
+                } else if (data[0] == "Teacher") {
+                  Navigator.pushReplacementNamed(context, "TeacherMainPage");
+                } else if (data[0] == "Parent") {
+                  Navigator.pushReplacementNamed(context, "ParentMainPage");
+                } else if (data[0] == "Admin") {
+                  Navigator.pushReplacementNamed(context, "AdminMainPage");
+                } else{
+                  Navigator.pushReplacementNamed(context, "LogInPage");
+                }
+              } else {
+                Navigator.pushReplacementNamed(context, "LogInPage");
+              }
             });
           }
         });
