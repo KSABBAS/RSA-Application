@@ -16,7 +16,10 @@ import 'firebase_options.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform,);
+  
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
   SystemChrome.setPreferredOrientations([
     DeviceOrientation.portraitUp,
     DeviceOrientation.portraitDown,
@@ -36,6 +39,6 @@ void main() async {
         "ParentSignUpPage": (context) => const ParentSignUpPage(),
         "TeacherSignUpPage": (context) => const TeacherSignUpPage()
       },
-      home: const SplashViewPage()));
+      home: const TeacherMainPage()));
   SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersiveSticky);
 }

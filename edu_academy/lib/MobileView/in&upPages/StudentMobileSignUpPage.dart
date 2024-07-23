@@ -1,6 +1,7 @@
 import 'package:edu_academy/MyTools.dart';
 import 'package:edu_academy/service/Databse_Service.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:overlay_loading_progress/overlay_loading_progress.dart';
 import 'package:panara_dialogs/panara_dialogs.dart';
 
@@ -37,6 +38,7 @@ class _StudentMobileSignUpPageState extends State<StudentMobileSignUpPage> {
 
   @override
   Widget build(BuildContext context) {
+    SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersiveSticky);
     return Scaffold(
         backgroundColor: const Color.fromARGB(255, 255, 255, 255),
         body: Form(

@@ -327,9 +327,14 @@ class _GVBuilderState extends State<GVBuilder> {
 }
 
 class DDButton extends StatefulWidget {
-  DDButton({super.key, required this.values});
+  DDButton({
+    super.key,
+    required this.values,
+    required this.onselected
+  });
   // void Function()? onChosen;
   List values = [];
+  Function onselected;
   var commonVar;
   @override
   State<DDButton> createState() => _DDButtonState();
@@ -403,7 +408,8 @@ class _RButtonState extends State<RButton> {
                 activeColor: const Color.fromARGB(255, 74, 193, 241),
                 title: Text(
                   widget.list[index],
-                  style: const TextStyle(fontSize: 10, fontWeight: FontWeight.w500),
+                  style: const TextStyle(
+                      fontSize: 10, fontWeight: FontWeight.w500),
                 ),
                 value: widget.list[index],
                 groupValue: selected,

@@ -27,11 +27,9 @@ class _SplashViewPageState extends State<SplashViewPage>
             Timer(const Duration(milliseconds: 300), () async {
               final SharedPreferences prefs =
                   await SharedPreferences.getInstance();
-
               try {
                 final List<String>? data = prefs.getStringList('id');
                 log(data.toString());
-
                 if (data != null) {
                   if (data[0] == "Student") {
                     Navigator.pushReplacementNamed(context, "StudentMainPage");
@@ -57,7 +55,6 @@ class _SplashViewPageState extends State<SplashViewPage>
       });
     animationController!.forward();
   }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(

@@ -1,6 +1,7 @@
 import 'package:edu_academy/MyTools.dart';
 import 'package:edu_academy/service/Databse_Service.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 class TeacherSignUpPage extends StatefulWidget {
   const TeacherSignUpPage({super.key});
@@ -30,6 +31,7 @@ class _TeacherSignUpPageState extends State<TeacherSignUpPage> {
 
   @override
   Widget build(BuildContext context) {
+    SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersiveSticky);
     return Scaffold(
         backgroundColor: const Color.fromARGB(255, 255, 255, 255),
         body: Form(
@@ -556,7 +558,7 @@ class _TeacherSignUpPageState extends State<TeacherSignUpPage> {
                       Expanded(child: Container()),
                       InkWell(
                         onTap: () {
-                          if (key3.currentState!.validate()) {
+                          if (true){//key3.currentState!.validate()) {
                             key3.currentState!.save();
                             dbService.fiCreate('Teacher', {
                               "name": TeacherName,

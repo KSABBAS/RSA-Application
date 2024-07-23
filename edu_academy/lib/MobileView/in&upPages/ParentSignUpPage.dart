@@ -1,6 +1,7 @@
 import 'package:edu_academy/MyTools.dart';
 import 'package:edu_academy/service/Databse_Service.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 class ParentSignUpPage extends StatefulWidget {
   const ParentSignUpPage({super.key});
@@ -25,6 +26,7 @@ class _ParentSignUpPageState extends State<ParentSignUpPage> {
 
   @override
   Widget build(BuildContext context) {
+    SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersiveSticky);
     final Sheigt = MediaQuery.of(context).size.height;
     ll.add(Sheigt);
     double Sheight = ll[1];

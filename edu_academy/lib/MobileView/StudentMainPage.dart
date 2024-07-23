@@ -6,6 +6,7 @@ import 'package:edu_academy/MobileView/SecondPage.dart';
 import 'package:edu_academy/MobileView/ThirdPage.dart';
 import 'package:edu_academy/MyTools.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:string_extensions/string_extensions.dart';
 
@@ -62,11 +63,10 @@ class _StudentMainPageState extends State<StudentMainPage> {
                       bottomRight: Radius.circular(20))),
               child: Row(
                 children: [
-                  Expanded(
-                      flex: 1,
-                      child: Container(
+                  Container(
+                          width: 70,
                           height: 50,
-                          padding: const EdgeInsets.only(top: 20, right: 30),
+                          padding: const EdgeInsets.only(top: 10),
                           alignment: Alignment.center,
                           child: InkWell(
                               onTap: () {
@@ -74,48 +74,49 @@ class _StudentMainPageState extends State<StudentMainPage> {
                                   PageIndex = 0;
                                 });
                               },
-                              child: Image.asset("images/Book.png")))),
-                  Column(
-                    children: [
-                      Expanded(
-                          flex: 2,
-                          child: Container(
-                            alignment: Alignment.bottomCenter,
-                            child: Text(
-                              name,
-                              style: TextStyle(
-                                  fontSize: 17,
-                                  fontWeight: FontWeight.w500,
-                                  color: Color.fromARGB(255, 5, 123, 151)),
-                            ),
-                          )),
-                      Expanded(
-                          flex: 2,
-                          child: Container(
-                            alignment: Alignment.center,
-                            child: Text(
-                              grade,
-                              style: TextStyle(
-                                  fontSize: 16,
-                                  fontWeight: FontWeight.w500,
-                                  color: Color.fromARGB(255, 89, 89, 87)),
-                            ),
-                          )),
-                    ],
-                  ),
+                              child: Image.asset("images/Book.png"))),
                   Expanded(
-                      flex: 1,
-                      child: InkWell(
+                    child: Row(
+                      children: [
+                        Expanded(
+                          child: CMaker(
+                                alignment: Alignment.bottomCenter,
+                                child: Text(
+                                  name,
+                                  style: TextStyle(
+                                      fontSize: 17,
+                                      fontWeight: FontWeight.w500,
+                                      color: Color.fromARGB(255, 5, 123, 151)),
+                                ),
+                              ),
+                        ),
+                        Expanded(
+                          child: CMaker(
+                                alignment: Alignment.bottomCenter,
+                                child: Text(
+                                  grade,
+                                  style: TextStyle(
+                                      fontSize: 16,
+                                      fontWeight: FontWeight.w500,
+                                      color: Color.fromARGB(255, 89, 89, 87)),
+                                ),
+                              ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  InkWell(
                         onTap: () {},
                         child: Container(
-                          padding: const EdgeInsets.only(top: 20, left: 30),
+                          width: 70,
+                          padding: const EdgeInsets.only(top: 10),
                           decoration: BoxDecoration(
                               color: const Color.fromARGB(255, 255, 255, 255),
                               borderRadius: BorderRadius.circular(10)),
                           height: 50,
                           child: const Icon(Icons.notifications),
                         ),
-                      )),
+                      ),
                 ],
               ),
             ),
@@ -396,11 +397,10 @@ class _StudentMainPageState extends State<StudentMainPage> {
                       bottomRight: Radius.circular(20))),
               child: Row(
                 children: [
-                  Expanded(
-                      flex: 1,
-                      child: Container(
+                  Container(
+                          width: 70,
                           height: 50,
-                          padding: const EdgeInsets.only(top: 20, right: 30),
+                          padding: const EdgeInsets.only(top: 10),
                           alignment: Alignment.center,
                           child: InkWell(
                               onTap: () {
@@ -408,48 +408,49 @@ class _StudentMainPageState extends State<StudentMainPage> {
                                   PageIndex = 0;
                                 });
                               },
-                              child: Image.asset("images/Book.png")))),
-                  Column(
-                    children: [
-                      Expanded(
-                          flex: 2,
-                          child: Container(
-                            alignment: Alignment.bottomCenter,
-                            child: Text(
-                              name,
-                              style: TextStyle(
-                                  fontSize: 17,
-                                  fontWeight: FontWeight.w500,
-                                  color: Color.fromARGB(255, 5, 123, 151)),
-                            ),
-                          )),
-                      Expanded(
-                          flex: 2,
-                          child: Container(
-                            alignment: Alignment.center,
-                            child: Text(
-                              grade,
-                              style: TextStyle(
-                                  fontSize: 16,
-                                  fontWeight: FontWeight.w500,
-                                  color: Color.fromARGB(255, 89, 89, 87)),
-                            ),
-                          )),
-                    ],
-                  ),
+                              child: Image.asset("images/Book.png"))),
                   Expanded(
-                      flex: 1,
-                      child: InkWell(
+                    child: Row(
+                      children: [
+                        Expanded(
+                          child: CMaker(
+                                alignment: Alignment.bottomCenter,
+                                child: Text(
+                                  name,
+                                  style: TextStyle(
+                                      fontSize: 17,
+                                      fontWeight: FontWeight.w500,
+                                      color: Color.fromARGB(255, 5, 123, 151)),
+                                ),
+                              ),
+                        ),
+                        Expanded(
+                          child: CMaker(
+                                alignment: Alignment.bottomCenter,
+                                child: Text(
+                                  grade,
+                                  style: TextStyle(
+                                      fontSize: 16,
+                                      fontWeight: FontWeight.w500,
+                                      color: Color.fromARGB(255, 89, 89, 87)),
+                                ),
+                              ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  InkWell(
                         onTap: () {},
                         child: Container(
-                          padding: const EdgeInsets.only(top: 20, left: 30),
+                          width: 70,
+                          padding: const EdgeInsets.only(top: 10),
                           decoration: BoxDecoration(
                               color: const Color.fromARGB(255, 255, 255, 255),
                               borderRadius: BorderRadius.circular(10)),
                           height: 50,
                           child: const Icon(Icons.notifications),
                         ),
-                      )),
+                      ),
                 ],
               ),
             ),
@@ -478,11 +479,10 @@ class _StudentMainPageState extends State<StudentMainPage> {
                       bottomRight: Radius.circular(20))),
               child: Row(
                 children: [
-                  Expanded(
-                      flex: 1,
-                      child: Container(
+                  Container(
+                          width: 70,
                           height: 50,
-                          padding: const EdgeInsets.only(top: 20, right: 30),
+                          padding: const EdgeInsets.only(top: 10),
                           alignment: Alignment.center,
                           child: InkWell(
                               onTap: () {
@@ -490,48 +490,49 @@ class _StudentMainPageState extends State<StudentMainPage> {
                                   PageIndex = 0;
                                 });
                               },
-                              child: Image.asset("images/Book.png")))),
-                  Column(
-                    children: [
-                      Expanded(
-                          flex: 2,
-                          child: Container(
-                            alignment: Alignment.bottomCenter,
-                            child: Text(
-                              name,
-                              style: TextStyle(
-                                  fontSize: 17,
-                                  fontWeight: FontWeight.w500,
-                                  color: Color.fromARGB(255, 5, 123, 151)),
-                            ),
-                          )),
-                      Expanded(
-                          flex: 2,
-                          child: Container(
-                            alignment: Alignment.center,
-                            child: Text(
-                              grade,
-                              style: TextStyle(
-                                  fontSize: 16,
-                                  fontWeight: FontWeight.w500,
-                                  color: Color.fromARGB(255, 89, 89, 87)),
-                            ),
-                          )),
-                    ],
-                  ),
+                              child: Image.asset("images/Book.png"))),
                   Expanded(
-                      flex: 1,
-                      child: InkWell(
+                    child: Row(
+                      children: [
+                        Expanded(
+                          child: CMaker(
+                                alignment: Alignment.bottomCenter,
+                                child: Text(
+                                  name,
+                                  style: TextStyle(
+                                      fontSize: 17,
+                                      fontWeight: FontWeight.w500,
+                                      color: Color.fromARGB(255, 5, 123, 151)),
+                                ),
+                              ),
+                        ),
+                        Expanded(
+                          child: CMaker(
+                                alignment: Alignment.bottomCenter,
+                                child: Text(
+                                  grade,
+                                  style: TextStyle(
+                                      fontSize: 16,
+                                      fontWeight: FontWeight.w500,
+                                      color: Color.fromARGB(255, 89, 89, 87)),
+                                ),
+                              ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  InkWell(
                         onTap: () {},
                         child: Container(
-                          padding: const EdgeInsets.only(top: 20, left: 30),
+                          width: 70,
+                          padding: const EdgeInsets.only(top: 10),
                           decoration: BoxDecoration(
                               color: const Color.fromARGB(255, 255, 255, 255),
                               borderRadius: BorderRadius.circular(10)),
                           height: 50,
                           child: const Icon(Icons.notifications),
                         ),
-                      )),
+                      ),
                 ],
               ),
             ),
@@ -559,11 +560,10 @@ class _StudentMainPageState extends State<StudentMainPage> {
                       bottomRight: Radius.circular(20))),
               child: Row(
                 children: [
-                  Expanded(
-                      flex: 1,
-                      child: Container(
+                  Container(
+                          width: 70,
                           height: 50,
-                          padding: const EdgeInsets.only(top: 20, right: 30),
+                          padding: const EdgeInsets.only(top: 10),
                           alignment: Alignment.center,
                           child: InkWell(
                               onTap: () {
@@ -571,57 +571,49 @@ class _StudentMainPageState extends State<StudentMainPage> {
                                   PageIndex = 0;
                                 });
                               },
-                              child: Image.asset("images/Book.png")))),
-                  Column(
-                    children: [
-                      Expanded(
-                          flex: 2,
-                          child: Container(
-                            alignment: Alignment.bottomCenter,
-                            child: Text(
-                              name,
-                              style: TextStyle(
-                                  fontSize: 17,
-                                  fontWeight: FontWeight.w500,
-                                  color: Color.fromARGB(255, 5, 123, 151)),
-                            ),
-                          )),
-                      Expanded(
-                          flex: 2,
-                          child: Container(
-                            alignment: Alignment.center,
-                            child: Text(
-                              grade,
-                              style: TextStyle(
-                                  fontSize: 16,
-                                  fontWeight: FontWeight.w500,
-                                  color: Color.fromARGB(255, 89, 89, 87)),
-                            ),
-                          )),
-                    ],
-                  ),
+                              child: Image.asset("images/Book.png"))),
                   Expanded(
-                      flex: 1,
-                      child: InkWell(
-                        onTap: () async {
-                          final SharedPreferences prefs =
-                              await SharedPreferences.getInstance();
-                          await prefs.remove('id');
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => const SplashViewPage()),
-                          );
-                        },
+                    child: Row(
+                      children: [
+                        Expanded(
+                          child: CMaker(
+                                alignment: Alignment.bottomCenter,
+                                child: Text(
+                                  name,
+                                  style: TextStyle(
+                                      fontSize: 17,
+                                      fontWeight: FontWeight.w500,
+                                      color: Color.fromARGB(255, 5, 123, 151)),
+                                ),
+                              ),
+                        ),
+                        Expanded(
+                          child: CMaker(
+                                alignment: Alignment.bottomCenter,
+                                child: Text(
+                                  grade,
+                                  style: TextStyle(
+                                      fontSize: 16,
+                                      fontWeight: FontWeight.w500,
+                                      color: Color.fromARGB(255, 89, 89, 87)),
+                                ),
+                              ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  InkWell(
+                        onTap: () {},
                         child: Container(
-                          padding: const EdgeInsets.only(top: 20, left: 30),
+                          width: 70,
+                          padding: const EdgeInsets.only(top: 10),
                           decoration: BoxDecoration(
                               color: const Color.fromARGB(255, 255, 255, 255),
                               borderRadius: BorderRadius.circular(10)),
                           height: 50,
-                          child: const Icon(Icons.logout_sharp),
+                          child: const Icon(Icons.notifications),
                         ),
-                      )),
+                      ),
                 ],
               ),
             ),
@@ -630,7 +622,7 @@ class _StudentMainPageState extends State<StudentMainPage> {
         ),
       ),
     ];
-
+    SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersiveSticky);
     return Scaffold(
       backgroundColor: const Color.fromARGB(255, 233, 255, 247),
       bottomNavigationBar: CurvedNavigationBar(
