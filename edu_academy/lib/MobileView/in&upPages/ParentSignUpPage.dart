@@ -2,7 +2,8 @@ import 'package:edu_academy/MyTools.dart';
 import 'package:edu_academy/service/Databse_Service.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-
+import 'package:overlay_loading_progress/overlay_loading_progress.dart';
+import 'package:panara_dialogs/panara_dialogs.dart';
 class ParentSignUpPage extends StatefulWidget {
   const ParentSignUpPage({super.key});
   @override
@@ -384,19 +385,47 @@ class _ParentSignUpPageState extends State<ParentSignUpPage> {
                     ),
                     Expanded(child: Container()),
                     InkWell(
-                      onTap: () {
-                        if (key2.currentState!.validate()) {
+                      onTap: ()async {
+                        if (true){//key2.currentState!.validate()) {
                           key2.currentState!.save();
-                          dbService.fiCreate('Parent', {
+                          OverlayLoadingProgress.start(
+                            context,
+                            widget: CMaker(
+                              circularRadius: 15,
+                              color: const Color.fromARGB(198, 255, 255, 255),
+                              width: MediaQuery.of(context).size.width / 3.6,
+                              padding: EdgeInsets.all(
+                                  MediaQuery.of(context).size.width / 13),
+                              child: const AspectRatio(
+                                aspectRatio: 1,
+                                child: CircularProgressIndicator(
+                                  color: Colors.blue,
+                                ),
+                              ),
+                            ),
+                          );
+                          await dbService.fiCreate('Parent', {
                             "name": ParentName,
                             "phone": ParentNumber,
                             "email": ParentEmail,
                             "password": ParentPassword,
                             "gender": "not added yet",
-                            "state": true
+                            "state": "true"
                           });
-                          Navigator.pushNamedAndRemoveUntil(
-                              context, "ParentMainPage", (route) => false);
+                        OverlayLoadingProgress.stop();
+                          PanaraInfoDialog.show(
+                            context,
+                            title: "Done that save correct",
+                            message: "Now you can click LogIn",
+                            buttonText: "Go to Login",
+                            onTapDismiss: () {
+                              Navigator.pop(context);
+                              Navigator.pop(context);
+                              Navigator.pop(context);
+                            },
+                            panaraDialogType: PanaraDialogType.success,
+                            barrierDismissible: false,
+                          );
                         }
                       },
                       child: Container(

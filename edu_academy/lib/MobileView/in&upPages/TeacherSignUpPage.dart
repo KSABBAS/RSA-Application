@@ -1,7 +1,10 @@
+import 'package:edu_academy/MobileView/SecondPage.dart';
 import 'package:edu_academy/MyTools.dart';
 import 'package:edu_academy/service/Databse_Service.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:overlay_loading_progress/overlay_loading_progress.dart';
+import 'package:panara_dialogs/panara_dialogs.dart';
 
 class TeacherSignUpPage extends StatefulWidget {
   const TeacherSignUpPage({super.key});
@@ -22,13 +25,33 @@ String TeacherDayOfBirth = "";
 String TeacherDateOfBirth = "";
 String TeacherMonthOfBirth = "";
 String TeacherYearOfBirth = "";
+String TeacherSubject1 = "null";
+String TeacherSubject2 = "null";
+String TeacherSubject3 = "null";
+
 GlobalKey<FormState> key3 = GlobalKey();
 
 class _TeacherSignUpPageState extends State<TeacherSignUpPage> {
   String TeacherDemoPassword = "";
   String TeacherDemoConfirmPassword = "";
   final dbService = DatabaseService();
-
+  List<DropdownMenuItem<String>>? SubjectsMaker(String TeacherSubjectNumber) {
+      List<DropdownMenuItem<String>>? list = [
+        DropdownMenuItem(
+            value: "null",
+            child: CMaker(child: TMaker(text:"null", fontSize: 20, fontWeight:FontWeight.w600, color:Colors.black)),
+          ),
+      ];
+      for (int i = 0; i < Subjects.length; i++) {
+        list.add(
+          DropdownMenuItem(
+            value: Subjects[i][1],
+            child: CMaker(child: TMaker(text: Subjects[i][1], fontSize: 20, fontWeight:FontWeight.w600, color:Colors.black)),
+          ),
+        );
+      }
+      return list;
+    }
   @override
   Widget build(BuildContext context) {
     SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersiveSticky);
@@ -135,8 +158,8 @@ class _TeacherSignUpPageState extends State<TeacherSignUpPage> {
               Expanded(
                 child: Container(
                   color: const Color.fromARGB(255, 255, 255, 255),
-                  height: PageHeight(context) + 500,
-                  width: 300,
+                  height: PageHeight(context) +800,
+                  width: 200,
                   child: Padding(
                     padding: const EdgeInsets.only(left: 30, right: 30),
                     child: Column(children: [
@@ -540,6 +563,82 @@ class _TeacherSignUpPageState extends State<TeacherSignUpPage> {
                         ],
                       ),
                       Expanded(child: Container()),
+                      Container(
+                        alignment: Alignment.centerLeft,
+                        child: const Text(
+                          "Select subject (one , two , three )",
+                          style: TextStyle(
+                              fontSize: 20, fontWeight: FontWeight.w600),
+                        ),
+                      ),
+                      Expanded(child: Container()),
+                      CMaker(
+                        height: 300,
+                        
+                        child: Column(
+                          children: [
+                                Expanded(child: Container()),
+                            Row(children:[
+                              Container(
+                        alignment: Alignment.centerLeft,
+                        child: const Text(
+                          "Subject one",
+                          style: TextStyle(
+                              fontSize: 20, fontWeight: FontWeight.w600),
+                        ),
+                      ),
+                      Expanded(child:Container()),
+                              DropdownButton(
+                                items:SubjectsMaker(TeacherSubject1),
+                                value: TeacherSubject1,
+                                onChanged: (s1) {
+                                  setState(() {
+                                    TeacherSubject1 = s1!.toString();
+                                  });
+                                }),]),
+                                Expanded(child: Container()),
+                            Row(children:[
+                              Container(
+                        alignment: Alignment.centerLeft,
+                        child: const Text(
+                          "Subject two",
+                          style: TextStyle(
+                              fontSize: 20, fontWeight: FontWeight.w600),
+                        ),
+                      ),
+                      Expanded(child:Container()),
+                              DropdownButton(
+                                items:SubjectsMaker(TeacherSubject2),
+                                value: TeacherSubject2,
+                                onChanged: (s2) {
+                                  setState(() {
+                                    TeacherSubject2 = s2!.toString();
+                                  });
+                                }),]),
+                                Expanded(child: Container()),
+                            Row(children:[
+                              Container(
+                        alignment: Alignment.centerLeft,
+                        child: const Text(
+                          "Subject three",
+                          style: TextStyle(
+                              fontSize: 20, fontWeight: FontWeight.w600),
+                        ),
+                      ),
+                      Expanded(child:Container()),
+                              DropdownButton(
+                                items:SubjectsMaker(TeacherSubject3),
+                                value: TeacherSubject3,
+                                onChanged: (s3) {
+                                  setState(() {
+                                    TeacherSubject3 = s3!.toString();
+                                  });
+                                }),]),
+                                Expanded(child: Container()),
+                          ],
+                        ),
+                      ),
+                      Expanded(child: Container()),
                       SizedBox(
                         height: 210,
                         child: TextField(
@@ -557,21 +656,51 @@ class _TeacherSignUpPageState extends State<TeacherSignUpPage> {
                       ),
                       Expanded(child: Container()),
                       InkWell(
-                        onTap: () {
-                          if (true){//key3.currentState!.validate()) {
+                        onTap: () async {
+                          if (true) {
+                            //key3.currentState!.validate()) {
                             key3.currentState!.save();
-                            dbService.fiCreate('Teacher', {
+                            OverlayLoadingProgress.start(
+                              context,
+                              widget: CMaker(
+                                circularRadius: 15,
+                                color: const Color.fromARGB(198, 255, 255, 255),
+                                width: MediaQuery.of(context).size.width / 3.6,
+                                padding: EdgeInsets.all(
+                                    MediaQuery.of(context).size.width / 13),
+                                child: const AspectRatio(
+                                  aspectRatio: 1,
+                                  child: CircularProgressIndicator(
+                                    color: Colors.blue,
+                                  ),
+                                ),
+                              ),
+                            );
+                            await dbService.fiCreate('Teacher', {
                               "name": TeacherName,
                               "phone": TeacherNumber,
                               "email": TeacherEmail,
                               "password": TeacherPassword,
                               "birth_date": TeacherDateOfBirth,
                               "gender": TeacherGeneder,
+                              // add subjects
                               "Description": "TeachertDescription",
-                              "state": true
+                              "state": "true"
                             });
-                            Navigator.pushNamedAndRemoveUntil(
-                                context, "StudentMainPage", (route) => false);
+                            OverlayLoadingProgress.stop();
+                            PanaraInfoDialog.show(
+                              context,
+                              title: "Done that save correct",
+                              message: "Now you can click LogIn",
+                              buttonText: "Go to Login",
+                              onTapDismiss: () {
+                                Navigator.pop(context);
+                                Navigator.pop(context);
+                                Navigator.pop(context);
+                              },
+                              panaraDialogType: PanaraDialogType.success,
+                              barrierDismissible: false,
+                            );
                           }
                         },
                         child: Container(

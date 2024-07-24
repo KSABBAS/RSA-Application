@@ -1,3 +1,4 @@
+import 'package:edu_academy/MobileView/in&upPages/LogInPage.dart';
 import 'package:edu_academy/MyTools.dart';
 import 'package:edu_academy/service/Databse_Service.dart';
 import 'package:flutter/material.dart';
@@ -723,7 +724,8 @@ class _StudentMobileSignUpPageState extends State<StudentMobileSignUpPage> {
                     const Padding(padding: EdgeInsets.only(top: 40)),
                     InkWell(
                       onTap: () async {
-                        if (key.currentState!.validate()) {
+                        if (true) {
+                          //key.currentState!.validate()) {
                           key.currentState!.save();
                           OverlayLoadingProgress.start(
                             context,
@@ -750,7 +752,7 @@ class _StudentMobileSignUpPageState extends State<StudentMobileSignUpPage> {
                             "birth_date": StudentDateOfBirth,
                             "gender": StudentGender,
                             "grade": StudentGrade,
-                            "state": "false"
+                            "state": "true"
                           });
                           OverlayLoadingProgress.stop();
                           PanaraInfoDialog.show(
@@ -759,8 +761,9 @@ class _StudentMobileSignUpPageState extends State<StudentMobileSignUpPage> {
                             message: "Now you can click LogIn",
                             buttonText: "Go to Login",
                             onTapDismiss: () {
-                              Navigator.pushNamedAndRemoveUntil(
-                                  context, "LogInPage", (rout) => false);
+                              Navigator.pop(context);
+                              Navigator.pop(context);
+                              Navigator.pop(context);
                             },
                             panaraDialogType: PanaraDialogType.success,
                             barrierDismissible: false,
