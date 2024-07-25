@@ -617,7 +617,9 @@ class _StudentMainPageState extends State<StudentMainPage> {
                 ],
               ),
             ),
-            Expanded(flex: 8, child: Container()),
+            Expanded(flex: 8, child: Container(
+              child: Text("hi"),
+            )),
           ],
         ),
       ),

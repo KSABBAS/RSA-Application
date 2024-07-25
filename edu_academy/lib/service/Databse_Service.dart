@@ -91,11 +91,8 @@ class DatabaseService {
 
   fiRead_Records(String grade, String subject) async {
     log("fiRead_Records");
-
     List<List<dynamic>> ret_list = [];
-
     ///Records/Zoom/Grades/Grade 1/G1Arabic/REC1
-
     QuerySnapshot studentSnapshot = await fire
         .collection('Records')
         .doc("Zoom")
@@ -106,6 +103,27 @@ class DatabaseService {
 
     for (var i in studentSnapshot.docs) {
       ret_list.add(["${i['link']}", "${i['date']}"]);
+    }
+    log(ret_list.toString());
+    return  ret_list as List<List<dynamic>>;
+  }
+
+  fiRead_Books(String grade, String subject) async {
+    log("fiRead_Books");
+    log(grade);
+    log(subject);
+    List<List<dynamic>> ret_list = [];
+    //Book/SubjectsBooks/Grades/Grade 1/عربي/Book1
+    QuerySnapshot studentSnapshot = await fire
+        .collection('Book')
+        .doc("SubjectsBooks")
+        .collection("Grades")
+        .doc(grade)
+        .collection(subject)
+        .get();
+
+    for (var i in studentSnapshot.docs) {
+      ret_list.add(["${i['link']}", "${i['date']}", "${i['title']}"]);
     }
     log(ret_list.toString());
     return  ret_list as List<List<dynamic>>;

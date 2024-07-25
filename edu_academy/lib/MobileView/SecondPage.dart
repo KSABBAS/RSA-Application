@@ -1,8 +1,3 @@
-// import 'dart:developer';
-
-import 'dart:ffi';
-import 'dart:math';
-
 import 'package:edu_academy/MyTools.dart';
 import 'package:edu_academy/service/Databse_Service.dart';
 import 'package:flutter/material.dart';
@@ -185,8 +180,10 @@ Map<String, dynamic> GradesSubjects = {
 };
 
 bool anySubjectSelected = false;
+int index_SubjectSelected = 0;
 int SubjectSelected = 0;
 List<List<dynamic>> all_rec = [];
+List<List<dynamic>> all_books = [];
 bool OpenBooks = false;
 bool OpenBook = false;
 int bookOpend = 0;
@@ -211,7 +208,6 @@ class _SecondPageState extends State<SecondPage> {
 
   @override
   Widget build(BuildContext context) {
-    // dbService.fiRead_Records(grade);
     if (anySubjectSelected) {
       // second
       return Column(
@@ -259,10 +255,14 @@ class _SecondPageState extends State<SecondPage> {
                 children: [
                   MaterialButton(
                     minWidth: 50,
-                    onPressed: () {
+                    onPressed: () async {
+                      List<List<dynamic>> records_ =
+                          await dbService.fiRead_Books(
+                              grade, "${Subjects[SubjectSelected][1]}");
                       setState(() {
                         OpenBooks = true;
                         anySubjectSelected = false;
+                        all_books = records_;
                       });
                     },
                     color: const Color.fromARGB(255, 217, 216, 216),
@@ -401,7 +401,7 @@ class _SecondPageState extends State<SecondPage> {
           SizedBox(
             height: PageHeight(context) - (310),
             child: ListView.builder(
-                itemCount: 20,
+                itemCount: all_books.length,
                 scrollDirection: Axis.vertical,
                 itemBuilder: (context, index) {
                   return Column(
@@ -412,7 +412,7 @@ class _SecondPageState extends State<SecondPage> {
                               OpenBook = true;
                               OpenBooks = false;
                               anySubjectSelected = false;
-                              bookOpend = index + 1;
+                              bookOpend = index;
                             });
                           },
                           child: CMaker(
@@ -423,10 +423,11 @@ class _SecondPageState extends State<SecondPage> {
                               color: const Color.fromARGB(255, 217, 216, 216),
                               margin:
                                   const EdgeInsets.symmetric(horizontal: 15),
-                              height: 40,
+                              // height: 40
                               width: double.infinity,
                               child: TMaker(
-                                  text: "File ${index + 1} book.pdf",
+                                  text:
+                                      "${index + 1}- ${all_books[index][2]}\ndate:${all_books[index][1]}", //////
                                   fontSize: 20,
                                   fontWeight: FontWeight.w500,
                                   color: const Color.fromARGB(
@@ -450,11 +451,19 @@ class _SecondPageState extends State<SecondPage> {
               child: Row(
                 children: [
                   IconButton(
-                      onPressed: () {
+                      onPressed: () async {
+                        List<
+                            List<
+                                dynamic>> records_ = await dbService.fiRead_Books(
+                            grade,
+                            "${Subjects[GradesSubjects[grade][0]][1]}");
+
                         setState(() {
                           anySubjectSelected = false;
                           OpenBooks = true;
                           OpenBook = false;
+                          all_books = records_;
+                          // log(all_books.toString());
                         });
                       },
                       icon: const Icon(Icons.arrow_back)),
@@ -490,7 +499,7 @@ class _SecondPageState extends State<SecondPage> {
                   children: [
                     const Padding(padding: EdgeInsets.only(top: 5)),
                     TMaker(
-                        text: "File $bookOpend book.pdf",
+                        text: "${bookOpend + 1}- ${all_books[bookOpend][2]}",
                         fontSize: 20,
                         fontWeight: FontWeight.w600,
                         color: const Color.fromARGB(255, 255, 255, 255)),
@@ -518,7 +527,7 @@ class _SecondPageState extends State<SecondPage> {
               width: double.infinity,
               height: (PageHeight(context) - 380),
               child: TMaker(
-                  text: "file view",
+                  text: "file view \n ${all_books[bookOpend][0]}",
                   fontSize: 30,
                   fontWeight: FontWeight.w400,
                   color: Colors.black),
