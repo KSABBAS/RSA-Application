@@ -28,10 +28,10 @@ class _GradesPageState extends State<GradesPage> {
     if (BooksAreOpened) {
       //صفحة الكتب
       return CMaker(
-          height: PageHeight(context) - 165,
+          height: PageHeight(context) - 145,
           width: PageWidth(context),
           padding: EdgeInsets.symmetric(horizontal: 10),
-          child: Column(children: [
+          child: ListView(children: [
             Row(
               children: [
                 InkWell(
@@ -88,33 +88,59 @@ class _GradesPageState extends State<GradesPage> {
                     circularRadius: 20,
                     margin: EdgeInsets.symmetric(horizontal: 10),
                     width: double.infinity,
-                    height:  PageHeight(context)-318,
+                    height: PageHeight(context) - 400,
                     child: ListView.builder(
-                      itemCount: 5,
+                      itemCount: 7,
                       itemBuilder: (context, index) {
                         return Column(
                           children: [
-                            CMaker(padding: EdgeInsets.only(left: 20) ,
-                            color: Colors.white,
-                            boxShadow: [
-                                      BoxShadow(
-                                          color: Color.fromARGB(61, 0, 0, 0),
-                                          offset: Offset(2, 2),
-                                          blurRadius: 10,
-                                          spreadRadius: .06)
-                                        ],
-                            circularRadius: 15,alignment: Alignment.centerLeft,height: 80,
-                            child: TMaker(
-                                    textAlign: TextAlign.start,
-                                    text: "Books and Files",
-                                    fontSize: 25,
-                                    fontWeight: FontWeight.w600,
-                                    color: const Color.fromARGB(255, 0, 0, 0)),),
+                            CMaker(
+                              padding: EdgeInsets.only(left: 20),
+                              color: Colors.white,
+                              border: Border.all(),
+                              circularRadius: 15,
+                              alignment: Alignment.centerLeft,
+                              height: 80,
+                              child: Row(
+                                children: [
+                                  TMaker(
+                                      textAlign: TextAlign.start,
+                                      text: "File number ${index + 1}",
+                                      fontSize: 25,
+                                      fontWeight: FontWeight.w600,
+                                      color:
+                                          const Color.fromARGB(255, 0, 0, 0)),
+                                  Expanded(child: Container()),
+                                  MaterialButton(
+                                    color: Colors.red,
+                                    onPressed: () {},
+                                    child: TMaker(
+                                        text: "حذف",
+                                        fontSize: 22,
+                                        fontWeight: FontWeight.w700,
+                                        color: Colors.white),
+                                  ),
+                                  Padding(padding: EdgeInsets.only(right: 10))
+                                ],
+                              ),
+                            ),
                             Padding(padding: EdgeInsets.only(bottom: 20)),
                           ],
                         );
                       },
                     ),
+                  ),
+                  Padding(padding: EdgeInsets.only(bottom: 20)),
+                  MaterialButton(
+                    height: 45,
+                    minWidth: 150,
+                    color: Color.fromARGB(255, 54, 244, 92),
+                    onPressed: () {},
+                    child: TMaker(
+                        text: "إضافة",
+                        fontSize: 22,
+                        fontWeight: FontWeight.w700,
+                        color: Colors.white),
                   )
                 ],
               ),
@@ -124,12 +150,12 @@ class _GradesPageState extends State<GradesPage> {
     if (GradeIsOpened) {
       //الصفحه الثانيه
       return CMaker(
-        height: PageHeight(context) - 165,
+        height: PageHeight(context) + 70,
         width: PageWidth(context),
         padding: EdgeInsets.symmetric(horizontal: 10),
         child: Column(
           children: [
-            Padding(padding: EdgeInsets.only(bottom: 5)),
+            Padding(padding: EdgeInsets.only(bottom: 10)),
             Row(
               children: [
                 InkWell(
@@ -159,34 +185,49 @@ class _GradesPageState extends State<GradesPage> {
                         color: Colors.white)),
               ],
             ),
-            Padding(padding: EdgeInsets.only(bottom: 15)),
-            InkWell(
-              onTap: () {
-                setState(() {
-                  GradeIsOpened = false;
-                  BooksAreOpened = true;
-                });
-              },
-              child: CMaker(
-                  alignment: Alignment.center,
-                  height: 60,
-                  boxShadow: [
-                    BoxShadow(
-                        color: Color.fromARGB(42, 0, 0, 0),
-                        offset: Offset(2, 2),
-                        blurRadius: 10,
-                        spreadRadius: .06)
+            Padding(padding: EdgeInsets.only(bottom: 30)),
+            CMaker(
+                alignment: Alignment.center,
+                height: 60,
+                boxShadow: [
+                  BoxShadow(
+                      color: Color.fromARGB(42, 0, 0, 0),
+                      offset: Offset(2, 2),
+                      blurRadius: 10,
+                       spreadRadius: .06)
+                ],
+                circularRadius: 20,
+                width: PageWidth(context) - 60,
+                color: Color.fromARGB(255, 255, 255, 255),
+                child: Row(
+                  children: [
+                    Padding(padding: EdgeInsets.only(left: 20)),
+                    TMaker(
+                        text: "books and files",
+                        fontSize: 25,
+                        fontWeight: FontWeight.w400,
+                        color: const Color.fromARGB(255, 0, 0, 0)),
+                    Expanded(child: Container()),
+                    MaterialButton(
+                      height: 35,
+                      minWidth: 50,
+                      color: Color.fromARGB(255, 54, 244, 92),
+                      onPressed: () {
+                          setState(() {
+                            GradeIsOpened = false;
+                            BooksAreOpened = true;
+                          });
+                      },
+                      child: TMaker(
+                          text: "فتح",
+                          fontSize: 22,
+                          fontWeight: FontWeight.w700,
+                          color: Colors.white),
+                    ),
+                    Expanded(child: Container()),
                   ],
-                  circularRadius: 20,
-                  width: PageWidth(context) - 60,
-                  color: Color.fromARGB(255, 255, 255, 255),
-                  child: TMaker(
-                      text: "go to books and files",
-                      fontSize: 30,
-                      fontWeight: FontWeight.w400,
-                      color: const Color.fromARGB(255, 0, 0, 0))),
-            ),
-            Padding(padding: EdgeInsets.only(top: 20)),
+                )),
+            Padding(padding: EdgeInsets.only(top: 30)),
             CMaker(
               alignment: Alignment.center,
               height: 280,
@@ -206,7 +247,11 @@ class _GradesPageState extends State<GradesPage> {
                     itemCount: widget.ListOfGrades[GradeOpenedIndex][1].length,
                     itemBuilder: (context, StudentIndex) {
                       return CMaker(
-                          margin: EdgeInsets.only(left: 30, bottom: 20),
+                          border: Border.all(),
+                          circularRadius: 15,
+                          padding: EdgeInsets.only(left: 10),
+                          margin:
+                              EdgeInsets.only(left: 20, bottom: 20, right: 20),
                           child: TMaker(
                             textAlign: TextAlign.start,
                             text: widget.ListOfGrades[GradeOpenedIndex][1]
@@ -227,7 +272,7 @@ class _GradesPageState extends State<GradesPage> {
             CMaker(
                 padding: EdgeInsets.all(20),
                 alignment: Alignment.topLeft,
-                height: 100,
+                height: 200,
                 boxShadow: [
                   BoxShadow(
                       color: Color.fromARGB(42, 0, 0, 0),
@@ -271,7 +316,7 @@ class _GradesPageState extends State<GradesPage> {
             Padding(padding: EdgeInsets.only(top: 20)),
             CMaker(
                 alignment: Alignment.center,
-                height: 165,
+                height: 250,
                 boxShadow: [
                   BoxShadow(
                       color: Color.fromARGB(42, 0, 0, 0),
@@ -284,7 +329,7 @@ class _GradesPageState extends State<GradesPage> {
                 color: Color.fromARGB(255, 255, 255, 255),
                 child: Column(
                   children: [
-                    Padding(padding: EdgeInsets.only(top: 10)),
+                    Padding(padding: EdgeInsets.only(top: 20)),
                     CMaker(
                         width: double.infinity,
                         padding: EdgeInsets.only(left: 15),
@@ -294,10 +339,12 @@ class _GradesPageState extends State<GradesPage> {
                             fontSize: 20,
                             fontWeight: FontWeight.w600,
                             color: Colors.black)),
-                    Padding(padding: EdgeInsets.only(top: 10)),
+                    Padding(padding: EdgeInsets.only(top: 20)),
                     Padding(
                       padding: EdgeInsets.symmetric(horizontal: 20),
                       child: TextField(
+                        minLines: 1,
+                        maxLines: 3,
                         onChanged: (value) {
                           CurrentMessage = value;
                         },
@@ -311,7 +358,8 @@ class _GradesPageState extends State<GradesPage> {
                                     color: Color.fromARGB(255, 192, 192, 192)),
                                 borderRadius: BorderRadius.circular(15)),
                             label: const Text(
-                              "enter the message",
+                              "enter a message",
+                              textAlign: TextAlign.start,
                               style: TextStyle(
                                   fontSize: 15, fontWeight: FontWeight.w600),
                             ),
@@ -323,6 +371,7 @@ class _GradesPageState extends State<GradesPage> {
                                 borderRadius: BorderRadius.circular(15))),
                       ),
                     ),
+                    Expanded(child: Container()),
                     Padding(
                       padding: EdgeInsets.symmetric(horizontal: 20),
                       child: Row(
@@ -390,10 +439,11 @@ class _GradesPageState extends State<GradesPage> {
                                     Icons.send,
                                     color: const Color.fromARGB(
                                         255, 255, 255, 255),
-                                  )))
+                                  ))),
                         ],
                       ),
-                    )
+                    ),
+                    Expanded(child: Container()),
                   ],
                 )),
           ],
@@ -412,14 +462,7 @@ class _GradesPageState extends State<GradesPage> {
                   padding: EdgeInsets.all(10),
                   child: Column(
                     children: [
-                      InkWell(
-                          onTap: () {
-                            setState(() {
-                              GradeIsOpened = true;
-                              GradeOpenedIndex = index;
-                            });
-                          },
-                          child: CMaker(
+                       CMaker(
                               color: Color.fromARGB(255, 255, 255, 255),
                               height:
                                   widget.ListOfGrades[index][1].length * 90.0,
@@ -440,16 +483,39 @@ class _GradesPageState extends State<GradesPage> {
                                   CMaker(
                                       alignment: Alignment.center,
                                       height: 60,
-                                      circularRadius: 20,
+                                      circularRadius: 10,
                                       margin:
                                           EdgeInsets.symmetric(horizontal: 30),
                                       width: double.infinity,
                                       color: Color.fromARGB(255, 61, 197, 255),
-                                      child: TMaker(
-                                          text: widget.ListOfGrades[index][0],
-                                          fontSize: 30,
-                                          fontWeight: FontWeight.w600,
-                                          color: Colors.white)),
+                                      child: Row(
+                                        children: [
+                                          Padding(padding:EdgeInsets.only(left: 20)),
+                                          TMaker(
+                                              text: widget.ListOfGrades[index][0],
+                                              fontSize: 30,
+                                              fontWeight: FontWeight.w600,
+                                              color: Colors.white),
+                                              Expanded(child: Container()),
+                                          MaterialButton(
+                                            height: 35,
+                                            minWidth: 50,
+                                            color: Color.fromARGB(255, 54, 244, 92),
+                                            onPressed: () {
+                                                setState(() {
+                                                  GradeIsOpened = true;
+                                                  GradeOpenedIndex = index;
+                                                });
+                                            },
+                                            child: TMaker(
+                                                text: "فتح",
+                                                fontSize: 22,
+                                                fontWeight: FontWeight.w700,
+                                                color: Colors.white),
+                                          ),
+                                          Expanded(child: Container()),
+                                        ],
+                                      )),
                                   Padding(padding: EdgeInsets.only(bottom: 30)),
                                   Expanded(
                                     child: CMaker(
@@ -458,8 +524,14 @@ class _GradesPageState extends State<GradesPage> {
                                               .ListOfGrades[index][1].length,
                                           itemBuilder: (context, StudentIndex) {
                                             return CMaker(
+                                                border: Border.all(),
+                                                circularRadius: 15,
+                                                padding:
+                                                    EdgeInsets.only(left: 10),
                                                 margin: EdgeInsets.only(
-                                                    left: 30, bottom: 20),
+                                                    left: 20,
+                                                    bottom: 20,
+                                                    right: 20),
                                                 child: TMaker(
                                                   textAlign: TextAlign.start,
                                                   text: widget
@@ -479,7 +551,7 @@ class _GradesPageState extends State<GradesPage> {
                                     ),
                                   )
                                 ],
-                              ))),
+                              )),
                       Padding(
                         padding: EdgeInsets.only(bottom: 20),
                       )
