@@ -153,7 +153,7 @@ class _GradesPageState extends State<GradesPage> {
     if (GradeIsOpened) {
       //الصفحه الثانيه
       return CMaker(
-        height: (PageHeight(context) + 20) + ((AllMessages.length - 1) * 120.0),
+        height: (PageHeight(context) + 24) + ((AllMessages.length - 1) * 70.0),
         width: PageWidth(context),
         padding: EdgeInsets.symmetric(horizontal: 10),
         child: Column(
@@ -273,9 +273,15 @@ class _GradesPageState extends State<GradesPage> {
             ),
             Padding(padding: EdgeInsets.only(top: 20)),
             CMaker(
+              width: double.infinity,
+              alignment: Alignment.centerLeft,
+              child: TextButton(
+                  onPressed: () {},
+                  child: Text("All messages"))),
+            CMaker(
                 padding: EdgeInsets.all(20),
                 alignment: Alignment.topLeft,
-                height: 150.0 + ((AllMessages.length - 1) * 120.0),
+                height: 100.0 + ((AllMessages.length - 1) * 70.0),
                 boxShadow: [
                   BoxShadow(
                       color: Color.fromARGB(42, 0, 0, 0),
@@ -291,12 +297,6 @@ class _GradesPageState extends State<GradesPage> {
                     itemBuilder: (context, index) {
                       return Column(
                         children: [
-                          CMaker(
-                              width: double.infinity,
-                              alignment: Alignment.centerLeft,
-                              child: TextButton(
-                                  onPressed: () {},
-                                  child: Text("All messages"))),
                           CMaker(
                             width: double.infinity,
                             alignment: Alignment.centerLeft,
