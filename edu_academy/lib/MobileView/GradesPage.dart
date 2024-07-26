@@ -22,10 +22,10 @@ String CurrentMessageTime = DateTime.now().toString();
 
 class _GradesPageState extends State<GradesPage> {
   final TextEditingController _MessageController = TextEditingController();
-List AllMessages = [
-  // عينه للتفهيم
-  ["Message", "Date","Duration"]
-];
+  List AllMessages = [
+    // عينه للتفهيم
+    ["Message", "Date", "Duration"]
+  ];
   @override
   Widget build(BuildContext context) {
     if (BooksAreOpened) {
@@ -153,7 +153,7 @@ List AllMessages = [
     if (GradeIsOpened) {
       //الصفحه الثانيه
       return CMaker(
-        height: (PageHeight(context) + 20)+((AllMessages.length-1)*120.0),
+        height: (PageHeight(context) + 20) + ((AllMessages.length - 1) * 120.0),
         width: PageWidth(context),
         padding: EdgeInsets.symmetric(horizontal: 10),
         child: Column(
@@ -275,7 +275,7 @@ List AllMessages = [
             CMaker(
                 padding: EdgeInsets.all(20),
                 alignment: Alignment.topLeft,
-                height: 150.0 +((AllMessages.length-1)*120.0),
+                height: 150.0 + ((AllMessages.length - 1) * 120.0),
                 boxShadow: [
                   BoxShadow(
                       color: Color.fromARGB(42, 0, 0, 0),
@@ -437,9 +437,12 @@ List AllMessages = [
                                 if (CurrentMessage != "") {
                                   setState(() {
                                     _MessageController.clear();
-                                    AllMessages.add(
-                                      ["$CurrentMessage", "$CurrentMessageTime","$TheMessageDuration"]
-                                    );
+                                    AllMessages.add([
+                                      "$CurrentMessage",
+                                      "$CurrentMessageTime",
+                                      "$TheMessageDuration"
+                                    ]);
+                                    CurrentMessage = "";
                                     print(AllMessages);
                                   });
                                 }
