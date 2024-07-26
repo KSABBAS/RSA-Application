@@ -24,7 +24,7 @@ class _GradesPageState extends State<GradesPage> {
   final TextEditingController _MessageController = TextEditingController();
 List AllMessages = [
   // عينه للتفهيم
-  ["Message", "Date"]
+  ["Message", "Date","Duration"]
 ];
   @override
   Widget build(BuildContext context) {
@@ -438,8 +438,9 @@ List AllMessages = [
                                   setState(() {
                                     _MessageController.clear();
                                     AllMessages.add(
-                                      ["$CurrentMessage", "$CurrentMessageTime"]
+                                      ["$CurrentMessage", "$CurrentMessageTime","$TheMessageDuration"]
                                     );
+                                    print(AllMessages);
                                   });
                                 }
                               },
