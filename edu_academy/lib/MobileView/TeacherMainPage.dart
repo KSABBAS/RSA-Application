@@ -382,7 +382,7 @@ class _TeacherMainPageState extends State<TeacherMainPage> {
             Padding(
               padding: EdgeInsets.only(top: 20),
             ),
-            TeacherHomeWorkPage()
+            TeacherHomeWorkPage(ListOfGrades: ListOfGrades,SubjectName: SubjectName,)
           ],
         ),
       ),

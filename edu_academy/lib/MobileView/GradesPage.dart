@@ -249,25 +249,28 @@ class _GradesPageState extends State<GradesPage> {
                 child: ListView.builder(
                     itemCount: widget.ListOfGrades[GradeOpenedIndex][1].length,
                     itemBuilder: (context, StudentIndex) {
-                      return CMaker(
-                          border: Border.all(),
-                          circularRadius: 15,
-                          padding: EdgeInsets.only(left: 10),
-                          margin:
-                              EdgeInsets.only(left: 20, bottom: 20, right: 20),
-                          child: TMaker(
-                            textAlign: TextAlign.start,
-                            text: widget.ListOfGrades[GradeOpenedIndex][1]
-                                        [StudentIndex]
-                                    .split(" ")[0] +
-                                " " +
-                                widget.ListOfGrades[GradeOpenedIndex][1]
-                                        [StudentIndex]
-                                    .split(" ")[1],
-                            fontSize: 28,
-                            fontWeight: FontWeight.w600,
-                            color: Color.fromARGB(255, 0, 0, 0),
-                          ));
+                      return Column(
+                                          children: [
+                                            ListTile(
+                                                leading: Image.asset("images/Person.png"),
+                                                title: TMaker(
+                                                    textAlign: TextAlign.start,
+                                                    text: widget.ListOfGrades[GradeOpenedIndex]
+                                                                [1][StudentIndex]
+                                                            .split(" ")[0] +
+                                                        " " +
+                                                        widget.ListOfGrades[GradeOpenedIndex][1]
+                                                                [StudentIndex]
+                                                            .split(" ")[1],
+                                                    fontSize: 20,
+                                                    fontWeight: FontWeight.w600,
+                                                    color:
+                                                        Color.fromARGB(255, 0, 0, 0),
+                                                  ),
+                                            ),
+                                            Padding(padding: EdgeInsets.only(bottom: 20),),
+                                          ],
+                                        );
                     }),
               ),
             ),
@@ -360,6 +363,32 @@ class _GradesPageState extends State<GradesPage> {
                           CurrentMessage = value;
                         },
                         decoration: InputDecoration(
+                          suffix: InkWell(
+                              onTap: () {
+                                if (CurrentMessage != "") {
+                                  setState(() {
+                                    _MessageController.clear();
+                                    AllMessages.add([
+                                      "$CurrentMessage",
+                                      "$CurrentMessageTime",
+                                      "$TheMessageDuration"
+                                    ]);
+                                    CurrentMessage = "";
+                                    print(AllMessages);
+                                  });
+                                }
+                              },
+                              child: CMaker(
+                                  circularRadius: 10,
+                                  alignment: Alignment.center,
+                                  width: 50,
+                                  height: 35,
+                                  color: Color.fromARGB(255, 61, 197, 255),
+                                  child: Icon(
+                                    Icons.send,
+                                    color: const Color.fromARGB(
+                                        255, 255, 255, 255),
+                                  ))),
                             focusedErrorBorder: OutlineInputBorder(
                                 borderSide: const BorderSide(
                                     color: Color.fromARGB(255, 192, 192, 192)),
@@ -432,32 +461,6 @@ class _GradesPageState extends State<GradesPage> {
                             },
                           ),
                           Expanded(child: Container()),
-                          InkWell(
-                              onTap: () {
-                                if (CurrentMessage != "") {
-                                  setState(() {
-                                    _MessageController.clear();
-                                    AllMessages.add([
-                                      "$CurrentMessage",
-                                      "$CurrentMessageTime",
-                                      "$TheMessageDuration"
-                                    ]);
-                                    CurrentMessage = "";
-                                    print(AllMessages);
-                                  });
-                                }
-                              },
-                              child: CMaker(
-                                  circularRadius: 10,
-                                  alignment: Alignment.center,
-                                  width: 50,
-                                  height: 35,
-                                  color: Color.fromARGB(255, 61, 197, 255),
-                                  child: Icon(
-                                    Icons.send,
-                                    color: const Color.fromARGB(
-                                        255, 255, 255, 255),
-                                  ))),
                         ],
                       ),
                     ),
@@ -501,9 +504,8 @@ class _GradesPageState extends State<GradesPage> {
                                   alignment: Alignment.center,
                                   height: 60,
                                   circularRadius: 10,
-                                  margin: EdgeInsets.symmetric(horizontal: 30),
+                                  margin: EdgeInsets.symmetric(horizontal: 10),
                                   width: double.infinity,
-                                  color: Color.fromARGB(255, 61, 197, 255),
                                   child: Row(
                                     children: [
                                       Padding(
@@ -512,8 +514,8 @@ class _GradesPageState extends State<GradesPage> {
                                           text: widget.ListOfGrades[index][0],
                                           fontSize: 30,
                                           fontWeight: FontWeight.w600,
-                                          color: Colors.white),
-                                      Expanded(child: Container()),
+                                          color: const Color.fromARGB(255, 0, 0, 0)),
+                                      Expanded(flex: 10,child: Container()),
                                       MaterialButton(
                                         height: 35,
                                         minWidth: 50,
@@ -540,36 +542,34 @@ class _GradesPageState extends State<GradesPage> {
                                       itemCount:
                                           widget.ListOfGrades[index][1].length,
                                       itemBuilder: (context, StudentIndex) {
-                                        return CMaker(
-                                            border: Border.all(),
-                                            circularRadius: 15,
-                                            padding: EdgeInsets.only(left: 10),
-                                            margin: EdgeInsets.only(
-                                                left: 20,
-                                                bottom: 20,
-                                                right: 20),
-                                            child: TMaker(
-                                              textAlign: TextAlign.start,
-                                              text: widget.ListOfGrades[index]
-                                                          [1][StudentIndex]
-                                                      .split(" ")[0] +
-                                                  " " +
-                                                  widget.ListOfGrades[index][1]
-                                                          [StudentIndex]
-                                                      .split(" ")[1],
-                                              fontSize: 28,
-                                              fontWeight: FontWeight.w600,
-                                              color:
-                                                  Color.fromARGB(255, 0, 0, 0),
-                                            ));
+                                        return Column(
+                                          children: [
+                                            ListTile(
+                                                leading: Image.asset("images/Person.png"),
+                                                title: TMaker(
+                                                    textAlign: TextAlign.start,
+                                                    text: widget.ListOfGrades[index]
+                                                                [1][StudentIndex]
+                                                            .split(" ")[0] +
+                                                        " " +
+                                                        widget.ListOfGrades[index][1]
+                                                                [StudentIndex]
+                                                            .split(" ")[1],
+                                                    fontSize: 20,
+                                                    fontWeight: FontWeight.w600,
+                                                    color:
+                                                        Color.fromARGB(255, 0, 0, 0),
+                                                  ),
+                                            ),
+                                            Padding(padding: EdgeInsets.only(bottom: 20),),
+                                          ],
+                                        );
                                       }),
                                 ),
-                              )
+                              ),
                             ],
                           )),
-                      Padding(
-                        padding: EdgeInsets.only(bottom: 20),
-                      )
+                      Padding(padding: EdgeInsets.only(bottom: 20),)
                     ],
                   ),
                 );
