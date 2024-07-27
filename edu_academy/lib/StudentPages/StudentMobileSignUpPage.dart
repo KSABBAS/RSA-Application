@@ -1,4 +1,3 @@
-import 'package:edu_academy/MobileView/in&upPages/LogInPage.dart';
 import 'package:edu_academy/MyTools.dart';
 import 'package:edu_academy/service/Databse_Service.dart';
 import 'package:flutter/material.dart';

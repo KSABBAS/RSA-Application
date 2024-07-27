@@ -2,6 +2,7 @@ import 'dart:math';
 
 import 'package:edu_academy/StudentPages/SecondPage.dart';
 import 'package:edu_academy/MyTools.dart';
+import 'package:edu_academy/TeacherPages/TeacherMainPage.dart';
 import 'package:flutter/material.dart';
 
 class GradesPage extends StatefulWidget {
@@ -250,37 +251,37 @@ class _GradesPageState extends State<GradesPage> {
                     itemCount: widget.ListOfGrades[GradeOpenedIndex][1].length,
                     itemBuilder: (context, StudentIndex) {
                       return Column(
-                                          children: [
-                                            ListTile(
-                                                leading: Image.asset("images/Person.png"),
-                                                title: TMaker(
-                                                    textAlign: TextAlign.start,
-                                                    text: widget.ListOfGrades[GradeOpenedIndex]
-                                                                [1][StudentIndex]
-                                                            .split(" ")[0] +
-                                                        " " +
-                                                        widget.ListOfGrades[GradeOpenedIndex][1]
-                                                                [StudentIndex]
-                                                            .split(" ")[1],
-                                                    fontSize: 20,
-                                                    fontWeight: FontWeight.w600,
-                                                    color:
-                                                        Color.fromARGB(255, 0, 0, 0),
-                                                  ),
-                                            ),
-                                            Padding(padding: EdgeInsets.only(bottom: 20),),
-                                          ],
-                                        );
+                        children: [
+                          ListTile(
+                            leading: Image.asset("images/Person.png"),
+                            title: TMaker(
+                              textAlign: TextAlign.start,
+                              text: widget.ListOfGrades[GradeOpenedIndex][1]
+                                          [StudentIndex]
+                                      .split(" ")[0] +
+                                  " " +
+                                  widget.ListOfGrades[GradeOpenedIndex][1]
+                                          [StudentIndex]
+                                      .split(" ")[1],
+                              fontSize: 20,
+                              fontWeight: FontWeight.w600,
+                              color: Color.fromARGB(255, 0, 0, 0),
+                            ),
+                          ),
+                          Padding(
+                            padding: EdgeInsets.only(bottom: 20),
+                          ),
+                        ],
+                      );
                     }),
               ),
             ),
             Padding(padding: EdgeInsets.only(top: 20)),
             CMaker(
-              width: double.infinity,
-              alignment: Alignment.centerLeft,
-              child: TextButton(
-                  onPressed: () {},
-                  child: Text("All messages"))),
+                width: double.infinity,
+                alignment: Alignment.centerLeft,
+                child:
+                    TextButton(onPressed: () {}, child: Text("All messages"))),
             CMaker(
                 padding: EdgeInsets.all(20),
                 alignment: Alignment.topLeft,
@@ -363,32 +364,32 @@ class _GradesPageState extends State<GradesPage> {
                           CurrentMessage = value;
                         },
                         decoration: InputDecoration(
-                          suffix: InkWell(
-                              onTap: () {
-                                if (CurrentMessage != "") {
-                                  setState(() {
-                                    _MessageController.clear();
-                                    AllMessages.add([
-                                      "$CurrentMessage",
-                                      "$CurrentMessageTime",
-                                      "$TheMessageDuration"
-                                    ]);
-                                    CurrentMessage = "";
-                                    print(AllMessages);
-                                  });
-                                }
-                              },
-                              child: CMaker(
-                                  circularRadius: 10,
-                                  alignment: Alignment.center,
-                                  width: 50,
-                                  height: 35,
-                                  color: Color.fromARGB(255, 61, 197, 255),
-                                  child: Icon(
-                                    Icons.send,
-                                    color: const Color.fromARGB(
-                                        255, 255, 255, 255),
-                                  ))),
+                            suffix: InkWell(
+                                onTap: () {
+                                  if (CurrentMessage != "") {
+                                    setState(() {
+                                      _MessageController.clear();
+                                      AllMessages.add([
+                                        "$CurrentMessage",
+                                        "$CurrentMessageTime",
+                                        "$TheMessageDuration"
+                                      ]);
+                                      CurrentMessage = "";
+                                      print(AllMessages);
+                                    });
+                                  }
+                                },
+                                child: CMaker(
+                                    circularRadius: 10,
+                                    alignment: Alignment.center,
+                                    width: 50,
+                                    height: 35,
+                                    color: Color.fromARGB(255, 61, 197, 255),
+                                    child: Icon(
+                                      Icons.send,
+                                      color: const Color.fromARGB(
+                                          255, 255, 255, 255),
+                                    ))),
                             focusedErrorBorder: OutlineInputBorder(
                                 borderSide: const BorderSide(
                                     color: Color.fromARGB(255, 192, 192, 192)),
@@ -511,11 +512,12 @@ class _GradesPageState extends State<GradesPage> {
                                       Padding(
                                           padding: EdgeInsets.only(left: 20)),
                                       TMaker(
-                                          text: widget.ListOfGrades[index][0],
-                                          fontSize: 30,
+                                          text: "${widget.ListOfGrades[index][0]} - $SubjectThatIsSelected",
+                                          fontSize: 25,
                                           fontWeight: FontWeight.w600,
-                                          color: const Color.fromARGB(255, 0, 0, 0)),
-                                      Expanded(flex: 10,child: Container()),
+                                          color: const Color.fromARGB(
+                                              255, 0, 0, 0)),
+                                      Expanded(flex: 10, child: Container()),
                                       MaterialButton(
                                         height: 35,
                                         minWidth: 50,
@@ -545,23 +547,27 @@ class _GradesPageState extends State<GradesPage> {
                                         return Column(
                                           children: [
                                             ListTile(
-                                                leading: Image.asset("images/Person.png"),
-                                                title: TMaker(
-                                                    textAlign: TextAlign.start,
-                                                    text: widget.ListOfGrades[index]
-                                                                [1][StudentIndex]
-                                                            .split(" ")[0] +
-                                                        " " +
-                                                        widget.ListOfGrades[index][1]
-                                                                [StudentIndex]
-                                                            .split(" ")[1],
-                                                    fontSize: 20,
-                                                    fontWeight: FontWeight.w600,
-                                                    color:
-                                                        Color.fromARGB(255, 0, 0, 0),
-                                                  ),
+                                              leading: Image.asset(
+                                                  "images/Person.png"),
+                                              title: TMaker(
+                                                textAlign: TextAlign.start,
+                                                text: widget.ListOfGrades[index]
+                                                            [1][StudentIndex]
+                                                        .split(" ")[0] +
+                                                    " " +
+                                                    widget.ListOfGrades[index]
+                                                            [1][StudentIndex]
+                                                        .split(" ")[1],
+                                                fontSize: 20,
+                                                fontWeight: FontWeight.w600,
+                                                color: Color.fromARGB(
+                                                    255, 0, 0, 0),
+                                              ),
                                             ),
-                                            Padding(padding: EdgeInsets.only(bottom: 20),),
+                                            Padding(
+                                              padding:
+                                                  EdgeInsets.only(bottom: 20),
+                                            ),
                                           ],
                                         );
                                       }),
@@ -569,7 +575,9 @@ class _GradesPageState extends State<GradesPage> {
                               ),
                             ],
                           )),
-                      Padding(padding: EdgeInsets.only(bottom: 20),)
+                      Padding(
+                        padding: EdgeInsets.only(bottom: 20),
+                      )
                     ],
                   ),
                 );
