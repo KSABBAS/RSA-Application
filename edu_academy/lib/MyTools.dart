@@ -1,6 +1,8 @@
 import 'dart:async';
 // import 'package:http/http.dart';
 import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
+import 'package:image_picker/image_picker.dart';
 // import 'package:http/http.dart' as http;
 // import 'package:html/parser.dart' as Parser;
 // import 'package:html/dom.dart' as dom;
@@ -327,11 +329,7 @@ class _GVBuilderState extends State<GVBuilder> {
 }
 
 class DDButton extends StatefulWidget {
-  DDButton({
-    super.key,
-    required this.values,
-    required this.onselected
-  });
+  DDButton({super.key, required this.values, required this.onselected});
   // void Function()? onChosen;
   List values = [];
   Function onselected;
@@ -510,3 +508,6 @@ class _RButtonState extends State<RButton> {
 //   return true;
 // }
 
+Future PhotoImageFromGalary() async {
+  return await ImagePicker().pickImage(source: ImageSource.gallery);
+}

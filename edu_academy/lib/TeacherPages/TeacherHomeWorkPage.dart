@@ -1,8 +1,11 @@
+import 'dart:io';
+
 import 'package:edu_academy/TeacherPages/TeacherMainPage.dart';
 import 'package:edu_academy/StudentPages/ThirdPage.dart';
 import 'package:edu_academy/MyTools.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
+
 class TeacherHomeWorkPage extends StatefulWidget {
   TeacherHomeWorkPage(
       {super.key, required this.ListOfGrades, required this.SubjectName});
@@ -12,6 +15,7 @@ class TeacherHomeWorkPage extends StatefulWidget {
   State<TeacherHomeWorkPage> createState() => _TeacherHomeWorkPageState();
 }
 
+List<File> HomeworkImagesLinks = [];
 bool GradeHomeWorkIsOppened = false;
 int GradeHomeWorkOppenedIndex = 0;
 bool NewHomeWork = false;
@@ -88,6 +92,11 @@ class _TeacherHomeWorkPageState extends State<TeacherHomeWorkPage> {
                         SizedBox(
                           height: 70,
                           child: TextFormField(
+                            onChanged: (value) {
+                              setState(() {
+                                HomeworkTitle = value;
+                              });
+                            },
                             onSaved: (newValue) {
                               HomeworkTitle = newValue!;
                             },
@@ -149,10 +158,15 @@ class _TeacherHomeWorkPageState extends State<TeacherHomeWorkPage> {
                                 fontWeight: FontWeight.w700,
                                 color: Colors.black)),
                         SizedBox(
-                          height: 170,
+                          height: 220,
                           child: TextFormField(
-                            minLines: 5,
-                            maxLines: 5,
+                            minLines: 10,
+                            maxLines: 10,
+                            onChanged: (value) {
+                              setState(() {
+                                HomeworkBody = value;
+                              });
+                            },
                             onSaved: (newValue) {
                               HomeworkBody = newValue!;
                             },
@@ -193,36 +207,50 @@ class _TeacherHomeWorkPageState extends State<TeacherHomeWorkPage> {
                 Padding(padding: EdgeInsets.only(bottom: 20)),
                 CMaker(
                     margin: EdgeInsets.only(left: 20),
-                  height: 50, width: double.infinity,alignment: Alignment.centerLeft ,child: Row(children: [
-                  InkWell(
-                    onTap: (){
-
-                    },
-                    child: CMaker(
-                    circularRadius: 15,
-                    height: 60,
-                    color: Colors.white,
-                    width: 150,
-                    boxShadow: [
-                      BoxShadow(
-                          color: Color.fromARGB(61, 0, 0, 0),
-                          offset: Offset(2, 2),
-                          blurRadius: 10,
-                          spreadRadius: .06)
-                    ],
-                    child: Row(children: [
-                      Expanded(child: Container()),
-                      TMaker(text: "add a photo", fontSize: 15, fontWeight:FontWeight.w800, color:Colors.black),
-                      Expanded(child: Container()),
-                      Icon(Icons.photo_library),
-                      Expanded(child: Container()),
-                  ],)),),
-                Padding(padding: EdgeInsets.only(left: 20)),
-
-                ],)),
+                    height: 50,
+                    width: double.infinity,
+                    alignment: Alignment.centerLeft,
+                    child: Row(
+                      children: [
+                        InkWell(
+                          onTap: () async {
+                            XFile? Image = await PhotoImageFromGalary();
+                            if(Image !=null){
+                            HomeworkImagesLinks.add(File(Image.path));
+                            setState(() {});
+                            }
+                          },
+                          child: CMaker(
+                              circularRadius: 15,
+                              height: 60,
+                              color: Colors.white,
+                              width: 150,
+                              boxShadow: [
+                                BoxShadow(
+                                    color: Color.fromARGB(61, 0, 0, 0),
+                                    offset: Offset(2, 2),
+                                    blurRadius: 10,
+                                    spreadRadius: .06)
+                              ],
+                              child: Row(
+                                children: [
+                                  Expanded(child: Container()),
+                                  TMaker(
+                                      text: "add a photo",
+                                      fontSize: 15,
+                                      fontWeight: FontWeight.w800,
+                                      color: Colors.black),
+                                  Expanded(child: Container()),
+                                  Icon(Icons.photo_library),
+                                  Expanded(child: Container()),
+                                ],
+                              )),
+                        ),
+                        Padding(padding: EdgeInsets.only(left: 20)),
+                      ],
+                    )),
                 Padding(padding: EdgeInsets.only(bottom: 20)),
                 CMaker(
-                    height: 300,
                     boxShadow: [
                       BoxShadow(
                           color: Color.fromARGB(61, 0, 0, 0),
@@ -235,7 +263,54 @@ class _TeacherHomeWorkPageState extends State<TeacherHomeWorkPage> {
                     margin: EdgeInsets.symmetric(horizontal: 20),
                     circularRadius: 15,
                     padding: EdgeInsets.all(15),
-                    child: Container()),
+                    child: Column(
+                      children: [
+                        Padding(padding: EdgeInsets.only(bottom: 10)),
+                        CMaker(
+                            alignment: Alignment.centerLeft,
+                            padding: EdgeInsets.only(left: 10),
+                            child: TMaker(
+                                text: HomeworkTitle,
+                                fontSize: 30,
+                                fontWeight: FontWeight.w700,
+                                color: Colors.black)),
+                        Padding(padding: EdgeInsets.only(bottom: 10)),
+                        CMaker(
+                            alignment: Alignment.centerLeft,
+                            padding: EdgeInsets.only(left: 10),
+                            child: TMaker(
+                                textAlign: TextAlign.start,
+                                text: HomeworkBody,
+                                fontSize: 17,
+                                fontWeight: FontWeight.w700,
+                                color: Color.fromARGB(255, 86, 86, 86))),
+                        Padding(padding: EdgeInsets.only(bottom: 20)),
+                        CMaker(
+                          height: (HomeworkImagesLinks.length % 2 == 0)
+                              ? HomeworkImagesLinks.length * 80
+                              : (HomeworkImagesLinks.length + 1) * 80,
+                          width: double.infinity,
+                          child: GridView.builder(
+                            itemCount: HomeworkImagesLinks.length,
+                            gridDelegate:
+                                SliverGridDelegateWithFixedCrossAxisCount(
+                                    crossAxisCount: 2,
+                                    crossAxisSpacing: 10,
+                                    mainAxisSpacing: 10),
+                            itemBuilder: (context, index) {
+                              return InkWell(
+                                  onTap: () {
+                                    setState(() {
+                                      HomeworkImagesLinks.removeAt(index);
+                                    });
+                                  },
+                                  child: Image.file(
+                                      File(HomeworkImagesLinks[index].path)));
+                            },
+                          ),
+                        )
+                      ],
+                    )),
                 Padding(padding: EdgeInsets.only(bottom: 20)),
               ],
             )),
