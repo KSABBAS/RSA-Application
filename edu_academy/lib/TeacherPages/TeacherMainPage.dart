@@ -2,10 +2,10 @@
 import 'dart:developer';
 
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
-import 'package:edu_academy/MobileView/GradesPage.dart';
-import 'package:edu_academy/MobileView/SecondPage.dart';
-import 'package:edu_academy/MobileView/TeacherHomeWorkPage.dart';
-import 'package:edu_academy/MobileView/ThirdPage.dart';
+import 'package:edu_academy/TeacherPages/GradesPage.dart';
+import 'package:edu_academy/StudentPages/SecondPage.dart';
+import 'package:edu_academy/TeacherPages/TeacherHomeWorkPage.dart';
+import 'package:edu_academy/StudentPages/ThirdPage.dart';
 import 'package:edu_academy/MyTools.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -304,7 +304,7 @@ class _TeacherMainPageState extends State<TeacherMainPage> {
         ),
       ),
       Container(
-        child: Column(
+        child: ListView(
           children: [
             Container(
               height: 70,
