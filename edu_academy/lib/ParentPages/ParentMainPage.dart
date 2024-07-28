@@ -34,7 +34,7 @@ class _ParentMainPageState extends State<ParentMainPage> {
         setState(() {
           name = items[2].split("-")[0] as String;
           name = "${name.split(" ")[0]} ${name.split(" ")[1]}".toTitleCase;
-          grade = items[2].split("-")[1] as String;
+          // grade = items[2].split("-")[1] as String;
           // userData = jsonDecode(items[2]) as Map<String, dynamic>;
         });
       }

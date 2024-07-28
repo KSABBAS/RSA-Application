@@ -28,10 +28,13 @@ String TeacherYearOfBirth = "";
 String TeacherSubject1 = "null";
 String TeacherSubject2 = "null";
 String TeacherSubject3 = "null";
-
+// bool SecondDropdownVisible = false;
+// bool ThirdDropdownVisible = false;
 GlobalKey<FormState> key3 = GlobalKey();
 
 class _TeacherSignUpPageState extends State<TeacherSignUpPage> {
+  bool SecondDropdownVisible = false;
+  bool ThirdDropdownVisible = false;
   String TeacherDemoPassword = "";
   String TeacherDemoConfirmPassword = "";
   final dbService = DatabaseService();
@@ -54,6 +57,9 @@ class _TeacherSignUpPageState extends State<TeacherSignUpPage> {
     }
   @override
   Widget build(BuildContext context) {
+    
+
+
     SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersiveSticky);
     return Scaffold(
         backgroundColor: const Color.fromARGB(255, 255, 255, 255),
@@ -566,7 +572,7 @@ class _TeacherSignUpPageState extends State<TeacherSignUpPage> {
                       Container(
                         alignment: Alignment.centerLeft,
                         child: const Text(
-                          "Select subject (one , two , three )",
+                          "Select subject",
                           style: TextStyle(
                               fontSize: 20, fontWeight: FontWeight.w600),
                         ),
@@ -574,68 +580,99 @@ class _TeacherSignUpPageState extends State<TeacherSignUpPage> {
                       Expanded(child: Container()),
                       CMaker(
                         height: 300,
-                        
                         child: Column(
                           children: [
-                                Expanded(child: Container()),
-                            Row(children:[
-                              Container(
-                        alignment: Alignment.centerLeft,
-                        child: const Text(
-                          "Subject one",
-                          style: TextStyle(
-                              fontSize: 20, fontWeight: FontWeight.w600),
-                        ),
-                      ),
-                      Expanded(child:Container()),
-                              DropdownButton(
-                                items:SubjectsMaker(TeacherSubject1),
-                                value: TeacherSubject1,
-                                onChanged: (s1) {
-                                  setState(() {
-                                    TeacherSubject1 = s1!.toString();
-                                  });
-                                }),]),
-                                Expanded(child: Container()),
-                            Row(children:[
-                              Container(
-                        alignment: Alignment.centerLeft,
-                        child: const Text(
-                          "Subject two",
-                          style: TextStyle(
-                              fontSize: 20, fontWeight: FontWeight.w600),
-                        ),
-                      ),
-                      Expanded(child:Container()),
-                              DropdownButton(
-                                items:SubjectsMaker(TeacherSubject2),
-                                value: TeacherSubject2,
-                                onChanged: (s2) {
-                                  setState(() {
-                                    TeacherSubject2 = s2!.toString();
-                                  });
-                                }),]),
-                                Expanded(child: Container()),
-                            Row(children:[
-                              Container(
-                        alignment: Alignment.centerLeft,
-                        child: const Text(
-                          "Subject three",
-                          style: TextStyle(
-                              fontSize: 20, fontWeight: FontWeight.w600),
-                        ),
-                      ),
-                      Expanded(child:Container()),
-                              DropdownButton(
-                                items:SubjectsMaker(TeacherSubject3),
-                                value: TeacherSubject3,
-                                onChanged: (s3) {
-                                  setState(() {
-                                    TeacherSubject3 = s3!.toString();
-                                  });
-                                }),]),
-                                Expanded(child: Container()),
-                          ],
+            Expanded(child: Container()),
+            Row(
+              children: [
+                Container(
+                  alignment: Alignment.centerLeft,
+                  child: const Text(
+                    "Subject one",
+                    style: TextStyle(fontSize: 20, fontWeight: FontWeight.w600),
+                  ),
+                ),
+                Expanded(child: Container()),
+                DropdownButton<String>(
+                  items: SubjectsMaker(TeacherSubject1),
+                  value: TeacherSubject1,
+                  onChanged: (s1) {
+                    setState(() {
+                      TeacherSubject1 =s1!.toString();
+                    });
+                  },
+                ),
+              ],
+            ),
+            Expanded(child: Container()),
+            Visibility(
+              visible: SecondDropdownVisible,
+              replacement: ElevatedButton(
+              onPressed: () {
+                setState(() {
+                  SecondDropdownVisible = true;
+                });
+              },
+              child: const Text("Show the second subject (if u need)"),
+            ),
+              child: Row(
+                children: [
+                  Container(
+                    alignment: Alignment.centerLeft,
+                    child: const Text(
+                      "Subject two",
+                      style: TextStyle(fontSize: 20, fontWeight: FontWeight.w600),
+                    ),
+                  ),
+                  Expanded(child: Container()),
+                  DropdownButton<String>(
+                    items: SubjectsMaker(TeacherSubject2),
+                    value: TeacherSubject2,
+                    onChanged: (s2) {
+                      setState(() {
+                        TeacherSubject2 = s2!.toString();
+                      });
+                    },
+                  ),
+                ],
+              ),
+            ),
+            Expanded(child: Container()),
+            Visibility (
+              visible: ThirdDropdownVisible,
+              replacement: SecondDropdownVisible ?ElevatedButton(
+              onPressed: () {
+                setState(() {
+                  ThirdDropdownVisible = true;
+                });
+              },
+              child: const Text("Show the third subject"),
+            ) : const SizedBox.shrink(),
+              child: Row(
+                children: [
+                  Container(
+                    alignment: Alignment.centerLeft,
+                    child: const Text(
+                      "Subject three",
+                      style: TextStyle(fontSize: 20, fontWeight: FontWeight.w600),
+                    ),
+                  ),
+                  Expanded(child: Container()),
+                  DropdownButton<String>(
+                    items: SubjectsMaker(TeacherSubject3),
+                    value: TeacherSubject3,
+                    onChanged: (s3) {
+                      setState(() {
+                        TeacherSubject3 = s3!.toString();
+                      });
+                    },
+                  ),
+                ],
+              ),
+            ),
+            Expanded(child: Container()),
+            
+          ],
                         ),
                       ),
                       Expanded(child: Container()),
@@ -657,8 +694,7 @@ class _TeacherSignUpPageState extends State<TeacherSignUpPage> {
                       Expanded(child: Container()),
                       InkWell(
                         onTap: () async {
-                          if (true) {
-                            //key3.currentState!.validate()) {
+                          if (key3.currentState!.validate()) {
                             key3.currentState!.save();
                             OverlayLoadingProgress.start(
                               context,
@@ -683,9 +719,11 @@ class _TeacherSignUpPageState extends State<TeacherSignUpPage> {
                               "password": TeacherPassword,
                               "birth_date": TeacherDateOfBirth,
                               "gender": TeacherGeneder,
-                              // add subjects
+                              "Subject1": [TeacherSubject1],
+                              "Subject2": (TeacherSubject2 == "null") ? TeacherSubject2 : [TeacherSubject2],
+                              "Subject3": (TeacherSubject3 == "null") ? TeacherSubject3 : [TeacherSubject3],
                               "Description": "TeachertDescription",
-                              "state": "true"
+                              "state": "false"
                             });
                             OverlayLoadingProgress.stop();
                             PanaraInfoDialog.show(

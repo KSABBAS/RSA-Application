@@ -176,8 +176,16 @@ List<List> Subjects = [
 ];
 
 Map<String, dynamic> GradesSubjects = {
-  'Grade 1': [30, 7, 14, 29]
+  'Grade 1': [30, 7, 14, 29],
+  'Grade 2': [30, 7, 14, 29],
+  'Grade 3': [30, 7, 14, 29],
+  'Grade 4': [30, 20,8,26,17,7,14],
+  'Grade 5': [30, 20,8,26,17,7,14],
+  'Grade 6': [30, 20,8,26,17,7,14],
 };
+
+
+
 
 bool anySubjectSelected = false;
 int index_SubjectSelected = 0;
