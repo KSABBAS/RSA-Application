@@ -154,7 +154,7 @@ class _GradesPageState extends State<GradesPage> {
     if (GradeIsOpened) {
       //الصفحه الثانيه
       return CMaker(
-        height: (PageHeight(context) + 24) + ((AllMessages.length - 1) * 70.0),
+        // height: (PageHeight(context) + 24) + ((AllMessages.length - 1) * 70.0),
         width: PageWidth(context),
         padding: EdgeInsets.symmetric(horizontal: 10),
         child: Column(
