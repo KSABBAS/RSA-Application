@@ -1,12 +1,12 @@
 // import 'dart:convert';
+
 import 'dart:developer';
 
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
-import 'package:edu_academy/MobileView/GradesPage.dart';
-import 'package:edu_academy/MobileView/SecondPage.dart';
-import 'package:edu_academy/MobileView/TeacherHomeWorkPage.dart';
-import 'package:edu_academy/MobileView/ThirdPage.dart';
+import 'package:edu_academy/TeacherPages/GradesPage.dart';
+import 'package:edu_academy/TeacherPages/TeacherHomeWorkPage.dart';
 import 'package:edu_academy/MyTools.dart';
+import 'package:edu_academy/service/Databse_Service.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -20,6 +20,7 @@ class TeacherMainPage extends StatefulWidget {
 }
 
 int PageIndex = 0;
+
 String SubjectName = "Math";
 List ListOfGrades = [
   [
@@ -69,7 +70,50 @@ List ListOfGrades = [
   ],
 ];
 
+String name = '';
+String Teacher_Id = '';
+List subjects_ = [];
+String subjects_string = '';
+Map<String, Map<String, List<dynamic>>> sub_data = {};
+
 class _TeacherMainPageState extends State<TeacherMainPage> {
+  final dbService = DatabaseService();
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((_) async {
+      final SharedPreferences prefs = await SharedPreferences.getInstance();
+      final List<String>? items = prefs.getStringList('id');
+      log(items.toString());
+      if (items != null && items.isNotEmpty) {
+        setState(()  {
+          name = items[2].split("-")[0];
+          name = "${name.split(" ")[0]} ${name.split(" ")[1]}".toTitleCase;
+          // start subject as list to use or ad a name
+          subjects_ = items[2].split("-").sublist(1);
+          subjects_.removeWhere((item) => item == 'null');
+          print("subjects_ $subjects_");
+          Teacher_Id = items[0].split("#")[1];
+          subjects_string = items[2]
+              .split('-')
+              .sublist(1)
+              .map((subject) =>
+                  subject.replaceAll(RegExp(r"[\[\]']"), '').split(', ')[0])
+              .where((subject) => subject != 'null')
+              .join('-');
+          print("subjects_string $subjects_string");
+          print("subjects_ $subjects_");
+          // end sub
+          // send data to database
+        });
+      Map<String, Map<String, List<dynamic>>> data0 =
+          await dbService.fiGrades_and_Students(Teacher_Id, subjects_);
+      sub_data = data0 as Map<String, Map<String, List<dynamic>>>;
+      print("sub_data $sub_data");
+      }
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersiveSticky);
@@ -112,8 +156,8 @@ class _TeacherMainPageState extends State<TeacherMainPage> {
                           child: CMaker(
                             alignment: Alignment.bottomCenter,
                             child: Text(
-                              "kareem said",
-                              style: TextStyle(
+                              name,
+                              style: const TextStyle(
                                   fontSize: 17,
                                   fontWeight: FontWeight.w500,
                                   color: Color.fromARGB(255, 5, 123, 151)),
@@ -124,7 +168,7 @@ class _TeacherMainPageState extends State<TeacherMainPage> {
                           child: CMaker(
                             alignment: Alignment.bottomCenter,
                             child: Text(
-                              "math",
+                              subjects_string,
                               style: TextStyle(
                                   fontSize: 16,
                                   fontWeight: FontWeight.w500,
@@ -217,8 +261,8 @@ class _TeacherMainPageState extends State<TeacherMainPage> {
           ],
         ),
       ),
-      Container(
-        height: PageHeight(context)+300,
+      SizedBox(
+        height: PageHeight(context) + 300,
         child: ListView(
           shrinkWrap: false,
           children: [
@@ -257,8 +301,8 @@ class _TeacherMainPageState extends State<TeacherMainPage> {
                           child: CMaker(
                             alignment: Alignment.bottomCenter,
                             child: Text(
-                              "kareem said",
-                              style: TextStyle(
+                              name,
+                              style: const TextStyle(
                                   fontSize: 17,
                                   fontWeight: FontWeight.w500,
                                   color: Color.fromARGB(255, 5, 123, 151)),
@@ -269,7 +313,7 @@ class _TeacherMainPageState extends State<TeacherMainPage> {
                           child: CMaker(
                             alignment: Alignment.bottomCenter,
                             child: Text(
-                              "math",
+                              subjects_string,
                               style: TextStyle(
                                   fontSize: 16,
                                   fontWeight: FontWeight.w500,
@@ -295,7 +339,7 @@ class _TeacherMainPageState extends State<TeacherMainPage> {
                 ],
               ),
             ),
-            Padding(padding: EdgeInsets.only(top: 10)),
+            const Padding(padding: EdgeInsets.only(top: 10)),
             GradesPage(
               ListOfGrades:
                   ListOfGrades, // put the list of grades and its students from the database here
@@ -342,8 +386,8 @@ class _TeacherMainPageState extends State<TeacherMainPage> {
                           child: CMaker(
                             alignment: Alignment.bottomCenter,
                             child: Text(
-                              "kareem said",
-                              style: TextStyle(
+                              name,
+                              style: const TextStyle(
                                   fontSize: 17,
                                   fontWeight: FontWeight.w500,
                                   color: Color.fromARGB(255, 5, 123, 151)),
@@ -354,7 +398,7 @@ class _TeacherMainPageState extends State<TeacherMainPage> {
                           child: CMaker(
                             alignment: Alignment.bottomCenter,
                             child: Text(
-                              "math",
+                              subjects_string,
                               style: TextStyle(
                                   fontSize: 16,
                                   fontWeight: FontWeight.w500,
@@ -380,8 +424,10 @@ class _TeacherMainPageState extends State<TeacherMainPage> {
                 ],
               ),
             ),
-            Padding(padding: EdgeInsets.only(top:20), ),
-            TeacherHomeWorkPage()
+            const Padding(
+              padding: EdgeInsets.only(top: 20),
+            ),
+            const TeacherHomeWorkPage()
           ],
         ),
       ),
@@ -423,8 +469,8 @@ class _TeacherMainPageState extends State<TeacherMainPage> {
                           child: CMaker(
                             alignment: Alignment.bottomCenter,
                             child: Text(
-                              "kareem said",
-                              style: TextStyle(
+                              name,
+                              style: const TextStyle(
                                   fontSize: 17,
                                   fontWeight: FontWeight.w500,
                                   color: Color.fromARGB(255, 5, 123, 151)),
@@ -435,7 +481,7 @@ class _TeacherMainPageState extends State<TeacherMainPage> {
                           child: CMaker(
                             alignment: Alignment.bottomCenter,
                             child: Text(
-                              "math",
+                              subjects_string,
                               style: TextStyle(
                                   fontSize: 16,
                                   fontWeight: FontWeight.w500,
@@ -447,7 +493,12 @@ class _TeacherMainPageState extends State<TeacherMainPage> {
                     ),
                   ),
                   InkWell(
-                    onTap: () {},
+                    onTap: () async {
+                      final SharedPreferences prefs =
+                          await SharedPreferences.getInstance();
+                      prefs.remove("id");
+                      Navigator.pushReplacementNamed(context, "SplashView");
+                    },
                     child: Container(
                       width: 70,
                       padding: const EdgeInsets.only(top: 10),
@@ -455,7 +506,7 @@ class _TeacherMainPageState extends State<TeacherMainPage> {
                           color: const Color.fromARGB(255, 255, 255, 255),
                           borderRadius: BorderRadius.circular(10)),
                       height: 50,
-                      child: const Icon(Icons.notifications),
+                      child: const Icon(Icons.logout_rounded),
                     ),
                   ),
                 ],

@@ -1,4 +1,3 @@
-import 'package:edu_academy/MobileView/ThirdPage.dart';
 import 'package:edu_academy/MyTools.dart';
 import 'package:flutter/material.dart';
 
@@ -18,7 +17,7 @@ class _TeacherHomeWorkPageState extends State<TeacherHomeWorkPage> {
     if (GradeHomeWorkIsOppened) {
       // الصفحه الثانية
       return Column(children: [
-        Padding(padding: EdgeInsets.only(bottom: 10)),
+        const Padding(padding: EdgeInsets.only(bottom: 10)),
             Row(
               children: [
                 InkWell(
@@ -31,7 +30,7 @@ class _TeacherHomeWorkPageState extends State<TeacherHomeWorkPage> {
                     width: 70,
                     height: 50,
                     alignment: Alignment.center,
-                    child: Icon(Icons.arrow_back),
+                    child: const Icon(Icons.arrow_back),
                   ),
                 ),
                 CMaker(
@@ -39,8 +38,8 @@ class _TeacherHomeWorkPageState extends State<TeacherHomeWorkPage> {
                     height: 60,
                     circularRadius: 20,
                     width: PageWidth(context) - 150,
-                    margin: EdgeInsets.only(left: 20),
-                    color: Color.fromARGB(255, 61, 197, 255),
+                    margin: const EdgeInsets.only(left: 20),
+                    color: const Color.fromARGB(255, 61, 197, 255),
                     child: TMaker(
                         text: "Grade $GradeHomeWorkOppenedIndex Homework",
                         fontSize: 20,
@@ -48,7 +47,7 @@ class _TeacherHomeWorkPageState extends State<TeacherHomeWorkPage> {
                         color: Colors.white)),
               ],
             ),
-            Padding(padding: EdgeInsets.only(bottom: 30)),
+            const Padding(padding: EdgeInsets.only(bottom: 30)),
       ],);
     } else {
       // الصفحة الاولى
@@ -60,20 +59,20 @@ class _TeacherHomeWorkPageState extends State<TeacherHomeWorkPage> {
               width: double.infinity,
               height: 60,
               alignment: Alignment.center,
-              margin: EdgeInsets.symmetric(horizontal: 10),
+              margin: const EdgeInsets.symmetric(horizontal: 10),
               color: Colors.white,
               child: TMaker(
                   text: "Homeworks",
                   fontSize: 30,
                   fontWeight: FontWeight.w700,
                   color: Colors.black)),
-          Padding(
+          const Padding(
             padding: EdgeInsets.only(top: 20),
           ),
           CMaker(
-              margin: EdgeInsets.symmetric(horizontal: 20),
+              margin: const EdgeInsets.symmetric(horizontal: 20),
               circularRadius: 20,
-              boxShadow: [
+              boxShadow: const [
                 BoxShadow(
                     color: Color.fromARGB(61, 0, 0, 0),
                     offset: Offset(2, 2),
@@ -103,11 +102,11 @@ class _TeacherHomeWorkPageState extends State<TeacherHomeWorkPage> {
                             CMaker(
                                 circularRadius: 15,
                                 height: 70,
-                                margin: EdgeInsets.symmetric(horizontal: 40),
-                                color: Color.fromARGB(255, 14, 167, 205),
+                                margin: const EdgeInsets.symmetric(horizontal: 40),
+                                color: const Color.fromARGB(255, 14, 167, 205),
                                 child: Row(
                                   children: [
-                                    Padding(padding: EdgeInsets.only(left: 20)),
+                                    const Padding(padding: EdgeInsets.only(left: 20)),
                                     TMaker(
                                         text: "Grade ${index + 1}",
                                         fontSize: 25,
@@ -117,7 +116,7 @@ class _TeacherHomeWorkPageState extends State<TeacherHomeWorkPage> {
                                     MaterialButton(
                                       height: 35,
                                       minWidth: 50,
-                                      color: Color.fromARGB(255, 54, 244, 92),
+                                      color: const Color.fromARGB(255, 54, 244, 92),
                                       onPressed: () {
                                         setState(() {
                                           GradeHomeWorkIsOppened = true;
@@ -130,11 +129,11 @@ class _TeacherHomeWorkPageState extends State<TeacherHomeWorkPage> {
                                           fontWeight: FontWeight.w700,
                                           color: Colors.white),
                                     ),
-                                    Padding(
+                                    const Padding(
                                         padding: EdgeInsets.only(right: 20)),
                                   ],
                                 )),
-                            Padding(padding: EdgeInsets.only(bottom: 20)),
+                            const Padding(padding: EdgeInsets.only(bottom: 20)),
                           ],
                         );
                       },

@@ -1,3 +1,4 @@
+
 import 'package:edu_academy/MyTools.dart';
 import 'package:edu_academy/service/Databse_Service.dart';
 import 'package:flutter/services.dart';
@@ -19,10 +20,9 @@ var obscureText = true;
 bool loggedIn = false;
 List l = [2.2];
 GlobalKey<FormState> key1 = GlobalKey();
-fo() async {
-  await Future.delayed(const Duration(seconds: 2));
-  return [true, "student"];
-}
+
+String last_input1_value = '';
+String last_input2_value = '';
 
 class _LoginPageState extends State<LogInPage> {
   final dbService = DatabaseService();
@@ -108,6 +108,7 @@ class _LoginPageState extends State<LogInPage> {
               child: Column(
                 children: [
                   TextFormField(
+                    initialValue: last_input1_value,
                     onSaved: (newValue) {
                       FullName = newValue!;
                     },
@@ -135,6 +136,7 @@ class _LoginPageState extends State<LogInPage> {
                   ),
                   Expanded(child: Container()),
                   TextFormField(
+                    initialValue: last_input2_value,
                     onSaved: (newValue) {
                       Password = newValue!;
                     },
@@ -198,6 +200,7 @@ class _LoginPageState extends State<LogInPage> {
                     onTap: () async {
                       final SharedPreferences prefs =
                           await SharedPreferences.getInstance();
+
                       setState(() {
                         loggedIn = true;
                       });
@@ -205,6 +208,9 @@ class _LoginPageState extends State<LogInPage> {
                         key1.currentState!.save();
                       }
                       // send data to data base
+                      await prefs.setStringList('Login_last_value',
+                          <String>[FullName, Password]);
+                      // log("['$FullName', '$Password']" as num);
                       OverlayLoadingProgress.start(
                         context,
                         widget: CMaker(
@@ -227,6 +233,8 @@ class _LoginPageState extends State<LogInPage> {
                       if (data[0]) {
                         await prefs.setStringList('id',
                             <String>['${data[1]}', '${data[2]}', '${data[3]}']);
+                        // log("['${data[1]}', '${data[2]}', '${data[3]}']");
+                        print("data from database services $data");
                         PanaraInfoDialog.show(
                           context,
                           title: "Success",
@@ -234,16 +242,19 @@ class _LoginPageState extends State<LogInPage> {
                           buttonText: "Okay",
                           onTapDismiss: () {
                             Navigator.pop(context);
-                            if (data[1] == "Student") {
+                            if (data[1].toString().split("#")[0] == "Student") {
                               Navigator.pushReplacementNamed(
                                   context, "StudentMainPage");
-                            } else if (data[1] == "Teacher") {
+                            } else if (data[1].toString().split("#")[0] ==
+                                "Teacher") {
                               Navigator.pushReplacementNamed(
                                   context, "TeacherMainPage");
-                            } else if (data[1] == "Parent") {
+                            } else if (data[1].toString().split("#")[0] ==
+                                "Parent") {
                               Navigator.pushReplacementNamed(
                                   context, "ParentMainPage");
-                            } else if (data[1] == "Admin") {
+                            } else if (data[1].toString().split("#")[0] ==
+                                "Admin") {
                               Navigator.pushReplacementNamed(
                                   context, "AdminMainPage");
                             }

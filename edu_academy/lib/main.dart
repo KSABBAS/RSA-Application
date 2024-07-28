@@ -1,18 +1,18 @@
-import 'package:edu_academy/MobileView/AdminMainPage.dart';
-import 'package:edu_academy/MobileView/ParentMainPage.dart';
-import 'package:edu_academy/MobileView/TeacherMainPage.dart';
-import 'package:edu_academy/MobileView/in&upPages/ParentSignUpPage.dart';
-import 'package:edu_academy/MobileView/in&upPages/StudentMobileSignUpPage.dart';
-import 'package:edu_academy/MobileView/in&upPages/TeacherSignUpPage.dart';
-import 'package:edu_academy/WhatAreYouPage.dart';
-import 'package:edu_academy/MobileView/in&upPages/LogInPage.dart';
-import 'package:edu_academy/MobileView/StudentMainPage.dart';
+import 'package:edu_academy/StudentPages/StudentMobileSignUpPage.dart';
+import 'package:edu_academy/AdminPages/AdminMainPage.dart';
+import 'package:edu_academy/ParentPages/ParentMainPage.dart';
+import 'package:edu_academy/TeacherPages/TeacherMainPage.dart';
+import 'package:edu_academy/ParentPages/ParentSignUpPage.dart';
+import 'package:edu_academy/TeacherPages/TeacherSignUpPage.dart';
+import 'package:edu_academy/Login/WhatAreYouPage.dart';
+import 'package:edu_academy/Login/LogInPage.dart';
+import 'package:edu_academy/StudentPages/StudentMainPage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
-import 'package:edu_academy/SplashViewPage.dart';
+import 'package:edu_academy/Login/SplashViewPage.dart';
 import 'package:firebase_core/firebase_core.dart';
-import 'firebase_options.dart';
+import 'service/firebase_options.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();

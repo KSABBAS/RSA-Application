@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'dart:developer';
 
+import 'package:edu_academy/Login/LogInPage.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -27,17 +28,30 @@ class _SplashViewPageState extends State<SplashViewPage>
             Timer(const Duration(milliseconds: 300), () async {
               final SharedPreferences prefs =
                   await SharedPreferences.getInstance();
+
+              //  satrt save data writen in login page
+              final List<String>? loginLastValue =
+                  prefs.getStringList("Login_last_value");
+              last_input1_value = loginLastValue?.isNotEmpty == true
+                  ? loginLastValue![0]
+                  : '';
+              last_input2_value = loginLastValue?.isNotEmpty == true
+                  ? loginLastValue![1]
+                  : '';
+              // end
+
               try {
                 final List<String>? data = prefs.getStringList('id');
+
                 log(data.toString());
                 if (data != null) {
-                  if (data[0] == "Student") {
+                  if (data[0].toString().split("#")[0] == "Student") {
                     Navigator.pushReplacementNamed(context, "StudentMainPage");
-                  } else if (data[0] == "Teacher") {
+                  } else if (data[0].toString().split("#")[0] == "Teacher") {
                     Navigator.pushReplacementNamed(context, "TeacherMainPage");
-                  } else if (data[0] == "Parent") {
+                  } else if (data[0].toString().split("#")[0] == "Parent") {
                     Navigator.pushReplacementNamed(context, "ParentMainPage");
-                  } else if (data[0] == "Admin") {
+                  } else if (data[0].toString().split("#")[0] == "Admin") {
                     Navigator.pushReplacementNamed(context, "AdminMainPage");
                   } else {
                     Navigator.pushReplacementNamed(context, "LogInPage");
@@ -47,7 +61,7 @@ class _SplashViewPageState extends State<SplashViewPage>
                 }
               } catch (e) {
                 log(e.toString());
-                  Navigator.pushReplacementNamed(context, "LogInPage");
+                Navigator.pushReplacementNamed(context, "LogInPage");
               }
             });
           }
@@ -55,6 +69,7 @@ class _SplashViewPageState extends State<SplashViewPage>
       });
     animationController!.forward();
   }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(

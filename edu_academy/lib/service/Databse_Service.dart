@@ -2,6 +2,9 @@ import 'dart:developer';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_database/firebase_database.dart';
+import 'package:edu_academy/StudentPages/SecondPage.dart';
+
+Map<String, List<String>> Students_in_grades = {};
 
 class DatabaseService {
   final real = FirebaseDatabase.instance;
@@ -13,10 +16,10 @@ class DatabaseService {
           fire.collection('Users').doc(rref).collection(rref);
 
       QuerySnapshot querySnapshot = await usersCollection.get();
-      int num_s = querySnapshot.size;
-      log(num_s.toString());
+      int numS = querySnapshot.size;
+      log(numS.toString());
 
-      String docId = "${rref[0]}${(num_s + 1).toString()}";
+      String docId = "${rref[0]}${(numS + 1).toString()}";
       await usersCollection.doc(docId).set(userData);
     } catch (e) {
       log(e.toString());
@@ -29,24 +32,40 @@ class DatabaseService {
       password = password.replaceAll(' ', '');
       log("input $input / $password");
 
-      List<Object>? checkCredentials(
-          QuerySnapshot categorySnapshot, String userType) {
+      List? checkCredentials(QuerySnapshot categorySnapshot, String userType) {
         for (var doc in categorySnapshot.docs) {
           String email = (doc['email'] ?? '').toString().replaceAll(' ', '');
           String phone = (doc['phone'] ?? '').toString().replaceAll(' ', '');
           String storedPassword =
               (doc['password'] ?? '').toString().replaceAll(' ', '');
-          log("data $email / $phone / $storedPassword");
+          log("$userType: ${doc.id} $email / $phone / $storedPassword");
 
           if ((email == input || phone == input) &&
               storedPassword == password) {
             log('Login successful as $userType: ${doc.id}');
-            return [
-              true,
-              '$userType', //${doc.id}
-              '${doc['state']}',
-              '${doc['name']}-${doc['grade']}'
-            ];
+
+            if (userType == "Student") {
+              return [
+                true,
+                '$userType#${doc.id}',
+                '${doc['state']}',
+                "${doc['name']}-${doc['grade']}"
+              ];
+            } else if (userType == "Teacher") {
+              return [
+                true,
+                '$userType#${doc.id}',
+                '${doc['state']}',
+                "${doc['name']}-${doc['Subject1']}-${doc['Subject2']}-${doc['Subject3']}"
+              ];
+            } else {
+              return [
+                true,
+                '$userType#${doc.id}',
+                '${doc['state']}',
+                "${doc['name']}"
+              ];
+            }
           }
         }
         return null;
@@ -91,7 +110,8 @@ class DatabaseService {
 
   fiRead_Records(String grade, String subject) async {
     log("fiRead_Records");
-    List<List<dynamic>> ret_list = [];
+    List<List<dynamic>> retList = [];
+
     ///Records/Zoom/Grades/Grade 1/G1Arabic/REC1
     QuerySnapshot studentSnapshot = await fire
         .collection('Records')
@@ -102,17 +122,17 @@ class DatabaseService {
         .get();
 
     for (var i in studentSnapshot.docs) {
-      ret_list.add(["${i['link']}", "${i['date']}"]);
+      retList.add(["${i['link']}", "${i['date']}"]);
     }
-    log(ret_list.toString());
-    return  ret_list as List<List<dynamic>>;
+    log(retList.toString());
+    return retList;
   }
 
   fiRead_Books(String grade, String subject) async {
     log("fiRead_Books");
     log(grade);
     log(subject);
-    List<List<dynamic>> ret_list = [];
+    List<List<dynamic>> retList = [];
     //Book/SubjectsBooks/Grades/Grade 1/عربي/Book1
     QuerySnapshot studentSnapshot = await fire
         .collection('Book')
@@ -123,9 +143,131 @@ class DatabaseService {
         .get();
 
     for (var i in studentSnapshot.docs) {
-      ret_list.add(["${i['link']}", "${i['date']}", "${i['title']}"]);
+      retList.add(["${i['link']}", "${i['date']}", "${i['title']}"]);
     }
-    log(ret_list.toString());
-    return  ret_list as List<List<dynamic>>;
+    log(retList.toString());
+    return retList;
+  }
+
+  get_all_students_with_grade() async {
+    Students_in_grades = {};
+    ///Users/Students/Students/S1
+    QuerySnapshot StudentsSnapshot = await fire
+        .collection('Users')
+        .doc('Students')
+        .collection('Students')
+        .get();
+    for (var doc in StudentsSnapshot.docs) {
+      if (!Students_in_grades.containsKey(doc["grade"]))
+        Students_in_grades[doc["grade"].toString()] = [];
+      Students_in_grades[doc["grade"].toString()]?.add(doc.id);
+    }
+    print(Students_in_grades);
+  }
+
+  fiGrades_and_Students(String teacherId, List<dynamic> Subjects) async {
+    print("im running.......");
+    await get_all_students_with_grade();
+    //  sub           garde   [gardes]
+    Map<String, Map<String, List<dynamic>>> last_re = {};
+    for (String i in Subjects) {
+      List ll = i.replaceAll(RegExp(r"[\[\]']"), '').split(", ");
+      print(ll[0]);
+      print(ll.sublist(1));
+      for (var j in ll.sublist(1)) {
+        print(j);
+        print(Students_in_grades[j.toString()]);
+        if (!last_re.containsKey(ll[0])) last_re[ll[0]] = {};
+
+        if (!last_re[ll[0]]!.containsKey(j)) last_re[ll[0]]![j] = [];
+
+        last_re[ll[0]]![j] = Students_in_grades[j.toString()] ?? [];
+      }
+    }
+    print(last_re);
+    return await last_re as Map<String, Map<String, List<dynamic>>>;
   }
 }
+
+
+  // fiGrades_and_Students(String teacherId) async {
+  //   QuerySnapshot teacherSnapshot = await fire
+  //       .collection('Users')
+  //       .doc('Teacher')
+  //       .collection('Teacher')
+  //       .get();
+  //   List grades = [];
+  //   for (var doc in teacherSnapshot.docs) {
+  //     if (doc.id == teacherId) {
+  //       grades = doc['grades'];
+  //       break;
+  //     }
+  //   }
+  //   if (grades.isEmpty) return null;
+  //   QuerySnapshot StudentsSnapshot = await fire
+  //       .collection('Users')
+  //       .doc('Student')
+  //       .collection('Student')
+  //       .get();
+  //   Map<String, List<String>> gradesStudents = {};
+  //   for (var doc in StudentsSnapshot.docs) {
+  //     for (var grade in grades) {
+  //       if (grade == doc['grades']) {
+  //         gradesStudents[grade]?.add(doc.id);
+  //       }
+  //     }
+  //   }
+  //   print(gradesStudents);
+  //   return gradesStudents;
+  // }
+
+
+
+    // Map<String, List<String>> GradesSubjects_names = {};
+    // for (String gg in GradesSubjects.keys) {
+    //   for (int nu in GradesSubjects[gg]) {
+    //     if (!GradesSubjects_names.containsKey(gg)) GradesSubjects_names[gg] = [];
+    //     GradesSubjects_names[gg]?.add(Subjects[nu][1]);
+    //   }
+    // }
+    // print("GradesSubjects_names $GradesSubjects_names");
+
+    // print(GradesSubjects_names);
+    // DocumentSnapshot<Map<String, dynamic>> teacherSnapshot = await fire
+    //     .collection('Users')
+    //     .doc('Teacher')
+    //     .collection('Teacher')
+    //     .doc(teacherId)
+    //     .get();
+    // List grades = [];
+    // for (var doc in teacherSnapshot["grades"]) {
+    //   if (doc.id == teacherId) {
+    //     grades = doc['grades'];
+    //     break;
+    //   }
+    // }
+
+    // if (grades.isEmpty) return null;
+
+    // QuerySnapshot StudentsSnapshot = await fire
+    //     .collection('Users')
+    //     .doc('Student')
+    //     .collection('Student')
+    //     .get();
+    // Map<String, List<String>> gradesStudents = {};
+    // for (var doc in StudentsSnapshot.docs) {
+    //   for (var grade in grades) {
+    //     if (grade == doc['grades']) {
+    //       gradesStudents[grade]?.add(doc.id);
+    //     }
+    //   }
+    // }
+    // print(gradesStudents);
+    // return gradesStudents;
+
+
+
+
+
+
+

@@ -1,4 +1,3 @@
-import 'package:edu_academy/MobileView/in&upPages/LogInPage.dart';
 import 'package:edu_academy/MyTools.dart';
 import 'package:edu_academy/service/Databse_Service.dart';
 import 'package:flutter/material.dart';
@@ -173,6 +172,7 @@ class _StudentMobileSignUpPageState extends State<StudentMobileSignUpPage> {
                     SizedBox(
                       height: 80,
                       child: TextFormField(
+                        initialValue: StudentName,
                         onSaved: (newValue) {
                           StudentName = newValue!;
                         },
@@ -211,6 +211,7 @@ class _StudentMobileSignUpPageState extends State<StudentMobileSignUpPage> {
                     SizedBox(
                       height: 80,
                       child: TextFormField(
+                        initialValue: StudentParentMobileNumber,
                         onSaved: (newValue) {
                           StudentParentMobileNumber = newValue!;
                         },
@@ -256,6 +257,7 @@ class _StudentMobileSignUpPageState extends State<StudentMobileSignUpPage> {
                     SizedBox(
                       height: 80,
                       child: TextFormField(
+                        initialValue: StudentMobileNumber,
                         onSaved: (newValue) {
                           StudentMobileNumber = newValue!;
                         },
@@ -314,6 +316,7 @@ class _StudentMobileSignUpPageState extends State<StudentMobileSignUpPage> {
                     SizedBox(
                       height: 80,
                       child: TextFormField(
+                        initialValue: StudentEmail,
                         onSaved: (newValue) {
                           StudentEmail = newValue!;
                         },
@@ -355,6 +358,7 @@ class _StudentMobileSignUpPageState extends State<StudentMobileSignUpPage> {
                     SizedBox(
                       height: 80,
                       child: TextFormField(
+                        initialValue: StudentPassword,
                         onSaved: (newValue) {
                           StudentPassword = newValue!;
                         },
@@ -406,6 +410,7 @@ class _StudentMobileSignUpPageState extends State<StudentMobileSignUpPage> {
                     SizedBox(
                       height: 80,
                       child: TextFormField(
+                        initialValue: StudentConfirmPassword,
                         onSaved: (newValue) {
                           StudentConfirmPassword = newValue!;
                         },
@@ -470,6 +475,8 @@ class _StudentMobileSignUpPageState extends State<StudentMobileSignUpPage> {
                             flex: 5,
                             child: Container(
                               child: TextFormField(
+                                initialValue: StudentDayOfBirth,
+
                                   onSaved: (newValue) {
                                     StudentDayOfBirth = newValue!;
                                   },
@@ -506,6 +513,7 @@ class _StudentMobileSignUpPageState extends State<StudentMobileSignUpPage> {
                             flex: 5,
                             child: Container(
                               child: TextFormField(
+                              initialValue: StudentMonthOfBirth,
                                 onSaved: (newValue) {
                                   StudentMonthOfBirth = newValue!;
                                 },
@@ -541,6 +549,7 @@ class _StudentMobileSignUpPageState extends State<StudentMobileSignUpPage> {
                           flex: 5,
                           child: Container(
                             child: TextFormField(
+                              initialValue: StudentYearOfBirth,
                               onSaved: (newValue) {
                                 StudentYearOfBirth = newValue!;
                               },
@@ -752,7 +761,7 @@ class _StudentMobileSignUpPageState extends State<StudentMobileSignUpPage> {
                             "birth_date": StudentDateOfBirth,
                             "gender": StudentGender,
                             "grade": StudentGrade,
-                            "state": "true"
+                            "state": "false"
                           });
                           OverlayLoadingProgress.stop();
                           PanaraInfoDialog.show(
