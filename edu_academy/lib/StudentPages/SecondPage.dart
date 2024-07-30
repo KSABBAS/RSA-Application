@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 // import 'package:shared_preferences/shared_preferences.dart';
 import 'package:edu_academy/StudentPages/StudentMainPage.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'package:overlay_loading_progress/overlay_loading_progress.dart';
 
 class SecondPage extends StatefulWidget {
   const SecondPage({super.key});
@@ -256,29 +257,53 @@ class _SecondPageState extends State<SecondPage> {
             padding: EdgeInsets.only(bottom: 10),
           ),
           CMaker(
-              color: const Color.fromARGB(255, 159, 207, 19),
+            circularRadius: 20,
+              color: Color.fromARGB(255, 32, 186, 158),
+              margin: EdgeInsets.symmetric(horizontal: 15),
               height: 60,
-              padding: const EdgeInsets.symmetric(vertical: 5, horizontal: 10),
+              padding: const EdgeInsets.symmetric(vertical: 5, horizontal: 30),
               child: Row(
                 children: [
-                  MaterialButton(
-                    minWidth: 50,
-                    onPressed: () async {
-                      List<List<dynamic>> records_ =
-                          await dbService.fiRead_Books(
-                              grade, "${Subjects[SubjectSelected][1]}");
-                      setState(() {
-                        OpenBooks = true;
-                        anySubjectSelected = false;
-                        all_books = records_;
-                      });
-                    },
-                    color: const Color.fromARGB(255, 217, 216, 216),
-                    child: TMaker(
-                        text: "فتح",
-                        fontSize: 15,
-                        fontWeight: FontWeight.w600,
-                        color: Colors.black),
+                  InkWell(
+                    onTap: () async {
+                      OverlayLoadingProgress.start(
+                        context,
+                        widget: CMaker(
+                          circularRadius: 15,
+                          color: const Color.fromARGB(198, 255, 255, 255),
+                          width: MediaQuery.of(context).size.width / 3.6,
+                          padding: EdgeInsets.all(
+                              MediaQuery.of(context).size.width / 13),
+                          child: const AspectRatio(
+                            aspectRatio: 1,
+                            child: CircularProgressIndicator(
+                              color: Color.fromARGB(255, 32, 186, 158),
+                            ),
+                          ),
+                        ),
+                      );
+                        List<List<dynamic>> records_ =
+                            await dbService.fiRead_Books(
+                                grade, "${Subjects[SubjectSelected][1]}");
+                      OverlayLoadingProgress.stop();
+                        setState(() {
+                          OpenBooks = true;
+                          anySubjectSelected = false;
+                          all_books = records_;
+                        });
+                      },
+                    child: CMaker(
+                      circularRadius: 15,
+                      alignment: Alignment.center,
+                      width: 55,
+                      height: 35,
+                      color: Color.fromARGB(255, 255, 255, 255),
+                      child: TMaker(
+                          text: "فتح",
+                          fontSize: 20,
+                          fontWeight: FontWeight.w700,
+                          color: Colors.black),
+                    ),
                   ),
                   Expanded(
                       child: CMaker(
@@ -286,11 +311,12 @@ class _SecondPageState extends State<SecondPage> {
                           alignment: Alignment.centerRight,
                           child: TMaker(
                               text: "عرض الكتب",
-                              fontSize: 20,
-                              fontWeight: FontWeight.w600,
+                              fontSize: 22,
+                              fontWeight: FontWeight.w800,
                               color: Colors.white)))
                 ],
               )),
+              Padding(padding:EdgeInsets.only(bottom: 10)),
           CMaker(
               height: 50,
               child: Row(
@@ -302,13 +328,13 @@ class _SecondPageState extends State<SecondPage> {
                       text: "الحصص المسجلة",
                       fontSize: 20,
                       fontWeight: FontWeight.w600,
-                      color: const Color.fromARGB(255, 6, 122, 153)),
+                      color: Color.fromARGB(255, 54, 54, 54)),
                   Expanded(child: Container())
                 ],
               )),
-          const Padding(padding: EdgeInsets.only(top: 10)),
+          const Padding(padding: EdgeInsets.only(top: 20)),
           SizedBox(
-            height: PageHeight(context) - (350),
+            height: PageHeight(context) - (370),
             child: ListView.builder(
                 itemCount: all_rec.length,
                 scrollDirection: Axis.vertical,
@@ -317,22 +343,27 @@ class _SecondPageState extends State<SecondPage> {
                       padding: const EdgeInsets.symmetric(horizontal: 20),
                       circularRadius: 15,
                       margin: const EdgeInsets.only(
-                          left: 10, right: 10, bottom: 15),
-                      color: const Color.fromARGB(255, 6, 122, 153),
-                      height: 60,
+                          left: 30, right: 30, bottom: 15),
+                      color: Color.fromARGB(255, 19, 218, 132),
+                      height: 90,
                       child: Row(
                         children: [
-                          MaterialButton(
-                            minWidth: 70,
-                            onPressed: () {
-                              _launchURL(url: all_rec[index][0]);
-                            },
-                            color: const Color.fromARGB(255, 18, 207, 60),
-                            child: TMaker(
-                                text: "تشغيل",
-                                fontSize: 15,
-                                fontWeight: FontWeight.w500,
-                                color: Colors.white),
+                          InkWell(
+                            onTap: () {
+                                _launchURL(url: all_rec[index][0]);
+                              },
+                            child: CMaker(
+                              alignment: Alignment.center,
+                              circularRadius: 15,
+                              width: 70,
+                              height: 40,
+                              color: const Color.fromARGB(255, 233, 255, 247),
+                              child: TMaker(
+                                  text: "تشغيل",
+                                  fontSize: 20,
+                                  fontWeight: FontWeight.w700,
+                                  color: const Color.fromARGB(255, 0, 0, 0)),
+                            ),
                           ),
                           Expanded(
                             child: Container(),
@@ -341,13 +372,13 @@ class _SecondPageState extends State<SecondPage> {
                             children: [
                               TMaker(
                                   text: "الحصه ${index + 1}",
-                                  fontSize: 25,
-                                  fontWeight: FontWeight.w500,
+                                  fontSize: 35,
+                                  fontWeight: FontWeight.w600,
                                   color: Colors.white),
                               TMaker(
-                                  text: "التاريخ : ${all_rec[index][1]}",
-                                  fontSize: 13,
-                                  fontWeight: FontWeight.w300,
+                                   text:"التاريخ : ${all_rec[index][1]}",
+                                  fontSize: 18,
+                                  fontWeight: FontWeight.w600,
                                   color: Colors.white)
                             ],
                           )
@@ -399,7 +430,7 @@ class _SecondPageState extends State<SecondPage> {
               alignment: Alignment.center,
               height: 70,
               child: TMaker(
-                  text: "اضغط لعرض الكتاب",
+                  text: "اضغط على الكناب للعرض",
                   fontSize: 20,
                   fontWeight: FontWeight.w500,
                   color: Colors.black)),
@@ -416,6 +447,24 @@ class _SecondPageState extends State<SecondPage> {
                     children: [
                       InkWell(
                           onTap: () {
+                            OverlayLoadingProgress.start(
+                        context,
+                        widget: CMaker(
+                          circularRadius: 15,
+                          color: const Color.fromARGB(198, 255, 255, 255),
+                          width: MediaQuery.of(context).size.width / 3.6,
+                          padding: EdgeInsets.all(
+                              MediaQuery.of(context).size.width / 13),
+                          child: const AspectRatio(
+                            aspectRatio: 1,
+                            child: CircularProgressIndicator(
+                              color: Color.fromARGB(255, 32, 186, 158),
+                            ),
+                          ),
+                        ),
+                      );
+                      // add database action here
+                      OverlayLoadingProgress.stop();
                             setState(() {
                               OpenBook = true;
                               OpenBooks = false;
@@ -514,7 +563,9 @@ class _SecondPageState extends State<SecondPage> {
                     const Padding(padding: EdgeInsets.only(top: 5)),
                     MaterialButton(
                       minWidth: 70,
-                      onPressed: () {},
+                      onPressed: () {
+                        // in here you must add the download function and its animation all by yourself
+                      },
                       color: const Color.fromARGB(255, 18, 207, 60),
                       child: TMaker(
                           text: "تنزيل",
@@ -577,9 +628,26 @@ class _SecondPageState extends State<SecondPage> {
                   itemBuilder: (context, index) {
                     return InkWell(
                       onTap: () async {
+                        OverlayLoadingProgress.start(
+                        context,
+                        widget: CMaker(
+                          circularRadius: 15,
+                          color: const Color.fromARGB(198, 255, 255, 255),
+                          width: MediaQuery.of(context).size.width / 3.6,
+                          padding: EdgeInsets.all(
+                              MediaQuery.of(context).size.width / 13),
+                          child: const AspectRatio(
+                            aspectRatio: 1,
+                            child: CircularProgressIndicator(
+                              color: Color.fromARGB(255, 32, 186, 158),
+                            ),
+                          ),
+                        ),
+                      );
                         List<List<dynamic>> records =
                             await dbService.fiRead_Records(grade,
                                 "${Subjects[GradesSubjects[grade][index]][1]}");
+                      OverlayLoadingProgress.stop();
                         setState(() {
                           SubjectSelected = GradesSubjects[grade][index];
                           anySubjectSelected = true;

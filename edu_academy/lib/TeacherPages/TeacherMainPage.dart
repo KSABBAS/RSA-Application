@@ -849,16 +849,21 @@ class _TeacherMainPageState extends State<TeacherMainPage> {
                     ),
                   ),
                   InkWell(
-                    onTap: () {},
-                    child: Container(
-                      width: 70,
-                      padding: const EdgeInsets.only(top: 10),
-                      decoration: BoxDecoration(
-                          color: const Color.fromARGB(255, 255, 255, 255),
-                          borderRadius: BorderRadius.circular(10)),
-                      height: 50,
-                      child: const Icon(Icons.notifications),
-                    ),
+                    onTap: ()async {
+                          final SharedPreferences prefs =
+                          await SharedPreferences.getInstance();
+                          prefs.remove("id");
+                          Navigator.pushReplacementNamed(context, "SplashView");
+                        },
+                        child: Container(
+                          width: 70,
+                          padding: const EdgeInsets.only(top: 10),
+                          decoration: BoxDecoration(
+                              color: const Color.fromARGB(255, 255, 255, 255),
+                              borderRadius: BorderRadius.circular(10)),
+                          height: 50,
+                          child: const Icon(Icons.logout),
+                        ),
                   ),
                 ],
               ),

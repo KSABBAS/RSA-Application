@@ -93,9 +93,7 @@ class _ThirdPageState extends State<ThirdPage> {
       return CMaker(
           child: Column(
         children: [
-          const Padding(padding: EdgeInsets.only(top: 10)),
-          Row(
-            children: [
+          const Padding(padding: EdgeInsets.only(top: 20)),
               InkWell(
                   onTap: () {
                     setState(() {
@@ -105,60 +103,77 @@ class _ThirdPageState extends State<ThirdPage> {
                   child: CMaker(
                       margin: const EdgeInsets.only(left: 15),
                       height: 30,
-                      width: 30,
-                      circularRadius: 50,
-                      color: const Color.fromARGB(255, 6, 122, 153),
+                      width: double.infinity,
+                      alignment: Alignment.centerLeft,
+                      circularRadius: 20,
                       child: const Icon(
                         Icons.arrow_back,
-                        color: Colors.white,
-                        size: 15,
+                        size: 28,
                       ))),
-              Expanded(child: Container()),
-              Container(
-                  decoration: const BoxDecoration(
-                      color: Color.fromARGB(255, 6, 122, 153),
-                      borderRadius: BorderRadius.only(
-                          topLeft: Radius.circular(15),
-                          bottomLeft: Radius.circular(15))),
-                  alignment: Alignment.center,
-                  height: 50,
-                  width: 150,
-                  child: TMaker(
-                      text: HomeWorks[HomeWorkIndex][0]["Name"],
-                      fontSize: 20,
-                      fontWeight: FontWeight.w600,
-                      color: Colors.white))
-            ],
-          ),
-          CMaker(
-              alignment: Alignment.centerRight,
-              child: Container(
-                margin: const EdgeInsets.only(right: 70),
-                height: 30,
-                width: 30,
-                color: const Color.fromARGB(255, 6, 122, 153),
-              )),
+              CMaker(
+                width: double.infinity,
+                alignment: Alignment.center,
+                child: CMaker(
+                    boxShadow: const [
+                              BoxShadow(
+                                  offset: Offset(1, 1),
+                                  blurRadius: 6,
+                                  spreadRadius: .03,
+                                  color: Color.fromARGB(58, 0, 0, 0)),
+                            ],
+                    circularRadius: 20,
+                    color: const Color.fromARGB(255, 32, 186, 158),
+                    alignment: Alignment.center,
+                    height: 70,
+                    width: 150,
+                    child: TMaker(
+                        text: HomeWorks[HomeWorkIndex][0]["Name"],
+                        fontSize: 20,
+                        fontWeight: FontWeight.w600,
+                        color: Color.fromARGB(255, 255, 255, 255))),
+              ),
+              Padding(padding:EdgeInsets.only(bottom: 30)),
           Expanded(
             flex: 13,
             child: CMaker(
                 padding: const EdgeInsets.only(top:50,right: 15,left:15),
-                circularRadius: 15,
-                margin: const EdgeInsets.only(right: 30, left: 30, bottom: 10),
+                circularRadius: 25,
+                margin: const EdgeInsets.only(right: 20, left: 20, bottom: 40),
                 width: double.infinity,
-                color: const Color.fromARGB(255, 6, 122, 153),
+                color: Color.fromARGB(255, 32, 186, 158),
                 child: ListView.builder(
                     itemCount: 3,
                     itemBuilder: (context, index) {
-                      return CMaker(padding: const EdgeInsets.all(10),circularRadius: 15,margin: const EdgeInsets.only(bottom: 30),color: const Color.fromARGB(255, 255, 255, 255),height: 50,width: double.infinity,child: Row(children: [
-                        CMaker(alignment: Alignment.center,width: 50,height: 40,circularRadius: 7,color: const Color.fromARGB(255,216,217,216),child: TMaker(
+                      return CMaker(
+                        boxShadow: const [
+                              BoxShadow(
+                                  offset: Offset(1, 1),
+                                  blurRadius: 6,
+                                  spreadRadius: .03,
+                                  color: Color.fromARGB(58, 0, 0, 0)),
+                            ],
+                        padding: const EdgeInsets.all(10),
+                        circularRadius: 25,margin: const EdgeInsets.only(bottom: 30),
+                        color: const Color.fromARGB(255, 233, 255, 247),
+                        height: 80,
+                        width: double.infinity,
+                        child: Row(children: [
+                        CMaker(
+                          alignment: Alignment.center,
+                          padding: const EdgeInsets.symmetric( horizontal: 15),
+                          circularRadius: 20,
+                          color: Color.fromARGB(255, 235, 218, 118),
+                          margin: EdgeInsets.symmetric(horizontal: 15),
+                          height: 40,
+                          child: TMaker(
                       text: "State",
                       fontSize: 15,
                       fontWeight: FontWeight.w600,
                       color: const Color.fromARGB(255, 0, 0, 0))),
                         Expanded(child: Container()),
-                        CMaker(child: TMaker(
+                        CMaker(padding: EdgeInsets.only(right: 10),child: TMaker(
                       text: " الواجب رقم ${index+1}",
-                      fontSize: 15,
+                      fontSize: 25,
                       fontWeight: FontWeight.w600,
                       color: const Color.fromARGB(255, 0, 0, 0))),
                       ],
@@ -176,622 +191,627 @@ class _ThirdPageState extends State<ThirdPage> {
         padding: const EdgeInsets.symmetric(horizontal: 15),
         child: Column(
           children: [
-            Column(
-              children: [
-                const Padding(padding: EdgeInsets.only(top: 20)),
-                Row(
-                  children: [
-                    Expanded(
-                        child: CMaker(
-                      height: 30,
-                      color: const Color.fromARGB(255, 6, 122, 153),
-                      child: Center(
-                          child: Image.asset(
-                        "images/Time.png",
-                        fit: BoxFit.fill,
+            const Padding(padding: EdgeInsets.only(top: 20)),
+            CMaker(
+              boxShadow: const [
+                              BoxShadow(
+                                  offset: Offset(1, 1),
+                                  blurRadius: 6,
+                                  spreadRadius: .03,
+                                  color: Color.fromARGB(82, 0, 0, 0)),
+                            ],
+              child: Column(
+                children: [
+                  Row(
+                    children: [
+                      Expanded(
+                          child: Container(
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.only(topLeft: Radius.circular(10)),
+                              border:  const Border(
+                            right: BorderSide(width: .5),
+                            bottom: BorderSide(width: .5)),
+                        color: const Color.fromARGB(255, 32, 186, 158),
+                            ),
+                        height: 30,
+                        child: Container()
                       )),
-                    )),
-                    Expanded(
-                        child: CMaker(
-                      height: 30,
-                      border: const Border(
-                          right: BorderSide(width: .5),
-                          bottom: BorderSide(width: .5)),
-                      color: const Color.fromARGB(255, 6, 122, 153),
-                      child: Center(
-                          child: TMaker(
-                              text: "",
-                              fontSize: 15,
-                              fontWeight: FontWeight.w500,
-                              color: Colors.white)),
-                    )),
-                    Expanded(
-                        child: CMaker(
-                      height: 30,
-                      border: const Border(
-                          right: BorderSide(width: .5),
-                          bottom: BorderSide(width: .5)),
-                      color: const Color.fromARGB(255, 6, 122, 153),
-                      child: Center(
-                          child: TMaker(
-                              text: "",
-                              fontSize: 15,
-                              fontWeight: FontWeight.w500,
-                              color: Colors.white)),
-                    )),
-                    Expanded(
-                        child: CMaker(
-                      height: 30,
-                      border: const Border(
-                          right: BorderSide(width: .5),
-                          bottom: BorderSide(width: .5)),
-                      color: const Color.fromARGB(255, 6, 122, 153),
-                      child: Center(
-                          child: TMaker(
-                              text: "",
-                              fontSize: 15,
-                              fontWeight: FontWeight.w500,
-                              color: Colors.white)),
-                    )),
-                    Expanded(
-                        child: CMaker(
-                      height: 30,
-                      border: const Border(
-                          right: BorderSide(width: .5),
-                          bottom: BorderSide(width: .5)),
-                      color: const Color.fromARGB(255, 6, 122, 153),
-                      child: Center(
-                          child: TMaker(
-                              text: "",
-                              fontSize: 15,
-                              fontWeight: FontWeight.w500,
-                              color: Colors.white)),
-                    )),
-                    Expanded(
-                        child: CMaker(
-                      height: 30,
-                      border: const Border(
-                          right: BorderSide(width: 2),
-                          bottom: BorderSide(width: .5)),
-                      color: const Color.fromARGB(255, 6, 122, 153),
-                      child: Center(
-                          child: TMaker(
-                              text: "",
-                              fontSize: 15,
-                              fontWeight: FontWeight.w500,
-                              color: Colors.white)),
-                    )),
-                  ],
-                ),
-                Row(
-                  children: [
-                    Expanded(
-                        child: CMaker(
-                      height: 30,
-                      border: const Border(
-                          right: BorderSide(width: .5),
-                          bottom: BorderSide(width: .5)),
-                      color: const Color.fromARGB(255, 6, 122, 153),
-                      child: Center(
-                          child: TMaker(
-                              text: "الأحد",
-                              fontSize: 15,
-                              fontWeight: FontWeight.w500,
-                              color: const Color.fromARGB(255, 255, 255, 255))),
-                    )),
-                    Expanded(
-                        child: CMaker(
-                      height: 30,
-                      border: const Border(
-                          right: BorderSide(width: .5),
-                          bottom: BorderSide(width: .5)),
-                      color: const Color.fromARGB(255, 255, 255, 255),
-                      child: Center(
-                          child: TMaker(
-                              text: "",
-                              fontSize: 15,
-                              fontWeight: FontWeight.w500,
-                              color: Colors.black)),
-                    )),
-                    Expanded(
-                        child: CMaker(
-                      height: 30,
-                      border: const Border(
-                          right: BorderSide(width: .5),
-                          bottom: BorderSide(width: .5)),
-                      color: const Color.fromARGB(255, 255, 255, 255),
-                      child: Center(
-                          child: TMaker(
-                              text: "",
-                              fontSize: 15,
-                              fontWeight: FontWeight.w500,
-                              color: Colors.black)),
-                    )),
-                    Expanded(
-                        child: CMaker(
-                      height: 30,
-                      border: const Border(
-                          right: BorderSide(width: .5),
-                          bottom: BorderSide(width: .5)),
-                      color: const Color.fromARGB(255, 255, 255, 255),
-                      child: Center(
-                          child: TMaker(
-                              text: "",
-                              fontSize: 15,
-                              fontWeight: FontWeight.w500,
-                              color: Colors.black)),
-                    )),
-                    Expanded(
-                        child: CMaker(
-                      height: 30,
-                      border: const Border(
-                          right: BorderSide(width: .5),
-                          bottom: BorderSide(width: .5)),
-                      color: const Color.fromARGB(255, 255, 255, 255),
-                      child: Center(
-                          child: TMaker(
-                              text: "",
-                              fontSize: 15,
-                              fontWeight: FontWeight.w500,
-                              color: Colors.black)),
-                    )),
-                    Expanded(
-                        child: CMaker(
-                      height: 30,
-                      border: const Border(
-                          right: BorderSide(width: 2),
-                          bottom: BorderSide(width: .5)),
-                      color: const Color.fromARGB(255, 255, 255, 255),
-                      child: Center(
-                          child: TMaker(
-                              text: "",
-                              fontSize: 15,
-                              fontWeight: FontWeight.w500,
-                              color: Colors.black)),
-                    )),
-                  ],
-                ),
-                Row(
-                  children: [
-                    Expanded(
-                        child: CMaker(
-                      height: 30,
-                      border: const Border(
-                          right: BorderSide(width: .5),
-                          bottom: BorderSide(width: .5)),
-                      color: const Color.fromARGB(255, 6, 122, 153),
-                      child: Center(
-                          child: TMaker(
-                              text: "الأثنين",
-                              fontSize: 15,
-                              fontWeight: FontWeight.w500,
-                              color: const Color.fromARGB(255, 255, 255, 255))),
-                    )),
-                    Expanded(
-                        child: CMaker(
-                      height: 30,
-                      border: const Border(
-                          right: BorderSide(width: .5),
-                          bottom: BorderSide(width: .5)),
-                      color: const Color.fromARGB(255, 255, 255, 255),
-                      child: Center(
-                          child: TMaker(
-                              text: "",
-                              fontSize: 15,
-                              fontWeight: FontWeight.w500,
-                              color: Colors.black)),
-                    )),
-                    Expanded(
-                        child: CMaker(
-                      height: 30,
-                      border: const Border(
-                          right: BorderSide(width: .5),
-                          bottom: BorderSide(width: .5)),
-                      color: const Color.fromARGB(255, 255, 255, 255),
-                      child: Center(
-                          child: TMaker(
-                              text: "",
-                              fontSize: 15,
-                              fontWeight: FontWeight.w500,
-                              color: Colors.black)),
-                    )),
-                    Expanded(
-                        child: CMaker(
-                      height: 30,
-                      border: const Border(
-                          right: BorderSide(width: .5),
-                          bottom: BorderSide(width: .5)),
-                      color: const Color.fromARGB(255, 255, 255, 255),
-                      child: Center(
-                          child: TMaker(
-                              text: "",
-                              fontSize: 15,
-                              fontWeight: FontWeight.w500,
-                              color: Colors.black)),
-                    )),
-                    Expanded(
-                        child: CMaker(
-                      height: 30,
-                      border: const Border(
-                          right: BorderSide(width: .5),
-                          bottom: BorderSide(width: .5)),
-                      color: const Color.fromARGB(255, 255, 255, 255),
-                      child: Center(
-                          child: TMaker(
-                              text: "",
-                              fontSize: 15,
-                              fontWeight: FontWeight.w500,
-                              color: Colors.black)),
-                    )),
-                    Expanded(
-                        child: CMaker(
-                      height: 30,
-                      border: const Border(
-                          right: BorderSide(width: 2),
-                          bottom: BorderSide(width: .5)),
-                      color: const Color.fromARGB(255, 255, 255, 255),
-                      child: Center(
-                          child: TMaker(
-                              text: "",
-                              fontSize: 15,
-                              fontWeight: FontWeight.w500,
-                              color: Colors.black)),
-                    )),
-                  ],
-                ),
-                Row(
-                  children: [
-                    Expanded(
-                        child: CMaker(
-                      height: 30,
-                      border: const Border(
-                          right: BorderSide(width: .5),
-                          bottom: BorderSide(width: .5)),
-                      color: const Color.fromARGB(255, 6, 122, 153),
-                      child: Center(
-                          child: TMaker(
-                              text: "الثلاثاء",
-                              fontSize: 15,
-                              fontWeight: FontWeight.w500,
-                              color: const Color.fromARGB(255, 255, 255, 255))),
-                    )),
-                    Expanded(
-                        child: CMaker(
-                      height: 30,
-                      border: const Border(
-                          right: BorderSide(width: .5),
-                          bottom: BorderSide(width: .5)),
-                      color: const Color.fromARGB(255, 255, 255, 255),
-                      child: Center(
-                          child: TMaker(
-                              text: "",
-                              fontSize: 15,
-                              fontWeight: FontWeight.w500,
-                              color: Colors.black)),
-                    )),
-                    Expanded(
-                        child: CMaker(
-                      height: 30,
-                      border: const Border(
-                          right: BorderSide(width: .5),
-                          bottom: BorderSide(width: .5)),
-                      color: const Color.fromARGB(255, 255, 255, 255),
-                      child: Center(
-                          child: TMaker(
-                              text: "",
-                              fontSize: 15,
-                              fontWeight: FontWeight.w500,
-                              color: Colors.black)),
-                    )),
-                    Expanded(
-                        child: CMaker(
-                      height: 30,
-                      border: const Border(
-                          right: BorderSide(width: .5),
-                          bottom: BorderSide(width: .5)),
-                      color: const Color.fromARGB(255, 255, 255, 255),
-                      child: Center(
-                          child: TMaker(
-                              text: "",
-                              fontSize: 15,
-                              fontWeight: FontWeight.w500,
-                              color: Colors.black)),
-                    )),
-                    Expanded(
-                        child: CMaker(
-                      height: 30,
-                      border: const Border(
-                          right: BorderSide(width: .5),
-                          bottom: BorderSide(width: .5)),
-                      color: const Color.fromARGB(255, 255, 255, 255),
-                      child: Center(
-                          child: TMaker(
-                              text: "",
-                              fontSize: 15,
-                              fontWeight: FontWeight.w500,
-                              color: Colors.black)),
-                    )),
-                    Expanded(
-                        child: CMaker(
-                      height: 30,
-                      border: const Border(
-                          right: BorderSide(width: 2),
-                          bottom: BorderSide(width: .5)),
-                      color: const Color.fromARGB(255, 255, 255, 255),
-                      child: Center(
-                          child: TMaker(
-                              text: "",
-                              fontSize: 15,
-                              fontWeight: FontWeight.w500,
-                              color: Colors.black)),
-                    )),
-                  ],
-                ),
-                Row(
-                  children: [
-                    Expanded(
-                        child: CMaker(
-                      height: 30,
-                      border: const Border(
-                          right: BorderSide(width: .5),
-                          bottom: BorderSide(width: .5)),
-                      color: const Color.fromARGB(255, 6, 122, 153),
-                      child: Center(
-                          child: TMaker(
-                              text: "الأربعاء",
-                              fontSize: 15,
-                              fontWeight: FontWeight.w500,
-                              color: const Color.fromARGB(255, 255, 255, 255))),
-                    )),
-                    Expanded(
-                        child: CMaker(
-                      height: 30,
-                      border: const Border(
-                          right: BorderSide(width: .5),
-                          bottom: BorderSide(width: .5)),
-                      color: const Color.fromARGB(255, 255, 255, 255),
-                      child: Center(
-                          child: TMaker(
-                              text: "",
-                              fontSize: 15,
-                              fontWeight: FontWeight.w500,
-                              color: Colors.black)),
-                    )),
-                    Expanded(
-                        child: CMaker(
-                      height: 30,
-                      border: const Border(
-                          right: BorderSide(width: .5),
-                          bottom: BorderSide(width: .5)),
-                      color: const Color.fromARGB(255, 255, 255, 255),
-                      child: Center(
-                          child: TMaker(
-                              text: "",
-                              fontSize: 15,
-                              fontWeight: FontWeight.w500,
-                              color: Colors.black)),
-                    )),
-                    Expanded(
-                        child: CMaker(
-                      height: 30,
-                      border: const Border(
-                          right: BorderSide(width: .5),
-                          bottom: BorderSide(width: .5)),
-                      color: const Color.fromARGB(255, 255, 255, 255),
-                      child: Center(
-                          child: TMaker(
-                              text: "",
-                              fontSize: 15,
-                              fontWeight: FontWeight.w500,
-                              color: Colors.black)),
-                    )),
-                    Expanded(
-                        child: CMaker(
-                      height: 30,
-                      border: const Border(
-                          right: BorderSide(width: .5),
-                          bottom: BorderSide(width: .5)),
-                      color: const Color.fromARGB(255, 255, 255, 255),
-                      child: Center(
-                          child: TMaker(
-                              text: "",
-                              fontSize: 15,
-                              fontWeight: FontWeight.w500,
-                              color: Colors.black)),
-                    )),
-                    Expanded(
-                        child: CMaker(
-                      height: 30,
-                      border: const Border(
-                          right: BorderSide(width: 2),
-                          bottom: BorderSide(width: .5)),
-                      color: const Color.fromARGB(255, 255, 255, 255),
-                      child: Center(
-                          child: TMaker(
-                              text: "",
-                              fontSize: 15,
-                              fontWeight: FontWeight.w500,
-                              color: Colors.black)),
-                    )),
-                  ],
-                ),
-                Row(
-                  children: [
-                    Expanded(
-                        child: CMaker(
-                      height: 30,
-                      border: const Border(
-                          right: BorderSide(width: .5),
-                          bottom: BorderSide(width: .5)),
-                      color: const Color.fromARGB(255, 6, 122, 153),
-                      child: Center(
-                          child: TMaker(
-                              text: "الخميس",
-                              fontSize: 15,
-                              fontWeight: FontWeight.w500,
-                              color: const Color.fromARGB(255, 255, 255, 255))),
-                    )),
-                    Expanded(
-                        child: CMaker(
-                      height: 30,
-                      border: const Border(
-                          right: BorderSide(width: .5),
-                          bottom: BorderSide(width: .5)),
-                      color: const Color.fromARGB(255, 255, 255, 255),
-                      child: Center(
-                          child: TMaker(
-                              text: "",
-                              fontSize: 15,
-                              fontWeight: FontWeight.w500,
-                              color: Colors.black)),
-                    )),
-                    Expanded(
-                        child: CMaker(
-                      height: 30,
-                      border: const Border(
-                          right: BorderSide(width: .5),
-                          bottom: BorderSide(width: .5)),
-                      color: const Color.fromARGB(255, 255, 255, 255),
-                      child: Center(
-                          child: TMaker(
-                              text: "",
-                              fontSize: 15,
-                              fontWeight: FontWeight.w500,
-                              color: Colors.black)),
-                    )),
-                    Expanded(
-                        child: CMaker(
-                      height: 30,
-                      border: const Border(
-                          right: BorderSide(width: .5),
-                          bottom: BorderSide(width: .5)),
-                      color: const Color.fromARGB(255, 255, 255, 255),
-                      child: Center(
-                          child: TMaker(
-                              text: "",
-                              fontSize: 15,
-                              fontWeight: FontWeight.w500,
-                              color: Colors.black)),
-                    )),
-                    Expanded(
-                        child: CMaker(
-                      height: 30,
-                      border: const Border(
-                          right: BorderSide(width: .5),
-                          bottom: BorderSide(width: .5)),
-                      color: const Color.fromARGB(255, 255, 255, 255),
-                      child: Center(
-                          child: TMaker(
-                              text: "",
-                              fontSize: 15,
-                              fontWeight: FontWeight.w500,
-                              color: Colors.black)),
-                    )),
-                    Expanded(
-                        child: CMaker(
-                      height: 30,
-                      border: const Border(
-                          right: BorderSide(width: 2),
-                          bottom: BorderSide(width: .5)),
-                      color: const Color.fromARGB(255, 255, 255, 255),
-                      child: Center(
-                          child: TMaker(
-                              text: "",
-                              fontSize: 15,
-                              fontWeight: FontWeight.w500,
-                              color: Colors.black)),
-                    )),
-                  ],
-                ),
-                Row(
-                  children: [
-                    Expanded(
-                        child: CMaker(
-                      height: 30,
-                      border: const Border(
-                          right: BorderSide(width: .5),
-                          bottom: BorderSide(width: .5)),
-                      color: const Color.fromARGB(255, 6, 122, 153),
-                      child: Center(
-                          child: TMaker(
-                              text: "الجمعة",
-                              fontSize: 15,
-                              fontWeight: FontWeight.w500,
-                              color: const Color.fromARGB(255, 255, 255, 255))),
-                    )),
-                    Expanded(
-                        child: CMaker(
-                      height: 30,
-                      border: const Border(
-                          right: BorderSide(width: .5),
-                          bottom: BorderSide(width: .5)),
-                      color: const Color.fromARGB(255, 255, 255, 255),
-                      child: Center(
-                          child: TMaker(
-                              text: "",
-                              fontSize: 15,
-                              fontWeight: FontWeight.w500,
-                              color: Colors.black)),
-                    )),
-                    Expanded(
-                        child: CMaker(
-                      height: 30,
-                      border: const Border(
-                          right: BorderSide(width: .5),
-                          bottom: BorderSide(width: .5)),
-                      color: const Color.fromARGB(255, 255, 255, 255),
-                      child: Center(
-                          child: TMaker(
-                              text: "",
-                              fontSize: 15,
-                              fontWeight: FontWeight.w500,
-                              color: Colors.black)),
-                    )),
-                    Expanded(
-                        child: CMaker(
-                      height: 30,
-                      border: const Border(
-                          right: BorderSide(width: .5),
-                          bottom: BorderSide(width: .5)),
-                      color: const Color.fromARGB(255, 255, 255, 255),
-                      child: Center(
-                          child: TMaker(
-                              text: "",
-                              fontSize: 15,
-                              fontWeight: FontWeight.w500,
-                              color: Colors.black)),
-                    )),
-                    Expanded(
-                        child: CMaker(
-                      height: 30,
-                      border: const Border(
-                          right: BorderSide(width: .5),
-                          bottom: BorderSide(width: .5)),
-                      color: const Color.fromARGB(255, 255, 255, 255),
-                      child: Center(
-                          child: TMaker(
-                              text: "",
-                              fontSize: 15,
-                              fontWeight: FontWeight.w500,
-                              color: Colors.black)),
-                    )),
-                    Expanded(
-                        child: CMaker(
-                      height: 30,
-                      border: const Border(
-                          right: BorderSide(width: 2),
-                          bottom: BorderSide(width: .5)),
-                      color: const Color.fromARGB(255, 255, 255, 255),
-                      child: Center(
-                          child: TMaker(
-                              text: "",
-                              fontSize: 15,
-                              fontWeight: FontWeight.w500,
-                              color: Colors.black)),
-                    )),
-                  ],
-                ),
-              ],
+                      Expanded(
+                          child: CMaker(
+                        height: 30,
+                        border: const Border(
+                            right: BorderSide(width: .5),
+                            bottom: BorderSide(width: .5)),
+                        color: const Color.fromARGB(255, 32, 186, 158),
+                        child: Center(
+                            child: TMaker(
+                                text: "",
+                                fontSize: 15,
+                                fontWeight: FontWeight.w500,
+                                color: Colors.white)),
+                      )),
+                      Expanded(
+                          child: CMaker(
+                        height: 30,
+                        border: const Border(
+                            right: BorderSide(width: .5),
+                            bottom: BorderSide(width: .5)),
+                        color: const Color.fromARGB(255, 32, 186, 158),
+                        child: Center(
+                            child: TMaker(
+                                text: "",
+                                fontSize: 15,
+                                fontWeight: FontWeight.w500,
+                                color: Colors.white)),
+                      )),
+                      Expanded(
+                          child: CMaker(
+                        height: 30,
+                        border: const Border(
+                            right: BorderSide(width: .5),
+                            bottom: BorderSide(width: .5)),
+                        color: const Color.fromARGB(255, 32, 186, 158),
+                        child: Center(
+                            child: TMaker(
+                                text: "",
+                                fontSize: 15,
+                                fontWeight: FontWeight.w500,
+                                color: Colors.white)),
+                      )),
+                      Expanded(
+                          child: CMaker(
+                        height: 30,
+                        border: const Border(
+                            right: BorderSide(width: .5),
+                            bottom: BorderSide(width: .5)),
+                        color: const Color.fromARGB(255, 32, 186, 158),
+                        child: Center(
+                            child: TMaker(
+                                text: "",
+                                fontSize: 15,
+                                fontWeight: FontWeight.w500,
+                                color: Colors.white)),
+                      )),
+                      Expanded(
+                          child: Container(
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.only(topRight: Radius.circular(10)),
+                              border:  const Border(
+                            bottom: BorderSide(width: .5)),
+                        color: const Color.fromARGB(255, 32, 186, 158),
+                            ),
+                        height: 30,
+                        child: Container()
+                      )),
+                    ],
+                  ),
+                  Row(
+                    children: [
+                      Expanded(
+                          child: CMaker(
+                        height: 30,
+                        border: const Border(
+                            right: BorderSide(width: .5),
+                            bottom: BorderSide(width: .5)),
+                        color: const Color.fromARGB(255, 32, 186, 158),
+                        child: Center(
+                            child: TMaker(
+                                text: "الأحد",
+                                fontSize: 15,
+                                fontWeight: FontWeight.w500,
+                                color: const Color.fromARGB(255, 255, 255, 255))),
+                      )),
+                      Expanded(
+                          child: CMaker(
+                        height: 30,
+                        border: const Border(
+                            right: BorderSide(width: .5),
+                            bottom: BorderSide(width: .5)),
+                        color: const Color.fromARGB(255, 255, 255, 255),
+                        child: Center(
+                            child: TMaker(
+                                text: "",
+                                fontSize: 15,
+                                fontWeight: FontWeight.w500,
+                                color: Colors.black)),
+                      )),
+                      Expanded(
+                          child: CMaker(
+                        height: 30,
+                        border: const Border(
+                            right: BorderSide(width: .5),
+                            bottom: BorderSide(width: .5)),
+                        color: const Color.fromARGB(255, 255, 255, 255),
+                        child: Center(
+                            child: TMaker(
+                                text: "",
+                                fontSize: 15,
+                                fontWeight: FontWeight.w500,
+                                color: Colors.black)),
+                      )),
+                      Expanded(
+                          child: CMaker(
+                        height: 30,
+                        border: const Border(
+                            right: BorderSide(width: .5),
+                            bottom: BorderSide(width: .5)),
+                        color: const Color.fromARGB(255, 255, 255, 255),
+                        child: Center(
+                            child: TMaker(
+                                text: "",
+                                fontSize: 15,
+                                fontWeight: FontWeight.w500,
+                                color: Colors.black)),
+                      )),
+                      Expanded(
+                          child: CMaker(
+                        height: 30,
+                        border: const Border(
+                            right: BorderSide(width: .5),
+                            bottom: BorderSide(width: .5)),
+                        color: const Color.fromARGB(255, 255, 255, 255),
+                        child: Center(
+                            child: TMaker(
+                                text: "",
+                                fontSize: 15,
+                                fontWeight: FontWeight.w500,
+                                color: Colors.black)),
+                      )),
+                      Expanded(
+                          child: CMaker(
+                        height: 30,
+                        border: const Border(
+                            bottom: BorderSide(width: .5)),
+                        color: const Color.fromARGB(255, 255, 255, 255),
+                        child: Center(
+                            child: TMaker(
+                                text: "",
+                                fontSize: 15,
+                                fontWeight: FontWeight.w500,
+                                color: Colors.black)),
+                      )),
+                    ],
+                  ),
+                  Row(
+                    children: [
+                      Expanded(
+                          child: CMaker(
+                        height: 30,
+                        border: const Border(
+                            right: BorderSide(width: .5),
+                            bottom: BorderSide(width: .5)),
+                        color: const Color.fromARGB(255, 32, 186, 158),
+                        child: Center(
+                            child: TMaker(
+                                text: "الأثنين",
+                                fontSize: 15,
+                                fontWeight: FontWeight.w500,
+                                color: const Color.fromARGB(255, 255, 255, 255))),
+                      )),
+                      Expanded(
+                          child: CMaker(
+                        height: 30,
+                        border: const Border(
+                            right: BorderSide(width: .5),
+                            bottom: BorderSide(width: .5)),
+                        color: const Color.fromARGB(255, 255, 255, 255),
+                        child: Center(
+                            child: TMaker(
+                                text: "",
+                                fontSize: 15,
+                                fontWeight: FontWeight.w500,
+                                color: Colors.black)),
+                      )),
+                      Expanded(
+                          child: CMaker(
+                        height: 30,
+                        border: const Border(
+                            right: BorderSide(width: .5),
+                            bottom: BorderSide(width: .5)),
+                        color: const Color.fromARGB(255, 255, 255, 255),
+                        child: Center(
+                            child: TMaker(
+                                text: "",
+                                fontSize: 15,
+                                fontWeight: FontWeight.w500,
+                                color: Colors.black)),
+                      )),
+                      Expanded(
+                          child: CMaker(
+                        height: 30,
+                        border: const Border(
+                            right: BorderSide(width: .5),
+                            bottom: BorderSide(width: .5)),
+                        color: const Color.fromARGB(255, 255, 255, 255),
+                        child: Center(
+                            child: TMaker(
+                                text: "",
+                                fontSize: 15,
+                                fontWeight: FontWeight.w500,
+                                color: Colors.black)),
+                      )),
+                      Expanded(
+                          child: CMaker(
+                        height: 30,
+                        border: const Border(
+                            right: BorderSide(width: .5),
+                            bottom: BorderSide(width: .5)),
+                        color: const Color.fromARGB(255, 255, 255, 255),
+                        child: Center(
+                            child: TMaker(
+                                text: "",
+                                fontSize: 15,
+                                fontWeight: FontWeight.w500,
+                                color: Colors.black)),
+                      )),
+                      Expanded(
+                          child: CMaker(
+                        height: 30,
+                        border: const Border(
+                            bottom: BorderSide(width: .5)),
+                        color: const Color.fromARGB(255, 255, 255, 255),
+                        child: Center(
+                            child: TMaker(
+                                text: "",
+                                fontSize: 15,
+                                fontWeight: FontWeight.w500,
+                                color: Colors.black)),
+                      )),
+                    ],
+                  ),
+                  Row(
+                    children: [
+                      Expanded(
+                          child: CMaker(
+                        height: 30,
+                        border: const Border(
+                            right: BorderSide(width: .5),
+                            bottom: BorderSide(width: .5)),
+                        color: const Color.fromARGB(255, 32, 186, 158),
+                        child: Center(
+                            child: TMaker(
+                                text: "الثلاثاء",
+                                fontSize: 15,
+                                fontWeight: FontWeight.w500,
+                                color: const Color.fromARGB(255, 255, 255, 255))),
+                      )),
+                      Expanded(
+                          child: CMaker(
+                        height: 30,
+                        border: const Border(
+                            right: BorderSide(width: .5),
+                            bottom: BorderSide(width: .5)),
+                        color: const Color.fromARGB(255, 255, 255, 255),
+                        child: Center(
+                            child: TMaker(
+                                text: "",
+                                fontSize: 15,
+                                fontWeight: FontWeight.w500,
+                                color: Colors.black)),
+                      )),
+                      Expanded(
+                          child: CMaker(
+                        height: 30,
+                        border: const Border(
+                            right: BorderSide(width: .5),
+                            bottom: BorderSide(width: .5)),
+                        color: const Color.fromARGB(255, 255, 255, 255),
+                        child: Center(
+                            child: TMaker(
+                                text: "",
+                                fontSize: 15,
+                                fontWeight: FontWeight.w500,
+                                color: Colors.black)),
+                      )),
+                      Expanded(
+                          child: CMaker(
+                        height: 30,
+                        border: const Border(
+                            right: BorderSide(width: .5),
+                            bottom: BorderSide(width: .5)),
+                        color: const Color.fromARGB(255, 255, 255, 255),
+                        child: Center(
+                            child: TMaker(
+                                text: "",
+                                fontSize: 15,
+                                fontWeight: FontWeight.w500,
+                                color: Colors.black)),
+                      )),
+                      Expanded(
+                          child: CMaker(
+                        height: 30,
+                        border: const Border(
+                            right: BorderSide(width: .5),
+                            bottom: BorderSide(width: .5)),
+                        color: const Color.fromARGB(255, 255, 255, 255),
+                        child: Center(
+                            child: TMaker(
+                                text: "",
+                                fontSize: 15,
+                                fontWeight: FontWeight.w500,
+                                color: Colors.black)),
+                      )),
+                      Expanded(
+                          child: CMaker(
+                        height: 30,
+                        border: const Border(
+                            bottom: BorderSide(width: .5)),
+                        color: const Color.fromARGB(255, 255, 255, 255),
+                        child: Center(
+                            child: TMaker(
+                                text: "",
+                                fontSize: 15,
+                                fontWeight: FontWeight.w500,
+                                color: Colors.black)),
+                      )),
+                    ],
+                  ),
+                  Row(
+                    children: [
+                      Expanded(
+                          child: CMaker(
+                        height: 30,
+                        border: const Border(
+                            right: BorderSide(width: .5),
+                            bottom: BorderSide(width: .5)),
+                        color: const Color.fromARGB(255, 32, 186, 158),
+                        child: Center(
+                            child: TMaker(
+                                text: "الأربعاء",
+                                fontSize: 15,
+                                fontWeight: FontWeight.w500,
+                                color: const Color.fromARGB(255, 255, 255, 255))),
+                      )),
+                      Expanded(
+                          child: CMaker(
+                        height: 30,
+                        border: const Border(
+                            right: BorderSide(width: .5),
+                            bottom: BorderSide(width: .5)),
+                        color: const Color.fromARGB(255, 255, 255, 255),
+                        child: Center(
+                            child: TMaker(
+                                text: "",
+                                fontSize: 15,
+                                fontWeight: FontWeight.w500,
+                                color: Colors.black)),
+                      )),
+                      Expanded(
+                          child: CMaker(
+                        height: 30,
+                        border: const Border(
+                            right: BorderSide(width: .5),
+                            bottom: BorderSide(width: .5)),
+                        color: const Color.fromARGB(255, 255, 255, 255),
+                        child: Center(
+                            child: TMaker(
+                                text: "",
+                                fontSize: 15,
+                                fontWeight: FontWeight.w500,
+                                color: Colors.black)),
+                      )),
+                      Expanded(
+                          child: CMaker(
+                        height: 30,
+                        border: const Border(
+                            right: BorderSide(width: .5),
+                            bottom: BorderSide(width: .5)),
+                        color: const Color.fromARGB(255, 255, 255, 255),
+                        child: Center(
+                            child: TMaker(
+                                text: "",
+                                fontSize: 15,
+                                fontWeight: FontWeight.w500,
+                                color: Colors.black)),
+                      )),
+                      Expanded(
+                          child: CMaker(
+                        height: 30,
+                        border: const Border(
+                            right: BorderSide(width: .5),
+                            bottom: BorderSide(width: .5)),
+                        color: const Color.fromARGB(255, 255, 255, 255),
+                        child: Center(
+                            child: TMaker(
+                                text: "",
+                                fontSize: 15,
+                                fontWeight: FontWeight.w500,
+                                color: Colors.black)),
+                      )),
+                      Expanded(
+                          child: CMaker(
+                        height: 30,
+                        border: const Border(
+                            bottom: BorderSide(width: .5)),
+                        color: const Color.fromARGB(255, 255, 255, 255),
+                        child: Center(
+                            child: TMaker(
+                                text: "",
+                                fontSize: 15,
+                                fontWeight: FontWeight.w500,
+                                color: Colors.black)),
+                      )),
+                    ],
+                  ),
+                  Row(
+                    children: [
+                      Expanded(
+                          child: CMaker(
+                        height: 30,
+                        border: const Border(
+                            right: BorderSide(width: .5),
+                            bottom: BorderSide(width: .5)),
+                        color: const Color.fromARGB(255, 32, 186, 158),
+                        child: Center(
+                            child: TMaker(
+                                text: "الخميس",
+                                fontSize: 15,
+                                fontWeight: FontWeight.w500,
+                                color: const Color.fromARGB(255, 255, 255, 255))),
+                      )),
+                      Expanded(
+                          child: CMaker(
+                        height: 30,
+                        border: const Border(
+                            right: BorderSide(width: .5),
+                            bottom: BorderSide(width: .5)),
+                        color: const Color.fromARGB(255, 255, 255, 255),
+                        child: Center(
+                            child: TMaker(
+                                text: "",
+                                fontSize: 15,
+                                fontWeight: FontWeight.w500,
+                                color: Colors.black)),
+                      )),
+                      Expanded(
+                          child: CMaker(
+                        height: 30,
+                        border: const Border(
+                            right: BorderSide(width: .5),
+                            bottom: BorderSide(width: .5)),
+                        color: const Color.fromARGB(255, 255, 255, 255),
+                        child: Center(
+                            child: TMaker(
+                                text: "",
+                                fontSize: 15,
+                                fontWeight: FontWeight.w500,
+                                color: Colors.black)),
+                      )),
+                      Expanded(
+                          child: CMaker(
+                        height: 30,
+                        border: const Border(
+                            right: BorderSide(width: .5),
+                            bottom: BorderSide(width: .5)),
+                        color: const Color.fromARGB(255, 255, 255, 255),
+                        child: Center(
+                            child: TMaker(
+                                text: "",
+                                fontSize: 15,
+                                fontWeight: FontWeight.w500,
+                                color: Colors.black)),
+                      )),
+                      Expanded(
+                          child: CMaker(
+                        height: 30,
+                        border: const Border(
+                            right: BorderSide(width: .5),
+                            bottom: BorderSide(width: .5)),
+                        color: const Color.fromARGB(255, 255, 255, 255),
+                        child: Center(
+                            child: TMaker(
+                                text: "",
+                                fontSize: 15,
+                                fontWeight: FontWeight.w500,
+                                color: Colors.black)),
+                      )),
+                      Expanded(
+                          child: CMaker(
+                        height: 30,
+                        border: const Border(
+                            bottom: BorderSide(width: .5)),
+                        color: const Color.fromARGB(255, 255, 255, 255),
+                        child: Center(
+                            child: TMaker(
+                                text: "",
+                                fontSize: 15,
+                                fontWeight: FontWeight.w500,
+                                color: Colors.black)),
+                      )),
+                    ],
+                  ),
+                  Row(
+                    children: [
+                      Expanded(
+                          child: Container(
+                        height: 30,
+                        decoration: BoxDecoration(
+                              borderRadius: BorderRadius.only(bottomLeft: Radius.circular(10)),
+                              border:  const Border(
+                            right: BorderSide(width: .5),),
+                        color: const Color.fromARGB(255, 32, 186, 158),
+                            ),
+                        child: Center(
+                            child: TMaker(
+                                text: "الجمعة",
+                                fontSize: 15,
+                                fontWeight: FontWeight.w500,
+                                color: const Color.fromARGB(255, 255, 255, 255))),
+                      )),
+                      Expanded(
+                          child: CMaker(
+                        height: 30,
+                        border: const Border(
+                            right: BorderSide(width: .5),
+                            ),
+                        color: const Color.fromARGB(255, 255, 255, 255),
+                        child: Center(
+                            child: TMaker(
+                                text: "",
+                                fontSize: 15,
+                                fontWeight: FontWeight.w500,
+                                color: Colors.black)),
+                      )),
+                      Expanded(
+                          child: CMaker(
+                        height: 30,
+                        border: const Border(
+                            right: BorderSide(width: .5),
+                            ),
+                        color: const Color.fromARGB(255, 255, 255, 255),
+                        child: Center(
+                            child: TMaker(
+                                text: "",
+                                fontSize: 15,
+                                fontWeight: FontWeight.w500,
+                                color: Colors.black)),
+                      )),
+                      Expanded(
+                          child: CMaker(
+                        height: 30,
+                        border: const Border(
+                            right: BorderSide(width: .5),
+                            ),
+                        color: const Color.fromARGB(255, 255, 255, 255),
+                        child: Center(
+                            child: TMaker(
+                                text: "",
+                                fontSize: 15,
+                                fontWeight: FontWeight.w500,
+                                color: Colors.black)),
+                      )),
+                      Expanded(
+                          child: CMaker(
+                        height: 30,
+                        border: const Border(
+                            right: BorderSide(width: .5),
+                            ),
+                        color: const Color.fromARGB(255, 255, 255, 255),
+                        child: Center(
+                            child: TMaker(
+                                text: "",
+                                fontSize: 15,
+                                fontWeight: FontWeight.w500,
+                                color: Colors.black)),
+                      )),
+                      Expanded(
+                          child: Container(
+                        height: 30,
+                        decoration: BoxDecoration(
+                              borderRadius: BorderRadius.only(bottomRight: Radius.circular(10)),
+                        color: Color.fromARGB(255, 255, 255, 255),
+                            ),
+                        child: Center(
+                            child: TMaker(
+                                text: "",
+                                fontSize: 15,
+                                fontWeight: FontWeight.w500,
+                                color: Colors.black)),
+                      )),
+                    ],
+                  ),
+                ],
+              ),
             ),
             CMaker(
               alignment: Alignment.center,
@@ -799,7 +819,14 @@ class _ThirdPageState extends State<ThirdPage> {
               margin: const EdgeInsets.only(top: 30, bottom: 15, left: 15, right: 15),
               width: double.infinity,
               height: (PageHeight(context) - 430),
-              color: const Color.fromARGB(255, 6, 122, 153),
+              boxShadow: const [
+                              BoxShadow(
+                                  offset: Offset(1, 1),
+                                  blurRadius: 6,
+                                  spreadRadius: .03,
+                                  color: Color.fromARGB(82, 0, 0, 0)),
+                            ],
+              color: Color.fromARGB(255, 255, 255, 255),
               child: Column(
                 children: [
                   CMaker(
@@ -809,7 +836,7 @@ class _ThirdPageState extends State<ThirdPage> {
                           circularRadius: 20,
                           height: 25,
                           width: 80,
-                          color: Colors.white,
+                          color: Color.fromARGB(255, 233, 255, 247),
                           margin:
                               const EdgeInsets.only(top: 20, bottom: 15, right: 10),
                           alignment: Alignment.center,
@@ -825,7 +852,14 @@ class _ThirdPageState extends State<ThirdPage> {
                         itemBuilder: (context, index) {
                           return CMaker(
                               circularRadius: 10,
-                              color: const Color.fromARGB(255, 255, 255, 255),
+                              boxShadow: const [
+                              BoxShadow(
+                                  offset: Offset(1, 1),
+                                  blurRadius: 6,
+                                  spreadRadius: .03,
+                                  color: Color.fromARGB(82, 0, 0, 0)),
+                            ],
+                              color: const Color.fromARGB(255, 233, 255, 247),
                               margin: const EdgeInsets.only(
                                   left: 20, right: 20, bottom: 30),
                               width: double.infinity,
@@ -878,14 +912,14 @@ class _ThirdPageState extends State<ThirdPage> {
                                               left: 7, bottom: 2),
                                           alignment: Alignment.center,
                                           color:
-                                              const Color.fromARGB(255, 6, 122, 153),
+                                              Color.fromARGB(255, 32, 186, 158),
                                           circularRadius: 10,
                                           height: 30,
                                           width: 60,
                                           child: TMaker(
                                               text: "تصفح",
-                                              fontSize: 13,
-                                              fontWeight: FontWeight.w500,
+                                              fontSize: 15,
+                                              fontWeight: FontWeight.w700,
                                               color: const Color.fromARGB(
                                                   255, 255, 255, 255)),
                                         ),

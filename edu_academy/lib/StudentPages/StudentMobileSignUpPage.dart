@@ -1,9 +1,11 @@
 import 'package:edu_academy/MyTools.dart';
 import 'package:edu_academy/service/Databse_Service.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:overlay_loading_progress/overlay_loading_progress.dart';
 import 'package:panara_dialogs/panara_dialogs.dart';
+import 'package:time_picker_spinner_pop_up/time_picker_spinner_pop_up.dart';
 
 class StudentMobileSignUpPage extends StatefulWidget {
   const StudentMobileSignUpPage({super.key});
@@ -29,6 +31,7 @@ String StudentDateOfBirth = "";
 int StudentAge = 6;
 var now = DateTime.now();
 GlobalKey<FormState> key = GlobalKey();
+var forDateInput = DateTime.now().subtract(const Duration(days: 1926));
 
 class _StudentMobileSignUpPageState extends State<StudentMobileSignUpPage> {
   String StudentDemoPassword = "";
@@ -471,112 +474,24 @@ class _StudentMobileSignUpPageState extends State<StudentMobileSignUpPage> {
                     Row(
                       children: [
                         Expanded(child: Container()),
-                        Expanded(
-                            flex: 5,
-                            child: Container(
-                              child: TextFormField(
-                                initialValue: StudentDayOfBirth,
-
-                                  onSaved: (newValue) {
-                                    StudentDayOfBirth = newValue!;
-                                  },
-                                  validator: (value) {
-                                    if (value!.isEmpty) {
-                                      return "الحقل فارغ";
-                                    }
-                                    if (int.tryParse(value) == null) {
-                                      return "ادخل رقم";
-                                    }
-                                    if (int.parse(value) <= 0 ||
-                                        int.parse(value) > 30) {
-                                      return "1 to 30 only";
-                                    }
-                                    return null;
-                                  },
-                                  style: const TextStyle(fontSize: 16),
-                                  onChanged: (value) {
-                                    StudentDayOfBirth = value;
-                                    StudentDateOfBirth =
-                                        "$StudentDayOfBirth/$StudentMonthOfBirth/$StudentYearOfBirth";
-                                  },
-                                  decoration: const InputDecoration(
-                                      label: Text(
-                                    "Day",
-                                    style: TextStyle(fontSize: 12),
-                                  ))),
-                            )),
-                        const Text(
-                          "  /  ",
-                          style: TextStyle(fontSize: 30),
-                        ),
-                        Expanded(
-                            flex: 5,
-                            child: Container(
-                              child: TextFormField(
-                              initialValue: StudentMonthOfBirth,
-                                onSaved: (newValue) {
-                                  StudentMonthOfBirth = newValue!;
-                                },
-                                validator: (value) {
-                                  if (value!.isEmpty) {
-                                    return "الحقل فارغ";
-                                  }
-                                  if (int.tryParse(value) == null) {
-                                    return "ادخل رقم";
-                                  }
-                                  if (int.parse(value) <= 0 ||
-                                      int.parse(value) > 12) {
-                                    return "1 to 12 only";
-                                  }
-                                  return null;
-                                },
-                                style: const TextStyle(fontSize: 16),
-                                onChanged: (value) {
-                                  StudentMonthOfBirth = value;
-                                  StudentDateOfBirth =
-                                      "$StudentDayOfBirth/$StudentMonthOfBirth/$StudentYearOfBirth";
-                                },
-                                decoration: const InputDecoration(
-                                    label: Text("Month",
-                                        style: TextStyle(fontSize: 12))),
-                              ),
-                            )),
-                        const Text(
-                          "  /  ",
-                          style: TextStyle(fontSize: 30),
-                        ),
-                        Expanded(
-                          flex: 5,
-                          child: Container(
-                            child: TextFormField(
-                              initialValue: StudentYearOfBirth,
-                              onSaved: (newValue) {
-                                StudentYearOfBirth = newValue!;
-                              },
-                              validator: (value) {
-                                if (value!.isEmpty) {
-                                  return "الحقل فارغ";
-                                }
-                                if (int.tryParse(value) == null) {
-                                  return "ادخل رقم";
-                                }
-                                if (int.parse(value) <= 1980 ||
-                                    int.parse(value) > now.year - 3) {
-                                  return "not allowed";
-                                }
-                                return null;
-                              },
-                              style: const TextStyle(fontSize: 16),
-                              onChanged: (value) {
-                                StudentYearOfBirth = value;
-                                StudentDateOfBirth =
-                                    "$StudentDayOfBirth/$StudentMonthOfBirth/$StudentYearOfBirth";
-                              },
-                              decoration: const InputDecoration(
-                                  label: Text("Year",
-                                      style: TextStyle(fontSize: 12))),
-                            ),
-                          ),
+                        TimePickerSpinnerPopUp(
+                          textStyle: TextStyle(fontSize: 25),
+                          iconSize: 40,
+                          minTime: DateTime.now().subtract(const Duration(days: 36525)),
+                          maxTime: DateTime.now().subtract(const Duration(days: 1824)),
+                          mode: CupertinoDatePickerMode.date,
+                          initTime: forDateInput,
+                          onChange: (dateTime) {
+                            setState(() {
+                              forDateInput=dateTime;
+                              StudentDayOfBirth = dateTime.day.toString();
+                              StudentMonthOfBirth = dateTime.month.toString();
+                              StudentYearOfBirth = dateTime.year.toString();
+                              StudentDateOfBirth =
+                                  "$StudentDayOfBirth/$StudentMonthOfBirth/$StudentYearOfBirth";
+                              print(StudentDateOfBirth);
+                            });
+                          },
                         ),
                         Expanded(child: Container()),
                       ],

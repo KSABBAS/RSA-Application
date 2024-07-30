@@ -280,8 +280,20 @@ class _GradesPageState extends State<GradesPage> {
             CMaker(
                 width: double.infinity,
                 alignment: Alignment.centerLeft,
-                child:
-                    TextButton(onPressed: () {}, child: Text("All messages"))),
+                child: TextButton(
+                    onPressed: () {
+                      showDialog(
+                        context: context,
+                        builder: (context) {
+                          return Container(
+                            height: 200,
+                            width: 200,
+                            color: Colors.amber,
+                          );
+                        },
+                      );
+                    },
+                    child: Text("All messages"))),
             CMaker(
                 padding: EdgeInsets.all(20),
                 alignment: Alignment.topLeft,
@@ -468,6 +480,7 @@ class _GradesPageState extends State<GradesPage> {
                     Expanded(child: Container()),
                   ],
                 )),
+            Padding(padding: EdgeInsets.only(top: 20)),
           ],
         ),
       );
@@ -512,7 +525,8 @@ class _GradesPageState extends State<GradesPage> {
                                       Padding(
                                           padding: EdgeInsets.only(left: 20)),
                                       TMaker(
-                                          text: "${widget.ListOfGrades[index][0]} - $SubjectThatIsSelected",
+                                          text:
+                                              "${widget.ListOfGrades[index][0]} - $SubjectThatIsSelected",
                                           fontSize: 25,
                                           fontWeight: FontWeight.w600,
                                           color: const Color.fromARGB(

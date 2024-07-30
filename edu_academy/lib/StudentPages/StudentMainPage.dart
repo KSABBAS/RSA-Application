@@ -21,8 +21,8 @@ int PageIndex = 0;
 
 String name = '';
 String grade = "";
-class _StudentMainPageState extends State<StudentMainPage> {
 
+class _StudentMainPageState extends State<StudentMainPage> {
   @override
   void initState() {
     super.initState();
@@ -64,59 +64,59 @@ class _StudentMainPageState extends State<StudentMainPage> {
               child: Row(
                 children: [
                   Container(
-                          width: 70,
-                          height: 50,
-                          padding: const EdgeInsets.only(top: 10),
-                          alignment: Alignment.center,
-                          child: InkWell(
-                              onTap: () {
-                                setState(() {
-                                  PageIndex = 0;
-                                });
-                              },
-                              child: Image.asset("images/Book.png"))),
+                      width: 70,
+                      height: 50,
+                      padding: const EdgeInsets.only(top: 10),
+                      alignment: Alignment.center,
+                      child: InkWell(
+                          onTap: () {
+                            setState(() {
+                              PageIndex = 0;
+                            });
+                          },
+                          child: Image.asset("images/Book.png"))),
                   Expanded(
                     child: Row(
                       children: [
                         Expanded(
                           child: CMaker(
-                                alignment: Alignment.bottomCenter,
-                                child: Text(
-                                  name,
-                                  style: const TextStyle(
-                                      fontSize: 17,
-                                      fontWeight: FontWeight.w500,
-                                      color: Color.fromARGB(255, 5, 123, 151)),
-                                ),
-                              ),
+                            alignment: Alignment.bottomCenter,
+                            child: Text(
+                              name,
+                              style: const TextStyle(
+                                  fontSize: 17,
+                                  fontWeight: FontWeight.w500,
+                                  color: Color.fromARGB(255, 5, 123, 151)),
+                            ),
+                          ),
                         ),
                         Expanded(
                           child: CMaker(
-                                alignment: Alignment.bottomCenter,
-                                child: Text(
-                                  grade,
-                                  style: const TextStyle(
-                                      fontSize: 16,
-                                      fontWeight: FontWeight.w500,
-                                      color: Color.fromARGB(255, 89, 89, 87)),
-                                ),
-                              ),
+                            alignment: Alignment.bottomCenter,
+                            child: Text(
+                              grade,
+                              style: const TextStyle(
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.w500,
+                                  color: Color.fromARGB(255, 89, 89, 87)),
+                            ),
+                          ),
                         ),
                       ],
                     ),
                   ),
                   InkWell(
-                        onTap: () {},
-                        child: Container(
-                          width: 70,
-                          padding: const EdgeInsets.only(top: 10),
-                          decoration: BoxDecoration(
-                              color: const Color.fromARGB(255, 255, 255, 255),
-                              borderRadius: BorderRadius.circular(10)),
-                          height: 50,
-                          child: const Icon(Icons.notifications),
-                        ),
-                      ),
+                    onTap: () {},
+                    child: Container(
+                      width: 70,
+                      padding: const EdgeInsets.only(top: 10),
+                      decoration: BoxDecoration(
+                          color: const Color.fromARGB(255, 255, 255, 255),
+                          borderRadius: BorderRadius.circular(10)),
+                      height: 50,
+                      child: const Icon(Icons.notifications),
+                    ),
+                  ),
                 ],
               ),
             ),
@@ -127,8 +127,14 @@ class _StudentMainPageState extends State<StudentMainPage> {
                     child: Column(
                       children: [
                         CMaker(
-                            circularRadius: 16,
-                            border: Border.all(width: 1),
+                          boxShadow: const [
+                              BoxShadow(
+                                  offset: Offset(1, 1),
+                                  blurRadius: 6,
+                                  spreadRadius: .03,
+                                  color: Color.fromARGB(82, 0, 0, 0)),
+                            ],
+                            circularRadius: 15,
                             child: Column(
                               children: [
                                 Row(
@@ -139,7 +145,7 @@ class _StudentMainPageState extends State<StudentMainPage> {
                                           borderRadius: BorderRadius.only(
                                               topLeft: Radius.circular(15)),
                                           color:
-                                              Color.fromARGB(255, 6, 122, 153)),
+                                              Color.fromARGB(255, 32, 186, 158)),
                                       height: 80,
                                       child: TMaker(
                                           text: "",
@@ -151,8 +157,7 @@ class _StudentMainPageState extends State<StudentMainPage> {
                                         child: CMaker(
                                       alignment: Alignment.center,
                                       height: 80,
-                                      color: const Color.fromARGB(
-                                          255, 6, 122, 153),
+                                      color: const Color.fromARGB(255, 32, 186, 158),
                                       child: TMaker(
                                           text: "00:00\nto\n00:00",
                                           fontSize: 13,
@@ -163,8 +168,7 @@ class _StudentMainPageState extends State<StudentMainPage> {
                                         child: CMaker(
                                       alignment: Alignment.center,
                                       height: 80,
-                                      color: const Color.fromARGB(
-                                          255, 6, 122, 153),
+                                      color: const Color.fromARGB(255, 32, 186, 158),
                                       child: TMaker(
                                           text: "00:00\nto\n00:00",
                                           fontSize: 13,
@@ -175,8 +179,7 @@ class _StudentMainPageState extends State<StudentMainPage> {
                                         child: CMaker(
                                       alignment: Alignment.center,
                                       height: 80,
-                                      color: const Color.fromARGB(
-                                          255, 6, 122, 153),
+                                      color: const Color.fromARGB(255, 32, 186, 158),
                                       child: TMaker(
                                           text: "00:00\nto\n00:00",
                                           fontSize: 13,
@@ -187,8 +190,7 @@ class _StudentMainPageState extends State<StudentMainPage> {
                                         child: CMaker(
                                       alignment: Alignment.center,
                                       height: 80,
-                                      color: const Color.fromARGB(
-                                          255, 6, 122, 153),
+                                      color: const Color.fromARGB(255, 32, 186, 158),
                                       child: TMaker(
                                           text: "00:00\nto\n00:00",
                                           fontSize: 13,
@@ -202,7 +204,7 @@ class _StudentMainPageState extends State<StudentMainPage> {
                                           borderRadius: BorderRadius.only(
                                               topRight: Radius.circular(15)),
                                           color:
-                                              Color.fromARGB(255, 6, 122, 153)),
+                                              Color.fromARGB(255, 32, 186, 158)),
                                       height: 80,
                                       child: TMaker(
                                           text: "00:00\nto\n00:00",
@@ -227,8 +229,7 @@ class _StudentMainPageState extends State<StudentMainPage> {
                                           text: "Day",
                                           fontSize: 13,
                                           fontWeight: FontWeight.w600,
-                                          color: const Color.fromARGB(
-                                              255, 6, 122, 153)),
+                                          color: const Color.fromARGB(255, 32, 186, 158)),
                                     )),
                                     Expanded(
                                         child: CMaker(
@@ -240,8 +241,7 @@ class _StudentMainPageState extends State<StudentMainPage> {
                                         text: "Math",
                                         fontSize: 13,
                                         fontWeight: FontWeight.w600,
-                                        color: const Color.fromARGB(
-                                            255, 6, 122, 153),
+                                        color: const Color.fromARGB(255, 123, 123, 123),
                                       ),
                                     )),
                                     Expanded(
@@ -254,8 +254,7 @@ class _StudentMainPageState extends State<StudentMainPage> {
                                         text: "Math",
                                         fontSize: 13,
                                         fontWeight: FontWeight.w600,
-                                        color: const Color.fromARGB(
-                                            255, 6, 122, 153),
+                                        color: const Color.fromARGB(255, 123, 123, 123),
                                       ),
                                     )),
                                     Expanded(
@@ -268,8 +267,7 @@ class _StudentMainPageState extends State<StudentMainPage> {
                                         text: "Math",
                                         fontSize: 13,
                                         fontWeight: FontWeight.w600,
-                                        color: const Color.fromARGB(
-                                            255, 6, 122, 153),
+                                        color: const Color.fromARGB(255, 123, 123, 123),
                                       ),
                                     )),
                                     Expanded(
@@ -282,8 +280,7 @@ class _StudentMainPageState extends State<StudentMainPage> {
                                         text: "Math",
                                         fontSize: 13,
                                         fontWeight: FontWeight.w600,
-                                        color: const Color.fromARGB(
-                                            255, 6, 122, 153),
+                                        color: const Color.fromARGB(255, 123, 123, 123),
                                       ),
                                     )),
                                     Expanded(
@@ -299,15 +296,14 @@ class _StudentMainPageState extends State<StudentMainPage> {
                                         text: "Math",
                                         fontSize: 13,
                                         fontWeight: FontWeight.w600,
-                                        color: const Color.fromARGB(
-                                            255, 6, 122, 153),
+                                        color: const Color.fromARGB(255, 123, 123, 123),
                                       ),
                                     )),
                                   ],
                                 ),
                               ],
                             )),
-                        const Padding(padding: EdgeInsets.only(top: 30)),
+                        const Padding(padding: EdgeInsets.only(top: 20)),
                         CMaker(
                             color: Colors.white,
                             boxShadow: const [
@@ -358,21 +354,90 @@ class _StudentMainPageState extends State<StudentMainPage> {
                                 ),
                                 Expanded(
                                     child: CMaker(
+                                        width: double.infinity,
                                         alignment: Alignment.center,
-                                        child: MaterialButton(
-                                          height: 40,
-                                          color: const Color.fromARGB(
-                                              255, 19, 184, 230),
-                                          onPressed: () {},
-                                          child: TMaker(
-                                              text: "Join",
-                                              fontSize: 20,
-                                              fontWeight: FontWeight.w600,
-                                              color: Colors.white),
+                                        child: InkWell(
+                                          onTap: () {
+                                            
+                                          },
+                                          child: CMaker(
+                                            alignment: Alignment.center,
+                                            circularRadius: 13,
+                                            height: 40,
+                                            width: 80,
+                                            padding: EdgeInsets.symmetric(horizontal: 15),
+                                            color: const Color.fromARGB(255, 32, 186, 158),
+                                            child: TMaker(
+                                                text: "Join",
+                                                fontSize: 20,
+                                                fontWeight: FontWeight.w600,
+                                                color: Colors.white),
+                                          ),
                                         )))
                               ],
                             )),
-                        Expanded(child: CMaker(child: Container()))
+                        const Padding(padding: EdgeInsets.only(top: 30)),
+                        CMaker(
+                            alignment: Alignment.center,
+                            width: double.infinity,
+                            child: CMaker(
+                                circularRadius: 10,
+                                margin: EdgeInsets.symmetric(horizontal: 40),
+                                alignment: Alignment.center,
+                                color: Color.fromARGB(255, 32, 186, 158),
+                                height: 40,
+                                child: TMaker(
+                                    text: "Notes form teachers",
+                                    fontSize: 20,
+                                    fontWeight: FontWeight.w700,
+                                    color: Color.fromARGB(255, 255, 255, 255)))),
+                        const Padding(padding: EdgeInsets.only(top: 10)),
+                        Expanded(
+                            child: CMaker(
+                                boxShadow: const [
+                              BoxShadow(
+                                  offset: Offset(1, 1),
+                                  blurRadius: 6,
+                                  spreadRadius: .03,
+                                  color: Color.fromARGB(82, 0, 0, 0)),
+                            ],
+                                circularRadius: 20,
+                                width: double.infinity,
+                                color: const Color.fromARGB(255, 255, 255, 255),
+                                child: ListView.builder(
+                                  itemCount: 2,
+                                  itemBuilder: (context, index) {
+                                    return CMaker(
+                                      border: Border.all(width: 1,color: const Color.fromARGB(31, 78, 78, 78)),
+                                      circularRadius: 20,
+                                      color: Color.fromARGB(255, 233, 255, 247),
+                                      padding: EdgeInsets.only(top: 15,right: 15,left: 15),
+                                      margin: EdgeInsets.only(bottom: 0,top: 20,left: 15,right: 15),
+                                      child: Column(children: [
+                                        Row(
+                                          children: [
+                                            CMaker(
+                                                circularRadius: 20,
+                                                alignment: Alignment.center,
+                                                height: 40,
+                                                padding: EdgeInsets.symmetric(horizontal: 15),
+                                                child: TMaker(
+                                                    text: "Math - Mr:Hazem",
+                                                    fontSize: 22,
+                                                    fontWeight: FontWeight.w900,
+                                                    color: Color.fromARGB(255, 135, 135, 135))),
+                                                    Expanded(child: Container()),
+                                          ],
+                                        ),
+                                                const Padding(padding: EdgeInsets.only(top: 5)),
+                                                CMaker(padding: EdgeInsets.only(left: 20),
+                                                width: double.infinity,
+                                                child: TMaker(textAlign: TextAlign.start,text: "The message", fontSize:17, fontWeight: FontWeight.w700, color:Color.fromARGB(255, 0, 0, 0))),
+                                                const Padding(padding: EdgeInsets.only(top: 25)),
+                                                ],),
+                                    );
+                                  },
+                                ))),
                       ],
                     ))),
           ],
@@ -398,59 +463,59 @@ class _StudentMainPageState extends State<StudentMainPage> {
               child: Row(
                 children: [
                   Container(
-                          width: 70,
-                          height: 50,
-                          padding: const EdgeInsets.only(top: 10),
-                          alignment: Alignment.center,
-                          child: InkWell(
-                              onTap: () {
-                                setState(() {
-                                  PageIndex = 0;
-                                });
-                              },
-                              child: Image.asset("images/Book.png"))),
+                      width: 70,
+                      height: 50,
+                      padding: const EdgeInsets.only(top: 10),
+                      alignment: Alignment.center,
+                      child: InkWell(
+                          onTap: () {
+                            setState(() {
+                              PageIndex = 0;
+                            });
+                          },
+                          child: Image.asset("images/Book.png"))),
                   Expanded(
                     child: Row(
                       children: [
                         Expanded(
                           child: CMaker(
-                                alignment: Alignment.bottomCenter,
-                                child: Text(
-                                  name,
-                                  style: const TextStyle(
-                                      fontSize: 17,
-                                      fontWeight: FontWeight.w500,
-                                      color: Color.fromARGB(255, 5, 123, 151)),
-                                ),
-                              ),
+                            alignment: Alignment.bottomCenter,
+                            child: Text(
+                              name,
+                              style: const TextStyle(
+                                  fontSize: 17,
+                                  fontWeight: FontWeight.w500,
+                                  color: Color.fromARGB(255, 5, 123, 151)),
+                            ),
+                          ),
                         ),
                         Expanded(
                           child: CMaker(
-                                alignment: Alignment.bottomCenter,
-                                child: Text(
-                                  grade,
-                                  style: const TextStyle(
-                                      fontSize: 16,
-                                      fontWeight: FontWeight.w500,
-                                      color: Color.fromARGB(255, 89, 89, 87)),
-                                ),
-                              ),
+                            alignment: Alignment.bottomCenter,
+                            child: Text(
+                              grade,
+                              style: const TextStyle(
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.w500,
+                                  color: Color.fromARGB(255, 89, 89, 87)),
+                            ),
+                          ),
                         ),
                       ],
                     ),
                   ),
                   InkWell(
-                        onTap: () {},
-                        child: Container(
-                          width: 70,
-                          padding: const EdgeInsets.only(top: 10),
-                          decoration: BoxDecoration(
-                              color: const Color.fromARGB(255, 255, 255, 255),
-                              borderRadius: BorderRadius.circular(10)),
-                          height: 50,
-                          child: const Icon(Icons.notifications),
-                        ),
-                      ),
+                    onTap: () {},
+                    child: Container(
+                      width: 70,
+                      padding: const EdgeInsets.only(top: 10),
+                      decoration: BoxDecoration(
+                          color: const Color.fromARGB(255, 255, 255, 255),
+                          borderRadius: BorderRadius.circular(10)),
+                      height: 50,
+                      child: const Icon(Icons.notifications),
+                    ),
+                  ),
                 ],
               ),
             ),
@@ -480,59 +545,59 @@ class _StudentMainPageState extends State<StudentMainPage> {
               child: Row(
                 children: [
                   Container(
-                          width: 70,
-                          height: 50,
-                          padding: const EdgeInsets.only(top: 10),
-                          alignment: Alignment.center,
-                          child: InkWell(
-                              onTap: () {
-                                setState(() {
-                                  PageIndex = 0;
-                                });
-                              },
-                              child: Image.asset("images/Book.png"))),
+                      width: 70,
+                      height: 50,
+                      padding: const EdgeInsets.only(top: 10),
+                      alignment: Alignment.center,
+                      child: InkWell(
+                          onTap: () {
+                            setState(() {
+                              PageIndex = 0;
+                            });
+                          },
+                          child: Image.asset("images/Book.png"))),
                   Expanded(
                     child: Row(
                       children: [
                         Expanded(
                           child: CMaker(
-                                alignment: Alignment.bottomCenter,
-                                child: Text(
-                                  name,
-                                  style: const TextStyle(
-                                      fontSize: 17,
-                                      fontWeight: FontWeight.w500,
-                                      color: Color.fromARGB(255, 5, 123, 151)),
-                                ),
-                              ),
+                            alignment: Alignment.bottomCenter,
+                            child: Text(
+                              name,
+                              style: const TextStyle(
+                                  fontSize: 17,
+                                  fontWeight: FontWeight.w500,
+                                  color: Color.fromARGB(255, 5, 123, 151)),
+                            ),
+                          ),
                         ),
                         Expanded(
                           child: CMaker(
-                                alignment: Alignment.bottomCenter,
-                                child: Text(
-                                  grade,
-                                  style: const TextStyle(
-                                      fontSize: 16,
-                                      fontWeight: FontWeight.w500,
-                                      color: Color.fromARGB(255, 89, 89, 87)),
-                                ),
-                              ),
+                            alignment: Alignment.bottomCenter,
+                            child: Text(
+                              grade,
+                              style: const TextStyle(
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.w500,
+                                  color: Color.fromARGB(255, 89, 89, 87)),
+                            ),
+                          ),
                         ),
                       ],
                     ),
                   ),
                   InkWell(
-                        onTap: () {},
-                        child: Container(
-                          width: 70,
-                          padding: const EdgeInsets.only(top: 10),
-                          decoration: BoxDecoration(
-                              color: const Color.fromARGB(255, 255, 255, 255),
-                              borderRadius: BorderRadius.circular(10)),
-                          height: 50,
-                          child: const Icon(Icons.notifications),
-                        ),
-                      ),
+                    onTap: () {},
+                    child: Container(
+                      width: 70,
+                      padding: const EdgeInsets.only(top: 10),
+                      decoration: BoxDecoration(
+                          color: const Color.fromARGB(255, 255, 255, 255),
+                          borderRadius: BorderRadius.circular(10)),
+                      height: 50,
+                      child: const Icon(Icons.notifications),
+                    ),
+                  ),
                 ],
               ),
             ),
@@ -561,70 +626,72 @@ class _StudentMainPageState extends State<StudentMainPage> {
               child: Row(
                 children: [
                   Container(
-                          width: 70,
-                          height: 50,
-                          padding: const EdgeInsets.only(top: 10),
-                          alignment: Alignment.center,
-                          child: InkWell(
-                              onTap: () {
-                                setState(() {
-                                  PageIndex = 0;
-                                });
-                              },
-                              child: Image.asset("images/Book.png"))),
+                      width: 70,
+                      height: 50,
+                      padding: const EdgeInsets.only(top: 10),
+                      alignment: Alignment.center,
+                      child: InkWell(
+                          onTap: () {
+                            setState(() {
+                              PageIndex = 0;
+                            });
+                          },
+                          child: Image.asset("images/Book.png"))),
                   Expanded(
                     child: Row(
                       children: [
                         Expanded(
                           child: CMaker(
-                                alignment: Alignment.bottomCenter,
-                                child: Text(
-                                  name,
-                                  style: const TextStyle(
-                                      fontSize: 17,
-                                      fontWeight: FontWeight.w500,
-                                      color: Color.fromARGB(255, 5, 123, 151)),
-                                ),
-                              ),
+                            alignment: Alignment.bottomCenter,
+                            child: Text(
+                              name,
+                              style: const TextStyle(
+                                  fontSize: 17,
+                                  fontWeight: FontWeight.w500,
+                                  color: Color.fromARGB(255, 5, 123, 151)),
+                            ),
+                          ),
                         ),
                         Expanded(
                           child: CMaker(
-                                alignment: Alignment.bottomCenter,
-                                child: Text(
-                                  grade,
-                                  style: const TextStyle(
-                                      fontSize: 16,
-                                      fontWeight: FontWeight.w500,
-                                      color: Color.fromARGB(255, 89, 89, 87)),
-                                ),
-                              ),
+                            alignment: Alignment.bottomCenter,
+                            child: Text(
+                              grade,
+                              style: const TextStyle(
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.w500,
+                                  color: Color.fromARGB(255, 89, 89, 87)),
+                            ),
+                          ),
                         ),
                       ],
                     ),
                   ),
                   InkWell(
-                        onTap: ()async {
-                          final SharedPreferences prefs =
+                    onTap: () async {
+                      final SharedPreferences prefs =
                           await SharedPreferences.getInstance();
-                          prefs.remove("id");
-                          Navigator.pushReplacementNamed(context, "SplashView");
-                        },
-                        child: Container(
-                          width: 70,
-                          padding: const EdgeInsets.only(top: 10),
-                          decoration: BoxDecoration(
-                              color: const Color.fromARGB(255, 255, 255, 255),
-                              borderRadius: BorderRadius.circular(10)),
-                          height: 50,
-                          child: const Icon(Icons.logout),
-                        ),
-                      ),
+                      prefs.remove("id");
+                      Navigator.pushReplacementNamed(context, "SplashView");
+                    },
+                    child: Container(
+                      width: 70,
+                      padding: const EdgeInsets.only(top: 10),
+                      decoration: BoxDecoration(
+                          color: const Color.fromARGB(255, 255, 255, 255),
+                          borderRadius: BorderRadius.circular(10)),
+                      height: 50,
+                      child: const Icon(Icons.logout),
+                    ),
+                  ),
                 ],
               ),
             ),
-            Expanded(flex: 8, child: Container(
-              child: const Text("hi"),
-            )),
+            Expanded(
+                flex: 8,
+                child: Container(
+                  child: const Text("hi"),
+                )),
           ],
         ),
       ),

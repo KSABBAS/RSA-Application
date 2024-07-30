@@ -10,7 +10,7 @@ import 'package:edu_academy/StudentPages/StudentMainPage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
-import 'package:edu_academy/Login/SplashViewPage.dart';
+import 'package:edu_academy/SplashViewPage.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'service/firebase_options.dart';
 
@@ -38,6 +38,6 @@ void main() async {
         "ParentSignUpPage": (context) => const ParentSignUpPage(),
         "TeacherSignUpPage": (context) => const TeacherSignUpPage()
       },
-      home: const TeacherMainPage()));
+      home: const SplashViewPage()));
   SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersiveSticky);
 }

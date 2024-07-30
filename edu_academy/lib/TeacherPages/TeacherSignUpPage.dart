@@ -1,10 +1,12 @@
 import 'package:edu_academy/StudentPages/SecondPage.dart';
 import 'package:edu_academy/MyTools.dart';
 import 'package:edu_academy/service/Databse_Service.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:overlay_loading_progress/overlay_loading_progress.dart';
 import 'package:panara_dialogs/panara_dialogs.dart';
+import 'package:time_picker_spinner_pop_up/time_picker_spinner_pop_up.dart';
 
 class TeacherSignUpPage extends StatefulWidget {
   const TeacherSignUpPage({super.key});
@@ -31,7 +33,7 @@ String TeacherSubject3 = "null";
 // bool SecondDropdownVisible = false;
 // bool ThirdDropdownVisible = false;
 GlobalKey<FormState> key3 = GlobalKey();
-
+var forDateInput = DateTime.now().subtract(const Duration(days: 1926));
 class _TeacherSignUpPageState extends State<TeacherSignUpPage> {
   bool SecondDropdownVisible = false;
   bool ThirdDropdownVisible = false;
@@ -451,62 +453,26 @@ class _TeacherSignUpPageState extends State<TeacherSignUpPage> {
                       Row(
                         children: [
                           Expanded(child: Container()),
-                          Expanded(
-                              flex: 5,
-                              child: Container(
-                                child: TextField(
-                                    style: const TextStyle(fontSize: 16),
-                                    onChanged: (value) {
-                                      TeacherDayOfBirth = value;
-                                      TeacherDateOfBirth =
-                                          "$TeacherDayOfBirth/$TeacherMonthOfBirth/$TeacherYearOfBirth";
-                                    },
-                                    decoration: const InputDecoration(
-                                        label: Text(
-                                      "Day",
-                                      style: TextStyle(fontSize: 12),
-                                    ))),
-                              )),
-                          const Text(
-                            "  /  ",
-                            style: TextStyle(fontSize: 30),
-                          ),
-                          Expanded(
-                              flex: 5,
-                              child: Container(
-                                child: TextField(
-                                  style: const TextStyle(fontSize: 16),
-                                  onChanged: (value) {
-                                    TeacherMonthOfBirth = value;
-                                    TeacherDateOfBirth =
-                                        "$TeacherDayOfBirth/$TeacherMonthOfBirth/$TeacherYearOfBirth";
-                                  },
-                                  decoration: const InputDecoration(
-                                      label: Text("Month",
-                                          style: TextStyle(fontSize: 12))),
-                                ),
-                              )),
-                          const Text(
-                            "  /  ",
-                            style: TextStyle(fontSize: 30),
-                          ),
-                          Expanded(
-                            flex: 5,
-                            child: Container(
-                              child: TextField(
-                                style: const TextStyle(fontSize: 16),
-                                onChanged: (value) {
-                                  TeacherYearOfBirth = value;
-                                  TeacherDateOfBirth =
-                                      "$TeacherDayOfBirth/$TeacherMonthOfBirth/$TeacherYearOfBirth";
-                                },
-                                decoration: const InputDecoration(
-                                    label: Text("Year",
-                                        style: TextStyle(fontSize: 12))),
-                              ),
-                            ),
-                          ),
-                          Expanded(child: Container()),
+                        TimePickerSpinnerPopUp(
+                          minTime: DateTime.now().subtract(const Duration(days: 36525)),
+                          maxTime: DateTime.now().subtract(const Duration(days: 1824)),
+                          textStyle: TextStyle(fontSize: 25),
+                          iconSize: 40,
+                          mode: CupertinoDatePickerMode.date,
+                          initTime: forDateInput,
+                          onChange: (dateTime) {
+                            setState(() {
+                              forDateInput=dateTime;
+                              TeacherDayOfBirth = dateTime.day.toString();
+                              TeacherMonthOfBirth = dateTime.month.toString();
+                              TeacherYearOfBirth = dateTime.year.toString();
+                              TeacherDateOfBirth =
+                                "$TeacherDayOfBirth/$TeacherMonthOfBirth/$TeacherYearOfBirth";
+                              print(TeacherDateOfBirth);
+                            });
+                          },
+                        ),
+                        Expanded(child: Container()),
                         ],
                       ),
                       Expanded(child: Container()),

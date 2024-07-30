@@ -28,6 +28,7 @@ environment:
 # the latest version available on pub.dev. To see which dependencies have newer
 # versions available, run `flutter pub outdated`.
 dependencies:
+  adaptive_dialog: ^2.1.0
   arabic_font: ^0.0.9
   cloud_firestore: ^5.1.0
   cupertino_icons: ^1.0.2
@@ -43,6 +44,7 @@ dependencies:
   panara_dialogs: ^0.1.5
   shared_preferences: ^2.2.3
   string_extensions: ^0.7.2
+  time_picker_spinner_pop_up: ^2.0.0
   url_launcher: ^6.3.0
 dev_dependencies:
   flutter_lints: ^4.0.0
