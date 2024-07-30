@@ -145,7 +145,7 @@ class _StudentMainPageState extends State<StudentMainPage> {
                                           borderRadius: BorderRadius.only(
                                               topLeft: Radius.circular(15)),
                                           color:
-                                              Color.fromARGB(255, 32, 186, 158)),
+                                              Color.fromARGB(255, 36, 160, 209)),
                                       height: 80,
                                       child: TMaker(
                                           text: "",
@@ -157,7 +157,7 @@ class _StudentMainPageState extends State<StudentMainPage> {
                                         child: CMaker(
                                       alignment: Alignment.center,
                                       height: 80,
-                                      color: const Color.fromARGB(255, 32, 186, 158),
+                                      color: const Color.fromARGB(255, 36, 160, 209),
                                       child: TMaker(
                                           text: "00:00\nto\n00:00",
                                           fontSize: 13,
@@ -168,7 +168,7 @@ class _StudentMainPageState extends State<StudentMainPage> {
                                         child: CMaker(
                                       alignment: Alignment.center,
                                       height: 80,
-                                      color: const Color.fromARGB(255, 32, 186, 158),
+                                      color: const Color.fromARGB(255, 36, 160, 209),
                                       child: TMaker(
                                           text: "00:00\nto\n00:00",
                                           fontSize: 13,
@@ -179,7 +179,7 @@ class _StudentMainPageState extends State<StudentMainPage> {
                                         child: CMaker(
                                       alignment: Alignment.center,
                                       height: 80,
-                                      color: const Color.fromARGB(255, 32, 186, 158),
+                                      color: const Color.fromARGB(255, 36, 160, 209),
                                       child: TMaker(
                                           text: "00:00\nto\n00:00",
                                           fontSize: 13,
@@ -190,7 +190,7 @@ class _StudentMainPageState extends State<StudentMainPage> {
                                         child: CMaker(
                                       alignment: Alignment.center,
                                       height: 80,
-                                      color: const Color.fromARGB(255, 32, 186, 158),
+                                      color: const Color.fromARGB(255, 36, 160, 209),
                                       child: TMaker(
                                           text: "00:00\nto\n00:00",
                                           fontSize: 13,
@@ -204,7 +204,7 @@ class _StudentMainPageState extends State<StudentMainPage> {
                                           borderRadius: BorderRadius.only(
                                               topRight: Radius.circular(15)),
                                           color:
-                                              Color.fromARGB(255, 32, 186, 158)),
+                                              Color.fromARGB(255, 36, 160, 209)),
                                       height: 80,
                                       child: TMaker(
                                           text: "00:00\nto\n00:00",
@@ -229,7 +229,7 @@ class _StudentMainPageState extends State<StudentMainPage> {
                                           text: "Day",
                                           fontSize: 13,
                                           fontWeight: FontWeight.w600,
-                                          color: const Color.fromARGB(255, 32, 186, 158)),
+                                          color: const Color.fromARGB(255, 36, 160, 209)),
                                     )),
                                     Expanded(
                                         child: CMaker(
@@ -366,7 +366,7 @@ class _StudentMainPageState extends State<StudentMainPage> {
                                             height: 40,
                                             width: 80,
                                             padding: EdgeInsets.symmetric(horizontal: 15),
-                                            color: const Color.fromARGB(255, 32, 186, 158),
+                                            color: const Color.fromARGB(255, 36, 160, 209),
                                             child: TMaker(
                                                 text: "Join",
                                                 fontSize: 20,
@@ -384,7 +384,7 @@ class _StudentMainPageState extends State<StudentMainPage> {
                                 circularRadius: 10,
                                 margin: EdgeInsets.symmetric(horizontal: 40),
                                 alignment: Alignment.center,
-                                color: Color.fromARGB(255, 32, 186, 158),
+                                color: Color.fromARGB(255, 36, 160, 209),
                                 height: 40,
                                 child: TMaker(
                                     text: "Notes form teachers",
@@ -410,7 +410,7 @@ class _StudentMainPageState extends State<StudentMainPage> {
                                     return CMaker(
                                       border: Border.all(width: 1,color: const Color.fromARGB(31, 78, 78, 78)),
                                       circularRadius: 20,
-                                      color: Color.fromARGB(255, 233, 255, 247),
+                                      color: Color.fromARGB(255, 36, 160, 209),
                                       padding: EdgeInsets.only(top: 15,right: 15,left: 15),
                                       margin: EdgeInsets.only(bottom: 0,top: 20,left: 15,right: 15),
                                       child: Column(children: [
@@ -425,14 +425,14 @@ class _StudentMainPageState extends State<StudentMainPage> {
                                                     text: "Math - Mr:Hazem",
                                                     fontSize: 22,
                                                     fontWeight: FontWeight.w900,
-                                                    color: Color.fromARGB(255, 135, 135, 135))),
+                                                    color: Color.fromARGB(255, 255, 255, 255))),
                                                     Expanded(child: Container()),
                                           ],
                                         ),
                                                 const Padding(padding: EdgeInsets.only(top: 5)),
                                                 CMaker(padding: EdgeInsets.only(left: 20),
                                                 width: double.infinity,
-                                                child: TMaker(textAlign: TextAlign.start,text: "The message", fontSize:17, fontWeight: FontWeight.w700, color:Color.fromARGB(255, 0, 0, 0))),
+                                                child: TMaker(textAlign: TextAlign.start,text: "The message", fontSize:17, fontWeight: FontWeight.w700, color:Color.fromARGB(255, 255, 255, 255))),
                                                 const Padding(padding: EdgeInsets.only(top: 25)),
                                                 ],),
                                     );

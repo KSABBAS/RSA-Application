@@ -258,7 +258,7 @@ class _SecondPageState extends State<SecondPage> {
           ),
           CMaker(
             circularRadius: 20,
-              color: Color.fromARGB(255, 32, 186, 158),
+              color: Color.fromARGB(255, 36, 160, 209),
               margin: EdgeInsets.symmetric(horizontal: 15),
               height: 60,
               padding: const EdgeInsets.symmetric(vertical: 5, horizontal: 30),
@@ -277,7 +277,7 @@ class _SecondPageState extends State<SecondPage> {
                           child: const AspectRatio(
                             aspectRatio: 1,
                             child: CircularProgressIndicator(
-                              color: Color.fromARGB(255, 32, 186, 158),
+                              color: Color.fromARGB(255, 36, 160, 209),
                             ),
                           ),
                         ),
@@ -458,7 +458,7 @@ class _SecondPageState extends State<SecondPage> {
                           child: const AspectRatio(
                             aspectRatio: 1,
                             child: CircularProgressIndicator(
-                              color: Color.fromARGB(255, 32, 186, 158),
+                              color: Color.fromARGB(255, 36, 160, 209),
                             ),
                           ),
                         ),
@@ -605,7 +605,7 @@ class _SecondPageState extends State<SecondPage> {
               height: 50,
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(15),
-                color: const Color.fromARGB(255, 104, 202, 255),
+                color: const Color.fromARGB(255, 36, 160, 209),
               ),
               child: const Text(
                 "الكتب الدراسية",
@@ -639,7 +639,7 @@ class _SecondPageState extends State<SecondPage> {
                           child: const AspectRatio(
                             aspectRatio: 1,
                             child: CircularProgressIndicator(
-                              color: Color.fromARGB(255, 32, 186, 158),
+                              color: Color.fromARGB(255, 36, 160, 209),
                             ),
                           ),
                         ),

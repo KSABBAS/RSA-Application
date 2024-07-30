@@ -122,7 +122,7 @@ class _ThirdPageState extends State<ThirdPage> {
                                   color: Color.fromARGB(58, 0, 0, 0)),
                             ],
                     circularRadius: 20,
-                    color: const Color.fromARGB(255, 32, 186, 158),
+                    color: const Color.fromARGB(255, 36, 160, 209),
                     alignment: Alignment.center,
                     height: 70,
                     width: 150,
@@ -140,7 +140,7 @@ class _ThirdPageState extends State<ThirdPage> {
                 circularRadius: 25,
                 margin: const EdgeInsets.only(right: 20, left: 20, bottom: 40),
                 width: double.infinity,
-                color: Color.fromARGB(255, 32, 186, 158),
+                color: Color.fromARGB(255, 36, 160, 209),
                 child: ListView.builder(
                     itemCount: 3,
                     itemBuilder: (context, index) {
@@ -211,7 +211,7 @@ class _ThirdPageState extends State<ThirdPage> {
                               border:  const Border(
                             right: BorderSide(width: .5),
                             bottom: BorderSide(width: .5)),
-                        color: const Color.fromARGB(255, 32, 186, 158),
+                        color: const Color.fromARGB(255, 36, 160, 209),
                             ),
                         height: 30,
                         child: Container()
@@ -222,7 +222,7 @@ class _ThirdPageState extends State<ThirdPage> {
                         border: const Border(
                             right: BorderSide(width: .5),
                             bottom: BorderSide(width: .5)),
-                        color: const Color.fromARGB(255, 32, 186, 158),
+                        color: const Color.fromARGB(255, 36, 160, 209),
                         child: Center(
                             child: TMaker(
                                 text: "",
@@ -236,7 +236,7 @@ class _ThirdPageState extends State<ThirdPage> {
                         border: const Border(
                             right: BorderSide(width: .5),
                             bottom: BorderSide(width: .5)),
-                        color: const Color.fromARGB(255, 32, 186, 158),
+                        color: const Color.fromARGB(255, 36, 160, 209),
                         child: Center(
                             child: TMaker(
                                 text: "",
@@ -250,7 +250,7 @@ class _ThirdPageState extends State<ThirdPage> {
                         border: const Border(
                             right: BorderSide(width: .5),
                             bottom: BorderSide(width: .5)),
-                        color: const Color.fromARGB(255, 32, 186, 158),
+                        color: const Color.fromARGB(255, 36, 160, 209),
                         child: Center(
                             child: TMaker(
                                 text: "",
@@ -264,7 +264,7 @@ class _ThirdPageState extends State<ThirdPage> {
                         border: const Border(
                             right: BorderSide(width: .5),
                             bottom: BorderSide(width: .5)),
-                        color: const Color.fromARGB(255, 32, 186, 158),
+                        color: const Color.fromARGB(255, 36, 160, 209),
                         child: Center(
                             child: TMaker(
                                 text: "",
@@ -278,7 +278,7 @@ class _ThirdPageState extends State<ThirdPage> {
                               borderRadius: BorderRadius.only(topRight: Radius.circular(10)),
                               border:  const Border(
                             bottom: BorderSide(width: .5)),
-                        color: const Color.fromARGB(255, 32, 186, 158),
+                        color: const Color.fromARGB(255, 36, 160, 209),
                             ),
                         height: 30,
                         child: Container()
@@ -293,7 +293,7 @@ class _ThirdPageState extends State<ThirdPage> {
                         border: const Border(
                             right: BorderSide(width: .5),
                             bottom: BorderSide(width: .5)),
-                        color: const Color.fromARGB(255, 32, 186, 158),
+                        color: const Color.fromARGB(255, 36, 160, 209),
                         child: Center(
                             child: TMaker(
                                 text: "الأحد",
@@ -380,7 +380,7 @@ class _ThirdPageState extends State<ThirdPage> {
                         border: const Border(
                             right: BorderSide(width: .5),
                             bottom: BorderSide(width: .5)),
-                        color: const Color.fromARGB(255, 32, 186, 158),
+                        color: const Color.fromARGB(255, 36, 160, 209),
                         child: Center(
                             child: TMaker(
                                 text: "الأثنين",
@@ -467,7 +467,7 @@ class _ThirdPageState extends State<ThirdPage> {
                         border: const Border(
                             right: BorderSide(width: .5),
                             bottom: BorderSide(width: .5)),
-                        color: const Color.fromARGB(255, 32, 186, 158),
+                        color: const Color.fromARGB(255, 36, 160, 209),
                         child: Center(
                             child: TMaker(
                                 text: "الثلاثاء",
@@ -554,7 +554,7 @@ class _ThirdPageState extends State<ThirdPage> {
                         border: const Border(
                             right: BorderSide(width: .5),
                             bottom: BorderSide(width: .5)),
-                        color: const Color.fromARGB(255, 32, 186, 158),
+                        color: const Color.fromARGB(255, 36, 160, 209),
                         child: Center(
                             child: TMaker(
                                 text: "الأربعاء",
@@ -641,7 +641,7 @@ class _ThirdPageState extends State<ThirdPage> {
                         border: const Border(
                             right: BorderSide(width: .5),
                             bottom: BorderSide(width: .5)),
-                        color: const Color.fromARGB(255, 32, 186, 158),
+                        color: const Color.fromARGB(255, 36, 160, 209),
                         child: Center(
                             child: TMaker(
                                 text: "الخميس",
@@ -729,7 +729,7 @@ class _ThirdPageState extends State<ThirdPage> {
                               borderRadius: BorderRadius.only(bottomLeft: Radius.circular(10)),
                               border:  const Border(
                             right: BorderSide(width: .5),),
-                        color: const Color.fromARGB(255, 32, 186, 158),
+                        color: const Color.fromARGB(255, 36, 160, 209),
                             ),
                         child: Center(
                             child: TMaker(
@@ -826,7 +826,7 @@ class _ThirdPageState extends State<ThirdPage> {
                                   spreadRadius: .03,
                                   color: Color.fromARGB(82, 0, 0, 0)),
                             ],
-              color: Color.fromARGB(255, 255, 255, 255),
+              color: Color.fromARGB(255, 36, 160, 209),
               child: Column(
                 children: [
                   CMaker(
@@ -852,13 +852,6 @@ class _ThirdPageState extends State<ThirdPage> {
                         itemBuilder: (context, index) {
                           return CMaker(
                               circularRadius: 10,
-                              boxShadow: const [
-                              BoxShadow(
-                                  offset: Offset(1, 1),
-                                  blurRadius: 6,
-                                  spreadRadius: .03,
-                                  color: Color.fromARGB(82, 0, 0, 0)),
-                            ],
                               color: const Color.fromARGB(255, 233, 255, 247),
                               margin: const EdgeInsets.only(
                                   left: 20, right: 20, bottom: 30),
@@ -912,7 +905,7 @@ class _ThirdPageState extends State<ThirdPage> {
                                               left: 7, bottom: 2),
                                           alignment: Alignment.center,
                                           color:
-                                              Color.fromARGB(255, 32, 186, 158),
+                                              Color.fromARGB(255, 36, 160, 209),
                                           circularRadius: 10,
                                           height: 30,
                                           width: 60,
