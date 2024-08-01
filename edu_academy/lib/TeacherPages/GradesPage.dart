@@ -285,16 +285,9 @@ class _GradesPageState extends State<GradesPage> {
                       showDialog(
                         context: context,
                         builder: (context) {
-                          return Container(
-                            height: 200,
-                            width: 200,
-                            color: Colors.amber,
-                          );
-                        },
-                      );
-                    },
-                    child: Text("All messages"))),
-            CMaker(
+                          return Dialog(
+                            backgroundColor: const Color.fromARGB(255, 255, 255, 255),
+                            child: CMaker(
                 padding: EdgeInsets.all(20),
                 alignment: Alignment.topLeft,
                 height: 100.0 + ((AllMessages.length - 1) * 70.0),
@@ -339,6 +332,50 @@ class _GradesPageState extends State<GradesPage> {
                         ],
                       );
                     })),
+                          );
+                        },
+                      );
+                    },
+                    child: Text("All messages"))),
+            CMaker(
+                padding: EdgeInsets.all(20),
+                alignment: Alignment.topLeft,
+                height: 120,
+                boxShadow: [
+                  BoxShadow(
+                      color: Color.fromARGB(42, 0, 0, 0),
+                      offset: Offset(2, 2),
+                      blurRadius: 10,
+                      spreadRadius: .06)
+                ],
+                circularRadius: 20,
+                width: PageWidth(context) - 60,
+                color: Color.fromARGB(255, 255, 255, 255),
+                child: ListView(
+                        children: [
+                          CMaker(
+                            width: double.infinity,
+                            alignment: Alignment.centerLeft,
+                            child: TMaker(
+                                textAlign: TextAlign.start,
+                                text: AllMessages[AllMessages.length-1][0],
+                                fontSize: 20,
+                                fontWeight: FontWeight.w600,
+                                color: Colors.black),
+                          ),
+                          CMaker(
+                            width: double.infinity,
+                            alignment: Alignment.centerLeft,
+                            child: TMaker(
+                                textAlign: TextAlign.start,
+                                text: "Date : ${AllMessages[AllMessages.length-1][1]}",
+                                fontSize: 15,
+                                fontWeight: FontWeight.w600,
+                                color: Colors.black),
+                          ),
+                        ],
+                      )
+                    ),
             Padding(padding: EdgeInsets.only(top: 20)),
             CMaker(
                 alignment: Alignment.center,
