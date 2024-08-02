@@ -59,53 +59,10 @@ class _TeacherSignUpPageState extends State<TeacherSignUpPage> {
     }
   @override
   Widget build(BuildContext context) {
-
-    
-    SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersiveSticky);
-    return Scaffold(
-        backgroundColor: const Color.fromARGB(255, 255, 255, 255),
-        body: Form(
-          key: key3,
-          child: ListView(
-            children: [
-              Expanded(
-                child: SizedBox(
-                  height: 250,
-                  child: Container(
-                    decoration: const BoxDecoration(
-                        gradient: LinearGradient(
-                            begin: Alignment.bottomLeft,
-                            end: Alignment.topRight,
-                            colors: [
-                          Color.fromARGB(255, 8, 125, 159),
-                          Color.fromARGB(255, 74, 193, 241)
-                        ])),
-                    child: Column(
-                      children: [
-                        Expanded(
-                            child: Row(
-                          children: [
-                            Expanded(
-                              flex: 4,
-                              child: Column(
-                                children: [
-                                  Expanded(
-                                    child: Container(
-                                      width: double.infinity,
-                                      alignment: Alignment.centerLeft,
-                                      padding: const EdgeInsets.only(left: 20),
-                                      child: IconButton(
-                                          onPressed: () {
-                                            Navigator.pop(context);
-                                          },
-                                          icon: const Icon(Icons.arrow_back)),
-                                    ),
-                                  ),
-                                  Expanded(
-                                    flex: 2,
-                                    child: Container(
-                                        alignment: Alignment.bottomLeft,
-                                        child: Container(
+    late Widget TeacherSignUpBody;
+    Widget SignUpCircle=Container(
+      alignment: Alignment.bottomLeft,
+      child: Container(
                                           padding: const EdgeInsets.fromLTRB(
                                               0, 40, 20, 0),
                                           alignment: Alignment.center,
@@ -116,7 +73,7 @@ class _TeacherSignUpPageState extends State<TeacherSignUpPage> {
                                                 bottomLeft: Radius.zero,
                                                 topLeft: Radius.circular(10),
                                                 topRight:
-                                                    Radius.circular(23000),
+                                                    Radius.circular(5000),
                                                 bottomRight:
                                                     Radius.circular(10)),
                                             color: Color.fromARGB(
@@ -130,73 +87,74 @@ class _TeacherSignUpPageState extends State<TeacherSignUpPage> {
                                                     255, 8, 125, 159),
                                                 fontWeight: FontWeight.w700),
                                           ),
-                                        )),
-                                  ),
-                                ],
-                              ),
-                            ),
-                            Expanded(
-                                flex: 3,
-                                child: Column(
-                                  children: [
-                                    Expanded(
-                                      child: Container(),
-                                    ),
-                                    Expanded(
-                                      flex: 3,
-                                      child: Container(
+                                        ));
+    Widget BackButton=Container(
+                                      width: double.infinity,
+                                      alignment: Alignment.centerLeft,
+                                      padding: const EdgeInsets.only(left: 20),
+                                      child: IconButton(
+                                          onPressed: () {
+                                            Navigator.pop(context);
+                                          },
+                                          icon: const Icon(Icons.arrow_back)),
+                                    );
+    Widget Logo=Container(
                                           height: double.infinity,
-                                          alignment: Alignment.topCenter,
                                           child: Image.asset(
                                             "images/Logo.png",
-                                            fit: BoxFit.fill,
-                                          )),
-                                    ),
-                                  ],
-                                ))
-                          ],
-                        )),
-                      ],
-                    ),
-                  ),
-                ),
-              ),
-              const Padding(padding: EdgeInsets.only(top: 20)),
-              Expanded(
-                child: Container(
-                  color: const Color.fromARGB(255, 255, 255, 255),
-                  height: PageHeight(context) +800,
-                  width: 200,
-                  child: Padding(
-                    padding: const EdgeInsets.only(left: 30, right: 30),
-                    child: Column(children: [
-                      Container(
-                        alignment: Alignment.centerLeft,
-                        width: double.infinity,
+                                            fit: BoxFit.contain,
+                                          ));
+    Widget TeacherWithArrow=Container(
                         child: Row(
                           children: [
                             Container(
-                                alignment: Alignment.bottomLeft,
+                                alignment: Alignment.centerLeft,
                                 child: const Text("Teacher  ",
                                     style: TextStyle(
-                                        fontSize: 28,
+                                        fontSize: 25,
                                         fontWeight: FontWeight.w600,
                                         color:
                                             Color.fromARGB(255, 8, 125, 159)))),
-                            Container(
-                                height: 15,
-                                alignment: Alignment.bottomLeft,
-                                child: const Icon(
-                                  Icons.arrow_forward,
-                                  color: Color.fromARGB(255, 8, 125, 159),
-                                )),
+                            Expanded(
+                                child: Container(
+                                    margin: const EdgeInsets.only(bottom: 20),
+                                    height: 5,
+                                    alignment: Alignment.bottomLeft,
+                                    child: const Icon(
+                                      Icons.arrow_forward,
+                                      color: Color.fromARGB(255, 8, 125, 159),
+                                    ))),
                           ],
                         ),
-                      ),
-                      Expanded(child: Container()),
-                      SizedBox(
-                        height: 80,
-                        child: TextFormField(
+                      );
+    List <Widget>AlreadyHaveAnAccountElements=[Container(
+                                alignment: Alignment.centerRight,
+                                child: const Text(
+                                  "Already have an account ? ",
+                                  style: TextStyle(
+                                      fontSize: 15,
+                                      color: Color.fromARGB(255, 206, 206, 206),
+                                      fontWeight: FontWeight.w500),
+                                ),
+                              ),
+                              Container(
+                              margin: const EdgeInsets.only(left: 20),
+                              alignment: Alignment.centerLeft,
+                              child: TextButton(
+                                onPressed: () {
+                                  Navigator.pushNamed(context, "LogInPage");
+                                },
+                                child: const Text(
+                                  "Log in",
+                                  style: TextStyle(
+                                      fontSize: 15,
+                                      color: Color.fromARGB(255, 74, 193, 241),
+                                      fontWeight: FontWeight.w500),
+                                ),
+                              ),
+                            ),
+                              ];
+    Widget NameTFF=SizedBox(height: 80,child: TextFormField(
                           onSaved: (newValue) {
                             TeacherName = newValue!;
                           },
@@ -232,12 +190,8 @@ class _TeacherSignUpPageState extends State<TeacherSignUpPage> {
                                   borderRadius: BorderRadius.circular(30)),
                               focusedBorder: OutlineInputBorder(
                                   borderRadius: BorderRadius.circular(15))),
-                        ),
-                      ),
-                      const Padding(padding: EdgeInsets.only(top: 20)),
-                      SizedBox(
-                        height: 80,
-                        child: TextFormField(
+                        ));
+    Widget PhoneTFF=SizedBox(height: 80,child: TextFormField(
                           onSaved: (newValue) {
                             TeacherNumber = newValue!;
                           },
@@ -280,12 +234,8 @@ class _TeacherSignUpPageState extends State<TeacherSignUpPage> {
                                   borderRadius: BorderRadius.circular(30)),
                               focusedBorder: OutlineInputBorder(
                                   borderRadius: BorderRadius.circular(15))),
-                        ),
-                      ),
-                      const Padding(padding: EdgeInsets.only(top: 20)),
-                      SizedBox(
-                        height: 80,
-                        child: TextFormField(
+                        ));
+    Widget EmailTFF=SizedBox(height: 80,child: TextFormField(
                           onSaved: (newValue) {
                             TeacherEmail = newValue!;
                           },
@@ -324,12 +274,8 @@ class _TeacherSignUpPageState extends State<TeacherSignUpPage> {
                                   borderRadius: BorderRadius.circular(30)),
                               focusedBorder: OutlineInputBorder(
                                   borderRadius: BorderRadius.circular(15))),
-                        ),
-                      ),
-                      const Padding(padding: EdgeInsets.only(top: 20)),
-                      SizedBox(
-                        height: 80,
-                        child: TextFormField(
+                        ));
+    Widget PasswordTFF=SizedBox(height: 80,child: TextFormField(
                           onSaved: (newValue) {
                             TeacherPassword = newValue!;
                           },
@@ -379,12 +325,8 @@ class _TeacherSignUpPageState extends State<TeacherSignUpPage> {
                                   borderRadius: BorderRadius.circular(30)),
                               focusedBorder: OutlineInputBorder(
                                   borderRadius: BorderRadius.circular(15))),
-                        ),
-                      ),
-                      const Padding(padding: EdgeInsets.only(top: 20)),
-                      SizedBox(
-                        height: 80,
-                        child: TextFormField(
+                        ));
+    Widget ConfirmTFF=SizedBox(height: 80,child: TextFormField(
                           onSaved: (newValue) {
                             TeacherConfirmPassword = newValue!;
                           },
@@ -434,25 +376,16 @@ class _TeacherSignUpPageState extends State<TeacherSignUpPage> {
                                   borderRadius: BorderRadius.circular(30)),
                               focusedBorder: OutlineInputBorder(
                                   borderRadius: BorderRadius.circular(15))),
-                        ),
-                      ),
-                      const Padding(padding: EdgeInsets.only(top: 20)),
-                      const Padding(padding: EdgeInsets.only(top: 10)),
-                      Expanded(
-                        child: Container(
+                        ));
+    Widget BirthDateTC=Container(
                           alignment: Alignment.centerLeft,
                           child: const Text(
                             "Date of birth",
                             style: TextStyle(
                                 fontSize: 25, fontWeight: FontWeight.w600),
                           ),
-                        ),
-                      ),
-                      Expanded(child: Container()),
-                      Row(
-                        children: [
-                          Expanded(child: Container()),
-                        TimePickerSpinnerPopUp(
+                        );
+    Widget BirthDateW=TimePickerSpinnerPopUp(
                           minTime: DateTime.now().subtract(const Duration(days: 36525)),
                           maxTime: DateTime.now().subtract(const Duration(days: 1824)),
                           textStyle: TextStyle(fontSize: 25),
@@ -470,48 +403,39 @@ class _TeacherSignUpPageState extends State<TeacherSignUpPage> {
                               print(TeacherDateOfBirth);
                             });
                           },
-                        ),
-                        Expanded(child: Container()),
-                        ],
-                      ),
-                      Expanded(child: Container()),
-                      Container(
+                        );
+    Widget GenederTC=Container(
                         alignment: Alignment.centerLeft,
                         child: const Text(
                           "Geneder",
                           style: TextStyle(
                               fontSize: 25, fontWeight: FontWeight.w600),
                         ),
-                      ),
-                      Expanded(child: Container()),
-                      Row(
-                        children: [
-                          Expanded(
-                              child: Container(
-                                  decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(20),
-                                    color:
-                                        const Color.fromARGB(96, 216, 216, 216),
-                                  ),
-                                  child: RadioListTile(
-                                      activeColor: const Color.fromARGB(
-                                          255, 74, 193, 241),
-                                      title: const Text(
-                                        "Male",
-                                        style: TextStyle(
-                                            fontSize: 10,
-                                            fontWeight: FontWeight.w500),
+                      );
+    List <Widget> GenederWidegts=[
+        Container(
+                                      decoration: BoxDecoration(
+                                        borderRadius: BorderRadius.circular(20),
+                                        color:
+                                            const Color.fromARGB(96, 216, 216, 216),
                                       ),
-                                      value: "Male",
-                                      groupValue: TeacherGeneder,
-                                      onChanged: (val) {
-                                        setState(() {
-                                          TeacherGeneder = val.toString();
-                                        });
-                                      }))),
-                          const Padding(padding: EdgeInsets.only(left: 20)),
-                          Expanded(
-                              child: Container(
+                                      child: RadioListTile(
+                                          activeColor: const Color.fromARGB(
+                                              255, 74, 193, 241),
+                                          title: const Text(
+                                            "Male",
+                                            style: TextStyle(
+                                                fontSize: 10,
+                                                fontWeight: FontWeight.w500),
+                                          ),
+                                          value: "Male",
+                                          groupValue: TeacherGeneder,
+                                          onChanged: (val) {
+                                            setState(() {
+                                              TeacherGeneder = val.toString();
+                                            });
+                                          })),
+                                          Container(
                                   decoration: BoxDecoration(
                                     borderRadius: BorderRadius.circular(20),
                                     color:
@@ -530,118 +454,118 @@ class _TeacherSignUpPageState extends State<TeacherSignUpPage> {
                                         setState(() {
                                           TeacherGeneder = val.toString();
                                         });
-                                      })))
-                        ],
-                      ),
-                      Expanded(child: Container()),
-                      Container(
+                                      }))
+      ];
+    Widget SubjectsTC=Container(
                         alignment: Alignment.centerLeft,
                         child: const Text(
                           "Select subject",
                           style: TextStyle(
                               fontSize: 20, fontWeight: FontWeight.w600),
                         ),
+                      );
+    Widget SubjectsWidgets=CMaker(
+      height: 300,
+      width: double.infinity,
+      child: Column(children: [
+        Expanded(child: Container()),
+        Expanded(
+          child: Row(
+                  children: [
+                    Container(
+                      alignment: Alignment.centerLeft,
+                      child: const Text(
+                        "Subject one",
+                        style: TextStyle(fontSize: 20, fontWeight: FontWeight.w600),
                       ),
-                      Expanded(child: Container()),
-                      CMaker(
-                        height: 300,
-                        child: Column(
-                          children: [
-            Expanded(child: Container()),
-            Row(
-              children: [
-                Container(
-                  alignment: Alignment.centerLeft,
-                  child: const Text(
-                    "Subject one",
-                    style: TextStyle(fontSize: 20, fontWeight: FontWeight.w600),
-                  ),
-                ),
-                Expanded(child: Container()),
-                DropdownButton<String>(
-                  items: SubjectsMaker(TeacherSubject1),
-                  value: TeacherSubject1,
-                  onChanged: (s1) {
-                    setState(() {
-                      TeacherSubject1 =s1!.toString();
-                    });
-                  },
-                ),
-              ],
-            ),
-            Expanded(child: Container()),
-            Visibility(
-              visible: SecondDropdownVisible,
-              replacement: ElevatedButton(
-              onPressed: () {
-                setState(() {
-                  SecondDropdownVisible = true;
-                });
-              },
-              child: const Text("Show the second subject (if u need)"),
-            ),
-              child: Row(
-                children: [
-                  Container(
-                    alignment: Alignment.centerLeft,
-                    child: const Text(
-                      "Subject two",
-                      style: TextStyle(fontSize: 20, fontWeight: FontWeight.w600),
                     ),
-                  ),
-                  Expanded(child: Container()),
-                  DropdownButton<String>(
-                    items: SubjectsMaker(TeacherSubject2),
-                    value: TeacherSubject2,
-                    onChanged: (s2) {
-                      setState(() {
-                        TeacherSubject2 = s2!.toString();
-                      });
-                    },
-                  ),
-                ],
-              ),
-            ),
-            Expanded(child: Container()),
-            Visibility (
-              visible: ThirdDropdownVisible,
-              replacement: SecondDropdownVisible ?ElevatedButton(
-              onPressed: () {
-                setState(() {
-                  ThirdDropdownVisible = true;
-                });
-              },
-              child: const Text("Show the third subject"),
-            ) : const SizedBox.shrink(),
-              child: Row(
-                children: [
-                  Container(
-                    alignment: Alignment.centerLeft,
-                    child: const Text(
-                      "Subject three",
-                      style: TextStyle(fontSize: 20, fontWeight: FontWeight.w600),
+                    Expanded(child: Container()),
+                    DropdownButton<String>(
+                      items: SubjectsMaker(TeacherSubject1),
+                      value: TeacherSubject1,
+                      onChanged: (s1) {
+                        setState(() {
+                          TeacherSubject1 =s1!.toString();
+                        });
+                      },
                     ),
-                  ),
-                  Expanded(child: Container()),
-                  DropdownButton<String>(
-                    items: SubjectsMaker(TeacherSubject3),
-                    value: TeacherSubject3,
-                    onChanged: (s3) {
-                      setState(() {
-                        TeacherSubject3 = s3!.toString();
-                      });
-                    },
-                  ),
-                ],
+                  ],
+                ),
+        ),
+        Expanded(child: Container()),
+        Visibility(
+                visible: SecondDropdownVisible,
+                replacement: ElevatedButton(
+                onPressed: () {
+                  setState(() {
+                    SecondDropdownVisible = true;
+                  });
+                },
+                child: const Text("Show the second subject (if u need)"),
               ),
-            ),
-            Expanded(child: Container()),
-            
-          ],
+                child: Expanded(
+                  child: Row(
+                    children: [
+                      Container(
+                        alignment: Alignment.centerLeft,
+                        child: const Text(
+                          "Subject two",
+                          style: TextStyle(fontSize: 20, fontWeight: FontWeight.w600),
                         ),
                       ),
                       Expanded(child: Container()),
-                      SizedBox(
+                      DropdownButton<String>(
+                        items: SubjectsMaker(TeacherSubject2),
+                        value: TeacherSubject2,
+                        onChanged: (s2) {
+                          setState(() {
+                            TeacherSubject2 = s2!.toString();
+                          });
+                        },
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+              Expanded(child: Container()),
+              Visibility (
+                visible: ThirdDropdownVisible,
+                replacement: SecondDropdownVisible ?ElevatedButton(
+                onPressed: () {
+                  setState(() {
+                    ThirdDropdownVisible = true;
+                  });
+                },
+                child: const Text("Show the third subject"),
+              ) : const SizedBox.shrink(),
+                child: Expanded(
+                  child: Row(
+                    children: [
+                      Container(
+                        alignment: Alignment.centerLeft,
+                        child: const Text(
+                          "Subject three",
+                          style: TextStyle(fontSize: 20, fontWeight: FontWeight.w600),
+                        ),
+                      ),
+                      Expanded(child: Container()),
+                      DropdownButton<String>(
+                        items: SubjectsMaker(TeacherSubject3),
+                        value: TeacherSubject3,
+                        onChanged: (s3) {
+                          setState(() {
+                            TeacherSubject3 = s3!.toString();
+                          });
+                        },
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+              Expanded(child: Container()),
+      ],),
+    );
+    Widget BreefWidge=SizedBox(
                         height: 210,
                         child: TextField(
                           maxLines: 8,
@@ -655,9 +579,8 @@ class _TeacherSignUpPageState extends State<TeacherSignUpPage> {
                               focusedBorder: OutlineInputBorder(
                                   borderRadius: BorderRadius.circular(15))),
                         ),
-                      ),
-                      Expanded(child: Container()),
-                      InkWell(
+                      );
+    Widget SignUpButton=InkWell(
                         onTap: () async {
                           if (key3.currentState!.validate()) {
                             key3.currentState!.save();
@@ -721,49 +644,248 @@ class _TeacherSignUpPageState extends State<TeacherSignUpPage> {
                                 fontWeight: FontWeight.w700),
                           ),
                         ),
+                      );
+    if (PageWidth(context) < 550) {
+      setState(() {
+        TeacherSignUpBody = Scaffold(
+          body: Form(
+            key: key3,
+            child: CMaker(
+              height: PageHeight(context),
+              child: ListView(children: [
+                Container(
+                  width: double.infinity,
+                  height: 250,
+                  decoration: const BoxDecoration(gradient: LinearGradient(
+                          begin: Alignment.bottomLeft,
+                          end: Alignment.topRight,
+                          colors: [
+                        Color.fromARGB(255, 8, 125, 159),
+                        Color.fromARGB(255, 74, 193, 241)
+                      ])),
+                      child: Row(children: [
+                        Expanded(child: Column(children: [
+                          Expanded(child: Container(child:BackButton),),
+                          Expanded(flex: 2,child: SignUpCircle,),
+                        ]
+                        )),
+                        Expanded(child: CMaker(height: double.infinity,alignment:Alignment.center,child: Logo))
+                      ],),
+                  ),
+                  CMaker(
+                    padding: EdgeInsets.symmetric(horizontal: 20),
+                    child: Column(children: [
+                  const Padding(padding:EdgeInsets.only(bottom: 20)),
+                  TeacherWithArrow,
+                  const Padding(padding:EdgeInsets.only(bottom: 20)),
+                  NameTFF,
+                  PhoneTFF,
+                  EmailTFF,
+                  PasswordTFF,
+                  ConfirmTFF,
+                  const Padding(padding:EdgeInsets.only(bottom: 20)),
+                  BirthDateTC,
+                  const Padding(padding:EdgeInsets.only(bottom: 40)),
+                  CMaker(alignment: Alignment.center,child: BirthDateW),
+                  const Padding(padding:EdgeInsets.only(bottom: 40)),
+                  GenederTC,
+                  const Padding(padding:EdgeInsets.only(bottom: 20)),
+                  CMaker(padding: EdgeInsets.symmetric(horizontal: 20),height: 100,width: double.infinity,child: Row(children: [
+                    Expanded(flex: 5,child: GenederWidegts[0]),
+                    Expanded(child: Container(),),
+                    Expanded(flex: 5,child: GenederWidegts[1]),
+                  ],)),
+                  const Padding(padding:EdgeInsets.only(bottom: 20)),
+                  SubjectsWidgets,
+                  const Padding(padding:EdgeInsets.only(bottom: 20)),
+                  BreefWidge,
+                  const Padding(padding:EdgeInsets.only(bottom: 20)),
+                  CMaker(alignment: Alignment.center,child: SignUpButton),
+                  const Padding(padding:EdgeInsets.only(bottom: 20)),
+                  CMaker(width: double.infinity,child: Row(children: [
+                    Expanded(child: Container()),
+                    Expanded(flex: 10,child: AlreadyHaveAnAccountElements[0]),
+                    Expanded(child: Container()),
+                    Expanded(flex: 6,child: AlreadyHaveAnAccountElements[1]),
+                    Expanded(child: Container()),
+                  ],)),
+                  const Padding(padding:EdgeInsets.only(bottom: 40)),
+                  ],))
+              ],),
+            ),
+          ),
+        );
+      });
+    } else if (PageWidth(context) >= 550&&PageHeight(context)>=900) {
+      setState(() {
+        TeacherSignUpBody = Scaffold(
+          body: Form(
+            key: key3,
+            child: CMaker(
+              alignment: Alignment.center,
+              width: double.infinity,
+              height:double.infinity,
+              gradient: LinearGradient(
+                          begin: Alignment.bottomLeft,
+                          end: Alignment.topRight,
+                          colors: [
+                        Color.fromARGB(255, 8, 125, 159),
+                        Color.fromARGB(255, 74, 193, 241)
+                      ]),
+              child: Column(
+                children: [
+                  Expanded(child: Container()),
+                  Expanded(flex: 3,child: Row(
+                    children: [
+                      Expanded(child: Container()),
+                      Expanded(child: BackButton),
+                      Expanded(flex: 20,
+                        child: Image.asset(
+                                                  "images/Logo.png",
+                                                  fit: BoxFit.contain,
+                                                ),
                       ),
                       Expanded(child: Container()),
-                      Row(
-                        children: [
-                          Expanded(
-                              flex: 2,
-                              child: Container(
-                                alignment: Alignment.centerRight,
-                                child: const Text(
-                                  "Already have an account ? ",
-                                  style: TextStyle(
-                                      fontSize: 15,
-                                      color: Color.fromARGB(255, 206, 206, 206),
-                                      fontWeight: FontWeight.w500),
-                                ),
-                              )),
-                          Expanded(
-                            child: Container(
-                              margin: const EdgeInsets.only(left: 20),
-                              alignment: Alignment.centerLeft,
-                              child: TextButton(
-                                onPressed: () {
-                                  Navigator.pushNamed(context, "LogInPage");
-                                },
-                                child: const Text(
-                                  "Log in",
-                                  style: TextStyle(
-                                      fontSize: 15,
-                                      color: Color.fromARGB(255, 74, 193, 241),
-                                      fontWeight: FontWeight.w500),
-                                ),
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
-                      Expanded(child: Container())
-                    ]),
-                  ),
-                ),
-              )
-            ],
+                      Expanded(child: Container()),
+                    ],
+                  ),),
+                  CMaker(circularRadius: 20,
+                  color: Colors.white,
+                  height: 800,
+                  width: 450,
+                  padding: EdgeInsets.only(top: 20,right: 20,left: 20),
+                  child: ListView(children: [
+                    const Padding(padding:EdgeInsets.only(bottom: 20)),
+                      TeacherWithArrow,
+                    const Padding(padding:EdgeInsets.only(bottom: 20)),
+                      NameTFF,
+                      PhoneTFF,
+                      EmailTFF,
+                      PasswordTFF,
+                      ConfirmTFF,
+                      const Padding(padding:EdgeInsets.only(bottom: 20)),
+                      BirthDateTC,
+                      const Padding(padding:EdgeInsets.only(bottom: 40)),
+  CMaker(alignment: Alignment.center,child: BirthDateW),
+                      const Padding(padding:EdgeInsets.only(bottom: 40)),
+                      GenederTC,
+                      const Padding(padding:EdgeInsets.only(bottom: 20)),
+                      CMaker(padding: EdgeInsets.symmetric(horizontal: 20),height: 100,width: double.infinity,child: Row(children: [
+                        Expanded(flex: 5,child: GenederWidegts[0]),
+                        Expanded(child: Container(),),
+                        Expanded(flex: 5,child: GenederWidegts[1]),
+                      ],)),
+                      const Padding(padding:EdgeInsets.only(bottom: 20)),
+                      SubjectsWidgets,
+                      const Padding(padding:EdgeInsets.only(bottom: 20)),
+                      BreefWidge,
+                      const Padding(padding:EdgeInsets.only(bottom: 20)),
+                      CMaker(alignment: Alignment.center,child: SignUpButton),
+                      const Padding(padding:EdgeInsets.only(bottom: 20)),
+                      CMaker(width: double.infinity,child: Row(children: [
+                        Expanded(child: Container()),
+                        Expanded(flex: 10,child: AlreadyHaveAnAccountElements[0]),
+                        Expanded(child: Container()),
+                        Expanded(flex: 6,child: AlreadyHaveAnAccountElements[1]),
+                        Expanded(child: Container()),
+                      ],)),
+                      const Padding(padding:EdgeInsets.only(bottom: 40)),
+                              ],)),
+                      Expanded(flex: 2,child: Container()),
+                ],
+              )),
           ),
-        ));
+        );
+      });
+    }else if (PageWidth(context) >= 550&&PageHeight(context)<900) {
+      setState(() {
+        TeacherSignUpBody = Scaffold(
+          body: Form(
+            key: key3,
+            child: CMaker(
+              alignment: Alignment.center,
+              width: double.infinity,
+              height:double.infinity,
+              gradient: LinearGradient(
+                          begin: Alignment.bottomLeft,
+                          end: Alignment.topRight,
+                          colors: [
+                        Color.fromARGB(255, 8, 125, 159),
+                        Color.fromARGB(255, 74, 193, 241)
+                      ]),
+              child: Row(
+                children: [
+                  Expanded(child: Container()),
+                  Expanded(flex: 3,child: Column(
+                    children: [
+                      Expanded(child: Container(),),
+                      CMaker(height: 70,child: BackButton,),
+                      (PageWidth(context)<800)?Expanded(flex: 20,
+                        child: Image.asset(
+                                                  "images/Logo.png",
+                                                  fit: BoxFit.contain,
+                                                ),
+                      ):Expanded(flex: 20,child: CMaker(width: 200,
+                        child: Image.asset(
+                                                  "images/Logo.png",
+                                                  fit: BoxFit.contain,
+                                                ),),
+                      ),
+                      Container(height: 70),
+                      Expanded(child: Container(),),
+                    ],
+                  ),),
+                  Expanded(child: Container()),
+                  CMaker(circularRadius: 20,
+                  color: Colors.white,
+                  height: 400,
+                  width:(PageWidth(context)<800)? PageWidth(context)/2:400,
+                  padding: EdgeInsets.only(top: 20,right: 20,left: 20),
+                  child: ListView(children: [
+                    const Padding(padding:EdgeInsets.only(bottom: 20)),
+                      TeacherWithArrow,
+                    const Padding(padding:EdgeInsets.only(bottom: 20)),
+                      NameTFF,
+                      PhoneTFF,
+                      EmailTFF,
+                      PasswordTFF,
+                      ConfirmTFF,
+                      const Padding(padding:EdgeInsets.only(bottom: 20)),
+                      BirthDateTC,
+                      const Padding(padding:EdgeInsets.only(bottom: 40)),
+  CMaker(alignment: Alignment.center,child: BirthDateW),
+                      const Padding(padding:EdgeInsets.only(bottom: 40)),
+                      GenederTC,
+                      const Padding(padding:EdgeInsets.only(bottom: 20)),
+                      CMaker(padding: EdgeInsets.symmetric(horizontal: 20),height: 100,width: double.infinity,child: Row(children: [
+                        Expanded(flex: 5,child: GenederWidegts[0]),
+                        Expanded(child: Container(),),
+                        Expanded(flex: 5,child: GenederWidegts[1]),
+                      ],)),
+                      const Padding(padding:EdgeInsets.only(bottom: 20)),
+                      SubjectsWidgets,
+                      const Padding(padding:EdgeInsets.only(bottom: 20)),
+                      BreefWidge,
+                      const Padding(padding:EdgeInsets.only(bottom: 20)),
+                      CMaker(alignment: Alignment.center,child: SignUpButton),
+                      const Padding(padding:EdgeInsets.only(bottom: 20)),
+                      CMaker(width: double.infinity,child: Row(children: [
+                        Expanded(child: Container()),
+                        Expanded(flex: 10,child: AlreadyHaveAnAccountElements[0]),
+                        Expanded(child: Container()),
+                        Expanded(flex: 6,child: AlreadyHaveAnAccountElements[1]),
+                        Expanded(child: Container()),
+                      ],)),
+                      const Padding(padding:EdgeInsets.only(bottom: 40)),
+                              ],)),
+                      Expanded(flex: 2,child: Container()),
+                ],
+              )),
+          ),
+        );
+      });
+    }
+    SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersiveSticky);
+    return TeacherSignUpBody;
   }
 }

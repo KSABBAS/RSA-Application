@@ -350,14 +350,12 @@ class _LoginPageState extends State<LogInPage> {
                       flex: 3,
                       child: Row(
                         children: [
-                      CMaker(width:  80,child: BackButton),
                       Expanded(
                         child: Image.asset(
                                                   "images/Logo.png",
                                                   fit: BoxFit.contain,
                                                 ),
                       ),
-                      Container(width:80),
                         ],
                       ),
                     ),
