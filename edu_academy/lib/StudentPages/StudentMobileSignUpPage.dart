@@ -620,7 +620,6 @@ class _StudentMobileSignUpPageState extends State<StudentMobileSignUpPage> {
                             ),
                               ];
     SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersiveSticky);
-    print(PageWidth(context));
     if (PageWidth(context) < 550) {
       setState(() {
         StudentSignUpBody = Scaffold(
@@ -693,7 +692,7 @@ class _StudentMobileSignUpPageState extends State<StudentMobileSignUpPage> {
           ),
         );
       });
-    } else if (PageWidth(context) >= 550&&PageHeight(context)>900) {
+    } else if (PageWidth(context) >= 550&&PageHeight(context)>=900) {
       setState(() {
         StudentSignUpBody = Scaffold(
           body: Form(
@@ -712,10 +711,20 @@ class _StudentMobileSignUpPageState extends State<StudentMobileSignUpPage> {
               child: Column(
                 children: [
                   Expanded(child: Container()),
-                  Expanded(flex: 3,child: Image.asset(
-                                            "images/Logo.png",
-                                            fit: BoxFit.contain,
-                                          ),),
+                  Expanded(flex: 3,child: Row(
+                    children: [
+                      Expanded(child: Container()),
+                      Expanded(child: BackButton),
+                      Expanded(flex: 20,
+                        child: Image.asset(
+                                                  "images/Logo.png",
+                                                  fit: BoxFit.contain,
+                                                ),
+                      ),
+                      Expanded(child: Container()),
+                      Expanded(child: Container()),
+                    ],
+                  ),),
                   CMaker(circularRadius: 20,
                   color: Colors.white,
                   height: 800,
@@ -765,7 +774,7 @@ class _StudentMobileSignUpPageState extends State<StudentMobileSignUpPage> {
           ),
         );
       });
-    }else if (PageWidth(context) >= 550&&PageHeight(context)<700&&PageHeight(context)<900) {
+    }else if (PageWidth(context) >= 550&&PageHeight(context)<900) {
       setState(() {
         StudentSignUpBody = Scaffold(
           body: Form(
@@ -781,17 +790,33 @@ class _StudentMobileSignUpPageState extends State<StudentMobileSignUpPage> {
                         Color.fromARGB(255, 8, 125, 159),
                         Color.fromARGB(255, 74, 193, 241)
                       ]),
-              child: Column(
+              child: Row(
                 children: [
                   Expanded(child: Container()),
-                  Expanded(flex: 3,child: Image.asset(
-                                            "images/Logo.png",
-                                            fit: BoxFit.contain,
-                                          ),),
+                  Expanded(flex: 3,child: Column(
+                    children: [
+                      Expanded(child: Container(),),
+                      CMaker(height: 70,child: BackButton,),
+                      (PageWidth(context)<800)?Expanded(flex: 20,
+                        child: Image.asset(
+                                                  "images/Logo.png",
+                                                  fit: BoxFit.contain,
+                                                ),
+                      ):Expanded(flex: 20,child: CMaker(width: 200,
+                        child: Image.asset(
+                                                  "images/Logo.png",
+                                                  fit: BoxFit.contain,
+                                                ),),
+                      ),
+                      Container(height: 70),
+                      Expanded(child: Container(),),
+                    ],
+                  ),),
+                  Expanded(child: Container()),
                   CMaker(circularRadius: 20,
                   color: Colors.white,
-                  height: 500,
-                  width: 400,
+                  height: 400,
+                  width:(PageWidth(context)<800)? PageWidth(context)/2:400,
                   padding: EdgeInsets.only(top: 20,right: 20,left: 20),
                   child: ListView(children: [
                     const Padding(padding:EdgeInsets.only(bottom: 20)),
@@ -820,7 +845,7 @@ class _StudentMobileSignUpPageState extends State<StudentMobileSignUpPage> {
                       const Padding(padding:EdgeInsets.only(bottom: 20)),
                       GradeDDB,
                       const Padding(padding:EdgeInsets.only(bottom: 60)),
-                      SignUpButton,
+                      CMaker(alignment: Alignment.center,child: SignUpButton),
                       const Padding(padding:EdgeInsets.only(bottom: 20)),
                       CMaker(width: double.infinity,child: Row(children: [
                         Expanded(child: Container()),

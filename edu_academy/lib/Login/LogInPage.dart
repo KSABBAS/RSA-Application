@@ -260,7 +260,9 @@ class _LoginPageState extends State<LogInPage> {
           },
           icon: const Icon(Icons.arrow_back)),
     );
-    if (PageWidth(context) <= 500) {
+    print(PageWidth(context));
+    print(PageHeight(context));
+    if (PageWidth(context) <= 550) {
       print("===============================================\nis a phone");
       setState(() {
         LoginBody = Scaffold(
@@ -324,7 +326,7 @@ class _LoginPageState extends State<LogInPage> {
           ),
         );
       });
-    } else {
+    } else if(PageWidth(context) >= 550&&PageHeight(context)>=900){
       print("===============================================\nnot a phone");
       setState(() {
         LoginBody = Scaffold(
@@ -346,9 +348,17 @@ class _LoginPageState extends State<LogInPage> {
                     Expanded(flex: 3,child: Container()),
                     Expanded(
                       flex: 3,
-                      child: Image.asset(
-                        "images/Logo.png",
-                        fit: BoxFit.contain,
+                      child: Row(
+                        children: [
+                      CMaker(width:  80,child: BackButton),
+                      Expanded(
+                        child: Image.asset(
+                                                  "images/Logo.png",
+                                                  fit: BoxFit.contain,
+                                                ),
+                      ),
+                      Container(width:80),
+                        ],
                       ),
                     ),
                     CMaker(
@@ -377,6 +387,74 @@ class _LoginPageState extends State<LogInPage> {
                           ],
                         )),
                     Expanded(flex: 5, child: Container()),
+                  ],
+                )),
+          ),
+        );
+      });
+    } else if(PageWidth(context) >= 550&&PageHeight(context)<900){
+      print("===============================================\nnot a phone");
+      setState(() {
+        LoginBody = Scaffold(
+          body: Form(
+            key: key1,
+            child: CMaker(
+                alignment: Alignment.center,
+                width: double.infinity,
+                height: double.infinity,
+                gradient: LinearGradient(
+                    begin: Alignment.bottomLeft,
+                    end: Alignment.topRight,
+                    colors: [
+                      Color.fromARGB(255, 8, 125, 159),
+                      Color.fromARGB(255, 74, 193, 241)
+                    ]),
+                child: Row(
+                  children: [
+                    Expanded(child: Container()),
+                  Expanded(flex: 3,child: Column(
+                    children: [
+                      Expanded(child: Container(),),
+                      (PageWidth(context)<800)?Expanded(flex: 20,
+                        child: Image.asset(
+                                                  "images/Logo.png",
+                                                  fit: BoxFit.contain,
+                                                ),
+                      ):Expanded(flex: 20,child: CMaker(width: 200,
+                        child: Image.asset(
+                                                  "images/Logo.png",
+                                                  fit: BoxFit.contain,
+                                                ),)),
+                      Expanded(child: Container(),),
+                    ],
+                  ),),
+                  Expanded(child: Container()),
+                  CMaker(
+                        circularRadius: 20,
+                        color: Colors.white,
+                        height: 400,
+                        width: (PageWidth(context)<800)? PageWidth(context)/2:400,
+                        padding: EdgeInsets.only(top: 20, right: 20, left: 20),
+                        child: ListView(
+                          children: [
+                            InputPart,
+                            CMaker(alignment: Alignment.center,child: LoginButton),
+                            Padding(padding:EdgeInsets.only(bottom: 20)),
+                            Expanded(
+                                child: Row(
+                              children: [
+                                Expanded(
+                                  child: ToWhatAreYouPage[0],
+                                ),
+                                Expanded(
+                                  child: ToWhatAreYouPage[1],
+                                )
+                              ],
+                            )),
+                            Expanded(child: Container()),
+                          ],
+                        )),
+                    Expanded( child: Container()),
                   ],
                 )),
           ),

@@ -59,9 +59,8 @@ class _TeacherSignUpPageState extends State<TeacherSignUpPage> {
     }
   @override
   Widget build(BuildContext context) {
+
     
-
-
     SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersiveSticky);
     return Scaffold(
         backgroundColor: const Color.fromARGB(255, 255, 255, 255),
