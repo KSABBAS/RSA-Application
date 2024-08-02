@@ -800,8 +800,7 @@ class _StudentMainPageState extends State<StudentMainPage> {
                     margin: EdgeInsets.symmetric(horizontal: 20),
                     child: Column(
                       children: [
-                        Expanded(
-                            child: CMaker(
+                        CMaker(
                           boxShadow: const [
                             BoxShadow(
                                 offset: Offset(1, 1),
@@ -812,8 +811,8 @@ class _StudentMainPageState extends State<StudentMainPage> {
                           padding: const EdgeInsets.all(10),
                           circularRadius: 25,
                           margin: const EdgeInsets.only(bottom: 30),
-                          color: const Color.fromARGB(255, 233, 255, 247),
-                          height: 80,
+                          color: Color.fromARGB(255, 79, 183, 145),
+                          // height: 80,
                           width: double.infinity,
                           child: Row(
                             children: [
@@ -829,9 +828,8 @@ class _StudentMainPageState extends State<StudentMainPage> {
                               Expanded(child: Container()),
                             ],
                           ),
-                        )),
-                        Expanded(
-                            child: CMaker(
+                        ),
+                        CMaker(
                           boxShadow: const [
                             BoxShadow(
                                 offset: Offset(1, 1),
@@ -843,7 +841,7 @@ class _StudentMainPageState extends State<StudentMainPage> {
                           circularRadius: 25,
                           margin: const EdgeInsets.only(bottom: 30),
                           color: const Color.fromARGB(255, 233, 255, 247),
-                          height: 80,
+                          // height: 80,
                           width: double.infinity,
                           child: Row(
                             children: [
@@ -859,7 +857,7 @@ class _StudentMainPageState extends State<StudentMainPage> {
                               Expanded(child: Container()),
                             ],
                           ),
-                        )),
+                        ),
                         Expanded(
                             child: InkWell(
                           onTap: () async {
@@ -1058,8 +1056,7 @@ class _StudentMainPageState extends State<StudentMainPage> {
                                                                   .only(
                                                                       left:
                                                                           20)),
-                                                          Expanded(
-                                                              child: InkWell(
+                                                          InkWell(
                                                                   onTap: () {
                                                                     Navigator.pop(
                                                                         context);
@@ -1195,7 +1192,7 @@ class _StudentMainPageState extends State<StudentMainPage> {
                                                                           fontWeight: FontWeight
                                                                               .w800,
                                                                           color:
-                                                                              Colors.white)))),
+                                                                              Colors.white))),
                                                         ],
                                                       ),
                                                     ));

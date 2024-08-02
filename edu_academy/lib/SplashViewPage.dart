@@ -2,6 +2,7 @@ import 'dart:async';
 import 'dart:developer';
 
 import 'package:edu_academy/Login/LogInPage.dart';
+import 'package:edu_academy/MyTools.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -11,7 +12,6 @@ class SplashViewPage extends StatefulWidget {
   @override
   State<SplashViewPage> createState() => _SplashViewPageState();
 }
-
 class _SplashViewPageState extends State<SplashViewPage>
     with SingleTickerProviderStateMixin {
   AnimationController? animationController;
@@ -32,12 +32,10 @@ class _SplashViewPageState extends State<SplashViewPage>
               //  satrt save data writen in login page
               final List<String>? loginLastValue =
                   prefs.getStringList("Login_last_value");
-              last_input1_value = loginLastValue?.isNotEmpty == true
-                  ? loginLastValue![0]
-                  : '';
-              last_input2_value = loginLastValue?.isNotEmpty == true
-                  ? loginLastValue![1]
-                  : '';
+              last_input1_value =
+                  loginLastValue?.isNotEmpty == true ? loginLastValue![0] : '';
+              last_input2_value =
+                  loginLastValue?.isNotEmpty == true ? loginLastValue![1] : '';
               // end
 
               try {
