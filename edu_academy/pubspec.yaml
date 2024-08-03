@@ -44,6 +44,7 @@ dependencies:
   overlay_loading_progress: ^1.0.1
   panara_dialogs: ^0.1.5
   shared_preferences: ^2.2.3
+  sidebar_with_animation: ^0.0.3
   string_extensions: ^0.7.2
   time_picker_spinner_pop_up: ^2.0.0
   url_launcher: ^6.3.0
