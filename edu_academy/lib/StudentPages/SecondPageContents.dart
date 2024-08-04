@@ -1266,7 +1266,6 @@ class _SecondPageState extends State<SecondPage> {
             child: Column(
               children: [
                 Container(
-                    margin: EdgeInsets.symmetric(horizontal: 20),
                     width: double.infinity,
                     decoration: const BoxDecoration(
                         boxShadow: [

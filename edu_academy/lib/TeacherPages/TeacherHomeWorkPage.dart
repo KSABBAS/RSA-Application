@@ -1,7 +1,7 @@
 import 'dart:io';
 
 import 'package:edu_academy/TeacherPages/TeacherMainPage.dart';
-import 'package:edu_academy/StudentPages/ThirdPage.dart';
+import 'package:edu_academy/StudentPages/ThirdPageContents.dart';
 import 'package:edu_academy/MyTools.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';

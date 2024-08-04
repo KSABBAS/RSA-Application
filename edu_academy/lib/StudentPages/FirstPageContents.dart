@@ -330,29 +330,31 @@ class _StudentFirstMainPageState extends State<StudentFirstMainPage> {
           child: ListView(
             children: [
               Container(
-                  width: double.infinity,
-                  decoration: const BoxDecoration(
-                      boxShadow: [
-                        BoxShadow(
-                            offset: Offset(1, 1),
-                            blurRadius: 6,
-                            spreadRadius: .03,
-                            color: Color.fromARGB(82, 0, 0, 0)),
+                    width: double.infinity,
+                    decoration: const BoxDecoration(
+                        boxShadow: [
+                          BoxShadow(
+                              offset: Offset(1, 1),
+                              blurRadius: 6,
+                              spreadRadius: .03,
+                              color: Color.fromARGB(82, 0, 0, 0)),
+                        ],
+                        color: Color.fromARGB(255, 255, 255, 255),
+                        borderRadius: BorderRadius.only(
+                            bottomLeft: Radius.circular(20),
+                            bottomRight: Radius.circular(20))),
+                    height: 80,
+                    child: Row(
+                      children: [
+                        Expanded(
+                            child:
+                                SizedBox(width: 30, height: 30, child: Logo)),
+                        Expanded(flex: 3, child: StudentNameTC),
+                        Expanded(flex: 2, child: StudentGradeTC),
+                        Expanded(child: Notifications)
                       ],
-                      color: Color.fromARGB(255, 255, 255, 255),
-                      borderRadius: BorderRadius.only(
-                          bottomLeft: Radius.circular(20),
-                          bottomRight: Radius.circular(20))),
-                  height: 70,
-                  child: Row(
-                    children: [
-                      Expanded(child: Logo),
-                      Expanded(flex: 3, child: StudentNameTC),
-                      Expanded(flex: 2, child: StudentGradeTC),
-                      Expanded(child: Notifications)
-                    ],
-                  )),
-              const Padding(padding: EdgeInsets.only(bottom: 20)),
+                    )),
+                const Padding(padding: EdgeInsets.only(top: 20)),
               Column(
                   children: [
                     CMaker(margin: EdgeInsets.symmetric(horizontal: 20),child: OneDayScadual),
@@ -408,29 +410,31 @@ class _StudentFirstMainPageState extends State<StudentFirstMainPage> {
           child: ListView(
             children: [
               Container(
-                  width: double.infinity,
-                  decoration: const BoxDecoration(
-                      boxShadow: [
-                        BoxShadow(
-                            offset: Offset(1, 1),
-                            blurRadius: 6,
-                            spreadRadius: .03,
-                            color: Color.fromARGB(82, 0, 0, 0)),
+                    width: double.infinity,
+                    decoration: const BoxDecoration(
+                        boxShadow: [
+                          BoxShadow(
+                              offset: Offset(1, 1),
+                              blurRadius: 6,
+                              spreadRadius: .03,
+                              color: Color.fromARGB(82, 0, 0, 0)),
+                        ],
+                        color: Color.fromARGB(255, 255, 255, 255),
+                        borderRadius: BorderRadius.only(
+                            bottomLeft: Radius.circular(20),
+                            bottomRight: Radius.circular(20))),
+                    height: 80,
+                    child: Row(
+                      children: [
+                        Expanded(
+                            child:
+                                SizedBox(width: 30, height: 30, child: Logo)),
+                        Expanded(flex: 3, child: StudentNameTC),
+                        Expanded(flex: 2, child: StudentGradeTC),
+                        Expanded(child: Notifications)
                       ],
-                      color: Color.fromARGB(255, 255, 255, 255),
-                      borderRadius: BorderRadius.only(
-                          bottomLeft: Radius.circular(20),
-                          bottomRight: Radius.circular(20))),
-                  height: 130,
-                  child: Row(
-                    children: [
-                      Expanded(child: SizedBox(width: 50,height: 40,child: Logo)),
-                      Expanded(flex: 3, child: StudentNameTC),
-                      Expanded(flex: 2, child: StudentGradeTC),
-                      Expanded(child: CMaker(height: 50,width: 20,child: Notifications))
-                    ],
-                  )),
-              const Padding(padding: EdgeInsets.only(bottom: 40)),
+                    )),
+                const Padding(padding: EdgeInsets.only(top: 20)),
               Column(
                   children: [
                     CMaker(margin: EdgeInsets.symmetric(horizontal: 20),child: OneDayScadual),
@@ -486,30 +490,31 @@ class _StudentFirstMainPageState extends State<StudentFirstMainPage> {
           child: ListView(
             children: [
               Container(
-                margin: EdgeInsets.symmetric(horizontal:20),
-                  width: double.infinity,
-                  decoration: const BoxDecoration(
-                      boxShadow: [
-                        BoxShadow(
-                            offset: Offset(1, 1),
-                            blurRadius: 6,
-                            spreadRadius: .03,
-                            color: Color.fromARGB(82, 0, 0, 0)),
+                    width: double.infinity,
+                    decoration: const BoxDecoration(
+                        boxShadow: [
+                          BoxShadow(
+                              offset: Offset(1, 1),
+                              blurRadius: 6,
+                              spreadRadius: .03,
+                              color: Color.fromARGB(82, 0, 0, 0)),
+                        ],
+                        color: Color.fromARGB(255, 255, 255, 255),
+                        borderRadius: BorderRadius.only(
+                            bottomLeft: Radius.circular(20),
+                            bottomRight: Radius.circular(20))),
+                    height: 80,
+                    child: Row(
+                      children: [
+                        Expanded(
+                            child:
+                                SizedBox(width: 30, height: 30, child: Logo)),
+                        Expanded(flex: 3, child: StudentNameTC),
+                        Expanded(flex: 2, child: StudentGradeTC),
+                        Expanded(child: Notifications)
                       ],
-                      color: Color.fromARGB(255, 255, 255, 255),
-                      borderRadius: BorderRadius.only(
-                          bottomLeft: Radius.circular(20),
-                          bottomRight: Radius.circular(20))),
-                  height: 80,
-                  child: Row(
-                    children: [
-                      Expanded(child: SizedBox(width: 30,height: 30,child: Logo)),
-                      Expanded(flex: 3, child: StudentNameTC),
-                      Expanded(flex: 2, child: StudentGradeTC),
-                      Expanded(child: Notifications)
-                    ],
-                  )),
-              const Padding(padding: EdgeInsets.only(bottom: 20)),
+                    )),
+                const Padding(padding: EdgeInsets.only(top: 20)),
               Column(
                   children: [
                     (PageWidth(context)<900)?Column(children: [

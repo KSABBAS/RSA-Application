@@ -2,7 +2,7 @@ import 'dart:developer';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_database/firebase_database.dart';
-import 'package:edu_academy/StudentPages/SecondPage.dart';
+import 'package:edu_academy/StudentPages/SecondPageContents.dart';
 
 Map<String, List<String>> Students_in_grades = {};
 

@@ -4,9 +4,9 @@ import 'dart:io';
 
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:edu_academy/StudentPages/FirstPageContents.dart';
-import 'package:edu_academy/StudentPages/SecondPage.dart';
+import 'package:edu_academy/StudentPages/SecondPageContents.dart';
 import 'package:edu_academy/StudentPages/StudentMobileSignUpPage.dart';
-import 'package:edu_academy/StudentPages/ThirdPage.dart';
+import 'package:edu_academy/StudentPages/ThirdPageContents.dart';
 import 'package:edu_academy/MyTools.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -67,85 +67,7 @@ class _StudentMainPageState extends State<StudentMainPage> {
         child: SecondPage()
       ),
       Container(
-        child: Column(
-          children: [
-            Container(
-              height: 70,
-              decoration: const BoxDecoration(
-                  boxShadow: [
-                    BoxShadow(
-                        offset: Offset(1, 1),
-                        blurRadius: 6,
-                        spreadRadius: .03,
-                        color: Color.fromARGB(82, 0, 0, 0)),
-                  ],
-                  color: Color.fromARGB(255, 255, 255, 255),
-                  borderRadius: BorderRadius.only(
-                      bottomLeft: Radius.circular(20),
-                      bottomRight: Radius.circular(20))),
-              child: Row(
-                children: [
-                  Container(
-                      width: 70,
-                      height: 50,
-                      padding: const EdgeInsets.only(top: 10),
-                      alignment: Alignment.center,
-                      child: InkWell(
-                          onTap: () {
-                            setState(() {
-                              PageIndex = 0;
-                            });
-                          },
-                          child: Image.asset("images/Book.png"))),
-                  Expanded(
-                    child: Row(
-                      children: [
-                        Expanded(
-                          child: CMaker(
-                            alignment: Alignment.bottomCenter,
-                            child: Text(
-                              name,
-                              style: const TextStyle(
-                                  fontSize: 17,
-                                  fontWeight: FontWeight.w500,
-                                  color: Color.fromARGB(255, 5, 123, 151)),
-                            ),
-                          ),
-                        ),
-                        Expanded(
-                          child: CMaker(
-                            alignment: Alignment.bottomCenter,
-                            child: Text(
-                              grade,
-                              style: const TextStyle(
-                                  fontSize: 16,
-                                  fontWeight: FontWeight.w500,
-                                  color: Color.fromARGB(255, 89, 89, 87)),
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                  InkWell(
-                    onTap: () {},
-                    child: Container(
-                      width: 70,
-                      padding: const EdgeInsets.only(top: 10),
-                      decoration: BoxDecoration(
-                          color: const Color.fromARGB(255, 255, 255, 255),
-                          borderRadius: BorderRadius.circular(10)),
-                      height: 50,
-                      child: const Icon(Icons.notifications),
-                    ),
-                  ),
-                ],
-              ),
-            ),
-            Expanded(flex: 8, child: Container(child: const ThirdPage())),
-            const Padding(padding: EdgeInsets.only(bottom: 10)),
-          ],
-        ),
+        child: ThirdPage(),
       ),
       Container(
         child: ListView(

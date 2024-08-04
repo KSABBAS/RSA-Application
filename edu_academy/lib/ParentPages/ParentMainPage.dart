@@ -2,8 +2,8 @@
 import 'dart:developer';
 
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
-import 'package:edu_academy/StudentPages/SecondPage.dart';
-import 'package:edu_academy/StudentPages/ThirdPage.dart';
+import 'package:edu_academy/StudentPages/SecondPageContents.dart';
+import 'package:edu_academy/StudentPages/ThirdPageContents.dart';
 import 'package:edu_academy/MyTools.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
