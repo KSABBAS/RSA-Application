@@ -1,4 +1,0 @@
-
-// List Scadual = [
-//   {"sunday":""}
-// ];

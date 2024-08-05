@@ -268,7 +268,7 @@ class _StudentFirstMainPageState extends State<StudentFirstMainPage> {
                 fontSize: (PageWidth(context)<550)? 20:(PageHeight(context)<900)? 18:25,
                 fontWeight: FontWeight.w700,
                 color: Color.fromARGB(255, 255, 255, 255));
-    Widget TeacherNotesWindow = CMaker( 
+    Widget TeacherNotesWindow = CMaker(
         boxShadow: const [
           BoxShadow(
               offset: Offset(1, 1),

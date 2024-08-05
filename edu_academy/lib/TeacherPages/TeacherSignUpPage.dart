@@ -738,14 +738,14 @@ class _TeacherSignUpPageState extends State<TeacherSignUpPage> {
                   Expanded(flex: 3,child: Row(
                     children: [
                       Expanded(child: Container()),
-                      Expanded(child: BackButton),
+                      CMaker(width: 70,height: 70,child: BackButton,),
                       Expanded(flex: 20,
                         child: Image.asset(
                                                   "images/Logo.png",
                                                   fit: BoxFit.contain,
                                                 ),
                       ),
-                      Expanded(child: Container()),
+                      Container(width: 70,height: 70),
                       Expanded(child: Container()),
                     ],
                   ),),
@@ -819,7 +819,7 @@ class _TeacherSignUpPageState extends State<TeacherSignUpPage> {
                   Expanded(flex: 3,child: Column(
                     children: [
                       Expanded(child: Container(),),
-                      CMaker(height: 70,child: BackButton,),
+                      CMaker(width: 70,height: 70,child: BackButton,),
                       (PageWidth(context)<800)?Expanded(flex: 20,
                         child: Image.asset(
                                                   "images/Logo.png",
@@ -831,7 +831,7 @@ class _TeacherSignUpPageState extends State<TeacherSignUpPage> {
                                                   fit: BoxFit.contain,
                                                 ),),
                       ),
-                      Container(height: 70),
+                      Container(width: 70,height: 70),
                       Expanded(child: Container(),),
                     ],
                   ),),

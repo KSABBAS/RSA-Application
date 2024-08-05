@@ -303,7 +303,7 @@ class _SecondPageState extends State<SecondPage> {
                   children: [
                     Expanded(child: Container()),
                     TMaker(
-                        text: "hi",//${bookOpend + 1}- ${all_books[bookOpend][2]}",
+                        text: "hi${bookOpend + 1}- ${all_books[bookOpend][2]}",
                         fontSize: 30,
                         fontWeight: FontWeight.w600,
                         color: const Color.fromARGB(255, 255, 255, 255)),
@@ -336,7 +336,7 @@ class _SecondPageState extends State<SecondPage> {
               width: (PageWidth(context)<800)?double.infinity:600,
               height: (PageHeight(context) - 390),
               child: TMaker(
-                  text: "file view \n",// ${all_books[bookOpend][0]}",
+                  text: "file view \n ${all_books[bookOpend][0]}",
                   fontSize: 30,
                   fontWeight: FontWeight.w400,
                   color: Colors.black),
@@ -583,7 +583,7 @@ class _SecondPageState extends State<SecondPage> {
                               width: double.infinity,
                               child: TMaker(
                                   text:
-                                      "     $index",//${index + 1}- ${all_books[index][2]}\ndate:${all_books[index][1]}", //////
+                                      "     $index${index + 1}- ${all_books[index][2]}\ndate:${all_books[index][1]}", //////
                                   fontSize: (PageWidth(context) < 550)? 20: (PageHeight(context) < 900)? 30: 30,
                                   fontWeight: FontWeight.w500,
                                   color: Color.fromARGB(255, 255, 255, 255)))),

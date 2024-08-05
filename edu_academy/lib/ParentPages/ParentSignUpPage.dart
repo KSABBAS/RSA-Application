@@ -493,7 +493,7 @@ class _ParentSignUpPageState extends State<ParentSignUpPage> {
                       child: Row(
                         children: [
                           Expanded(child: Container()),
-                          Expanded(child: BackButton),
+                          CMaker(width: 70,height: 70,child: BackButton,),
                           Expanded(
                             flex: 20,
                             child: Image.asset(
@@ -501,7 +501,7 @@ class _ParentSignUpPageState extends State<ParentSignUpPage> {
                               fit: BoxFit.contain,
                             ),
                           ),
-                          Expanded(child: Container()),
+                          Container(width: 70,height: 70,),
                           Expanded(child: Container()),
                         ],
                       ),
@@ -573,10 +573,7 @@ class _ParentSignUpPageState extends State<ParentSignUpPage> {
                           Expanded(
                             child: Container(),
                           ),
-                          CMaker(
-                            height: 70,
-                            child: BackButton,
-                          ),
+                          CMaker(width: 70,height: 70,child: BackButton,),
                           (PageWidth(context) < 800)
                               ? Expanded(
                                   flex: 20,
@@ -595,7 +592,7 @@ class _ParentSignUpPageState extends State<ParentSignUpPage> {
                                     ),
                                   ),
                                 ),
-                          Container(height: 70),
+                          Container(width: 70,height: 70),
                           Expanded(
                             child: Container(),
                           ),
