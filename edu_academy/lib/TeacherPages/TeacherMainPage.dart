@@ -1,4 +1,5 @@
 // import 'dart:convert';
+import 'dart:developer';
 import 'dart:io';
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:edu_academy/Login/LogInPage.dart';
@@ -6,6 +7,7 @@ import 'package:edu_academy/TeacherPages/TeacherSecondPageContents.dart';
 import 'package:edu_academy/TeacherPages/TeacherFirstPageContenets.dart';
 import 'package:edu_academy/TeacherPages/TeacherThirdPageContents.dart';
 import 'package:edu_academy/MyTools.dart';
+import 'package:edu_academy/service/Databse_Service.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:image_picker/image_picker.dart';
@@ -13,6 +15,8 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:panara_dialogs/panara_dialogs.dart';
 import 'package:overlay_loading_progress/overlay_loading_progress.dart';
 import 'package:sidebar_with_animation/animated_side_bar.dart';
+import 'package:string_extensions/string_extensions.dart';
+
 class TeacherMainPage extends StatefulWidget {
   const TeacherMainPage({super.key});
 
@@ -25,72 +29,114 @@ String NewTeacherEmail = "";
 String NewTeacherPhoneNumber = "";
 String NewTeacherPassWord = "";
 int PageIndex = 0;
+
 String SubjectName = "Math";
-List ListOfGrades = [
-  [
-    "Grade one",
-    [
-      "kareem said hassan abbas",
-      "iman ahmed esmaeel",
-      "mohsen mohammed ali",
-      "hana saeed mohsen",
-    ],
-    [
-      ["توقيت الرسالة", "1 الرسالة"],
-      ["توقيت الرسالة", "1 الرسالة"],
-      ["توقيت الرسالة", "1 الرسالة"]
-    ],
-    ["الكتاب الاول", "الكتاب الثانى"]
-  ],
-  [
-    "Grade two",
-    [
-      "kareem said hassan abbas",
-      "iman ahmed esmaeel",
-      "mohsen mohammed ali",
-      "hana saeed mohsen",
-    ],
-    [
-      ["توقيت الرسالة", "1 الرسالة"],
-      ["توقيت الرسالة", "1 الرسالة"],
-      ["توقيت الرسالة", "1 الرسالة"]
-    ],
-    ["الكتاب الاول", "الكتاب الثانى"]
-  ],
-  [
-    "Grade three",
-    [
-      "kareem said hassan abbas",
-      "iman ahmed esmaeel",
-      "mohsen mohammed ali",
-      "hana saeed mohsen",
-    ],
-    [
-      ["توقيت الرسالة", "1 الرسالة"],
-      ["توقيت الرسالة", "1 الرسالة"],
-      ["توقيت الرسالة", "1 الرسالة"]
-    ],
-    ["الكتاب الاول", "الكتاب الثانى"]
-  ],
-];
-String Subject1 = "Arabic";
-String Subject2 = "English";
-String Subject3 = "Quran";
-XFile? Avatar = null;
-XFile? ProfileAvatar = null;
+List ListOfGrades = [];
+
+List<String> Subject_techer = ['null', 'null', 'null'];
+String Subject1 = "Tester";
+String Subject2 = "null";
+String Subject3 = "null";
+XFile? Avatar;
+XFile? ProfileAvatar;
 int numberOfSubjects = 1;
 String SubjectThatIsSelected = Subject1;
 String ProfileSubjectsAvailable = "";
 
+// data base start
+String name = '';
+String Teacher_Id = '';
+List subjects_ = [];
+String subjects_string = '';
+Map<String, Map<String, List<dynamic>>> sub_data = {};
+
+// data base end
+
 class _TeacherMainPageState extends State<TeacherMainPage> {
+  // data base start
+  final dbService = DatabaseService();
+  late Future<void> _dataFuture;
+
+  void initState() {
+    super.initState();
+    _dataFuture = _initializeData();
+  }
+
+  Future<void> _initializeData() async {
+    print("start .. _initializeData ");
+    print("ListOfGrades $ListOfGrades");
+
+
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    final List<String>? items = await prefs.getStringList('id');
+    log(items.toString());
+    if (items != null && items.isNotEmpty) {
+      setState(() {
+        print("start .. setState");
+        name = items[2].split("-")[0];
+        name = "${name.split(" ")[0]} ${name.split(" ")[1]}".toTitleCase;
+        // start subject as list to use or add a name
+        subjects_ = items[2].split("-").sublist(1);
+        subjects_.removeWhere((item) => item == 'null');
+        print("subjects_ $subjects_");
+        Teacher_Id = items[0].split("#")[1];
+        subjects_string = items[2]
+            .split('-')
+            .sublist(1)
+            .map((subject) =>
+                subject.replaceAll(RegExp(r"[\[\]']"), '').split(', ')[0])
+            .where((subject) => subject != 'null')
+            .join('-');
+        print("subjects_string $subjects_string");
+        print("subjects_ $subjects_");
+      });
+      Map<String, Map<String, List<dynamic>>> data0 =
+          await dbService.fiGrades_and_Students(Teacher_Id, subjects_);
+      setState(() {
+        sub_data = data0 as Map<String, Map<String, List<dynamic>>>;
+        int index_ = 0;
+        for (String i in sub_data.keys) {
+          Subject_techer[index_] = i;
+          index_++;
+        }
+        Subject1 = Subject_techer[0];
+        Subject2 = Subject_techer[1];
+        Subject3 = Subject_techer[2];
+        print("sub_data $sub_data");
+        print("Subject_techer $Subject_techer");
+        print(
+            "sub_data[SubjectThatIsSelected]!.keys ${sub_data[SubjectThatIsSelected]}");
+
+        for (var i in sub_data[SubjectThatIsSelected]!.keys) {
+          print("i $i");
+          print("ii ${sub_data[SubjectThatIsSelected]![i]}");
+          List gg = [];
+          for (var j in sub_data[SubjectThatIsSelected]![i]!) {
+            print("j$j");
+            gg.add(j);
+          }
+          print("gg $gg");
+          ListOfGrades.add([i, gg]);
+          gg = [];
+          print("ListOfGrades $ListOfGrades");
+        }
+        // for (var i in sub_data[SubjectThatIsSelected]!.keys) {
+        //   print(i);
+        // }
+      });
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
+    print("start .. build ");
+
     late Widget TeacherMainPageBody;
     if (Subject2.toString() != "null" && Subject3.toString() == "null") {
       ProfileSubjectsAvailable =
           "${Subject1.toString()} - ${Subject2.toString()}";
     } else if (Subject2.toString() == "null" && Subject3.toString() == "null") {
-      ProfileSubjectsAvailable = "${Subject1.toString()}";
+      ProfileSubjectsAvailable = Subject1.toString();
     } else {
       ProfileSubjectsAvailable =
           "${Subject1.toString()} - ${Subject2.toString()} - ${Subject3.toString()}";
@@ -134,9 +180,9 @@ class _TeacherMainPageState extends State<TeacherMainPage> {
                         children: [
                           Expanded(
                             child: CMaker(
-                              padding: EdgeInsets.only(bottom: 13),
+                              padding: const EdgeInsets.only(bottom: 13),
                               alignment: Alignment.bottomCenter,
-                              child: Text(
+                              child: const Text(
                                 "kareem said",
                                 style: TextStyle(
                                     fontSize: 17,
@@ -152,11 +198,11 @@ class _TeacherMainPageState extends State<TeacherMainPage> {
                                   Subject3 == "null") {
                                 numberOfSubjects = 1;
                                 return CMaker(
-                                  padding: EdgeInsets.only(bottom: 13),
+                                  padding: const EdgeInsets.only(bottom: 13),
                                   alignment: Alignment.bottomCenter,
                                   child: Text(
-                                    "${Subject1}",
-                                    style: TextStyle(
+                                    Subject1,
+                                    style: const TextStyle(
                                         fontSize: 16,
                                         fontWeight: FontWeight.w500,
                                         color: Color.fromARGB(255, 89, 89, 87)),
@@ -170,7 +216,7 @@ class _TeacherMainPageState extends State<TeacherMainPage> {
                                 return CMaker(
                                   alignment: Alignment.bottomCenter,
                                   child: DropdownButton(
-                                    underline: Container(
+                                    underline: const SizedBox(
                                       height: 0,
                                       width: 0,
                                     ),
@@ -179,8 +225,8 @@ class _TeacherMainPageState extends State<TeacherMainPage> {
                                       DropdownMenuItem(
                                         value: Subject1,
                                         child: Text(
-                                          "${Subject1}",
-                                          style: TextStyle(
+                                          Subject1,
+                                          style: const TextStyle(
                                               fontSize: 16,
                                               fontWeight: FontWeight.w500,
                                               color: Color.fromARGB(
@@ -190,8 +236,8 @@ class _TeacherMainPageState extends State<TeacherMainPage> {
                                       DropdownMenuItem(
                                         value: Subject2,
                                         child: Text(
-                                          "${Subject2}",
-                                          style: TextStyle(
+                                          Subject2,
+                                          style: const TextStyle(
                                               fontSize: 16,
                                               fontWeight: FontWeight.w500,
                                               color: Color.fromARGB(
@@ -201,7 +247,8 @@ class _TeacherMainPageState extends State<TeacherMainPage> {
                                     ],
                                     onChanged: (value) {
                                       setState(() {
-                                        SubjectThatIsSelected = value.toString();
+                                        SubjectThatIsSelected =
+                                            value.toString();
                                       });
                                     },
                                   ),
@@ -211,7 +258,7 @@ class _TeacherMainPageState extends State<TeacherMainPage> {
                                 return CMaker(
                                   alignment: Alignment.bottomCenter,
                                   child: DropdownButton(
-                                    underline: Container(
+                                    underline: const SizedBox(
                                       height: 0,
                                       width: 0,
                                     ),
@@ -220,8 +267,8 @@ class _TeacherMainPageState extends State<TeacherMainPage> {
                                       DropdownMenuItem(
                                         value: Subject1,
                                         child: Text(
-                                          "${Subject1}",
-                                          style: TextStyle(
+                                          Subject1,
+                                          style: const TextStyle(
                                               fontSize: 16,
                                               fontWeight: FontWeight.w500,
                                               color: Color.fromARGB(
@@ -231,8 +278,8 @@ class _TeacherMainPageState extends State<TeacherMainPage> {
                                       DropdownMenuItem(
                                         value: Subject2,
                                         child: Text(
-                                          "${Subject2}",
-                                          style: TextStyle(
+                                          Subject2,
+                                          style: const TextStyle(
                                               fontSize: 16,
                                               fontWeight: FontWeight.w500,
                                               color: Color.fromARGB(
@@ -242,8 +289,8 @@ class _TeacherMainPageState extends State<TeacherMainPage> {
                                       DropdownMenuItem(
                                         value: Subject3,
                                         child: Text(
-                                          "${Subject3}",
-                                          style: TextStyle(
+                                          Subject3,
+                                          style: const TextStyle(
                                               fontSize: 16,
                                               fontWeight: FontWeight.w500,
                                               color: Color.fromARGB(
@@ -253,7 +300,8 @@ class _TeacherMainPageState extends State<TeacherMainPage> {
                                     ],
                                     onChanged: (value) {
                                       setState(() {
-                                        SubjectThatIsSelected = value.toString();
+                                        SubjectThatIsSelected =
+                                            value.toString();
                                       });
                                     },
                                   ),
@@ -280,13 +328,13 @@ class _TeacherMainPageState extends State<TeacherMainPage> {
                 ),
               ),
               const Padding(padding: EdgeInsets.only(top: 30)),
-              TeacherFirstPageContenets()
+              const TeacherFirstPageContenets()
             ],
           ),
         ),
       ),
       Expanded(
-        child: Container(
+        child: SizedBox(
           height: PageHeight(context) + 300,
           child: ListView(
             shrinkWrap: false,
@@ -324,9 +372,9 @@ class _TeacherMainPageState extends State<TeacherMainPage> {
                         children: [
                           Expanded(
                             child: CMaker(
-                              padding: EdgeInsets.only(bottom: 13),
+                              padding: const EdgeInsets.only(bottom: 13),
                               alignment: Alignment.bottomCenter,
-                              child: Text(
+                              child: const Text(
                                 "kareem said",
                                 style: TextStyle(
                                     fontSize: 17,
@@ -342,11 +390,11 @@ class _TeacherMainPageState extends State<TeacherMainPage> {
                                   Subject3 == "null") {
                                 numberOfSubjects = 1;
                                 return CMaker(
-                                  padding: EdgeInsets.only(bottom: 13),
+                                  padding: const EdgeInsets.only(bottom: 13),
                                   alignment: Alignment.bottomCenter,
                                   child: Text(
-                                    "${Subject1}",
-                                    style: TextStyle(
+                                    Subject1,
+                                    style: const TextStyle(
                                         fontSize: 16,
                                         fontWeight: FontWeight.w500,
                                         color: Color.fromARGB(255, 89, 89, 87)),
@@ -360,7 +408,7 @@ class _TeacherMainPageState extends State<TeacherMainPage> {
                                 return CMaker(
                                   alignment: Alignment.bottomCenter,
                                   child: DropdownButton(
-                                    underline: Container(
+                                    underline: const SizedBox(
                                       height: 0,
                                       width: 0,
                                     ),
@@ -369,8 +417,8 @@ class _TeacherMainPageState extends State<TeacherMainPage> {
                                       DropdownMenuItem(
                                         value: Subject1,
                                         child: Text(
-                                          "${Subject1}",
-                                          style: TextStyle(
+                                          Subject1,
+                                          style: const TextStyle(
                                               fontSize: 16,
                                               fontWeight: FontWeight.w500,
                                               color: Color.fromARGB(
@@ -380,8 +428,8 @@ class _TeacherMainPageState extends State<TeacherMainPage> {
                                       DropdownMenuItem(
                                         value: Subject2,
                                         child: Text(
-                                          "${Subject2}",
-                                          style: TextStyle(
+                                          Subject2,
+                                          style: const TextStyle(
                                               fontSize: 16,
                                               fontWeight: FontWeight.w500,
                                               color: Color.fromARGB(
@@ -390,8 +438,11 @@ class _TeacherMainPageState extends State<TeacherMainPage> {
                                       ),
                                     ],
                                     onChanged: (value) {
+                                      ListOfGrades = [];
+                                      _dataFuture = _initializeData();
                                       setState(() {
-                                        SubjectThatIsSelected = value.toString();
+                                        SubjectThatIsSelected =
+                                            value.toString();
                                       });
                                     },
                                   ),
@@ -401,7 +452,7 @@ class _TeacherMainPageState extends State<TeacherMainPage> {
                                 return CMaker(
                                   alignment: Alignment.bottomCenter,
                                   child: DropdownButton(
-                                    underline: Container(
+                                    underline: const SizedBox(
                                       height: 0,
                                       width: 0,
                                     ),
@@ -410,8 +461,8 @@ class _TeacherMainPageState extends State<TeacherMainPage> {
                                       DropdownMenuItem(
                                         value: Subject1,
                                         child: Text(
-                                          "${Subject1}",
-                                          style: TextStyle(
+                                          Subject1,
+                                          style: const TextStyle(
                                               fontSize: 16,
                                               fontWeight: FontWeight.w500,
                                               color: Color.fromARGB(
@@ -421,8 +472,8 @@ class _TeacherMainPageState extends State<TeacherMainPage> {
                                       DropdownMenuItem(
                                         value: Subject2,
                                         child: Text(
-                                          "${Subject2}",
-                                          style: TextStyle(
+                                          Subject2,
+                                          style: const TextStyle(
                                               fontSize: 16,
                                               fontWeight: FontWeight.w500,
                                               color: Color.fromARGB(
@@ -432,8 +483,8 @@ class _TeacherMainPageState extends State<TeacherMainPage> {
                                       DropdownMenuItem(
                                         value: Subject3,
                                         child: Text(
-                                          "${Subject3}",
-                                          style: TextStyle(
+                                          Subject3,
+                                          style: const TextStyle(
                                               fontSize: 16,
                                               fontWeight: FontWeight.w500,
                                               color: Color.fromARGB(
@@ -443,7 +494,8 @@ class _TeacherMainPageState extends State<TeacherMainPage> {
                                     ],
                                     onChanged: (value) {
                                       setState(() {
-                                        SubjectThatIsSelected = value.toString();
+                                        SubjectThatIsSelected =
+                                            value.toString();
                                       });
                                     },
                                   ),
@@ -469,7 +521,7 @@ class _TeacherMainPageState extends State<TeacherMainPage> {
                   ],
                 ),
               ),
-              Padding(padding: EdgeInsets.only(top: 10)),
+              const Padding(padding: EdgeInsets.only(top: 10)),
               TeacherSecondPageContents(
                 ListOfGrades:
                     ListOfGrades, // put the list of grades and its students from the database here
@@ -516,9 +568,9 @@ class _TeacherMainPageState extends State<TeacherMainPage> {
                         children: [
                           Expanded(
                             child: CMaker(
-                              padding: EdgeInsets.only(bottom: 13),
+                              padding: const EdgeInsets.only(bottom: 13),
                               alignment: Alignment.bottomCenter,
-                              child: Text(
+                              child: const Text(
                                 "kareem said",
                                 style: TextStyle(
                                     fontSize: 17,
@@ -534,11 +586,11 @@ class _TeacherMainPageState extends State<TeacherMainPage> {
                                   Subject3 == "null") {
                                 numberOfSubjects = 1;
                                 return CMaker(
-                                  padding: EdgeInsets.only(bottom: 13),
+                                  padding: const EdgeInsets.only(bottom: 13),
                                   alignment: Alignment.bottomCenter,
                                   child: Text(
-                                    "${Subject1}",
-                                    style: TextStyle(
+                                    Subject1,
+                                    style: const TextStyle(
                                         fontSize: 16,
                                         fontWeight: FontWeight.w500,
                                         color: Color.fromARGB(255, 89, 89, 87)),
@@ -552,7 +604,7 @@ class _TeacherMainPageState extends State<TeacherMainPage> {
                                 return CMaker(
                                   alignment: Alignment.bottomCenter,
                                   child: DropdownButton(
-                                    underline: Container(
+                                    underline: const SizedBox(
                                       height: 0,
                                       width: 0,
                                     ),
@@ -561,8 +613,8 @@ class _TeacherMainPageState extends State<TeacherMainPage> {
                                       DropdownMenuItem(
                                         value: Subject1,
                                         child: Text(
-                                          "${Subject1}",
-                                          style: TextStyle(
+                                          Subject1,
+                                          style: const TextStyle(
                                               fontSize: 16,
                                               fontWeight: FontWeight.w500,
                                               color: Color.fromARGB(
@@ -572,8 +624,8 @@ class _TeacherMainPageState extends State<TeacherMainPage> {
                                       DropdownMenuItem(
                                         value: Subject2,
                                         child: Text(
-                                          "${Subject2}",
-                                          style: TextStyle(
+                                          Subject2,
+                                          style: const TextStyle(
                                               fontSize: 16,
                                               fontWeight: FontWeight.w500,
                                               color: Color.fromARGB(
@@ -583,7 +635,8 @@ class _TeacherMainPageState extends State<TeacherMainPage> {
                                     ],
                                     onChanged: (value) {
                                       setState(() {
-                                        SubjectThatIsSelected = value.toString();
+                                        SubjectThatIsSelected =
+                                            value.toString();
                                       });
                                     },
                                   ),
@@ -593,7 +646,7 @@ class _TeacherMainPageState extends State<TeacherMainPage> {
                                 return CMaker(
                                   alignment: Alignment.bottomCenter,
                                   child: DropdownButton(
-                                    underline: Container(
+                                    underline: const SizedBox(
                                       height: 0,
                                       width: 0,
                                     ),
@@ -602,8 +655,8 @@ class _TeacherMainPageState extends State<TeacherMainPage> {
                                       DropdownMenuItem(
                                         value: Subject1,
                                         child: Text(
-                                          "${Subject1}",
-                                          style: TextStyle(
+                                          Subject1,
+                                          style: const TextStyle(
                                               fontSize: 16,
                                               fontWeight: FontWeight.w500,
                                               color: Color.fromARGB(
@@ -613,8 +666,8 @@ class _TeacherMainPageState extends State<TeacherMainPage> {
                                       DropdownMenuItem(
                                         value: Subject2,
                                         child: Text(
-                                          "${Subject2}",
-                                          style: TextStyle(
+                                          Subject2,
+                                          style: const TextStyle(
                                               fontSize: 16,
                                               fontWeight: FontWeight.w500,
                                               color: Color.fromARGB(
@@ -624,8 +677,8 @@ class _TeacherMainPageState extends State<TeacherMainPage> {
                                       DropdownMenuItem(
                                         value: Subject3,
                                         child: Text(
-                                          "${Subject3}",
-                                          style: TextStyle(
+                                          Subject3,
+                                          style: const TextStyle(
                                               fontSize: 16,
                                               fontWeight: FontWeight.w500,
                                               color: Color.fromARGB(
@@ -635,7 +688,8 @@ class _TeacherMainPageState extends State<TeacherMainPage> {
                                     ],
                                     onChanged: (value) {
                                       setState(() {
-                                        SubjectThatIsSelected = value.toString();
+                                        SubjectThatIsSelected =
+                                            value.toString();
                                       });
                                     },
                                   ),
@@ -661,7 +715,7 @@ class _TeacherMainPageState extends State<TeacherMainPage> {
                   ],
                 ),
               ),
-              Padding(
+              const Padding(
                 padding: EdgeInsets.only(top: 20),
               ),
               TeacherThirdPageContents(
@@ -707,9 +761,9 @@ class _TeacherMainPageState extends State<TeacherMainPage> {
                   children: [
                     Expanded(
                       child: CMaker(
-                        padding: EdgeInsets.only(bottom: 13),
+                        padding: const EdgeInsets.only(bottom: 13),
                         alignment: Alignment.bottomCenter,
-                        child: Text(
+                        child: const Text(
                           "kareem said",
                           style: TextStyle(
                               fontSize: 17,
@@ -725,11 +779,11 @@ class _TeacherMainPageState extends State<TeacherMainPage> {
                             Subject3 == "null") {
                           numberOfSubjects = 1;
                           return CMaker(
-                            padding: EdgeInsets.only(bottom: 13),
+                            padding: const EdgeInsets.only(bottom: 13),
                             alignment: Alignment.bottomCenter,
                             child: Text(
-                              "${Subject1}",
-                              style: TextStyle(
+                              Subject1,
+                              style: const TextStyle(
                                   fontSize: 16,
                                   fontWeight: FontWeight.w500,
                                   color: Color.fromARGB(255, 89, 89, 87)),
@@ -743,7 +797,7 @@ class _TeacherMainPageState extends State<TeacherMainPage> {
                           return CMaker(
                             alignment: Alignment.bottomCenter,
                             child: DropdownButton(
-                              underline: Container(
+                              underline: const SizedBox(
                                 height: 0,
                                 width: 0,
                               ),
@@ -752,8 +806,8 @@ class _TeacherMainPageState extends State<TeacherMainPage> {
                                 DropdownMenuItem(
                                   value: Subject1,
                                   child: Text(
-                                    "${Subject1}",
-                                    style: TextStyle(
+                                    Subject1,
+                                    style: const TextStyle(
                                         fontSize: 16,
                                         fontWeight: FontWeight.w500,
                                         color: Color.fromARGB(255, 89, 89, 87)),
@@ -762,8 +816,8 @@ class _TeacherMainPageState extends State<TeacherMainPage> {
                                 DropdownMenuItem(
                                   value: Subject2,
                                   child: Text(
-                                    "${Subject2}",
-                                    style: TextStyle(
+                                    Subject2,
+                                    style: const TextStyle(
                                         fontSize: 16,
                                         fontWeight: FontWeight.w500,
                                         color: Color.fromARGB(255, 89, 89, 87)),
@@ -782,7 +836,7 @@ class _TeacherMainPageState extends State<TeacherMainPage> {
                           return CMaker(
                             alignment: Alignment.bottomCenter,
                             child: DropdownButton(
-                              underline: Container(
+                              underline: const SizedBox(
                                 height: 0,
                                 width: 0,
                               ),
@@ -791,8 +845,8 @@ class _TeacherMainPageState extends State<TeacherMainPage> {
                                 DropdownMenuItem(
                                   value: Subject1,
                                   child: Text(
-                                    "${Subject1}",
-                                    style: TextStyle(
+                                    Subject1,
+                                    style: const TextStyle(
                                         fontSize: 16,
                                         fontWeight: FontWeight.w500,
                                         color: Color.fromARGB(255, 89, 89, 87)),
@@ -801,8 +855,8 @@ class _TeacherMainPageState extends State<TeacherMainPage> {
                                 DropdownMenuItem(
                                   value: Subject2,
                                   child: Text(
-                                    "${Subject2}",
-                                    style: TextStyle(
+                                    Subject2,
+                                    style: const TextStyle(
                                         fontSize: 16,
                                         fontWeight: FontWeight.w500,
                                         color: Color.fromARGB(255, 89, 89, 87)),
@@ -811,8 +865,8 @@ class _TeacherMainPageState extends State<TeacherMainPage> {
                                 DropdownMenuItem(
                                   value: Subject3,
                                   child: Text(
-                                    "${Subject3}",
-                                    style: TextStyle(
+                                    Subject3,
+                                    style: const TextStyle(
                                         fontSize: 16,
                                         fontWeight: FontWeight.w500,
                                         color: Color.fromARGB(255, 89, 89, 87)),
@@ -852,7 +906,7 @@ class _TeacherMainPageState extends State<TeacherMainPage> {
             ],
           ),
         ),
-        Padding(
+        const Padding(
           padding: EdgeInsets.only(bottom: 40),
         ),
         CMaker(
@@ -870,7 +924,7 @@ class _TeacherMainPageState extends State<TeacherMainPage> {
                 },
                 child: CMaker(
                   circularRadius: 130,
-                  boxShadow: [
+                  boxShadow: const [
                     BoxShadow(
                         offset: Offset(1, 1),
                         blurRadius: 6,
@@ -884,7 +938,7 @@ class _TeacherMainPageState extends State<TeacherMainPage> {
                     fit: StackFit.expand,
                     children: [
                       (ProfileAvatar == null)
-                          ? CircleAvatar(
+                          ? const CircleAvatar(
                               backgroundImage:
                                   AssetImage("images/personDeafult.png"))
                           : CircleAvatar(
@@ -897,26 +951,26 @@ class _TeacherMainPageState extends State<TeacherMainPage> {
                         child: CMaker(
                           border: Border.all(
                               width: 4,
-                              color: Color.fromARGB(255, 233, 255, 247)),
+                              color: const Color.fromARGB(255, 233, 255, 247)),
                           height: 40,
                           width: 40,
                           circularRadius: 50,
                           color: const Color.fromARGB(255, 36, 160, 209),
-                          child: Icon(Icons.add, size: 30),
+                          child: const Icon(Icons.add, size: 30),
                         ),
                       ),
                     ],
                   ),
                 ),
               ),
-              Padding(padding: EdgeInsets.only(bottom: 20)),
+              const Padding(padding: EdgeInsets.only(bottom: 20)),
               CMaker(
-                  padding: EdgeInsets.all(20),
+                  padding: const EdgeInsets.all(20),
                   height: PageHeight(context) - 400,
                   width: double.infinity,
-                  color: Color.fromARGB(255, 36, 160, 209),
+                  color: const Color.fromARGB(255, 36, 160, 209),
                   circularRadius: 25,
-                  margin: EdgeInsets.symmetric(horizontal: 20),
+                  margin: const EdgeInsets.symmetric(horizontal: 20),
                   child: Column(
                     children: [
                       Expanded(
@@ -938,7 +992,7 @@ class _TeacherMainPageState extends State<TeacherMainPage> {
                           children: [
                             Expanded(child: Container()),
                             CMaker(
-                                padding: EdgeInsets.only(right: 10),
+                                padding: const EdgeInsets.only(right: 10),
                                 child: TMaker(
                                     text: "Kareem said hassan",
                                     fontSize: 20,
@@ -967,7 +1021,7 @@ class _TeacherMainPageState extends State<TeacherMainPage> {
                           children: [
                             Expanded(child: Container()),
                             CMaker(
-                                padding: EdgeInsets.only(right: 10),
+                                padding: const EdgeInsets.only(right: 10),
                                 child: TMaker(
                                     text: ProfileSubjectsAvailable,
                                     fontSize: 20,
@@ -984,7 +1038,7 @@ class _TeacherMainPageState extends State<TeacherMainPage> {
                             context: context,
                             builder: (context) {
                               return AlertDialog(
-                                title: Text(
+                                title: const Text(
                                     "Enter the password                  "),
                                 content: CMaker(
                                   height: 60,
@@ -1026,7 +1080,7 @@ class _TeacherMainPageState extends State<TeacherMainPage> {
                                       onPressed: () {
                                         Navigator.pop(context);
                                       },
-                                      child: Text(
+                                      child: const Text(
                                         "Cancel",
                                       )),
                                   TextButton(
@@ -1036,9 +1090,9 @@ class _TeacherMainPageState extends State<TeacherMainPage> {
                                             context: context,
                                             builder: (context) {
                                               return AlertDialog(
-                                                  title: Text(
+                                                  title: const Text(
                                                       "What do you wanna Change ?"),
-                                                  content: Container(
+                                                  content: SizedBox(
                                                     height: 100,
                                                     child: Row(
                                                       children: [
@@ -1054,7 +1108,7 @@ class _TeacherMainPageState extends State<TeacherMainPage> {
                                                                           (context) {
                                                                         return AlertDialog(
                                                                           title:
-                                                                              Text("enter the new Email Adress"),
+                                                                              const Text("enter the new Email Adress"),
                                                                           content:
                                                                               CMaker(
                                                                             height:
@@ -1094,7 +1148,7 @@ class _TeacherMainPageState extends State<TeacherMainPage> {
                                                                                 onPressed: () {
                                                                                   Navigator.pop(context);
                                                                                 },
-                                                                                child: Text("Cancel")),
+                                                                                child: const Text("Cancel")),
                                                                             TextButton(
                                                                                 onPressed: () async {
                                                                                   if (NewKey1.currentState!.validate()) {
@@ -1114,7 +1168,7 @@ class _TeacherMainPageState extends State<TeacherMainPage> {
                                                                                         ),
                                                                                       ),
                                                                                     );
-                                                                                    await Future.delayed(Duration(seconds: 2));
+                                                                                    await Future.delayed(const Duration(seconds: 2));
                                                                                     //edit the Email in the database if there is no one else using it and return true or false
                                                                                     OverlayLoadingProgress.stop();
                                                                                     if (true) {
@@ -1147,17 +1201,19 @@ class _TeacherMainPageState extends State<TeacherMainPage> {
                                                                                     }
                                                                                   }
                                                                                 },
-                                                                                child: Text("Ok")),
+                                                                                child: const Text("Ok")),
                                                                           ],
                                                                         );
                                                                       });
                                                                 },
                                                                 child: CMaker(
-                                                                    alignment: Alignment
-                                                                        .center,
+                                                                    alignment:
+                                                                        Alignment
+                                                                            .center,
                                                                     height: 60,
-                                                                    color: Color
-                                                                        .fromARGB(
+                                                                    color:
+                                                                        const Color
+                                                                            .fromARGB(
                                                                             255,
                                                                             144,
                                                                             30,
@@ -1174,7 +1230,7 @@ class _TeacherMainPageState extends State<TeacherMainPage> {
                                                                                 .w800,
                                                                         color: Colors
                                                                             .white)))),
-                                                        Padding(
+                                                        const Padding(
                                                             padding:
                                                                 EdgeInsets.only(
                                                                     left: 20)),
@@ -1190,7 +1246,7 @@ class _TeacherMainPageState extends State<TeacherMainPage> {
                                                                           (context) {
                                                                         return AlertDialog(
                                                                           title:
-                                                                              Text("enter the new Password"),
+                                                                              const Text("enter the new Password"),
                                                                           content:
                                                                               CMaker(
                                                                             height:
@@ -1239,7 +1295,7 @@ class _TeacherMainPageState extends State<TeacherMainPage> {
                                                                                 onPressed: () {
                                                                                   Navigator.pop(context);
                                                                                 },
-                                                                                child: Text("Cancel")),
+                                                                                child: const Text("Cancel")),
                                                                             TextButton(
                                                                                 onPressed: () async {
                                                                                   if (NewKey1.currentState!.validate()) {
@@ -1259,7 +1315,7 @@ class _TeacherMainPageState extends State<TeacherMainPage> {
                                                                                         ),
                                                                                       ),
                                                                                     );
-                                                                                    await Future.delayed(Duration(seconds: 2));
+                                                                                    await Future.delayed(const Duration(seconds: 2));
                                                                                     //edit the Email in the database if there is no one else using it and return true or false
                                                                                     OverlayLoadingProgress.stop();
                                                                                     if (true) {
@@ -1292,17 +1348,19 @@ class _TeacherMainPageState extends State<TeacherMainPage> {
                                                                                     }
                                                                                   }
                                                                                 },
-                                                                                child: Text("Ok")),
+                                                                                child: const Text("Ok")),
                                                                           ],
                                                                         );
                                                                       });
                                                                 },
                                                                 child: CMaker(
-                                                                    alignment: Alignment
-                                                                        .center,
+                                                                    alignment:
+                                                                        Alignment
+                                                                            .center,
                                                                     height: 60,
-                                                                    color: Color
-                                                                        .fromARGB(
+                                                                    color:
+                                                                        const Color
+                                                                            .fromARGB(
                                                                             255,
                                                                             144,
                                                                             30,
@@ -1324,7 +1382,7 @@ class _TeacherMainPageState extends State<TeacherMainPage> {
                                                   ));
                                             });
                                       },
-                                      child: Text("Ok"))
+                                      child: const Text("Ok"))
                                 ],
                               );
                             },
@@ -1348,7 +1406,7 @@ class _TeacherMainPageState extends State<TeacherMainPage> {
                             children: [
                               Expanded(child: Container()),
                               CMaker(
-                                  padding: EdgeInsets.only(right: 10),
+                                  padding: const EdgeInsets.only(right: 10),
                                   child: TMaker(
                                       text: "Email",
                                       fontSize: 15,
@@ -1362,7 +1420,7 @@ class _TeacherMainPageState extends State<TeacherMainPage> {
                                   fontWeight: FontWeight.w600,
                                   color: const Color.fromARGB(255, 0, 0, 0)),
                               Expanded(child: Container()),
-                              Icon(Icons.arrow_forward_ios_outlined)
+                              const Icon(Icons.arrow_forward_ios_outlined)
                             ],
                           ),
                         ),
@@ -1374,7 +1432,7 @@ class _TeacherMainPageState extends State<TeacherMainPage> {
                               context: context,
                               builder: (context) {
                                 return AlertDialog(
-                                    title: Text(
+                                    title: const Text(
                                         "Enter the password                  "),
                                     content: CMaker(
                                       height: 60,
@@ -1414,7 +1472,7 @@ class _TeacherMainPageState extends State<TeacherMainPage> {
                                           onPressed: () {
                                             Navigator.pop(context);
                                           },
-                                          child: Text(
+                                          child: const Text(
                                             "Cancel",
                                           )),
                                       TextButton(
@@ -1424,7 +1482,7 @@ class _TeacherMainPageState extends State<TeacherMainPage> {
                                                 context: context,
                                                 builder: (context) {
                                                   return AlertDialog(
-                                                    title: Text(
+                                                    title: const Text(
                                                         "enter the new Number"),
                                                     content: CMaker(
                                                       height: 80,
@@ -1510,8 +1568,8 @@ class _TeacherMainPageState extends State<TeacherMainPage> {
                                                             Navigator.pop(
                                                                 context);
                                                           },
-                                                          child:
-                                                              Text("Cancel")),
+                                                          child: const Text(
+                                                              "Cancel")),
                                                       TextButton(
                                                           onPressed: () async {
                                                             if (NewKey1
@@ -1555,7 +1613,7 @@ class _TeacherMainPageState extends State<TeacherMainPage> {
                                                                 ),
                                                               );
                                                               await Future.delayed(
-                                                                  Duration(
+                                                                  const Duration(
                                                                       seconds:
                                                                           2));
                                                               //edit the Email in the database if there is no one else using it and return true or false
@@ -1612,12 +1670,13 @@ class _TeacherMainPageState extends State<TeacherMainPage> {
                                                               }
                                                             }
                                                           },
-                                                          child: Text("Ok")),
+                                                          child:
+                                                              const Text("Ok")),
                                                     ],
                                                   );
                                                 });
                                           },
-                                          child: Text(
+                                          child: const Text(
                                             "ok",
                                           )),
                                     ]);
@@ -1641,7 +1700,7 @@ class _TeacherMainPageState extends State<TeacherMainPage> {
                             children: [
                               Expanded(child: Container()),
                               CMaker(
-                                  padding: EdgeInsets.only(right: 10),
+                                  padding: const EdgeInsets.only(right: 10),
                                   child: TMaker(
                                       text: "Phone",
                                       fontSize: 15,
@@ -1655,7 +1714,7 @@ class _TeacherMainPageState extends State<TeacherMainPage> {
                                   fontWeight: FontWeight.w600,
                                   color: const Color.fromARGB(255, 0, 0, 0)),
                               Expanded(child: Container()),
-                              Icon(Icons.arrow_forward_ios_outlined)
+                              const Icon(Icons.arrow_forward_ios_outlined)
                             ],
                           ),
                         ),
@@ -1684,7 +1743,8 @@ class _TeacherMainPageState extends State<TeacherMainPage> {
                                   children: [
                                     Expanded(child: Container()),
                                     CMaker(
-                                        padding: EdgeInsets.only(right: 10),
+                                        padding:
+                                            const EdgeInsets.only(right: 10),
                                         child: TMaker(
                                             text: "Rate us",
                                             fontSize: 25,
@@ -1741,16 +1801,16 @@ class _TeacherMainPageState extends State<TeacherMainPage> {
             ]),
         body: Pages.elementAt(PageIndex),
       );
-    } else if (PageHeight(context) >= 550 && PageHeight(context) < 900) {
+    } else if (PageWidth(context) >= 550 && PageHeight(context) < 900) {
       TeacherMainPageBody = Scaffold(
         backgroundColor: const Color.fromARGB(255, 233, 255, 247),
         body: Row(
           children: [
             SideBarAnimated(
-              dividerColor: Color.fromARGB(255, 0, 0, 0),
+              dividerColor: const Color.fromARGB(255, 0, 0, 0),
               sideBarColor: const Color.fromARGB(255, 36, 160, 209),
               selectedIconColor: Colors.white,
-              hoverColor: Color.fromARGB(255, 255, 255, 255),
+              hoverColor: const Color.fromARGB(255, 255, 255, 255),
               unselectedIconColor: Colors.black,
               unSelectedTextColor: Colors.black,
               sideBarWidth: 300,
@@ -1787,7 +1847,7 @@ class _TeacherMainPageState extends State<TeacherMainPage> {
           ],
         ),
       );
-    } else if (PageHeight(context) >= 550 && PageHeight(context) >= 900) {
+    } else if (PageWidth(context) >= 550 && PageHeight(context) >= 900) {
       TeacherMainPageBody = Scaffold(
         backgroundColor: const Color.fromARGB(255, 233, 255, 247),
         bottomNavigationBar: CurvedNavigationBar(

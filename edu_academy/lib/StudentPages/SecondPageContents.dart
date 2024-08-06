@@ -241,7 +241,7 @@ class _SecondPageState extends State<SecondPage> {
                     ? 20
                     : 20,
             fontWeight: FontWeight.w500,
-            color: Color.fromARGB(255, 5, 123, 151)),
+            color: const Color.fromARGB(255, 5, 123, 151)),
       ),
     );
     Widget StudentGradeTC = CMaker(
@@ -255,7 +255,7 @@ class _SecondPageState extends State<SecondPage> {
                     ? 20
                     : 20,
             fontWeight: FontWeight.w500,
-            color: Color.fromARGB(255, 89, 89, 87)),
+            color: const Color.fromARGB(255, 89, 89, 87)),
       ),
     );
     Widget Notifications = InkWell(
@@ -576,17 +576,17 @@ class _SecondPageState extends State<SecondPage> {
                               padding:
                                   const EdgeInsets.symmetric(horizontal: 20),
                               circularRadius: 5,
-                              color: Color.fromARGB(255, 19, 218, 132),
+                              color: const Color.fromARGB(255, 19, 218, 132),
                               margin:
                                   const EdgeInsets.symmetric(horizontal: 15),
                               // height: 40
                               width: double.infinity,
                               child: TMaker(
                                   text:
-                                      "     $index${index + 1}- ${all_books[index][2]}\ndate:${all_books[index][1]}", //////
+                                      "$index${index + 1}- ${all_books[index][2]}\ndate:${all_books[index][1]}", //////
                                   fontSize: (PageWidth(context) < 550)? 20: (PageHeight(context) < 900)? 30: 30,
                                   fontWeight: FontWeight.w500,
-                                  color: Color.fromARGB(255, 255, 255, 255)))),
+                                  color: const Color.fromARGB(255, 255, 255, 255)))),
                       const Padding(
                         padding: EdgeInsets.only(bottom: 20),
                       )
@@ -826,7 +826,7 @@ class _SecondPageState extends State<SecondPage> {
           alignment: Alignment.center,
           width: 55,
           height: 35,
-          color: Color.fromARGB(255, 255, 255, 255),
+          color: const Color.fromARGB(255, 255, 255, 255),
           child: TMaker(
               text: "فتح",
               fontSize: 20,
@@ -847,7 +847,7 @@ class _SecondPageState extends State<SecondPage> {
           text: "الحصص المسجلة",
           fontSize: 20,
           fontWeight: FontWeight.w600,
-          color: Color.fromARGB(255, 54, 54, 54));
+          color: const Color.fromARGB(255, 54, 54, 54));
       Widget LessonsListView = ListView.builder(
           itemCount: all_rec.length,
           scrollDirection: Axis.vertical,
@@ -856,7 +856,7 @@ class _SecondPageState extends State<SecondPage> {
                 padding: const EdgeInsets.symmetric(horizontal: 20),
                 circularRadius: 15,
                 margin: const EdgeInsets.only(left: 30, right: 30, bottom: 15),
-                color: Color.fromARGB(255, 19, 218, 132),
+                color: const Color.fromARGB(255, 19, 218, 132),
                 height: 90,
                 child: Row(
                   children: [
@@ -949,8 +949,8 @@ class _SecondPageState extends State<SecondPage> {
               ),
               CMaker(
                   circularRadius: 20,
-                  color: Color.fromARGB(255, 36, 160, 209),
-                  margin: EdgeInsets.symmetric(horizontal: 15),
+                  color: const Color.fromARGB(255, 36, 160, 209),
+                  margin: const EdgeInsets.symmetric(horizontal: 15),
                   height: 60,
                   padding:
                       const EdgeInsets.symmetric(vertical: 5, horizontal: 30),
@@ -960,7 +960,7 @@ class _SecondPageState extends State<SecondPage> {
                       Expanded(child: OpenTheBooksTC)
                     ],
                   )),
-              Padding(padding: EdgeInsets.only(bottom: 10)),
+              const Padding(padding: EdgeInsets.only(bottom: 10)),
               CMaker(
                   height: 50,
                   child: Row(
@@ -1030,8 +1030,8 @@ class _SecondPageState extends State<SecondPage> {
               ),
               CMaker(
                   circularRadius: 20,
-                  color: Color.fromARGB(255, 36, 160, 209),
-                  margin: EdgeInsets.symmetric(horizontal: 15),
+                  color: const Color.fromARGB(255, 36, 160, 209),
+                  margin: const EdgeInsets.symmetric(horizontal: 15),
                   height: 60,
                   padding:
                       const EdgeInsets.symmetric(vertical: 5, horizontal: 30),
@@ -1041,7 +1041,7 @@ class _SecondPageState extends State<SecondPage> {
                       Expanded(child: OpenTheBooksTC)
                     ],
                   )),
-              Padding(padding: EdgeInsets.only(bottom: 10)),
+              const Padding(padding: EdgeInsets.only(bottom: 10)),
               CMaker(
                   height: 50,
                   child: Row(
@@ -1112,8 +1112,8 @@ class _SecondPageState extends State<SecondPage> {
                 ),
                 CMaker(
                     circularRadius: 20,
-                    color: Color.fromARGB(255, 36, 160, 209),
-                    margin: EdgeInsets.symmetric(horizontal: 15),
+                    color: const Color.fromARGB(255, 36, 160, 209),
+                    margin: const EdgeInsets.symmetric(horizontal: 15),
                     height: 60,
                     padding:
                         const EdgeInsets.symmetric(vertical: 5, horizontal: 30),
@@ -1123,7 +1123,7 @@ class _SecondPageState extends State<SecondPage> {
                         Expanded(child: OpenTheBooksTC)
                       ],
                     )),
-                Padding(padding: EdgeInsets.only(bottom: 10)),
+                const Padding(padding: EdgeInsets.only(bottom: 10)),
                 CMaker(
                     height: 50,
                     child: Row(
@@ -1164,7 +1164,7 @@ class _SecondPageState extends State<SecondPage> {
                   : (PageHeight(context) < 900)
                       ? 40
                       : 30,
-              color: Color.fromARGB(255, 255, 255, 255),
+              color: const Color.fromARGB(255, 255, 255, 255),
               fontWeight: FontWeight.w600),
         ),
       );
@@ -1292,8 +1292,8 @@ class _SecondPageState extends State<SecondPage> {
                     )),
                 const Padding(padding: EdgeInsets.only(top: 20)),
                 CMaker(
+                  margin: const EdgeInsets.symmetric(horizontal: 40),
                   child: GridBooksTitleC,
-                  margin: EdgeInsets.symmetric(horizontal: 40),
                 ),
                 const Padding(padding: EdgeInsets.only(top: 20)),
                 Expanded(child: GridViewWidget),
@@ -1334,8 +1334,8 @@ class _SecondPageState extends State<SecondPage> {
                     )),
                 const Padding(padding: EdgeInsets.only(top: 20)),
                 CMaker(
+                  margin: const EdgeInsets.symmetric(horizontal: 40),
                   child: GridBooksTitleC,
-                  margin: EdgeInsets.symmetric(horizontal: 40),
                 ),
                 const Padding(padding: EdgeInsets.only(top: 20)),
                 Expanded(child: GridViewWidget),
@@ -1375,8 +1375,8 @@ class _SecondPageState extends State<SecondPage> {
                     )),
                 const Padding(padding: EdgeInsets.only(top: 20)),
                 CMaker(
+                  margin: const EdgeInsets.symmetric(horizontal: 40),
                   child: GridBooksTitleC,
-                  margin: EdgeInsets.symmetric(horizontal: 40),
                 ),
                 const Padding(padding: EdgeInsets.only(top: 20)),
                 Expanded(child: GridViewWidget),

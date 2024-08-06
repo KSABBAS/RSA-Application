@@ -2,7 +2,6 @@ import 'dart:async';
 // import 'package:http/http.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:image_picker/image_picker.dart';
 // import 'package:http/http.dart' as http;
 // import 'package:html/parser.dart' as Parser;
 // import 'package:html/dom.dart' as dom;

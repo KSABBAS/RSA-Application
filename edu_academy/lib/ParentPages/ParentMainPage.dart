@@ -32,7 +32,7 @@ class _ParentMainPageState extends State<ParentMainPage> {
       log(items.toString());
       if (items != null && items.isNotEmpty) {
         setState(() {
-          name = items[2].split("-")[0] as String;
+          name = items[2].split("-")[0];
           name = "${name.split(" ")[0]} ${name.split(" ")[1]}".toTitleCase;
           // grade = items[2].split("-")[1] as String;
           // userData = jsonDecode(items[2]) as Map<String, dynamic>;
@@ -85,7 +85,7 @@ class _ParentMainPageState extends State<ParentMainPage> {
                             alignment: Alignment.bottomCenter,
                             child: Text(
                               name,
-                              style: TextStyle(
+                              style: const TextStyle(
                                   fontSize: 17,
                                   fontWeight: FontWeight.w500,
                                   color: Color.fromARGB(255, 5, 123, 151)),
@@ -97,7 +97,7 @@ class _ParentMainPageState extends State<ParentMainPage> {
                             alignment: Alignment.center,
                             child: Text(
                               grade,
-                              style: TextStyle(
+                              style: const TextStyle(
                                   fontSize: 16,
                                   fontWeight: FontWeight.w500,
                                   color: Color.fromARGB(255, 89, 89, 87)),
@@ -419,7 +419,7 @@ class _ParentMainPageState extends State<ParentMainPage> {
                             alignment: Alignment.bottomCenter,
                             child: Text(
                               name,
-                              style: TextStyle(
+                              style: const TextStyle(
                                   fontSize: 17,
                                   fontWeight: FontWeight.w500,
                                   color: Color.fromARGB(255, 5, 123, 151)),
@@ -431,7 +431,7 @@ class _ParentMainPageState extends State<ParentMainPage> {
                             alignment: Alignment.center,
                             child: Text(
                               grade,
-                              style: TextStyle(
+                              style: const TextStyle(
                                   fontSize: 16,
                                   fontWeight: FontWeight.w500,
                                   color: Color.fromARGB(255, 89, 89, 87)),
@@ -501,7 +501,7 @@ class _ParentMainPageState extends State<ParentMainPage> {
                             alignment: Alignment.bottomCenter,
                             child: Text(
                               name,
-                              style: TextStyle(
+                              style: const TextStyle(
                                   fontSize: 17,
                                   fontWeight: FontWeight.w500,
                                   color: Color.fromARGB(255, 5, 123, 151)),
@@ -513,7 +513,7 @@ class _ParentMainPageState extends State<ParentMainPage> {
                             alignment: Alignment.center,
                             child: Text(
                               grade,
-                              style: TextStyle(
+                              style: const TextStyle(
                                   fontSize: 16,
                                   fontWeight: FontWeight.w500,
                                   color: Color.fromARGB(255, 89, 89, 87)),
@@ -582,7 +582,7 @@ class _ParentMainPageState extends State<ParentMainPage> {
                             alignment: Alignment.bottomCenter,
                             child: Text(
                               name,
-                              style: TextStyle(
+                              style: const TextStyle(
                                   fontSize: 17,
                                   fontWeight: FontWeight.w500,
                                   color: Color.fromARGB(255, 5, 123, 151)),
@@ -594,7 +594,7 @@ class _ParentMainPageState extends State<ParentMainPage> {
                             alignment: Alignment.center,
                             child: Text(
                               grade,
-                              style: TextStyle(
+                              style: const TextStyle(
                                   fontSize: 16,
                                   fontWeight: FontWeight.w500,
                                   color: Color.fromARGB(255, 89, 89, 87)),

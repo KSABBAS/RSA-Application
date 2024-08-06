@@ -318,7 +318,7 @@ class _StudentMobileSignUpPageState extends State<StudentMobileSignUpPage> {
       ),
     );
     Widget BirthDateW = TimePickerSpinnerPopUp(
-      textStyle: TextStyle(fontSize: 25),
+      textStyle: const TextStyle(fontSize: 25),
       iconSize: 40,
       minTime: DateTime.now().subtract(const Duration(days: 36525)),
       maxTime: DateTime.now().subtract(const Duration(days: 1824)),
@@ -380,7 +380,7 @@ class _StudentMobileSignUpPageState extends State<StudentMobileSignUpPage> {
               }))
     ];
     Widget GradeText = CMaker(width: double.infinity,alignment: Alignment.centerLeft,
-      child: Text(
+      child: const Text(
         "Grade",
         style: TextStyle(fontSize: 25, fontWeight: FontWeight.w600),
       ),
@@ -500,7 +500,7 @@ class _StudentMobileSignUpPageState extends State<StudentMobileSignUpPage> {
                                           },
                                           icon: const Icon(Icons.arrow_back)),
                                     );
-    Widget Logo=Container(
+    Widget Logo=SizedBox(
                                           height: double.infinity,
                                           child: Image.asset(
                                             "images/Logo.png",
@@ -648,7 +648,7 @@ class _StudentMobileSignUpPageState extends State<StudentMobileSignUpPage> {
                       ],),
                   ),
                   CMaker(
-                    padding: EdgeInsets.symmetric(horizontal: 20),
+                    padding: const EdgeInsets.symmetric(horizontal: 20),
                     child: Column(children: [
                   const Padding(padding:EdgeInsets.only(bottom: 20)),
                   StudentWithArro,
@@ -666,7 +666,7 @@ class _StudentMobileSignUpPageState extends State<StudentMobileSignUpPage> {
                   const Padding(padding:EdgeInsets.only(bottom: 40)),
                   GenederText,
                   const Padding(padding:EdgeInsets.only(bottom: 20)),
-                  CMaker(padding: EdgeInsets.symmetric(horizontal: 20),height: 100,width: double.infinity,child: Row(children: [
+                  CMaker(padding: const EdgeInsets.symmetric(horizontal: 20),height: 100,width: double.infinity,child: Row(children: [
                     Expanded(flex: 5,child: GenederWidgets[0]),
                     Expanded(child: Container(),),
                     Expanded(flex: 5,child: GenederWidgets[1]),
@@ -701,7 +701,7 @@ class _StudentMobileSignUpPageState extends State<StudentMobileSignUpPage> {
               alignment: Alignment.center,
               width: double.infinity,
               height:double.infinity,
-              gradient: LinearGradient(
+              gradient: const LinearGradient(
                           begin: Alignment.bottomLeft,
                           end: Alignment.topRight,
                           colors: [
@@ -721,7 +721,7 @@ class _StudentMobileSignUpPageState extends State<StudentMobileSignUpPage> {
                                                   fit: BoxFit.contain,
                                                 ),
                       ),
-                      Container(width: 70,height: 70),
+                      const SizedBox(width: 70,height: 70),
                       Expanded(child: Container()),
                     ],
                   ),),
@@ -729,7 +729,7 @@ class _StudentMobileSignUpPageState extends State<StudentMobileSignUpPage> {
                   color: Colors.white,
                   height: 800,
                   width: 450,
-                  padding: EdgeInsets.only(top: 20,right: 20,left: 20),
+                  padding: const EdgeInsets.only(top: 20,right: 20,left: 20),
                   child: ListView(children: [
                     const Padding(padding:EdgeInsets.only(bottom: 20)),
                       StudentWithArro,
@@ -747,7 +747,7 @@ class _StudentMobileSignUpPageState extends State<StudentMobileSignUpPage> {
                       const Padding(padding:EdgeInsets.only(bottom: 40)),
                       GenederText,
                       const Padding(padding:EdgeInsets.only(bottom: 20)),
-                      CMaker(padding: EdgeInsets.symmetric(horizontal: 20),height: 100,width: double.infinity,child: Row(children: [
+                      CMaker(padding: const EdgeInsets.symmetric(horizontal: 20),height: 100,width: double.infinity,child: Row(children: [
                         Expanded(flex: 5,child: GenederWidgets[0]),
                         Expanded(child: Container(),),
                         Expanded(flex: 5,child: GenederWidgets[1]),
@@ -783,7 +783,7 @@ class _StudentMobileSignUpPageState extends State<StudentMobileSignUpPage> {
               alignment: Alignment.center,
               width: double.infinity,
               height:double.infinity,
-              gradient: LinearGradient(
+              gradient: const LinearGradient(
                           begin: Alignment.bottomLeft,
                           end: Alignment.topRight,
                           colors: [
@@ -808,7 +808,7 @@ class _StudentMobileSignUpPageState extends State<StudentMobileSignUpPage> {
                                                   fit: BoxFit.contain,
                                                 ),),
                       ),
-                      Container(width: 70,height: 70),
+                      const SizedBox(width: 70,height: 70),
                       Expanded(child: Container(),),
                     ],
                   ),),
@@ -817,7 +817,7 @@ class _StudentMobileSignUpPageState extends State<StudentMobileSignUpPage> {
                   color: Colors.white,
                   height: 400,
                   width:(PageWidth(context)<800)? PageWidth(context)/2:400,
-                  padding: EdgeInsets.only(top: 20,right: 20,left: 20),
+                  padding: const EdgeInsets.only(top: 20,right: 20,left: 20),
                   child: ListView(children: [
                     const Padding(padding:EdgeInsets.only(bottom: 20)),
                       StudentWithArro,
@@ -835,7 +835,7 @@ class _StudentMobileSignUpPageState extends State<StudentMobileSignUpPage> {
                       const Padding(padding:EdgeInsets.only(bottom: 40)),
                       GenederText,
                       const Padding(padding:EdgeInsets.only(bottom: 20)),
-                      CMaker(padding: EdgeInsets.symmetric(horizontal: 20),height: 100,width: double.infinity,child: Row(children: [
+                      CMaker(padding: const EdgeInsets.symmetric(horizontal: 20),height: 100,width: double.infinity,child: Row(children: [
                         Expanded(flex: 5,child: GenederWidgets[0]),
                         Expanded(child: Container(),),
                         Expanded(flex: 5,child: GenederWidgets[1]),

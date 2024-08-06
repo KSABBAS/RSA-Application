@@ -111,7 +111,7 @@ class _ThirdPageState extends State<ThirdPage> {
                     ? 20
                     : 20,
             fontWeight: FontWeight.w500,
-            color: Color.fromARGB(255, 5, 123, 151)),
+            color: const Color.fromARGB(255, 5, 123, 151)),
       ),
     );
     Widget StudentGradeTC = CMaker(
@@ -125,7 +125,7 @@ class _ThirdPageState extends State<ThirdPage> {
                     ? 20
                     : 20,
             fontWeight: FontWeight.w500,
-            color: Color.fromARGB(255, 89, 89, 87)),
+            color: const Color.fromARGB(255, 89, 89, 87)),
       ),
     );
     Widget Notifications = InkWell(
@@ -167,7 +167,7 @@ class _ThirdPageState extends State<ThirdPage> {
               text: HomeWorks[HomeWorkIndex][0]["Name"],
               fontSize: 20,
               fontWeight: FontWeight.w600,
-              color: Color.fromARGB(255, 255, 255, 255))),
+              color: const Color.fromARGB(255, 255, 255, 255))),
     );
     Widget ThirdPageBackButton = InkWell(
         onTap: () {
@@ -190,7 +190,7 @@ class _ThirdPageState extends State<ThirdPage> {
       //Third
       Widget ThirdPageHomeworkTitle=CMaker(
                               circularRadius: 17,
-                              padding: EdgeInsets.all(20),
+                              padding: const EdgeInsets.all(20),
                                 color: const Color.fromARGB(255, 233, 255, 247),
                                 child: TMaker(
                                     text: " الواجب رقم ${HomeworkSelected + 1}",
@@ -203,21 +203,21 @@ class _ThirdPageState extends State<ThirdPage> {
                                     fontSize: (PageWidth(context) < 550)? 15: (PageHeight(context) < 900)? 25: 25,
                                     fontWeight: FontWeight.w600,
                                     color:
-                                        Color.fromARGB(255, 255, 255, 255)));
+                                        const Color.fromARGB(255, 255, 255, 255)));
       Widget HomeworkImage=CMaker(width: double.infinity,child: Image.asset("images/webinar.png"));
       Widget ThirdPageHomeworkDescription2=CMaker(alignment: Alignment.center,child: TMaker(
                                     text: "حل صفحه رقم 1 و صفحه 2 فى ال pdf",
                                     fontSize: (PageWidth(context) < 550)? 15: (PageHeight(context) < 900)? 25: 25,
                                     fontWeight: FontWeight.w600,
                                     color:
-                                        Color.fromARGB(255, 255, 255, 255)));
+                                        const Color.fromARGB(255, 255, 255, 255)));
       Widget BookPdfButton=InkWell(
                               onTap: (){
                                 
                               },
                               child: CMaker(
                                 circularRadius: 17,
-                                padding: EdgeInsets.only(top: 20,bottom: 20,left: 70,right: 70),
+                                padding: const EdgeInsets.only(top: 20,bottom: 20,left: 70,right: 70),
                                   color: const Color.fromARGB(255, 233, 255, 247),
                                   child: TMaker(
                                       text: "File.pdf",
@@ -229,7 +229,7 @@ class _ThirdPageState extends State<ThirdPage> {
       Widget StarsOf10=CMaker(
                               circularRadius: 20,
                               color: Colors.white,
-                              padding: EdgeInsets.symmetric(horizontal: 20,vertical: 10),
+                              padding: const EdgeInsets.symmetric(horizontal: 20,vertical: 10),
                               child: TMaker(text: "9/10 ⭐",
                                 fontSize: 20,
                                 fontWeight:FontWeight.w700,
@@ -239,7 +239,7 @@ class _ThirdPageState extends State<ThirdPage> {
                               child: CMaker(
                               circularRadius: 20,
                               color: Colors.white,
-                              padding: EdgeInsets.symmetric(horizontal: 20,vertical: 10),
+                              padding: const EdgeInsets.symmetric(horizontal: 20,vertical: 10),
                               child: TMaker(text: "الملاحظات",
                                 fontSize: 20,
                                 fontWeight:FontWeight.w700,
@@ -249,7 +249,7 @@ class _ThirdPageState extends State<ThirdPage> {
                                   },
                                   child: CMaker(
                                     circularRadius: 17,
-                                    padding: EdgeInsets.only(top: 10,bottom: 10,left: 30,right: 30),
+                                    padding: const EdgeInsets.only(top: 10,bottom: 10,left: 30,right: 30),
                                       color: const Color.fromARGB(255, 233, 255, 247),
                                       child: TMaker(
                                           text: "عرض الحل",
@@ -292,7 +292,7 @@ class _ThirdPageState extends State<ThirdPage> {
           Expanded(
               flex: 13,
               child: CMaker(
-                margin: EdgeInsets.symmetric(horizontal: 20),
+                margin: const EdgeInsets.symmetric(horizontal: 20),
                 circularRadius: 20,
                 color: const Color.fromARGB(255, 36, 160, 209),
                 child: ListView(
@@ -372,7 +372,7 @@ class _ThirdPageState extends State<ThirdPage> {
           Expanded(
                 flex: 13,
                 child: CMaker(
-                  margin: EdgeInsets.symmetric(horizontal: 20),
+                  margin: const EdgeInsets.symmetric(horizontal: 20),
                   circularRadius: 20,
                   color: const Color.fromARGB(255, 36, 160, 209),
                   child: Row(
@@ -459,7 +459,7 @@ class _ThirdPageState extends State<ThirdPage> {
             Expanded(
                 flex: 13,
                 child: CMaker(
-                  margin: EdgeInsets.symmetric(horizontal: 20),
+                  margin: const EdgeInsets.symmetric(horizontal: 20),
                   circularRadius: 20,
                   color: const Color.fromARGB(255, 36, 160, 209),
                   child: Row(
@@ -537,7 +537,7 @@ class _ThirdPageState extends State<ThirdPage> {
           circularRadius: 25,
           margin: const EdgeInsets.only(right: 20, left: 20, bottom: 40),
           width: double.infinity,
-          color: Color.fromARGB(255, 36, 160, 209),
+          color: const Color.fromARGB(255, 36, 160, 209),
           child: ListView.builder(
               itemCount: 3,
               itemBuilder: (context, index) {
@@ -569,8 +569,8 @@ class _ThirdPageState extends State<ThirdPage> {
                             alignment: Alignment.center,
                             padding: const EdgeInsets.symmetric(horizontal: 15),
                             circularRadius: 20,
-                            color: Color.fromARGB(255, 235, 218, 118),
-                            margin: EdgeInsets.symmetric(horizontal: 15),
+                            color: const Color.fromARGB(255, 235, 218, 118),
+                            margin: const EdgeInsets.symmetric(horizontal: 15),
                             height: 40,
                             child: TMaker(
                                 text: "State",
@@ -580,7 +580,7 @@ class _ThirdPageState extends State<ThirdPage> {
                       ),
                       Expanded(child: Container()),
                       CMaker(
-                          padding: EdgeInsets.only(right: 10),
+                          padding: const EdgeInsets.only(right: 10),
                           child: TMaker(
                               text: " الواجب رقم ${index + 1}",
                               fontSize: 25,
@@ -662,9 +662,9 @@ class _ThirdPageState extends State<ThirdPage> {
                     )),
                 const Padding(padding: EdgeInsets.only(top: 20)),
                 SecondPageArrowBack,
-                Padding(padding: EdgeInsets.only(bottom: 30)),
+                const Padding(padding: EdgeInsets.only(bottom: 30)),
                 HomeworkSubjectName,
-                Padding(padding: EdgeInsets.only(bottom: 30)),
+                const Padding(padding: EdgeInsets.only(bottom: 30)),
                 Expanded(flex: 13, child: HomeWorksBuilder)
               ],
             ),
@@ -703,9 +703,9 @@ class _ThirdPageState extends State<ThirdPage> {
                       )),
                   const Padding(padding: EdgeInsets.only(top: 20)),
                   SecondPageArrowBack,
-                  Padding(padding: EdgeInsets.only(bottom: 30)),
+                  const Padding(padding: EdgeInsets.only(bottom: 30)),
                   HomeworkSubjectName,
-                  Padding(padding: EdgeInsets.only(bottom: 30)),
+                  const Padding(padding: EdgeInsets.only(bottom: 30)),
                   Expanded(flex: 13, child: HomeWorksBuilder)
                 ],
               ),
@@ -1126,13 +1126,13 @@ class _ThirdPageState extends State<ThirdPage> {
             Expanded(
                 child: Container(
               height: 30,
-              decoration: BoxDecoration(
+              decoration: const BoxDecoration(
                 borderRadius:
                     BorderRadius.only(bottomLeft: Radius.circular(10)),
-                border: const Border(
+                border: Border(
                   right: BorderSide(width: .5),
                 ),
-                color: const Color.fromARGB(255, 36, 160, 209),
+                color: Color.fromARGB(255, 36, 160, 209),
               ),
               child: Center(
                   child: TMaker(
@@ -1200,7 +1200,7 @@ class _ThirdPageState extends State<ThirdPage> {
             Expanded(
                 child: Container(
               height: 30,
-              decoration: BoxDecoration(
+              decoration: const BoxDecoration(
                 borderRadius:
                     BorderRadius.only(bottomRight: Radius.circular(10)),
                 color: Color.fromARGB(255, 255, 255, 255),
@@ -1228,7 +1228,7 @@ class _ThirdPageState extends State<ThirdPage> {
               spreadRadius: .03,
               color: Color.fromARGB(82, 0, 0, 0)),
         ],
-        color: Color.fromARGB(255, 36, 160, 209),
+        color: const Color.fromARGB(255, 36, 160, 209),
         child: Column(
           children: [
             CMaker(
@@ -1238,7 +1238,7 @@ class _ThirdPageState extends State<ThirdPage> {
                     circularRadius: 20,
                     height: 25,
                     width: 80,
-                    color: Color.fromARGB(255, 233, 255, 247),
+                    color: const Color.fromARGB(255, 233, 255, 247),
                     margin:
                         const EdgeInsets.only(top: 20, bottom: 15, right: 10),
                     alignment: Alignment.center,
@@ -1304,7 +1304,7 @@ class _ThirdPageState extends State<ThirdPage> {
                                   margin:
                                       const EdgeInsets.only(left: 7, bottom: 2),
                                   alignment: Alignment.center,
-                                  color: Color.fromARGB(255, 36, 160, 209),
+                                  color: const Color.fromARGB(255, 36, 160, 209),
                                   circularRadius: 10,
                                   height: 30,
                                   width: 60,
@@ -1372,14 +1372,14 @@ class _ThirdPageState extends State<ThirdPage> {
                         )),
                     const Padding(padding: EdgeInsets.only(top: 20)),
                     CMaker(
-                        boxShadow: [
+                        boxShadow: const [
                           BoxShadow(
                               offset: Offset(1, 1),
                               blurRadius: 6,
                               spreadRadius: .03,
                               color: Color.fromARGB(82, 0, 0, 0)),
                         ],
-                        margin: EdgeInsets.symmetric(horizontal: 20),
+                        margin: const EdgeInsets.symmetric(horizontal: 20),
                         child: StudentFullScadual)
                   ],
                 ),
@@ -1423,14 +1423,14 @@ class _ThirdPageState extends State<ThirdPage> {
                         )),
                     const Padding(padding: EdgeInsets.only(top: 20)),
                     CMaker(
-                        boxShadow: [
+                        boxShadow: const [
                           BoxShadow(
                               offset: Offset(1, 1),
                               blurRadius: 6,
                               spreadRadius: .03,
                               color: Color.fromARGB(82, 0, 0, 0)),
                         ],
-                        margin: EdgeInsets.symmetric(horizontal: 20),
+                        margin: const EdgeInsets.symmetric(horizontal: 20),
                         child: StudentFullScadual)
                   ],
                 ),
@@ -1475,14 +1475,14 @@ class _ThirdPageState extends State<ThirdPage> {
                           )),
                       const Padding(padding: EdgeInsets.only(top: 20)),
                       CMaker(
-                          boxShadow: [
+                          boxShadow: const [
                             BoxShadow(
                                 offset: Offset(1, 1),
                                 blurRadius: 6,
                                 spreadRadius: .03,
                                 color: Color.fromARGB(82, 0, 0, 0)),
                           ],
-                          margin: EdgeInsets.symmetric(horizontal: 20),
+                          margin: const EdgeInsets.symmetric(horizontal: 20),
                           child: StudentFullScadual)
                     ],
                   ),

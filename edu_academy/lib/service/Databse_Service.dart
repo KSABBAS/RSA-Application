@@ -2,13 +2,20 @@ import 'dart:developer';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_database/firebase_database.dart';
-import 'package:edu_academy/StudentPages/SecondPageContents.dart';
 
-Map<String, List<String>> Students_in_grades = {};
+Map<String, List<List<String>>> Students_in_grades = {};
 
 class DatabaseService {
   final real = FirebaseDatabase.instance;
   final fire = FirebaseFirestore.instance;
+
+  // rePublicMessages_read(){
+
+  // }
+  rePublicMessages_Send(String sub , String Grade){
+    
+
+  }
 
   fiCreate(String rref, userData) async {
     try {
@@ -158,9 +165,10 @@ class DatabaseService {
         .collection('Students')
         .get();
     for (var doc in StudentsSnapshot.docs) {
-      if (!Students_in_grades.containsKey(doc["grade"]))
+      if (!Students_in_grades.containsKey(doc["grade"])) {
         Students_in_grades[doc["grade"].toString()] = [];
-      Students_in_grades[doc["grade"].toString()]?.add(doc.id);
+      }
+      Students_in_grades[doc["grade"].toString()]?.add([doc['name'],doc.id,"image"]);
     }
     print(Students_in_grades);
   }
@@ -169,7 +177,7 @@ class DatabaseService {
     print("im running.......");
     await get_all_students_with_grade();
     //  sub           garde   [gardes]
-    Map<String, Map<String, List<dynamic>>> last_re = {};
+    Map<String, Map<String, List<dynamic>>> lastRe = {};
     for (String i in Subjects) {
       List ll = i.replaceAll(RegExp(r"[\[\]']"), '').split(", ");
       print(ll[0]);
@@ -177,15 +185,15 @@ class DatabaseService {
       for (var j in ll.sublist(1)) {
         print(j);
         print(Students_in_grades[j.toString()]);
-        if (!last_re.containsKey(ll[0])) last_re[ll[0]] = {};
+        if (!lastRe.containsKey(ll[0])) lastRe[ll[0]] = {};
 
-        if (!last_re[ll[0]]!.containsKey(j)) last_re[ll[0]]![j] = [];
+        if (!lastRe[ll[0]]!.containsKey(j)) lastRe[ll[0]]![j] = [];
 
-        last_re[ll[0]]![j] = Students_in_grades[j.toString()] ?? [];
+        lastRe[ll[0]]![j] = Students_in_grades[j.toString()] ?? [];
       }
     }
-    print(last_re);
-    return await last_re as Map<String, Map<String, List<dynamic>>>;
+    print(lastRe);
+    return lastRe;
   }
 }
 

@@ -10,7 +10,6 @@ import 'package:edu_academy/StudentPages/ThirdPageContents.dart';
 import 'package:edu_academy/MyTools.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter/widgets.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:string_extensions/string_extensions.dart';
@@ -53,21 +52,22 @@ class _StudentMainPageState extends State<StudentMainPage> {
     });
   }
 
-  XFile? Avatar = null;
-  XFile? ProfileAvatar = null;
+  XFile? Avatar;
+  XFile? ProfileAvatar;
   @override
   String UpdatedPassword = "";
+  @override
   Widget build(BuildContext context) {
     late Widget StudentMainPageBody;
     List<Widget> Pages = [
       Container(
-        child: StudentFirstMainPage(),
+        child: const StudentFirstMainPage(),
       ),
       Container(
-        child: SecondPage()
+        child: const SecondPage()
       ),
       Container(
-        child: ThirdPage(),
+        child: const ThirdPage(),
       ),
       Container(
         child: ListView(
@@ -150,7 +150,7 @@ class _StudentMainPageState extends State<StudentMainPage> {
                 ],
               ),
             ),
-            Padding(
+            const Padding(
               padding: EdgeInsets.only(bottom: 40),
             ),
             CMaker(
@@ -167,7 +167,7 @@ class _StudentMainPageState extends State<StudentMainPage> {
                   },
                   child: CMaker(
                     circularRadius: 130,
-                    boxShadow: [
+                    boxShadow: const [
                       BoxShadow(
                           offset: Offset(1, 1),
                           blurRadius: 6,
@@ -181,7 +181,7 @@ class _StudentMainPageState extends State<StudentMainPage> {
                       fit: StackFit.expand,
                       children: [
                         (ProfileAvatar == null)
-                            ? CircleAvatar(
+                            ? const CircleAvatar(
                                 backgroundImage:
                                     AssetImage("images/personDeafult.png"))
                             : CircleAvatar(
@@ -194,26 +194,26 @@ class _StudentMainPageState extends State<StudentMainPage> {
                           child: CMaker(
                             border: Border.all(
                                 width: 4,
-                                color: Color.fromARGB(255, 233, 255, 247)),
+                                color: const Color.fromARGB(255, 233, 255, 247)),
                             height: 40,
                             width: 40,
                             circularRadius: 50,
                             color: const Color.fromARGB(255, 36, 160, 209),
-                            child: Icon(Icons.add, size: 30),
+                            child: const Icon(Icons.add, size: 30),
                           ),
                         ),
                       ],
                     ),
                   ),
                 ),
-                Padding(padding: EdgeInsets.only(bottom: 20)),
+                const Padding(padding: EdgeInsets.only(bottom: 20)),
                 CMaker(
-                    padding: EdgeInsets.all(20),
+                    padding: const EdgeInsets.all(20),
                     height: PageHeight(context) - 400,
                     width: double.infinity,
-                    color: Color.fromARGB(255, 36, 160, 209),
+                    color: const Color.fromARGB(255, 36, 160, 209),
                     circularRadius: 25,
-                    margin: EdgeInsets.symmetric(horizontal: 20),
+                    margin: const EdgeInsets.symmetric(horizontal: 20),
                     child: Column(
                       children: [
                         CMaker(
@@ -227,14 +227,14 @@ class _StudentMainPageState extends State<StudentMainPage> {
                           padding: const EdgeInsets.all(10),
                           circularRadius: 25,
                           margin: const EdgeInsets.only(bottom: 30),
-                          color: Color.fromARGB(255, 79, 183, 145),
+                          color: const Color.fromARGB(255, 79, 183, 145),
                           // height: 80,
                           width: double.infinity,
                           child: Row(
                             children: [
                               Expanded(child: Container()),
                               CMaker(
-                                  padding: EdgeInsets.only(right: 10),
+                                  padding: const EdgeInsets.only(right: 10),
                                   child: TMaker(
                                       text: "Kareem said hassan",
                                       fontSize: 20,
@@ -263,7 +263,7 @@ class _StudentMainPageState extends State<StudentMainPage> {
                             children: [
                               Expanded(child: Container()),
                               CMaker(
-                                  padding: EdgeInsets.only(right: 10),
+                                  padding: const EdgeInsets.only(right: 10),
                                   child: TMaker(
                                       text: "Grade 12",
                                       fontSize: 20,
@@ -281,7 +281,7 @@ class _StudentMainPageState extends State<StudentMainPage> {
                               context: context,
                               builder: (context) {
                                 return AlertDialog(
-                                  title: Text(
+                                  title: const Text(
                                       "Enter the password                  "),
                                   content: CMaker(
                                     height: 60,
@@ -322,7 +322,7 @@ class _StudentMainPageState extends State<StudentMainPage> {
                                         onPressed: () {
                                           Navigator.pop(context);
                                         },
-                                        child: Text(
+                                        child: const Text(
                                           "Cancel",
                                         )),
                                     TextButton(
@@ -332,9 +332,9 @@ class _StudentMainPageState extends State<StudentMainPage> {
                                               context: context,
                                               builder: (context) {
                                                 return AlertDialog(
-                                                    title: Text(
+                                                    title: const Text(
                                                         "What do you wanna Change ?"),
-                                                    content: Container(
+                                                    content: SizedBox(
                                                       height: 100,
                                                       child: Row(
                                                         children: [
@@ -350,7 +350,7 @@ class _StudentMainPageState extends State<StudentMainPage> {
                                                                             (context) {
                                                                           return AlertDialog(
                                                                             title:
-                                                                                Text("enter the new Email Adress"),
+                                                                                const Text("enter the new Email Adress"),
                                                                             content:
                                                                                 CMaker(
                                                                               height: 80,
@@ -387,7 +387,7 @@ class _StudentMainPageState extends State<StudentMainPage> {
                                                                                   onPressed: () {
                                                                                     Navigator.pop(context);
                                                                                   },
-                                                                                  child: Text("Cancel")),
+                                                                                  child: const Text("Cancel")),
                                                                               TextButton(
                                                                                   onPressed: () async {
                                                                                     if (NewKey.currentState!.validate()) {
@@ -407,7 +407,7 @@ class _StudentMainPageState extends State<StudentMainPage> {
                                                                                           ),
                                                                                         ),
                                                                                       );
-                                                                                      await Future.delayed(Duration(seconds: 2));
+                                                                                      await Future.delayed(const Duration(seconds: 2));
                                                                                       //edit the Email in the database if there is no one else using it and return true or false
                                                                                       OverlayLoadingProgress.stop();
                                                                                       if (true) {
@@ -440,7 +440,7 @@ class _StudentMainPageState extends State<StudentMainPage> {
                                                                                       }
                                                                                     }
                                                                                   },
-                                                                                  child: Text("Ok")),
+                                                                                  child: const Text("Ok")),
                                                                             ],
                                                                           );
                                                                         });
@@ -451,7 +451,7 @@ class _StudentMainPageState extends State<StudentMainPage> {
                                                                               .center,
                                                                       height:
                                                                           60,
-                                                                      color: Color.fromARGB(
+                                                                      color: const Color.fromARGB(
                                                                           255,
                                                                           144,
                                                                           30,
@@ -467,7 +467,7 @@ class _StudentMainPageState extends State<StudentMainPage> {
                                                                               .w800,
                                                                           color:
                                                                               Colors.white)))),
-                                                          Padding(
+                                                          const Padding(
                                                               padding: EdgeInsets
                                                                   .only(
                                                                       left:
@@ -482,7 +482,7 @@ class _StudentMainPageState extends State<StudentMainPage> {
                                                                     builder:
                                                                         (context) {
                                                                       return AlertDialog(
-                                                                        title: Text(
+                                                                        title: const Text(
                                                                             "enter the new Password"),
                                                                         content:
                                                                             CMaker(
@@ -534,7 +534,7 @@ class _StudentMainPageState extends State<StudentMainPage> {
                                                                               onPressed: () {
                                                                                 Navigator.pop(context);
                                                                               },
-                                                                              child: Text("Cancel")),
+                                                                              child: const Text("Cancel")),
                                                                           TextButton(
                                                                               onPressed: () async {
                                                                                 if (NewKey.currentState!.validate()) {
@@ -554,7 +554,7 @@ class _StudentMainPageState extends State<StudentMainPage> {
                                                                                       ),
                                                                                     ),
                                                                                   );
-                                                                                  await Future.delayed(Duration(seconds: 2));
+                                                                                  await Future.delayed(const Duration(seconds: 2));
                                                                                   //edit the Email in the database if there is no one else using it and return true or false
                                                                                   OverlayLoadingProgress.stop();
                                                                                   if (true) {
@@ -587,7 +587,7 @@ class _StudentMainPageState extends State<StudentMainPage> {
                                                                                   }
                                                                                 }
                                                                               },
-                                                                              child: Text("Ok")),
+                                                                              child: const Text("Ok")),
                                                                         ],
                                                                       );
                                                                     });
@@ -596,7 +596,7 @@ class _StudentMainPageState extends State<StudentMainPage> {
                                                                   alignment: Alignment
                                                                       .center,
                                                                   height: 60,
-                                                                  color: Color
+                                                                  color: const Color
                                                                       .fromARGB(
                                                                           255,
                                                                           144,
@@ -619,7 +619,7 @@ class _StudentMainPageState extends State<StudentMainPage> {
                                                     ));
                                               });
                                         },
-                                        child: Text("Ok"))
+                                        child: const Text("Ok"))
                                   ],
                                 );
                               },
@@ -643,7 +643,7 @@ class _StudentMainPageState extends State<StudentMainPage> {
                               children: [
                                 Expanded(child: Container()),
                                 CMaker(
-                                    padding: EdgeInsets.only(right: 10),
+                                    padding: const EdgeInsets.only(right: 10),
                                     child: TMaker(
                                         text: "Email",
                                         fontSize: 15,
@@ -657,7 +657,7 @@ class _StudentMainPageState extends State<StudentMainPage> {
                                     fontWeight: FontWeight.w600,
                                     color: const Color.fromARGB(255, 0, 0, 0)),
                                 Expanded(child: Container()),
-                                Icon(Icons.arrow_forward_ios_outlined)
+                                const Icon(Icons.arrow_forward_ios_outlined)
                               ],
                             ),
                           ),
@@ -669,7 +669,7 @@ class _StudentMainPageState extends State<StudentMainPage> {
                                 context: context,
                                 builder: (context) {
                                   return AlertDialog(
-                                      title: Text(
+                                      title: const Text(
                                           "Enter the password                  "),
                                       content: CMaker(
                                         height: 60,
@@ -710,7 +710,7 @@ class _StudentMainPageState extends State<StudentMainPage> {
                                             onPressed: () {
                                               Navigator.pop(context);
                                             },
-                                            child: Text(
+                                            child: const Text(
                                               "Cancel",
                                             )),
                                         TextButton(
@@ -720,7 +720,7 @@ class _StudentMainPageState extends State<StudentMainPage> {
                                                   context: context,
                                                   builder: (context) {
                                                     return AlertDialog(
-                                                      title: Text(
+                                                      title: const Text(
                                                           "enter the new Number"),
                                                       content: CMaker(
                                                         height: 80,
@@ -803,7 +803,7 @@ class _StudentMainPageState extends State<StudentMainPage> {
                                                                   context);
                                                             },
                                                             child:
-                                                                Text("Cancel")),
+                                                                const Text("Cancel")),
                                                         TextButton(
                                                             onPressed:
                                                                 () async {
@@ -846,7 +846,7 @@ class _StudentMainPageState extends State<StudentMainPage> {
                                                                   ),
                                                                 );
                                                                 await Future.delayed(
-                                                                    Duration(
+                                                                    const Duration(
                                                                         seconds:
                                                                             2));
                                                                 //edit the Email in the database if there is no one else using it and return true or false
@@ -903,12 +903,12 @@ class _StudentMainPageState extends State<StudentMainPage> {
                                                                 }
                                                               }
                                                             },
-                                                            child: Text("Ok")),
+                                                            child: const Text("Ok")),
                                                       ],
                                                     );
                                                   });
                                             },
-                                            child: Text(
+                                            child: const Text(
                                               "ok",
                                             )),
                                       ]);
@@ -932,7 +932,7 @@ class _StudentMainPageState extends State<StudentMainPage> {
                               children: [
                                 Expanded(child: Container()),
                                 CMaker(
-                                    padding: EdgeInsets.only(right: 10),
+                                    padding: const EdgeInsets.only(right: 10),
                                     child: TMaker(
                                         text: "Phone",
                                         fontSize: 15,
@@ -946,7 +946,7 @@ class _StudentMainPageState extends State<StudentMainPage> {
                                     fontWeight: FontWeight.w600,
                                     color: const Color.fromARGB(255, 0, 0, 0)),
                                 Expanded(child: Container()),
-                                Icon(Icons.arrow_forward_ios_outlined)
+                                const Icon(Icons.arrow_forward_ios_outlined)
                               ],
                             ),
                           ),
@@ -976,7 +976,7 @@ class _StudentMainPageState extends State<StudentMainPage> {
                                     children: [
                                       Expanded(child: Container()),
                                       CMaker(
-                                          padding: EdgeInsets.only(right: 10),
+                                          padding: const EdgeInsets.only(right: 10),
                                           child: TMaker(
                                               text: "Rate us",
                                               fontSize: 25,
@@ -1039,10 +1039,10 @@ class _StudentMainPageState extends State<StudentMainPage> {
         body: Row(
           children: [
             SideBarAnimated(
-              dividerColor: Color.fromARGB(255, 0, 0, 0),
+              dividerColor: const Color.fromARGB(255, 0, 0, 0),
               sideBarColor: const Color.fromARGB(255, 36, 160, 209),
               selectedIconColor: Colors.white,
-              hoverColor: Color.fromARGB(255, 255, 255, 255),
+              hoverColor: const Color.fromARGB(255, 255, 255, 255),
               unselectedIconColor: Colors.black,
               unSelectedTextColor: Colors.black,
               sideBarWidth: 300,

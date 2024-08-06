@@ -29,7 +29,7 @@ class _LoginPageState extends State<LogInPage> {
   Widget build(BuildContext context) {
     late Widget LoginBody;
     print(PageWidth(context));
-    Widget InputPart = Container(
+    Widget InputPart = SizedBox(
       height: 250,
       width: double.infinity,
       child:Column(
@@ -221,7 +221,7 @@ class _LoginPageState extends State<LogInPage> {
             )),
       ),
     ];
-    Widget Logo = Container(
+    Widget Logo = SizedBox(
         height: double.infinity,
         child: Image.asset(
           "images/Logo.png",
@@ -304,7 +304,7 @@ class _LoginPageState extends State<LogInPage> {
                     ),
                   ),
                   Expanded(flex: 2,child: Container()),
-                  CMaker(margin: EdgeInsetsDirectional.symmetric(horizontal: 20),child: InputPart),
+                  CMaker(margin: const EdgeInsetsDirectional.symmetric(horizontal: 20),child: InputPart),
                   Expanded(flex: 2,child: Container()),
                             CMaker(alignment: Alignment.center,child: LoginButton),
                   Expanded(flex: 2,child: Container()),
@@ -336,7 +336,7 @@ class _LoginPageState extends State<LogInPage> {
                 alignment: Alignment.center,
                 width: double.infinity,
                 height: double.infinity,
-                gradient: LinearGradient(
+                gradient: const LinearGradient(
                     begin: Alignment.bottomLeft,
                     end: Alignment.topRight,
                     colors: [
@@ -364,12 +364,12 @@ class _LoginPageState extends State<LogInPage> {
                         color: Colors.white,
                         height: 400,
                         width: 450,
-                        padding: EdgeInsets.only(top: 20, right: 20, left: 20),
+                        padding: const EdgeInsets.only(top: 20, right: 20, left: 20),
                         child: ListView(
                           children: [
                             InputPart,
                             CMaker(alignment: Alignment.center,child: LoginButton),
-                            Padding(padding:EdgeInsets.only(bottom: 20)),
+                            const Padding(padding:EdgeInsets.only(bottom: 20)),
                             Expanded(
                                 child: Row(
                               children: [
@@ -400,7 +400,7 @@ class _LoginPageState extends State<LogInPage> {
                 alignment: Alignment.center,
                 width: double.infinity,
                 height: double.infinity,
-                gradient: LinearGradient(
+                gradient: const LinearGradient(
                     begin: Alignment.bottomLeft,
                     end: Alignment.topRight,
                     colors: [
@@ -432,12 +432,12 @@ class _LoginPageState extends State<LogInPage> {
                         color: Colors.white,
                         height: 400,
                         width: (PageWidth(context)<800)? PageWidth(context)/2:400,
-                        padding: EdgeInsets.only(top: 20, right: 20, left: 20),
+                        padding: const EdgeInsets.only(top: 20, right: 20, left: 20),
                         child: ListView(
                           children: [
                             InputPart,
                             CMaker(alignment: Alignment.center,child: LoginButton),
-                            Padding(padding:EdgeInsets.only(bottom: 20)),
+                            const Padding(padding:EdgeInsets.only(bottom: 20)),
                             Expanded(
                                 child: Row(
                               children: [

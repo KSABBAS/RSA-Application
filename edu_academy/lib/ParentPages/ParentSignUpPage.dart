@@ -277,7 +277,7 @@ class _ParentSignUpPageState extends State<ParentSignUpPage> {
           },
           icon: const Icon(Icons.arrow_back)),
     );
-    Widget Logo = Container(
+    Widget Logo = SizedBox(
         height: double.infinity,
         child: Image.asset(
           "images/Logo.png",
@@ -434,7 +434,7 @@ class _ParentSignUpPageState extends State<ParentSignUpPage> {
                     ),
                   ),
                   CMaker(
-                      padding: EdgeInsets.symmetric(horizontal: 20),
+                      padding: const EdgeInsets.symmetric(horizontal: 20),
                       child: Column(
                         children: [
                           const Padding(padding: EdgeInsets.only(bottom: 20)),
@@ -478,7 +478,7 @@ class _ParentSignUpPageState extends State<ParentSignUpPage> {
                 alignment: Alignment.center,
                 width: double.infinity,
                 height: double.infinity,
-                gradient: LinearGradient(
+                gradient: const LinearGradient(
                     begin: Alignment.bottomLeft,
                     end: Alignment.topRight,
                     colors: [
@@ -501,7 +501,7 @@ class _ParentSignUpPageState extends State<ParentSignUpPage> {
                               fit: BoxFit.contain,
                             ),
                           ),
-                          Container(width: 70,height: 70,),
+                          const SizedBox(width: 70,height: 70,),
                           Expanded(child: Container()),
                         ],
                       ),
@@ -511,7 +511,7 @@ class _ParentSignUpPageState extends State<ParentSignUpPage> {
                         color: Colors.white,
                         height: 500,
                         width: 450,
-                        padding: EdgeInsets.only(top: 20, right: 20, left: 20),
+                        padding: const EdgeInsets.only(top: 20, right: 20, left: 20),
                         child: ListView(
                           children: [
                             const Padding(padding: EdgeInsets.only(bottom: 20)),
@@ -556,7 +556,7 @@ class _ParentSignUpPageState extends State<ParentSignUpPage> {
                 alignment: Alignment.center,
                 width: double.infinity,
                 height: double.infinity,
-                gradient: LinearGradient(
+                gradient: const LinearGradient(
                     begin: Alignment.bottomLeft,
                     end: Alignment.topRight,
                     colors: [
@@ -592,7 +592,7 @@ class _ParentSignUpPageState extends State<ParentSignUpPage> {
                                     ),
                                   ),
                                 ),
-                          Container(width: 70,height: 70),
+                          const SizedBox(width: 70,height: 70),
                           Expanded(
                             child: Container(),
                           ),
@@ -607,7 +607,7 @@ class _ParentSignUpPageState extends State<ParentSignUpPage> {
                         width: (PageWidth(context) < 800)
                             ? PageWidth(context) / 2
                             : 400,
-                        padding: EdgeInsets.only(top: 20, right: 20, left: 20),
+                        padding: const EdgeInsets.only(top: 20, right: 20, left: 20),
                         child: ListView(
                           children: [
                             const Padding(padding: EdgeInsets.only(bottom: 20)),
