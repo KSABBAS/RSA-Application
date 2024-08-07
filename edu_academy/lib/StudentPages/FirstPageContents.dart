@@ -225,7 +225,7 @@ class _StudentFirstMainPageState extends State<StudentFirstMainPage> {
             )),
       ],
     );
-    Widget NewClassTC = CMaker(
+    Widget NextClassTC = CMaker(
         width: 130,
         child: TMaker(
             text: "Next Class :",
@@ -375,7 +375,7 @@ class _StudentFirstMainPageState extends State<StudentFirstMainPage> {
                       child: Column(children: [
                       Expanded(child: Row(children: [
                         Expanded(flex: 2,child: Container(),),
-                        Expanded(flex: 6,child: NewClassTC,),
+                        Expanded(flex: 6,child: NextClassTC,),
                         Expanded(child: Container(),),
                         Expanded(flex: 6,child: LessonAndDate,),
                         Expanded(flex: 2,child: Container(),),
@@ -455,7 +455,7 @@ class _StudentFirstMainPageState extends State<StudentFirstMainPage> {
                       child: Column(children: [
                       Expanded(child: Row(children: [
                         Expanded(flex: 3,child: Container(),),
-                        Expanded(flex: 6,child: NewClassTC,),
+                        Expanded(flex: 6,child: NextClassTC,),
                         Expanded(child: Container(),),
                         Expanded(flex: 6,child: LessonAndDate,),
                         Expanded(flex: 3,child: Container(),),
@@ -536,7 +536,7 @@ class _StudentFirstMainPageState extends State<StudentFirstMainPage> {
                       child: Column(children: [
                       Expanded(child: Row(children: [
                         Expanded(flex: 3,child: Container(),),
-                        Expanded(flex: 6,child: NewClassTC,),
+                        Expanded(flex: 6,child: NextClassTC,),
                         Expanded(child: Container(),),
                         Expanded(flex: 6,child: LessonAndDate,),
                         Expanded(flex: 3,child: Container(),),
@@ -564,7 +564,7 @@ class _StudentFirstMainPageState extends State<StudentFirstMainPage> {
                           child: Column(children: [
                           Expanded(child: Row(children: [
                             Expanded(flex: 3,child: Container(),),
-                            Expanded(flex: 6,child: NewClassTC,),
+                            Expanded(flex: 6,child: NextClassTC,),
                             Expanded(child: Container(),),
                             Expanded(flex: 6,child: LessonAndDate,),
                             Expanded(flex: 3,child: Container(),),

@@ -1741,7 +1741,7 @@ class _TeacherMainPageState extends State<TeacherMainPage> {
             ]),
         body: Pages.elementAt(PageIndex),
       );
-    } else if (PageHeight(context) >= 550 && PageHeight(context) < 900) {
+    } else if (PageWidth(context) >= 550 && PageHeight(context) < 900) {
       TeacherMainPageBody = Scaffold(
         backgroundColor: const Color.fromARGB(255, 233, 255, 247),
         body: Row(
@@ -1787,7 +1787,7 @@ class _TeacherMainPageState extends State<TeacherMainPage> {
           ],
         ),
       );
-    } else if (PageHeight(context) >= 550 && PageHeight(context) >= 900) {
+    } else if (PageWidth(context) >= 550 && PageHeight(context) >= 900) {
       TeacherMainPageBody = Scaffold(
         backgroundColor: const Color.fromARGB(255, 233, 255, 247),
         bottomNavigationBar: CurvedNavigationBar(

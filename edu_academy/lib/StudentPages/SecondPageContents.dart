@@ -1146,8 +1146,6 @@ class _SecondPageState extends State<SecondPage> {
       }
     } else {
       // first
-      print(PageWidth(context));
-      print(PageHeight(context));
       Widget GridBooksTitleC = Container(
         alignment: Alignment.center,
         width: double.infinity,
