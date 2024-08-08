@@ -1,22 +1,21 @@
 import 'dart:developer';
+import 'dart:io';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_database/firebase_database.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 
 Map<String, List<List<String>>> Students_in_grades = {};
 
 class DatabaseService {
   final real = FirebaseDatabase.instance;
   final fire = FirebaseFirestore.instance;
+  final storage = FirebaseStorage.instance;
 
-  // rePublicMessages_read(){
+  // RealTime
+  rePublicMessages_Send(String sub, String Grade) {}
 
-  // }
-  rePublicMessages_Send(String sub , String Grade){
-    
-
-  }
-
+  // FireStore
   fiCreate(String rref, userData) async {
     try {
       CollectionReference usersCollection =
@@ -158,6 +157,7 @@ class DatabaseService {
 
   get_all_students_with_grade() async {
     Students_in_grades = {};
+
     ///Users/Students/Students/S1
     QuerySnapshot StudentsSnapshot = await fire
         .collection('Users')
@@ -168,7 +168,8 @@ class DatabaseService {
       if (!Students_in_grades.containsKey(doc["grade"])) {
         Students_in_grades[doc["grade"].toString()] = [];
       }
-      Students_in_grades[doc["grade"].toString()]?.add([doc['name'],doc.id,"image"]);
+      Students_in_grades[doc["grade"].toString()]
+          ?.add([doc['name'], doc.id, "image"]);
     }
     print(Students_in_grades);
   }
@@ -194,6 +195,58 @@ class DatabaseService {
     }
     print(lastRe);
     return lastRe;
+  }
+
+  fiAdd_Hw(String Grade, String Subject, String Teacher_Id, List<dynamic> Files_List,
+      String HomeworkTitle, String HomeworkBody, String score) async {
+    ///Homework/Grade 1/عربي
+    CollectionReference Homework =
+        fire.collection('Homework').doc(Grade).collection(Subject);
+
+    QuerySnapshot querySnapshot = await Homework.get();
+    int numHw = (querySnapshot.size)+1;
+    log(numHw.toString());
+
+    Homework.doc("Hw$numHw").set({
+      "title": HomeworkTitle,
+      "body": HomeworkBody,
+      "files": Files_List,
+      "score": score,
+      "date": "current_date"
+    });
+
+    return true;
+  }
+
+  // Storage
+  stHwStore(var file) async {
+    if (file.length != 0) {
+      if (file.length > 1) {
+        List<String> out_list = [];
+        for (var file in file) {
+          print(file);
+          List<String> name = file.toString().split("/");
+          String file_name = name[name.length - 1].replaceAll("'", "");
+          var snapshot =
+              await storage.ref().child('Homeworks/${file_name}').putFile(file);
+          var downloadUrl = await snapshot.ref.getDownloadURL();
+          out_list.add(downloadUrl);
+        }
+        return out_list;
+      } else {
+        print(file[0]);
+        List<String> name = file[0].toString().split("/");
+        String file_name = name[name.length - 1].replaceAll("'", "");
+        var snapshot = await storage
+            .ref()
+            .child('Homeworks/${file_name}')
+            .putFile(file[0]);
+        var downloadUrl = await snapshot.ref.getDownloadURL();
+        return downloadUrl;
+      }
+    } else {
+      print("emty files");
+    }
   }
 }
 
