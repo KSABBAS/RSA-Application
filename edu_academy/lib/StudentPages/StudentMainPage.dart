@@ -33,7 +33,16 @@ GlobalKey<FormState> NewKey = GlobalKey();
 String NewEmail = "";
 String NewPassWord = "";
 String NewPhoneNumber = "";
-
+List<List> ScadualData = [
+  ["","arabic","English","math","geo","other"],
+  ["السبت","1","2","3","4","5"],
+  ["الاحد","1","2","3","4","5"],
+  ["الاثنين","1","2","3","4","5"],
+  ["الثلاثاء","1","2","3","4","5"],
+  ["الاربعاء","1","2","3","4","5"],
+  ["الخميس","1","2","3","4","5"],
+  ["الجمعة","1","2","3","4","5"],
+];
 class _StudentMainPageState extends State<StudentMainPage> {
   @override
   void initState() {
