@@ -751,18 +751,18 @@ class _ThirdPageState extends State<ThirdPage> {
             scrollDirection: Axis.horizontal,
             shrinkWrap: false,
             physics: NeverScrollableScrollPhysics(),
-            itemCount: ScadualData[0].length,
+            itemCount: TableData[0].length,
             itemBuilder: (context, ColumnIndex) {
               return CMaker(
-                  width: (PageWidth(context) - 40) / ScadualData[0].length,
+                  width: (PageWidth(context) - 40) / TableData[0].length,
                   child: ListView.builder(
                     scrollDirection: Axis.vertical,
                     shrinkWrap: false,
                     physics: NeverScrollableScrollPhysics(),
-                    itemCount: ScadualData.length,
+                    itemCount: TableData.length,
                     itemBuilder: (context, RowIndex) {
                       return CMaker(
-                          height: (200) / ScadualData.length,
+                          height: (200) / TableData.length,
                           child: Container(
                               decoration: BoxDecoration(
                                 border: Border(
@@ -772,14 +772,14 @@ class _ThirdPageState extends State<ThirdPage> {
                                       ? Radius.circular(10)
                                       : Radius.circular(0),
                                   bottomLeft:
-                                      ("$ColumnIndex $RowIndex" == "0 ${ScadualData.length-1}")
+                                      ("$ColumnIndex $RowIndex" == "0 ${TableData.length-1}")
                                           ? Radius.circular(10)
                                           : Radius.circular(0),
-                                  topRight: ("$ColumnIndex $RowIndex" == "${ScadualData[0].length-1} 0")
+                                  topRight: ("$ColumnIndex $RowIndex" == "${TableData[0].length-1} 0")
                                       ? Radius.circular(10)
                                       : Radius.circular(0),
                                   bottomRight:
-                                      ("$ColumnIndex $RowIndex" == "${ScadualData[0].length-1} ${ScadualData.length-1}")
+                                      ("$ColumnIndex $RowIndex" == "${TableData[0].length-1} ${TableData.length-1}")
                                           ? Radius.circular(10)
                                           : Radius.circular(0),
                                 ),
@@ -789,7 +789,7 @@ class _ThirdPageState extends State<ThirdPage> {
                               ),
                               alignment: Alignment.center,
                               child: TMaker(
-                                  text: "${ScadualData[RowIndex][ColumnIndex]}",
+                                  text: "${TableData[RowIndex][ColumnIndex]}",
                                   fontSize: 15,
                                   fontWeight: FontWeight.w600,
                                   color: (ColumnIndex == 0 || RowIndex == 0)

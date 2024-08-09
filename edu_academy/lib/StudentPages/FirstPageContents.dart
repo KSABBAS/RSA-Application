@@ -70,7 +70,7 @@ class _StudentFirstMainPageState extends State<StudentFirstMainPage> {
         ),
       ),
     );
-    Widget OneDayScadual = Column(
+    Widget OneDayTable = Column(
       children: [
         CMaker(
             boxShadow: const [
@@ -209,20 +209,20 @@ class _StudentFirstMainPageState extends State<StudentFirstMainPage> {
                     scrollDirection: Axis.horizontal,
                     shrinkWrap: false,
                     physics: NeverScrollableScrollPhysics(),
-                    itemCount: ScadualData[0].length,
+                    itemCount: TableData[0].length,
                     itemBuilder: (context, index) {
                       return CMaker(
                           height: 70,
-                          width :(PageWidth(context) - 40) / ScadualData[0].length,
+                          width :(PageWidth(context) - 40) / TableData[0].length,
                           child: Container(
                               decoration: BoxDecoration(
-                                borderRadius: BorderRadius.only(bottomLeft: (index==0)?Radius.circular(15):Radius.circular(0),bottomRight: (index==ScadualData[0].length-1)?Radius.circular(15):Radius.circular(0)),
+                                borderRadius: BorderRadius.only(bottomLeft: (index==0)?Radius.circular(15):Radius.circular(0),bottomRight: (index==TableData[0].length-1)?Radius.circular(15):Radius.circular(0)),
                                 color:
                                     Colors.white,
                               ),
                               alignment: Alignment.center,
                               child: TMaker(
-                                  text: "${ScadualData[DayIndex][index]}",
+                                  text: "${TableData[DayIndex][index]}",
                                   fontSize: 15,
                                   fontWeight: FontWeight.w600,
                                   color: (index == 0)
@@ -246,7 +246,7 @@ class _StudentFirstMainPageState extends State<StudentFirstMainPage> {
         width: 150,
         child: ListTile(
           title: TMaker(
-              text: "${ScadualData[DayIndex][2]}",
+              text: "${TableData[DayIndex][2]}",
               fontSize: 25,
               fontWeight: FontWeight.w600,
               color: const Color.fromARGB(153, 24, 58, 60)),
@@ -400,7 +400,7 @@ class _StudentFirstMainPageState extends State<StudentFirstMainPage> {
                 children: [
                   CMaker(
                       margin: const EdgeInsets.symmetric(horizontal: 20),
-                      child: OneDayScadual),
+                      child: OneDayTable),
                   const Padding(padding: EdgeInsets.only(bottom: 20)),
                   CMaker(
                       circularRadius: 20,
@@ -503,7 +503,7 @@ class _StudentFirstMainPageState extends State<StudentFirstMainPage> {
                 children: [
                   CMaker(
                       margin: const EdgeInsets.symmetric(horizontal: 20),
-                      child: OneDayScadual),
+                      child: OneDayTable),
                   const Padding(padding: EdgeInsets.only(bottom: 40)),
                   CMaker(
                       circularRadius: 20,
@@ -610,7 +610,7 @@ class _StudentFirstMainPageState extends State<StudentFirstMainPage> {
                             CMaker(
                                 margin:
                                     const EdgeInsets.symmetric(horizontal: 20),
-                                child: OneDayScadual),
+                                child: OneDayTable),
                             const Padding(padding: EdgeInsets.only(bottom: 40)),
                             CMaker(
                                 circularRadius: 20,
@@ -668,7 +668,7 @@ class _StudentFirstMainPageState extends State<StudentFirstMainPage> {
                                   child: CMaker(
                                       margin: const EdgeInsets.symmetric(
                                           horizontal: 20),
-                                      child: OneDayScadual)),
+                                      child: OneDayTable)),
                               const Padding(padding: EdgeInsets.only(left: 20)),
                               Expanded(
                                 child: CMaker(

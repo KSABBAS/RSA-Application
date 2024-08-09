@@ -33,7 +33,7 @@ GlobalKey<FormState> NewKey = GlobalKey();
 String NewEmail = "";
 String NewPassWord = "";
 String NewPhoneNumber = "";
-List<List> ScadualData = [
+List<List> TableData = [
   ["","arabic","English","math","geo","other"],
   ["السبت","1","2","3","4","5"],
   ["الاحد","1","2","3","4","5"],
