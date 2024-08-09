@@ -98,7 +98,7 @@ class _TeacherSignUpPageState extends State<TeacherSignUpPage> {
                                           },
                                           icon: const Icon(Icons.arrow_back)),
                                     );
-    Widget Logo=Container(
+    Widget Logo=SizedBox(
                                           height: double.infinity,
                                           child: Image.asset(
                                             "images/Logo.png",
@@ -388,7 +388,7 @@ class _TeacherSignUpPageState extends State<TeacherSignUpPage> {
     Widget BirthDateW=TimePickerSpinnerPopUp(
                           minTime: DateTime.now().subtract(const Duration(days: 36525)),
                           maxTime: DateTime.now().subtract(const Duration(days: 1824)),
-                          textStyle: TextStyle(fontSize: 25),
+                          textStyle: const TextStyle(fontSize: 25),
                           iconSize: 40,
                           mode: CupertinoDatePickerMode.date,
                           initTime: forDateInput,
@@ -673,7 +673,7 @@ class _TeacherSignUpPageState extends State<TeacherSignUpPage> {
                       ],),
                   ),
                   CMaker(
-                    padding: EdgeInsets.symmetric(horizontal: 20),
+                    padding: const EdgeInsets.symmetric(horizontal: 20),
                     child: Column(children: [
                   const Padding(padding:EdgeInsets.only(bottom: 20)),
                   TeacherWithArrow,
@@ -690,7 +690,7 @@ class _TeacherSignUpPageState extends State<TeacherSignUpPage> {
                   const Padding(padding:EdgeInsets.only(bottom: 40)),
                   GenederTC,
                   const Padding(padding:EdgeInsets.only(bottom: 20)),
-                  CMaker(padding: EdgeInsets.symmetric(horizontal: 20),height: 100,width: double.infinity,child: Row(children: [
+                  CMaker(padding: const EdgeInsets.symmetric(horizontal: 20),height: 100,width: double.infinity,child: Row(children: [
                     Expanded(flex: 5,child: GenederWidegts[0]),
                     Expanded(child: Container(),),
                     Expanded(flex: 5,child: GenederWidegts[1]),
@@ -725,7 +725,7 @@ class _TeacherSignUpPageState extends State<TeacherSignUpPage> {
               alignment: Alignment.center,
               width: double.infinity,
               height:double.infinity,
-              gradient: LinearGradient(
+              gradient: const LinearGradient(
                           begin: Alignment.bottomLeft,
                           end: Alignment.topRight,
                           colors: [
@@ -745,7 +745,7 @@ class _TeacherSignUpPageState extends State<TeacherSignUpPage> {
                                                   fit: BoxFit.contain,
                                                 ),
                       ),
-                      Container(width: 70,height: 70),
+                      const SizedBox(width: 70,height: 70),
                       Expanded(child: Container()),
                     ],
                   ),),
@@ -753,7 +753,7 @@ class _TeacherSignUpPageState extends State<TeacherSignUpPage> {
                   color: Colors.white,
                   height: 800,
                   width: 450,
-                  padding: EdgeInsets.only(top: 20,right: 20,left: 20),
+                  padding: const EdgeInsets.only(top: 20,right: 20,left: 20),
                   child: ListView(children: [
                     const Padding(padding:EdgeInsets.only(bottom: 20)),
                       TeacherWithArrow,
@@ -770,7 +770,7 @@ class _TeacherSignUpPageState extends State<TeacherSignUpPage> {
                       const Padding(padding:EdgeInsets.only(bottom: 40)),
                       GenederTC,
                       const Padding(padding:EdgeInsets.only(bottom: 20)),
-                      CMaker(padding: EdgeInsets.symmetric(horizontal: 20),height: 100,width: double.infinity,child: Row(children: [
+                      CMaker(padding: const EdgeInsets.symmetric(horizontal: 20),height: 100,width: double.infinity,child: Row(children: [
                         Expanded(flex: 5,child: GenederWidegts[0]),
                         Expanded(child: Container(),),
                         Expanded(flex: 5,child: GenederWidegts[1]),
@@ -806,7 +806,7 @@ class _TeacherSignUpPageState extends State<TeacherSignUpPage> {
               alignment: Alignment.center,
               width: double.infinity,
               height:double.infinity,
-              gradient: LinearGradient(
+              gradient: const LinearGradient(
                           begin: Alignment.bottomLeft,
                           end: Alignment.topRight,
                           colors: [
@@ -831,7 +831,7 @@ class _TeacherSignUpPageState extends State<TeacherSignUpPage> {
                                                   fit: BoxFit.contain,
                                                 ),),
                       ),
-                      Container(width: 70,height: 70),
+                      const SizedBox(width: 70,height: 70),
                       Expanded(child: Container(),),
                     ],
                   ),),
@@ -840,7 +840,7 @@ class _TeacherSignUpPageState extends State<TeacherSignUpPage> {
                   color: Colors.white,
                   height: 400,
                   width:(PageWidth(context)<800)? PageWidth(context)/2:400,
-                  padding: EdgeInsets.only(top: 20,right: 20,left: 20),
+                  padding: const EdgeInsets.only(top: 20,right: 20,left: 20),
                   child: ListView(children: [
                     const Padding(padding:EdgeInsets.only(bottom: 20)),
                       TeacherWithArrow,
@@ -857,7 +857,7 @@ class _TeacherSignUpPageState extends State<TeacherSignUpPage> {
                       const Padding(padding:EdgeInsets.only(bottom: 40)),
                       GenederTC,
                       const Padding(padding:EdgeInsets.only(bottom: 20)),
-                      CMaker(padding: EdgeInsets.symmetric(horizontal: 20),height: 100,width: double.infinity,child: Row(children: [
+                      CMaker(padding: const EdgeInsets.symmetric(horizontal: 20),height: 100,width: double.infinity,child: Row(children: [
                         Expanded(flex: 5,child: GenederWidegts[0]),
                         Expanded(child: Container(),),
                         Expanded(flex: 5,child: GenederWidegts[1]),

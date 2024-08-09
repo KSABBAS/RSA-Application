@@ -149,7 +149,7 @@ class _WhatAreYouPageState extends State<WhatAreYouPage> {
                                                 fontWeight: FontWeight.w700),
                                           ),
                                         ));
-    Widget Logo=Container(
+    Widget Logo=SizedBox(
                                           height: double.infinity,
                                           child: Image.asset(
                                             "images/Logo.png",
@@ -193,7 +193,7 @@ class _WhatAreYouPageState extends State<WhatAreYouPage> {
                       ],
                     ),
                   ),
-                  Expanded(flex: 2,child: CMaker(color: Colors.white,padding: EdgeInsets.all(30),child: ChoseWhatYouAre)),
+                  Expanded(flex: 2,child: CMaker(color: Colors.white,padding: const EdgeInsets.all(30),child: ChoseWhatYouAre)),
                 ],
               ),
             ),
@@ -207,7 +207,7 @@ class _WhatAreYouPageState extends State<WhatAreYouPage> {
                 alignment: Alignment.center,
                 width: double.infinity,
                 height: double.infinity,
-                gradient: LinearGradient(
+                gradient: const LinearGradient(
                     begin: Alignment.bottomLeft,
                     end: Alignment.topRight,
                     colors: [
@@ -237,7 +237,7 @@ class _WhatAreYouPageState extends State<WhatAreYouPage> {
                         color: Colors.white,
                         height: 500,
                         width: 400,
-                        padding: EdgeInsets.only(top: 20, right: 20, left: 20),
+                        padding: const EdgeInsets.only(top: 20, right: 20, left: 20),
                         child: ChoseWhatYouAre),
                     Expanded(flex: 5, child: Container()),
                   ],
@@ -252,7 +252,7 @@ class _WhatAreYouPageState extends State<WhatAreYouPage> {
                 alignment: Alignment.center,
                 width: double.infinity,
                 height: double.infinity,
-                gradient: LinearGradient(
+                gradient: const LinearGradient(
                     begin: Alignment.bottomLeft,
                     end: Alignment.topRight,
                     colors: [
@@ -285,7 +285,7 @@ class _WhatAreYouPageState extends State<WhatAreYouPage> {
                   color: Colors.white,
                   height: 400,
                   width:(PageWidth(context)<800)? PageWidth(context)/2:400,
-                  padding: EdgeInsets.only(top: 20,right: 20,left: 20),
+                  padding: const EdgeInsets.only(top: 20,right: 20,left: 20),
                         child: ChoseWhatYouAre),
                     Expanded( child: Container()),
                   ],

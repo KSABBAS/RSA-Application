@@ -541,3 +541,25 @@ flutter:
     - assets/rive_animations/
     - assets/pdfs/
   
+
+
+
+
+
+name
+
+Teacher_Id
+SubjectThatIsSelected
+ListOfGrades[GradeHomeWorkOppenedIndex][0]
+
+Files_List
+HomeworkTitle
+HomeworkBody
+
+
+
+
+
+
+
+

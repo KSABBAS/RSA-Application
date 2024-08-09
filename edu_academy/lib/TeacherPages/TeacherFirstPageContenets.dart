@@ -1,5 +1,4 @@
 import 'package:edu_academy/MyTools.dart';
-import 'package:edu_academy/TeacherPages/TeacherMainPage.dart';
 import 'package:flutter/material.dart';
 
 class TeacherFirstPageContenets extends StatefulWidget {
@@ -43,7 +42,7 @@ class _TeacherFirstPageContenetsState extends State<TeacherFirstPageContenets> {
                         circularRadius: 13,
                         height: (PageWidth(context)<550)? 40:(PageHeight(context)<900)? 60:70,
                         width: (PageWidth(context)<550)? 120:(PageHeight(context)<900)? 120:200,
-                        padding: EdgeInsets.symmetric(horizontal: 15),
+                        padding: const EdgeInsets.symmetric(horizontal: 15),
                         color: const Color.fromARGB(255, 36, 160, 209),
                         child: TMaker(
                             text: "Join",
@@ -57,8 +56,8 @@ class _TeacherFirstPageContenetsState extends State<TeacherFirstPageContenets> {
       FirstPageBody=CMaker(
           circularRadius: 20,
           height: 200,
-          margin: EdgeInsets.symmetric(horizontal: 20),
-          boxShadow: [
+          margin: const EdgeInsets.symmetric(horizontal: 20),
+          boxShadow: const [
             BoxShadow(
                 offset: Offset(1, 1),
                 blurRadius: 6,
@@ -83,8 +82,8 @@ class _TeacherFirstPageContenetsState extends State<TeacherFirstPageContenets> {
         FirstPageBody=CMaker(
           circularRadius: 20,
           height: 200,
-          margin: EdgeInsets.symmetric(horizontal: 20),
-          boxShadow: [
+          margin: const EdgeInsets.symmetric(horizontal: 20),
+          boxShadow: const [
             BoxShadow(
                 offset: Offset(1, 1),
                 blurRadius: 6,
@@ -109,8 +108,8 @@ class _TeacherFirstPageContenetsState extends State<TeacherFirstPageContenets> {
         FirstPageBody=CMaker(
               circularRadius: 20,
               height: 200,
-              margin: EdgeInsets.symmetric(horizontal: 20),
-              boxShadow: [
+              margin: const EdgeInsets.symmetric(horizontal: 20),
+              boxShadow: const [
                 BoxShadow(
                     offset: Offset(1, 1),
                     blurRadius: 6,

@@ -27,7 +27,7 @@ class _StudentFirstMainPageState extends State<StudentFirstMainPage> {
         style:  TextStyle(
             fontSize:(PageWidth(context)<550)? 17:(PageHeight(context)<900)?20:20,
             fontWeight: FontWeight.w500,
-            color: Color.fromARGB(255, 5, 123, 151)),
+            color: const Color.fromARGB(255, 5, 123, 151)),
       ),
     );
     Widget StudentGradeTC = CMaker(
@@ -37,7 +37,7 @@ class _StudentFirstMainPageState extends State<StudentFirstMainPage> {
         style: TextStyle(
             fontSize: (PageWidth(context)<550)? 17:(PageHeight(context)<900)? 20:20,
             fontWeight: FontWeight.w500,
-            color: Color.fromARGB(255, 89, 89, 87)),
+            color: const Color.fromARGB(255, 89, 89, 87)),
       ),
     );
     Widget Notifications = InkWell(
@@ -254,7 +254,7 @@ class _StudentFirstMainPageState extends State<StudentFirstMainPage> {
                         circularRadius: 13,
                         height: (PageWidth(context)<550)? 40:(PageHeight(context)<900)? 60:70,
                         width: (PageWidth(context)<550)? 120:(PageHeight(context)<900)? 120:200,
-                        padding: EdgeInsets.symmetric(horizontal: 15),
+                        padding: const EdgeInsets.symmetric(horizontal: 15),
                         color: const Color.fromARGB(255, 36, 160, 209),
                         child: TMaker(
                             text: "Join",
@@ -267,7 +267,7 @@ class _StudentFirstMainPageState extends State<StudentFirstMainPage> {
                 text: "Notes form teachers",
                 fontSize: (PageWidth(context)<550)? 20:(PageHeight(context)<900)? 18:25,
                 fontWeight: FontWeight.w700,
-                color: Color.fromARGB(255, 255, 255, 255));
+                color: const Color.fromARGB(255, 255, 255, 255));
     Widget TeacherNotesWindow = CMaker(
         boxShadow: const [
           BoxShadow(
@@ -277,7 +277,7 @@ class _StudentFirstMainPageState extends State<StudentFirstMainPage> {
               color: Color.fromARGB(82, 0, 0, 0)),
         ],
         circularRadius: 20,
-        margin: EdgeInsets.symmetric(horizontal: 20),
+        margin: const EdgeInsets.symmetric(horizontal: 20),
         height: (PageWidth(context)<550)? 300:(PageHeight(context)<900)? 300:400,
         width: double.infinity,
         color: const Color.fromARGB(255, 255, 255, 255),
@@ -288,9 +288,9 @@ class _StudentFirstMainPageState extends State<StudentFirstMainPage> {
               border: Border.all(
                   width: 1, color: const Color.fromARGB(31, 78, 78, 78)),
               circularRadius: 20,
-              color: Color.fromARGB(255, 36, 160, 209),
-              padding: EdgeInsets.only(top: 15, right: 15, left: 15),
-              margin: EdgeInsets.only(bottom: 0, top: 20, left: 15, right: 15),
+              color: const Color.fromARGB(255, 36, 160, 209),
+              padding: const EdgeInsets.only(top: 15, right: 15, left: 15),
+              margin: const EdgeInsets.only(bottom: 0, top: 20, left: 15, right: 15),
               child: Column(
                 children: [
                   Row(
@@ -299,25 +299,25 @@ class _StudentFirstMainPageState extends State<StudentFirstMainPage> {
                           circularRadius: 20,
                           alignment: Alignment.center,
                           height: (PageWidth(context)<550)? 30:(PageHeight(context)<900)? 30:30,
-                          padding: EdgeInsets.symmetric(horizontal: 15),
+                          padding: const EdgeInsets.symmetric(horizontal: 15),
                           child: TMaker(
                               text: "Math - Mr:Hazem",
                               fontSize: (PageWidth(context)<550)? 22:(PageHeight(context)<900)? 20:25,
                               fontWeight: FontWeight.w700,
-                              color: Color.fromARGB(255, 255, 255, 255))),
+                              color: const Color.fromARGB(255, 255, 255, 255))),
                       Expanded(child: Container()),
                     ],
                   ),
                   const Padding(padding: EdgeInsets.only(top: 5)),
                   CMaker(
-                      padding: EdgeInsets.only(left: 20),
+                      padding: const EdgeInsets.only(left: 20),
                       width: double.infinity,
                       child: TMaker(
                           textAlign: TextAlign.start,
                           text: "The message",
                           fontSize: (PageWidth(context)<550)? 17:(PageHeight(context)<900)? 15:20,
                           fontWeight: FontWeight.w700,
-                          color: Color.fromARGB(255, 255, 255, 255))),
+                          color: const Color.fromARGB(255, 255, 255, 255))),
                   const Padding(padding: EdgeInsets.only(top: 25)),
                 ],
               ),
@@ -357,13 +357,13 @@ class _StudentFirstMainPageState extends State<StudentFirstMainPage> {
                 const Padding(padding: EdgeInsets.only(top: 20)),
               Column(
                   children: [
-                    CMaker(margin: EdgeInsets.symmetric(horizontal: 20),child: OneDayScadual),
+                    CMaker(margin: const EdgeInsets.symmetric(horizontal: 20),child: OneDayScadual),
                     const Padding(padding: EdgeInsets.only(bottom: 20)),
                     CMaker(
                       circularRadius: 20,
                       height: 150,
-                      margin: EdgeInsets.symmetric(horizontal: 20),
-                      boxShadow: [
+                      margin: const EdgeInsets.symmetric(horizontal: 20),
+                      boxShadow: const [
                         BoxShadow(
                             offset: Offset(1, 1),
                             blurRadius: 6,
@@ -388,9 +388,9 @@ class _StudentFirstMainPageState extends State<StudentFirstMainPage> {
                       width: double.infinity,
                       child: CMaker(
                           circularRadius: 10,
-                          margin: EdgeInsets.symmetric(horizontal: 40),
+                          margin: const EdgeInsets.symmetric(horizontal: 40),
                           alignment: Alignment.center,
-                          color: Color.fromARGB(255, 36, 160, 209),
+                          color: const Color.fromARGB(255, 36, 160, 209),
                           height: 40,
                           child: TeacherNotesT),
                           ),
@@ -437,13 +437,13 @@ class _StudentFirstMainPageState extends State<StudentFirstMainPage> {
                 const Padding(padding: EdgeInsets.only(top: 20)),
               Column(
                   children: [
-                    CMaker(margin: EdgeInsets.symmetric(horizontal: 20),child: OneDayScadual),
+                    CMaker(margin: const EdgeInsets.symmetric(horizontal: 20),child: OneDayScadual),
                     const Padding(padding: EdgeInsets.only(bottom: 40)),
                     CMaker(
                       circularRadius: 20,
                       height: 200,
-                      margin: EdgeInsets.symmetric(horizontal: 20),
-                      boxShadow: [
+                      margin: const EdgeInsets.symmetric(horizontal: 20),
+                      boxShadow: const [
                         BoxShadow(
                             offset: Offset(1, 1),
                             blurRadius: 6,
@@ -468,9 +468,9 @@ class _StudentFirstMainPageState extends State<StudentFirstMainPage> {
                       width: double.infinity,
                       child: CMaker(
                           circularRadius: 10,
-                          margin: EdgeInsets.symmetric(horizontal: 120),
+                          margin: const EdgeInsets.symmetric(horizontal: 120),
                           alignment: Alignment.center,
-                          color: Color.fromARGB(255, 36, 160, 209),
+                          color: const Color.fromARGB(255, 36, 160, 209),
                           height: 60,
                           child: TeacherNotesT),
                           ),
@@ -518,13 +518,13 @@ class _StudentFirstMainPageState extends State<StudentFirstMainPage> {
               Column(
                   children: [
                     (PageWidth(context)<900)?Column(children: [
-                      CMaker(margin: EdgeInsets.symmetric(horizontal: 20),child: OneDayScadual),
+                      CMaker(margin: const EdgeInsets.symmetric(horizontal: 20),child: OneDayScadual),
                     const Padding(padding: EdgeInsets.only(bottom: 40)),
                     CMaker(
                       circularRadius: 20,
                       height: 200,
-                      margin: EdgeInsets.symmetric(horizontal: 20),
-                      boxShadow: [
+                      margin: const EdgeInsets.symmetric(horizontal: 20),
+                      boxShadow: const [
                         BoxShadow(
                             offset: Offset(1, 1),
                             blurRadius: 6,
@@ -546,14 +546,14 @@ class _StudentFirstMainPageState extends State<StudentFirstMainPage> {
                     ],):CMaker(
                       width: double.infinity,
                       child: Row(children: [
-                        Expanded(child: CMaker(margin: EdgeInsets.symmetric(horizontal: 20),child: OneDayScadual)),
+                        Expanded(child: CMaker(margin: const EdgeInsets.symmetric(horizontal: 20),child: OneDayScadual)),
                       const Padding(padding: EdgeInsets.only(left: 20)),
                       Expanded(
                         child: CMaker(
                           circularRadius: 20,
                           height: 200,
-                          margin: EdgeInsets.symmetric(horizontal: 20),
-                          boxShadow: [
+                          margin: const EdgeInsets.symmetric(horizontal: 20),
+                          boxShadow: const [
                             BoxShadow(
                                 offset: Offset(1, 1),
                                 blurRadius: 6,
@@ -580,9 +580,9 @@ class _StudentFirstMainPageState extends State<StudentFirstMainPage> {
                       width: double.infinity,
                       child: CMaker(
                           circularRadius: 10,
-                          margin: EdgeInsets.symmetric(horizontal: 120),
+                          margin: const EdgeInsets.symmetric(horizontal: 120),
                           alignment: Alignment.center,
-                          color: Color.fromARGB(255, 36, 160, 209),
+                          color: const Color.fromARGB(255, 36, 160, 209),
                           height: 60,
                           child: TeacherNotesT),
                           ),

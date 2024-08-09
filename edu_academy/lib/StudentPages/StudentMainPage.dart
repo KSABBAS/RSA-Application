@@ -11,7 +11,6 @@ import 'package:edu_academy/StudentPages/ThirdPageContents.dart';
 import 'package:edu_academy/MyTools.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter/widgets.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:string_extensions/string_extensions.dart';
@@ -54,21 +53,22 @@ class _StudentMainPageState extends State<StudentMainPage> {
     });
   }
 
-  XFile? Avatar = null;
-  XFile? ProfileAvatar = null;
+  XFile? Avatar;
+  XFile? ProfileAvatar;
   @override
   String UpdatedPassword = "";
+  @override
   Widget build(BuildContext context) {
     late Widget StudentMainPageBody;
     List<Widget> Pages = [
       Container(
-        child: StudentFirstMainPage(),
+        child: const StudentFirstMainPage(),
       ),
       Container(
-        child: SecondPage()
+        child: const SecondPage()
       ),
       Container(
-        child: ThirdPage(),
+        child: const ThirdPage(),
       ),
       Expanded(
         child: Container(
@@ -200,10 +200,10 @@ class _StudentMainPageState extends State<StudentMainPage> {
         body: Row(
           children: [
             SideBarAnimated(
-              dividerColor: Color.fromARGB(255, 0, 0, 0),
+              dividerColor: const Color.fromARGB(255, 0, 0, 0),
               sideBarColor: const Color.fromARGB(255, 36, 160, 209),
               selectedIconColor: Colors.white,
-              hoverColor: Color.fromARGB(255, 255, 255, 255),
+              hoverColor: const Color.fromARGB(255, 255, 255, 255),
               unselectedIconColor: Colors.black,
               unSelectedTextColor: Colors.black,
               sideBarWidth: 300,
