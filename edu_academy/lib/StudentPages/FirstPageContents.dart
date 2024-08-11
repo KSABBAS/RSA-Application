@@ -1,6 +1,11 @@
 import 'package:edu_academy/MyTools.dart';
 import 'package:edu_academy/StudentPages/StudentMainPage.dart';
+// import 'package:edu_academy/service/Databse_Service.dart';
+import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
+import 'dart:core';
+
+import 'package:shared_preferences/shared_preferences.dart';
 
 class StudentFirstMainPage extends StatefulWidget {
   const StudentFirstMainPage({super.key});
@@ -9,9 +14,48 @@ class StudentFirstMainPage extends StatefulWidget {
   State<StudentFirstMainPage> createState() => _StudentFirstMainPageState();
 }
 
-int DayIndex = DateTime.daysPerWeek;
+List<dynamic> Messgaes_list = [
+  ['math0', 'mohamed', 'hi gyes'],
+  ['math', 'mohamed', 'hi gyes'],
+];
+
+Object? realTimeValues;
 
 class _StudentFirstMainPageState extends State<StudentFirstMainPage> {
+  late Future<void> _dataFuture;
+
+  void initState() {
+    super.initState();
+    _dataFuture = regetmessages();
+  }
+
+  regetmessages() async {
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    final List<String>? items = prefs.getStringList('id');
+    grade = items![2].split("-")[1];
+    final real = FirebaseDatabase.instance;
+    final allMes = real.ref("Messages").child(grade);
+    print("grade $grade");
+    allMes.onValue.listen(
+      (event) {
+        setState(() {
+          Messgaes_list = [];
+          realTimeValues = event.snapshot.value;
+          print("realTimeValues ${realTimeValues}");
+          Map map = realTimeValues as Map;
+          print("map.keys ${map.keys}");
+
+
+          for (var i in map.keys ){
+            for (var j in map[i].keys ){
+              Messgaes_list.add([i,map[i][j][3],map[i][j][0]]);
+            }
+          }
+        });
+      },
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     int DayIndex = DateTime.daysPerWeek;
@@ -325,7 +369,7 @@ class _StudentFirstMainPageState extends State<StudentFirstMainPage> {
         width: double.infinity,
         color: const Color.fromARGB(255, 255, 255, 255),
         child: ListView.builder(
-          itemCount: 2,
+          itemCount: Messgaes_list.length - 1,
           itemBuilder: (context, index) {
             return CMaker(
               border: Border.all(
@@ -349,7 +393,8 @@ class _StudentFirstMainPageState extends State<StudentFirstMainPage> {
                                   : 30,
                           padding: const EdgeInsets.symmetric(horizontal: 15),
                           child: TMaker(
-                              text: "Math - Mr:Hazem",
+                              text:
+                                  "${Messgaes_list[index][0]} - ${Messgaes_list[index][1]}",
                               fontSize: (PageWidth(context) < 550)
                                   ? 22
                                   : (PageHeight(context) < 900)
@@ -366,7 +411,7 @@ class _StudentFirstMainPageState extends State<StudentFirstMainPage> {
                       width: double.infinity,
                       child: TMaker(
                           textAlign: TextAlign.start,
-                          text: "The message",
+                          text: "${Messgaes_list[index][2]}",
                           fontSize: (PageWidth(context) < 550)
                               ? 17
                               : (PageHeight(context) < 900)

@@ -1,9 +1,10 @@
 import 'dart:developer';
-import 'dart:io';
+// import 'dart:io';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:firebase_storage/firebase_storage.dart';
+import 'package:get/get.dart';
 
 Map<String, List<List<String>>> Students_in_grades = {};
 
@@ -13,7 +14,23 @@ class DatabaseService {
   final storage = FirebaseStorage.instance;
 
   // RealTime
-  rePublicMessages_Send(String sub, String Grade) {}
+  rePublicMessages_Send(String sub, String Grade, String messgae, String date,
+      String duration,String name) async {
+    try {
+      final allStudents = real.ref("Messages").child(Grade).child(sub);
+      final oness = await allStudents.once();
+      print(oness.snapshot.value);
+      int num_s = oness.snapshot.children.length;
+      log(num_s.toString());
+      await allStudents
+          .child("messgae${num_s + 1}")
+          .set([messgae, date, duration,name]);
+    } catch (e) {
+      log(e.toString());
+    }
+  }
+
+  
 
   // FireStore
   fiCreate(String rref, userData) async {
@@ -197,14 +214,20 @@ class DatabaseService {
     return lastRe;
   }
 
-  fiAdd_Hw(String Grade, String Subject, String Teacher_Id, List<dynamic> Files_List,
-      String HomeworkTitle, String HomeworkBody, String score) async {
+  fiAdd_Hw(
+      String Grade,
+      String Subject,
+      String Teacher_Id,
+      List<dynamic> Files_List,
+      String HomeworkTitle,
+      String HomeworkBody,
+      String score) async {
     ///Homework/Grade 1/عربي
     CollectionReference Homework =
         fire.collection('Homework').doc(Grade).collection(Subject);
 
     QuerySnapshot querySnapshot = await Homework.get();
-    int numHw = (querySnapshot.size)+1;
+    int numHw = (querySnapshot.size) + 1;
     log(numHw.toString());
 
     Homework.doc("Hw$numHw").set({

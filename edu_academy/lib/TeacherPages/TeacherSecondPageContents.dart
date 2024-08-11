@@ -1,6 +1,7 @@
-
 import 'package:edu_academy/MyTools.dart';
 import 'package:edu_academy/TeacherPages/TeacherMainPage.dart';
+import 'package:edu_academy/TeacherPages/TeacherThirdPageContents.dart';
+import 'package:edu_academy/service/Databse_Service.dart';
 import 'package:flutter/material.dart';
 
 class TeacherSecondPageContents extends StatefulWidget {
@@ -21,6 +22,8 @@ String CurrentMessage = "";
 String CurrentMessageTime = DateTime.now().toString();
 
 class _TeacherSecondPageContentsState extends State<TeacherSecondPageContents> {
+  final dbService = DatabaseService();
+
   final TextEditingController _MessageController = TextEditingController();
   List AllMessages = [
     // عينه للتفهيم
@@ -184,8 +187,7 @@ class _TeacherSecondPageContentsState extends State<TeacherSecondPageContents> {
               ]));
         });
       }
-    }
-    else if (GradeIsOpened) {
+    } else if (GradeIsOpened) {
       //الصفحه الثانيه
       Widget SecondPageArrowBack = InkWell(
         onTap: () {
@@ -285,8 +287,9 @@ class _TeacherSecondPageContentsState extends State<TeacherSecondPageContents> {
                       title: TMaker(
                         textAlign: TextAlign.start,
                         text: widget.ListOfGrades[GradeOpenedIndex][1]
-                                    [StudentIndex][0].toString()+' ${widget.ListOfGrades[GradeOpenedIndex][1]
-                                    [StudentIndex][2]}',
+                                    [StudentIndex][0]
+                                .toString() +
+                            ' ${widget.ListOfGrades[GradeOpenedIndex][1][StudentIndex][2]}',
                         fontSize: 20,
                         fontWeight: FontWeight.w600,
                         color: const Color.fromARGB(255, 0, 0, 0),
@@ -445,6 +448,13 @@ class _TeacherSecondPageContentsState extends State<TeacherSecondPageContents> {
                                   CurrentMessageTime,
                                   TheMessageDuration
                                 ]);
+                                //rePublicMessages_Send(String sub, String Grade,String messgae,String date,String duration)
+                                dbService.rePublicMessages_Send(
+                                    SubjectThatIsSelected,
+                                    ListOfGrades[GradeHomeWorkOppenedIndex][0],
+                                    CurrentMessage,
+                                    CurrentMessageTime,
+                                    TheMessageDuration,name);
                                 CurrentMessage = "";
                                 print(AllMessages);
                               });
@@ -495,34 +505,26 @@ class _TeacherSecondPageContentsState extends State<TeacherSecondPageContents> {
                           child: Text("for 24 hours"),
                         ),
                         DropdownMenuItem(
-                            value: "for 2 days",
-                            child: Text("for 2 days")),
+                            value: "for 2 days", child: Text("for 2 days")),
                         DropdownMenuItem(
                             value: "for 3 days",
                             child: Text(
                               "for 3 days",
                             )),
                         DropdownMenuItem(
-                            value: "for 4 days",
-                            child: Text("for 4 days")),
+                            value: "for 4 days", child: Text("for 4 days")),
                         DropdownMenuItem(
-                            value: "for 5 days",
-                            child: Text("for 5 days")),
+                            value: "for 5 days", child: Text("for 5 days")),
                         DropdownMenuItem(
-                            value: "for 6 days",
-                            child: Text("for 6 days")),
+                            value: "for 6 days", child: Text("for 6 days")),
                         DropdownMenuItem(
-                            value: "for a week",
-                            child: Text("for a week")),
+                            value: "for a week", child: Text("for a week")),
                         DropdownMenuItem(
-                            value: "for 2 weeks",
-                            child: Text("for 2 weeks")),
+                            value: "for 2 weeks", child: Text("for 2 weeks")),
                         DropdownMenuItem(
-                            value: "for 3 weeks",
-                            child: Text("for 3 weeks")),
+                            value: "for 3 weeks", child: Text("for 3 weeks")),
                         DropdownMenuItem(
-                            value: "for a month",
-                            child: Text("for a month")),
+                            value: "for a month", child: Text("for a month")),
                       ],
                       onChanged: (value) {
                         setState(() {
@@ -640,7 +642,8 @@ class _TeacherSecondPageContentsState extends State<TeacherSecondPageContents> {
                                 children: [
                                   AllMessagesButton,
                                   LastMessageWindow,
-                                  const Padding(padding: EdgeInsets.only(top: 20)),
+                                  const Padding(
+                                      padding: EdgeInsets.only(top: 20)),
                                   EnterAMessage,
                                 ],
                               ),
@@ -705,11 +708,13 @@ class _TeacherSecondPageContentsState extends State<TeacherSecondPageContents> {
                               alignment: Alignment.center,
                               height: 60,
                               circularRadius: 10,
-                              margin: const EdgeInsets.symmetric(horizontal: 10),
+                              margin:
+                                  const EdgeInsets.symmetric(horizontal: 10),
                               width: double.infinity,
                               child: Row(
                                 children: [
-                                  const Padding(padding: EdgeInsets.only(left: 20)),
+                                  const Padding(
+                                      padding: EdgeInsets.only(left: 20)),
                                   TMaker(
                                       text:
                                           "${widget.ListOfGrades[index][0]} - $SubjectThatIsSelected",
@@ -729,7 +734,8 @@ class _TeacherSecondPageContentsState extends State<TeacherSecondPageContents> {
                                       alignment: Alignment.center,
                                       height: 40,
                                       width: 70,
-                                      color: const Color.fromARGB(255, 54, 244, 92),
+                                      color: const Color.fromARGB(
+                                          255, 54, 244, 92),
                                       circularRadius: 20,
                                       child: TMaker(
                                           text: "فتح",
@@ -755,10 +761,12 @@ class _TeacherSecondPageContentsState extends State<TeacherSecondPageContents> {
                                           title: TMaker(
                                             textAlign: TextAlign.start,
                                             text: widget.ListOfGrades[index][1]
-                                                        [StudentIndex][0].toString(),
+                                                    [StudentIndex][0]
+                                                .toString(),
                                             fontSize: 20,
                                             fontWeight: FontWeight.w600,
-                                            color: const Color.fromARGB(255, 0, 0, 0),
+                                            color: const Color.fromARGB(
+                                                255, 0, 0, 0),
                                           ),
                                         ),
                                         const Padding(
