@@ -203,33 +203,47 @@ class _StudentFirstMainPageState extends State<StudentFirstMainPage> {
                   ],
                 ),
                 CMaker(
-                  height: 70,
-                  width: PageWidth(context)-40,
-                  child: ListView.builder(
-                    scrollDirection: Axis.horizontal,
-                    shrinkWrap: false,
-                    physics: NeverScrollableScrollPhysics(),
-                    itemCount: TableData[0].length,
-                    itemBuilder: (context, index) {
-                      return CMaker(
-                          height: 70,
-                          width :(PageWidth(context) - 40) / TableData[0].length,
-                          child: Container(
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.only(bottomLeft: (index==0)?Radius.circular(15):Radius.circular(0),bottomRight: (index==TableData[0].length-1)?Radius.circular(15):Radius.circular(0)),
-                                color:
-                                    Colors.white,
-                              ),
-                              alignment: Alignment.center,
-                              child: TMaker(
-                                  text: "${TableData[DayIndex][index]}",
-                                  fontSize: 15,
-                                  fontWeight: FontWeight.w600,
-                                  color: (index == 0)
-                                      ? Color.fromARGB(255, 36, 160, 209)
-                                      : const Color.fromARGB(255, 0, 0, 0))));
-                    },
-                  ))
+                    height: 70,
+                    width: PageWidth(context) - 40,
+                    child: ListView.builder(
+                      scrollDirection: Axis.horizontal,
+                      shrinkWrap: false,
+                      physics: NeverScrollableScrollPhysics(),
+                      itemCount: TableData[0].length,
+                      itemBuilder: (context, index) {
+                        return CMaker(
+                            height: 70,
+                            width: (PageWidth(context) >= 550 &&
+                                    PageWidth(context)<1200&&
+                                    PageHeight(context) < 900)
+                                ? (PageWidth(context)-165)/TableData[0].length
+                                :(PageWidth(context) >= 550 &&
+                                    PageWidth(context)>=1200&&
+                                    PageHeight(context) < 900)
+                                ? (PageWidth(context)-790)/TableData[0].length: ((PageWidth(context) - 40) /
+                                    TableData[0].length),
+                            child: Container(
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.only(
+                                      bottomLeft: (index == 0)
+                                          ? Radius.circular(15)
+                                          : Radius.circular(0),
+                                      bottomRight:
+                                          (index == TableData[0].length - 1)
+                                              ? Radius.circular(15)
+                                              : Radius.circular(0)),
+                                  color: Colors.white,
+                                ),
+                                alignment: Alignment.center,
+                                child: TMaker(
+                                    text: "${TableData[DayIndex][index]}",
+                                    fontSize: 15,
+                                    fontWeight: FontWeight.w600,
+                                    color: (index == 0)
+                                        ? Color.fromARGB(255, 36, 160, 209)
+                                        : const Color.fromARGB(255, 0, 0, 0))));
+                      },
+                    ))
               ],
             )),
       ],
@@ -471,7 +485,9 @@ class _StudentFirstMainPageState extends State<StudentFirstMainPage> {
     }
     if (PageWidth(context) >= 550 && PageHeight(context) >= 900) {
       setState(() {
-        FirstPageBody = Expanded(
+        FirstPageBody = CMaker(
+          height: double.infinity,
+          width: double.infinity,
           child: ListView(
             children: [
               Container(
@@ -604,7 +620,7 @@ class _StudentFirstMainPageState extends State<StudentFirstMainPage> {
               const Padding(padding: EdgeInsets.only(top: 20)),
               Column(
                 children: [
-                  (PageWidth(context) < 900)
+                  (PageWidth(context) < 1200)
                       ? Column(
                           children: [
                             CMaker(
@@ -670,10 +686,10 @@ class _StudentFirstMainPageState extends State<StudentFirstMainPage> {
                                           horizontal: 20),
                                       child: OneDayTable)),
                               const Padding(padding: EdgeInsets.only(left: 20)),
-                              Expanded(
-                                child: CMaker(
+                              CMaker(
                                     circularRadius: 20,
                                     height: 200,
+                                    width: 350,
                                     margin: const EdgeInsets.symmetric(
                                         horizontal: 20),
                                     boxShadow: const [
@@ -716,7 +732,6 @@ class _StudentFirstMainPageState extends State<StudentFirstMainPage> {
                                                 child: JoinButton))
                                       ],
                                     )),
-                              ),
                             ],
                           ),
                         ),

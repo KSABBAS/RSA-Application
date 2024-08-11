@@ -285,7 +285,7 @@ class _LoginPageState extends State<LogInPage> {
                         ])),
                     child: Row(
                       children: [
-                        Expanded(
+                        Flexible(
                             child: Column(children: [
                           Expanded(
                             child: Container(child: BackButton),
@@ -295,7 +295,7 @@ class _LoginPageState extends State<LogInPage> {
                             child: LoginCircle,
                           ),
                         ])),
-                        Expanded(
+                        Flexible(
                             child: CMaker(
                                 height: double.infinity,
                                 alignment: Alignment.center,
@@ -308,7 +308,7 @@ class _LoginPageState extends State<LogInPage> {
                   Expanded(flex: 2,child: Container()),
                             CMaker(alignment: Alignment.center,child: LoginButton),
                   Expanded(flex: 2,child: Container()),
-                            Expanded(
+                            Flexible(
                                 child: Row(
                               children: [
                                 Expanded(
@@ -346,8 +346,8 @@ class _LoginPageState extends State<LogInPage> {
                 child: Column(
                   children: [
                     Expanded(flex: 3,child: Container()),
-                    Expanded(
-                      flex: 3,
+                    CMaker(
+                      height: PageHeight(context)/6,
                       child: Row(
                         children: [
                       Expanded(
@@ -370,8 +370,7 @@ class _LoginPageState extends State<LogInPage> {
                             InputPart,
                             CMaker(alignment: Alignment.center,child: LoginButton),
                             const Padding(padding:EdgeInsets.only(bottom: 20)),
-                            Expanded(
-                                child: Row(
+                            Row(
                               children: [
                                 Expanded(
                                   child: ToWhatAreYouPage[0],
@@ -380,7 +379,7 @@ class _LoginPageState extends State<LogInPage> {
                                   child: ToWhatAreYouPage[1],
                                 )
                               ],
-                            )),
+                            ),
                             Expanded(child: Container()),
                           ],
                         )),
@@ -410,7 +409,7 @@ class _LoginPageState extends State<LogInPage> {
                 child: Row(
                   children: [
                     Expanded(child: Container()),
-                  Expanded(flex: 3,child: Column(
+                  CMaker(width: PageWidth(context)/3,child: Column(
                     children: [
                       Expanded(child: Container(),),
                       (PageWidth(context)<800)?Expanded(flex: 20,
@@ -438,17 +437,16 @@ class _LoginPageState extends State<LogInPage> {
                             InputPart,
                             CMaker(alignment: Alignment.center,child: LoginButton),
                             const Padding(padding:EdgeInsets.only(bottom: 20)),
-                            Expanded(
-                                child: Row(
-                              children: [
-                                Expanded(
-                                  child: ToWhatAreYouPage[0],
-                                ),
-                                Expanded(
-                                  child: ToWhatAreYouPage[1],
-                                )
-                              ],
-                            )),
+                              Row(
+                                children: [
+                                  Expanded(
+                                    child: ToWhatAreYouPage[0],
+                                  ),
+                                  Expanded(
+                                    child: ToWhatAreYouPage[1],
+                                  )
+                                ],
+                              ),
                             Expanded(child: Container()),
                           ],
                         )),

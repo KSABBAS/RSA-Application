@@ -743,8 +743,7 @@ class _TeacherSecondPageContentsState extends State<TeacherSecondPageContents> {
                               )),
                           const Padding(padding: EdgeInsets.only(bottom: 30)),
                           Expanded(
-                            child: CMaker(
-                              child: ListView.builder(
+                            child:ListView.builder(
                                   itemCount:
                                       widget.ListOfGrades[index][1].length,
                                   itemBuilder: (context, StudentIndex) {
@@ -769,7 +768,6 @@ class _TeacherSecondPageContentsState extends State<TeacherSecondPageContents> {
                                     );
                                   }),
                             ),
-                          ),
                         ],
                       )),
                 ],

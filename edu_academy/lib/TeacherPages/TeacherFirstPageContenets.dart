@@ -67,13 +67,13 @@ class _TeacherFirstPageContenetsState extends State<TeacherFirstPageContenets> {
           width: double.infinity,
           color: Colors.white,
           child: Column(children: [
-          Expanded(child: Row(children: [
+          Row(children: [
             Expanded(flex: 2,child: Container(),),
             Expanded(flex: 6,child: NewClassTC,),
             Expanded(child: Container(),),
             Expanded(flex: 6,child: LessonAndDate,),
             Expanded(flex: 2,child: Container(),),
-          ],)),
+          ],),
           Expanded(child: CMaker(alignment: Alignment.center,child: JoinButton))
         ],));
       });

@@ -1,6 +1,7 @@
 import 'package:edu_academy/AdminPages/AdminMainPage.dart';
 import 'package:edu_academy/Login/LogInPage.dart';
 import 'package:edu_academy/ParentPages/ParentMainPage.dart';
+import 'package:edu_academy/ParentPages/SonPage.dart';
 import 'package:edu_academy/TeacherPages/TeacherMainPage.dart';
 import 'package:edu_academy/ParentPages/ParentSignUpPage.dart';
 import 'package:edu_academy/StudentPages/StudentMobileSignUpPage.dart';
@@ -36,7 +37,7 @@ void main() async {
         "AdminMainPage": (context) => const AdminMainPage(),
         "WhatAreYouPage": (context) => const WhatAreYouPage(),
         "ParentSignUpPage": (context) => const ParentSignUpPage(),
-        "TeacherSignUpPage": (context) => const TeacherSignUpPage()
+        "TeacherSignUpPage": (context) => const TeacherSignUpPage(),
       },
       home: const SplashViewPage()));
   SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersiveSticky);

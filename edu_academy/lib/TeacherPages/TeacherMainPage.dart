@@ -144,7 +144,9 @@ class _TeacherMainPageState extends State<TeacherMainPage> {
     }
     SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersiveSticky);
     List<Widget> Pages = [
-      Expanded(
+      CMaker(
+        height: double.infinity,
+        width: double.infinity,
         child: Container(
           child: Column(
             children: [
@@ -176,7 +178,8 @@ class _TeacherMainPageState extends State<TeacherMainPage> {
                               });
                             },
                             child: Image.asset("images/Book.png"))),
-                    Expanded(
+                    CMaker(
+                      width: PageWidth(context)-150,
                       child: Row(
                         children: [
                           Expanded(
@@ -334,7 +337,9 @@ class _TeacherMainPageState extends State<TeacherMainPage> {
           ),
         ),
       ),
-      Expanded(
+      CMaker(
+        height: double.infinity,
+            width: double.infinity,
         child: SizedBox(
           height: PageHeight(context) + 300,
           child: ListView(
@@ -368,7 +373,8 @@ class _TeacherMainPageState extends State<TeacherMainPage> {
                               });
                             },
                             child: Image.asset("images/Book.png"))),
-                    Expanded(
+                    CMaker(
+                      width: PageWidth(context)-150,
                       child: Row(
                         children: [
                           Expanded(
@@ -532,7 +538,9 @@ class _TeacherMainPageState extends State<TeacherMainPage> {
           ),
         ),
       ),
-      Expanded(
+      CMaker(
+        height: double.infinity,
+            width: double.infinity,
         child: Container(
           child: ListView(
             children: [
@@ -564,7 +572,8 @@ class _TeacherMainPageState extends State<TeacherMainPage> {
                               });
                             },
                             child: Image.asset("images/Book.png"))),
-                    Expanded(
+                    CMaker(
+                      width: PageWidth(context)-150,
                       child: Row(
                         children: [
                           Expanded(
@@ -727,7 +736,9 @@ class _TeacherMainPageState extends State<TeacherMainPage> {
           ),
         ),
       ),
-      Expanded(
+      CMaker(
+        height: double.infinity,
+            width: double.infinity,
         child: Container(
             child: ListView(children: [
           Container(
@@ -758,7 +769,8 @@ class _TeacherMainPageState extends State<TeacherMainPage> {
                           });
                         },
                         child: Image.asset("images/Book.png"))),
-                Expanded(
+                CMaker(
+                  width:PageWidth(context)-150,
                   child: Row(
                     children: [
                       Expanded(

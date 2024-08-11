@@ -308,22 +308,20 @@ class _ThirdPageState extends State<ThirdPage> {
                   child: ListView(
                     children: [
                       const Padding(padding: EdgeInsets.only(top: 20)),
-                      Expanded(
-                          flex: 3,
-                          child: CMaker(
+                      CMaker(
+                        height: 100,
                               alignment: Alignment.center,
-                              child: ThirdPageHomeworkTitle)),
+                              child: ThirdPageHomeworkTitle),
                       const Padding(padding: EdgeInsets.only(top: 20)),
                       ThirdPageHomeworkDescription,
-                      Expanded(flex: 10, child: HomeworkImage),
+                      CMaker(height: 400, child: HomeworkImage),
                       const Padding(padding: EdgeInsets.only(top: 20)),
                       ThirdPageHomeworkDescription2,
                       const Padding(padding: EdgeInsets.only(top: 10)),
-                      Expanded(
-                          flex: 3,
-                          child: CMaker(
+                      CMaker(
+                        height: 100,
                               alignment: Alignment.center,
-                              child: BookPdfButton)),
+                              child: BookPdfButton),
                       const Padding(padding: EdgeInsets.only(top: 40)),
                       CMaker(
                         width: double.infinity,
@@ -341,11 +339,10 @@ class _ThirdPageState extends State<ThirdPage> {
                         ),
                       ),
                       const Padding(padding: EdgeInsets.only(top: 30)),
-                      Expanded(
-                          flex: 2,
-                          child: CMaker(
+                      CMaker(
+                        height: 70,
                               alignment: Alignment.center,
-                              child: ViewTheRightSolution)),
+                              child: ViewTheRightSolution),
                       const Padding(padding: EdgeInsets.only(top: 30)),
                     ],
                   ),
@@ -395,119 +392,23 @@ class _ThirdPageState extends State<ThirdPage> {
                     children: [
                       Expanded(child: HomeworkImage),
                       Expanded(
-                        flex: 2,
-                        child: ListView(
-                          children: [
-                            const Padding(padding: EdgeInsets.only(top: 60)),
-                            Expanded(
-                                flex: 3,
-                                child: CMaker(
-                                    alignment: Alignment.center,
-                                    child: ThirdPageHomeworkTitle)),
-                            const Padding(padding: EdgeInsets.only(top: 60)),
-                            ThirdPageHomeworkDescription,
-                            const Padding(padding: EdgeInsets.only(top: 60)),
-                            ThirdPageHomeworkDescription2,
-                            const Padding(padding: EdgeInsets.only(top: 60)),
-                            Expanded(
-                                flex: 3,
-                                child: CMaker(
-                                    alignment: Alignment.center,
-                                    child: BookPdfButton)),
-                            const Padding(padding: EdgeInsets.only(top: 40)),
-                            CMaker(
-                              width: double.infinity,
-                              child: Row(
-                                children: [
-                                  Expanded(
-                                      child: CMaker(
-                                          alignment: Alignment.center,
-                                          child: StarsOf10)),
-                                  Expanded(
-                                      child: CMaker(
-                                          alignment: Alignment.center,
-                                          child: TeacherHomeworkNotes)),
-                                ],
-                              ),
-                            ),
-                            const Padding(padding: EdgeInsets.only(top: 30)),
-                            Expanded(
-                                flex: 2,
-                                child: CMaker(
-                                    alignment: Alignment.center,
-                                    child: ViewTheRightSolution)),
-                            const Padding(padding: EdgeInsets.only(top: 30)),
-                          ],
-                        ),
-                      ),
-                    ],
-                  ),
-                )),
-            const Padding(padding: EdgeInsets.only(top: 20)),
-          ],
-        );
-      } else if (PageWidth(context) >= 550 && PageHeight(context) < 900) {
-        ThirdPageContents = Expanded(
-          child: Column(
-            children: [
-              Container(
-                  width: double.infinity,
-                  decoration: const BoxDecoration(
-                      boxShadow: [
-                        BoxShadow(
-                            offset: Offset(1, 1),
-                            blurRadius: 6,
-                            spreadRadius: .03,
-                            color: Color.fromARGB(82, 0, 0, 0)),
-                      ],
-                      color: Color.fromARGB(255, 255, 255, 255),
-                      borderRadius: BorderRadius.only(
-                          bottomLeft: Radius.circular(20),
-                          bottomRight: Radius.circular(20))),
-                  height: 80,
-                  child: Row(
-                    children: [
-                      Expanded(
-                          child: SizedBox(width: 30, height: 30, child: Logo)),
-                      Expanded(flex: 3, child: StudentNameTC),
-                      Expanded(flex: 2, child: StudentGradeTC),
-                      Expanded(child: Notifications)
-                    ],
-                  )),
-              const Padding(padding: EdgeInsets.only(top: 60)),
-              ThirdPageBackButton,
-              const Padding(padding: EdgeInsets.only(top: 60)),
-              HomeworkSubjectName,
-              const Padding(padding: EdgeInsets.only(top: 60)),
-              Expanded(
-                  flex: 13,
-                  child: CMaker(
-                    margin: const EdgeInsets.symmetric(horizontal: 20),
-                    circularRadius: 20,
-                    color: const Color.fromARGB(255, 36, 160, 209),
-                    child: Row(
-                      children: [
-                        Expanded(child: HomeworkImage),
-                        Expanded(
-                          flex: 2,
+                        flex: 3,
+                        child: CMaker(
                           child: ListView(
                             children: [
-                              const Padding(padding: EdgeInsets.only(top: 20)),
-                              Expanded(
-                                  flex: 3,
-                                  child: CMaker(
+                              const Padding(padding: EdgeInsets.only(top: 60)),
+                              CMaker(height: 100,
                                       alignment: Alignment.center,
-                                      child: ThirdPageHomeworkTitle)),
-                              const Padding(padding: EdgeInsets.only(top: 20)),
+                                      child: ThirdPageHomeworkTitle),
+                              const Padding(padding: EdgeInsets.only(top: 60)),
                               ThirdPageHomeworkDescription,
-                              const Padding(padding: EdgeInsets.only(top: 20)),
+                              const Padding(padding: EdgeInsets.only(top: 60)),
                               ThirdPageHomeworkDescription2,
-                              const Padding(padding: EdgeInsets.only(top: 10)),
-                              Expanded(
-                                  flex: 3,
-                                  child: CMaker(
+                              const Padding(padding: EdgeInsets.only(top: 60)),
+                              CMaker(
+                                height: 100,
                                       alignment: Alignment.center,
-                                      child: BookPdfButton)),
+                                      child: BookPdfButton),
                               const Padding(padding: EdgeInsets.only(top: 40)),
                               CMaker(
                                 width: double.infinity,
@@ -525,20 +426,118 @@ class _ThirdPageState extends State<ThirdPage> {
                                 ),
                               ),
                               const Padding(padding: EdgeInsets.only(top: 30)),
-                              Expanded(
-                                  flex: 2,
-                                  child: CMaker(
+                              CMaker(
+                                height: 60,
                                       alignment: Alignment.center,
-                                      child: ViewTheRightSolution)),
+                                      child: ViewTheRightSolution),
                               const Padding(padding: EdgeInsets.only(top: 30)),
                             ],
                           ),
                         ),
+                      ),
+                    ],
+                  ),
+                )),
+            const Padding(padding: EdgeInsets.only(top: 20)),
+          ],
+        );
+      } else if (PageWidth(context) >= 550 && PageHeight(context) < 900) {
+        ThirdPageContents = Expanded(
+          child: CMaker(
+            child: Column(
+              children: [
+                Container(
+                    width: double.infinity,
+                    decoration: const BoxDecoration(
+                        boxShadow: [
+                          BoxShadow(
+                              offset: Offset(1, 1),
+                              blurRadius: 6,
+                              spreadRadius: .03,
+                              color: Color.fromARGB(82, 0, 0, 0)),
+                        ],
+                        color: Color.fromARGB(255, 255, 255, 255),
+                        borderRadius: BorderRadius.only(
+                            bottomLeft: Radius.circular(20),
+                            bottomRight: Radius.circular(20))),
+                    height: 80,
+                    child: Row(
+                      children: [
+                        Expanded(
+                            child: SizedBox(width: 30, height: 30, child: Logo)),
+                        Expanded(flex: 3, child: StudentNameTC),
+                        Expanded(flex: 2, child: StudentGradeTC),
+                        Expanded(child: Notifications)
                       ],
-                    ),
-                  )),
-              const Padding(padding: EdgeInsets.only(top: 20)),
-            ],
+                    )),
+                const Padding(padding: EdgeInsets.only(top: 60)),
+                ThirdPageBackButton,
+                const Padding(padding: EdgeInsets.only(top: 60)),
+                HomeworkSubjectName,
+                const Padding(padding: EdgeInsets.only(top: 60)),
+                Expanded(
+                    flex: 13,
+                    child: CMaker(
+                      margin: const EdgeInsets.symmetric(horizontal: 20),
+                      circularRadius: 20,
+                      color: const Color.fromARGB(255, 36, 160, 209),
+                      child: Row(
+                        children: [
+                          Expanded(child: HomeworkImage),
+                          Expanded(
+                            flex: 3,
+                            child: CMaker(
+                              child: ListView(
+                                children: [
+                                  const Padding(padding: EdgeInsets.only(top: 20)),
+                                  Expanded(
+                                      flex: 3,
+                                      child: CMaker(
+                                          alignment: Alignment.center,
+                                          child: ThirdPageHomeworkTitle)),
+                                  const Padding(padding: EdgeInsets.only(top: 20)),
+                                  ThirdPageHomeworkDescription,
+                                  const Padding(padding: EdgeInsets.only(top: 20)),
+                                  ThirdPageHomeworkDescription2,
+                                  const Padding(padding: EdgeInsets.only(top: 10)),
+                                  Expanded(
+                                      flex: 3,
+                                      child: CMaker(
+                                          alignment: Alignment.center,
+                                          child: BookPdfButton)),
+                                  const Padding(padding: EdgeInsets.only(top: 40)),
+                                  CMaker(
+                                    width: double.infinity,
+                                    child: Row(
+                                      children: [
+                                        Expanded(
+                                            child: CMaker(
+                                                alignment: Alignment.center,
+                                                child: StarsOf10)),
+                                        Expanded(
+                                            child: CMaker(
+                                                alignment: Alignment.center,
+                                                child: TeacherHomeworkNotes)),
+                                      ],
+                                    ),
+                                  ),
+                                  const Padding(padding: EdgeInsets.only(top: 30)),
+                                  Expanded(
+                                      flex: 2,
+                                      child: CMaker(
+                                          alignment: Alignment.center,
+                                          child: ViewTheRightSolution)),
+                                  const Padding(padding: EdgeInsets.only(top: 30)),
+                                ],
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    )),
+                const Padding(padding: EdgeInsets.only(top: 20)),
+              ],
+            ),
           ),
         );
       }

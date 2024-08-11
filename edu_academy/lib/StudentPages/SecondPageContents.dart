@@ -371,7 +371,9 @@ class _SecondPageState extends State<SecondPage> {
           const Padding(padding: EdgeInsets.only(bottom: 20),),
           CMaker(
                 height: 50,
-                child: Expanded(
+                child: CMaker(
+                  height: double.infinity,
+                  width: double.infinity,
                   child: Row(
                     children: [
                       ForthPageBackButton,
@@ -430,7 +432,9 @@ class _SecondPageState extends State<SecondPage> {
           const Padding(padding: EdgeInsets.only(bottom: 20),),
           CMaker(
                 height: 50,
-                child: Expanded(
+                child: CMaker(
+                  height: double.infinity,
+                  width: double.infinity,
                   child: Row(
                     children: [
                       ForthPageBackButton,
@@ -462,62 +466,66 @@ class _SecondPageState extends State<SecondPage> {
       }else if(PageWidth(context) >= 550 && PageHeight(context) < 900){
         setState((){
         SecondPageContents = Expanded(
-          child: Column(
-          children: [
-            Container(
-                    width: double.infinity,
-                    decoration: const BoxDecoration(
-                        boxShadow: [
-                          BoxShadow(
-                              offset: Offset(1, 1),
-                              blurRadius: 6,
-                              spreadRadius: .03,
-                              color: Color.fromARGB(82, 0, 0, 0)),
-                        ],
-                        color: Color.fromARGB(255, 255, 255, 255),
-                        borderRadius: BorderRadius.only(
-                            bottomLeft: Radius.circular(20),
-                            bottomRight: Radius.circular(20))),
-                    height: 70,
-                    child: Row(
-                      children: [
-                        Expanded(child: Logo),
-                        Expanded(flex: 3, child: StudentNameTC),
-                        Expanded(flex: 2, child: StudentGradeTC),
-                        Expanded(child: Notifications)
-                      ],
-                    )),
-            const Padding(padding: EdgeInsets.only(bottom: 20),),
-            CMaker(
-                  height: 50,
-                  child: Expanded(
-                    child: Row(
-                      children: [
-                        ForthPageBackButton,
-                        Expanded(child: Container()),
-                        Row(
-                          children: [
-                            SubjectSelectedImage,
-                            const Padding(padding: EdgeInsets.only(left: 5)),
-                            SubjectSelectedName
+          child: CMaker(
+            child: Column(
+            children: [
+              Container(
+                      width: double.infinity,
+                      decoration: const BoxDecoration(
+                          boxShadow: [
+                            BoxShadow(
+                                offset: Offset(1, 1),
+                                blurRadius: 6,
+                                spreadRadius: .03,
+                                color: Color.fromARGB(82, 0, 0, 0)),
                           ],
-                        ),
-                        Expanded(child: Container())
-                      ],
+                          color: Color.fromARGB(255, 255, 255, 255),
+                          borderRadius: BorderRadius.only(
+                              bottomLeft: Radius.circular(20),
+                              bottomRight: Radius.circular(20))),
+                      height: 70,
+                      child: Row(
+                        children: [
+                          Expanded(child: Logo),
+                          Expanded(flex: 3, child: StudentNameTC),
+                          Expanded(flex: 2, child: StudentGradeTC),
+                          Expanded(child: Notifications)
+                        ],
+                      )),
+              const Padding(padding: EdgeInsets.only(bottom: 20),),
+              CMaker(
+                    height: 50,
+                    child: CMaker(
+                      height: double.infinity,
+                      width: double.infinity,
+                      child: Row(
+                        children: [
+                          ForthPageBackButton,
+                          Expanded(child: Container()),
+                          Row(
+                            children: [
+                              SubjectSelectedImage,
+                              const Padding(padding: EdgeInsets.only(left: 5)),
+                              SubjectSelectedName
+                            ],
+                          ),
+                          Expanded(child: Container())
+                        ],
+                      ),
                     ),
                   ),
-                ),
-            const Padding(padding: EdgeInsets.only(bottom: 20),),
-            Padding(
-              padding: const EdgeInsets.all(15.0),
-              child: DownloadTheBook
-            ),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 15),
-              child: BookView
-            )
-          ],
-                ),
+              const Padding(padding: EdgeInsets.only(bottom: 20),),
+              Padding(
+                padding: const EdgeInsets.all(15.0),
+                child: DownloadTheBook
+              ),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 15),
+                child: BookView
+              )
+            ],
+                  ),
+          ),
         );
         });
       }
@@ -623,17 +631,21 @@ class _SecondPageState extends State<SecondPage> {
                 const Padding(padding: EdgeInsets.only(bottom: 20)),
                 CMaker(
                 height: 50,
-                child: Expanded(
+                child: CMaker(
+                  height: double.infinity,
+                  width: double.infinity,
                   child: Row(
                     children: [
                       thirdPageBackButton,
                       Expanded(child: Container()),
-                      Row(
-                        children: [
-                          SubjectSelectedImage,
-                          const Padding(padding: EdgeInsets.only(left: 5)),
-                          SubjectSelectedName
-                        ],
+                      CMaker(
+                        child: Row(
+                          children: [
+                            SubjectSelectedImage,
+                            const Padding(padding: EdgeInsets.only(left: 5)),
+                            SubjectSelectedName
+                          ],
+                        ),
                       ),
                       Expanded(child: Container())
                     ],
@@ -686,7 +698,9 @@ class _SecondPageState extends State<SecondPage> {
                 const Padding(padding: EdgeInsets.only(bottom: 20)),
                 CMaker(
                 height: 50,
-                child: Expanded(
+                child: CMaker(
+                  height: double.infinity,
+                  width: double.infinity,
                   child: Row(
                     children: [
                       thirdPageBackButton,
@@ -722,65 +736,69 @@ class _SecondPageState extends State<SecondPage> {
       if(PageWidth(context) >= 550 && PageHeight(context) < 900){
         setState(() {
         SecondPageContents = Expanded(
-          child: Column(
-          children: [
-          Container(
-                    width: double.infinity,
-                    decoration: const BoxDecoration(
-                        boxShadow: [
-                          BoxShadow(
-                              offset: Offset(1, 1),
-                              blurRadius: 6,
-                              spreadRadius: .03,
-                              color: Color.fromARGB(82, 0, 0, 0)),
+          child: CMaker(
+            child: Column(
+            children: [
+            Container(
+                      width: double.infinity,
+                      decoration: const BoxDecoration(
+                          boxShadow: [
+                            BoxShadow(
+                                offset: Offset(1, 1),
+                                blurRadius: 6,
+                                spreadRadius: .03,
+                                color: Color.fromARGB(82, 0, 0, 0)),
+                          ],
+                          color: Color.fromARGB(255, 255, 255, 255),
+                          borderRadius: BorderRadius.only(
+                              bottomLeft: Radius.circular(20),
+                              bottomRight: Radius.circular(20))),
+                      height: 70,
+                      child: Row(
+                        children: [
+                          Expanded(child: Logo),
+                          Expanded(flex: 3, child: StudentNameTC),
+                          Expanded(flex: 2, child: StudentGradeTC),
+                          Expanded(child: Notifications)
                         ],
-                        color: Color.fromARGB(255, 255, 255, 255),
-                        borderRadius: BorderRadius.only(
-                            bottomLeft: Radius.circular(20),
-                            bottomRight: Radius.circular(20))),
-                    height: 70,
+                      )),
+                    const Padding(padding: EdgeInsets.only(bottom: 10)),
+                    CMaker(
+                  height: 50,
+                  child: CMaker(
+                    height: double.infinity,
+                    width: double.infinity,
                     child: Row(
                       children: [
-                        Expanded(child: Logo),
-                        Expanded(flex: 3, child: StudentNameTC),
-                        Expanded(flex: 2, child: StudentGradeTC),
-                        Expanded(child: Notifications)
+                        thirdPageBackButton,
+                        Expanded(child: Container()),
+                        Row(
+                          children: [
+                            SubjectSelectedImage,
+                            const Padding(padding: EdgeInsets.only(left: 5)),
+                            SubjectSelectedName
+                          ],
+                        ),
+                        Expanded(child: Container())
                       ],
-                    )),
-                  const Padding(padding: EdgeInsets.only(bottom: 10)),
-                  CMaker(
-                height: 50,
-                child: Expanded(
-                  child: Row(
-                    children: [
-                      thirdPageBackButton,
-                      Expanded(child: Container()),
-                      Row(
-                        children: [
-                          SubjectSelectedImage,
-                          const Padding(padding: EdgeInsets.only(left: 5)),
-                          SubjectSelectedName
-                        ],
-                      ),
-                      Expanded(child: Container())
-                    ],
+                    ),
                   ),
                 ),
+                    const Padding(padding: EdgeInsets.only(bottom: 20)),
+              CMaker(
+                  alignment: Alignment.center,
+                  height: 70,
+                  child: PressOnBookT),
+              const Padding(
+                padding: EdgeInsets.only(bottom: 10),
               ),
-                  const Padding(padding: EdgeInsets.only(bottom: 20)),
-            CMaker(
-                alignment: Alignment.center,
-                height: 70,
-                child: PressOnBookT),
-            const Padding(
-              padding: EdgeInsets.only(bottom: 10),
-            ),
-            SizedBox(
-              height: PageHeight(context) - (250),
-              child: PressableBooks
-            )
-          ],
-                ),
+              SizedBox(
+                height: PageHeight(context) - (250),
+                child: PressableBooks
+              )
+            ],
+                  ),
+          ),
         );
         });
       }
@@ -927,7 +945,9 @@ class _SecondPageState extends State<SecondPage> {
               const Padding(padding: EdgeInsets.only(bottom: 20)),
               CMaker(
                 height: 50,
-                child: Expanded(
+                child: CMaker(
+                  height: double.infinity,
+                  width: double.infinity,
                   child: Row(
                     children: [
                       SecondPageBackButton,
@@ -1008,7 +1028,9 @@ class _SecondPageState extends State<SecondPage> {
           const Padding(padding: EdgeInsets.only(bottom: 20),),
               CMaker(
                 height: 50,
-                child: Expanded(
+                child: CMaker(
+                  height: double.infinity,
+                  width: double.infinity,
                   child: Row(
                     children: [
                       SecondPageBackButton,
@@ -1061,85 +1083,89 @@ class _SecondPageState extends State<SecondPage> {
         });
       } else if (PageWidth(context) >= 550 && PageHeight(context) < 900) {
         setState(() {
-          SecondPageContents = Expanded(
-            child: Column(
-              children: [
-                Container(
-                  width: double.infinity,
-                  decoration: const BoxDecoration(
-                      boxShadow: [
-                        BoxShadow(
-                            offset: Offset(1, 1),
-                            blurRadius: 6,
-                            spreadRadius: .03,
-                            color: Color.fromARGB(82, 0, 0, 0)),
-                      ],
-                      color: Color.fromARGB(255, 255, 255, 255),
-                      borderRadius: BorderRadius.only(
-                          bottomLeft: Radius.circular(20),
-                          bottomRight: Radius.circular(20))),
-                  height: 70,
-                  child: Row(
-                    children: [
-                      Expanded(child: Logo),
-                      Expanded(flex: 3, child: StudentNameTC),
-                      Expanded(flex: 2, child: StudentGradeTC),
-                      Expanded(child: Notifications)
-                    ],
-                  )),
-          const Padding(padding: EdgeInsets.only(bottom: 20),),
-                CMaker(
-                  height: 50,
-                  child: Expanded(
+          SecondPageContents =Expanded(
+            child: CMaker(
+              child: Column(
+                children: [
+                  Container(
+                    width: double.infinity,
+                    decoration: const BoxDecoration(
+                        boxShadow: [
+                          BoxShadow(
+                              offset: Offset(1, 1),
+                              blurRadius: 6,
+                              spreadRadius: .03,
+                              color: Color.fromARGB(82, 0, 0, 0)),
+                        ],
+                        color: Color.fromARGB(255, 255, 255, 255),
+                        borderRadius: BorderRadius.only(
+                            bottomLeft: Radius.circular(20),
+                            bottomRight: Radius.circular(20))),
+                    height: 70,
                     child: Row(
                       children: [
-                        SecondPageBackButton,
-                        Expanded(child: Container()),
-                        Row(
-                          children: [
-                            SubjectSelectedImage,
-                            const Padding(padding: EdgeInsets.only(left: 5)),
-                            SubjectSelectedName
-                          ],
-                        ),
-                        Expanded(child: Container())
+                        Expanded(child: Logo),
+                        Expanded(flex: 3, child: StudentNameTC),
+                        Expanded(flex: 2, child: StudentGradeTC),
+                        Expanded(child: Notifications)
                       ],
+                    )),
+            const Padding(padding: EdgeInsets.only(bottom: 20),),
+                  CMaker(
+                    height: 50,
+                    child: CMaker(
+                      height: double.infinity,
+                      width: double.infinity,
+                      child: Row(
+                        children: [
+                          SecondPageBackButton,
+                          Expanded(child: Container()),
+                          Row(
+                            children: [
+                              SubjectSelectedImage,
+                              const Padding(padding: EdgeInsets.only(left: 5)),
+                              SubjectSelectedName
+                            ],
+                          ),
+                          Expanded(child: Container())
+                        ],
+                      ),
                     ),
                   ),
-                ),
-                const Padding(
-                  padding: EdgeInsets.only(bottom: 10),
-                ),
-                CMaker(
-                    circularRadius: 20,
-                    color: const Color.fromARGB(255, 36, 160, 209),
-                    margin: const EdgeInsets.symmetric(horizontal: 15),
-                    height: 60,
-                    padding:
-                        const EdgeInsets.symmetric(vertical: 5, horizontal: 30),
-                    child: Row(
-                      children: [
-                        OpenTheBooksButton,
-                        Expanded(child: OpenTheBooksTC)
-                      ],
-                    )),
-                const Padding(padding: EdgeInsets.only(bottom: 10)),
-                CMaker(
-                    height: 50,
-                    child: Row(
-                      children: [
-                        Expanded(child: Container()),
-                        RecoredeLessonsImage,
-                        const Padding(padding: EdgeInsets.only(left: 5)),
-                        RecoredeLessonsT,
-                        Expanded(child: Container())
-                      ],
-                    )),
-                const Padding(padding: EdgeInsets.only(top: 20)),
-                SizedBox(
-                    height: PageHeight(context) - (380),
-                    child: LessonsListView),
-              ],
+                  const Padding(
+                    padding: EdgeInsets.only(bottom: 10),
+                  ),
+                  CMaker(
+                      circularRadius: 20,
+                      color: const Color.fromARGB(255, 36, 160, 209),
+                      margin: const EdgeInsets.symmetric(horizontal: 15),
+                      height: 60,
+                      padding:
+                          const EdgeInsets.symmetric(vertical: 5, horizontal: 30),
+                      child: Row(
+                        children: [
+                          OpenTheBooksButton,
+                          Expanded(child: OpenTheBooksTC)
+                        ],
+                      )),
+                  const Padding(padding: EdgeInsets.only(bottom: 10)),
+                  CMaker(
+                      height: 50,
+                      child: Row(
+                        children: [
+                          Expanded(child: Container()),
+                          RecoredeLessonsImage,
+                          const Padding(padding: EdgeInsets.only(left: 5)),
+                          RecoredeLessonsT,
+                          Expanded(child: Container())
+                        ],
+                      )),
+                  const Padding(padding: EdgeInsets.only(top: 20)),
+                  SizedBox(
+                      height: PageHeight(context) - (380),
+                      child: LessonsListView),
+                ],
+              ),
             ),
           );
         });
@@ -1259,8 +1285,9 @@ class _SecondPageState extends State<SecondPage> {
       );
       if (PageWidth(context) < 550) {
         setState(() {
-          SecondPageContents = Expanded(
-              child: Container(
+          SecondPageContents =Container(
+            height: double.infinity,
+            width: double.infinity,
             child: Column(
               children: [
                 Container(
@@ -1298,13 +1325,14 @@ class _SecondPageState extends State<SecondPage> {
                 const Padding(padding: EdgeInsets.only(top: 20)),
               ],
             ),
-          ));
+          );
         });
       }
       if (PageWidth(context) >= 550 && PageHeight(context) >= 900) {
         setState(() {
-          SecondPageContents = Expanded(
-              child: Container(
+          SecondPageContents = Container(
+            height: double.infinity,
+            width: double.infinity,
             child: Column(
               children: [
                 Container(
@@ -1339,49 +1367,52 @@ class _SecondPageState extends State<SecondPage> {
                 Expanded(child: GridViewWidget),
               ],
             ),
-          ));
+          );
         });
       }
       if (PageWidth(context) >= 550 && PageHeight(context) < 900) {
         setState(() {
-          SecondPageContents = Expanded(
-              child: Container(
-            child: Column(
-              children: [
-                Container(
-                    width: double.infinity,
-                    decoration: const BoxDecoration(
-                        boxShadow: [
-                          BoxShadow(
-                              offset: Offset(1, 1),
-                              blurRadius: 6,
-                              spreadRadius: .03,
-                              color: Color.fromARGB(82, 0, 0, 0)),
+          SecondPageContents =Expanded(
+            child: Container(
+              child: Column(
+                children: [
+                  Container(
+                      width: double.infinity,
+                      decoration: const BoxDecoration(
+                          boxShadow: [
+                            BoxShadow(
+                                offset: Offset(1, 1),
+                                blurRadius: 6,
+                                spreadRadius: .03,
+                                color: Color.fromARGB(82, 0, 0, 0)),
+                          ],
+                          color: Color.fromARGB(255, 255, 255, 255),
+                          borderRadius: BorderRadius.only(
+                              bottomLeft: Radius.circular(20),
+                              bottomRight: Radius.circular(20))),
+                      height: 80,
+                      child: Row(
+                        children: [
+                          Expanded(
+                              child:
+                                  SizedBox(width: 30, height: 30, child: Logo)),
+                          Expanded(flex: 3, child: StudentNameTC),
+                          Expanded(flex: 2, child: StudentGradeTC),
+                          Expanded(child: Notifications)
                         ],
-                        color: Color.fromARGB(255, 255, 255, 255),
-                        borderRadius: BorderRadius.only(
-                            bottomLeft: Radius.circular(20),
-                            bottomRight: Radius.circular(20))),
-                    height: 70,
-                    child: Row(
-                      children: [
-                        Expanded(child: Logo),
-                        Expanded(flex: 3, child: StudentNameTC),
-                        Expanded(flex: 2, child: StudentGradeTC),
-                        Expanded(child: Notifications)
-                      ],
-                    )),
-                const Padding(padding: EdgeInsets.only(top: 20)),
-                CMaker(
-                  margin: const EdgeInsets.symmetric(horizontal: 40),
-                  child: GridBooksTitleC,
-                ),
-                const Padding(padding: EdgeInsets.only(top: 20)),
-                Expanded(child: GridViewWidget),
-                const Padding(padding: EdgeInsets.only(top: 20)),
-              ],
+                      )),
+                  const Padding(padding: EdgeInsets.only(top: 20)),
+                  CMaker(
+                    margin: const EdgeInsets.symmetric(horizontal: 40),
+                    child: GridBooksTitleC,
+                  ),
+                  const Padding(padding: EdgeInsets.only(top: 20)),
+                  Expanded(child: GridViewWidget),
+                  const Padding(padding: EdgeInsets.only(top: 20)),
+                ],
+              ),
             ),
-          ));
+          );
         });
       }
     }

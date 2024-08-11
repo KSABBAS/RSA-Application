@@ -1,12 +1,9 @@
 // import 'dart:convert';
 import 'dart:developer';
-import 'dart:io';
-
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:edu_academy/StudentPages/FirstPageContents.dart';
 import 'package:edu_academy/StudentPages/ProfilePageContents.dart';
 import 'package:edu_academy/StudentPages/SecondPageContents.dart';
-import 'package:edu_academy/StudentPages/StudentMobileSignUpPage.dart';
 import 'package:edu_academy/StudentPages/ThirdPageContents.dart';
 import 'package:edu_academy/MyTools.dart';
 import 'package:flutter/material.dart';
@@ -14,8 +11,6 @@ import 'package:flutter/services.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:string_extensions/string_extensions.dart';
-import 'package:panara_dialogs/panara_dialogs.dart';
-import 'package:overlay_loading_progress/overlay_loading_progress.dart';
 import 'package:sidebar_with_animation/animated_side_bar.dart';
 
 class StudentMainPage extends StatefulWidget {
@@ -112,33 +107,35 @@ class _StudentMainPageState extends State<StudentMainPage> {
                             },
                             child: Image.asset("images/Book.png"))),
                     Expanded(
-                      child: Row(
-                        children: [
-                          Expanded(
-                            child: CMaker(
-                              alignment: Alignment.bottomCenter,
-                              child: Text(
-                                name,
-                                style: const TextStyle(
-                                    fontSize: 17,
-                                    fontWeight: FontWeight.w500,
-                                    color: Color.fromARGB(255, 5, 123, 151)),
+                      child: CMaker(
+                        child: Row(
+                            children: [
+                              Expanded(
+                                child: CMaker(
+                                  alignment: Alignment.bottomCenter,
+                                  child: Text(
+                                    name,
+                                    style: const TextStyle(
+                                        fontSize: 17,
+                                        fontWeight: FontWeight.w500,
+                                        color: Color.fromARGB(255, 5, 123, 151)),
+                                  ),
+                                ),
                               ),
-                            ),
-                          ),
-                          Expanded(
-                            child: CMaker(
-                              alignment: Alignment.bottomCenter,
-                              child: Text(
-                                grade,
-                                style: const TextStyle(
-                                    fontSize: 16,
-                                    fontWeight: FontWeight.w500,
-                                    color: Color.fromARGB(255, 89, 89, 87)),
+                              Expanded(
+                                child: CMaker(
+                                  alignment: Alignment.bottomCenter,
+                                  child: Text(
+                                    grade,
+                                    style: const TextStyle(
+                                        fontSize: 16,
+                                        fontWeight: FontWeight.w500,
+                                        color: Color.fromARGB(255, 89, 89, 87)),
+                                  ),
+                                ),
                               ),
-                            ),
+                            ],
                           ),
-                        ],
                       ),
                     ),
                     InkWell(
@@ -221,7 +218,8 @@ class _StudentMainPageState extends State<StudentMainPage> {
                 PageIndex = s;
                 });
               },
-              widthSwitch: (PageWidth(context)>600&&PageWidth(context)<900)?800:1200,
+              sideBarAnimationDuration: Duration(milliseconds: 500),
+              widthSwitch: 1200,
               mainLogoImage: 'images/Logo.png',
               sidebarItems: [
                 SideBarItem(

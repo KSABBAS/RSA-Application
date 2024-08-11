@@ -639,7 +639,7 @@ class _StudentProfileState extends State<StudentProfile> {
                               width: 0,
                             ),
                       (!EditMode)
-                          ? Expanded(child: Container())
+                          ? const Padding(padding: EdgeInsets.only(bottom: 10))
                           : Container(
                               height: 0,
                               width: 0,
@@ -651,15 +651,16 @@ class _StudentProfileState extends State<StudentProfile> {
                               width: 0,
                             ),
                       (!EditMode)
-                          ? Expanded(child: Container())
+                          ? const Padding(padding: EdgeInsets.only(bottom: 10))
                           : Container(
                               height: 0,
                               width: 0,
                             ),
-                      Expanded(child: Container()),
+                      const Padding(padding: EdgeInsets.only(bottom: 10)),
                       EmailField,
+                      const Padding(padding: EdgeInsets.only(bottom: 10)),
                       (EditMode)
-                          ? Expanded(child: Container())
+                          ? const Padding(padding: EdgeInsets.only(bottom: 10))
                           : Container(
                               height: 0,
                               width: 0,
@@ -670,8 +671,9 @@ class _StudentProfileState extends State<StudentProfile> {
                               height: 0,
                               width: 0,
                             ),
+                            const Padding(padding: EdgeInsets.only(bottom: 10)),
                       NumberField,
-                      const Padding(padding:EdgeInsets.only(bottom: 20)),
+                      const Padding(padding:EdgeInsets.only(bottom: 10)),
                       CMaker(
                           width: double.infinity,
                           height: 80,
@@ -679,7 +681,7 @@ class _StudentProfileState extends State<StudentProfile> {
                           child: EditAndSaveButton),
                     ],
                   )),
-              Expanded(child: Container()),
+              Expanded(child: Container())
             ]),
           ),
         );
