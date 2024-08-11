@@ -39,6 +39,6 @@ void main() async {
         "ParentSignUpPage": (context) => const ParentSignUpPage(),
         "TeacherSignUpPage": (context) => const TeacherSignUpPage(),
       },
-      home: const SplashViewPage()));
+      home: const AdminMainPage()));
   SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersiveSticky);
 }
