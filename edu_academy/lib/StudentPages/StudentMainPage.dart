@@ -74,8 +74,7 @@ class _StudentMainPageState extends State<StudentMainPage> {
       Container(
         child: const ThirdPage(),
       ),
-      Expanded(
-        child: Container(
+      Container(
           child: ListView(
             children: [
               Container(
@@ -165,7 +164,6 @@ class _StudentMainPageState extends State<StudentMainPage> {
             ],
           ),
         ),
-      ),
     ];
     if (PageWidth(context) < 550) {
       StudentMainPageBody = Scaffold(

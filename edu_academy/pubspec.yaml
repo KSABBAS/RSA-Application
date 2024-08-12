@@ -42,6 +42,7 @@ dependencies:
   get: ^4.6.6
   image_picker: ^1.1.2
   input_dialog: ^0.1.1
+  insta_image_viewer: ^1.0.4
   loader_overlay: ^4.0.1
   overlay_loading_progress: ^1.0.1
   panara_dialogs: ^0.1.5
