@@ -680,6 +680,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.0.2"
+  on_off_switch:
+    dependency: "direct main"
+    description:
+      name: on_off_switch
+      sha256: f13c3c6ef7a261c228dad49386a6ef7827737dbf40e414157634ae09fa28dafa
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.0.1"
   overlay_loading_progress:
     dependency: "direct main"
     description:

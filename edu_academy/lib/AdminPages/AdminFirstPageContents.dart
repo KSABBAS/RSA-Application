@@ -8,41 +8,79 @@ class AdminFirstPageContents extends StatefulWidget {
   State<AdminFirstPageContents> createState() => _AdminFirstPageContentsState();
 }
 int TabBarIndex = 0 ;
-List<List> TablesData = [
+List<List> GradesTablesData = [
   ["Grade 1",
     [
-      ["","arabic","English","math","geo","other"],
-      ["السبت","1","2","3","4","5"],
-      ["الاحد","1","2","3","4","5"],
-      ["الاثنين","1","2","3","4","5"],
-      ["الثلاثاء","1","2","3","4","5"],
-      ["الاربعاء","1","2","3","4","5"],
-      ["الخميس","1","2","3","4","5"],
-      ["الجمعة","1","2","3","4","5"],
+      ["","00:00","00:00","00:00","00:00","00:00"],
+      ["السبت","arabic","English","math","geo","other"],
+      ["الاحد","arabic","English","math","geo","other"],
+      ["الاثنين","arabic","English","math","geo","other"],
+      ["الثلاثاء","arabic","English","math","geo","other"],
+      ["الاربعاء","arabic","English","math","geo","other"],
+      ["الخميس","arabic","English","math","geo","other"],
+      ["الجمعة","arabic","English","math","geo","other"],
     ],
   ],
   ["Grade 2",
     [
-      ["","arabic","English","math","geo","other"],
-      ["السبت","1","2","3","4","5"],
-      ["الاحد","1","2","3","4","5"],
-      ["الاثنين","1","2","3","4","5"],
-      ["الثلاثاء","1","2","3","4","5"],
-      ["الاربعاء","1","2","3","4","5"],
-      ["الخميس","1","2","3","4","5"],
-      ["الجمعة","1","2","3","4","5"],
+      ["","00:00","00:00","00:00","00:00","00:00"],
+      ["السبت","arabic","English","math","geo","other"],
+      ["الاحد","arabic","English","math","geo","other"],
+      ["الاثنين","arabic","English","math","geo","other"],
+      ["الثلاثاء","arabic","English","math","geo","other"],
+      ["الاربعاء","arabic","English","math","geo","other"],
+      ["الخميس","arabic","English","math","geo","other"],
+      ["الجمعة","arabic","English","math","geo","other"],
     ],
   ],
   ["Grade 3",
     [
-      ["","arabic","English","math","geo","other"],
-      ["السبت","1","2","3","4","5"],
-      ["الاحد","1","2","3","4","5"],
-      ["الاثنين","1","2","3","4","5"],
-      ["الثلاثاء","1","2","3","4","5"],
-      ["الاربعاء","1","2","3","4","5"],
-      ["الخميس","1","2","3","4","5"],
-      ["الجمعة","1","2","3","4","5"],
+      ["","00:00","00:00","00:00","00:00","00:00"],
+      ["السبت","arabic","English","math","geo","other"],
+      ["الاحد","arabic","English","math","geo","other"],
+      ["الاثنين","arabic","English","math","geo","other"],
+      ["الثلاثاء","arabic","English","math","geo","other"],
+      ["الاربعاء","arabic","English","math","geo","other"],
+      ["الخميس","arabic","English","math","geo","other"],
+      ["الجمعة","arabic","English","math","geo","other"],
+    ],
+  ],
+];
+List<List> TeachersTablesData = [
+  ["Arabic",
+    [
+      ["","00:00","00:00","00:00","00:00","00:00"],
+      ["السبت","Grade 1","Grade 2","Grade 3","Grade 4","Grade 5"],
+      ["الاحد","Grade 1","Grade 2","Grade 3","Grade 4","Grade 5"],
+      ["الاثنين","Grade 1","Grade 2","Grade 3","Grade 4","Grade 5"],
+      ["الثلاثاء","Grade 1","Grade 2","Grade 3","Grade 4","Grade 5"],
+      ["الاربعاء","Grade 1","Grade 2","Grade 3","Grade 4","Grade 5"],
+      ["الخميس","Grade 1","Grade 2","Grade 3","Grade 4","Grade 5"],
+      ["الجمعة","Grade 1","Grade 2","Grade 3","Grade 4","Grade 5"],
+    ],
+  ],
+  ["English",
+    [
+      ["","00:00","00:00","00:00","00:00","00:00"],
+      ["السبت","Grade 1","Grade 2","Grade 3","Grade 4","Grade 5"],
+      ["الاحد","Grade 1","Grade 2","Grade 3","Grade 4","Grade 5"],
+      ["الاثنين","Grade 1","Grade 2","Grade 3","Grade 4","Grade 5"],
+      ["الثلاثاء","Grade 1","Grade 2","Grade 3","Grade 4","Grade 5"],
+      ["الاربعاء","Grade 1","Grade 2","Grade 3","Grade 4","Grade 5"],
+      ["الخميس","Grade 1","Grade 2","Grade 3","Grade 4","Grade 5"],
+      ["الجمعة","Grade 1","Grade 2","Grade 3","Grade 4","Grade 5"],
+    ],
+  ],
+  ["Chemistry",
+    [
+      ["","00:00","00:00","00:00","00:00","00:00"],
+      ["السبت","Grade 1","Grade 2","Grade 3","Grade 4","Grade 5"],
+      ["الاحد","Grade 1","Grade 2","Grade 3","Grade 4","Grade 5"],
+      ["الاثنين","Grade 1","Grade 2","Grade 3","Grade 4","Grade 5"],
+      ["الثلاثاء","Grade 1","Grade 2","Grade 3","Grade 4","Grade 5"],
+      ["الاربعاء","Grade 1","Grade 2","Grade 3","Grade 4","Grade 5"],
+      ["الخميس","Grade 1","Grade 2","Grade 3","Grade 4","Grade 5"],
+      ["الجمعة","Grade 1","Grade 2","Grade 3","Grade 4","Grade 5"],
     ],
   ],
 ];
@@ -64,7 +102,7 @@ class _AdminFirstPageContentsState extends State<AdminFirstPageContents> {
             color: const Color.fromARGB(255, 5, 123, 151)),
       ),
     );
-    Widget StudentGradeTC = CMaker(
+    Widget StateTC = CMaker(
       alignment: Alignment.bottomCenter,
       child: Text(
         "Admin",
@@ -138,11 +176,11 @@ class _AdminFirstPageContentsState extends State<AdminFirstPageContents> {
           const Padding(padding: EdgeInsets.only(top: 50)),
           CMaker(
             padding: EdgeInsets.symmetric(horizontal: 10),
-            height: TablesData.length*250,
+            height: GradesTablesData.length*250,
             child: ListView.builder(
               physics: NeverScrollableScrollPhysics(),
               shrinkWrap: false,
-              itemCount: TablesData.length,
+              itemCount: GradesTablesData.length,
               itemBuilder:(context, index) {
               return Column(
                 children: [
@@ -150,7 +188,7 @@ class _AdminFirstPageContentsState extends State<AdminFirstPageContents> {
                     width: double.infinity,
                     alignment: Alignment.center,
                     child: TMaker(
-                    text: TablesData[index][0],
+                    text: GradesTablesData[index][0],
                     fontSize: 18,
                     fontWeight: FontWeight.w600,
                     color: Colors.black)),
@@ -161,18 +199,18 @@ class _AdminFirstPageContentsState extends State<AdminFirstPageContents> {
                               scrollDirection: Axis.horizontal,
                               shrinkWrap: false,
                               physics: NeverScrollableScrollPhysics(),
-                              itemCount: TablesData[index][1][0].length,
+                              itemCount: GradesTablesData[index][1][0].length,
                               itemBuilder: (context, ColumnIndex) {
                   return CMaker(
-                      width: (PageWidth(context) - 40) / TablesData[index][1][0].length,
+                      width: (PageWidth(context) - 40) / GradesTablesData[index][1][0].length,
                       child: ListView.builder(
                         scrollDirection: Axis.vertical,
                         shrinkWrap: false,
                         physics: NeverScrollableScrollPhysics(),
-                        itemCount: TablesData[index][1].length,
+                        itemCount: GradesTablesData[index][1].length,
                         itemBuilder: (context, RowIndex) {
                           return CMaker(
-                              height: (200) / TablesData[index][1].length,
+                              height: (200) / GradesTablesData[index][1].length,
                               child: Container(
                                   decoration: BoxDecoration(
                                     border: Border(
@@ -182,14 +220,14 @@ class _AdminFirstPageContentsState extends State<AdminFirstPageContents> {
                                           ? Radius.circular(10)
                                           : Radius.circular(0),
                                       bottomLeft:
-                                          ("$ColumnIndex $RowIndex" == "0 ${TablesData[index][1].length-1}")
+                                          ("$ColumnIndex $RowIndex" == "0 ${GradesTablesData[index][1].length-1}")
                                               ? Radius.circular(10)
                                               : Radius.circular(0),
-                                      topRight: ("$ColumnIndex $RowIndex" == "${TablesData[index][1][0].length-1} 0")
+                                      topRight: ("$ColumnIndex $RowIndex" == "${GradesTablesData[index][1][0].length-1} 0")
                                           ? Radius.circular(10)
                                           : Radius.circular(0),
                                       bottomRight:
-                                          ("$ColumnIndex $RowIndex" == "${TablesData[index][1][0].length-1} ${TablesData[index][1].length-1}")
+                                          ("$ColumnIndex $RowIndex" == "${GradesTablesData[index][1][0].length-1} ${GradesTablesData[index][1].length-1}")
                                               ? Radius.circular(10)
                                               : Radius.circular(0),
                                     ),
@@ -199,7 +237,7 @@ class _AdminFirstPageContentsState extends State<AdminFirstPageContents> {
                                   ),
                                   alignment: Alignment.center,
                                   child: TMaker(
-                                      text: "${TablesData[index][1][RowIndex][ColumnIndex]}",
+                                      text: "${GradesTablesData[index][1][RowIndex][ColumnIndex]}",
                                       fontSize: 15,
                                       fontWeight: FontWeight.w600,
                                       color: (ColumnIndex == 0 || RowIndex == 0)
@@ -215,7 +253,123 @@ class _AdminFirstPageContentsState extends State<AdminFirstPageContents> {
             },))
         ],),
         ),
-      Expanded(child: CMaker(child: Text("page 2"),)),
+      CMaker(
+        boxShadow:const [
+          BoxShadow(
+              offset: Offset(1, 1),
+              blurRadius: 6,
+              spreadRadius: .03,
+              color: Color.fromARGB(82, 0, 0, 0)),
+        ],
+        height: PageHeight(context)-320,
+        margin:const EdgeInsets.symmetric(horizontal: 10),
+        circularRadius: 20,
+        width: double.infinity,
+        color:const Color.fromARGB(255, 255, 255, 255),
+        child: ListView(children: [
+          const Padding(padding: EdgeInsets.only(top: 20)),
+          CMaker(width: double.infinity,alignment: Alignment.center,
+          child: InkWell(
+            onTap: () {
+              
+            },
+            child: CMaker(
+              color: Color.fromARGB(255, 192, 255, 176),
+              padding: EdgeInsets.symmetric(horizontal: 20,vertical: 10),
+              circularRadius: 20,
+              boxShadow:const [
+                BoxShadow(
+                    offset: Offset(1, 1),
+                    blurRadius: 6,
+                    spreadRadius: .03,
+                    color: Color.fromARGB(50, 0, 0, 0)),
+              ],
+              child: TMaker(
+                text: "Upload a table",
+                fontSize: 18,
+                fontWeight: FontWeight.w600,
+                color: Colors.black)),
+          )),
+          const Padding(padding: EdgeInsets.only(top: 50)),
+          CMaker(
+            padding: EdgeInsets.symmetric(horizontal: 10),
+            height: GradesTablesData.length*250,
+            child: ListView.builder(
+              physics: NeverScrollableScrollPhysics(),
+              shrinkWrap: false,
+              itemCount: TeachersTablesData.length,
+              itemBuilder:(context, index) {
+              return Column(
+                children: [
+                  CMaker(
+                    width: double.infinity,
+                    alignment: Alignment.center,
+                    child: TMaker(
+                    text: TeachersTablesData[index][0],
+                    fontSize: 18,
+                    fontWeight: FontWeight.w600,
+                    color: Colors.black)),
+                  CMaker(
+                            width: double.infinity,
+                            height: 200,
+                            child: ListView.builder(
+                              scrollDirection: Axis.horizontal,
+                              shrinkWrap: false,
+                              physics: NeverScrollableScrollPhysics(),
+                              itemCount: TeachersTablesData[index][1][0].length,
+                              itemBuilder: (context, ColumnIndex) {
+                  return CMaker(
+                      width: (PageWidth(context) - 40) / TeachersTablesData[index][1][0].length,
+                      child: ListView.builder(
+                        scrollDirection: Axis.vertical,
+                        shrinkWrap: false,
+                        physics: NeverScrollableScrollPhysics(),
+                        itemCount: TeachersTablesData[index][1].length,
+                        itemBuilder: (context, RowIndex) {
+                          return CMaker(
+                              height: (200) / TeachersTablesData[index][1].length,
+                              child: Container(
+                                  decoration: BoxDecoration(
+                                    border: Border(
+                                        right: BorderSide(), bottom: BorderSide()),
+                                    borderRadius: BorderRadius.only(
+                                      topLeft: ("$ColumnIndex $RowIndex" == "0 0")
+                                          ? Radius.circular(10)
+                                          : Radius.circular(0),
+                                      bottomLeft:
+                                          ("$ColumnIndex $RowIndex" == "0 ${TeachersTablesData[index][1].length-1}")
+                                              ? Radius.circular(10)
+                                              : Radius.circular(0),
+                                      topRight: ("$ColumnIndex $RowIndex" == "${TeachersTablesData[index][1][0].length-1} 0")
+                                          ? Radius.circular(10)
+                                          : Radius.circular(0),
+                                      bottomRight:
+                                          ("$ColumnIndex $RowIndex" == "${TeachersTablesData[index][1][0].length-1} ${TeachersTablesData[index][1].length-1}")
+                                              ? Radius.circular(10)
+                                              : Radius.circular(0),
+                                    ),
+                                    color: (ColumnIndex == 0 || RowIndex == 0)
+                                        ? Color.fromARGB(255, 36, 160, 209)
+                                        : Colors.white,
+                                  ),
+                                  alignment: Alignment.center,
+                                  child: TMaker(
+                                      text: "${TeachersTablesData[index][1][RowIndex][ColumnIndex]}",
+                                      fontSize: 15,
+                                      fontWeight: FontWeight.w600,
+                                      color: (ColumnIndex == 0 || RowIndex == 0)
+                                          ? Color.fromARGB(255, 255, 255, 255)
+                                          : const Color.fromARGB(255, 0, 0, 0))));
+                        },
+                      ));
+                              },
+                            )),
+                          const Padding(padding: EdgeInsets.only(top: 20)),
+                ],
+              );
+            },))
+        ],),
+        ),
     ];
     return CMaker(
         width: double.infinity,
@@ -241,7 +395,7 @@ class _AdminFirstPageContentsState extends State<AdminFirstPageContents> {
                     Expanded(
                         child: SizedBox(width: 30, height: 30, child: Logo)),
                     Expanded(flex: 3, child: StudentNameTC),
-                    Expanded(flex: 2, child: StudentGradeTC),
+                    Expanded(flex: 2, child: StateTC),
                     Expanded(child: Notifications)
                   ],
                 )),

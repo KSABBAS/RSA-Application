@@ -1,5 +1,7 @@
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:edu_academy/AdminPages/AdminFirstPageContents.dart';
+import 'package:edu_academy/AdminPages/AdminSocendPageContenets.dart';
+import 'package:edu_academy/AdminPages/AdminThirdPageContents.dart';
 import 'package:edu_academy/MyTools.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -19,8 +21,8 @@ class _AdminMainPageState extends State<AdminMainPage> {
     late Widget AdmintMainPageBody;
     List<Widget> Pages = [
       AdminFirstPageContents(AdminName: "Kareem said"),
-      Container(),
-      Container(),
+      AdminSocendPageContenets(AdminName: "Kareem said",),
+      AdminThirdPageContenets(AdminName: "Kareem said"),
       Container(),
     ];
     if (PageWidth(context) < 550) {
