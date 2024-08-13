@@ -23,7 +23,6 @@ class _AdminMainPageState extends State<AdminMainPage> {
       AdminFirstPageContents(AdminName: "Kareem said"),
       AdminSocendPageContenets(AdminName: "Kareem said",),
       AdminThirdPageContenets(AdminName: "Kareem said"),
-      Container(),
     ];
     if (PageWidth(context) < 550) {
       AdmintMainPageBody = Scaffold(
@@ -49,10 +48,6 @@ class _AdminMainPageState extends State<AdminMainPage> {
               ),
               Icon(
                 Icons.book,
-                color: Colors.black,
-              ),
-              Icon(
-                Icons.person,
                 color: Colors.black,
               ),
             ]),
@@ -92,10 +87,6 @@ class _AdminMainPageState extends State<AdminMainPage> {
                   iconSelected: Icons.book,
                   text: 'Students',
                 ),
-                SideBarItem(
-                  iconSelected: Icons.person,
-                  text: 'Profile',
-                ),
               ],
             ),
             Pages.elementAt(PageIndex),
@@ -126,10 +117,6 @@ class _AdminMainPageState extends State<AdminMainPage> {
               ),
               Icon(
                 Icons.book,
-                color: Colors.black,
-              ),
-              Icon(
-                Icons.person,
                 color: Colors.black,
               ),
             ]),

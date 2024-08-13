@@ -307,7 +307,7 @@ class _LoginPageState extends State<LogInPage> {
                   CMaker(margin: const EdgeInsetsDirectional.symmetric(horizontal: 20),child: InputPart),
                   Expanded(flex: 2,child: Container()),
                             CMaker(alignment: Alignment.center,child: LoginButton),
-                  Expanded(flex: 2,child: Container()),
+                  Expanded(flex: 1,child: Container()),
                             Flexible(
                                 child: Row(
                               children: [

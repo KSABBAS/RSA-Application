@@ -1,6 +1,7 @@
 import 'package:edu_academy/MyTools.dart';
 import 'package:flutter/material.dart';
 import 'package:on_off_switch/on_off_switch.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class AdminThirdPageContenets extends StatefulWidget {
   AdminThirdPageContenets({super.key, required this.AdminName});
@@ -70,23 +71,20 @@ class _AdminThirdPageContenetsState extends State<AdminThirdPageContenets> {
             color: const Color.fromARGB(255, 89, 89, 87)),
       ),
     );
-    Widget Notifications = InkWell(
-      onTap: () {},
+    Widget LogOutButton = InkWell(
+      onTap: () async {
+        final SharedPreferences prefs = await SharedPreferences.getInstance();
+        prefs.remove("id");
+        Navigator.pushReplacementNamed(context, "SplashView");
+      },
       child: Container(
         width: 70,
         padding: const EdgeInsets.only(top: 10),
         decoration: BoxDecoration(
             color: const Color.fromARGB(255, 255, 255, 255),
             borderRadius: BorderRadius.circular(10)),
-        height: (PageWidth(context) < 550) ? 50 : 100,
-        child: Icon(
-          Icons.notifications,
-          size: (PageWidth(context) < 550)
-              ? 25
-              : (PageHeight(context) < 900)
-                  ? 30
-                  : 35,
-        ),
+        height: 50,
+        child: const Icon(Icons.logout),
       ),
     );
     if (StudentOpend) {
@@ -113,7 +111,7 @@ class _AdminThirdPageContenetsState extends State<AdminThirdPageContenets> {
                   Expanded(child: SizedBox(width: 30, height: 30, child: Logo)),
                   Expanded(flex: 3, child: StudentNameTC),
                   Expanded(flex: 2, child: StateTC),
-                  Expanded(child: Notifications)
+                  Expanded(child: LogOutButton)
                 ],
               )),
           const Padding(padding: EdgeInsets.only(top: 20)),
@@ -365,7 +363,7 @@ class _AdminThirdPageContenetsState extends State<AdminThirdPageContenets> {
                           child: SizedBox(width: 30, height: 30, child: Logo)),
                       Expanded(flex: 3, child: StudentNameTC),
                       Expanded(flex: 2, child: StateTC),
-                      Expanded(child: Notifications)
+                      Expanded(child: LogOutButton)
                     ],
                   )),
               const Padding(padding: EdgeInsets.only(top: 20)),
