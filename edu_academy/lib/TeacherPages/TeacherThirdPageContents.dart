@@ -30,7 +30,7 @@ GlobalKey<FormState> HomeworkKey = GlobalKey();
 bool AllhomeWorks = false;
 bool AllHomeworksAndOneIsOpend = false;
 int IsOpendIndex = 0;
-
+String score = '5';
 class _TeacherThirdPageContentsState extends State<TeacherThirdPageContents> {
   final dbService = DatabaseService();
   @override
@@ -50,6 +50,7 @@ class _TeacherThirdPageContentsState extends State<TeacherThirdPageContents> {
               color: Colors.white)),
     );
     if (AllHomeworksAndOneIsOpend) {
+      // third page
       ThirdPageBody = Column(
         children: [
           CMaker(
@@ -85,20 +86,21 @@ class _TeacherThirdPageContentsState extends State<TeacherThirdPageContents> {
               ])),
           Padding(padding: EdgeInsets.only(bottom: 20)),
           CMaker(
-              width: double.infinity,
-              height: PageHeight(context) - 320,
-              margin: EdgeInsets.only(left: 20, right: 20),
-              circularRadius: 20,
-              alignment: Alignment.center,
-              boxShadow: const [
-                BoxShadow(
-                    color: Color.fromARGB(61, 0, 0, 0),
-                    offset: Offset(2, 2),
-                    blurRadius: 10,
-                    spreadRadius: .06)
-              ],
-              color: Color.fromARGB(255, 255, 255, 255),
-              child: ListView(children: [
+            width: double.infinity,
+            height: PageHeight(context) - 320,
+            margin: EdgeInsets.only(left: 20, right: 20),
+            circularRadius: 20,
+            alignment: Alignment.center,
+            boxShadow: const [
+              BoxShadow(
+                  color: Color.fromARGB(61, 0, 0, 0),
+                  offset: Offset(2, 2),
+                  blurRadius: 10,
+                  spreadRadius: .06)
+            ],
+            color: Color.fromARGB(255, 255, 255, 255),
+            child: ListView(
+              children: [
                 Padding(padding: EdgeInsets.only(bottom: 20)),
                 CMaker(
                     alignment: Alignment.centerLeft,
@@ -111,85 +113,97 @@ class _TeacherThirdPageContentsState extends State<TeacherThirdPageContents> {
                         fontWeight: FontWeight.w600,
                         color: const Color.fromARGB(255, 0, 0, 0))),
                 Padding(padding: EdgeInsets.only(bottom: 20)),
-                    CMaker(
-                        alignment: Alignment.centerLeft,
-                        padding:
-                            const EdgeInsets.only(left: 30),
-                        child: TMaker(
-                            textAlign: TextAlign.start,
-                            text: "Body",
-                            fontSize: 25,
-                            fontWeight: FontWeight.w700,
-                            color: const Color.fromARGB(
-                                255, 86, 86, 86))),
-                    const Padding(
-                        padding: EdgeInsets.only(bottom: 20)),
-                    CMaker(
-                      height:300,
-                      width: double.infinity,
-                      child: GridView.builder(
-                        itemCount: 4,
-                        gridDelegate:
-                            const SliverGridDelegateWithFixedCrossAxisCount(
-                                crossAxisCount: 1,
-                                crossAxisSpacing: 10,
-                                mainAxisSpacing: 10),
-                        itemBuilder: (context, index) {
-                          return InkWell(
-                            onTap: () {
-                              setState(() {});
-                            },
-                            child: Image.asset(
-                              "images/Logo.png",
-                              fit: BoxFit.fitWidth,
-                            ),
-                          );
+                CMaker(
+                    alignment: Alignment.centerLeft,
+                    padding: const EdgeInsets.only(left: 30),
+                    child: TMaker(
+                        textAlign: TextAlign.start,
+                        text: "Body",
+                        fontSize: 25,
+                        fontWeight: FontWeight.w700,
+                        color: const Color.fromARGB(255, 86, 86, 86))),
+                const Padding(padding: EdgeInsets.only(bottom: 20)),
+                CMaker(
+                  height: 300,
+                  width: double.infinity,
+                  child: GridView.builder(
+                    itemCount: 4,
+                    gridDelegate:
+                        const SliverGridDelegateWithFixedCrossAxisCount(
+                            crossAxisCount: 1,
+                            crossAxisSpacing: 10,
+                            mainAxisSpacing: 10),
+                    itemBuilder: (context, index) {
+                      return InkWell(
+                        onTap: () {
+                          setState(() {});
                         },
-                      ),
-                    ),
-                     Padding(
-                        padding: EdgeInsets.only(bottom:PageHeight(context)-850)),
-              CMaker(width: double.infinity ,child: Row(children: [
-                Expanded(child: Container()),
-                Expanded(flex: 2,child: InkWell(
-                  onTap: () {
-                    
-                  },
-                  child: CMaker(
-                    padding: EdgeInsets.all(10),
-                    circularRadius: 15,
-                    boxShadow: const [
-                  BoxShadow(
-                      color: Color.fromARGB(61, 0, 0, 0),
-                      offset: Offset(1, 1),
-                      blurRadius: 1,
-                      spreadRadius: .06)
-                                ],
-                    color: const Color.fromARGB(255, 233, 255, 247),
-                    child: TMaker(text: "Edit", fontSize:20, fontWeight:FontWeight.w600, color:Colors.black)),
-                )),
-                Expanded(flex: 3,child: Container()),
-                Expanded(flex: 2,child: InkWell(
-                  onTap: () {
-                    
-                  },
-                  child: CMaker(
-                    padding: EdgeInsets.all(10),
-                    circularRadius: 15,
-                    boxShadow: const [
-                  BoxShadow(
-                      color: Color.fromARGB(61, 0, 0, 0),
-                      offset: Offset(1, 1),
-                      blurRadius: 1,
-                      spreadRadius: .06)
-                                ],
-                    color: const Color.fromARGB(255, 233, 255, 247),
-                    child: TMaker(text: "Delete", fontSize:20, fontWeight:FontWeight.w600, color:Colors.black)))),
-                Expanded(child: Container()),
-              ],))
-                  ],
+                        child: Image.asset(
+                          "images/Logo.png",
+                          fit: BoxFit.fitWidth,
+                        ),
+                      );
+                    },
+                  ),
                 ),
-              ),
+                Padding(
+                    padding:
+                        EdgeInsets.only(bottom: PageHeight(context) - 850)),
+                CMaker(
+                    width: double.infinity,
+                    child: Row(
+                      children: [
+                        Expanded(child: Container()),
+                        Expanded(
+                            flex: 2,
+                            child: InkWell(
+                              onTap: () {},
+                              child: CMaker(
+                                  padding: EdgeInsets.all(10),
+                                  circularRadius: 15,
+                                  boxShadow: const [
+                                    BoxShadow(
+                                        color: Color.fromARGB(61, 0, 0, 0),
+                                        offset: Offset(1, 1),
+                                        blurRadius: 1,
+                                        spreadRadius: .06)
+                                  ],
+                                  color:
+                                      const Color.fromARGB(255, 233, 255, 247),
+                                  child: TMaker(
+                                      text: "Edit",
+                                      fontSize: 20,
+                                      fontWeight: FontWeight.w600,
+                                      color: Colors.black)),
+                            )),
+                        Expanded(flex: 3, child: Container()),
+                        Expanded(
+                            flex: 2,
+                            child: InkWell(
+                                onTap: () {},
+                                child: CMaker(
+                                    padding: EdgeInsets.all(10),
+                                    circularRadius: 15,
+                                    boxShadow: const [
+                                      BoxShadow(
+                                          color: Color.fromARGB(61, 0, 0, 0),
+                                          offset: Offset(1, 1),
+                                          blurRadius: 1,
+                                          spreadRadius: .06)
+                                    ],
+                                    color: const Color.fromARGB(
+                                        255, 233, 255, 247),
+                                    child: TMaker(
+                                        text: "Delete",
+                                        fontSize: 20,
+                                        fontWeight: FontWeight.w600,
+                                        color: Colors.black)))),
+                        Expanded(child: Container()),
+                      ],
+                    ))
+              ],
+            ),
+          ),
         ],
       );
     } else if (AllhomeWorks) {
@@ -258,22 +272,22 @@ class _TeacherThirdPageContentsState extends State<TeacherThirdPageContents> {
                           color: const Color.fromARGB(255, 0, 0, 0))),
                   Padding(padding: EdgeInsets.only(bottom: 20)),
                   CMaker(
-                        circularRadius: 20,
-                        height: PageHeight(context) - 420,
-                        child: ListView.builder(
-                            itemCount: 3,
-                            itemBuilder: (context, index) {
-                              return InkWell(
-                    onTap: () {
-                      setState(() {
-                        IsOpendIndex = index;
-                        GradeHomeWorkIsOppened = false;
-                        NewHomeWork = false;
-                        AllhomeWorks = false;
-                        AllHomeworksAndOneIsOpend = true;
-                      });
-                    },
-                    child: CMaker(
+                    circularRadius: 20,
+                    height: PageHeight(context) - 420,
+                    child: ListView.builder(
+                        itemCount: 3,
+                        itemBuilder: (context, index) {
+                          return InkWell(
+                              onTap: () {
+                                setState(() {
+                                  IsOpendIndex = index;
+                                  GradeHomeWorkIsOppened = false;
+                                  NewHomeWork = false;
+                                  AllhomeWorks = false;
+                                  AllHomeworksAndOneIsOpend = true;
+                                });
+                              },
+                              child: CMaker(
                                 boxShadow: const [
                                   BoxShadow(
                                       color: Color.fromARGB(61, 0, 0, 0),
@@ -341,14 +355,13 @@ class _TeacherThirdPageContentsState extends State<TeacherThirdPageContents> {
                                   ],
                                 ),
                               ));
-                            }),
+                        }),
                   ),
                 ],
               )),
         ],
       );
     } else if (NewHomeWork) {
-      // third page
       Widget ThirdPageArrowBack = InkWell(
         onTap: () {
           setState(() {
@@ -493,6 +506,75 @@ class _TeacherThirdPageContentsState extends State<TeacherThirdPageContents> {
               ),
             ],
           ));
+      Widget ScoreTFF=CMaker(
+          boxShadow: const [
+            BoxShadow(
+                color: Color.fromARGB(61, 0, 0, 0),
+                offset: Offset(2, 2),
+                blurRadius: 10,
+                spreadRadius: .06)
+          ],
+          color: const Color.fromARGB(255, 255, 255, 255),
+          alignment: Alignment.center,
+          margin: const EdgeInsets.symmetric(horizontal: 20),
+          circularRadius: 15,
+          padding: const EdgeInsets.all(15),
+          height: 120,
+          child: Row(
+            children: [
+              Expanded(child: Container()),
+              CMaker(
+                  width: 80,
+                  child: TMaker(
+                      textAlign: TextAlign.start,
+                      text: "Score",
+                      fontSize: 25,
+                      fontWeight: FontWeight.w700,
+                      color: Colors.black)),
+              CMaker(
+                alignment: Alignment.center,
+                height: 60,
+                width: 100,
+                child: TextFormField(
+                  onChanged: (value) {
+                    setState(() {
+                      score = value;
+                    });
+                  },
+                  onSaved: (newValue) {
+                    score = newValue!;
+                  },
+                  validator: (value) {
+                    if (value!.isEmpty) {
+                      return "الحقل فارغ";
+                    }
+                    return null;
+                  },
+                  decoration: InputDecoration(
+                      focusedErrorBorder: OutlineInputBorder(
+                          borderSide: const BorderSide(
+                              color: Color.fromARGB(255, 192, 192, 192)),
+                          borderRadius: BorderRadius.circular(30)),
+                      errorBorder: OutlineInputBorder(
+                          borderSide: const BorderSide(
+                              color: Color.fromARGB(255, 192, 192, 192)),
+                          borderRadius: BorderRadius.circular(30)),
+                      label: const Text(
+                        "Add Score",
+                        style: TextStyle(
+                            fontSize: 15, fontWeight: FontWeight.w600),
+                      ),
+                      enabledBorder: OutlineInputBorder(
+                          borderSide: const BorderSide(
+                              color: Color.fromARGB(255, 192, 192, 192)),
+                          borderRadius: BorderRadius.circular(30)),
+                      focusedBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(15))),
+                ),
+              ),
+              Expanded(child: Container()),
+            ],
+          ));;
       Widget AddAnImageToHomework = CMaker(
           margin: const EdgeInsets.only(left: 20),
           height: 50,
@@ -587,63 +669,64 @@ class _TeacherThirdPageContentsState extends State<TeacherThirdPageContents> {
       );
       Widget SendHomeworkButton = InkWell(
         onTap: () async {
-          OverlayLoadingProgress.start(
-            context,
-            widget: CMaker(
-              circularRadius: 15,
-              color: const Color.fromARGB(198, 255, 255, 255),
-              width: MediaQuery.of(context).size.width / 3.6,
-              padding: EdgeInsets.all(MediaQuery.of(context).size.width / 13),
-              child: const AspectRatio(
-                aspectRatio: 1,
-                child: CircularProgressIndicator(
-                  color: Colors.blue,
+          if (HomeworkKey.currentState!.validate()) {
+            HomeworkKey.currentState!.save();
+            OverlayLoadingProgress.start(
+              context,
+              widget: CMaker(
+                circularRadius: 15,
+                color: const Color.fromARGB(198, 255, 255, 255),
+                width: MediaQuery.of(context).size.width / 3.6,
+                padding: EdgeInsets.all(MediaQuery.of(context).size.width / 13),
+                child: const AspectRatio(
+                  aspectRatio: 1,
+                  child: CircularProgressIndicator(
+                    color: Colors.blue,
+                  ),
                 ),
               ),
-            ),
-          );
-          List<dynamic> Files_List = [];
-          print(HomeworkImagesLinks);
-          if (HomeworkImagesLinks.length != 0) {
-            Files_List = await dbService.stHwStore(HomeworkImagesLinks);
-            print(Files_List);
-          }
-          String score = '5';
-          //fiAdd_Hw(String Grade, String Subject, String Teacher_Id, List Files_List,
-          //String HomeworkTitle, String HomeworkBody, String score)
-          dbService.fiAdd_Hw(
-              ListOfGrades[GradeHomeWorkOppenedIndex][0],
-              SubjectThatIsSelected,
-              Teacher_Id,
-              Files_List,
-              HomeworkTitle,
-              HomeworkBody,
-              score);
+            );
+            List<dynamic> Files_List = [];
+            print(HomeworkImagesLinks);
+            if (HomeworkImagesLinks.length != 0) {
+              Files_List = await dbService.stHwStore(HomeworkImagesLinks);
+              print(Files_List);
+            }
+            //fiAdd_Hw(String Grade, String Subject, String Teacher_Id, List Files_List,
+            //String HomeworkTitle, String HomeworkBody, String score)
+            dbService.fiAdd_Hw(
+                ListOfGrades[GradeHomeWorkOppenedIndex][0],
+                SubjectThatIsSelected,
+                Teacher_Id,
+                Files_List,
+                HomeworkTitle,
+                HomeworkBody,
+                score);
 
-          OverlayLoadingProgress.stop();
-          PanaraInfoDialog.show(
-            context,
-            title: "نجاح",
-            message: "تم اضافة الواجب بنجاح",
-            buttonText: "عودة",
-            onTapDismiss: () {
-              Navigator.pop(context);
-              // Navigator.pop(context);
-            },
-            panaraDialogType: PanaraDialogType.success,
-            barrierDismissible: false,
-          );
+            OverlayLoadingProgress.stop();
+            PanaraInfoDialog.show(
+              context,
+              title: "نجاح",
+              message: "تم اضافة الواجب بنجاح",
+              buttonText: "عودة",
+              onTapDismiss: () {
+                Navigator.pop(context);
+                setState(() {
+            GradeHomeWorkIsOppened = true;
+            NewHomeWork = false;
+          });
+              },
+              panaraDialogType: PanaraDialogType.success,
+              barrierDismissible: false,
+            );
+          }
         },
         child: CMaker(
-          height: 40,
-          width: 60,
+          padding: EdgeInsets.all(10),
           color: Color.fromARGB(255, 61, 197, 255),
           alignment: Alignment.center,
           circularRadius: 15,
-          child: Icon(
-            Icons.send,
-            color: Colors.white,
-          ),
+          child: TMaker(text: "Send", fontSize:20, fontWeight:FontWeight.w700, color:Colors.white)
         ),
       );
       if (PageWidth(context) < 550) {
@@ -663,7 +746,11 @@ class _TeacherThirdPageContentsState extends State<TeacherThirdPageContents> {
                   const Padding(padding: EdgeInsets.only(bottom: 20)),
                   HomeworkBodyTFF,
                   const Padding(padding: EdgeInsets.only(bottom: 20)),
+                  ScoreTFF,
+                  const Padding(padding: EdgeInsets.only(bottom: 20)),
                   AddAnImageToHomework,
+                  const Padding(padding: EdgeInsets.only(bottom: 20)),
+                  CMaker(width: double.infinity,alignment: Alignment.center,child: CMaker(width: 140,height: 70,alignment: Alignment.bottomCenter,child: TMaker(text: "Final Look", fontSize: 28, fontWeight:FontWeight.w700, color:Colors.black))),
                   const Padding(padding: EdgeInsets.only(bottom: 20)),
                   CMaker(
                       width: double.infinity,
@@ -685,9 +772,8 @@ class _TeacherThirdPageContentsState extends State<TeacherThirdPageContents> {
                   const Padding(padding: EdgeInsets.only(bottom: 20)),
                   CMaker(
                       width: double.infinity,
-                      alignment: Alignment.centerRight,
-                      padding: EdgeInsetsDirectional.only(end: 20),
-                      child: SendHomeworkButton),
+                      alignment: Alignment.center,
+                      child: CMaker(width: 80,child: SendHomeworkButton)),
                   Padding(padding: EdgeInsets.only(bottom: 20)),
                 ],
               ),
@@ -711,8 +797,12 @@ class _TeacherThirdPageContentsState extends State<TeacherThirdPageContents> {
                   Padding(padding: EdgeInsets.only(bottom: 20)),
                   HomeworkBodyTFF,
                   Padding(padding: EdgeInsets.only(bottom: 20)),
+                  ScoreTFF,
+                  Padding(padding: EdgeInsets.only(bottom: 20)),
                   AddAnImageToHomework,
                   Padding(padding: EdgeInsets.only(bottom: 20)),
+                  CMaker(width: double.infinity,alignment: Alignment.center,child: CMaker(width: 140,height: 70,alignment: Alignment.bottomCenter,child: TMaker(text: "Final Look", fontSize: 28, fontWeight:FontWeight.w700, color:Colors.black))),
+                  const Padding(padding: EdgeInsets.only(bottom: 20)),
                   CMaker(
                       width: double.infinity,
                       height: 300,
@@ -758,14 +848,21 @@ class _TeacherThirdPageContentsState extends State<TeacherThirdPageContents> {
                               HomeworkBodyTFF,
                               const Padding(
                                   padding: EdgeInsets.only(bottom: 20)),
+                              ScoreTFF,
+                              const Padding(
+                                  padding: EdgeInsets.only(bottom: 20)),
                               AddAnImageToHomework,
                               const Padding(
                                   padding: EdgeInsets.only(bottom: 20)),
+                                  CMaker(width: double.infinity,alignment: Alignment.center,child: CMaker(width: 140,height: 70,alignment: Alignment.bottomCenter,child: TMaker(text: "Final Look", fontSize: 28, fontWeight:FontWeight.w700, color:Colors.black))),
+                  const Padding(padding: EdgeInsets.only(bottom: 20)),
                               HomeWorkFinalLook,
                             ],
                           )
                         : Row(
                             children: [
+                              CMaker(width: double.infinity,alignment: Alignment.center,child: CMaker(width: 140,height: 70,alignment: Alignment.bottomCenter,child: TMaker(text: "Final Look", fontSize: 28, fontWeight:FontWeight.w700, color:Colors.black))),
+                  const Padding(padding: EdgeInsets.only(bottom: 20)),
                               Expanded(
                                 flex: 10,
                                 child: CMaker(
@@ -858,7 +955,12 @@ class _TeacherThirdPageContentsState extends State<TeacherThirdPageContents> {
                     alignment: Alignment.center,
                     child: Row(
                       children: [
-                        Image.asset("images/Person.png"),
+                        CMaker(
+                            height: 70,
+                            width: 70,
+                            child: CircleAvatar(
+                                backgroundImage:
+                                    Image.asset("images/Person.png").image)),
                         Expanded(
                           child: ListTile(
                             subtitle: TMaker(

@@ -283,7 +283,7 @@ class _TeacherSecondPageContentsState extends State<TeacherSecondPageContents> {
                 return Column(
                   children: [
                     ListTile(
-                      leading: Image.asset("images/Person.png"),
+                      leading: CMaker(height: 70,width: 70,child: CircleAvatar(backgroundImage: Image.asset("images/Person.png").image)),
                       title: TMaker(
                         textAlign: TextAlign.start,
                         text: widget.ListOfGrades[GradeOpenedIndex][1]
@@ -757,7 +757,7 @@ class _TeacherSecondPageContentsState extends State<TeacherSecondPageContents> {
                                       children: [
                                         ListTile(
                                           leading:
-                                              Image.asset("images/Person.png"),
+                                              CMaker(height: 70,width: 70,child: CircleAvatar(backgroundImage: Image.asset("images/Person.png").image)),
                                           title: TMaker(
                                             textAlign: TextAlign.start,
                                             text: widget.ListOfGrades[index][1]
