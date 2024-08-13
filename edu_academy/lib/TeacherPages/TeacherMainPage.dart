@@ -50,7 +50,7 @@ String Teacher_Id = '';
 List subjects_ = [];
 String subjects_string = '';
 Map<String, Map<String, List<dynamic>>> sub_data = {};
-
+bool AccountActivation =false;
 // data base end
 
 class _TeacherMainPageState extends State<TeacherMainPage> {
@@ -66,7 +66,6 @@ class _TeacherMainPageState extends State<TeacherMainPage> {
   Future<void> _initializeData() async {
     print("start .. _initializeData ");
     print("ListOfGrades $ListOfGrades");
-
 
     final SharedPreferences prefs = await SharedPreferences.getInstance();
     final List<String>? items = await prefs.getStringList('id');
@@ -179,7 +178,7 @@ class _TeacherMainPageState extends State<TeacherMainPage> {
                             },
                             child: Image.asset("images/Book.png"))),
                     CMaker(
-                      width: PageWidth(context)-150,
+                      width: PageWidth(context) - 150,
                       child: Row(
                         children: [
                           Expanded(
@@ -339,7 +338,7 @@ class _TeacherMainPageState extends State<TeacherMainPage> {
       ),
       CMaker(
         height: double.infinity,
-            width: double.infinity,
+        width: double.infinity,
         child: SizedBox(
           height: PageHeight(context) + 300,
           child: ListView(
@@ -374,7 +373,7 @@ class _TeacherMainPageState extends State<TeacherMainPage> {
                             },
                             child: Image.asset("images/Book.png"))),
                     CMaker(
-                      width: PageWidth(context)-150,
+                      width: PageWidth(context) - 150,
                       child: Row(
                         children: [
                           Expanded(
@@ -540,7 +539,7 @@ class _TeacherMainPageState extends State<TeacherMainPage> {
       ),
       CMaker(
         height: double.infinity,
-            width: double.infinity,
+        width: double.infinity,
         child: Container(
           child: ListView(
             children: [
@@ -573,7 +572,7 @@ class _TeacherMainPageState extends State<TeacherMainPage> {
                             },
                             child: Image.asset("images/Book.png"))),
                     CMaker(
-                      width: PageWidth(context)-150,
+                      width: PageWidth(context) - 150,
                       child: Row(
                         children: [
                           Expanded(
@@ -738,7 +737,7 @@ class _TeacherMainPageState extends State<TeacherMainPage> {
       ),
       CMaker(
         height: double.infinity,
-            width: double.infinity,
+        width: double.infinity,
         child: Container(
             child: ListView(children: [
           Container(
@@ -770,7 +769,7 @@ class _TeacherMainPageState extends State<TeacherMainPage> {
                         },
                         child: Image.asset("images/Book.png"))),
                 CMaker(
-                  width:PageWidth(context)-150,
+                  width: PageWidth(context) - 150,
                   child: Row(
                     children: [
                       Expanded(
@@ -824,7 +823,8 @@ class _TeacherMainPageState extends State<TeacherMainPage> {
                                       style: TextStyle(
                                           fontSize: 16,
                                           fontWeight: FontWeight.w500,
-                                          color: Color.fromARGB(255, 89, 89, 87)),
+                                          color:
+                                              Color.fromARGB(255, 89, 89, 87)),
                                     ),
                                   ),
                                   DropdownMenuItem(
@@ -834,7 +834,8 @@ class _TeacherMainPageState extends State<TeacherMainPage> {
                                       style: TextStyle(
                                           fontSize: 16,
                                           fontWeight: FontWeight.w500,
-                                          color: Color.fromARGB(255, 89, 89, 87)),
+                                          color:
+                                              Color.fromARGB(255, 89, 89, 87)),
                                     ),
                                   ),
                                 ],
@@ -863,7 +864,8 @@ class _TeacherMainPageState extends State<TeacherMainPage> {
                                       style: TextStyle(
                                           fontSize: 16,
                                           fontWeight: FontWeight.w500,
-                                          color: Color.fromARGB(255, 89, 89, 87)),
+                                          color:
+                                              Color.fromARGB(255, 89, 89, 87)),
                                     ),
                                   ),
                                   DropdownMenuItem(
@@ -873,7 +875,8 @@ class _TeacherMainPageState extends State<TeacherMainPage> {
                                       style: TextStyle(
                                           fontSize: 16,
                                           fontWeight: FontWeight.w500,
-                                          color: Color.fromARGB(255, 89, 89, 87)),
+                                          color:
+                                              Color.fromARGB(255, 89, 89, 87)),
                                     ),
                                   ),
                                   DropdownMenuItem(
@@ -883,7 +886,8 @@ class _TeacherMainPageState extends State<TeacherMainPage> {
                                       style: TextStyle(
                                           fontSize: 16,
                                           fontWeight: FontWeight.w500,
-                                          color: Color.fromARGB(255, 89, 89, 87)),
+                                          color:
+                                              Color.fromARGB(255, 89, 89, 87)),
                                     ),
                                   ),
                                 ],
@@ -920,7 +924,12 @@ class _TeacherMainPageState extends State<TeacherMainPage> {
               ],
             ),
           ),
-          TeacherProfilePage(TeacherName: "kareem said hassan", TeacherEmail: "kareemsaid234@gmail.com", ProfileSubjectsAvailable: ProfileSubjectsAvailable, TeacherNumber: "01006270833", TeacherPassword: "1234")
+          TeacherProfilePage(
+              TeacherName: "kareem said hassan",
+              TeacherEmail: "kareemsaid234@gmail.com",
+              ProfileSubjectsAvailable: ProfileSubjectsAvailable,
+              TeacherNumber: "01006270833",
+              TeacherPassword: "1234")
         ])),
       )
     ];
@@ -956,9 +965,65 @@ class _TeacherMainPageState extends State<TeacherMainPage> {
                 color: Colors.black,
               ),
             ]),
-        body: Pages.elementAt(PageIndex),
+        body: (AccountActivation)
+            ? Pages.elementAt(PageIndex)
+            : Stack(
+                children: [
+                  Opacity(
+                    opacity: .4,
+                    child: Pages.elementAt(PageIndex),
+                  ),
+                  CMaker(
+                      width: double.infinity,
+                      alignment: Alignment.center,
+                      height: PageHeight(context) - 90,
+                      color: const Color.fromARGB(168, 137, 137, 137),
+                      child: CMaker(
+                        alignment: Alignment.center,
+                        circularRadius: 20,
+                        width: PageWidth(context) / 1.5,
+                        height: PageHeight(context) / 5,
+                        color: Colors.white,
+                        child: Column(
+                          children: [
+                            Expanded(child: Container()),
+                            TMaker(
+                                text: "Your Account Is Not Activated",
+                                fontSize: 20,
+                                fontWeight: FontWeight.w700,
+                                color: Colors.black),
+                            Expanded(child: Container()),
+                            InkWell(
+                              onTap: () async {
+                                final SharedPreferences prefs =
+                                    await SharedPreferences.getInstance();
+                                prefs.remove("id");
+                                Navigator.pushReplacementNamed(
+                                    context, "SplashView");
+                              },
+                              child: CMaker(
+                                  width: double.infinity,
+                                  alignment: Alignment.center,
+                                  child: CMaker(
+                                    padding: EdgeInsets.symmetric(
+                                        horizontal: 20, vertical: 10),
+                                    circularRadius: 15,
+                                    color: Color.fromARGB(255, 74, 193, 241),
+                                    child: TMaker(
+                                        text: "Log Out",
+                                        fontSize: 20,
+                                        fontWeight: FontWeight.w700,
+                                        color: const Color.fromARGB(
+                                            255, 255, 255, 255)),
+                                  )),
+                            ),
+                            Expanded(child: Container()),
+                          ],
+                        ),
+                      )),
+                ],
+              ),
       );
-    } else if (PageWidth(context) >= 550 && PageHeight(context) < 900) {
     } else if (PageWidth(context) >= 550 && PageHeight(context) < 900) {
       TeacherMainPageBody = Scaffold(
         backgroundColor: const Color.fromARGB(255, 233, 255, 247),
@@ -1001,11 +1066,68 @@ class _TeacherMainPageState extends State<TeacherMainPage> {
                 ),
               ],
             ),
-            Pages.elementAt(PageIndex),
+            (AccountActivation)
+                ? Pages.elementAt(PageIndex)
+                : Stack(
+                    children: [
+                      Opacity(
+                        opacity: .4,
+                        child: Pages.elementAt(PageIndex),
+                      ),
+                      CMaker(
+                          width: double.infinity,
+                          alignment: Alignment.center,
+                          height: PageHeight(context) - 90,
+                          color: const Color.fromARGB(168, 137, 137, 137),
+                          child: CMaker(
+                            alignment: Alignment.center,
+                            circularRadius: 20,
+                            width: PageWidth(context) / 1.5,
+                            height: PageHeight(context) / 5,
+                            color: Colors.white,
+                            child: Column(
+                              children: [
+                                Expanded(child: Container()),
+                                TMaker(
+                                    text: "Your Account Is Not Activated",
+                                    fontSize: 20,
+                                    fontWeight: FontWeight.w700,
+                                    color: Colors.black),
+                                Expanded(child: Container()),
+                                InkWell(
+                                  onTap: () async {
+                                    final SharedPreferences prefs =
+                                        await SharedPreferences.getInstance();
+                                    prefs.remove("id");
+                                    Navigator.pushReplacementNamed(
+                                        context, "SplashView");
+                                  },
+                                  child: CMaker(
+                                      width: double.infinity,
+                                      alignment: Alignment.center,
+                                      child: CMaker(
+                                        padding: EdgeInsets.symmetric(
+                                            horizontal: 20, vertical: 10),
+                                        circularRadius: 15,
+                                        color:
+                                            Color.fromARGB(255, 74, 193, 241),
+                                        child: TMaker(
+                                            text: "Log Out",
+                                            fontSize: 20,
+                                            fontWeight: FontWeight.w700,
+                                            color: const Color.fromARGB(
+                                                255, 255, 255, 255)),
+                                      )),
+                                ),
+                                Expanded(child: Container()),
+                              ],
+                            ),
+                          )),
+                    ],
+                  ),
           ],
         ),
       );
-    } else if (PageWidth(context) >= 550 && PageHeight(context) >= 900) {
     } else if (PageWidth(context) >= 550 && PageHeight(context) >= 900) {
       TeacherMainPageBody = Scaffold(
         backgroundColor: const Color.fromARGB(255, 233, 255, 247),
@@ -1037,7 +1159,64 @@ class _TeacherMainPageState extends State<TeacherMainPage> {
                 color: Colors.black,
               ),
             ]),
-        body: Pages.elementAt(PageIndex),
+        body: (AccountActivation)
+            ? Pages.elementAt(PageIndex)
+            : Stack(
+                children: [
+                  Opacity(
+                    opacity: .4,
+                    child: Pages.elementAt(PageIndex),
+                  ),
+                  CMaker(
+                      width: double.infinity,
+                      alignment: Alignment.center,
+                      height: PageHeight(context) - 90,
+                      color: const Color.fromARGB(168, 137, 137, 137),
+                      child: CMaker(
+                        alignment: Alignment.center,
+                        circularRadius: 20,
+                        width: PageWidth(context) / 1.5,
+                        height: PageHeight(context) / 5,
+                        color: Colors.white,
+                        child: Column(
+                          children: [
+                            Expanded(child: Container()),
+                            TMaker(
+                                text: "Your Account Is Not Activated",
+                                fontSize: 20,
+                                fontWeight: FontWeight.w700,
+                                color: Colors.black),
+                            Expanded(child: Container()),
+                            InkWell(
+                              onTap: () async {
+                                final SharedPreferences prefs =
+                                    await SharedPreferences.getInstance();
+                                prefs.remove("id");
+                                Navigator.pushReplacementNamed(
+                                    context, "SplashView");
+                              },
+                              child: CMaker(
+                                  width: double.infinity,
+                                  alignment: Alignment.center,
+                                  child: CMaker(
+                                    padding: EdgeInsets.symmetric(
+                                        horizontal: 20, vertical: 10),
+                                    circularRadius: 15,
+                                    color: Color.fromARGB(255, 74, 193, 241),
+                                    child: TMaker(
+                                        text: "Log Out",
+                                        fontSize: 20,
+                                        fontWeight: FontWeight.w700,
+                                        color: const Color.fromARGB(
+                                            255, 255, 255, 255)),
+                                  )),
+                            ),
+                            Expanded(child: Container()),
+                          ],
+                        ),
+                      )),
+                ],
+              ),
       );
     }
     SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersiveSticky);
