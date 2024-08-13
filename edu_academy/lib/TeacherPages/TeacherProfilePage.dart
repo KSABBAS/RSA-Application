@@ -43,7 +43,7 @@ class _TeacherProfilePageState extends State<TeacherProfilePage> {
       },
       child: CMaker(
         circularRadius: 130,
-        boxShadow: [
+        boxShadow: const [
           BoxShadow(
               offset: Offset(1, 1),
               blurRadius: 6,
@@ -57,7 +57,7 @@ class _TeacherProfilePageState extends State<TeacherProfilePage> {
           fit: StackFit.expand,
           children: [
             (ProfileAvatar == null)
-                ? CircleAvatar(
+                ? const CircleAvatar(
                     backgroundImage: AssetImage("images/personDeafult.png"))
                 : CircleAvatar(
                     backgroundImage:
@@ -68,12 +68,12 @@ class _TeacherProfilePageState extends State<TeacherProfilePage> {
               right: -4,
               child: CMaker(
                 border: Border.all(
-                    width: 4, color: Color.fromARGB(255, 233, 255, 247)),
+                    width: 4, color: const Color.fromARGB(255, 233, 255, 247)),
                 height: 40,
                 width: 40,
                 circularRadius: 50,
-                color: Color.fromARGB(255, 74, 193, 239),
-                child: Icon(Icons.add, size: 30),
+                color: const Color.fromARGB(255, 74, 193, 239),
+                child: const Icon(Icons.add, size: 30),
               ),
             ),
           ],
@@ -83,7 +83,7 @@ class _TeacherProfilePageState extends State<TeacherProfilePage> {
     Widget NameField = Column(
       children: [
         Padding(
-          padding: EdgeInsets.only(left: 10),
+          padding: const EdgeInsets.only(left: 10),
           child: CMaker(
               width: double.infinity,
               child: TMaker(
@@ -95,7 +95,7 @@ class _TeacherProfilePageState extends State<TeacherProfilePage> {
                           ? 30
                           : 30,
                   fontWeight: FontWeight.w400,
-                  color: Color.fromARGB(255, 0, 0, 0))),
+                  color: const Color.fromARGB(255, 0, 0, 0))),
         ),
         CMaker(
           height: (PageWidth(context) < 550)
@@ -117,7 +117,7 @@ class _TeacherProfilePageState extends State<TeacherProfilePage> {
             children: [
               Expanded(child: Container()),
               CMaker(
-                  padding: EdgeInsets.only(right: 10),
+                  padding: const EdgeInsets.only(right: 10),
                   child: TMaker(
                       text: widget.TeacherName,
                       fontSize: (PageWidth(context) < 550)
@@ -135,7 +135,7 @@ class _TeacherProfilePageState extends State<TeacherProfilePage> {
     );
     Widget IdField = Column(children: [
       Padding(
-        padding: EdgeInsets.only(left: 10),
+        padding: const EdgeInsets.only(left: 10),
         child: CMaker(
             width: double.infinity,
             child: TMaker(
@@ -147,7 +147,7 @@ class _TeacherProfilePageState extends State<TeacherProfilePage> {
                         ? 30
                         : 30,
                 fontWeight: FontWeight.w400,
-                color: Color.fromARGB(255, 0, 0, 0))),
+                color: const Color.fromARGB(255, 0, 0, 0))),
       ),
       CMaker(
           height: (PageWidth(context) < 550)
@@ -169,7 +169,7 @@ class _TeacherProfilePageState extends State<TeacherProfilePage> {
             children: [
               Expanded(child: Container()),
               CMaker(
-                  padding: EdgeInsets.only(right: 10),
+                  padding: const EdgeInsets.only(right: 10),
                   child: TMaker(
                       text: "12345",
                       fontSize: (PageWidth(context) < 550)
@@ -186,7 +186,7 @@ class _TeacherProfilePageState extends State<TeacherProfilePage> {
     Widget SubjectsField = Column(
       children: [
         Padding(
-          padding: EdgeInsets.only(left: 10),
+          padding: const EdgeInsets.only(left: 10),
           child: CMaker(
               width: double.infinity,
               child: TMaker(
@@ -198,7 +198,7 @@ class _TeacherProfilePageState extends State<TeacherProfilePage> {
                           ? 30
                           : 30,
                   fontWeight: FontWeight.w400,
-                  color: Color.fromARGB(255, 0, 0, 0))),
+                  color: const Color.fromARGB(255, 0, 0, 0))),
         ),
         CMaker(
           height: (PageWidth(context) < 550)
@@ -220,7 +220,7 @@ class _TeacherProfilePageState extends State<TeacherProfilePage> {
             children: [
               Expanded(child: Container()),
               CMaker(
-                  padding: EdgeInsets.only(right: 10),
+                  padding: const EdgeInsets.only(right: 10),
                   child: TMaker(
                       text: widget.ProfileSubjectsAvailable,
                       fontSize: (PageWidth(context) < 550)
@@ -239,7 +239,7 @@ class _TeacherProfilePageState extends State<TeacherProfilePage> {
     Widget EmailField = Column(
       children: [
         Padding(
-          padding: EdgeInsets.only(left: 10),
+          padding: const EdgeInsets.only(left: 10),
           child: CMaker(
               width: double.infinity,
               child: TMaker(
@@ -251,7 +251,7 @@ class _TeacherProfilePageState extends State<TeacherProfilePage> {
                           ? 30
                           : 30,
                   fontWeight: FontWeight.w400,
-                  color: Color.fromARGB(255, 0, 0, 0))),
+                  color: const Color.fromARGB(255, 0, 0, 0))),
         ),
         CMaker(
             alignment: Alignment.center,
@@ -304,10 +304,10 @@ class _TeacherProfilePageState extends State<TeacherProfilePage> {
                             borderRadius: BorderRadius.circular(20)),
                         enabledBorder: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(20),
-                            borderSide: BorderSide(width: 0)),
+                            borderSide: const BorderSide(width: 0)),
                         focusedBorder: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(20),
-                            borderSide: BorderSide(width: 0))),
+                            borderSide: const BorderSide(width: 0))),
                   )
                 : TMaker(
                     text: widget.TeacherEmail,
@@ -323,7 +323,7 @@ class _TeacherProfilePageState extends State<TeacherProfilePage> {
     Widget PasswordField = Column(
       children: [
         Padding(
-          padding: EdgeInsets.only(left: 10),
+          padding: const EdgeInsets.only(left: 10),
           child: CMaker(
               width: double.infinity,
               child: TMaker(
@@ -335,7 +335,7 @@ class _TeacherProfilePageState extends State<TeacherProfilePage> {
                           ? 30
                           : 30,
                   fontWeight: FontWeight.w400,
-                  color: Color.fromARGB(255, 0, 0, 0))),
+                  color: const Color.fromARGB(255, 0, 0, 0))),
         ),
         CMaker(
             alignment: Alignment.center,
@@ -363,7 +363,7 @@ class _TeacherProfilePageState extends State<TeacherProfilePage> {
                       if (value!.isEmpty) {
                         return "الحقل فارغ";
                       }
-                      if (value!.length < 4) {
+                      if (value.length < 4) {
                         return "يجب ان يكون الرقم السرى اكبر من 3 (حروف او ارقام)";
                       }
                       return null;
@@ -385,10 +385,10 @@ class _TeacherProfilePageState extends State<TeacherProfilePage> {
                             borderRadius: BorderRadius.circular(20)),
                         enabledBorder: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(20),
-                            borderSide: BorderSide(width: 0)),
+                            borderSide: const BorderSide(width: 0)),
                         focusedBorder: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(20),
-                            borderSide: BorderSide(width: 0))),
+                            borderSide: const BorderSide(width: 0))),
                   )
                 : TMaker(
                     text: widget.TeacherEmail,
@@ -404,7 +404,7 @@ class _TeacherProfilePageState extends State<TeacherProfilePage> {
     Widget NumberField = Column(
       children: [
         Padding(
-          padding: EdgeInsets.only(left: 10),
+          padding: const EdgeInsets.only(left: 10),
           child: CMaker(
               width: double.infinity,
               child: TMaker(
@@ -416,7 +416,7 @@ class _TeacherProfilePageState extends State<TeacherProfilePage> {
                           ? 30
                           : 30,
                   fontWeight: FontWeight.w400,
-                  color: Color.fromARGB(255, 0, 0, 0))),
+                  color: const Color.fromARGB(255, 0, 0, 0))),
         ),
         CMaker(
           alignment: Alignment.center,
@@ -475,10 +475,10 @@ class _TeacherProfilePageState extends State<TeacherProfilePage> {
                           borderRadius: BorderRadius.circular(20)),
                       enabledBorder: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(20),
-                          borderSide: BorderSide(width: 0)),
+                          borderSide: const BorderSide(width: 0)),
                       focusedBorder: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(20),
-                          borderSide: BorderSide(width: 0))),
+                          borderSide: const BorderSide(width: 0))),
                 )
               : TMaker(
                   text: widget.TeacherPassword,
@@ -494,12 +494,12 @@ class _TeacherProfilePageState extends State<TeacherProfilePage> {
     );
     Widget EditAndSaveButton = InkWell(
       onTap: () {
-        if (ProfileKey.currentState!.validate())
+        if (ProfileKey.currentState!.validate()) {
           showDialog(
               context: context,
               builder: (context) {
                 return AlertDialog(
-                    title: Text("Enter the password                  "),
+                    title: const Text("Enter the password                  "),
                     content: CMaker(
                       height: 100,
                       alignment: Alignment.center,
@@ -531,7 +531,7 @@ class _TeacherProfilePageState extends State<TeacherProfilePage> {
                           onPressed: () {
                             Navigator.pop(context);
                           },
-                          child: Text(
+                          child: const Text(
                             "Cancel",
                           )),
                       TextButton(
@@ -550,11 +550,12 @@ class _TeacherProfilePageState extends State<TeacherProfilePage> {
                               EditMode = !EditMode;
                             });
                           },
-                          child: Text(
+                          child: const Text(
                             "ok",
                           )),
                     ]);
               });
+        }
       },
       child: CMaker(
         width: 170,
@@ -576,7 +577,7 @@ class _TeacherProfilePageState extends State<TeacherProfilePage> {
           children: [
             Expanded(child: Container()),
             CMaker(
-                padding: EdgeInsets.only(right: 10),
+                padding: const EdgeInsets.only(right: 10),
                 child: TMaker(
                     text: (EditMode) ? "Save" : "Edit",
                     fontSize: (PageWidth(context) < 550)
@@ -603,41 +604,41 @@ class _TeacherProfilePageState extends State<TeacherProfilePage> {
               ProfilePicture,
               Expanded(child: Container()),
               CMaker(
-                  padding: EdgeInsets.all(20),
+                  padding: const EdgeInsets.all(20),
                   height: PageHeight(context) - 400,
                   width: double.infinity,
-                  color: Color.fromARGB(255, 74, 193, 239),
+                  color: const Color.fromARGB(255, 74, 193, 239),
                   circularRadius: 25,
-                  margin: EdgeInsets.symmetric(horizontal: 20),
+                  margin: const EdgeInsets.symmetric(horizontal: 20),
                   child: ListView(
                     children: [
                       (!EditMode)
                           ? NameField
-                          : Container(
+                          : const SizedBox(
                               height: 0,
                               width: 0,
                             ),
                       (!EditMode)
                           ? const Padding(padding: EdgeInsets.only(bottom: 10))
-                          : Container(
+                          : const SizedBox(
                               height: 0,
                               width: 0,
                             ),
                       (!EditMode)
                           ? IdField
-                          : Container(
+                          : const SizedBox(
                               height: 0,
                               width: 0,
                             ),
                       (!EditMode)
                           ? SubjectsField
-                          : Container(
+                          : const SizedBox(
                               height: 0,
                               width: 0,
                             ),
                       (!EditMode)
                           ? const Padding(padding: EdgeInsets.only(bottom: 10))
-                          : Container(
+                          : const SizedBox(
                               height: 0,
                               width: 0,
                             ),
@@ -646,13 +647,13 @@ class _TeacherProfilePageState extends State<TeacherProfilePage> {
                       const Padding(padding: EdgeInsets.only(bottom: 10)),
                       (EditMode)
                           ? const Padding(padding: EdgeInsets.only(bottom: 10))
-                          : Container(
+                          : const SizedBox(
                               height: 0,
                               width: 0,
                             ),
                       (EditMode)
                           ? PasswordField
-                          : Container(
+                          : const SizedBox(
                               height: 0,
                               width: 0,
                             ),
@@ -683,41 +684,41 @@ class _TeacherProfilePageState extends State<TeacherProfilePage> {
               ProfilePicture,
               Expanded(child: Container()),
               CMaker(
-                  padding: EdgeInsets.all(20),
+                  padding: const EdgeInsets.all(20),
                   height: PageHeight(context) - 400,
                   width: double.infinity,
-                  color: Color.fromARGB(255, 74, 193, 239),
+                  color: const Color.fromARGB(255, 74, 193, 239),
                   circularRadius: 25,
-                  margin: EdgeInsets.symmetric(horizontal: 20),
+                  margin: const EdgeInsets.symmetric(horizontal: 20),
                   child: ListView(
                     children: [
                       (!EditMode)
                           ? NameField
-                          : Container(
+                          : const SizedBox(
                               height: 0,
                               width: 0,
                             ),
                       (!EditMode)
                           ? const Padding(padding: EdgeInsets.only(bottom: 10))
-                          : Container(
+                          : const SizedBox(
                               height: 0,
                               width: 0,
                             ),
                       (!EditMode)
                           ? IdField
-                          : Container(
+                          : const SizedBox(
                               height: 0,
                               width: 0,
                             ),
                       (!EditMode)
                           ? SubjectsField
-                          : Container(
+                          : const SizedBox(
                               height: 0,
                               width: 0,
                             ),
                       (!EditMode)
                           ? const Padding(padding: EdgeInsets.only(bottom: 10))
-                          : Container(
+                          : const SizedBox(
                               height: 0,
                               width: 0,
                             ),
@@ -726,13 +727,13 @@ class _TeacherProfilePageState extends State<TeacherProfilePage> {
                       const Padding(padding: EdgeInsets.only(bottom: 10)),
                       (EditMode)
                           ? const Padding(padding: EdgeInsets.only(bottom: 10))
-                          : Container(
+                          : const SizedBox(
                               height: 0,
                               width: 0,
                             ),
                       (EditMode)
                           ? PasswordField
-                          : Container(
+                          : const SizedBox(
                               height: 0,
                               width: 0,
                             ),
@@ -763,41 +764,41 @@ class _TeacherProfilePageState extends State<TeacherProfilePage> {
               ProfilePicture,
               Expanded(child: Container()),
               CMaker(
-                  padding: EdgeInsets.all(20),
+                  padding: const EdgeInsets.all(20),
                   height: PageHeight(context) - 400,
                   width: double.infinity,
-                  color: Color.fromARGB(255, 74, 193, 239),
+                  color: const Color.fromARGB(255, 74, 193, 239),
                   circularRadius: 25,
-                  margin: EdgeInsets.symmetric(horizontal: 20),
+                  margin: const EdgeInsets.symmetric(horizontal: 20),
                   child: ListView(
                     children: [
                       (!EditMode)
                           ? NameField
-                          : Container(
+                          : const SizedBox(
                               height: 0,
                               width: 0,
                             ),
                       (!EditMode)
                           ? Expanded(child: Container())
-                          : Container(
+                          : const SizedBox(
                               height: 0,
                               width: 0,
                             ),
                       (!EditMode)
                           ? IdField
-                          : Container(
+                          : const SizedBox(
                               height: 0,
                               width: 0,
                             ),
                       (!EditMode)
                           ? SubjectsField
-                          : Container(
+                          : const SizedBox(
                               height: 0,
                               width: 0,
                             ),
                       (!EditMode)
                           ? Expanded(child: Container())
-                          : Container(
+                          : const SizedBox(
                               height: 0,
                               width: 0,
                             ),
@@ -805,13 +806,13 @@ class _TeacherProfilePageState extends State<TeacherProfilePage> {
                       EmailField,
                       (EditMode)
                           ? Expanded(child: Container())
-                          : Container(
+                          : const SizedBox(
                               height: 0,
                               width: 0,
                             ),
                       (EditMode)
                           ? PasswordField
-                          : Container(
+                          : const SizedBox(
                               height: 0,
                               width: 0,
                             ),

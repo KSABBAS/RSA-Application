@@ -157,7 +157,7 @@ class _StudentMainPageState extends State<StudentMainPage> {
                   ],
                 ),
               ),
-              Padding(
+              const Padding(
                 padding: EdgeInsets.only(bottom: 40),
               ),
               StudentProfile(StudentName: "Kareem said hassan",StudentGrade: "Grade 12",StudentEmail: "kreemsaid234@gmail.com",StudentNumber: "01065866283",StudentPassword: "1234",)
@@ -216,7 +216,7 @@ class _StudentMainPageState extends State<StudentMainPage> {
                 PageIndex = s;
                 });
               },
-              sideBarAnimationDuration: Duration(milliseconds: 500),
+              sideBarAnimationDuration: const Duration(milliseconds: 500),
               widthSwitch: 1200,
               mainLogoImage: 'images/Logo.png',
               sidebarItems: [

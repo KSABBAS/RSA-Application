@@ -1285,7 +1285,7 @@ class _SecondPageState extends State<SecondPage> {
       );
       if (PageWidth(context) < 550) {
         setState(() {
-          SecondPageContents =Container(
+          SecondPageContents =SizedBox(
             height: double.infinity,
             width: double.infinity,
             child: Column(
@@ -1330,7 +1330,7 @@ class _SecondPageState extends State<SecondPage> {
       }
       if (PageWidth(context) >= 550 && PageHeight(context) >= 900) {
         setState(() {
-          SecondPageContents = Container(
+          SecondPageContents = SizedBox(
             height: double.infinity,
             width: double.infinity,
             child: Column(

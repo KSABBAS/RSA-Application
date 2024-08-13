@@ -1,8 +1,6 @@
 // import 'dart:convert';
 import 'dart:developer';
-import 'dart:io';
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
-import 'package:edu_academy/Login/LogInPage.dart';
 import 'package:edu_academy/TeacherPages/TeacherProfilePage.dart';
 import 'package:edu_academy/TeacherPages/TeacherSecondPageContents.dart';
 import 'package:edu_academy/TeacherPages/TeacherFirstPageContenets.dart';
@@ -13,8 +11,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:panara_dialogs/panara_dialogs.dart';
-import 'package:overlay_loading_progress/overlay_loading_progress.dart';
 import 'package:sidebar_with_animation/animated_side_bar.dart';
 import 'package:string_extensions/string_extensions.dart';
 
@@ -58,6 +54,7 @@ class _TeacherMainPageState extends State<TeacherMainPage> {
   final dbService = DatabaseService();
   late Future<void> _dataFuture;
 
+  @override
   void initState() {
     super.initState();
     _dataFuture = _initializeData();
@@ -69,7 +66,7 @@ class _TeacherMainPageState extends State<TeacherMainPage> {
 
 
     final SharedPreferences prefs = await SharedPreferences.getInstance();
-    final List<String>? items = await prefs.getStringList('id');
+    final List<String>? items = prefs.getStringList('id');
     log(items.toString());
     if (items != null && items.isNotEmpty) {
       setState(() {
@@ -94,7 +91,7 @@ class _TeacherMainPageState extends State<TeacherMainPage> {
       Map<String, Map<String, List<dynamic>>> data0 =
           await dbService.fiGrades_and_Students(Teacher_Id, subjects_);
       setState(() {
-        sub_data = data0 as Map<String, Map<String, List<dynamic>>>;
+        sub_data = data0;
         int index_ = 0;
         for (String i in sub_data.keys) {
           Subject_techer[index_] = i;
@@ -775,9 +772,9 @@ class _TeacherMainPageState extends State<TeacherMainPage> {
                     children: [
                       Expanded(
                         child: CMaker(
-                          padding: EdgeInsets.only(bottom: 13),
+                          padding: const EdgeInsets.only(bottom: 13),
                           alignment: Alignment.bottomCenter,
-                          child: Text(
+                          child: const Text(
                             "kareem said",
                             style: TextStyle(
                                 fontSize: 17,
@@ -793,11 +790,11 @@ class _TeacherMainPageState extends State<TeacherMainPage> {
                               Subject3 == "null") {
                             numberOfSubjects = 1;
                             return CMaker(
-                              padding: EdgeInsets.only(bottom: 13),
+                              padding: const EdgeInsets.only(bottom: 13),
                               alignment: Alignment.bottomCenter,
                               child: Text(
-                                "${Subject1}",
-                                style: TextStyle(
+                                Subject1,
+                                style: const TextStyle(
                                     fontSize: 16,
                                     fontWeight: FontWeight.w500,
                                     color: Color.fromARGB(255, 89, 89, 87)),
@@ -811,7 +808,7 @@ class _TeacherMainPageState extends State<TeacherMainPage> {
                             return CMaker(
                               alignment: Alignment.bottomCenter,
                               child: DropdownButton(
-                                underline: Container(
+                                underline: const SizedBox(
                                   height: 0,
                                   width: 0,
                                 ),
@@ -820,8 +817,8 @@ class _TeacherMainPageState extends State<TeacherMainPage> {
                                   DropdownMenuItem(
                                     value: Subject1,
                                     child: Text(
-                                      "${Subject1}",
-                                      style: TextStyle(
+                                      Subject1,
+                                      style: const TextStyle(
                                           fontSize: 16,
                                           fontWeight: FontWeight.w500,
                                           color: Color.fromARGB(255, 89, 89, 87)),
@@ -830,8 +827,8 @@ class _TeacherMainPageState extends State<TeacherMainPage> {
                                   DropdownMenuItem(
                                     value: Subject2,
                                     child: Text(
-                                      "${Subject2}",
-                                      style: TextStyle(
+                                      Subject2,
+                                      style: const TextStyle(
                                           fontSize: 16,
                                           fontWeight: FontWeight.w500,
                                           color: Color.fromARGB(255, 89, 89, 87)),
@@ -850,7 +847,7 @@ class _TeacherMainPageState extends State<TeacherMainPage> {
                             return CMaker(
                               alignment: Alignment.bottomCenter,
                               child: DropdownButton(
-                                underline: Container(
+                                underline: const SizedBox(
                                   height: 0,
                                   width: 0,
                                 ),
@@ -859,8 +856,8 @@ class _TeacherMainPageState extends State<TeacherMainPage> {
                                   DropdownMenuItem(
                                     value: Subject1,
                                     child: Text(
-                                      "${Subject1}",
-                                      style: TextStyle(
+                                      Subject1,
+                                      style: const TextStyle(
                                           fontSize: 16,
                                           fontWeight: FontWeight.w500,
                                           color: Color.fromARGB(255, 89, 89, 87)),
@@ -869,8 +866,8 @@ class _TeacherMainPageState extends State<TeacherMainPage> {
                                   DropdownMenuItem(
                                     value: Subject2,
                                     child: Text(
-                                      "${Subject2}",
-                                      style: TextStyle(
+                                      Subject2,
+                                      style: const TextStyle(
                                           fontSize: 16,
                                           fontWeight: FontWeight.w500,
                                           color: Color.fromARGB(255, 89, 89, 87)),
@@ -879,8 +876,8 @@ class _TeacherMainPageState extends State<TeacherMainPage> {
                                   DropdownMenuItem(
                                     value: Subject3,
                                     child: Text(
-                                      "${Subject3}",
-                                      style: TextStyle(
+                                      Subject3,
+                                      style: const TextStyle(
                                           fontSize: 16,
                                           fontWeight: FontWeight.w500,
                                           color: Color.fromARGB(255, 89, 89, 87)),

@@ -93,7 +93,7 @@ class _SonPageState extends State<SonPage> {
               const Padding(padding: EdgeInsets.only(left: 20)),
               InkWell(onTap: () {
                 Navigator.pop(context);
-              },child: CMaker(height: 50,width: 50,circularRadius: 50,child: Icon(Icons.arrow_back))),
+              },child: CMaker(height: 50,width: 50,circularRadius: 50,child: const Icon(Icons.arrow_back))),
               Expanded(child: Container()),
               TMaker(text: "Informations", fontSize: 30, fontWeight:FontWeight.w700, color:Colors.black),
               Expanded(child: Container()),
@@ -101,7 +101,7 @@ class _SonPageState extends State<SonPage> {
           )),
           const Padding(padding: EdgeInsets.only(top: 20)),
           Expanded(child: CMaker(
-            margin: EdgeInsetsDirectional.only(bottom: 20,start: 20,end: 20),
+            margin: const EdgeInsetsDirectional.only(bottom: 20,start: 20,end: 20),
             width: double.infinity,
             color: Colors.white,
             circularRadius: 20,
@@ -127,10 +127,10 @@ class _SonPageState extends State<SonPage> {
               Column(
                 children: [
                   Padding(
-                    padding: EdgeInsets.only(left: 10),
+                    padding: const EdgeInsets.only(left: 10),
                     child: CMaker(
                         width: double.infinity,
-                        margin: EdgeInsets.symmetric(horizontal: 20),
+                        margin: const EdgeInsets.symmetric(horizontal: 20),
                         child: TMaker(
                             textAlign: TextAlign.start,
                             text: "Grade",
@@ -140,10 +140,10 @@ class _SonPageState extends State<SonPage> {
                                     ? 30
                                     : 30,
                             fontWeight: FontWeight.w400,
-                            color: Color.fromARGB(255, 0, 0, 0))),
+                            color: const Color.fromARGB(255, 0, 0, 0))),
                   ),
                   CMaker(
-                    margin: EdgeInsets.symmetric(horizontal: 20),
+                    margin: const EdgeInsets.symmetric(horizontal: 20),
                     height: (PageWidth(context) < 550)
                         ? 60
                         : (PageHeight(context) < 900)
@@ -163,7 +163,7 @@ class _SonPageState extends State<SonPage> {
                       children: [
                         Expanded(child: Container()),
                         CMaker(
-                            padding: EdgeInsets.only(right: 10),
+                            padding: const EdgeInsets.only(right: 10),
                             child: TMaker(
                                 text: widget.SonsList[widget.SonIndex][1],
                                 fontSize: (PageWidth(context) < 550)
@@ -183,10 +183,10 @@ class _SonPageState extends State<SonPage> {
               Column(
                 children: [
                   Padding(
-                    padding: EdgeInsets.only(left: 10),
+                    padding: const EdgeInsets.only(left: 10),
                     child: CMaker(
                         width: double.infinity,
-                        margin: EdgeInsets.symmetric(horizontal: 20),
+                        margin: const EdgeInsets.symmetric(horizontal: 20),
                         child: TMaker(
                             textAlign: TextAlign.start,
                             text: "Age",
@@ -196,10 +196,10 @@ class _SonPageState extends State<SonPage> {
                                     ? 30
                                     : 30,
                             fontWeight: FontWeight.w400,
-                            color: Color.fromARGB(255, 0, 0, 0))),
+                            color: const Color.fromARGB(255, 0, 0, 0))),
                   ),
                   CMaker(
-                    margin: EdgeInsets.symmetric(horizontal: 20),
+                    margin: const EdgeInsets.symmetric(horizontal: 20),
                     height: (PageWidth(context) < 550)
                         ? 60
                         : (PageHeight(context) < 900)
@@ -219,7 +219,7 @@ class _SonPageState extends State<SonPage> {
                       children: [
                         Expanded(child: Container()),
                         CMaker(
-                            padding: EdgeInsets.only(right: 10),
+                            padding: const EdgeInsets.only(right: 10),
                             child: TMaker(
                                 text: widget.SonsList[widget.SonIndex][2],
                                 fontSize: (PageWidth(context) < 550)
@@ -239,10 +239,10 @@ class _SonPageState extends State<SonPage> {
               Column(
                 children: [
                   Padding(
-                    padding: EdgeInsets.only(left: 10),
+                    padding: const EdgeInsets.only(left: 10),
                     child: CMaker(
                         width: double.infinity,
-                        margin: EdgeInsets.symmetric(horizontal: 20),
+                        margin: const EdgeInsets.symmetric(horizontal: 20),
                         child: TMaker(
                             textAlign: TextAlign.start,
                             text: "Email",
@@ -252,10 +252,10 @@ class _SonPageState extends State<SonPage> {
                                     ? 30
                                     : 30,
                             fontWeight: FontWeight.w400,
-                            color: Color.fromARGB(255, 0, 0, 0))),
+                            color: const Color.fromARGB(255, 0, 0, 0))),
                   ),
                   CMaker(
-                    margin: EdgeInsets.symmetric(horizontal: 20),
+                    margin: const EdgeInsets.symmetric(horizontal: 20),
                     height: (PageWidth(context) < 550)
                         ? 60
                         : (PageHeight(context) < 900)
@@ -275,7 +275,7 @@ class _SonPageState extends State<SonPage> {
                       children: [
                         Expanded(child: Container()),
                         CMaker(
-                            padding: EdgeInsets.only(right: 10),
+                            padding: const EdgeInsets.only(right: 10),
                             child: TMaker(
                                 text: widget.SonsList[widget.SonIndex][4],
                                 fontSize: (PageWidth(context) < 550)
@@ -295,10 +295,10 @@ class _SonPageState extends State<SonPage> {
               Column(
                 children: [
                   Padding(
-                    padding: EdgeInsets.only(left: 10),
+                    padding: const EdgeInsets.only(left: 10),
                     child: CMaker(
                         width: double.infinity,
-                        margin: EdgeInsets.symmetric(horizontal: 20),
+                        margin: const EdgeInsets.symmetric(horizontal: 20),
                         child: TMaker(
                             textAlign: TextAlign.start,
                             text: "Number",
@@ -308,10 +308,10 @@ class _SonPageState extends State<SonPage> {
                                     ? 30
                                     : 30,
                             fontWeight: FontWeight.w400,
-                            color: Color.fromARGB(255, 0, 0, 0))),
+                            color: const Color.fromARGB(255, 0, 0, 0))),
                   ),
                   CMaker(
-                    margin: EdgeInsets.symmetric(horizontal: 20),
+                    margin: const EdgeInsets.symmetric(horizontal: 20),
                     height: (PageWidth(context) < 550)
                         ? 60
                         : (PageHeight(context) < 900)
@@ -331,7 +331,7 @@ class _SonPageState extends State<SonPage> {
                       children: [
                         Expanded(child: Container()),
                         CMaker(
-                            padding: EdgeInsets.only(right: 10),
+                            padding: const EdgeInsets.only(right: 10),
                             child: TMaker(
                                 text: widget.SonsList[widget.SonIndex][5],
                                 fontSize: (PageWidth(context) < 550)

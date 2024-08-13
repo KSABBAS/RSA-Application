@@ -286,10 +286,8 @@ class _TeacherSecondPageContentsState extends State<TeacherSecondPageContents> {
                       leading: Image.asset("images/Person.png"),
                       title: TMaker(
                         textAlign: TextAlign.start,
-                        text: widget.ListOfGrades[GradeOpenedIndex][1]
-                                    [StudentIndex][0]
-                                .toString() +
-                            ' ${widget.ListOfGrades[GradeOpenedIndex][1][StudentIndex][2]}',
+                        text: '${widget.ListOfGrades[GradeOpenedIndex][1]
+                                    [StudentIndex][0]} ${widget.ListOfGrades[GradeOpenedIndex][1][StudentIndex][2]}',
                         fontSize: 20,
                         fontWeight: FontWeight.w600,
                         color: const Color.fromARGB(255, 0, 0, 0),

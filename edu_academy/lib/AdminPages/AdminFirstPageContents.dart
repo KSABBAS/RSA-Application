@@ -119,8 +119,8 @@ class _AdminFirstPageContentsState extends State<AdminFirstPageContents> {
               
             },
             child: CMaker(
-              color: Color.fromARGB(255, 192, 255, 176),
-              padding: EdgeInsets.symmetric(horizontal: 20,vertical: 10),
+              color: const Color.fromARGB(255, 192, 255, 176),
+              padding: const EdgeInsets.symmetric(horizontal: 20,vertical: 10),
               circularRadius: 20,
               boxShadow:const [
                 BoxShadow(
@@ -137,10 +137,10 @@ class _AdminFirstPageContentsState extends State<AdminFirstPageContents> {
           )),
           const Padding(padding: EdgeInsets.only(top: 50)),
           CMaker(
-            padding: EdgeInsets.symmetric(horizontal: 10),
+            padding: const EdgeInsets.symmetric(horizontal: 10),
             height: TablesData.length*250,
             child: ListView.builder(
-              physics: NeverScrollableScrollPhysics(),
+              physics: const NeverScrollableScrollPhysics(),
               shrinkWrap: false,
               itemCount: TablesData.length,
               itemBuilder:(context, index) {
@@ -160,7 +160,7 @@ class _AdminFirstPageContentsState extends State<AdminFirstPageContents> {
                             child: ListView.builder(
                               scrollDirection: Axis.horizontal,
                               shrinkWrap: false,
-                              physics: NeverScrollableScrollPhysics(),
+                              physics: const NeverScrollableScrollPhysics(),
                               itemCount: TablesData[index][1][0].length,
                               itemBuilder: (context, ColumnIndex) {
                   return CMaker(
@@ -168,33 +168,33 @@ class _AdminFirstPageContentsState extends State<AdminFirstPageContents> {
                       child: ListView.builder(
                         scrollDirection: Axis.vertical,
                         shrinkWrap: false,
-                        physics: NeverScrollableScrollPhysics(),
+                        physics: const NeverScrollableScrollPhysics(),
                         itemCount: TablesData[index][1].length,
                         itemBuilder: (context, RowIndex) {
                           return CMaker(
                               height: (200) / TablesData[index][1].length,
                               child: Container(
                                   decoration: BoxDecoration(
-                                    border: Border(
+                                    border: const Border(
                                         right: BorderSide(), bottom: BorderSide()),
                                     borderRadius: BorderRadius.only(
                                       topLeft: ("$ColumnIndex $RowIndex" == "0 0")
-                                          ? Radius.circular(10)
-                                          : Radius.circular(0),
+                                          ? const Radius.circular(10)
+                                          : const Radius.circular(0),
                                       bottomLeft:
                                           ("$ColumnIndex $RowIndex" == "0 ${TablesData[index][1].length-1}")
-                                              ? Radius.circular(10)
-                                              : Radius.circular(0),
+                                              ? const Radius.circular(10)
+                                              : const Radius.circular(0),
                                       topRight: ("$ColumnIndex $RowIndex" == "${TablesData[index][1][0].length-1} 0")
-                                          ? Radius.circular(10)
-                                          : Radius.circular(0),
+                                          ? const Radius.circular(10)
+                                          : const Radius.circular(0),
                                       bottomRight:
                                           ("$ColumnIndex $RowIndex" == "${TablesData[index][1][0].length-1} ${TablesData[index][1].length-1}")
-                                              ? Radius.circular(10)
-                                              : Radius.circular(0),
+                                              ? const Radius.circular(10)
+                                              : const Radius.circular(0),
                                     ),
                                     color: (ColumnIndex == 0 || RowIndex == 0)
-                                        ? Color.fromARGB(255, 36, 160, 209)
+                                        ? const Color.fromARGB(255, 36, 160, 209)
                                         : Colors.white,
                                   ),
                                   alignment: Alignment.center,
@@ -203,7 +203,7 @@ class _AdminFirstPageContentsState extends State<AdminFirstPageContents> {
                                       fontSize: 15,
                                       fontWeight: FontWeight.w600,
                                       color: (ColumnIndex == 0 || RowIndex == 0)
-                                          ? Color.fromARGB(255, 255, 255, 255)
+                                          ? const Color.fromARGB(255, 255, 255, 255)
                                           : const Color.fromARGB(255, 0, 0, 0))));
                         },
                       ));
@@ -215,7 +215,7 @@ class _AdminFirstPageContentsState extends State<AdminFirstPageContents> {
             },))
         ],),
         ),
-      Expanded(child: CMaker(child: Text("page 2"),)),
+      Expanded(child: CMaker(child: const Text("page 2"),)),
     ];
     return CMaker(
         width: double.infinity,
@@ -273,16 +273,16 @@ class _AdminFirstPageContentsState extends State<AdminFirstPageContents> {
                         child: CMaker(
                             boxShadow: [
                               BoxShadow(
-                                  offset: Offset(1, 1),
+                                  offset: const Offset(1, 1),
                                   blurRadius: 4,
                                   spreadRadius: .03,
-                                  color: (TabBarIndex==0)?Color.fromARGB(82, 0, 0, 0):Color.fromARGB(0, 255, 255, 255)),
+                                  color: (TabBarIndex==0)?const Color.fromARGB(82, 0, 0, 0):const Color.fromARGB(0, 255, 255, 255)),
                             ],
                             height: 55,
                             width: 90,
                             alignment: Alignment.center,
                             circularRadius: 20,
-                            color: (TabBarIndex==0)? Color.fromARGB(255, 233, 255, 247):const Color.fromARGB(255, 255, 255, 255),
+                            color: (TabBarIndex==0)? const Color.fromARGB(255, 233, 255, 247):const Color.fromARGB(255, 255, 255, 255),
                             child: TMaker(
                                 text: "Grades",
                                 fontSize: 18,
@@ -299,16 +299,16 @@ class _AdminFirstPageContentsState extends State<AdminFirstPageContents> {
                         child: CMaker(
                             boxShadow: [
                               BoxShadow(
-                                  offset: Offset(1, 1),
+                                  offset: const Offset(1, 1),
                                   blurRadius: 4,
                                   spreadRadius: .03,
-                                  color: (TabBarIndex==1)?Color.fromARGB(82, 0, 0, 0):Color.fromARGB(0, 255, 255, 255)),
+                                  color: (TabBarIndex==1)?const Color.fromARGB(82, 0, 0, 0):const Color.fromARGB(0, 255, 255, 255)),
                             ],
                             height: 55,
                             width: 90,
                             alignment: Alignment.center,
                             circularRadius: 20,
-                            color: (TabBarIndex==1)? Color.fromARGB(255, 233, 255, 247):const Color.fromARGB(255, 255, 255, 255),
+                            color: (TabBarIndex==1)? const Color.fromARGB(255, 233, 255, 247):const Color.fromARGB(255, 255, 255, 255),
                             child: TMaker(
                                 text: "Teachers",
                                 fontSize: 18,

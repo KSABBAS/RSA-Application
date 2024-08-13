@@ -4,7 +4,6 @@ import 'dart:developer';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:firebase_storage/firebase_storage.dart';
-import 'package:get/get.dart';
 
 Map<String, List<List<String>>> Students_in_grades = {};
 
@@ -20,10 +19,10 @@ class DatabaseService {
       final allStudents = real.ref("Messages").child(Grade).child(sub);
       final oness = await allStudents.once();
       print(oness.snapshot.value);
-      int num_s = oness.snapshot.children.length;
-      log(num_s.toString());
+      int numS = oness.snapshot.children.length;
+      log(numS.toString());
       await allStudents
-          .child("messgae${num_s + 1}")
+          .child("messgae${numS + 1}")
           .set([messgae, date, duration,name]);
     } catch (e) {
       log(e.toString());
@@ -217,8 +216,8 @@ class DatabaseService {
   fiAdd_Hw(
       String Grade,
       String Subject,
-      String Teacher_Id,
-      List<dynamic> Files_List,
+      String teacherId,
+      List<dynamic> filesList,
       String HomeworkTitle,
       String HomeworkBody,
       String score) async {
@@ -233,7 +232,7 @@ class DatabaseService {
     Homework.doc("Hw$numHw").set({
       "title": HomeworkTitle,
       "body": HomeworkBody,
-      "files": Files_List,
+      "files": filesList,
       "score": score,
       "date": "current_date"
     });
@@ -245,24 +244,24 @@ class DatabaseService {
   stHwStore(var file) async {
     if (file.length != 0) {
       if (file.length > 1) {
-        List<String> out_list = [];
+        List<String> outList = [];
         for (var file in file) {
           print(file);
           List<String> name = file.toString().split("/");
-          String file_name = name[name.length - 1].replaceAll("'", "");
+          String fileName = name[name.length - 1].replaceAll("'", "");
           var snapshot =
-              await storage.ref().child('Homeworks/${file_name}').putFile(file);
+              await storage.ref().child('Homeworks/$fileName').putFile(file);
           var downloadUrl = await snapshot.ref.getDownloadURL();
-          out_list.add(downloadUrl);
+          outList.add(downloadUrl);
         }
-        return out_list;
+        return outList;
       } else {
         print(file[0]);
         List<String> name = file[0].toString().split("/");
-        String file_name = name[name.length - 1].replaceAll("'", "");
+        String fileName = name[name.length - 1].replaceAll("'", "");
         var snapshot = await storage
             .ref()
-            .child('Homeworks/${file_name}')
+            .child('Homeworks/$fileName')
             .putFile(file[0]);
         var downloadUrl = await snapshot.ref.getDownloadURL();
         return downloadUrl;

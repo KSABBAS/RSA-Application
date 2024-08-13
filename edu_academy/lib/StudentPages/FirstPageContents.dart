@@ -24,6 +24,7 @@ Object? realTimeValues;
 class _StudentFirstMainPageState extends State<StudentFirstMainPage> {
   late Future<void> _dataFuture;
 
+  @override
   void initState() {
     super.initState();
     _dataFuture = regetmessages();
@@ -41,7 +42,7 @@ class _StudentFirstMainPageState extends State<StudentFirstMainPage> {
         setState(() {
           Messgaes_list = [];
           realTimeValues = event.snapshot.value;
-          print("realTimeValues ${realTimeValues}");
+          print("realTimeValues $realTimeValues");
           Map map = realTimeValues as Map;
           print("map.keys ${map.keys}");
 
@@ -252,7 +253,7 @@ class _StudentFirstMainPageState extends State<StudentFirstMainPage> {
                     child: ListView.builder(
                       scrollDirection: Axis.horizontal,
                       shrinkWrap: false,
-                      physics: NeverScrollableScrollPhysics(),
+                      physics: const NeverScrollableScrollPhysics(),
                       itemCount: TableData[0].length,
                       itemBuilder: (context, index) {
                         return CMaker(
@@ -270,12 +271,12 @@ class _StudentFirstMainPageState extends State<StudentFirstMainPage> {
                                 decoration: BoxDecoration(
                                   borderRadius: BorderRadius.only(
                                       bottomLeft: (index == 0)
-                                          ? Radius.circular(15)
-                                          : Radius.circular(0),
+                                          ? const Radius.circular(15)
+                                          : const Radius.circular(0),
                                       bottomRight:
                                           (index == TableData[0].length - 1)
-                                              ? Radius.circular(15)
-                                              : Radius.circular(0)),
+                                              ? const Radius.circular(15)
+                                              : const Radius.circular(0)),
                                   color: Colors.white,
                                 ),
                                 alignment: Alignment.center,
@@ -284,7 +285,7 @@ class _StudentFirstMainPageState extends State<StudentFirstMainPage> {
                                     fontSize: 15,
                                     fontWeight: FontWeight.w600,
                                     color: (index == 0)
-                                        ? Color.fromARGB(255, 36, 160, 209)
+                                        ? const Color.fromARGB(255, 36, 160, 209)
                                         : const Color.fromARGB(255, 0, 0, 0))));
                       },
                     ))
