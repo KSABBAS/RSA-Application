@@ -1,7 +1,6 @@
 import 'package:edu_academy/AdminPages/AdminMainPage.dart';
 import 'package:edu_academy/Login/LogInPage.dart';
 import 'package:edu_academy/ParentPages/ParentMainPage.dart';
-import 'package:edu_academy/ParentPages/SonPage.dart';
 import 'package:edu_academy/TeacherPages/TeacherMainPage.dart';
 import 'package:edu_academy/ParentPages/ParentSignUpPage.dart';
 import 'package:edu_academy/StudentPages/StudentMobileSignUpPage.dart';

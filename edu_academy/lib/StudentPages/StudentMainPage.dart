@@ -20,7 +20,7 @@ class StudentMainPage extends StatefulWidget {
   State<StudentMainPage> createState() => _StudentMainPageState();
 }
 
-bool AccountActivation = false;
+bool AccountActivation = true;
 int PageIndex = 0;
 
 String name = '';
@@ -74,102 +74,311 @@ class _StudentMainPageState extends State<StudentMainPage> {
       Container(
         child: const ThirdPage(),
       ),
-      Container(
-        child: ListView(
-          children: [
-            Container(
-              height: 70,
-              decoration: const BoxDecoration(
-                  boxShadow: [
-                    BoxShadow(
-                        offset: Offset(1, 1),
-                        blurRadius: 6,
-                        spreadRadius: .03,
-                        color: Color.fromARGB(82, 0, 0, 0)),
-                  ],
-                  color: Color.fromARGB(255, 255, 255, 255),
-                  borderRadius: BorderRadius.only(
-                      bottomLeft: Radius.circular(20),
-                      bottomRight: Radius.circular(20))),
-              child: Row(
+      Builder(builder:(context) {
+        return
+        (PageWidth(context) < 550)?
+        Container(
+              child: ListView(
                 children: [
                   Container(
-                      width: 70,
-                      height: 50,
-                      padding: const EdgeInsets.only(top: 10),
-                      alignment: Alignment.center,
-                      child: InkWell(
-                          onTap: () {
-                            setState(() {
-                              PageIndex = 0;
-                            });
+                    height: 70,
+                    decoration: const BoxDecoration(
+                        boxShadow: [
+                          BoxShadow(
+                              offset: Offset(1, 1),
+                              blurRadius: 6,
+                              spreadRadius: .03,
+                              color: Color.fromARGB(82, 0, 0, 0)),
+                        ],
+                        color: Color.fromARGB(255, 255, 255, 255),
+                        borderRadius: BorderRadius.only(
+                            bottomLeft: Radius.circular(20),
+                            bottomRight: Radius.circular(20))),
+                    child: Row(
+                      children: [
+                        Container(
+                            width: 70,
+                            height: 50,
+                            padding: const EdgeInsets.only(top: 10),
+                            alignment: Alignment.center,
+                            child: InkWell(
+                                onTap: () {
+                                  setState(() {
+                                    PageIndex = 0;
+                                  });
+                                },
+                                child: Image.asset("images/Book.png"))),
+                        Expanded(
+                          child: CMaker(
+                            child: Row(
+                              children: [
+                                Expanded(
+                                  child: CMaker(
+                                    alignment: Alignment.bottomCenter,
+                                    child: Text(
+                                      name,
+                                      style: const TextStyle(
+                                          fontSize: 17,
+                                          fontWeight: FontWeight.w500,
+                                          color:
+                                              Color.fromARGB(255, 5, 123, 151)),
+                                    ),
+                                  ),
+                                ),
+                                Expanded(
+                                  child: CMaker(
+                                    alignment: Alignment.bottomCenter,
+                                    child: Text(
+                                      grade,
+                                      style: const TextStyle(
+                                          fontSize: 16,
+                                          fontWeight: FontWeight.w500,
+                                          color:
+                                              Color.fromARGB(255, 89, 89, 87)),
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                        InkWell(
+                          onTap: () async {
+                            final SharedPreferences prefs =
+                                await SharedPreferences.getInstance();
+                            prefs.remove("id");
+                            Navigator.pushReplacementNamed(
+                                context, "SplashView");
                           },
-                          child: Image.asset("images/Book.png"))),
-                  Expanded(
-                    child: CMaker(
+                          child: Container(
+                            width: 70,
+                            padding: const EdgeInsets.only(top: 10),
+                            decoration: BoxDecoration(
+                                color: const Color.fromARGB(255, 255, 255, 255),
+                                borderRadius: BorderRadius.circular(10)),
+                            height: 50,
+                            child: const Icon(Icons.logout),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  Padding(
+                    padding: EdgeInsets.only(bottom: 40),
+                  ),
+                  StudentProfile(
+                    StudentName: "Kareem said hassan",
+                    StudentGrade: "Grade 12",
+                    StudentEmail: "kreemsaid234@gmail.com",
+                    StudentNumber: "01065866283",
+                    StudentPassword: "1234",
+                  )
+                ],
+              ),
+            )
+            : (PageWidth(context) >= 550 && PageHeight(context) >= 900)?
+            Container(
+              child: ListView(
+                children: [
+                  Container(
+                    height: 70,
+                    decoration: const BoxDecoration(
+                        boxShadow: [
+                          BoxShadow(
+                              offset: Offset(1, 1),
+                              blurRadius: 6,
+                              spreadRadius: .03,
+                              color: Color.fromARGB(82, 0, 0, 0)),
+                        ],
+                        color: Color.fromARGB(255, 255, 255, 255),
+                        borderRadius: BorderRadius.only(
+                            bottomLeft: Radius.circular(20),
+                            bottomRight: Radius.circular(20))),
+                    child: Row(
+                      children: [
+                        Container(
+                            width: 70,
+                            height: 50,
+                            padding: const EdgeInsets.only(top: 10),
+                            alignment: Alignment.center,
+                            child: InkWell(
+                                onTap: () {
+                                  setState(() {
+                                    PageIndex = 0;
+                                  });
+                                },
+                                child: Image.asset("images/Book.png"))),
+                        Expanded(
+                          child: CMaker(
+                            child: Row(
+                              children: [
+                                Expanded(
+                                  child: CMaker(
+                                    alignment: Alignment.bottomCenter,
+                                    child: Text(
+                                      name,
+                                      style: const TextStyle(
+                                          fontSize: 17,
+                                          fontWeight: FontWeight.w500,
+                                          color:
+                                              Color.fromARGB(255, 5, 123, 151)),
+                                    ),
+                                  ),
+                                ),
+                                Expanded(
+                                  child: CMaker(
+                                    alignment: Alignment.bottomCenter,
+                                    child: Text(
+                                      grade,
+                                      style: const TextStyle(
+                                          fontSize: 16,
+                                          fontWeight: FontWeight.w500,
+                                          color:
+                                              Color.fromARGB(255, 89, 89, 87)),
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                        InkWell(
+                          onTap: () async {
+                            final SharedPreferences prefs =
+                                await SharedPreferences.getInstance();
+                            prefs.remove("id");
+                            Navigator.pushReplacementNamed(
+                                context, "SplashView");
+                          },
+                          child: Container(
+                            width: 70,
+                            padding: const EdgeInsets.only(top: 10),
+                            decoration: BoxDecoration(
+                                color: const Color.fromARGB(255, 255, 255, 255),
+                                borderRadius: BorderRadius.circular(10)),
+                            height: 50,
+                            child: const Icon(Icons.logout),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  Padding(
+                    padding: EdgeInsets.only(bottom: 40),
+                  ),
+                  StudentProfile(
+                    StudentName: "Kareem said hassan",
+                    StudentGrade: "Grade 12",
+                    StudentEmail: "kreemsaid234@gmail.com",
+                    StudentNumber: "01065866283",
+                    StudentPassword: "1234",
+                  )
+                ],
+              ),
+            ):
+            Expanded(
+              child: Container(
+                child: ListView(
+                  children: [
+                    Container(
+                      height: 70,
+                      decoration: const BoxDecoration(
+                          boxShadow: [
+                            BoxShadow(
+                                offset: Offset(1, 1),
+                                blurRadius: 6,
+                                spreadRadius: .03,
+                                color: Color.fromARGB(82, 0, 0, 0)),
+                          ],
+                          color: Color.fromARGB(255, 255, 255, 255),
+                          borderRadius: BorderRadius.only(
+                              bottomLeft: Radius.circular(20),
+                              bottomRight: Radius.circular(20))),
                       child: Row(
                         children: [
+                          Container(
+                              width: 70,
+                              height: 50,
+                              padding: const EdgeInsets.only(top: 10),
+                              alignment: Alignment.center,
+                              child: InkWell(
+                                  onTap: () {
+                                    setState(() {
+                                      PageIndex = 0;
+                                    });
+                                  },
+                                  child: Image.asset("images/Book.png"))),
                           Expanded(
                             child: CMaker(
-                              alignment: Alignment.bottomCenter,
-                              child: Text(
-                                name,
-                                style: const TextStyle(
-                                    fontSize: 17,
-                                    fontWeight: FontWeight.w500,
-                                    color: Color.fromARGB(255, 5, 123, 151)),
+                              child: Row(
+                                children: [
+                                  Expanded(
+                                    child: CMaker(
+                                      alignment: Alignment.bottomCenter,
+                                      child: Text(
+                                        name,
+                                        style: const TextStyle(
+                                            fontSize: 17,
+                                            fontWeight: FontWeight.w500,
+                                            color:
+                                                Color.fromARGB(255, 5, 123, 151)),
+                                      ),
+                                    ),
+                                  ),
+                                  Expanded(
+                                    child: CMaker(
+                                      alignment: Alignment.bottomCenter,
+                                      child: Text(
+                                        grade,
+                                        style: const TextStyle(
+                                            fontSize: 16,
+                                            fontWeight: FontWeight.w500,
+                                            color:
+                                                Color.fromARGB(255, 89, 89, 87)),
+                                      ),
+                                    ),
+                                  ),
+                                ],
                               ),
                             ),
                           ),
-                          Expanded(
-                            child: CMaker(
-                              alignment: Alignment.bottomCenter,
-                              child: Text(
-                                grade,
-                                style: const TextStyle(
-                                    fontSize: 16,
-                                    fontWeight: FontWeight.w500,
-                                    color: Color.fromARGB(255, 89, 89, 87)),
-                              ),
+                          InkWell(
+                            onTap: () async {
+                              final SharedPreferences prefs =
+                                  await SharedPreferences.getInstance();
+                              prefs.remove("id");
+                              Navigator.pushReplacementNamed(
+                                  context, "SplashView");
+                            },
+                            child: Container(
+                              width: 70,
+                              padding: const EdgeInsets.only(top: 10),
+                              decoration: BoxDecoration(
+                                  color: const Color.fromARGB(255, 255, 255, 255),
+                                  borderRadius: BorderRadius.circular(10)),
+                              height: 50,
+                              child: const Icon(Icons.logout),
                             ),
                           ),
                         ],
                       ),
                     ),
-                  ),
-                  InkWell(
-                    onTap: () async {
-                      final SharedPreferences prefs =
-                          await SharedPreferences.getInstance();
-                      prefs.remove("id");
-                      Navigator.pushReplacementNamed(context, "SplashView");
-                    },
-                    child: Container(
-                      width: 70,
-                      padding: const EdgeInsets.only(top: 10),
-                      decoration: BoxDecoration(
-                          color: const Color.fromARGB(255, 255, 255, 255),
-                          borderRadius: BorderRadius.circular(10)),
-                      height: 50,
-                      child: const Icon(Icons.logout),
+                    Padding(
+                      padding: EdgeInsets.only(bottom: 40),
                     ),
-                  ),
-                ],
+                    StudentProfile(
+                      StudentName: "Kareem said hassan",
+                      StudentGrade: "Grade 12",
+                      StudentEmail: "kreemsaid234@gmail.com",
+                      StudentNumber: "01065866283",
+                      StudentPassword: "1234",
+                    )
+                  ],
+                ),
               ),
-            ),
-            Padding(
-              padding: EdgeInsets.only(bottom: 40),
-            ),
-            StudentProfile(
-              StudentName: "Kareem said hassan",
-              StudentGrade: "Grade 12",
-              StudentEmail: "kreemsaid234@gmail.com",
-              StudentNumber: "01065866283",
-              StudentPassword: "1234",
-            )
-          ],
-        ),
-      ),
+            );
+          }
+      )
     ];
     if (PageWidth(context) < 550) {
       StudentMainPageBody = Scaffold(
@@ -202,51 +411,64 @@ class _StudentMainPageState extends State<StudentMainPage> {
                 color: Colors.black,
               ),
             ]),
-        body: (AccountActivation)?Pages.elementAt(PageIndex):Stack(
-          children: [
-            Opacity(opacity: .4,child: Pages.elementAt(PageIndex),),
-            CMaker(
-              width: double.infinity,
-              alignment: Alignment.center,
-              height: PageHeight(context)-90,
-              color: const Color.fromARGB(168, 137, 137, 137),
-              child: CMaker(
-                alignment: Alignment.center,
-                circularRadius: 20,
-                width: PageWidth(context)/1.5,
-                height: PageHeight(context)/5,
-                color: Colors.white,
-                child: Column(children: [
-                  Expanded(child: Container()),
-                  TMaker(
-                  text: "Your Account Is Not Activated",
-                    fontSize: 20,
-                    fontWeight:FontWeight.w700,
-                    color: Colors.black),
-                  Expanded(child: Container()),
-                  InkWell(
-                    onTap: () async {
-                      final SharedPreferences prefs =
-                          await SharedPreferences.getInstance();
-                      prefs.remove("id");
-                      Navigator.pushReplacementNamed(context, "SplashView");
-                    },
-                    child: CMaker(width: double.infinity,alignment: Alignment.center,child: CMaker(
-                      padding: EdgeInsets.symmetric(horizontal: 20,vertical: 10),
-                      circularRadius: 15,
-                      color: Color.fromARGB(255, 74, 193, 241),
-                      child: TMaker(
-                        text: "Log Out",
-                          fontSize: 20,
-                          fontWeight:FontWeight.w700,
-                          color: const Color.fromARGB(255, 255, 255, 255)),)),
+        body: (AccountActivation)
+            ? Pages.elementAt(PageIndex)
+            : Stack(
+                children: [
+                  Opacity(
+                    opacity: .4,
+                    child: Pages.elementAt(PageIndex),
                   ),
-                  Expanded(child: Container()),
-                    ],
-                  ),)
-                ),
-          ],
-        ),
+                  CMaker(
+                      width: double.infinity,
+                      alignment: Alignment.center,
+                      height: PageHeight(context) - 90,
+                      color: const Color.fromARGB(168, 137, 137, 137),
+                      child: CMaker(
+                        alignment: Alignment.center,
+                        circularRadius: 20,
+                        width: PageWidth(context) / 1.5,
+                        height: PageHeight(context) / 5,
+                        color: Colors.white,
+                        child: Column(
+                          children: [
+                            Expanded(child: Container()),
+                            TMaker(
+                                text: "Your Account Is Not Activated",
+                                fontSize: 20,
+                                fontWeight: FontWeight.w700,
+                                color: Colors.black),
+                            Expanded(child: Container()),
+                            InkWell(
+                              onTap: () async {
+                                final SharedPreferences prefs =
+                                    await SharedPreferences.getInstance();
+                                prefs.remove("id");
+                                Navigator.pushReplacementNamed(
+                                    context, "SplashView");
+                              },
+                              child: CMaker(
+                                  width: double.infinity,
+                                  alignment: Alignment.center,
+                                  child: CMaker(
+                                    padding: EdgeInsets.symmetric(
+                                        horizontal: 20, vertical: 10),
+                                    circularRadius: 15,
+                                    color: Color.fromARGB(255, 74, 193, 241),
+                                    child: TMaker(
+                                        text: "Log Out",
+                                        fontSize: 20,
+                                        fontWeight: FontWeight.w700,
+                                        color: const Color.fromARGB(
+                                            255, 255, 255, 255)),
+                                  )),
+                            ),
+                            Expanded(child: Container()),
+                          ],
+                        ),
+                      )),
+                ],
+              ),
       );
     } else if (PageWidth(context) >= 550 && PageHeight(context) < 900) {
       StudentMainPageBody = Scaffold(
@@ -288,51 +510,65 @@ class _StudentMainPageState extends State<StudentMainPage> {
                 ),
               ],
             ),
-            (AccountActivation)?Pages.elementAt(PageIndex):Stack(
-          children: [
-            Opacity(opacity: .4,child: Pages.elementAt(PageIndex),),
-            CMaker(
-              width: double.infinity,
-              alignment: Alignment.center,
-              height: PageHeight(context)-90,
-              color: const Color.fromARGB(168, 137, 137, 137),
-              child: CMaker(
-                alignment: Alignment.center,
-                circularRadius: 20,
-                width: PageWidth(context)/1.5,
-                height: PageHeight(context)/5,
-                color: Colors.white,
-                child: Column(children: [
-                  Expanded(child: Container()),
-                  TMaker(
-                  text: "Your Account Is Not Activated",
-                    fontSize: 20,
-                    fontWeight:FontWeight.w700,
-                    color: Colors.black),
-                  Expanded(child: Container()),
-                  InkWell(
-                    onTap: () async {
-                      final SharedPreferences prefs =
-                          await SharedPreferences.getInstance();
-                      prefs.remove("id");
-                      Navigator.pushReplacementNamed(context, "SplashView");
-                    },
-                    child: CMaker(width: double.infinity,alignment: Alignment.center,child: CMaker(
-                      padding: EdgeInsets.symmetric(horizontal: 20,vertical: 10),
-                      circularRadius: 15,
-                      color: Color.fromARGB(255, 74, 193, 241),
-                      child: TMaker(
-                        text: "Log Out",
-                          fontSize: 20,
-                          fontWeight:FontWeight.w700,
-                          color: const Color.fromARGB(255, 255, 255, 255)),)),
-                  ),
-                  Expanded(child: Container()),
+            (AccountActivation)
+                ? Pages.elementAt(PageIndex)
+                : Stack(
+                    children: [
+                      Opacity(
+                        opacity: .4,
+                        child: Pages.elementAt(PageIndex),
+                      ),
+                      CMaker(
+                          width: double.infinity,
+                          alignment: Alignment.center,
+                          height: PageHeight(context) - 90,
+                          color: const Color.fromARGB(168, 137, 137, 137),
+                          child: CMaker(
+                            alignment: Alignment.center,
+                            circularRadius: 20,
+                            width: PageWidth(context) / 1.5,
+                            height: PageHeight(context) / 5,
+                            color: Colors.white,
+                            child: Column(
+                              children: [
+                                Expanded(child: Container()),
+                                TMaker(
+                                    text: "Your Account Is Not Activated",
+                                    fontSize: 20,
+                                    fontWeight: FontWeight.w700,
+                                    color: Colors.black),
+                                Expanded(child: Container()),
+                                InkWell(
+                                  onTap: () async {
+                                    final SharedPreferences prefs =
+                                        await SharedPreferences.getInstance();
+                                    prefs.remove("id");
+                                    Navigator.pushReplacementNamed(
+                                        context, "SplashView");
+                                  },
+                                  child: CMaker(
+                                      width: double.infinity,
+                                      alignment: Alignment.center,
+                                      child: CMaker(
+                                        padding: EdgeInsets.symmetric(
+                                            horizontal: 20, vertical: 10),
+                                        circularRadius: 15,
+                                        color:
+                                            Color.fromARGB(255, 74, 193, 241),
+                                        child: TMaker(
+                                            text: "Log Out",
+                                            fontSize: 20,
+                                            fontWeight: FontWeight.w700,
+                                            color: const Color.fromARGB(
+                                                255, 255, 255, 255)),
+                                      )),
+                                ),
+                                Expanded(child: Container()),
+                              ],
+                            ),
+                          )),
                     ],
-                  ),)
-                ),
-          ],
-        ),
+                  ),
           ],
         ),
       );
@@ -367,51 +603,64 @@ class _StudentMainPageState extends State<StudentMainPage> {
                 color: Colors.black,
               ),
             ]),
-        body: (AccountActivation)?Pages.elementAt(PageIndex):Stack(
-          children: [
-            Opacity(opacity: .4,child: Pages.elementAt(PageIndex),),
-            CMaker(
-              width: double.infinity,
-              alignment: Alignment.center,
-              height: PageHeight(context)-90,
-              color: const Color.fromARGB(168, 137, 137, 137),
-              child: CMaker(
-                alignment: Alignment.center,
-                circularRadius: 20,
-                width: PageWidth(context)/1.5,
-                height: PageHeight(context)/5,
-                color: Colors.white,
-                child: Column(children: [
-                  Expanded(child: Container()),
-                  TMaker(
-                  text: "Your Account Is Not Activated",
-                    fontSize: 20,
-                    fontWeight:FontWeight.w700,
-                    color: Colors.black),
-                  Expanded(child: Container()),
-                  InkWell(
-                    onTap: () async {
-                      final SharedPreferences prefs =
-                          await SharedPreferences.getInstance();
-                      prefs.remove("id");
-                      Navigator.pushReplacementNamed(context, "SplashView");
-                    },
-                    child: CMaker(width: double.infinity,alignment: Alignment.center,child: CMaker(
-                      padding: EdgeInsets.symmetric(horizontal: 20,vertical: 10),
-                      circularRadius: 15,
-                      color: Color.fromARGB(255, 74, 193, 241),
-                      child: TMaker(
-                        text: "Log Out",
-                          fontSize: 20,
-                          fontWeight:FontWeight.w700,
-                          color: const Color.fromARGB(255, 255, 255, 255)),)),
+        body: (AccountActivation)
+            ? Pages.elementAt(PageIndex)
+            : Stack(
+                children: [
+                  Opacity(
+                    opacity: .4,
+                    child: Pages.elementAt(PageIndex),
                   ),
-                  Expanded(child: Container()),
-                    ],
-                  ),)
-                ),
-          ],
-        ),
+                  CMaker(
+                      width: double.infinity,
+                      alignment: Alignment.center,
+                      height: PageHeight(context) - 90,
+                      color: const Color.fromARGB(168, 137, 137, 137),
+                      child: CMaker(
+                        alignment: Alignment.center,
+                        circularRadius: 20,
+                        width: PageWidth(context) / 1.5,
+                        height: PageHeight(context) / 5,
+                        color: Colors.white,
+                        child: Column(
+                          children: [
+                            Expanded(child: Container()),
+                            TMaker(
+                                text: "Your Account Is Not Activated",
+                                fontSize: 20,
+                                fontWeight: FontWeight.w700,
+                                color: Colors.black),
+                            Expanded(child: Container()),
+                            InkWell(
+                              onTap: () async {
+                                final SharedPreferences prefs =
+                                    await SharedPreferences.getInstance();
+                                prefs.remove("id");
+                                Navigator.pushReplacementNamed(
+                                    context, "SplashView");
+                              },
+                              child: CMaker(
+                                  width: double.infinity,
+                                  alignment: Alignment.center,
+                                  child: CMaker(
+                                    padding: EdgeInsets.symmetric(
+                                        horizontal: 20, vertical: 10),
+                                    circularRadius: 15,
+                                    color: Color.fromARGB(255, 74, 193, 241),
+                                    child: TMaker(
+                                        text: "Log Out",
+                                        fontSize: 20,
+                                        fontWeight: FontWeight.w700,
+                                        color: const Color.fromARGB(
+                                            255, 255, 255, 255)),
+                                  )),
+                            ),
+                            Expanded(child: Container()),
+                          ],
+                        ),
+                      )),
+                ],
+              ),
       );
     }
     SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersiveSticky);

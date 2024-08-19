@@ -722,6 +722,7 @@ class _TeacherThirdPageContentsState extends State<TeacherThirdPageContents> {
           }
         },
         child: CMaker(
+          width: 80,
           padding: EdgeInsets.all(10),
           color: Color.fromARGB(255, 61, 197, 255),
           alignment: Alignment.center,
@@ -820,6 +821,11 @@ class _TeacherThirdPageContentsState extends State<TeacherThirdPageContents> {
                           circularRadius: 15,
                           padding: EdgeInsets.all(15),
                           child: HomeWorkFinalLook)),
+                  const Padding(padding: EdgeInsets.only(bottom: 20)),
+                  CMaker(
+                      width: double.infinity,
+                      alignment: Alignment.center,
+                      child: CMaker(width: 80,child: SendHomeworkButton)),
                   Padding(padding: EdgeInsets.only(bottom: 20)),
                 ],
               ),
@@ -828,7 +834,8 @@ class _TeacherThirdPageContentsState extends State<TeacherThirdPageContents> {
         });
       } else if (PageWidth(context) >= 550 && PageHeight(context) < 900) {
         setState(() {
-          ThirdPageBody = Form(
+          ThirdPageBody =
+          Form(
             key: HomeworkKey,
             child: CMaker(
                 height: PageHeight(context) - 180,
@@ -839,74 +846,102 @@ class _TeacherThirdPageContentsState extends State<TeacherThirdPageContents> {
                       children: [ThirdPageArrowBack, GradeTitle],
                     ),
                     const Padding(padding: EdgeInsets.only(bottom: 20)),
-                    (PageWidth(context) < 900)
-                        ? Column(
-                            children: [
-                              HomeworkTitleTFF,
-                              const Padding(
-                                  padding: EdgeInsets.only(bottom: 20)),
-                              HomeworkBodyTFF,
-                              const Padding(
-                                  padding: EdgeInsets.only(bottom: 20)),
-                              ScoreTFF,
-                              const Padding(
-                                  padding: EdgeInsets.only(bottom: 20)),
-                              AddAnImageToHomework,
-                              const Padding(
-                                  padding: EdgeInsets.only(bottom: 20)),
-                                  CMaker(width: double.infinity,alignment: Alignment.center,child: CMaker(width: 140,height: 70,alignment: Alignment.bottomCenter,child: TMaker(text: "Final Look", fontSize: 28, fontWeight:FontWeight.w700, color:Colors.black))),
+                  HomeworkTitleTFF,
                   const Padding(padding: EdgeInsets.only(bottom: 20)),
-                              HomeWorkFinalLook,
-                            ],
-                          )
-                        : Row(
-                            children: [
-                              CMaker(width: double.infinity,alignment: Alignment.center,child: CMaker(width: 140,height: 70,alignment: Alignment.bottomCenter,child: TMaker(text: "Final Look", fontSize: 28, fontWeight:FontWeight.w700, color:Colors.black))),
+                  HomeworkBodyTFF,
                   const Padding(padding: EdgeInsets.only(bottom: 20)),
-                              Expanded(
-                                flex: 10,
-                                child: CMaker(
-                                    height: 400,
-                                    child: CMaker(
-                                        boxShadow: const [
-                                          BoxShadow(
-                                              color:
-                                                  Color.fromARGB(61, 0, 0, 0),
-                                              offset: Offset(2, 2),
-                                              blurRadius: 10,
-                                              spreadRadius: .06)
-                                        ],
-                                        color: const Color.fromARGB(
-                                            255, 255, 255, 255),
-                                        alignment: Alignment.center,
-                                        margin: const EdgeInsets.symmetric(
-                                            horizontal: 20),
-                                        circularRadius: 15,
-                                        padding: const EdgeInsets.all(15),
-                                        child: HomeWorkFinalLook)),
-                              ),
-                              Expanded(child: Container()),
-                              Expanded(
-                                flex: 10,
-                                child: CMaker(
-                                  height: PageHeight(context) - 200,
-                                  child: ListView(children: [
-                                    HomeworkTitleTFF,
-                                    const Padding(
-                                        padding: EdgeInsets.only(bottom: 20)),
-                                    HomeworkBodyTFF,
-                                    const Padding(
-                                        padding: EdgeInsets.only(bottom: 20)),
-                                    AddAnImageToHomework,
-                                  ]),
-                                ),
-                              ),
-                            ],
-                          ),
+                  ScoreTFF,
+                  const Padding(padding: EdgeInsets.only(bottom: 20)),
+                  AddAnImageToHomework,
+                  const Padding(padding: EdgeInsets.only(bottom: 20)),
+                  CMaker(width: double.infinity,alignment: Alignment.center,child: CMaker(width: 140,height: 70,alignment: Alignment.bottomCenter,child: TMaker(text: "Final Look", fontSize: 28, fontWeight:FontWeight.w700, color:Colors.black))),
+                  const Padding(padding: EdgeInsets.only(bottom: 20)),
+                  CMaker(
+                      width: double.infinity,
+                      height: 200,
+                      child: CMaker(
+                          boxShadow: const [
+                            BoxShadow(
+                                color: Color.fromARGB(61, 0, 0, 0),
+                                offset: Offset(2, 2),
+                                blurRadius: 10,
+                                spreadRadius: .06)
+                          ],
+                          color: const Color.fromARGB(255, 255, 255, 255),
+                          alignment: Alignment.center,
+                          margin: const EdgeInsets.symmetric(horizontal: 20),
+                          circularRadius: 15,
+                          padding: const EdgeInsets.all(15),
+                          child: HomeWorkFinalLook)),
+                  //   (PageWidth(context) < 900)
+                  //       ? Column(
+                  //           children: [
+                  //             HomeworkTitleTFF,
+                  //             const Padding(
+                  //                 padding: EdgeInsets.only(bottom: 20)),
+                  //             HomeworkBodyTFF,
+                  //             const Padding(
+                  //                 padding: EdgeInsets.only(bottom: 20)),
+                  //             ScoreTFF,
+                  //             const Padding(
+                  //                 padding: EdgeInsets.only(bottom: 20)),
+                  //             AddAnImageToHomework,
+                  //             const Padding(
+                  //                 padding: EdgeInsets.only(bottom: 20)),
+                  //                 CMaker(width: double.infinity,alignment: Alignment.center,child: CMaker(width: 140,height: 70,alignment: Alignment.bottomCenter,child: TMaker(text: "Final Look", fontSize: 28, fontWeight:FontWeight.w700, color:Colors.black))),
+                  // const Padding(padding: EdgeInsets.only(bottom: 20)),
+                  //             HomeWorkFinalLook,
+                  //           ],
+                  //         )
+                  //       :
+                  // Row(
+                  //           children: [
+                  //             CMaker(width: double.infinity,alignment: Alignment.center,child: CMaker(width: 140,height: 70,alignment: Alignment.bottomCenter,child: TMaker(text: "Final Look", fontSize: 28, fontWeight:FontWeight.w700, color:Colors.black))),
+                  // const Padding(padding: EdgeInsets.only(bottom: 20)),
+                  //             Expanded(
+                  //               flex: 10,
+                  //               child: CMaker(
+                  //                   height: 400,
+                  //                   child: CMaker(
+                  //                       boxShadow: const [
+                  //                         BoxShadow(
+                  //                             color:
+                  //                                 Color.fromARGB(61, 0, 0, 0),
+                  //                             offset: Offset(2, 2),
+                  //                             blurRadius: 10,
+                  //                             spreadRadius: .06)
+                  //                       ],
+                  //                       color: const Color.fromARGB(
+                  //                           255, 255, 255, 255),
+                  //                       alignment: Alignment.center,
+                  //                       margin: const EdgeInsets.symmetric(
+                  //                           horizontal: 20),
+                  //                       circularRadius: 15,
+                  //                       padding: const EdgeInsets.all(15),
+                  //                       child: HomeWorkFinalLook)),
+                  //             ),
+                  //             Expanded(child: Container()),
+                  //             Expanded(
+                  //               flex: 10,
+                  //               child: CMaker(
+                  //                 height: PageHeight(context) - 200,
+                  //                 child: ListView(children: [
+                  //                   HomeworkTitleTFF,
+                  //                   const Padding(
+                  //                       padding: EdgeInsets.only(bottom: 20)),
+                  //                   HomeworkBodyTFF,
+                  //                   const Padding(
+                  //                       padding: EdgeInsets.only(bottom: 20)),
+                  //                   AddAnImageToHomework,
+                  //                 ]),
+                  //               ),
+                  //             ),
+                  //           ],
+                  //         ),
                     Padding(padding: EdgeInsets.only(bottom: 20)),
                     CMaker(
                         width: double.infinity,
-                        alignment: Alignment.centerRight,
+                        alignment: Alignment.center,
                         padding: EdgeInsetsDirectional.only(end: 20),
                         child: SendHomeworkButton),
                     const Padding(padding: EdgeInsets.only(bottom: 20)),

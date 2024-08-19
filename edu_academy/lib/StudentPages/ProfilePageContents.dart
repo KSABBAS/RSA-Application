@@ -94,11 +94,7 @@ class _StudentProfileState extends State<StudentProfile> {
               child: TMaker(
                   textAlign: TextAlign.start,
                   text: "Name",
-                  fontSize: (PageWidth(context) < 550)
-                      ? 20
-                      : (PageHeight(context) < 900)
-                          ? 30
-                          : 30,
+                  fontSize: 20,
                   fontWeight: FontWeight.w400,
                   color: Color.fromARGB(255, 0, 0, 0))),
         ),
@@ -125,11 +121,7 @@ class _StudentProfileState extends State<StudentProfile> {
                   padding: EdgeInsets.only(right: 10),
                   child: TMaker(
                       text: widget.StudentName,
-                      fontSize: (PageWidth(context) < 550)
-                          ? 20
-                          : (PageHeight(context) < 900)
-                              ? 40
-                              : 40,
+                      fontSize:20,
                       fontWeight: FontWeight.w600,
                       color: const Color.fromARGB(255, 0, 0, 0))),
               Expanded(child: Container()),
@@ -152,11 +144,7 @@ class _StudentProfileState extends State<StudentProfile> {
                         child: TMaker(
                             textAlign: TextAlign.start,
                             text: "Id",
-                            fontSize: (PageWidth(context) < 550)
-                                ? 20
-                                : (PageHeight(context) < 900)
-                                    ? 30
-                                    : 30,
+                            fontSize:20,
                             fontWeight: FontWeight.w400,
                             color: Color.fromARGB(255, 0, 0, 0))),
                   ),
@@ -183,11 +171,7 @@ class _StudentProfileState extends State<StudentProfile> {
                             padding: EdgeInsets.only(right: 10),
                             child: TMaker(
                                 text: "12345",
-                                fontSize: (PageWidth(context) < 550)
-                          ? 20
-                          : (PageHeight(context) < 900)
-                              ? 40
-                              : 40,
+                                fontSize: 20,
                                 fontWeight: FontWeight.w600,
                                 color: const Color.fromARGB(255, 0, 0, 0))),
                         Expanded(child: Container()),
@@ -209,11 +193,7 @@ class _StudentProfileState extends State<StudentProfile> {
                         child: TMaker(
                             textAlign: TextAlign.start,
                             text: "Grade",
-                            fontSize: (PageWidth(context) < 550)
-                                ? 20
-                                : (PageHeight(context) < 900)
-                                    ? 30
-                                    : 30,
+                            fontSize:20,
                             fontWeight: FontWeight.w400,
                             color: Color.fromARGB(255, 0, 0, 0))),
                   ),
@@ -240,11 +220,7 @@ class _StudentProfileState extends State<StudentProfile> {
                             padding: EdgeInsets.only(right: 10),
                             child: TMaker(
                                 text: widget.StudentGrade,
-                                fontSize: (PageWidth(context) < 550)
-                          ? 20
-                          : (PageHeight(context) < 900)
-                              ? 40
-                              : 40,
+                                fontSize: 20,
                                 fontWeight: FontWeight.w600,
                                 color: const Color.fromARGB(255, 0, 0, 0))),
                         Expanded(child: Container()),
@@ -265,11 +241,7 @@ class _StudentProfileState extends State<StudentProfile> {
               child: TMaker(
                   textAlign: TextAlign.start,
                   text: (EditMode) ? "Edit Email" : "Email",
-                  fontSize: (PageWidth(context) < 550)
-                          ? 20
-                          : (PageHeight(context) < 900)
-                              ? 30
-                              : 30,
+                  fontSize: 20,
                   fontWeight: FontWeight.w400,
                   color: Color.fromARGB(255, 0, 0, 0))),
         ),
@@ -310,11 +282,7 @@ class _StudentProfileState extends State<StudentProfile> {
                     textAlign: TextAlign.center,
                     initialValue: widget.StudentEmail,
                     style: TextStyle(
-                        fontSize: (PageWidth(context) < 550)
-                          ? 20
-                          : (PageHeight(context) < 900)
-                              ? 40
-                              : 40,
+                        fontSize: 20,
                         fontWeight: FontWeight.w600,
                         color: const Color.fromARGB(255, 0, 0, 0)),
                     decoration: InputDecoration(
@@ -331,11 +299,7 @@ class _StudentProfileState extends State<StudentProfile> {
                   )
                 : TMaker(
                     text: widget.StudentEmail,
-                    fontSize: (PageWidth(context) < 550)
-                          ? 20
-                          : (PageHeight(context) < 900)
-                              ? 40
-                              : 40,
+                    fontSize: 20,
                     fontWeight: FontWeight.w600,
                     color: const Color.fromARGB(255, 0, 0, 0))),
       ],
@@ -349,11 +313,7 @@ class _StudentProfileState extends State<StudentProfile> {
               child: TMaker(
                   textAlign: TextAlign.start,
                   text: (EditMode) ? "Edit Password" : "Password",
-                  fontSize: (PageWidth(context) < 550)
-                          ? 20
-                          : (PageHeight(context) < 900)
-                              ? 30
-                              : 30,
+                  fontSize: 20,
                   fontWeight: FontWeight.w400,
                   color: Color.fromARGB(255, 0, 0, 0))),
         ),
@@ -391,11 +351,7 @@ class _StudentProfileState extends State<StudentProfile> {
                     textAlign: TextAlign.center,
                     initialValue: widget.StudentPassword,
                     style: TextStyle(
-                        fontSize: (PageWidth(context) < 550)
-                          ? 20
-                          : (PageHeight(context) < 900)
-                              ? 40
-                              : 40,
+                        fontSize: 20,
                         fontWeight: FontWeight.w600,
                         color: const Color.fromARGB(255, 0, 0, 0)),
                     decoration: InputDecoration(
@@ -412,11 +368,7 @@ class _StudentProfileState extends State<StudentProfile> {
                   )
                 : TMaker(
                     text: widget.StudentEmail,
-                    fontSize: (PageWidth(context) < 550)
-                          ? 20
-                          : (PageHeight(context) < 900)
-                              ? 40
-                              : 40,
+                    fontSize: 20,
                     fontWeight: FontWeight.w600,
                     color: const Color.fromARGB(255, 0, 0, 0))),
       ],
@@ -430,11 +382,7 @@ class _StudentProfileState extends State<StudentProfile> {
               child: TMaker(
                   textAlign: TextAlign.start,
                   text: (EditMode) ? "Edit Number" : "Number",
-                  fontSize: (PageWidth(context) < 550)
-                          ? 20
-                          : (PageHeight(context) < 900)
-                              ? 30
-                              : 30,
+                  fontSize: 20,
                   fontWeight: FontWeight.w400,
                   color: Color.fromARGB(255, 0, 0, 0))),
         ),
@@ -477,11 +425,7 @@ class _StudentProfileState extends State<StudentProfile> {
                   textAlign: TextAlign.center,
                   initialValue: widget.StudentNumber,
                   style: TextStyle(
-                      fontSize: (PageWidth(context) < 550)
-                          ? 20
-                          : (PageHeight(context) < 900)
-                              ? 40
-                              : 40,
+                      fontSize: 20,
                       fontWeight: FontWeight.w600,
                       color: const Color.fromARGB(255, 0, 0, 0)),
                   decoration: InputDecoration(
@@ -502,11 +446,7 @@ class _StudentProfileState extends State<StudentProfile> {
                 )
               : TMaker(
                   text: widget.StudentPassword,
-                  fontSize: (PageWidth(context) < 550)
-                          ? 20
-                          : (PageHeight(context) < 900)
-                              ? 40
-                              : 40,
+                  fontSize: 20,
                   fontWeight: FontWeight.w600,
                   color: const Color.fromARGB(255, 0, 0, 0)),
         ),
@@ -600,11 +540,7 @@ class _StudentProfileState extends State<StudentProfile> {
                 padding: EdgeInsets.only(right: 10),
                 child: TMaker(
                     text: (EditMode) ? "Save" : "Edit",
-                    fontSize: (PageWidth(context) < 550)
-                          ? 25
-                          : (PageHeight(context) < 900)
-                              ? 40
-                              : 40,
+                    fontSize:25,
                     fontWeight: FontWeight.w600,
                     color: const Color.fromARGB(255, 0, 0, 0))),
             Expanded(child: Container()),
