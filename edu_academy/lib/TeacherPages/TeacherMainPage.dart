@@ -143,7 +143,7 @@ class _TeacherMainPageState extends State<TeacherMainPage> {
     }
     SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersiveSticky);
     List<Widget> Pages = [
-      Expanded(
+      (PageWidth(context)>=550&&PageHeight(context)<900)? Expanded(
         child: CMaker(
           child: Column(
             children: [
@@ -338,8 +338,201 @@ class _TeacherMainPageState extends State<TeacherMainPage> {
             ],
           ),
         ),
-      ),
-      Expanded(
+      ):CMaker(
+          child: Column(
+            children: [
+              Container(
+                height: 70,
+                decoration: const BoxDecoration(
+                    boxShadow: [
+                      BoxShadow(
+                          offset: Offset(1, 1),
+                          blurRadius: 6,
+                          spreadRadius: .03,
+                          color: Color.fromARGB(82, 0, 0, 0)),
+                    ],
+                    color: Color.fromARGB(255, 255, 255, 255),
+                    borderRadius: BorderRadius.only(
+                        bottomLeft: Radius.circular(20),
+                        bottomRight: Radius.circular(20))),
+                child: Row(
+                  children: [
+                    Expanded(
+                      child: Container(
+                          height: 50,
+                          padding: const EdgeInsets.only(top: 10),
+                          alignment: Alignment.center,
+                          child: InkWell(
+                              onTap: () {
+                                setState(() {
+                                  PageIndex = 0;
+                                });
+                              },
+                              child: Image.asset("images/Book.png"))),
+                    ),
+                    Expanded(flex: 4,
+                      child: CMaker(
+                        height: 70,
+                        child: Row(
+                          children: [
+                            Expanded(
+                              child: CMaker(
+                                padding: const EdgeInsets.only(bottom: 13),
+                                alignment: Alignment.bottomCenter,
+                                child: const Text(
+                                  "kareem said",
+                                  style: TextStyle(
+                                      fontSize: 17,
+                                      fontWeight: FontWeight.w500,
+                                      color: Color.fromARGB(255, 5, 123, 151)),
+                                ),
+                              ),
+                            ),
+                            Expanded(child: Builder(
+                              builder: (context) {
+                                if (Subject1 != "null" &&
+                                    Subject2 == "null" &&
+                                    Subject3 == "null") {
+                                  numberOfSubjects = 1;
+                                  return CMaker(
+                                    padding: const EdgeInsets.only(bottom: 13),
+                                    alignment: Alignment.bottomCenter,
+                                    child: Text(
+                                      Subject1,
+                                      style: const TextStyle(
+                                          fontSize: 16,
+                                          fontWeight: FontWeight.w500,
+                                          color: Color.fromARGB(255, 89, 89, 87)),
+                                    ),
+                                  );
+                                }
+                                if (Subject1 != "null" &&
+                                    Subject2 != "null" &&
+                                    Subject3 == "null") {
+                                  numberOfSubjects = 2;
+                                  return CMaker(
+                                    alignment: Alignment.bottomCenter,
+                                    child: DropdownButton(
+                                      underline: const SizedBox(
+                                        height: 0,
+                                        width: 0,
+                                      ),
+                                      value: SubjectThatIsSelected,
+                                      items: [
+                                        DropdownMenuItem(
+                                          value: Subject1,
+                                          child: Text(
+                                            Subject1,
+                                            style: const TextStyle(
+                                                fontSize: 16,
+                                                fontWeight: FontWeight.w500,
+                                                color: Color.fromARGB(
+                                                    255, 89, 89, 87)),
+                                          ),
+                                        ),
+                                        DropdownMenuItem(
+                                          value: Subject2,
+                                          child: Text(
+                                            Subject2,
+                                            style: const TextStyle(
+                                                fontSize: 16,
+                                                fontWeight: FontWeight.w500,
+                                                color: Color.fromARGB(
+                                                    255, 89, 89, 87)),
+                                          ),
+                                        ),
+                                      ],
+                                      onChanged: (value) {
+                                        setState(() {
+                                          SubjectThatIsSelected =
+                                              value.toString();
+                                        });
+                                      },
+                                    ),
+                                  );
+                                } else {
+                                  numberOfSubjects = 3;
+                                  return CMaker(
+                                    alignment: Alignment.bottomCenter,
+                                    child: DropdownButton(
+                                      underline: const SizedBox(
+                                        height: 0,
+                                        width: 0,
+                                      ),
+                                      value: SubjectThatIsSelected,
+                                      items: [
+                                        DropdownMenuItem(
+                                          value: Subject1,
+                                          child: Text(
+                                            Subject1,
+                                            style: const TextStyle(
+                                                fontSize: 16,
+                                                fontWeight: FontWeight.w500,
+                                                color: Color.fromARGB(
+                                                    255, 89, 89, 87)),
+                                          ),
+                                        ),
+                                        DropdownMenuItem(
+                                          value: Subject2,
+                                          child: Text(
+                                            Subject2,
+                                            style: const TextStyle(
+                                                fontSize: 16,
+                                                fontWeight: FontWeight.w500,
+                                                color: Color.fromARGB(
+                                                    255, 89, 89, 87)),
+                                          ),
+                                        ),
+                                        DropdownMenuItem(
+                                          value: Subject3,
+                                          child: Text(
+                                            Subject3,
+                                            style: const TextStyle(
+                                                fontSize: 16,
+                                                fontWeight: FontWeight.w500,
+                                                color: Color.fromARGB(
+                                                    255, 89, 89, 87)),
+                                          ),
+                                        ),
+                                      ],
+                                      onChanged: (value) {
+                                        setState(() {
+                                          SubjectThatIsSelected =
+                                              value.toString();
+                                        });
+                                      },
+                                    ),
+                                  );
+                                }
+                              },
+                            )),
+                          ],
+                        ),
+                      ),
+                    ),
+                    Expanded(
+                      child: InkWell(
+                        onTap: () {},
+                        child: Container(
+                          width: 70,
+                          padding: const EdgeInsets.only(top: 10),
+                          decoration: BoxDecoration(
+                              color: const Color.fromARGB(255, 255, 255, 255),
+                              borderRadius: BorderRadius.circular(10)),
+                          height: 50,
+                          child: const Icon(Icons.notifications),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              const Padding(padding: EdgeInsets.only(top: 30)),
+              const TeacherFirstPageContenets()
+            ],
+          ),
+        ),
+      (PageWidth(context)>=550&&PageHeight(context)<900)?Expanded(
         child: CMaker(
           child: SizedBox(
             height: PageHeight(context) + 300,
@@ -542,26 +735,27 @@ class _TeacherMainPageState extends State<TeacherMainPage> {
             ),
           ),
         ),
-      ),
-      Expanded(
-        child: Container(
-          child: ListView(
-            children: [
-              Container(
-                height: 70,
-                decoration: const BoxDecoration(
-                    boxShadow: [
-                      BoxShadow(
-                          offset: Offset(1, 1),
-                          blurRadius: 6,
-                          spreadRadius: .03,
-                          color: Color.fromARGB(82, 0, 0, 0)),
-                    ],
-                    color: Color.fromARGB(255, 255, 255, 255),
-                    borderRadius: BorderRadius.only(
-                        bottomLeft: Radius.circular(20),
-                        bottomRight: Radius.circular(20))),
-                child: Row(
+      ):CMaker(
+          child: SizedBox(
+            height: PageHeight(context) + 300,
+            child: ListView(
+              shrinkWrap: false,
+              children: [
+                Container(
+                  height: 70,
+                  decoration: const BoxDecoration(
+                      boxShadow: [
+                        BoxShadow(
+                            offset: Offset(1, 1),
+                            blurRadius: 6,
+                            spreadRadius: .03,
+                            color: Color.fromARGB(82, 0, 0, 0)),
+                      ],
+                      color: Color.fromARGB(255, 255, 255, 255),
+                      borderRadius: BorderRadius.only(
+                          bottomLeft: Radius.circular(20),
+                          bottomRight: Radius.circular(20))),
+                  child: Row(
                   children: [
                     Expanded(
                       child: Container(
@@ -732,7 +926,198 @@ class _TeacherMainPageState extends State<TeacherMainPage> {
                     ),
                   ],
                 ),
-              ),
+                ),
+                const Padding(padding: EdgeInsets.only(top: 10)),
+                TeacherSecondPageContents(
+                  ListOfGrades:
+                      ListOfGrades, // put the list of grades and its students from the database here
+                  SubjectName: SubjectName, // put the teacher subject here
+                ),
+              ],
+            ),
+          ),
+        ),
+      (PageWidth(context)>=550&&PageHeight(context)<900)?Expanded(
+        child: Container(
+          child: ListView(
+            children: [
+              Container(
+                  width: double.infinity,
+                  decoration: const BoxDecoration(
+                      boxShadow: [
+                        BoxShadow(
+                            offset: Offset(1, 1),
+                            blurRadius: 6,
+                            spreadRadius: .03,
+                            color: Color.fromARGB(82, 0, 0, 0)),
+                      ],
+                      color: Color.fromARGB(255, 255, 255, 255),
+                      borderRadius: BorderRadius.only(
+                          bottomLeft: Radius.circular(20),
+                          bottomRight: Radius.circular(20))),
+                  height: 80,
+                  child: Row(
+                    children: [
+                      Expanded(
+                          child: SizedBox(width: 30, height: 30, child: InkWell(
+                                  onTap: () {
+                                    setState(() {
+                                      PageIndex = 0;
+                                    });
+                                  },
+                                  child: Image.asset("images/Book.png")))),
+                      Expanded(flex: 3, child: CMaker(
+                        alignment: Alignment.bottomCenter,
+                        child: Text(
+                          name,
+                          style: TextStyle(
+                              fontSize: (PageWidth(context) < 550)
+                                  ? 17
+                                  : (PageHeight(context) < 900)
+                                      ? 20
+                                      : 20,
+                              fontWeight: FontWeight.w500,
+                              color: const Color.fromARGB(255, 5, 123, 151)),
+                        ),
+                      )),
+                      Expanded(flex: 2, child: Builder(
+                              builder: (context) {
+                                if (Subject1 != "null" &&
+                                    Subject2 == "null" &&
+                                    Subject3 == "null") {
+                                  numberOfSubjects = 1;
+                                  return CMaker(
+                                    padding: const EdgeInsets.only(bottom: 13),
+                                    alignment: Alignment.bottomCenter,
+                                    child: Text(
+                                      Subject1,
+                                      style: const TextStyle(
+                                          fontSize: 16,
+                                          fontWeight: FontWeight.w500,
+                                          color: Color.fromARGB(255, 89, 89, 87)),
+                                    ),
+                                  );
+                                }
+                                if (Subject1 != "null" &&
+                                    Subject2 != "null" &&
+                                    Subject3 == "null") {
+                                  numberOfSubjects = 2;
+                                  return CMaker(
+                                    alignment: Alignment.bottomCenter,
+                                    child: DropdownButton(
+                                      underline: const SizedBox(
+                                        height: 0,
+                                        width: 0,
+                                      ),
+                                      value: SubjectThatIsSelected,
+                                      items: [
+                                        DropdownMenuItem(
+                                          value: Subject1,
+                                          child: Text(
+                                            Subject1,
+                                            style: const TextStyle(
+                                                fontSize: 16,
+                                                fontWeight: FontWeight.w500,
+                                                color: Color.fromARGB(
+                                                    255, 89, 89, 87)),
+                                          ),
+                                        ),
+                                        DropdownMenuItem(
+                                          value: Subject2,
+                                          child: Text(
+                                            Subject2,
+                                            style: const TextStyle(
+                                                fontSize: 16,
+                                                fontWeight: FontWeight.w500,
+                                                color: Color.fromARGB(
+                                                    255, 89, 89, 87)),
+                                          ),
+                                        ),
+                                      ],
+                                      onChanged: (value) {
+                                        setState(() {
+                                          SubjectThatIsSelected =
+                                              value.toString();
+                                        });
+                                      },
+                                    ),
+                                  );
+                                } else {
+                                  numberOfSubjects = 3;
+                                  return CMaker(
+                                    alignment: Alignment.bottomCenter,
+                                    child: DropdownButton(
+                                      underline: const SizedBox(
+                                        height: 0,
+                                        width: 0,
+                                      ),
+                                      value: SubjectThatIsSelected,
+                                      items: [
+                                        DropdownMenuItem(
+                                          value: Subject1,
+                                          child: Text(
+                                            Subject1,
+                                            style: const TextStyle(
+                                                fontSize: 16,
+                                                fontWeight: FontWeight.w500,
+                                                color: Color.fromARGB(
+                                                    255, 89, 89, 87)),
+                                          ),
+                                        ),
+                                        DropdownMenuItem(
+                                          value: Subject2,
+                                          child: Text(
+                                            Subject2,
+                                            style: const TextStyle(
+                                                fontSize: 16,
+                                                fontWeight: FontWeight.w500,
+                                                color: Color.fromARGB(
+                                                    255, 89, 89, 87)),
+                                          ),
+                                        ),
+                                        DropdownMenuItem(
+                                          value: Subject3,
+                                          child: Text(
+                                            Subject3,
+                                            style: const TextStyle(
+                                                fontSize: 16,
+                                                fontWeight: FontWeight.w500,
+                                                color: Color.fromARGB(
+                                                    255, 89, 89, 87)),
+                                          ),
+                                        ),
+                                      ],
+                                      onChanged: (value) {
+                                        setState(() {
+                                          SubjectThatIsSelected =
+                                              value.toString();
+                                        });
+                                      },
+                                    ),
+                                  );
+                                }
+                              },
+                            )),
+                      Expanded(child: InkWell(
+                            onTap: () async {
+                              final SharedPreferences prefs =
+                                  await SharedPreferences.getInstance();
+                              prefs.remove("id");
+                              Navigator.pushReplacementNamed(
+                                  context, "SplashView");
+                            },
+                            child: Container(
+                              width: 70,
+                              padding: const EdgeInsets.only(top: 10),
+                              decoration: BoxDecoration(
+                                  color: const Color.fromARGB(255, 255, 255, 255),
+                                  borderRadius: BorderRadius.circular(10)),
+                              height: 50,
+                              child: const Icon(Icons.logout),
+                            ),
+                          ),)
+                    ],
+                  )),
               const Padding(
                 padding: EdgeInsets.only(top: 20),
               ),
@@ -743,196 +1128,377 @@ class _TeacherMainPageState extends State<TeacherMainPage> {
             ],
           ),
         ),
-      ),
-      CMaker(
-        height: double.infinity,
-        width: double.infinity,
-        child: Container(
-            child: ListView(children: [
-          Container(
-            height: 70,
-            decoration: const BoxDecoration(
-                boxShadow: [
-                  BoxShadow(
-                      offset: Offset(1, 1),
-                      blurRadius: 6,
-                      spreadRadius: .03,
-                      color: Color.fromARGB(82, 0, 0, 0)),
-                ],
-                color: Color.fromARGB(255, 255, 255, 255),
-                borderRadius: BorderRadius.only(
-                    bottomLeft: Radius.circular(20),
-                    bottomRight: Radius.circular(20))),
-            child: Row(
-              children: [
-                Container(
-                    width: 70,
-                    height: 50,
-                    padding: const EdgeInsets.only(top: 10),
-                    alignment: Alignment.center,
-                    child: InkWell(
-                        onTap: () {
-                          setState(() {
-                            PageIndex = 0;
-                          });
-                        },
-                        child: Image.asset("images/Book.png"))),
-                CMaker(
-                  width: PageWidth(context) - 150,
+      ):Container(
+          child: ListView(
+            children: [
+              Container(
+                  width: double.infinity,
+                  decoration: const BoxDecoration(
+                      boxShadow: [
+                        BoxShadow(
+                            offset: Offset(1, 1),
+                            blurRadius: 6,
+                            spreadRadius: .03,
+                            color: Color.fromARGB(82, 0, 0, 0)),
+                      ],
+                      color: Color.fromARGB(255, 255, 255, 255),
+                      borderRadius: BorderRadius.only(
+                          bottomLeft: Radius.circular(20),
+                          bottomRight: Radius.circular(20))),
+                  height: 80,
                   child: Row(
                     children: [
                       Expanded(
-                        child: CMaker(
-                          padding: EdgeInsets.only(bottom: 13),
-                          alignment: Alignment.bottomCenter,
-                          child: Text(
-                            "kareem said",
-                            style: TextStyle(
-                                fontSize: 17,
-                                fontWeight: FontWeight.w500,
-                                color: Color.fromARGB(255, 5, 123, 151)),
-                          ),
+                          child: SizedBox(width: 30, height: 30, child: InkWell(
+                                  onTap: () {
+                                    setState(() {
+                                      PageIndex = 0;
+                                    });
+                                  },
+                                  child: Image.asset("images/Book.png")))),
+                      Expanded(flex: 3, child: CMaker(
+                        alignment: Alignment.bottomCenter,
+                        child: Text(
+                          name,
+                          style: TextStyle(
+                              fontSize: (PageWidth(context) < 550)
+                                  ? 17
+                                  : (PageHeight(context) < 900)
+                                      ? 20
+                                      : 20,
+                              fontWeight: FontWeight.w500,
+                              color: const Color.fromARGB(255, 5, 123, 151)),
                         ),
-                      ),
-                      Expanded(child: Builder(
-                        builder: (context) {
-                          if (Subject1 != "null" &&
-                              Subject2 == "null" &&
-                              Subject3 == "null") {
-                            numberOfSubjects = 1;
-                            return CMaker(
-                              padding: EdgeInsets.only(bottom: 13),
-                              alignment: Alignment.bottomCenter,
-                              child: Text(
-                                "${Subject1}",
-                                style: TextStyle(
-                                    fontSize: 16,
-                                    fontWeight: FontWeight.w500,
-                                    color: Color.fromARGB(255, 89, 89, 87)),
-                              ),
-                            );
-                          }
-                          if (Subject1 != "null" &&
-                              Subject2 != "null" &&
-                              Subject3 == "null") {
-                            numberOfSubjects = 2;
-                            return CMaker(
-                              alignment: Alignment.bottomCenter,
-                              child: DropdownButton(
-                                underline: Container(
-                                  height: 0,
-                                  width: 0,
-                                ),
-                                value: SubjectThatIsSelected,
-                                items: [
-                                  DropdownMenuItem(
-                                    value: Subject1,
-                                    child: Text(
-                                      "${Subject1}",
-                                      style: TextStyle(
-                                          fontSize: 16,
-                                          fontWeight: FontWeight.w500,
-                                          color:
-                                              Color.fromARGB(255, 89, 89, 87)),
-                                    ),
-                                  ),
-                                  DropdownMenuItem(
-                                    value: Subject2,
-                                    child: Text(
-                                      "${Subject2}",
-                                      style: TextStyle(
-                                          fontSize: 16,
-                                          fontWeight: FontWeight.w500,
-                                          color:
-                                              Color.fromARGB(255, 89, 89, 87)),
-                                    ),
-                                  ),
-                                ],
-                                onChanged: (value) {
-                                  setState(() {
-                                    SubjectThatIsSelected = value.toString();
-                                  });
-                                },
-                              ),
-                            );
-                          } else {
-                            numberOfSubjects = 3;
-                            return CMaker(
-                              alignment: Alignment.bottomCenter,
-                              child: DropdownButton(
-                                underline: Container(
-                                  height: 0,
-                                  width: 0,
-                                ),
-                                value: SubjectThatIsSelected,
-                                items: [
-                                  DropdownMenuItem(
-                                    value: Subject1,
-                                    child: Text(
-                                      "${Subject1}",
-                                      style: TextStyle(
-                                          fontSize: 16,
-                                          fontWeight: FontWeight.w500,
-                                          color:
-                                              Color.fromARGB(255, 89, 89, 87)),
-                                    ),
-                                  ),
-                                  DropdownMenuItem(
-                                    value: Subject2,
-                                    child: Text(
-                                      "${Subject2}",
-                                      style: TextStyle(
-                                          fontSize: 16,
-                                          fontWeight: FontWeight.w500,
-                                          color:
-                                              Color.fromARGB(255, 89, 89, 87)),
-                                    ),
-                                  ),
-                                  DropdownMenuItem(
-                                    value: Subject3,
-                                    child: Text(
-                                      "${Subject3}",
-                                      style: TextStyle(
-                                          fontSize: 16,
-                                          fontWeight: FontWeight.w500,
-                                          color:
-                                              Color.fromARGB(255, 89, 89, 87)),
-                                    ),
-                                  ),
-                                ],
-                                onChanged: (value) {
-                                  setState(() {
-                                    SubjectThatIsSelected = value.toString();
-                                  });
-                                },
-                              ),
-                            );
-                          }
-                        },
                       )),
+                      Expanded(flex: 2, child: Builder(
+                              builder: (context) {
+                                if (Subject1 != "null" &&
+                                    Subject2 == "null" &&
+                                    Subject3 == "null") {
+                                  numberOfSubjects = 1;
+                                  return CMaker(
+                                    padding: const EdgeInsets.only(bottom: 13),
+                                    alignment: Alignment.bottomCenter,
+                                    child: Text(
+                                      Subject1,
+                                      style: const TextStyle(
+                                          fontSize: 16,
+                                          fontWeight: FontWeight.w500,
+                                          color: Color.fromARGB(255, 89, 89, 87)),
+                                    ),
+                                  );
+                                }
+                                if (Subject1 != "null" &&
+                                    Subject2 != "null" &&
+                                    Subject3 == "null") {
+                                  numberOfSubjects = 2;
+                                  return CMaker(
+                                    alignment: Alignment.bottomCenter,
+                                    child: DropdownButton(
+                                      underline: const SizedBox(
+                                        height: 0,
+                                        width: 0,
+                                      ),
+                                      value: SubjectThatIsSelected,
+                                      items: [
+                                        DropdownMenuItem(
+                                          value: Subject1,
+                                          child: Text(
+                                            Subject1,
+                                            style: const TextStyle(
+                                                fontSize: 16,
+                                                fontWeight: FontWeight.w500,
+                                                color: Color.fromARGB(
+                                                    255, 89, 89, 87)),
+                                          ),
+                                        ),
+                                        DropdownMenuItem(
+                                          value: Subject2,
+                                          child: Text(
+                                            Subject2,
+                                            style: const TextStyle(
+                                                fontSize: 16,
+                                                fontWeight: FontWeight.w500,
+                                                color: Color.fromARGB(
+                                                    255, 89, 89, 87)),
+                                          ),
+                                        ),
+                                      ],
+                                      onChanged: (value) {
+                                        setState(() {
+                                          SubjectThatIsSelected =
+                                              value.toString();
+                                        });
+                                      },
+                                    ),
+                                  );
+                                } else {
+                                  numberOfSubjects = 3;
+                                  return CMaker(
+                                    alignment: Alignment.bottomCenter,
+                                    child: DropdownButton(
+                                      underline: const SizedBox(
+                                        height: 0,
+                                        width: 0,
+                                      ),
+                                      value: SubjectThatIsSelected,
+                                      items: [
+                                        DropdownMenuItem(
+                                          value: Subject1,
+                                          child: Text(
+                                            Subject1,
+                                            style: const TextStyle(
+                                                fontSize: 16,
+                                                fontWeight: FontWeight.w500,
+                                                color: Color.fromARGB(
+                                                    255, 89, 89, 87)),
+                                          ),
+                                        ),
+                                        DropdownMenuItem(
+                                          value: Subject2,
+                                          child: Text(
+                                            Subject2,
+                                            style: const TextStyle(
+                                                fontSize: 16,
+                                                fontWeight: FontWeight.w500,
+                                                color: Color.fromARGB(
+                                                    255, 89, 89, 87)),
+                                          ),
+                                        ),
+                                        DropdownMenuItem(
+                                          value: Subject3,
+                                          child: Text(
+                                            Subject3,
+                                            style: const TextStyle(
+                                                fontSize: 16,
+                                                fontWeight: FontWeight.w500,
+                                                color: Color.fromARGB(
+                                                    255, 89, 89, 87)),
+                                          ),
+                                        ),
+                                      ],
+                                      onChanged: (value) {
+                                        setState(() {
+                                          SubjectThatIsSelected =
+                                              value.toString();
+                                        });
+                                      },
+                                    ),
+                                  );
+                                }
+                              },
+                            )),
+                      Expanded(child: InkWell(
+                            onTap: () async {
+                              final SharedPreferences prefs =
+                                  await SharedPreferences.getInstance();
+                              prefs.remove("id");
+                              Navigator.pushReplacementNamed(
+                                  context, "SplashView");
+                            },
+                            child: Container(
+                              width: 70,
+                              padding: const EdgeInsets.only(top: 10),
+                              decoration: BoxDecoration(
+                                  color: const Color.fromARGB(255, 255, 255, 255),
+                                  borderRadius: BorderRadius.circular(10)),
+                              height: 50,
+                              child: const Icon(Icons.logout),
+                            ),
+                          ),)
                     ],
-                  ),
-                ),
-                InkWell(
-                  onTap: () async {
-                    final SharedPreferences prefs =
-                        await SharedPreferences.getInstance();
-                    prefs.remove("id");
-                    Navigator.pushReplacementNamed(context, "SplashView");
-                  },
-                  child: Container(
-                    width: 70,
-                    padding: const EdgeInsets.only(top: 10),
-                    decoration: BoxDecoration(
-                        color: const Color.fromARGB(255, 255, 255, 255),
-                        borderRadius: BorderRadius.circular(10)),
-                    height: 50,
-                    child: const Icon(Icons.logout),
-                  ),
-                ),
-              ],
-            ),
+                  )),
+              const Padding(
+                padding: EdgeInsets.only(top: 20),
+              ),
+              TeacherThirdPageContents(
+                ListOfGrades: ListOfGrades,
+                SubjectName: SubjectName,
+              )
+            ],
           ),
+        ),
+      (PageWidth(context)>=550&&PageHeight(context)<900)?
+      Expanded(
+        child: Container(
+            child: ListView(children: [
+          Container(
+                  width: double.infinity,
+                  decoration: const BoxDecoration(
+                      boxShadow: [
+                        BoxShadow(
+                            offset: Offset(1, 1),
+                            blurRadius: 6,
+                            spreadRadius: .03,
+                            color: Color.fromARGB(82, 0, 0, 0)),
+                      ],
+                      color: Color.fromARGB(255, 255, 255, 255),
+                      borderRadius: BorderRadius.only(
+                          bottomLeft: Radius.circular(20),
+                          bottomRight: Radius.circular(20))),
+                  height: 80,
+                  child: Row(
+                    children: [
+                      Expanded(
+                          child: SizedBox(width: 30, height: 30, child: InkWell(
+                                  onTap: () {
+                                    setState(() {
+                                      PageIndex = 0;
+                                    });
+                                  },
+                                  child: Image.asset("images/Book.png")))),
+                      Expanded(flex: 3, child: CMaker(
+                        alignment: Alignment.bottomCenter,
+                        child: Text(
+                          name,
+                          style: TextStyle(
+                              fontSize: (PageWidth(context) < 550)
+                                  ? 17
+                                  : (PageHeight(context) < 900)
+                                      ? 20
+                                      : 20,
+                              fontWeight: FontWeight.w500,
+                              color: const Color.fromARGB(255, 5, 123, 151)),
+                        ),
+                      )),
+                      Expanded(flex: 2, child: Builder(
+                              builder: (context) {
+                                if (Subject1 != "null" &&
+                                    Subject2 == "null" &&
+                                    Subject3 == "null") {
+                                  numberOfSubjects = 1;
+                                  return CMaker(
+                                    padding: const EdgeInsets.only(bottom: 13),
+                                    alignment: Alignment.bottomCenter,
+                                    child: Text(
+                                      Subject1,
+                                      style: const TextStyle(
+                                          fontSize: 16,
+                                          fontWeight: FontWeight.w500,
+                                          color: Color.fromARGB(255, 89, 89, 87)),
+                                    ),
+                                  );
+                                }
+                                if (Subject1 != "null" &&
+                                    Subject2 != "null" &&
+                                    Subject3 == "null") {
+                                  numberOfSubjects = 2;
+                                  return CMaker(
+                                    alignment: Alignment.bottomCenter,
+                                    child: DropdownButton(
+                                      underline: const SizedBox(
+                                        height: 0,
+                                        width: 0,
+                                      ),
+                                      value: SubjectThatIsSelected,
+                                      items: [
+                                        DropdownMenuItem(
+                                          value: Subject1,
+                                          child: Text(
+                                            Subject1,
+                                            style: const TextStyle(
+                                                fontSize: 16,
+                                                fontWeight: FontWeight.w500,
+                                                color: Color.fromARGB(
+                                                    255, 89, 89, 87)),
+                                          ),
+                                        ),
+                                        DropdownMenuItem(
+                                          value: Subject2,
+                                          child: Text(
+                                            Subject2,
+                                            style: const TextStyle(
+                                                fontSize: 16,
+                                                fontWeight: FontWeight.w500,
+                                                color: Color.fromARGB(
+                                                    255, 89, 89, 87)),
+                                          ),
+                                        ),
+                                      ],
+                                      onChanged: (value) {
+                                        setState(() {
+                                          SubjectThatIsSelected =
+                                              value.toString();
+                                        });
+                                      },
+                                    ),
+                                  );
+                                } else {
+                                  numberOfSubjects = 3;
+                                  return CMaker(
+                                    alignment: Alignment.bottomCenter,
+                                    child: DropdownButton(
+                                      underline: const SizedBox(
+                                        height: 0,
+                                        width: 0,
+                                      ),
+                                      value: SubjectThatIsSelected,
+                                      items: [
+                                        DropdownMenuItem(
+                                          value: Subject1,
+                                          child: Text(
+                                            Subject1,
+                                            style: const TextStyle(
+                                                fontSize: 16,
+                                                fontWeight: FontWeight.w500,
+                                                color: Color.fromARGB(
+                                                    255, 89, 89, 87)),
+                                          ),
+                                        ),
+                                        DropdownMenuItem(
+                                          value: Subject2,
+                                          child: Text(
+                                            Subject2,
+                                            style: const TextStyle(
+                                                fontSize: 16,
+                                                fontWeight: FontWeight.w500,
+                                                color: Color.fromARGB(
+                                                    255, 89, 89, 87)),
+                                          ),
+                                        ),
+                                        DropdownMenuItem(
+                                          value: Subject3,
+                                          child: Text(
+                                            Subject3,
+                                            style: const TextStyle(
+                                                fontSize: 16,
+                                                fontWeight: FontWeight.w500,
+                                                color: Color.fromARGB(
+                                                    255, 89, 89, 87)),
+                                          ),
+                                        ),
+                                      ],
+                                      onChanged: (value) {
+                                        setState(() {
+                                          SubjectThatIsSelected =
+                                              value.toString();
+                                        });
+                                      },
+                                    ),
+                                  );
+                                }
+                              },
+                            )),
+                      Expanded(child: InkWell(
+                            onTap: () async {
+                              final SharedPreferences prefs =
+                                  await SharedPreferences.getInstance();
+                              prefs.remove("id");
+                              Navigator.pushReplacementNamed(
+                                  context, "SplashView");
+                            },
+                            child: Container(
+                              width: 70,
+                              padding: const EdgeInsets.only(top: 10),
+                              decoration: BoxDecoration(
+                                  color: const Color.fromARGB(255, 255, 255, 255),
+                                  borderRadius: BorderRadius.circular(10)),
+                              height: 50,
+                              child: const Icon(Icons.logout),
+                            ),
+                          ),)
+                    ],
+                  )),
           TeacherProfilePage(
               TeacherName: "kareem said hassan",
               TeacherEmail: "kareemsaid234@gmail.com",
@@ -940,7 +1506,192 @@ class _TeacherMainPageState extends State<TeacherMainPage> {
               TeacherNumber: "01006270833",
               TeacherPassword: "1234")
         ])),
-      )
+      ):Container(
+            child: ListView(children: [
+          Container(
+                  width: double.infinity,
+                  decoration: const BoxDecoration(
+                      boxShadow: [
+                        BoxShadow(
+                            offset: Offset(1, 1),
+                            blurRadius: 6,
+                            spreadRadius: .03,
+                            color: Color.fromARGB(82, 0, 0, 0)),
+                      ],
+                      color: Color.fromARGB(255, 255, 255, 255),
+                      borderRadius: BorderRadius.only(
+                          bottomLeft: Radius.circular(20),
+                          bottomRight: Radius.circular(20))),
+                  height: 80,
+                  child: Row(
+                    children: [
+                      Expanded(
+                          child: SizedBox(width: 30, height: 30, child: InkWell(
+                                  onTap: () {
+                                    setState(() {
+                                      PageIndex = 0;
+                                    });
+                                  },
+                                  child: Image.asset("images/Book.png")))),
+                      Expanded(flex: 3, child: CMaker(
+                        alignment: Alignment.bottomCenter,
+                        child: Text(
+                          name,
+                          style: TextStyle(
+                              fontSize: (PageWidth(context) < 550)
+                                  ? 17
+                                  : (PageHeight(context) < 900)
+                                      ? 20
+                                      : 20,
+                              fontWeight: FontWeight.w500,
+                              color: const Color.fromARGB(255, 5, 123, 151)),
+                        ),
+                      )),
+                      Expanded(flex: 2, child: Builder(
+                              builder: (context) {
+                                if (Subject1 != "null" &&
+                                    Subject2 == "null" &&
+                                    Subject3 == "null") {
+                                  numberOfSubjects = 1;
+                                  return CMaker(
+                                    padding: const EdgeInsets.only(bottom: 13),
+                                    alignment: Alignment.bottomCenter,
+                                    child: Text(
+                                      Subject1,
+                                      style: const TextStyle(
+                                          fontSize: 16,
+                                          fontWeight: FontWeight.w500,
+                                          color: Color.fromARGB(255, 89, 89, 87)),
+                                    ),
+                                  );
+                                }
+                                if (Subject1 != "null" &&
+                                    Subject2 != "null" &&
+                                    Subject3 == "null") {
+                                  numberOfSubjects = 2;
+                                  return CMaker(
+                                    alignment: Alignment.bottomCenter,
+                                    child: DropdownButton(
+                                      underline: const SizedBox(
+                                        height: 0,
+                                        width: 0,
+                                      ),
+                                      value: SubjectThatIsSelected,
+                                      items: [
+                                        DropdownMenuItem(
+                                          value: Subject1,
+                                          child: Text(
+                                            Subject1,
+                                            style: const TextStyle(
+                                                fontSize: 16,
+                                                fontWeight: FontWeight.w500,
+                                                color: Color.fromARGB(
+                                                    255, 89, 89, 87)),
+                                          ),
+                                        ),
+                                        DropdownMenuItem(
+                                          value: Subject2,
+                                          child: Text(
+                                            Subject2,
+                                            style: const TextStyle(
+                                                fontSize: 16,
+                                                fontWeight: FontWeight.w500,
+                                                color: Color.fromARGB(
+                                                    255, 89, 89, 87)),
+                                          ),
+                                        ),
+                                      ],
+                                      onChanged: (value) {
+                                        setState(() {
+                                          SubjectThatIsSelected =
+                                              value.toString();
+                                        });
+                                      },
+                                    ),
+                                  );
+                                } else {
+                                  numberOfSubjects = 3;
+                                  return CMaker(
+                                    alignment: Alignment.bottomCenter,
+                                    child: DropdownButton(
+                                      underline: const SizedBox(
+                                        height: 0,
+                                        width: 0,
+                                      ),
+                                      value: SubjectThatIsSelected,
+                                      items: [
+                                        DropdownMenuItem(
+                                          value: Subject1,
+                                          child: Text(
+                                            Subject1,
+                                            style: const TextStyle(
+                                                fontSize: 16,
+                                                fontWeight: FontWeight.w500,
+                                                color: Color.fromARGB(
+                                                    255, 89, 89, 87)),
+                                          ),
+                                        ),
+                                        DropdownMenuItem(
+                                          value: Subject2,
+                                          child: Text(
+                                            Subject2,
+                                            style: const TextStyle(
+                                                fontSize: 16,
+                                                fontWeight: FontWeight.w500,
+                                                color: Color.fromARGB(
+                                                    255, 89, 89, 87)),
+                                          ),
+                                        ),
+                                        DropdownMenuItem(
+                                          value: Subject3,
+                                          child: Text(
+                                            Subject3,
+                                            style: const TextStyle(
+                                                fontSize: 16,
+                                                fontWeight: FontWeight.w500,
+                                                color: Color.fromARGB(
+                                                    255, 89, 89, 87)),
+                                          ),
+                                        ),
+                                      ],
+                                      onChanged: (value) {
+                                        setState(() {
+                                          SubjectThatIsSelected =
+                                              value.toString();
+                                        });
+                                      },
+                                    ),
+                                  );
+                                }
+                              },
+                            )),
+                      Expanded(child: InkWell(
+                            onTap: () async {
+                              final SharedPreferences prefs =
+                                  await SharedPreferences.getInstance();
+                              prefs.remove("id");
+                              Navigator.pushReplacementNamed(
+                                  context, "SplashView");
+                            },
+                            child: Container(
+                              width: 70,
+                              padding: const EdgeInsets.only(top: 10),
+                              decoration: BoxDecoration(
+                                  color: const Color.fromARGB(255, 255, 255, 255),
+                                  borderRadius: BorderRadius.circular(10)),
+                              height: 50,
+                              child: const Icon(Icons.logout),
+                            ),
+                          ),)
+                    ],
+                  )),
+          TeacherProfilePage(
+              TeacherName: "kareem said hassan",
+              TeacherEmail: "kareemsaid234@gmail.com",
+              ProfileSubjectsAvailable: ProfileSubjectsAvailable,
+              TeacherNumber: "01006270833",
+              TeacherPassword: "1234")
+        ])),
     ];
 
     if (PageWidth(context) < 550) {

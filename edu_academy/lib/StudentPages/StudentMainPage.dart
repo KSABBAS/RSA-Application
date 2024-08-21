@@ -280,69 +280,60 @@ class _StudentMainPageState extends State<StudentMainPage> {
               child: Container(
                 child: ListView(
                   children: [
-                    Container(
-                      height: 70,
-                      decoration: const BoxDecoration(
-                          boxShadow: [
-                            BoxShadow(
-                                offset: Offset(1, 1),
-                                blurRadius: 6,
-                                spreadRadius: .03,
-                                color: Color.fromARGB(82, 0, 0, 0)),
-                          ],
-                          color: Color.fromARGB(255, 255, 255, 255),
-                          borderRadius: BorderRadius.only(
-                              bottomLeft: Radius.circular(20),
-                              bottomRight: Radius.circular(20))),
-                      child: Row(
-                        children: [
-                          Container(
-                              width: 70,
-                              height: 50,
-                              padding: const EdgeInsets.only(top: 10),
-                              alignment: Alignment.center,
-                              child: InkWell(
+                Container(
+                  width: double.infinity,
+                  decoration: const BoxDecoration(
+                      boxShadow: [
+                        BoxShadow(
+                            offset: Offset(1, 1),
+                            blurRadius: 6,
+                            spreadRadius: .03,
+                            color: Color.fromARGB(82, 0, 0, 0)),
+                      ],
+                      color: Color.fromARGB(255, 255, 255, 255),
+                      borderRadius: BorderRadius.only(
+                          bottomLeft: Radius.circular(20),
+                          bottomRight: Radius.circular(20))),
+                  height: 80,
+                  child: Row(
+                    children: [
+                      Expanded(
+                          child: SizedBox(width: 30, height: 30, child: InkWell(
                                   onTap: () {
                                     setState(() {
                                       PageIndex = 0;
                                     });
                                   },
-                                  child: Image.asset("images/Book.png"))),
-                          Expanded(
-                            child: CMaker(
-                              child: Row(
-                                children: [
-                                  Expanded(
-                                    child: CMaker(
-                                      alignment: Alignment.bottomCenter,
-                                      child: Text(
-                                        name,
-                                        style: const TextStyle(
-                                            fontSize: 17,
-                                            fontWeight: FontWeight.w500,
-                                            color:
-                                                Color.fromARGB(255, 5, 123, 151)),
-                                      ),
-                                    ),
-                                  ),
-                                  Expanded(
-                                    child: CMaker(
-                                      alignment: Alignment.bottomCenter,
-                                      child: Text(
-                                        grade,
-                                        style: const TextStyle(
-                                            fontSize: 16,
-                                            fontWeight: FontWeight.w500,
-                                            color:
-                                                Color.fromARGB(255, 89, 89, 87)),
-                                      ),
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ),
-                          ),
-                          InkWell(
+                                  child: Image.asset("images/Book.png")))),
+                      Expanded(flex: 3, child: CMaker(
+                        alignment: Alignment.bottomCenter,
+                        child: Text(
+                          name,
+                          style: TextStyle(
+                              fontSize: (PageWidth(context) < 550)
+                                  ? 17
+                                  : (PageHeight(context) < 900)
+                                      ? 20
+                                      : 20,
+                              fontWeight: FontWeight.w500,
+                              color: const Color.fromARGB(255, 5, 123, 151)),
+                        ),
+                      )),
+                      Expanded(flex: 2, child: CMaker(
+                        alignment: Alignment.bottomCenter,
+                        child: Text(
+                          grade,
+                          style: TextStyle(
+                              fontSize: (PageWidth(context) < 550)
+                                  ? 17
+                                  : (PageHeight(context) < 900)
+                                      ? 20
+                                      : 20,
+                              fontWeight: FontWeight.w500,
+                              color: const Color.fromARGB(255, 89, 89, 87)),
+                        ),
+                      )),
+                      Expanded(child: InkWell(
                             onTap: () async {
                               final SharedPreferences prefs =
                                   await SharedPreferences.getInstance();
@@ -359,10 +350,9 @@ class _StudentMainPageState extends State<StudentMainPage> {
                               height: 50,
                               child: const Icon(Icons.logout),
                             ),
-                          ),
-                        ],
-                      ),
-                    ),
+                          ),)
+                    ],
+                  )),
                     Padding(
                       padding: EdgeInsets.only(bottom: 40),
                     ),
@@ -372,7 +362,7 @@ class _StudentMainPageState extends State<StudentMainPage> {
                       StudentEmail: "kreemsaid234@gmail.com",
                       StudentNumber: "01065866283",
                       StudentPassword: "1234",
-                    )
+                    ),
                   ],
                 ),
               ),
