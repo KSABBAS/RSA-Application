@@ -2,6 +2,9 @@ import 'dart:developer';
 // import 'dart:io';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:edu_academy/StudentPages/SecondPageContents.dart';
+import 'package:edu_academy/StudentPages/ThirdPageContents.dart';
+import 'package:edu_academy/main.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 
@@ -14,7 +17,7 @@ class DatabaseService {
 
   // RealTime
   rePublicMessages_Send(String sub, String Grade, String messgae, String date,
-      String duration,String name) async {
+      String duration, String name) async {
     try {
       final allStudents = real.ref("Messages").child(Grade).child(sub);
       final oness = await allStudents.once();
@@ -23,13 +26,11 @@ class DatabaseService {
       log(numS.toString());
       await allStudents
           .child("messgae${numS + 1}")
-          .set([messgae, date, duration,name]);
+          .set([messgae, date, duration, name]);
     } catch (e) {
       log(e.toString());
     }
   }
-
-  
 
   // FireStore
   fiCreate(String rref, userData) async {
@@ -240,6 +241,71 @@ class DatabaseService {
     return true;
   }
 
+  fiGet_Hw(String Grade) async {
+// Reference to the specific document within the 'Homework' collection
+    DocumentReference documentReference =
+        FirebaseFirestore.instance.collection('Homework').doc(Grade);
+
+    // List of known sub-collection names
+    List<String> knownCollections = [];
+    for (var i in GradesSubjects[Grade]!) {
+      knownCollections.add(Subjects[i][1]);
+    }
+    print("knownCollections $knownCollections");
+
+    Map<String, List<dynamic>> out = {};
+    List<dynamic> out_final = [];
+
+    for (String collectionName in knownCollections) {
+      CollectionReference collection =
+          documentReference.collection(collectionName);
+
+      out[collectionName] = ["$collectionName"];
+
+      QuerySnapshot querySnapshot = await collection.get();
+      print(
+          'Collection: $collectionName, Document count: ${querySnapshot.size}');
+
+      for (var doc in querySnapshot.docs) {
+        print('Document ID: ${doc.id}, Data: ${doc.data()}');
+        out[collectionName]?.add(doc.data());
+      }
+    }
+    for (String sub_name in knownCollections) {
+      print(sub_name);
+      print("out ${out[sub_name]}");
+      List hhww = [sub_name];
+      for (var j in out[sub_name]!.sublist(1)) {
+        print("j.keys ${j.keys}");
+        hhww.add([
+          'mohmm',
+          j["body"],
+          j["title"],
+          j["files"],
+          [],
+          j["date"],
+          j["score"],
+          [false]
+        ]);
+      }
+      // if (hhww.length == 0) {
+      //   hhww = [
+      //     'Empty',
+      //     'Empty',
+      //     'Empty',
+      //     [],
+      //     [],
+      //     'Empty',
+      //     'Empty',
+      //     [false]
+      //   ];
+      // }
+      out_final.add(hhww);
+      print("out_final $out_final");
+    }
+    return out_final;
+  }
+
   // Storage
   stHwStore(var file) async {
     if (file.length != 0) {
@@ -259,10 +325,8 @@ class DatabaseService {
         print(file[0]);
         List<String> name = file[0].toString().split("/");
         String fileName = name[name.length - 1].replaceAll("'", "");
-        var snapshot = await storage
-            .ref()
-            .child('Homeworks/$fileName')
-            .putFile(file[0]);
+        var snapshot =
+            await storage.ref().child('Homeworks/$fileName').putFile(file[0]);
         var downloadUrl = await snapshot.ref.getDownloadURL();
         return downloadUrl;
       }

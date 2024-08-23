@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:edu_academy/MyTools.dart';
+import 'package:edu_academy/service/Databse_Service.dart';
 import 'package:flutter/material.dart';
 import 'package:edu_academy/StudentPages/StudentMainPage.dart';
 import 'package:insta_image_viewer/insta_image_viewer.dart';
@@ -24,7 +25,7 @@ List Cols = [
   const Color.fromARGB(255, 236, 42, 145),
   const Color.fromARGB(255, 161, 255, 126)
 ];
-List HomeWorks = [
+List<dynamic> HomeWorks = [
   [
     "اللغة العربية",
     [
@@ -86,7 +87,7 @@ List HomeWorks = [
           'bodey',
           ['files']
         ],
-        ['3 / 5 ⭐', 'comment']
+        ['3', 'comment']
       ],
 
       /// solve or not [data of solve] [score,comment]
@@ -225,6 +226,24 @@ bool EditSolution = false;
 bool ViewSentSolution = false;
 
 class _ThirdPageState extends State<ThirdPage> {
+  late Future<void> _dataFuture;
+  final dbService = DatabaseService();
+
+  @override
+  void initState() {
+    super.initState();
+    _dataFuture = regetmessages();
+  }
+
+  regetmessages() async {
+    List ggrtr = await dbService.fiGet_Hw(grade);
+    // HomeWorks.add(ggrtr);
+    HomeWorks = ggrtr;
+    print(ggrtr);
+    print("add done");
+    print(HomeWorks[HomeWorkIndex][0]);
+  }
+
   @override
   Widget build(BuildContext context) {
     late Widget ThirdPageContents;
@@ -299,7 +318,7 @@ class _ThirdPageState extends State<ThirdPage> {
           height: 70,
           width: 150,
           child: TMaker(
-              text: HomeWorks[HomeWorkIndex][0],
+              text: HomeWorks[HomeWorkIndex][0] as String,
               fontSize: 20,
               fontWeight: FontWeight.w600,
               color: const Color.fromARGB(255, 255, 255, 255))),
@@ -332,15 +351,13 @@ class _ThirdPageState extends State<ThirdPage> {
         width: double.infinity,
         child: GridView.builder(
             itemCount: HomeWorks[HomeWorkIndex][HomeworkSelected + 1][3].length,
-            gridDelegate:
-                const SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2),
+            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                crossAxisCount: 2),
             itemBuilder: (context, index) {
               return InstaImageViewer(
                 backgroundColor: const Color.fromARGB(137, 104, 104, 104),
-                child: Image(
-                  image: AssetImage(
-                      HomeWorks[HomeWorkIndex][HomeworkSelected + 1][3][index]),
-                ),
+                child: Image.network(
+                    HomeWorks[HomeWorkIndex][HomeworkSelected + 1][3][index]),
               );
             }),
       );
@@ -355,8 +372,8 @@ class _ThirdPageState extends State<ThirdPage> {
         width: double.infinity,
         child: GridView.builder(
             itemCount: HomeWorks[HomeWorkIndex][HomeworkSelected + 1][4].length,
-            gridDelegate:
-                const SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2),
+            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                crossAxisCount: 2),
             itemBuilder: (context, index) {
               return InstaImageViewer(
                   backgroundColor: const Color.fromARGB(137, 104, 104, 104),
@@ -497,13 +514,14 @@ class _ThirdPageState extends State<ThirdPage> {
                                         bottom: 10,
                                         left: 30,
                                         right: 30),
-                                    color: const Color.fromARGB(255, 22, 255, 111),
+                                    color:
+                                        const Color.fromARGB(255, 22, 255, 111),
                                     child: TMaker(
                                         text: "Upload a Photo",
                                         fontSize: 20,
                                         fontWeight: FontWeight.w600,
-                                        color:
-                                            const Color.fromARGB(255, 71, 69, 69))),
+                                        color: const Color.fromARGB(
+                                            255, 71, 69, 69))),
                               )),
                           const Padding(padding: EdgeInsets.only(top: 30)),
                           HomeworkStudentImages,
@@ -730,13 +748,14 @@ class _ThirdPageState extends State<ThirdPage> {
                                         bottom: 10,
                                         left: 30,
                                         right: 30),
-                                    color: const Color.fromARGB(255, 22, 255, 111),
+                                    color:
+                                        const Color.fromARGB(255, 22, 255, 111),
                                     child: TMaker(
                                         text: "Upload a Photo",
                                         fontSize: 20,
                                         fontWeight: FontWeight.w600,
-                                        color:
-                                            const Color.fromARGB(255, 71, 69, 69))),
+                                        color: const Color.fromARGB(
+                                            255, 71, 69, 69))),
                               )),
                           const Padding(padding: EdgeInsets.only(top: 30)),
                           HomeworkStudentImages,
@@ -1170,7 +1189,7 @@ class _ThirdPageState extends State<ThirdPage> {
                                         255, 233, 255, 247),
                                     child: TMaker(
                                         text: HomeWorks[HomeWorkIndex]
-                                            [HomeworkSelected +1][7][2][0],
+                                            [HomeworkSelected + 1][7][2][0],
                                         fontSize: 20,
                                         fontWeight: FontWeight.w600,
                                         color: const Color.fromARGB(
@@ -1279,8 +1298,10 @@ class _ThirdPageState extends State<ThirdPage> {
                                     : (HomeWorks[HomeWorkIndex][index + 1][7]
                                                 .length ==
                                             2)
-                                        ? const Color.fromARGB(255, 66, 133, 241)
-                                        : const Color.fromARGB(255, 32, 222, 32),
+                                        ? const Color.fromARGB(
+                                            255, 66, 133, 241)
+                                        : const Color.fromARGB(
+                                            255, 32, 222, 32),
                                 child: TMaker(
                                     text: (HomeWorks[HomeWorkIndex][index + 1]
                                                 [7][0] ==

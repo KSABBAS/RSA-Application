@@ -31,7 +31,7 @@ String SubjectName = "Math";
 List ListOfGrades = [];
 
 List<String> Subject_techer = ['null', 'null', 'null'];
-String Subject1 = "Tester";
+String Subject1 = "Loading....";
 String Subject2 = "null";
 String Subject3 = "null";
 XFile? Avatar;

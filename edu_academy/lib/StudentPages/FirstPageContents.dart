@@ -14,10 +14,7 @@ class StudentFirstMainPage extends StatefulWidget {
   State<StudentFirstMainPage> createState() => _StudentFirstMainPageState();
 }
 
-List<dynamic> Messgaes_list = [
-  ['math0', 'mohamed', 'hi gyes'],
-  ['math', 'mohamed', 'hi gyes'],
-];
+List<dynamic> Messgaes_list = [];
 
 Object? realTimeValues;
 
@@ -40,17 +37,20 @@ class _StudentFirstMainPageState extends State<StudentFirstMainPage> {
     allMes.onValue.listen(
       (event) {
         setState(() {
-          Messgaes_list = [];
+          try {
+
           realTimeValues = event.snapshot.value;
           print("realTimeValues $realTimeValues");
           Map map = realTimeValues as Map;
           print("map.keys ${map.keys}");
 
-
-          for (var i in map.keys ){
-            for (var j in map[i].keys ){
-              Messgaes_list.add([i,map[i][j][3],map[i][j][0]]);
+          for (var i in map.keys) {
+            for (var j in map[i].keys) {
+              Messgaes_list.add([i, map[i][j][3], map[i][j][0]]);
             }
+          }
+          } catch (e) {
+            print("e $e");
           }
         });
       },
@@ -259,14 +259,17 @@ class _StudentFirstMainPageState extends State<StudentFirstMainPage> {
                         return CMaker(
                             height: 70,
                             width: (PageWidth(context) >= 550 &&
-                                    PageWidth(context)<1200&&
+                                    PageWidth(context) < 1200 &&
                                     PageHeight(context) < 900)
-                                ? (PageWidth(context)-165)/TableData[0].length
-                                :(PageWidth(context) >= 550 &&
-                                    PageWidth(context)>=1200&&
-                                    PageHeight(context) < 900)
-                                ? (PageWidth(context)-790)/TableData[0].length: ((PageWidth(context) - 40) /
-                                    TableData[0].length),
+                                ? (PageWidth(context) - 165) /
+                                    TableData[0].length
+                                : (PageWidth(context) >= 550 &&
+                                        PageWidth(context) >= 1200 &&
+                                        PageHeight(context) < 900)
+                                    ? (PageWidth(context) - 790) /
+                                        TableData[0].length
+                                    : ((PageWidth(context) - 40) /
+                                        TableData[0].length),
                             child: Container(
                                 decoration: BoxDecoration(
                                   borderRadius: BorderRadius.only(
@@ -285,7 +288,8 @@ class _StudentFirstMainPageState extends State<StudentFirstMainPage> {
                                     fontSize: 15,
                                     fontWeight: FontWeight.w600,
                                     color: (index == 0)
-                                        ? const Color.fromARGB(255, 36, 160, 209)
+                                        ? const Color.fromARGB(
+                                            255, 36, 160, 209)
                                         : const Color.fromARGB(255, 0, 0, 0))));
                       },
                     ))
@@ -370,7 +374,7 @@ class _StudentFirstMainPageState extends State<StudentFirstMainPage> {
         width: double.infinity,
         color: const Color.fromARGB(255, 255, 255, 255),
         child: ListView.builder(
-          itemCount: Messgaes_list.length - 1,
+          itemCount: Messgaes_list.length,
           itemBuilder: (context, index) {
             return CMaker(
               border: Border.all(
@@ -733,51 +737,51 @@ class _StudentFirstMainPageState extends State<StudentFirstMainPage> {
                                       child: OneDayTable)),
                               const Padding(padding: EdgeInsets.only(left: 20)),
                               CMaker(
-                                    circularRadius: 20,
-                                    height: 200,
-                                    width: 350,
-                                    margin: const EdgeInsets.symmetric(
-                                        horizontal: 20),
-                                    boxShadow: const [
-                                      BoxShadow(
-                                          offset: Offset(1, 1),
-                                          blurRadius: 6,
-                                          spreadRadius: .03,
-                                          color: Color.fromARGB(82, 0, 0, 0)),
+                                  circularRadius: 20,
+                                  height: 200,
+                                  width: 350,
+                                  margin: const EdgeInsets.symmetric(
+                                      horizontal: 20),
+                                  boxShadow: const [
+                                    BoxShadow(
+                                        offset: Offset(1, 1),
+                                        blurRadius: 6,
+                                        spreadRadius: .03,
+                                        color: Color.fromARGB(82, 0, 0, 0)),
+                                  ],
+                                  color: Colors.white,
+                                  child: Column(
+                                    children: [
+                                      Expanded(
+                                          child: Row(
+                                        children: [
+                                          Expanded(
+                                            flex: 3,
+                                            child: Container(),
+                                          ),
+                                          Expanded(
+                                            flex: 6,
+                                            child: NextClassTC,
+                                          ),
+                                          Expanded(
+                                            child: Container(),
+                                          ),
+                                          Expanded(
+                                            flex: 6,
+                                            child: LessonAndDate,
+                                          ),
+                                          Expanded(
+                                            flex: 3,
+                                            child: Container(),
+                                          ),
+                                        ],
+                                      )),
+                                      Expanded(
+                                          child: CMaker(
+                                              alignment: Alignment.center,
+                                              child: JoinButton))
                                     ],
-                                    color: Colors.white,
-                                    child: Column(
-                                      children: [
-                                        Expanded(
-                                            child: Row(
-                                          children: [
-                                            Expanded(
-                                              flex: 3,
-                                              child: Container(),
-                                            ),
-                                            Expanded(
-                                              flex: 6,
-                                              child: NextClassTC,
-                                            ),
-                                            Expanded(
-                                              child: Container(),
-                                            ),
-                                            Expanded(
-                                              flex: 6,
-                                              child: LessonAndDate,
-                                            ),
-                                            Expanded(
-                                              flex: 3,
-                                              child: Container(),
-                                            ),
-                                          ],
-                                        )),
-                                        Expanded(
-                                            child: CMaker(
-                                                alignment: Alignment.center,
-                                                child: JoinButton))
-                                      ],
-                                    )),
+                                  )),
                             ],
                           ),
                         ),
