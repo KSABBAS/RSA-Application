@@ -23,6 +23,7 @@ String CurrentMessageTime = DateTime.now().toString();
 
 class _TeacherSecondPageContentsState extends State<TeacherSecondPageContents> {
   final dbService = DatabaseService();
+  List ListOfGrades = [];
 
   final TextEditingController _MessageController = TextEditingController();
   List AllMessages = [

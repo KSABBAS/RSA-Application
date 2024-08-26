@@ -24,20 +24,22 @@ int PageIndex = 0;
 
 String name = '';
 String grade = "";
+String student_id = '';
 GlobalKey<FormState> NewKey = GlobalKey();
 String NewEmail = "";
 String NewPassWord = "";
 String NewPhoneNumber = "";
 List<List> TableData = [
-  ["","arabic","English","math","geo","other"],
-  ["السبت","1","2","3","4","5"],
-  ["الاحد","1","2","3","4","5"],
-  ["الاثنين","1","2","3","4","5"],
-  ["الثلاثاء","1","2","3","4","5"],
-  ["الاربعاء","1","2","3","4","5"],
-  ["الخميس","1","2","3","4","5"],
-  ["الجمعة","1","2","3","4","5"],
+  ["", "arabic", "English", "math", "geo", "other"],
+  ["السبت", "1", "2", "3", "4", "5"],
+  ["الاحد", "1", "2", "3", "4", "5"],
+  ["الاثنين", "1", "2", "3", "4", "5"],
+  ["الثلاثاء", "1", "2", "3", "4", "5"],
+  ["الاربعاء", "1", "2", "3", "4", "5"],
+  ["الخميس", "1", "2", "3", "4", "5"],
+  ["الجمعة", "1", "2", "3", "4", "5"],
 ];
+
 class _StudentMainPageState extends State<StudentMainPage> {
   @override
   void initState() {
@@ -51,6 +53,7 @@ class _StudentMainPageState extends State<StudentMainPage> {
           name = items[2].split("-")[0];
           name = "${name.split(" ")[0]} ${name.split(" ")[1]}".toTitleCase;
           grade = items[2].split("-")[1];
+          student_id = items[0].toString().split("#")[1];
           // userData = jsonDecode(items[2]) as Map<String, dynamic>;
         });
       }
@@ -68,102 +71,106 @@ class _StudentMainPageState extends State<StudentMainPage> {
       Container(
         child: const StudentFirstMainPage(),
       ),
-      Container(
-        child: const SecondPage()
-      ),
+      Container(child: const SecondPage()),
       Container(
         child: const ThirdPage(),
       ),
       Container(
-          child: ListView(
-            children: [
-              Container(
-                height: 70,
-                decoration: const BoxDecoration(
-                    boxShadow: [
-                      BoxShadow(
-                          offset: Offset(1, 1),
-                          blurRadius: 6,
-                          spreadRadius: .03,
-                          color: Color.fromARGB(82, 0, 0, 0)),
-                    ],
-                    color: Color.fromARGB(255, 255, 255, 255),
-                    borderRadius: BorderRadius.only(
-                        bottomLeft: Radius.circular(20),
-                        bottomRight: Radius.circular(20))),
-                child: Row(
-                  children: [
-                    Container(
-                        width: 70,
-                        height: 50,
-                        padding: const EdgeInsets.only(top: 10),
-                        alignment: Alignment.center,
-                        child: InkWell(
-                            onTap: () {
-                              setState(() {
-                                PageIndex = 0;
-                              });
-                            },
-                            child: Image.asset("images/Book.png"))),
-                    Expanded(
-                      child: CMaker(
-                        child: Row(
-                            children: [
-                              Expanded(
-                                child: CMaker(
-                                  alignment: Alignment.bottomCenter,
-                                  child: Text(
-                                    name,
-                                    style: const TextStyle(
-                                        fontSize: 17,
-                                        fontWeight: FontWeight.w500,
-                                        color: Color.fromARGB(255, 5, 123, 151)),
-                                  ),
-                                ),
-                              ),
-                              Expanded(
-                                child: CMaker(
-                                  alignment: Alignment.bottomCenter,
-                                  child: Text(
-                                    grade,
-                                    style: const TextStyle(
-                                        fontSize: 16,
-                                        fontWeight: FontWeight.w500,
-                                        color: Color.fromARGB(255, 89, 89, 87)),
-                                  ),
-                                ),
-                              ),
-                            ],
-                          ),
-                      ),
-                    ),
-                    InkWell(
-                      onTap: () async {
-                        final SharedPreferences prefs =
-                            await SharedPreferences.getInstance();
-                        prefs.remove("id");
-                        Navigator.pushReplacementNamed(context, "SplashView");
-                      },
-                      child: Container(
-                        width: 70,
-                        padding: const EdgeInsets.only(top: 10),
-                        decoration: BoxDecoration(
-                            color: const Color.fromARGB(255, 255, 255, 255),
-                            borderRadius: BorderRadius.circular(10)),
-                        height: 50,
-                        child: const Icon(Icons.logout),
-                      ),
-                    ),
+        child: ListView(
+          children: [
+            Container(
+              height: 70,
+              decoration: const BoxDecoration(
+                  boxShadow: [
+                    BoxShadow(
+                        offset: Offset(1, 1),
+                        blurRadius: 6,
+                        spreadRadius: .03,
+                        color: Color.fromARGB(82, 0, 0, 0)),
                   ],
-                ),
+                  color: Color.fromARGB(255, 255, 255, 255),
+                  borderRadius: BorderRadius.only(
+                      bottomLeft: Radius.circular(20),
+                      bottomRight: Radius.circular(20))),
+              child: Row(
+                children: [
+                  Container(
+                      width: 70,
+                      height: 50,
+                      padding: const EdgeInsets.only(top: 10),
+                      alignment: Alignment.center,
+                      child: InkWell(
+                          onTap: () {
+                            setState(() {
+                              PageIndex = 0;
+                            });
+                          },
+                          child: Image.asset("images/Book.png"))),
+                  Expanded(
+                    child: CMaker(
+                      child: Row(
+                        children: [
+                          Expanded(
+                            child: CMaker(
+                              alignment: Alignment.bottomCenter,
+                              child: Text(
+                                name,
+                                style: const TextStyle(
+                                    fontSize: 17,
+                                    fontWeight: FontWeight.w500,
+                                    color: Color.fromARGB(255, 5, 123, 151)),
+                              ),
+                            ),
+                          ),
+                          Expanded(
+                            child: CMaker(
+                              alignment: Alignment.bottomCenter,
+                              child: Text(
+                                grade,
+                                style: const TextStyle(
+                                    fontSize: 16,
+                                    fontWeight: FontWeight.w500,
+                                    color: Color.fromARGB(255, 89, 89, 87)),
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                  InkWell(
+                    onTap: () async {
+                      final SharedPreferences prefs =
+                          await SharedPreferences.getInstance();
+                      prefs.remove("id");
+                      Navigator.pushReplacementNamed(context, "SplashView");
+                    },
+                    child: Container(
+                      width: 70,
+                      padding: const EdgeInsets.only(top: 10),
+                      decoration: BoxDecoration(
+                          color: const Color.fromARGB(255, 255, 255, 255),
+                          borderRadius: BorderRadius.circular(10)),
+                      height: 50,
+                      child: const Icon(Icons.logout),
+                    ),
+                  ),
+                ],
               ),
-              const Padding(
-                padding: EdgeInsets.only(bottom: 40),
-              ),
-              StudentProfile(StudentName: "Kareem said hassan",StudentGrade: "Grade 12",StudentEmail: "kreemsaid234@gmail.com",StudentNumber: "01065866283",StudentPassword: "1234",)
-            ],
-          ),
+            ),
+            const Padding(
+              padding: EdgeInsets.only(bottom: 40),
+            ),
+            StudentProfile(
+              StudentName: "Kareem said hassan",
+              StudentGrade: "Grade 12",
+              StudentEmail: "kreemsaid234@gmail.com",
+              StudentNumber: "01065866283",
+              StudentPassword: "1234",
+            )
+          ],
         ),
+      ),
     ];
     if (PageWidth(context) < 550) {
       StudentMainPageBody = Scaffold(
@@ -213,7 +220,7 @@ class _StudentMainPageState extends State<StudentMainPage> {
               sideBarWidth: 300,
               onTap: (s) {
                 setState(() {
-                PageIndex = s;
+                  PageIndex = s;
                 });
               },
               sideBarAnimationDuration: const Duration(milliseconds: 500),

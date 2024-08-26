@@ -3,8 +3,6 @@ import 'dart:developer';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:edu_academy/StudentPages/SecondPageContents.dart';
-import 'package:edu_academy/StudentPages/ThirdPageContents.dart';
-import 'package:edu_academy/main.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 
@@ -229,13 +227,14 @@ class DatabaseService {
     QuerySnapshot querySnapshot = await Homework.get();
     int numHw = (querySnapshot.size) + 1;
     log(numHw.toString());
-
-    Homework.doc("Hw$numHw").set({
+    var doc_id = Homework.doc();
+    doc_id.set({
       "title": HomeworkTitle,
       "body": HomeworkBody,
       "files": filesList,
       "score": score,
-      "date": "current_date"
+      "date": "current_date",
+      'id': doc_id.id
     });
 
     return true;
@@ -254,13 +253,13 @@ class DatabaseService {
     print("knownCollections $knownCollections");
 
     Map<String, List<dynamic>> out = {};
-    List<dynamic> out_final = [];
+    List<dynamic> outFinal = [];
 
     for (String collectionName in knownCollections) {
       CollectionReference collection =
           documentReference.collection(collectionName);
 
-      out[collectionName] = ["$collectionName"];
+      out[collectionName] = [collectionName];
 
       QuerySnapshot querySnapshot = await collection.get();
       print(
@@ -285,25 +284,60 @@ class DatabaseService {
           [],
           j["date"],
           j["score"],
-          [false]
+          [false],
+          j["id"],
         ]);
       }
-      // if (hhww.length == 0) {
-      //   hhww = [
-      //     'Empty',
-      //     'Empty',
-      //     'Empty',
-      //     [],
-      //     [],
-      //     'Empty',
-      //     'Empty',
-      //     [false]
-      //   ];
-      // }
-      out_final.add(hhww);
-      print("out_final $out_final");
+      outFinal.add(hhww);
+      print("out_final $outFinal");
     }
-    return out_final;
+    return outFinal;
+  }
+
+  FiAdd_Solve(List<dynamic> hw_id, String student_id, String hw_solve_body,
+      List<dynamic> hw_solve_files) async {
+    // hw id,student_id,hw solve body,hw files
+
+    ///Homework/Grade 1/عربي/NY63UvWuWPWfjzutq745
+    DocumentReference documentReference = FirebaseFirestore.instance
+        .collection('Homework')
+        .doc(hw_id[0])
+        .collection(hw_id[1])
+        .doc(hw_id[2])
+        .collection("Solve")
+        .doc(student_id);
+
+    documentReference.set({
+      "body": hw_solve_body,
+      "files": "hw_solve_files",
+      'date': "current_date",
+      'score': '0'
+    });
+
+    return true;
+
+    // DocumentSnapshot documentSnapshot = await documentReference.get();
+
+    // Map<String, dynamic>? data =
+    //     documentSnapshot.data() as Map<String, dynamic>?;
+    // // Now you can access your data using the `data` variable.
+    // print(data);
+  }
+
+  Fi_getAll_HW(String grade, String subject) async {
+    CollectionReference collection = FirebaseFirestore.instance
+        .collection('Homework')
+        .doc(grade)
+        .collection(subject);
+
+    QuerySnapshot querySnapshot = await collection.get();
+    List<dynamic> out_hw = [];
+    for (var doc in querySnapshot.docs) {
+      print('Data: ${doc.data()}\n');
+      out_hw.add(
+          [doc['title'], doc['body'], doc['date'], doc['score'], doc['files']]);
+    }
+    return out_hw ;
   }
 
   // Storage
@@ -328,7 +362,7 @@ class DatabaseService {
         var snapshot =
             await storage.ref().child('Homeworks/$fileName').putFile(file[0]);
         var downloadUrl = await snapshot.ref.getDownloadURL();
-        return downloadUrl;
+        return [downloadUrl];
       }
     } else {
       print("emty files");

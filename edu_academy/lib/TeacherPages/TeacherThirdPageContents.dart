@@ -28,6 +28,9 @@ GlobalKey<FormState> HomeworkKey = GlobalKey();
 bool AllhomeWorks = false;
 bool AllHomeworksAndOneIsOpend = false;
 int IsOpendIndex = 0;
+String Grade_selected = '';
+
+List<dynamic> all_Homeworks = [];
 
 class _TeacherThirdPageContentsState extends State<TeacherThirdPageContents> {
   final dbService = DatabaseService();
@@ -42,7 +45,7 @@ class _TeacherThirdPageContentsState extends State<TeacherThirdPageContents> {
           margin: const EdgeInsets.only(left: 20, right: 20),
           color: const Color.fromARGB(255, 61, 197, 255),
           child: TMaker(
-              text: "Grade ${GradeHomeWorkOppenedIndex + 1} Homework",
+              text: "${Grade_selected} Homework",
               fontSize: 20,
               fontWeight: FontWeight.w600,
               color: Colors.white)),
@@ -83,20 +86,21 @@ class _TeacherThirdPageContentsState extends State<TeacherThirdPageContents> {
               ])),
           const Padding(padding: EdgeInsets.only(bottom: 20)),
           CMaker(
-              width: double.infinity,
-              height: PageHeight(context) - 320,
-              margin: const EdgeInsets.only(left: 20, right: 20),
-              circularRadius: 20,
-              alignment: Alignment.center,
-              boxShadow: const [
-                BoxShadow(
-                    color: Color.fromARGB(61, 0, 0, 0),
-                    offset: Offset(2, 2),
-                    blurRadius: 10,
-                    spreadRadius: .06)
-              ],
-              color: const Color.fromARGB(255, 255, 255, 255),
-              child: ListView(children: [
+            width: double.infinity,
+            height: PageHeight(context) - 320,
+            margin: const EdgeInsets.only(left: 20, right: 20),
+            circularRadius: 20,
+            alignment: Alignment.center,
+            boxShadow: const [
+              BoxShadow(
+                  color: Color.fromARGB(61, 0, 0, 0),
+                  offset: Offset(2, 2),
+                  blurRadius: 10,
+                  spreadRadius: .06)
+            ],
+            color: const Color.fromARGB(255, 255, 255, 255),
+            child: ListView(
+              children: [
                 const Padding(padding: EdgeInsets.only(bottom: 20)),
                 CMaker(
                     alignment: Alignment.centerLeft,
@@ -104,90 +108,108 @@ class _TeacherThirdPageContentsState extends State<TeacherThirdPageContents> {
                     circularRadius: 20,
                     margin: const EdgeInsets.only(left: 20, right: 20),
                     child: TMaker(
-                        text: "Title ${IsOpendIndex + 1}",
+                        text: all_Homeworks[IsOpendIndex][0],
                         fontSize: 30,
                         fontWeight: FontWeight.w600,
                         color: const Color.fromARGB(255, 0, 0, 0))),
                 const Padding(padding: EdgeInsets.only(bottom: 20)),
-                    CMaker(
-                        alignment: Alignment.centerLeft,
-                        padding:
-                            const EdgeInsets.only(left: 30),
-                        child: TMaker(
-                            textAlign: TextAlign.start,
-                            text: "Body",
-                            fontSize: 25,
-                            fontWeight: FontWeight.w700,
-                            color: const Color.fromARGB(
-                                255, 86, 86, 86))),
-                    const Padding(
-                        padding: EdgeInsets.only(bottom: 20)),
-                    CMaker(
-                      height:300,
-                      width: double.infinity,
-                      child: GridView.builder(
-                        itemCount: 4,
-                        gridDelegate:
-                            const SliverGridDelegateWithFixedCrossAxisCount(
-                                crossAxisCount: 1,
-                                crossAxisSpacing: 10,
-                                mainAxisSpacing: 10),
-                        itemBuilder: (context, index) {
-                          return InkWell(
-                            onTap: () {
-                              setState(() {});
-                            },
-                            child: Image.asset(
-                              "images/Logo.png",
-                              fit: BoxFit.fitWidth,
-                            ),
-                          );
+                CMaker(
+                    alignment: Alignment.centerLeft,
+                    padding: const EdgeInsets.only(left: 30),
+                    child: TMaker(
+                        textAlign: TextAlign.start,
+                        text: all_Homeworks[IsOpendIndex][1],
+                        fontSize: 25,
+                        fontWeight: FontWeight.w700,
+                        color: const Color.fromARGB(255, 86, 86, 86))),
+                const Padding(padding: EdgeInsets.only(bottom: 20)),
+                CMaker(
+                    alignment: Alignment.centerLeft,
+                    padding: const EdgeInsets.only(left: 30),
+                    child: TMaker(
+                        textAlign: TextAlign.start,
+                        text: "Created date: ${all_Homeworks[IsOpendIndex][2]}\nscore:${all_Homeworks[IsOpendIndex][3]}",
+                        fontSize: 18,
+                        fontWeight: FontWeight.w400,
+                        color: const Color.fromARGB(255, 86, 86, 86))),
+                const Padding(padding: EdgeInsets.only(bottom: 20)),
+                CMaker(
+                  height: 300,
+                  width: double.infinity,
+                  child: GridView.builder(
+                    itemCount: (all_Homeworks[IsOpendIndex][4] as List).length,
+                    gridDelegate:
+                        const SliverGridDelegateWithFixedCrossAxisCount(
+                            crossAxisCount: 1,
+                            crossAxisSpacing: 10,
+                            mainAxisSpacing: 10),
+                    itemBuilder: (context, index) {
+                      return InkWell(
+                        onTap: () {
+                          setState(() {});
                         },
-                      ),
-                    ),
-                     Padding(
-                        padding: EdgeInsets.only(bottom:PageHeight(context)-850)),
-              CMaker(width: double.infinity ,child: Row(children: [
-                Expanded(child: Container()),
-                Expanded(flex: 2,child: InkWell(
-                  onTap: () {
-                    
-                  },
-                  child: CMaker(
-                    padding: const EdgeInsets.all(10),
-                    circularRadius: 15,
-                    boxShadow: const [
-                  BoxShadow(
-                      color: Color.fromARGB(61, 0, 0, 0),
-                      offset: Offset(1, 1),
-                      blurRadius: 1,
-                      spreadRadius: .06)
-                                ],
-                    color: const Color.fromARGB(255, 233, 255, 247),
-                    child: TMaker(text: "Edit", fontSize:20, fontWeight:FontWeight.w600, color:Colors.black)),
-                )),
-                Expanded(flex: 3,child: Container()),
-                Expanded(flex: 2,child: InkWell(
-                  onTap: () {
-                    
-                  },
-                  child: CMaker(
-                    padding: const EdgeInsets.all(10),
-                    circularRadius: 15,
-                    boxShadow: const [
-                  BoxShadow(
-                      color: Color.fromARGB(61, 0, 0, 0),
-                      offset: Offset(1, 1),
-                      blurRadius: 1,
-                      spreadRadius: .06)
-                                ],
-                    color: const Color.fromARGB(255, 233, 255, 247),
-                    child: TMaker(text: "Delete", fontSize:20, fontWeight:FontWeight.w600, color:Colors.black)))),
-                Expanded(child: Container()),
-              ],))
-                  ],
+                        child: Image.network(
+                          all_Homeworks[IsOpendIndex][4][index],
+                          fit: BoxFit.fitWidth,
+                        ),
+                      );
+                    },
+                  ),
                 ),
-              ),
+                Padding(
+                    padding:
+                        EdgeInsets.only(bottom: PageHeight(context) - 850)),
+                CMaker(
+                    width: double.infinity,
+                    child: Row(
+                      children: [
+                        Expanded(child: Container()),
+                        InkWell(
+                              onTap: () {},
+                              child: CMaker(
+                                  padding: const EdgeInsets.all(10),
+                                  circularRadius: 15,
+                                  boxShadow: const [
+                                    BoxShadow(
+                                        color: Color.fromARGB(61, 0, 0, 0),
+                                        offset: Offset(1, 1),
+                                        blurRadius: 1,
+                                        spreadRadius: .06)
+                                  ],
+                                  color:
+                                      const Color.fromARGB(255, 233, 255, 247),
+                                  child: TMaker(
+                                      text: "Edit(soon)",
+                                      fontSize: 20,
+                                      fontWeight: FontWeight.w600,
+                                      color: Colors.black),
+                            )),
+                        Expanded(flex: 3, child: Container()),
+                        InkWell(
+                                onTap: () {},
+                                child: CMaker(
+                                    padding: const EdgeInsets.all(10),
+                                    circularRadius: 15,
+                                    boxShadow: const [
+                                      BoxShadow(
+                                          color: Color.fromARGB(61, 0, 0, 0),
+                                          offset: Offset(1, 1),
+                                          blurRadius: 1,
+                                          spreadRadius: .06)
+                                    ],
+                                    color: const Color.fromARGB(
+                                        255, 233, 255, 247),
+                                    child: TMaker(
+                                        text: "Delete(soon)",
+                                        fontSize: 20,
+                                        fontWeight: FontWeight.w600,
+                                        color: Colors.black))),
+                        Expanded(child: Container()),
+                      ],
+                    ))
+              ],
+            ),
+          ),
         ],
       );
     } else if (AllhomeWorks) {
@@ -249,29 +271,28 @@ class _TeacherThirdPageContentsState extends State<TeacherThirdPageContents> {
                       circularRadius: 20,
                       margin: const EdgeInsets.only(left: 20, right: 20),
                       child: TMaker(
-                          text:
-                              "Grade ${GradeHomeWorkOppenedIndex + 1} Homework",
+                          text: "${Grade_selected} Homework",
                           fontSize: 30,
                           fontWeight: FontWeight.w600,
                           color: const Color.fromARGB(255, 0, 0, 0))),
                   const Padding(padding: EdgeInsets.only(bottom: 20)),
                   CMaker(
-                        circularRadius: 20,
-                        height: PageHeight(context) - 420,
-                        child: ListView.builder(
-                            itemCount: 3,
-                            itemBuilder: (context, index) {
-                              return InkWell(
-                    onTap: () {
-                      setState(() {
-                        IsOpendIndex = index;
-                        GradeHomeWorkIsOppened = false;
-                        NewHomeWork = false;
-                        AllhomeWorks = false;
-                        AllHomeworksAndOneIsOpend = true;
-                      });
-                    },
-                    child: CMaker(
+                    circularRadius: 20,
+                    height: PageHeight(context) - 420,
+                    child: ListView.builder(
+                        itemCount: all_Homeworks.length,
+                        itemBuilder: (context, index) {
+                          return InkWell(
+                              onTap: () {
+                                setState(() {
+                                  IsOpendIndex = index;
+                                  GradeHomeWorkIsOppened = false;
+                                  NewHomeWork = false;
+                                  AllhomeWorks = false;
+                                  AllHomeworksAndOneIsOpend = true;
+                                });
+                              },
+                              child: CMaker(
                                 boxShadow: const [
                                   BoxShadow(
                                       color: Color.fromARGB(61, 0, 0, 0),
@@ -294,7 +315,7 @@ class _TeacherThirdPageContentsState extends State<TeacherThirdPageContents> {
                                         padding:
                                             const EdgeInsets.only(left: 10),
                                         child: TMaker(
-                                            text: "Title",
+                                            text: all_Homeworks[index][0],
                                             fontSize: 30,
                                             fontWeight: FontWeight.w700,
                                             color: Colors.black)),
@@ -306,7 +327,7 @@ class _TeacherThirdPageContentsState extends State<TeacherThirdPageContents> {
                                             const EdgeInsets.only(left: 10),
                                         child: TMaker(
                                             textAlign: TextAlign.start,
-                                            text: "Body",
+                                            text: all_Homeworks[index][1],
                                             fontSize: 17,
                                             fontWeight: FontWeight.w700,
                                             color: const Color.fromARGB(
@@ -317,7 +338,7 @@ class _TeacherThirdPageContentsState extends State<TeacherThirdPageContents> {
                                       height: 70,
                                       width: double.infinity,
                                       child: GridView.builder(
-                                        itemCount: 4,
+                                        itemCount: (all_Homeworks[index][4] as List).length,
                                         gridDelegate:
                                             const SliverGridDelegateWithFixedCrossAxisCount(
                                                 crossAxisCount: 6,
@@ -328,8 +349,8 @@ class _TeacherThirdPageContentsState extends State<TeacherThirdPageContents> {
                                             onTap: () {
                                               setState(() {});
                                             },
-                                            child: Image.asset(
-                                              "images/Logo.png",
+                                            child: Image.network(
+                                              all_Homeworks[index][4][index],
                                               fit: BoxFit.fitWidth,
                                             ),
                                           );
@@ -339,7 +360,7 @@ class _TeacherThirdPageContentsState extends State<TeacherThirdPageContents> {
                                   ],
                                 ),
                               ));
-                            }),
+                        }),
                   ),
                 ],
               )),
@@ -867,10 +888,12 @@ class _TeacherThirdPageContentsState extends State<TeacherThirdPageContents> {
                                 color: const Color.fromARGB(119, 0, 0, 0)),
                             title: TMaker(
                               textAlign: TextAlign.start,
-                              text: widget
-                                  .ListOfGrades[GradeHomeWorkOppenedIndex][1]
-                                      [index][0]
-                                  .toString(),
+                              text:(() {
+                                List<String> nameParts = widget.ListOfGrades[GradeHomeWorkOppenedIndex][1][index][0].toString().split(" ");
+                                return nameParts.length > 1 
+                                    ? "${nameParts[0]} ${nameParts[1]}" 
+                                    : nameParts[0];
+                              })(),
                               fontSize: 20,
                               fontWeight: FontWeight.w600,
                               color: const Color.fromARGB(255, 0, 0, 0),
@@ -922,8 +945,16 @@ class _TeacherThirdPageContentsState extends State<TeacherThirdPageContents> {
             },
           ));
       Widget AllHomeworks = InkWell(
-        onTap: () {
-          setState(() {
+        onTap: ()  async {
+          all_Homeworks = await 
+                dbService.Fi_getAll_HW(Grade_selected, SubjectThatIsSelected) ;
+          setState(()  {
+            // fitch all home works
+            print(Grade_selected);
+            print(SubjectThatIsSelected);
+            print("all_Homeworks $all_Homeworks");
+
+  
             GradeHomeWorkIsOppened = false;
             NewHomeWork = false;
             AllhomeWorks = true;
@@ -1177,6 +1208,7 @@ class _TeacherThirdPageContentsState extends State<TeacherThirdPageContents> {
                                   GradeHomeWorkIsOppened = true;
                                   NewHomeWork = false;
                                   GradeHomeWorkOppenedIndex = index;
+                                  Grade_selected = ListOfGrades[index][0];
                                 });
                               },
                               child: CMaker(

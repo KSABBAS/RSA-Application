@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:edu_academy/MyTools.dart';
 import 'package:edu_academy/service/Databse_Service.dart';
 import 'package:flutter/services.dart';
@@ -155,7 +157,7 @@ class _LoginPageState extends State<LogInPage> {
           if (data[0]) {
             await prefs.setStringList(
                 'id', <String>['${data[1]}', '${data[2]}', '${data[3]}']);
-            // log("['${data[1]}', '${data[2]}', '${data[3]}']");
+            log("['${data[1]}', '${data[2]}', '${data[3]}']");
             print("data from database services $data");
             PanaraInfoDialog.show(
               context,

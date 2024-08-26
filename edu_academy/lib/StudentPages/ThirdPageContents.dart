@@ -36,11 +36,6 @@ List<dynamic> HomeWorks = [
         "images/Logo.png",
         "images/webinar.png",
         "images/Logo.png",
-        "images/webinar.png",
-        "images/Logo.png",
-        "images/webinar.png",
-        "images/Logo.png",
-        "images/webinar.png",
       ], //these images contain the questions from the teacher to the student
       [],
       "Date", //Date
@@ -228,6 +223,7 @@ bool ViewSentSolution = false;
 class _ThirdPageState extends State<ThirdPage> {
   late Future<void> _dataFuture;
   final dbService = DatabaseService();
+  // HomeWorks[HomeWorkIndex][HomeworkSelected + 1][4] = [];
 
   @override
   void initState() {
@@ -530,7 +526,24 @@ class _ThirdPageState extends State<ThirdPage> {
                               height: 70,
                               alignment: Alignment.center,
                               child: InkWell(
-                                onTap: () {},
+                                onTap: () {
+                                  print(HomeWorks[HomeWorkIndex]
+                                      [HomeworkSelected + 1][4]); // hw files
+                                  print(StudentHomeWorkAnswer); // hw solve body
+                                  print(HomeWorks[HomeWorkIndex]
+                                      [HomeworkSelected + 1][8]); // hw id
+                                  print(student_id);
+                                  // hw id,student_id,hw solve body,hw files
+                                  dbService.FiAdd_Solve(
+                                      [grade,HomeWorks[HomeWorkIndex]
+                                          [HomeworkSelected],HomeWorks[HomeWorkIndex]
+                                          [HomeworkSelected + 1][8]],
+                                      student_id,
+                                      StudentHomeWorkAnswer,
+                                      HomeWorks[HomeWorkIndex]
+                                      [HomeworkSelected + 1][4]);
+                                  // send sovle hw
+                                },
                                 child: CMaker(
                                     circularRadius: 17,
                                     padding: const EdgeInsets.only(
