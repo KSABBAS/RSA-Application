@@ -1,14 +1,11 @@
 // import 'dart:convert';
 import 'dart:developer';
 
-import 'package:curved_navigation_bar/curved_navigation_bar.dart';
-import 'package:edu_academy/MyTools.dart';
 import 'package:edu_academy/ParentPages/ParentMainPageContents.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:string_extensions/string_extensions.dart';
-import 'package:sidebar_with_animation/animated_side_bar.dart';
 
 class ParentMainPage extends StatefulWidget {
   const ParentMainPage({super.key});

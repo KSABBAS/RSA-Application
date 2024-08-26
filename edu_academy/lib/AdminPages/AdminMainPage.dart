@@ -71,7 +71,7 @@ class _AdminMainPageState extends State<AdminMainPage> {
                 PageIndex = s;
                 });
               },
-              sideBarAnimationDuration: Duration(milliseconds: 500),
+              sideBarAnimationDuration: const Duration(milliseconds: 500),
               widthSwitch: 1200,
               mainLogoImage: 'images/Logo.png',
               sidebarItems: [

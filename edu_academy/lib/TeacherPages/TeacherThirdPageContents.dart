@@ -1,10 +1,8 @@
 import 'dart:io';
 
 import 'package:edu_academy/TeacherPages/TeacherMainPage.dart';
-import 'package:edu_academy/StudentPages/ThirdPageContents.dart';
 import 'package:edu_academy/MyTools.dart';
 import 'package:edu_academy/service/Databse_Service.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:overlay_loading_progress/overlay_loading_progress.dart';
@@ -30,6 +28,9 @@ GlobalKey<FormState> HomeworkKey = GlobalKey();
 bool AllhomeWorks = false;
 bool AllHomeworksAndOneIsOpend = false;
 int IsOpendIndex = 0;
+String Grade_selected = '';
+
+List<dynamic> all_Homeworks = [];
 String score = '5';
 
 class _TeacherThirdPageContentsState extends State<TeacherThirdPageContents> {
@@ -45,7 +46,7 @@ class _TeacherThirdPageContentsState extends State<TeacherThirdPageContents> {
           margin: const EdgeInsets.only(left: 20, right: 20),
           color: const Color.fromARGB(255, 61, 197, 255),
           child: TMaker(
-              text: "Grade ${GradeHomeWorkOppenedIndex + 1} Homework",
+              text: "${Grade_selected} Homework",
               fontSize: 20,
               fontWeight: FontWeight.w600,
               color: Colors.white)),
@@ -1476,13 +1477,13 @@ class _TeacherThirdPageContentsState extends State<TeacherThirdPageContents> {
               height: PageHeight(context) - 180,
               child: ListView(
                 children: [
-                  Padding(padding: EdgeInsets.only(bottom: 10)),
+                  const Padding(padding: EdgeInsets.only(bottom: 10)),
                   Row(
                     children: [ThirdPageArrowBack, GradeTitle],
                   ),
-                  Padding(padding: EdgeInsets.only(bottom: 20)),
+                  const Padding(padding: EdgeInsets.only(bottom: 20)),
                   HomeworkTitleTFF,
-                  Padding(padding: EdgeInsets.only(bottom: 20)),
+                  const Padding(padding: EdgeInsets.only(bottom: 20)),
                   HomeworkBodyTFF,
                   Padding(padding: EdgeInsets.only(bottom: 20)),
                   ScoreTFF,
@@ -1506,7 +1507,7 @@ class _TeacherThirdPageContentsState extends State<TeacherThirdPageContents> {
                       width: double.infinity,
                       height: 300,
                       child: CMaker(
-                          boxShadow: [
+                          boxShadow: const [
                             BoxShadow(
                                 color: Color.fromARGB(61, 0, 0, 0),
                                 offset: Offset(2, 2),
@@ -1515,9 +1516,9 @@ class _TeacherThirdPageContentsState extends State<TeacherThirdPageContents> {
                           ],
                           color: const Color.fromARGB(255, 255, 255, 255),
                           alignment: Alignment.center,
-                          margin: EdgeInsets.symmetric(horizontal: 20),
+                          margin: const EdgeInsets.symmetric(horizontal: 20),
                           circularRadius: 15,
-                          padding: EdgeInsets.all(15),
+                          padding: const EdgeInsets.all(15),
                           child: HomeWorkFinalLook)),
                   const Padding(padding: EdgeInsets.only(bottom: 20)),
                   CMaker(
@@ -1714,10 +1715,12 @@ class _TeacherThirdPageContentsState extends State<TeacherThirdPageContents> {
                                 color: const Color.fromARGB(119, 0, 0, 0)),
                             title: TMaker(
                               textAlign: TextAlign.start,
-                              text: widget
-                                  .ListOfGrades[GradeHomeWorkOppenedIndex][1]
-                                      [index][0]
-                                  .toString(),
+                              text:(() {
+                                List<String> nameParts = widget.ListOfGrades[GradeHomeWorkOppenedIndex][1][index][0].toString().split(" ");
+                                return nameParts.length > 1 
+                                    ? "${nameParts[0]} ${nameParts[1]}" 
+                                    : nameParts[0];
+                              })(),
                               fontSize: 20,
                               fontWeight: FontWeight.w600,
                               color: const Color.fromARGB(255, 0, 0, 0),
@@ -1769,8 +1772,16 @@ class _TeacherThirdPageContentsState extends State<TeacherThirdPageContents> {
             },
           ));
       Widget AllHomeworks = InkWell(
-        onTap: () {
-          setState(() {
+        onTap: ()  async {
+          all_Homeworks = await 
+                dbService.Fi_getAll_HW(Grade_selected, SubjectThatIsSelected) ;
+          setState(()  {
+            // fitch all home works
+            print(Grade_selected);
+            print(SubjectThatIsSelected);
+            print("all_Homeworks $all_Homeworks");
+
+  
             GradeHomeWorkIsOppened = false;
             NewHomeWork = false;
             AllhomeWorks = true;
@@ -2024,6 +2035,7 @@ class _TeacherThirdPageContentsState extends State<TeacherThirdPageContents> {
                                   GradeHomeWorkIsOppened = true;
                                   NewHomeWork = false;
                                   GradeHomeWorkOppenedIndex = index;
+                                  Grade_selected = ListOfGrades[index][0];
                                 });
                               },
                               child: CMaker(

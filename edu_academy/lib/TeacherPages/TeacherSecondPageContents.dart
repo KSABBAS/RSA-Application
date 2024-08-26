@@ -23,6 +23,7 @@ String CurrentMessageTime = DateTime.now().toString();
 
 class _TeacherSecondPageContentsState extends State<TeacherSecondPageContents> {
   final dbService = DatabaseService();
+  List ListOfGrades = [];
 
   final TextEditingController _MessageController = TextEditingController();
   List AllMessages = [
@@ -286,10 +287,8 @@ class _TeacherSecondPageContentsState extends State<TeacherSecondPageContents> {
                       leading: CMaker(height: 70,width: 70,child: CircleAvatar(backgroundImage: Image.asset("images/Person.png").image)),
                       title: TMaker(
                         textAlign: TextAlign.start,
-                        text: widget.ListOfGrades[GradeOpenedIndex][1]
-                                    [StudentIndex][0]
-                                .toString() +
-                            ' ${widget.ListOfGrades[GradeOpenedIndex][1][StudentIndex][2]}',
+                        text: '${widget.ListOfGrades[GradeOpenedIndex][1]
+                                    [StudentIndex][0]} ${widget.ListOfGrades[GradeOpenedIndex][1][StudentIndex][2]}',
                         fontSize: 20,
                         fontWeight: FontWeight.w600,
                         color: const Color.fromARGB(255, 0, 0, 0),

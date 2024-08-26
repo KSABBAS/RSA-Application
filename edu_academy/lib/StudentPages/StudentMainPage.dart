@@ -25,6 +25,7 @@ int PageIndex = 0;
 
 String name = '';
 String grade = "";
+String student_id = '';
 GlobalKey<FormState> NewKey = GlobalKey();
 String NewEmail = "";
 String NewPassWord = "";
@@ -53,6 +54,7 @@ class _StudentMainPageState extends State<StudentMainPage> {
           name = items[2].split("-")[0];
           name = "${name.split(" ")[0]} ${name.split(" ")[1]}".toTitleCase;
           grade = items[2].split("-")[1];
+          student_id = items[0].toString().split("#")[1];
           // userData = jsonDecode(items[2]) as Map<String, dynamic>;
         });
       }
@@ -478,7 +480,7 @@ class _StudentMainPageState extends State<StudentMainPage> {
                   PageIndex = s;
                 });
               },
-              sideBarAnimationDuration: Duration(milliseconds: 500),
+              sideBarAnimationDuration: const Duration(milliseconds: 500),
               widthSwitch: 1200,
               mainLogoImage: 'images/Logo.png',
               sidebarItems: [

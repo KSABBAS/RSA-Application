@@ -1,8 +1,6 @@
 // import 'dart:convert';
 import 'dart:developer';
-import 'dart:io';
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
-import 'package:edu_academy/Login/LogInPage.dart';
 import 'package:edu_academy/TeacherPages/TeacherProfilePage.dart';
 import 'package:edu_academy/TeacherPages/TeacherSecondPageContents.dart';
 import 'package:edu_academy/TeacherPages/TeacherFirstPageContenets.dart';
@@ -13,8 +11,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:panara_dialogs/panara_dialogs.dart';
-import 'package:overlay_loading_progress/overlay_loading_progress.dart';
 import 'package:sidebar_with_animation/animated_side_bar.dart';
 import 'package:string_extensions/string_extensions.dart';
 
@@ -35,7 +31,7 @@ String SubjectName = "Math";
 List ListOfGrades = [];
 
 List<String> Subject_techer = ['null', 'null', 'null'];
-String Subject1 = "Tester";
+String Subject1 = "Loading....";
 String Subject2 = "null";
 String Subject3 = "null";
 XFile? Avatar;
@@ -54,10 +50,12 @@ bool AccountActivation =true;
 // data base end
 
 class _TeacherMainPageState extends State<TeacherMainPage> {
+  // ListOfGrades = [];
   // data base start
   final dbService = DatabaseService();
   late Future<void> _dataFuture;
 
+  @override
   void initState() {
     super.initState();
     _dataFuture = _initializeData();
@@ -68,7 +66,7 @@ class _TeacherMainPageState extends State<TeacherMainPage> {
     print("ListOfGrades $ListOfGrades");
 
     final SharedPreferences prefs = await SharedPreferences.getInstance();
-    final List<String>? items = await prefs.getStringList('id');
+    final List<String>? items = prefs.getStringList('id');
     log(items.toString());
     if (items != null && items.isNotEmpty) {
       setState(() {
@@ -93,7 +91,7 @@ class _TeacherMainPageState extends State<TeacherMainPage> {
       Map<String, Map<String, List<dynamic>>> data0 =
           await dbService.fiGrades_and_Students(Teacher_Id, subjects_);
       setState(() {
-        sub_data = data0 as Map<String, Map<String, List<dynamic>>>;
+        sub_data = data0;
         int index_ = 0;
         for (String i in sub_data.keys) {
           Subject_techer[index_] = i;

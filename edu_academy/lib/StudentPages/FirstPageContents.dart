@@ -14,16 +14,14 @@ class StudentFirstMainPage extends StatefulWidget {
   State<StudentFirstMainPage> createState() => _StudentFirstMainPageState();
 }
 
-List<dynamic> Messgaes_list = [
-  ['math0', 'mohamed', 'hi gyes'],
-  ['math', 'mohamed', 'hi gyes'],
-];
+List<dynamic> Messgaes_list = [];
 
 Object? realTimeValues;
 
 class _StudentFirstMainPageState extends State<StudentFirstMainPage> {
   late Future<void> _dataFuture;
 
+  @override
   void initState() {
     super.initState();
     _dataFuture = regetmessages();
@@ -39,9 +37,10 @@ class _StudentFirstMainPageState extends State<StudentFirstMainPage> {
     allMes.onValue.listen(
       (event) {
         setState(() {
-          Messgaes_list = [];
+          try {
+
           realTimeValues = event.snapshot.value;
-          print("realTimeValues ${realTimeValues}");
+          print("realTimeValues $realTimeValues");
           Map map = realTimeValues as Map;
           print("map.keys ${map.keys}");
 
@@ -49,6 +48,9 @@ class _StudentFirstMainPageState extends State<StudentFirstMainPage> {
             for (var j in map[i].keys) {
               Messgaes_list.add([i, map[i][j][3], map[i][j][0]]);
             }
+          }
+          } catch (e) {
+            print("e $e");
           }
         });
       },
@@ -252,7 +254,7 @@ class _StudentFirstMainPageState extends State<StudentFirstMainPage> {
                     child: ListView.builder(
                       scrollDirection: Axis.horizontal,
                       shrinkWrap: false,
-                      physics: NeverScrollableScrollPhysics(),
+                      physics: const NeverScrollableScrollPhysics(),
                       itemCount: TableData[0].length,
                       itemBuilder: (context, index) {
                         return CMaker(
@@ -273,12 +275,12 @@ class _StudentFirstMainPageState extends State<StudentFirstMainPage> {
                                 decoration: BoxDecoration(
                                   borderRadius: BorderRadius.only(
                                       bottomLeft: (index == 0)
-                                          ? Radius.circular(15)
-                                          : Radius.circular(0),
+                                          ? const Radius.circular(15)
+                                          : const Radius.circular(0),
                                       bottomRight:
                                           (index == TableData[0].length - 1)
-                                              ? Radius.circular(15)
-                                              : Radius.circular(0)),
+                                              ? const Radius.circular(15)
+                                              : const Radius.circular(0)),
                                   color: Colors.white,
                                 ),
                                 alignment: Alignment.center,
@@ -287,7 +289,8 @@ class _StudentFirstMainPageState extends State<StudentFirstMainPage> {
                                     fontSize: 15,
                                     fontWeight: FontWeight.w600,
                                     color: (index == 0)
-                                        ? Color.fromARGB(255, 36, 160, 209)
+                                        ? const Color.fromARGB(
+                                            255, 36, 160, 209)
                                         : const Color.fromARGB(255, 0, 0, 0))));
                       },
                     ))
@@ -372,7 +375,7 @@ class _StudentFirstMainPageState extends State<StudentFirstMainPage> {
         width: double.infinity,
         color: const Color.fromARGB(255, 255, 255, 255),
         child: ListView.builder(
-          itemCount: Messgaes_list.length - 1,
+          itemCount: Messgaes_list.length,
           itemBuilder: (context, index) {
             return CMaker(
               border: Border.all(
