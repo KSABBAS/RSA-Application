@@ -131,12 +131,12 @@ class _TeacherThirdPageContentsState extends State<TeacherThirdPageContents> {
                     CMaker(
                       height: 300,
                       boxShadow: const [
-                    BoxShadow(
-                        color: Color.fromARGB(61, 0, 0, 0),
-                        offset: Offset(1, 1),
-                        blurRadius: 1,
-                        spreadRadius: .06)
-                  ],
+                        BoxShadow(
+                            color: Color.fromARGB(61, 0, 0, 0),
+                            offset: Offset(1, 1),
+                            blurRadius: 1,
+                            spreadRadius: .06)
+                      ],
                       color: const Color.fromARGB(255, 233, 255, 247),
                       width: double.infinity,
                       margin: EdgeInsets.symmetric(horizontal: 20),
@@ -161,54 +161,51 @@ class _TeacherThirdPageContentsState extends State<TeacherThirdPageContents> {
                       ),
                     ),
                     const Padding(padding: EdgeInsets.only(bottom: 20)),
-          CMaker(
-            width: double.infinity,
-            alignment: Alignment.center,
-            child: InkWell(
-              onTap: () {},
-              child: CMaker(
-                  padding: EdgeInsets.all(10),
-                  circularRadius: 15,
-                  boxShadow: const [
-                    BoxShadow(
-                        color: Color.fromARGB(61, 0, 0, 0),
-                        offset: Offset(1, 1),
-                        blurRadius: 1,
-                        spreadRadius: .06)
-                  ],
-                  color: const Color.fromARGB(
-                      255, 233, 255, 247),
-                  child: TMaker(
-                      text: "Edit",
-                      fontSize: 20,
-                      fontWeight: FontWeight.w600,
-                      color: Colors.black))),
-          ),
-          const Padding(padding: EdgeInsets.only(bottom: 20)),
-          CMaker(
-            width: double.infinity,
-            alignment: Alignment.center,
-            child: InkWell(
-              onTap: () {},
-              child: CMaker(
-                  padding: EdgeInsets.all(10),
-                  circularRadius: 15,
-                  boxShadow: const [
-                    BoxShadow(
-                        color:
-                            Color.fromARGB(61, 0, 0, 0),
-                        offset: Offset(1, 1),
-                        blurRadius: 1,
-                        spreadRadius: .06)
-                  ],
-                  color: const Color.fromARGB(
-                      255, 233, 255, 247),
-                  child: TMaker(
-                      text: "Delete",
-                      fontSize: 20,
-                      fontWeight: FontWeight.w600,
-                      color: Colors.black)))),
-                      const Padding(padding: EdgeInsets.only(bottom: 20)),
+                    CMaker(
+                      width: double.infinity,
+                      alignment: Alignment.center,
+                      child: InkWell(
+                          onTap: () {},
+                          child: CMaker(
+                              padding: EdgeInsets.all(10),
+                              circularRadius: 15,
+                              boxShadow: const [
+                                BoxShadow(
+                                    color: Color.fromARGB(61, 0, 0, 0),
+                                    offset: Offset(1, 1),
+                                    blurRadius: 1,
+                                    spreadRadius: .06)
+                              ],
+                              color: const Color.fromARGB(255, 233, 255, 247),
+                              child: TMaker(
+                                  text: "Edit",
+                                  fontSize: 20,
+                                  fontWeight: FontWeight.w600,
+                                  color: Colors.black))),
+                    ),
+                    const Padding(padding: EdgeInsets.only(bottom: 20)),
+                    CMaker(
+                        width: double.infinity,
+                        alignment: Alignment.center,
+                        child: InkWell(
+                            onTap: () {},
+                            child: CMaker(
+                                padding: EdgeInsets.all(10),
+                                circularRadius: 15,
+                                boxShadow: const [
+                                  BoxShadow(
+                                      color: Color.fromARGB(61, 0, 0, 0),
+                                      offset: Offset(1, 1),
+                                      blurRadius: 1,
+                                      spreadRadius: .06)
+                                ],
+                                color: const Color.fromARGB(255, 233, 255, 247),
+                                child: TMaker(
+                                    text: "Delete",
+                                    fontSize: 20,
+                                    fontWeight: FontWeight.w600,
+                                    color: Colors.black)))),
+                    const Padding(padding: EdgeInsets.only(bottom: 20)),
                   ],
                 ),
               ),
@@ -292,12 +289,12 @@ class _TeacherThirdPageContentsState extends State<TeacherThirdPageContents> {
                     CMaker(
                       height: 300,
                       boxShadow: const [
-                    BoxShadow(
-                        color: Color.fromARGB(61, 0, 0, 0),
-                        offset: Offset(1, 1),
-                        blurRadius: 1,
-                        spreadRadius: .06)
-                  ],
+                        BoxShadow(
+                            color: Color.fromARGB(61, 0, 0, 0),
+                            offset: Offset(1, 1),
+                            blurRadius: 1,
+                            spreadRadius: .06)
+                      ],
                       color: const Color.fromARGB(255, 233, 255, 247),
                       width: double.infinity,
                       margin: EdgeInsets.symmetric(horizontal: 20),
@@ -322,54 +319,51 @@ class _TeacherThirdPageContentsState extends State<TeacherThirdPageContents> {
                       ),
                     ),
                     const Padding(padding: EdgeInsets.only(bottom: 20)),
-          CMaker(
-            width: double.infinity,
-            alignment: Alignment.center,
-            child: InkWell(
-              onTap: () {},
-              child: CMaker(
-                  padding: EdgeInsets.all(10),
-                  circularRadius: 15,
-                  boxShadow: const [
-                    BoxShadow(
-                        color: Color.fromARGB(61, 0, 0, 0),
-                        offset: Offset(1, 1),
-                        blurRadius: 1,
-                        spreadRadius: .06)
-                  ],
-                  color: const Color.fromARGB(
-                      255, 233, 255, 247),
-                  child: TMaker(
-                      text: "Edit",
-                      fontSize: 20,
-                      fontWeight: FontWeight.w600,
-                      color: Colors.black))),
-          ),
-          const Padding(padding: EdgeInsets.only(bottom: 20)),
-          CMaker(
-            width: double.infinity,
-            alignment: Alignment.center,
-            child: InkWell(
-              onTap: () {},
-              child: CMaker(
-                  padding: EdgeInsets.all(10),
-                  circularRadius: 15,
-                  boxShadow: const [
-                    BoxShadow(
-                        color:
-                            Color.fromARGB(61, 0, 0, 0),
-                        offset: Offset(1, 1),
-                        blurRadius: 1,
-                        spreadRadius: .06)
-                  ],
-                  color: const Color.fromARGB(
-                      255, 233, 255, 247),
-                  child: TMaker(
-                      text: "Delete",
-                      fontSize: 20,
-                      fontWeight: FontWeight.w600,
-                      color: Colors.black)))),
-                      const Padding(padding: EdgeInsets.only(bottom: 20)),
+                    CMaker(
+                      width: double.infinity,
+                      alignment: Alignment.center,
+                      child: InkWell(
+                          onTap: () {},
+                          child: CMaker(
+                              padding: EdgeInsets.all(10),
+                              circularRadius: 15,
+                              boxShadow: const [
+                                BoxShadow(
+                                    color: Color.fromARGB(61, 0, 0, 0),
+                                    offset: Offset(1, 1),
+                                    blurRadius: 1,
+                                    spreadRadius: .06)
+                              ],
+                              color: const Color.fromARGB(255, 233, 255, 247),
+                              child: TMaker(
+                                  text: "Edit",
+                                  fontSize: 20,
+                                  fontWeight: FontWeight.w600,
+                                  color: Colors.black))),
+                    ),
+                    const Padding(padding: EdgeInsets.only(bottom: 20)),
+                    CMaker(
+                        width: double.infinity,
+                        alignment: Alignment.center,
+                        child: InkWell(
+                            onTap: () {},
+                            child: CMaker(
+                                padding: EdgeInsets.all(10),
+                                circularRadius: 15,
+                                boxShadow: const [
+                                  BoxShadow(
+                                      color: Color.fromARGB(61, 0, 0, 0),
+                                      offset: Offset(1, 1),
+                                      blurRadius: 1,
+                                      spreadRadius: .06)
+                                ],
+                                color: const Color.fromARGB(255, 233, 255, 247),
+                                child: TMaker(
+                                    text: "Delete",
+                                    fontSize: 20,
+                                    fontWeight: FontWeight.w600,
+                                    color: Colors.black)))),
+                    const Padding(padding: EdgeInsets.only(bottom: 20)),
                   ],
                 ),
               ),
@@ -453,12 +447,12 @@ class _TeacherThirdPageContentsState extends State<TeacherThirdPageContents> {
                     CMaker(
                       height: 300,
                       boxShadow: const [
-                    BoxShadow(
-                        color: Color.fromARGB(61, 0, 0, 0),
-                        offset: Offset(1, 1),
-                        blurRadius: 1,
-                        spreadRadius: .06)
-                  ],
+                        BoxShadow(
+                            color: Color.fromARGB(61, 0, 0, 0),
+                            offset: Offset(1, 1),
+                            blurRadius: 1,
+                            spreadRadius: .06)
+                      ],
                       color: const Color.fromARGB(255, 233, 255, 247),
                       width: double.infinity,
                       margin: EdgeInsets.symmetric(horizontal: 20),
@@ -483,54 +477,51 @@ class _TeacherThirdPageContentsState extends State<TeacherThirdPageContents> {
                       ),
                     ),
                     const Padding(padding: EdgeInsets.only(bottom: 20)),
-          CMaker(
-            width: double.infinity,
-            alignment: Alignment.center,
-            child: InkWell(
-              onTap: () {},
-              child: CMaker(
-                  padding: EdgeInsets.all(10),
-                  circularRadius: 15,
-                  boxShadow: const [
-                    BoxShadow(
-                        color: Color.fromARGB(61, 0, 0, 0),
-                        offset: Offset(1, 1),
-                        blurRadius: 1,
-                        spreadRadius: .06)
-                  ],
-                  color: const Color.fromARGB(
-                      255, 233, 255, 247),
-                  child: TMaker(
-                      text: "Edit",
-                      fontSize: 20,
-                      fontWeight: FontWeight.w600,
-                      color: Colors.black))),
-          ),
-          const Padding(padding: EdgeInsets.only(bottom: 20)),
-          CMaker(
-            width: double.infinity,
-            alignment: Alignment.center,
-            child: InkWell(
-              onTap: () {},
-              child: CMaker(
-                  padding: EdgeInsets.all(10),
-                  circularRadius: 15,
-                  boxShadow: const [
-                    BoxShadow(
-                        color:
-                            Color.fromARGB(61, 0, 0, 0),
-                        offset: Offset(1, 1),
-                        blurRadius: 1,
-                        spreadRadius: .06)
-                  ],
-                  color: const Color.fromARGB(
-                      255, 233, 255, 247),
-                  child: TMaker(
-                      text: "Delete",
-                      fontSize: 20,
-                      fontWeight: FontWeight.w600,
-                      color: Colors.black)))),
-                      const Padding(padding: EdgeInsets.only(bottom: 20)),
+                    CMaker(
+                      width: double.infinity,
+                      alignment: Alignment.center,
+                      child: InkWell(
+                          onTap: () {},
+                          child: CMaker(
+                              padding: EdgeInsets.all(10),
+                              circularRadius: 15,
+                              boxShadow: const [
+                                BoxShadow(
+                                    color: Color.fromARGB(61, 0, 0, 0),
+                                    offset: Offset(1, 1),
+                                    blurRadius: 1,
+                                    spreadRadius: .06)
+                              ],
+                              color: const Color.fromARGB(255, 233, 255, 247),
+                              child: TMaker(
+                                  text: "Edit",
+                                  fontSize: 20,
+                                  fontWeight: FontWeight.w600,
+                                  color: Colors.black))),
+                    ),
+                    const Padding(padding: EdgeInsets.only(bottom: 20)),
+                    CMaker(
+                        width: double.infinity,
+                        alignment: Alignment.center,
+                        child: InkWell(
+                            onTap: () {},
+                            child: CMaker(
+                                padding: EdgeInsets.all(10),
+                                circularRadius: 15,
+                                boxShadow: const [
+                                  BoxShadow(
+                                      color: Color.fromARGB(61, 0, 0, 0),
+                                      offset: Offset(1, 1),
+                                      blurRadius: 1,
+                                      spreadRadius: .06)
+                                ],
+                                color: const Color.fromARGB(255, 233, 255, 247),
+                                child: TMaker(
+                                    text: "Delete",
+                                    fontSize: 20,
+                                    fontWeight: FontWeight.w600,
+                                    color: Colors.black)))),
+                    const Padding(padding: EdgeInsets.only(bottom: 20)),
                   ],
                 ),
               ),
@@ -870,167 +861,165 @@ class _TeacherThirdPageContentsState extends State<TeacherThirdPageContents> {
       } else if (PageWidth(context) >= 550 && PageHeight(context) < 900) {
         setState(() {
           ThirdPageBody = Column(
-                children: [
-                  CMaker(
-                      width: double.infinity,
-                      height: 100,
-                      child: Row(children: [
-                        InkWell(
-                          onTap: () {
-                            setState(() {
-                              GradeHomeWorkIsOppened = true;
-                              NewHomeWork = false;
-                              AllhomeWorks = false;
-                            });
-                          },
-                          child: CMaker(
-                              margin: EdgeInsets.symmetric(horizontal: 10),
-                              alignment: Alignment.center,
-                              height: 50,
-                              width: 50,
-                              child: Icon(Icons.arrow_back)),
-                        ),
-                        Expanded(
-                            child: CMaker(
+            children: [
+              CMaker(
+                  width: double.infinity,
+                  height: 100,
+                  child: Row(children: [
+                    InkWell(
+                      onTap: () {
+                        setState(() {
+                          GradeHomeWorkIsOppened = true;
+                          NewHomeWork = false;
+                          AllhomeWorks = false;
+                        });
+                      },
+                      child: CMaker(
+                          margin: EdgeInsets.symmetric(horizontal: 10),
                           alignment: Alignment.center,
-                          circularRadius: 20,
-                          margin: EdgeInsets.only(right: 20),
-                          height: 70,
-                          child: TMaker(
-                              text: "All Homeworks",
-                              fontSize: 30,
-                              fontWeight: FontWeight.w700,
-                              color: const Color.fromARGB(255, 0, 0, 0)),
-                        ))
-                      ])),
-                  Padding(padding: EdgeInsets.only(bottom: 20)),
-                  CMaker(
-                      width: double.infinity,
-                      height: PageHeight(context) - 320,
-                      margin: EdgeInsets.only(left: 20, right: 20),
-                      circularRadius: 20,
+                          height: 50,
+                          width: 50,
+                          child: Icon(Icons.arrow_back)),
+                    ),
+                    Expanded(
+                        child: CMaker(
                       alignment: Alignment.center,
-                      boxShadow: const [
-                        BoxShadow(
-                            color: Color.fromARGB(61, 0, 0, 0),
-                            offset: Offset(2, 2),
-                            blurRadius: 10,
-                            spreadRadius: .06)
-                      ],
-                      color: Color.fromARGB(255, 255, 255, 255),
-                      child: Column(
-                        children: [
-                          Padding(padding: EdgeInsets.only(bottom: 20)),
-                          CMaker(
-                              alignment: Alignment.centerLeft,
-                              height: 60,
-                              circularRadius: 20,
-                              margin:
-                                  const EdgeInsets.only(left: 20, right: 20),
-                              child: TMaker(
-                                  text:
-                                      "Grade ${GradeHomeWorkOppenedIndex + 1} Homework",
-                                  fontSize: 30,
-                                  fontWeight: FontWeight.w600,
-                                  color: const Color.fromARGB(255, 0, 0, 0))),
-                          Padding(padding: EdgeInsets.only(bottom: 20)),
-                          CMaker(
-                            circularRadius: 20,
-                            height: PageHeight(context) - 420,
-                            child: ListView.builder(
-                                itemCount: 3,
-                                itemBuilder: (context, index) {
-                                  return InkWell(
-                                      onTap: () {
-                                        setState(() {
-                                          IsOpendIndex = index;
-                                          GradeHomeWorkIsOppened = false;
-                                          NewHomeWork = false;
-                                          AllhomeWorks = false;
-                                          AllHomeworksAndOneIsOpend = true;
-                                        });
-                                      },
-                                      child: CMaker(
-                                        boxShadow: const [
-                                          BoxShadow(
-                                              color:
-                                                  Color.fromARGB(61, 0, 0, 0),
-                                              offset: Offset(2, 2),
-                                              blurRadius: 10,
-                                              spreadRadius: .06)
-                                        ],
-                                        circularRadius: 20,
-                                        margin: EdgeInsets.only(
-                                            top: 15,
-                                            bottom: 15,
-                                            left: 20,
-                                            right: 20),
-                                        width: double.infinity,
-                                        height: 180,
-                                        color: const Color.fromARGB(
-                                            255, 233, 255, 247),
-                                        child: Column(
-                                          children: [
-                                            const Padding(
-                                                padding: EdgeInsets.only(
-                                                    bottom: 10)),
-                                            CMaker(
-                                                alignment: Alignment.centerLeft,
-                                                padding: const EdgeInsets.only(
-                                                    left: 10),
-                                                child: TMaker(
-                                                    text: "Title",
-                                                    fontSize: 30,
-                                                    fontWeight: FontWeight.w700,
-                                                    color: Colors.black)),
-                                            const Padding(
-                                                padding: EdgeInsets.only(
-                                                    bottom: 10)),
-                                            CMaker(
-                                                alignment: Alignment.centerLeft,
-                                                padding: const EdgeInsets.only(
-                                                    left: 10),
-                                                child: TMaker(
-                                                    textAlign: TextAlign.start,
-                                                    text: "Body",
-                                                    fontSize: 17,
-                                                    fontWeight: FontWeight.w700,
-                                                    color: const Color.fromARGB(
-                                                        255, 86, 86, 86))),
-                                            const Padding(
-                                                padding: EdgeInsets.only(
-                                                    bottom: 20)),
-                                            CMaker(
-                                              height: 70,
-                                              width: double.infinity,
-                                              child: GridView.builder(
-                                                itemCount: 4,
-                                                gridDelegate:
-                                                    const SliverGridDelegateWithFixedCrossAxisCount(
-                                                        crossAxisCount: 6,
-                                                        crossAxisSpacing: 10,
-                                                        mainAxisSpacing: 10),
-                                                itemBuilder: (context, index) {
-                                                  return InkWell(
-                                                    onTap: () {
-                                                      setState(() {});
-                                                    },
-                                                    child: Image.asset(
-                                                      "images/Logo.png",
-                                                      fit: BoxFit.fitWidth,
-                                                    ),
-                                                  );
+                      circularRadius: 20,
+                      margin: EdgeInsets.only(right: 20),
+                      height: 70,
+                      child: TMaker(
+                          text: "All Homeworks",
+                          fontSize: 30,
+                          fontWeight: FontWeight.w700,
+                          color: const Color.fromARGB(255, 0, 0, 0)),
+                    ))
+                  ])),
+              Padding(padding: EdgeInsets.only(bottom: 20)),
+              CMaker(
+                  width: double.infinity,
+                  height: PageHeight(context) - 320,
+                  margin: EdgeInsets.only(left: 20, right: 20),
+                  circularRadius: 20,
+                  alignment: Alignment.center,
+                  boxShadow: const [
+                    BoxShadow(
+                        color: Color.fromARGB(61, 0, 0, 0),
+                        offset: Offset(2, 2),
+                        blurRadius: 10,
+                        spreadRadius: .06)
+                  ],
+                  color: Color.fromARGB(255, 255, 255, 255),
+                  child: Column(
+                    children: [
+                      Padding(padding: EdgeInsets.only(bottom: 20)),
+                      CMaker(
+                          alignment: Alignment.centerLeft,
+                          height: 60,
+                          circularRadius: 20,
+                          margin: const EdgeInsets.only(left: 20, right: 20),
+                          child: TMaker(
+                              text:
+                                  "Grade ${GradeHomeWorkOppenedIndex + 1} Homework",
+                              fontSize: 30,
+                              fontWeight: FontWeight.w600,
+                              color: const Color.fromARGB(255, 0, 0, 0))),
+                      Padding(padding: EdgeInsets.only(bottom: 20)),
+                      CMaker(
+                        circularRadius: 20,
+                        height: PageHeight(context) - 420,
+                        child: ListView.builder(
+                            itemCount: 3,
+                            itemBuilder: (context, index) {
+                              return InkWell(
+                                  onTap: () {
+                                    setState(() {
+                                      IsOpendIndex = index;
+                                      GradeHomeWorkIsOppened = false;
+                                      NewHomeWork = false;
+                                      AllhomeWorks = false;
+                                      AllHomeworksAndOneIsOpend = true;
+                                    });
+                                  },
+                                  child: CMaker(
+                                    boxShadow: const [
+                                      BoxShadow(
+                                          color: Color.fromARGB(61, 0, 0, 0),
+                                          offset: Offset(2, 2),
+                                          blurRadius: 10,
+                                          spreadRadius: .06)
+                                    ],
+                                    circularRadius: 20,
+                                    margin: EdgeInsets.only(
+                                        top: 15,
+                                        bottom: 15,
+                                        left: 20,
+                                        right: 20),
+                                    width: double.infinity,
+                                    height: 180,
+                                    color: const Color.fromARGB(
+                                        255, 233, 255, 247),
+                                    child: Column(
+                                      children: [
+                                        const Padding(
+                                            padding:
+                                                EdgeInsets.only(bottom: 10)),
+                                        CMaker(
+                                            alignment: Alignment.centerLeft,
+                                            padding:
+                                                const EdgeInsets.only(left: 10),
+                                            child: TMaker(
+                                                text: "Title",
+                                                fontSize: 30,
+                                                fontWeight: FontWeight.w700,
+                                                color: Colors.black)),
+                                        const Padding(
+                                            padding:
+                                                EdgeInsets.only(bottom: 10)),
+                                        CMaker(
+                                            alignment: Alignment.centerLeft,
+                                            padding:
+                                                const EdgeInsets.only(left: 10),
+                                            child: TMaker(
+                                                textAlign: TextAlign.start,
+                                                text: "Body",
+                                                fontSize: 17,
+                                                fontWeight: FontWeight.w700,
+                                                color: const Color.fromARGB(
+                                                    255, 86, 86, 86))),
+                                        const Padding(
+                                            padding:
+                                                EdgeInsets.only(bottom: 20)),
+                                        CMaker(
+                                          height: 70,
+                                          width: double.infinity,
+                                          child: GridView.builder(
+                                            itemCount: 4,
+                                            gridDelegate:
+                                                const SliverGridDelegateWithFixedCrossAxisCount(
+                                                    crossAxisCount: 6,
+                                                    crossAxisSpacing: 10,
+                                                    mainAxisSpacing: 10),
+                                            itemBuilder: (context, index) {
+                                              return InkWell(
+                                                onTap: () {
+                                                  setState(() {});
                                                 },
-                                              ),
-                                            )
-                                          ],
-                                        ),
-                                      ));
-                                }),
-                          ),
-                        ],
-                      )),
-                ],
+                                                child: Image.asset(
+                                                  "images/Logo.png",
+                                                  fit: BoxFit.fitWidth,
+                                                ),
+                                              );
+                                            },
+                                          ),
+                                        )
+                                      ],
+                                    ),
+                                  ));
+                            }),
+                      ),
+                    ],
+                  )),
+            ],
           );
         });
       }
@@ -1690,7 +1679,7 @@ class _TeacherThirdPageContentsState extends State<TeacherThirdPageContents> {
           margin: const EdgeInsets.symmetric(horizontal: 20),
           color: const Color.fromARGB(255, 255, 255, 255),
           child: ListView.builder(
-            itemCount: ListOfGrades.length,
+            itemCount: (ListOfGrades.length-1),
             itemBuilder: (context, index) {
               return Column(
                 children: [
@@ -1715,11 +1704,19 @@ class _TeacherThirdPageContentsState extends State<TeacherThirdPageContents> {
                                 color: const Color.fromARGB(119, 0, 0, 0)),
                             title: TMaker(
                               textAlign: TextAlign.start,
-                              text:(() {
-                                List<String> nameParts = widget.ListOfGrades[GradeHomeWorkOppenedIndex][1][index][0].toString().split(" ");
-                                return nameParts.length > 1 
-                                    ? "${nameParts[0]} ${nameParts[1]}" 
-                                    : nameParts[0];
+                              text: (() {
+                                try {
+                                  List<String> nameParts = widget
+                                      .ListOfGrades[GradeHomeWorkOppenedIndex]
+                                          [1][index][0]
+                                      .toString()
+                                      .split(" ");
+                                  return nameParts.length > 1
+                                      ? "${nameParts[0]} ${nameParts[1]}"
+                                      : nameParts[0];
+                                } catch (e) {
+                                  return "None";
+                                }
                               })(),
                               fontSize: 20,
                               fontWeight: FontWeight.w600,
@@ -1772,16 +1769,15 @@ class _TeacherThirdPageContentsState extends State<TeacherThirdPageContents> {
             },
           ));
       Widget AllHomeworks = InkWell(
-        onTap: ()  async {
-          all_Homeworks = await 
-                dbService.Fi_getAll_HW(Grade_selected, SubjectThatIsSelected) ;
-          setState(()  {
+        onTap: () async {
+          all_Homeworks = await dbService.Fi_getAll_HW(
+              Grade_selected, SubjectThatIsSelected);
+          setState(() {
             // fitch all home works
             print(Grade_selected);
             print(SubjectThatIsSelected);
             print("all_Homeworks $all_Homeworks");
 
-  
             GradeHomeWorkIsOppened = false;
             NewHomeWork = false;
             AllhomeWorks = true;

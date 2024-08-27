@@ -66,7 +66,7 @@ class _StudentMobileSignUpPageState extends State<StudentMobileSignUpPage> {
                     const BorderSide(color: Color.fromARGB(255, 192, 192, 192)),
                 borderRadius: BorderRadius.circular(30)),
             label: const Text(
-              "Full Name",
+              "Full Name *",
               style: TextStyle(fontSize: 15, fontWeight: FontWeight.w600),
             ),
             enabledBorder: OutlineInputBorder(
@@ -109,7 +109,7 @@ class _StudentMobileSignUpPageState extends State<StudentMobileSignUpPage> {
                     const BorderSide(color: Color.fromARGB(255, 192, 192, 192)),
                 borderRadius: BorderRadius.circular(30)),
             label: const Text(
-              "Gardian Phone Number",
+              "Parent Phone Number *",
               style: TextStyle(fontSize: 15, fontWeight: FontWeight.w600),
             ),
             enabledBorder: OutlineInputBorder(
@@ -201,7 +201,7 @@ class _StudentMobileSignUpPageState extends State<StudentMobileSignUpPage> {
                     const BorderSide(color: Color.fromARGB(255, 192, 192, 192)),
                 borderRadius: BorderRadius.circular(30)),
             label: const Text(
-              "Email",
+              "Email *",
               style: TextStyle(fontSize: 15, fontWeight: FontWeight.w600),
             ),
             enabledBorder: OutlineInputBorder(
@@ -250,7 +250,7 @@ class _StudentMobileSignUpPageState extends State<StudentMobileSignUpPage> {
               child: const Icon(Icons.remove_red_eye_outlined),
             ),
             label: const Text(
-              "Password",
+              "Password *",
               style: TextStyle(fontSize: 15, fontWeight: FontWeight.w600),
             ),
             enabledBorder: OutlineInputBorder(
@@ -299,7 +299,7 @@ class _StudentMobileSignUpPageState extends State<StudentMobileSignUpPage> {
               child: const Icon(Icons.remove_red_eye_outlined),
             ),
             label: const Text(
-              "Confirm Password",
+              "Confirm Password *",
               style: TextStyle(fontSize: 15, fontWeight: FontWeight.w600),
             ),
             enabledBorder: OutlineInputBorder(
@@ -558,6 +558,7 @@ class _StudentMobileSignUpPageState extends State<StudentMobileSignUpPage> {
                               "birth_date": StudentDateOfBirth,
                               "gender": StudentGender,
                               "grade": StudentGrade,
+                              "photo" : '',
                               "state": "false"
                             });
                             OverlayLoadingProgress.stop();

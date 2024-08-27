@@ -1,4 +1,5 @@
 import 'dart:developer';
+import 'dart:io';
 // import 'dart:io';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -337,7 +338,50 @@ class DatabaseService {
       out_hw.add(
           [doc['title'], doc['body'], doc['date'], doc['score'], doc['files']]);
     }
-    return out_hw ;
+    return out_hw;
+  }
+
+  FiGet_profile_data(String id, String role) async {
+    DocumentReference documentReference = FirebaseFirestore.instance
+        .collection('Users')
+        .doc(role + "s")
+        .collection(role + "s")
+        .doc(id);
+
+    ///Users/Students/Students/S5  Student
+    DocumentSnapshot documentSnapshot = await documentReference.get();
+    print(documentSnapshot);
+    Map<String, dynamic>? data =
+        documentSnapshot.data() as Map<String, dynamic>?;
+    print(data);
+    return data as Map<String, dynamic>;
+  }
+
+  FiAdd_photo(String id, String role, var photo) async {
+    // print(file[0]);
+    // List<String> name = photo.toString().split("/");
+    // String fileName = name[name.length - 1].replaceAll("'", "");
+    var snapshot = await storage
+        .ref()
+        .child('Profiles/${role}/${id}/${id}profile_image')
+        .putFile(photo);
+    var downloadUrl = await snapshot.ref.getDownloadURL();
+    print(downloadUrl);
+    DocumentReference documentReference = FirebaseFirestore.instance
+        .collection('Users')
+        .doc(role + "s")
+        .collection(role + "s")
+        .doc(id);
+    documentReference.update({'photo': "$downloadUrl"});
+
+    // ///Users/Students/Students/S5  Student
+    // DocumentSnapshot documentSnapshot = await documentReference.get();
+    // print(documentSnapshot);
+    // Map<String, dynamic>? data =
+    //     documentSnapshot.data() as Map<String, dynamic>?;
+    // print(data);
+    // return data as Map<String, dynamic>;
+    return downloadUrl as String;
   }
 
   // Storage

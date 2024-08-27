@@ -611,6 +611,7 @@ class _TeacherSignUpPageState extends State<TeacherSignUpPage> {
                               "Subject2": (TeacherSubject2 == "null") ? TeacherSubject2 : [TeacherSubject2],
                               "Subject3": (TeacherSubject3 == "null") ? TeacherSubject3 : [TeacherSubject3],
                               "Description": "TeachertDescription",
+                              "photo" : '',
                               "state": "false"
                             });
                             OverlayLoadingProgress.stop();
