@@ -23,7 +23,6 @@ String CurrentMessageTime = DateTime.now().toString();
 
 class _TeacherSecondPageContentsState extends State<TeacherSecondPageContents> {
   final dbService = DatabaseService();
-  List ListOfGrades = [];
 
   final TextEditingController _MessageController = TextEditingController();
   List AllMessages = [
@@ -455,7 +454,7 @@ class _TeacherSecondPageContentsState extends State<TeacherSecondPageContents> {
                                 //rePublicMessages_Send(String sub, String Grade,String messgae,String date,String duration)
                                 dbService.rePublicMessages_Send(
                                     SubjectThatIsSelected,
-                                    ListOfGrades[GradeHomeWorkOppenedIndex][0],
+                                    widget.ListOfGrades[GradeHomeWorkOppenedIndex][0],
                                     CurrentMessage,
                                     CurrentMessageTime,
                                     TheMessageDuration,
