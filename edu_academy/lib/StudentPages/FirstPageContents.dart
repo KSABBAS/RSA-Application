@@ -1,4 +1,5 @@
 import 'package:edu_academy/MyTools.dart';
+import 'package:edu_academy/StudentPages/SecondPageContents.dart';
 import 'package:edu_academy/StudentPages/StudentMainPage.dart';
 // import 'package:edu_academy/service/Databse_Service.dart';
 import 'package:firebase_database/firebase_database.dart';
@@ -6,6 +7,7 @@ import 'package:flutter/material.dart';
 import 'dart:core';
 
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class StudentFirstMainPage extends StatefulWidget {
   const StudentFirstMainPage({super.key});
@@ -20,7 +22,16 @@ Object? realTimeValues;
 
 class _StudentFirstMainPageState extends State<StudentFirstMainPage> {
   late Future<void> _dataFuture;
-
+  
+  Future<void> _launchURL({required String url}) async {
+    try {
+      if (!await launchUrl(Uri.parse(url))) {
+        throw 'Could not launch $url';
+      }
+    } catch (e) {
+      //mj
+    }
+  }
   @override
   void initState() {
     super.initState();
@@ -321,7 +332,9 @@ class _StudentFirstMainPageState extends State<StudentFirstMainPage> {
               color: const Color.fromARGB(153, 24, 58, 60)),
         ));
     Widget JoinButton = InkWell(
-      onTap: () {},
+      onTap: () {
+        _launchURL(url: "https://us06web.zoom.us/j/3088571822?pwd=E5VM4ANDKYA5jW59RKUuwRvVA2onkA.1");
+      },
       child: CMaker(
         alignment: Alignment.center,
         circularRadius: 13,
