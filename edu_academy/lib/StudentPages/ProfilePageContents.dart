@@ -4,6 +4,7 @@ import 'package:edu_academy/Login/LogInPage.dart';
 import 'package:edu_academy/MyTools.dart';
 import 'package:edu_academy/StudentPages/StudentMainPage.dart';
 import 'package:edu_academy/TeacherPages/TeacherMainPage.dart';
+import 'package:edu_academy/service/Databse_Service.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
 import 'package:get/get.dart';
@@ -18,12 +19,14 @@ class StudentProfile extends StatefulWidget {
       required this.StudentEmail,
       required this.StudentGrade,
       required this.StudentNumber,
+      required this.profile_photo,
       required this.StudentPassword});
   String StudentName;
   String StudentGrade;
   String StudentEmail;
   String StudentPassword;
   String StudentNumber;
+  String profile_photo;
   @override
   State<StudentProfile> createState() => _StudentProfileState();
 }
@@ -33,16 +36,25 @@ GlobalKey<FormState> ProfileKey = GlobalKey();
 String NewProfileEmail = "";
 String NewProfileNumber = "";
 String NewProfilePassword = "";
+String Check_pass = "";
 
 class _StudentProfileState extends State<StudentProfile> {
+  bool EditMode = false;
+  final dbService = DatabaseService();
   @override
   Widget build(BuildContext context) {
+    // String profile_photo = widget.profile_photo;
+    print("widget.profile_photo ${widget.profile_photo}");
     late Widget StudentProfileBody;
     Widget ProfilePicture = InkWell(
       onTap: () async {
         XFile? Avatar = await PhotoImageFromGalary();
         if (Avatar != null) {
           ProfileAvatar = Avatar;
+          print("File(ProfileAvatar!.path) ${File(ProfileAvatar!.path)}");
+          widget.profile_photo = await dbService.FiAdd_photo(
+              student_id, role, File(ProfileAvatar!.path));
+          // refresh
           setState(() {});
         }
       },
@@ -61,12 +73,11 @@ class _StudentProfileState extends State<StudentProfile> {
         child: Stack(
           fit: StackFit.expand,
           children: [
-            (ProfileAvatar == null)
+            (ProfileAvatar == null && widget.profile_photo == "")
                 ? CircleAvatar(
                     backgroundImage: AssetImage("images/personDeafult.png"))
                 : CircleAvatar(
-                    backgroundImage:
-                        Image.file(File(ProfileAvatar!.path)).image,
+                    backgroundImage: Image.network((widget.profile_photo)).image,
                   ),
             Positioned(
               bottom: 6,
@@ -121,7 +132,7 @@ class _StudentProfileState extends State<StudentProfile> {
                   padding: EdgeInsets.only(right: 10),
                   child: TMaker(
                       text: widget.StudentName,
-                      fontSize:20,
+                      fontSize: 20,
                       fontWeight: FontWeight.w600,
                       color: const Color.fromARGB(255, 0, 0, 0))),
               Expanded(child: Container()),
@@ -144,7 +155,7 @@ class _StudentProfileState extends State<StudentProfile> {
                         child: TMaker(
                             textAlign: TextAlign.start,
                             text: "Id",
-                            fontSize:20,
+                            fontSize: 20,
                             fontWeight: FontWeight.w400,
                             color: Color.fromARGB(255, 0, 0, 0))),
                   ),
@@ -193,7 +204,7 @@ class _StudentProfileState extends State<StudentProfile> {
                         child: TMaker(
                             textAlign: TextAlign.start,
                             text: "Grade",
-                            fontSize:20,
+                            fontSize: 20,
                             fontWeight: FontWeight.w400,
                             color: Color.fromARGB(255, 0, 0, 0))),
                   ),
@@ -454,7 +465,7 @@ class _StudentProfileState extends State<StudentProfile> {
     );
     Widget EditAndSaveButton = InkWell(
       onTap: () {
-        if (ProfileKey.currentState!.validate())
+        if (ProfileKey.currentState!.validate()) {
           showDialog(
               context: context,
               builder: (context) {
@@ -464,6 +475,9 @@ class _StudentProfileState extends State<StudentProfile> {
                       height: 100,
                       alignment: Alignment.center,
                       child: TextFormField(
+                        onSaved: (newValue) {
+                          Check_pass = newValue!;
+                        },
                         obscureText: obscureText,
                         decoration: InputDecoration(
                             focusedErrorBorder: OutlineInputBorder(
@@ -497,7 +511,7 @@ class _StudentProfileState extends State<StudentProfile> {
                           )),
                       TextButton(
                           onPressed: () async {
-                            Navigator.pop(context);
+                            // Navigator.pop(context);
                             if (EditMode) {
                               ProfileKey.currentState!.save();
                               widget.StudentEmail = NewProfileEmail;
@@ -508,7 +522,8 @@ class _StudentProfileState extends State<StudentProfile> {
                               print(widget.StudentPassword);
                             }
                             setState(() {
-                              EditMode = !EditMode;
+                              print("Check_pass ${Check_pass}");
+                              // EditMode = !EditMode;
                             });
                           },
                           child: Text(
@@ -516,6 +531,7 @@ class _StudentProfileState extends State<StudentProfile> {
                           )),
                     ]);
               });
+        }
       },
       child: CMaker(
         width: 170,
@@ -540,7 +556,7 @@ class _StudentProfileState extends State<StudentProfile> {
                 padding: EdgeInsets.only(right: 10),
                 child: TMaker(
                     text: (EditMode) ? "Save" : "Edit",
-                    fontSize:25,
+                    fontSize: 25,
                     fontWeight: FontWeight.w600,
                     color: const Color.fromARGB(255, 0, 0, 0))),
             Expanded(child: Container()),
@@ -607,9 +623,9 @@ class _StudentProfileState extends State<StudentProfile> {
                               height: 0,
                               width: 0,
                             ),
-                            const Padding(padding: EdgeInsets.only(bottom: 10)),
+                      const Padding(padding: EdgeInsets.only(bottom: 10)),
                       NumberField,
-                      const Padding(padding:EdgeInsets.only(bottom: 10)),
+                      const Padding(padding: EdgeInsets.only(bottom: 10)),
                       CMaker(
                           width: double.infinity,
                           height: 80,
@@ -681,9 +697,9 @@ class _StudentProfileState extends State<StudentProfile> {
                               height: 0,
                               width: 0,
                             ),
-                            const Padding(padding: EdgeInsets.only(bottom: 10)),
+                      const Padding(padding: EdgeInsets.only(bottom: 10)),
                       NumberField,
-                      const Padding(padding:EdgeInsets.only(bottom: 10)),
+                      const Padding(padding: EdgeInsets.only(bottom: 10)),
                       CMaker(
                           width: double.infinity,
                           height: 80,
@@ -755,9 +771,9 @@ class _StudentProfileState extends State<StudentProfile> {
                               height: 0,
                               width: 0,
                             ),
-                            const Padding(padding: EdgeInsets.only(bottom: 10)),
+                      const Padding(padding: EdgeInsets.only(bottom: 10)),
                       NumberField,
-                      const Padding(padding:EdgeInsets.only(bottom: 10)),
+                      const Padding(padding: EdgeInsets.only(bottom: 10)),
                       CMaker(
                           width: double.infinity,
                           height: 80,

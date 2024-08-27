@@ -2452,7 +2452,7 @@ class _TeacherThirdPageContentsState extends State<TeacherThirdPageContents> {
           margin: const EdgeInsets.symmetric(horizontal: 20),
           color: const Color.fromARGB(255, 255, 255, 255),
           child: ListView.builder(
-            itemCount: ListOfGrades.length,
+            itemCount: (ListOfGrades.length-1),
             itemBuilder: (context, index) {
               return Column(
                 children: [
@@ -2551,6 +2551,8 @@ class _TeacherThirdPageContentsState extends State<TeacherThirdPageContents> {
             print(Grade_selected);
             print(SubjectThatIsSelected);
             print("all_Homeworks $all_Homeworks");
+
+  
             GradeHomeWorkIsOppened = false;
             NewHomeWork = false;
             AllhomeWorks = true;

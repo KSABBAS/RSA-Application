@@ -284,11 +284,16 @@ class _TeacherSecondPageContentsState extends State<TeacherSecondPageContents> {
                 return Column(
                   children: [
                     ListTile(
-                      leading: CMaker(height: 70,width: 70,child: CircleAvatar(backgroundImage: Image.asset("images/Person.png").image)),
+                      leading: CMaker(
+                          height: 70,
+                          width: 70,
+                          child: CircleAvatar(
+                              backgroundImage:
+                                  Image.asset("images/Person.png").image)),
                       title: TMaker(
                         textAlign: TextAlign.start,
-                        text: '${widget.ListOfGrades[GradeOpenedIndex][1]
-                                    [StudentIndex][0]} ${widget.ListOfGrades[GradeOpenedIndex][1][StudentIndex][2]}',
+                        text:
+                            '${widget.ListOfGrades[GradeOpenedIndex][1][StudentIndex][0]} ${widget.ListOfGrades[GradeOpenedIndex][1][StudentIndex][2]}',
                         fontSize: 20,
                         fontWeight: FontWeight.w600,
                         color: const Color.fromARGB(255, 0, 0, 0),
@@ -453,7 +458,8 @@ class _TeacherSecondPageContentsState extends State<TeacherSecondPageContents> {
                                     ListOfGrades[GradeHomeWorkOppenedIndex][0],
                                     CurrentMessage,
                                     CurrentMessageTime,
-                                    TheMessageDuration,name);
+                                    TheMessageDuration,
+                                    name);
                                 CurrentMessage = "";
                                 print(AllMessages);
                               });
@@ -688,7 +694,14 @@ class _TeacherSecondPageContentsState extends State<TeacherSecondPageContents> {
                 children: [
                   CMaker(
                       color: const Color.fromARGB(255, 255, 255, 255),
-                      height: widget.ListOfGrades[index][1][0].length * 100.0,
+                      height: (() {
+                        try {
+                          return widget.ListOfGrades[index][1][0].length *
+                              100.0;
+                        } catch (e) {
+                          return 2.0 * 100.0;
+                        }
+                      }()),
                       width: double.infinity,
                       boxShadow: const [
                         BoxShadow(
@@ -748,33 +761,37 @@ class _TeacherSecondPageContentsState extends State<TeacherSecondPageContents> {
                               )),
                           const Padding(padding: EdgeInsets.only(bottom: 30)),
                           Expanded(
-                            child:ListView.builder(
-                                  itemCount:
-                                      widget.ListOfGrades[index][1].length,
-                                  itemBuilder: (context, StudentIndex) {
-                                    return Column(
-                                      children: [
-                                        ListTile(
-                                          leading:
-                                              CMaker(height: 70,width: 70,child: CircleAvatar(backgroundImage: Image.asset("images/Person.png").image)),
-                                          title: TMaker(
-                                            textAlign: TextAlign.start,
-                                            text: widget.ListOfGrades[index][1]
-                                                    [StudentIndex][0]
-                                                .toString(),
-                                            fontSize: 20,
-                                            fontWeight: FontWeight.w600,
-                                            color: const Color.fromARGB(
-                                                255, 0, 0, 0),
-                                          ),
+                            child: ListView.builder(
+                                itemCount: widget.ListOfGrades[index][1].length,
+                                itemBuilder: (context, StudentIndex) {
+                                  return Column(
+                                    children: [
+                                      ListTile(
+                                        leading: CMaker(
+                                            height: 70,
+                                            width: 70,
+                                            child: CircleAvatar(
+                                                backgroundImage: Image.asset(
+                                                        "images/Person.png")
+                                                    .image)),
+                                        title: TMaker(
+                                          textAlign: TextAlign.start,
+                                          text: widget.ListOfGrades[index][1]
+                                                  [StudentIndex][0]
+                                              .toString(),
+                                          fontSize: 20,
+                                          fontWeight: FontWeight.w600,
+                                          color: const Color.fromARGB(
+                                              255, 0, 0, 0),
                                         ),
-                                        const Padding(
-                                          padding: EdgeInsets.only(bottom: 20),
-                                        ),
-                                      ],
-                                    );
-                                  }),
-                            ),
+                                      ),
+                                      const Padding(
+                                        padding: EdgeInsets.only(bottom: 20),
+                                      ),
+                                    ],
+                                  );
+                                }),
+                          ),
                         ],
                       )),
                 ],

@@ -359,7 +359,8 @@ class _ParentSignUpPageState extends State<ParentSignUpPage> {
             "email": ParentEmail,
             "password": ParentPassword,
             "gender": "not added yet",
-            "state": "true"
+            "photo" : '',
+            "state": "false"
           });
           OverlayLoadingProgress.stop();
           PanaraInfoDialog.show(
