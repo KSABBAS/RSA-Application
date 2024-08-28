@@ -24,8 +24,8 @@ class StudentMainPage extends StatefulWidget {
 bool AccountActivation = true;
 int PageIndex = 0;
 
-String name = '';
-String grade = "";
+String name = "loading....";
+String grade = "loading....";
 String student_id = '';
 String role = '';
 GlobalKey<FormState> NewKey = GlobalKey();
@@ -45,27 +45,35 @@ List<List> TableData = [
 Map<String, dynamic> profile_data = {};
 
 class _StudentMainPageState extends State<StudentMainPage> {
+  bool isLoading = true;
+  late Future<void> dataFuture;
   @override
   void initState() {
     super.initState();
-    WidgetsBinding.instance.addPostFrameCallback((_) async {
-      final SharedPreferences prefs = await SharedPreferences.getInstance();
-      final List<String>? items = prefs.getStringList('id');
-      final dbService = DatabaseService();
-      log(items.toString());
-      if (items != null && items.isNotEmpty) {
-        setState(() {
-          name = items[2].split("-")[0];
-          name = "${name.split(" ")[0]} ${name.split(" ")[1]}".toTitleCase;
-          grade = items[2].split("-")[1];
-          student_id = items[0].toString().split("#")[1];
-          role = items[0].toString().split("#")[0];
-          // userData = jsonDecode(items[2]) as Map<String, dynamic>;
-        });
-      }
-      print("student_id $student_id");
-      print("role $role");
-      profile_data = await dbService.FiGet_profile_data(student_id, role) as  Map<String, dynamic>;
+    fetch();
+  }
+
+  Future<void> fetch() async {
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    final List<String>? items = await prefs.getStringList('id');
+    final dbService = DatabaseService();
+    print(items.toString());
+    if (items != null && items.isNotEmpty) {
+      name = items[2].split("-")[0];
+      name = "${name.split(" ")[0]} ${name.split(" ")[1]}".toTitleCase;
+      grade = items[2].split("-")[1];
+      student_id = items[0].toString().split("#")[1];
+      role = items[0].toString().split("#")[0];
+      // userData = jsonDecode(items[2]) as Map<String, dynamic>;
+    }
+    print("student_id $student_id");
+    print("role $role");
+    print(name);
+    print(grade);
+    profile_data = await dbService.FiGet_profile_data(student_id, role)
+        as Map<String, dynamic>;
+    setState(() {
+      isLoading = false;
     });
   }
 
@@ -75,6 +83,7 @@ class _StudentMainPageState extends State<StudentMainPage> {
   String UpdatedPassword = "";
   @override
   Widget build(BuildContext context) {
+    print("start........build");
     late Widget StudentMainPageBody;
     List<Widget> Pages = [
       Container(
@@ -181,7 +190,7 @@ class _StudentMainPageState extends State<StudentMainPage> {
                       StudentGrade: profile_data['grade'],
                       StudentEmail: profile_data['email'],
                       StudentNumber: profile_data['phone'],
-                      StudentPassword: profile_data['name'], 
+                      StudentPassword: profile_data['name'],
                       profile_photo: profile_data['photo'],
                     )
                   ],
@@ -684,6 +693,6 @@ class _StudentMainPageState extends State<StudentMainPage> {
       );
     }
     SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersiveSticky);
-    return StudentMainPageBody;
+    return(isLoading)? Scaffold(backgroundColor: const Color.fromARGB(255, 233, 255, 247),body: Center(child: CircularProgressIndicator(color: Color.fromARGB(255, 74, 193, 241),))):StudentMainPageBody;
   }
 }

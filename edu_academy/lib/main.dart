@@ -23,7 +23,7 @@ void main() async {
     DeviceOrientation.portraitUp,
     DeviceOrientation.portraitDown,
   ]);
-  //dart fix --dry-run 
+  //dart fix --dry-run
   runApp(GetMaterialApp(
       debugShowCheckedModeBanner: false,
       routes: {

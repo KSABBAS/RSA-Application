@@ -22,7 +22,7 @@ Object? realTimeValues;
 
 class _StudentFirstMainPageState extends State<StudentFirstMainPage> {
   late Future<void> _dataFuture;
-  
+
   Future<void> _launchURL({required String url}) async {
     try {
       if (!await launchUrl(Uri.parse(url))) {
@@ -32,6 +32,7 @@ class _StudentFirstMainPageState extends State<StudentFirstMainPage> {
       //mj
     }
   }
+
   @override
   void initState() {
     super.initState();
@@ -49,17 +50,15 @@ class _StudentFirstMainPageState extends State<StudentFirstMainPage> {
       (event) {
         setState(() {
           try {
-
-          realTimeValues = event.snapshot.value;
-          print("realTimeValues $realTimeValues");
-          Map map = realTimeValues as Map;
-          print("map.keys ${map.keys}");
-
-          for (var i in map.keys) {
-            for (var j in map[i].keys) {
-              Messgaes_list.add([i, map[i][j][3], map[i][j][0]]);
+            realTimeValues = event.snapshot.value;
+            print("realTimeValues $realTimeValues");
+            Map map = realTimeValues as Map;
+            print("map.keys ${map.keys}");
+            for (var i in map.keys) {
+              for (var j in map[i].keys) {
+                Messgaes_list.add([i, map[i][j][3], map[i][j][0]]);
+              }
             }
-          }
           } catch (e) {
             print("e $e");
           }
@@ -70,6 +69,9 @@ class _StudentFirstMainPageState extends State<StudentFirstMainPage> {
 
   @override
   Widget build(BuildContext context) {
+    print("==============================================");
+    print(name);
+    print(grade);
     int DayIndex = DateTime.now().weekday;
     print(DayIndex);
     late Widget FirstPageBody;
@@ -333,7 +335,9 @@ class _StudentFirstMainPageState extends State<StudentFirstMainPage> {
         ));
     Widget JoinButton = InkWell(
       onTap: () {
-        _launchURL(url: "https://us06web.zoom.us/j/3088571822?pwd=E5VM4ANDKYA5jW59RKUuwRvVA2onkA.1");
+        _launchURL(
+            url:
+                "https://us06web.zoom.us/j/3088571822?pwd=E5VM4ANDKYA5jW59RKUuwRvVA2onkA.1");
       },
       child: CMaker(
         alignment: Alignment.center,
