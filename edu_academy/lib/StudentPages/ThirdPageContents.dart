@@ -249,7 +249,7 @@ class _ThirdPageState extends State<ThirdPage> {
             PageIndex = 0;
           });
         },
-        child: Image.asset("images/Book.png"));
+        child: CircleAvatar(backgroundImage:NetworkImage(profile_data['photo'])));
     Widget StudentNameTC = CMaker(
       alignment: Alignment.bottomCenter,
       child: Text(

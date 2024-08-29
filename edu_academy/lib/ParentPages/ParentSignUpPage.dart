@@ -278,7 +278,7 @@ class _ParentSignUpPageState extends State<ParentSignUpPage> {
           icon: const Icon(Icons.arrow_back)),
     );
     Widget Logo = SizedBox(
-        height: double.infinity,
+        height: 150,
         child: Image.asset(
           "images/Logo.png",
           fit: BoxFit.contain,

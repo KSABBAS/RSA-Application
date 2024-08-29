@@ -6,6 +6,7 @@ import 'package:flutter/services.dart';
 import 'package:overlay_loading_progress/overlay_loading_progress.dart';
 import 'package:panara_dialogs/panara_dialogs.dart';
 import 'package:time_picker_spinner_pop_up/time_picker_spinner_pop_up.dart';
+import 'package:omni_datetime_picker/omni_datetime_picker.dart';
 
 class StudentMobileSignUpPage extends StatefulWidget {
   const StudentMobileSignUpPage({super.key});
@@ -27,7 +28,7 @@ String StudentPassword = "";
 String StudentConfirmPassword = "";
 String StudentMobileNumber = "";
 String StudentParentMobileNumber = "";
-String StudentDateOfBirth = "";
+String StudentDateOfBirth = "Select a Date";
 int StudentAge = 6;
 var now = DateTime.now();
 GlobalKey<FormState> key = GlobalKey();
@@ -317,25 +318,77 @@ class _StudentMobileSignUpPageState extends State<StudentMobileSignUpPage> {
         style: TextStyle(fontSize: 25, fontWeight: FontWeight.w600),
       ),
     );
-    Widget BirthDateW = TimePickerSpinnerPopUp(
-      textStyle: const TextStyle(fontSize: 25),
-      iconSize: 40,
-      minTime: DateTime.now().subtract(const Duration(days: 36525)),
-      maxTime: DateTime.now().subtract(const Duration(days: 1824)),
-      mode: CupertinoDatePickerMode.date,
-      initTime: forDateInput,
-      onChange: (dateTime) {
-        setState(() {
-          forDateInput = dateTime;
-          StudentDayOfBirth = dateTime.day.toString();
-          StudentMonthOfBirth = dateTime.month.toString();
-          StudentYearOfBirth = dateTime.year.toString();
-          StudentDateOfBirth =
-              "$StudentDayOfBirth/$StudentMonthOfBirth/$StudentYearOfBirth";
-          print(StudentDateOfBirth);
-        });
-      },
-    );
+    Widget BirthDateW = (PageWidth(context) > 550 && PageHeight(context) < 900)
+        ? MyButton(
+          padding: EdgeInsets.all(10),
+            buttonColor: Color.fromARGB(255, 74, 193, 241),
+            text: StudentDateOfBirth,
+            onTap: () async {
+              var TimeSelected=await showOmniDateTimePicker(
+                context: context,
+                initialDate: DateTime.now(),
+                // firstDate: DateTime.now().subtract(const Duration(days: 36525)),
+                // lastDate: DateTime.now().subtract(
+                //   const Duration(days: 1824),
+                // ),
+                type: OmniDateTimePickerType.date,
+                is24HourMode: false,
+                isShowSeconds: false,
+                minutesInterval: 1,
+                secondsInterval: 1,
+                borderRadius: const BorderRadius.all(Radius.circular(16)),
+                constraints: const BoxConstraints(
+                  maxWidth: 350,
+                  maxHeight: 650,
+                ),
+                transitionBuilder: (context, anim1, anim2, child) {
+                  return FadeTransition(
+                    opacity: anim1.drive(
+                      Tween(
+                        begin: 0,
+                        end: 1,
+                      ),
+                    ),
+                    child: child,
+                  );
+                },
+                selectableDayPredicate: (p0) {
+                  if (p0 == DateTime.now()) {
+                        return false;
+                      } else {
+                        return true;
+                      }
+                },
+                transitionDuration: const Duration(milliseconds: 200),
+                barrierDismissible: true,
+              );
+              StudentDayOfBirth = TimeSelected!.day.toString();
+                  StudentMonthOfBirth = TimeSelected!.month.toString();
+                  StudentYearOfBirth = TimeSelected!.year.toString();
+                  StudentDateOfBirth =
+                    "$StudentDayOfBirth / $StudentMonthOfBirth / $StudentYearOfBirth";
+              setState(() {
+              });
+            })
+        : TimePickerSpinnerPopUp(
+            textStyle: const TextStyle(fontSize: 25),
+            iconSize: 40,
+            minTime: DateTime.now().subtract(const Duration(days: 36525)),
+            maxTime: DateTime.now().subtract(const Duration(days: 1824)),
+            mode: CupertinoDatePickerMode.date,
+            initTime: forDateInput,
+            onChange: (dateTime) {
+              setState(() {
+                forDateInput = dateTime;
+                StudentDayOfBirth = dateTime.day.toString();
+                StudentMonthOfBirth = dateTime.month.toString();
+                StudentYearOfBirth = dateTime.year.toString();
+                StudentDateOfBirth =
+                    "$StudentDayOfBirth/$StudentMonthOfBirth/$StudentYearOfBirth";
+                print(StudentDateOfBirth);
+              });
+            },
+          );
     Widget GenederText = Container(
       alignment: Alignment.centerLeft,
       child: const Text(
@@ -379,7 +432,9 @@ class _StudentMobileSignUpPageState extends State<StudentMobileSignUpPage> {
                 });
               }))
     ];
-    Widget GradeText = CMaker(width: double.infinity,alignment: Alignment.centerLeft,
+    Widget GradeText = CMaker(
+      width: double.infinity,
+      alignment: Alignment.centerLeft,
       child: const Text(
         "Grade",
         style: TextStyle(fontSize: 25, fontWeight: FontWeight.w600),
@@ -462,164 +517,158 @@ class _StudentMobileSignUpPageState extends State<StudentMobileSignUpPage> {
             }),
       ),
     );
-    Widget SignUpCircle=Container(
-      alignment: Alignment.bottomLeft,
+    Widget SignUpCircle = Container(
+        alignment: Alignment.bottomLeft,
+        child: Container(
+          padding: const EdgeInsets.fromLTRB(0, 40, 20, 0),
+          alignment: Alignment.center,
+          width: 160,
+          height: 160,
+          decoration: const BoxDecoration(
+            borderRadius: BorderRadius.only(
+                bottomLeft: Radius.zero,
+                topLeft: Radius.circular(10),
+                topRight: Radius.circular(5000),
+                bottomRight: Radius.circular(10)),
+            color: Color.fromARGB(255, 255, 255, 255),
+          ),
+          child: const Text(
+            "Sign up",
+            style: TextStyle(
+                fontSize: 35,
+                color: Color.fromARGB(255, 8, 125, 159),
+                fontWeight: FontWeight.w700),
+          ),
+        ));
+    Widget BackButton = Container(
+      width: double.infinity,
+      alignment: Alignment.centerLeft,
+      padding: const EdgeInsets.only(left: 20),
+      child: IconButton(
+          onPressed: () {
+            Navigator.pop(context);
+          },
+          icon: const Icon(Icons.arrow_back)),
+    );
+    Widget Logo = SizedBox(
+        height: 150,
+        child: Image.asset(
+          "images/Logo.png",
+          fit: BoxFit.contain,
+        ));
+    Widget StudentWithArro = Container(
+      child: Row(
+        children: [
+          Container(
+              alignment: Alignment.centerLeft,
+              child: const Text("Student  ",
+                  style: TextStyle(
+                      fontSize: 25,
+                      fontWeight: FontWeight.w600,
+                      color: Color.fromARGB(255, 8, 125, 159)))),
+          Expanded(
+              child: Container(
+                  margin: const EdgeInsets.only(bottom: 20),
+                  height: 5,
+                  alignment: Alignment.bottomLeft,
+                  child: const Icon(
+                    Icons.arrow_forward,
+                    color: Color.fromARGB(255, 8, 125, 159),
+                  ))),
+        ],
+      ),
+    );
+    Widget SignUpButton = InkWell(
+      onTap: () async {
+        if (key.currentState!.validate()) {
+          key.currentState!.save();
+          OverlayLoadingProgress.start(
+            context,
+            widget: CMaker(
+              circularRadius: 15,
+              color: const Color.fromARGB(198, 255, 255, 255),
+              width: MediaQuery.of(context).size.width / 3.6,
+              padding: EdgeInsets.all(MediaQuery.of(context).size.width / 13),
+              child: const AspectRatio(
+                aspectRatio: 1,
+                child: CircularProgressIndicator(
+                  color: Colors.blue,
+                ),
+              ),
+            ),
+          );
+          await dbService.fiCreate('Students', {
+            "name": StudentName,
+            "phone": StudentMobileNumber,
+            "par_phone": StudentParentMobileNumber,
+            "email": StudentEmail,
+            "password": StudentPassword,
+            "birth_date": StudentDateOfBirth,
+            "gender": StudentGender,
+            "grade": StudentGrade,
+            "photo": '',
+            "state": "false"
+          });
+          OverlayLoadingProgress.stop();
+          PanaraInfoDialog.show(
+            context,
+            title: "Done that save correct",
+            message: "Now you can click LogIn",
+            buttonText: "Go to Login",
+            onTapDismiss: () {
+              Navigator.pop(context);
+              Navigator.pop(context);
+              Navigator.pop(context);
+            },
+            panaraDialogType: PanaraDialogType.success,
+            barrierDismissible: false,
+          );
+        }
+      },
       child: Container(
-                                          padding: const EdgeInsets.fromLTRB(
-                                              0, 40, 20, 0),
-                                          alignment: Alignment.center,
-                                          width: 160,
-                                          height: 160,
-                                          decoration: const BoxDecoration(
-                                            borderRadius: BorderRadius.only(
-                                                bottomLeft: Radius.zero,
-                                                topLeft: Radius.circular(10),
-                                                topRight:
-                                                    Radius.circular(5000),
-                                                bottomRight:
-                                                    Radius.circular(10)),
-                                            color: Color.fromARGB(
-                                                255, 255, 255, 255),
-                                          ),
-                                          child: const Text(
-                                            "Sign up",
-                                            style: TextStyle(
-                                                fontSize: 35,
-                                                color: Color.fromARGB(
-                                                    255, 8, 125, 159),
-                                                fontWeight: FontWeight.w700),
-                                          ),
-                                        ));
-    Widget BackButton=Container(
-                                      width: double.infinity,
-                                      alignment: Alignment.centerLeft,
-                                      padding: const EdgeInsets.only(left: 20),
-                                      child: IconButton(
-                                          onPressed: () {
-                                            Navigator.pop(context);
-                                          },
-                                          icon: const Icon(Icons.arrow_back)),
-                                    );
-    Widget Logo=SizedBox(
-                                          height: double.infinity,
-                                          child: Image.asset(
-                                            "images/Logo.png",
-                                            fit: BoxFit.contain,
-                                          ));
-    Widget StudentWithArro=Container(
-                        child: Row(
-                          children: [
-                            Container(
-                                alignment: Alignment.centerLeft,
-                                child: const Text("Student  ",
-                                    style: TextStyle(
-                                        fontSize: 25,
-                                        fontWeight: FontWeight.w600,
-                                        color:
-                                            Color.fromARGB(255, 8, 125, 159)))),
-                            Expanded(
-                                child: Container(
-                                    margin: const EdgeInsets.only(bottom: 20),
-                                    height: 5,
-                                    alignment: Alignment.bottomLeft,
-                                    child: const Icon(
-                                      Icons.arrow_forward,
-                                      color: Color.fromARGB(255, 8, 125, 159),
-                                    ))),
-                          ],
-                        ),
-                      );
-    Widget SignUpButton=InkWell(
-                        onTap: () async {
-                          if (key.currentState!.validate()) {
-                            key.currentState!.save();
-                            OverlayLoadingProgress.start(
-                              context,
-                              widget: CMaker(
-                                circularRadius: 15,
-                                color: const Color.fromARGB(198, 255, 255, 255),
-                                width: MediaQuery.of(context).size.width / 3.6,
-                                padding: EdgeInsets.all(
-                                    MediaQuery.of(context).size.width / 13),
-                                child: const AspectRatio(
-                                  aspectRatio: 1,
-                                  child: CircularProgressIndicator(
-                                    color: Colors.blue,
-                                  ),
-                                ),
-                              ),
-                            );
-                            await dbService.fiCreate('Students', {
-                              "name": StudentName,
-                              "phone": StudentMobileNumber,
-                              "par_phone": StudentParentMobileNumber,
-                              "email": StudentEmail,
-                              "password": StudentPassword,
-                              "birth_date": StudentDateOfBirth,
-                              "gender": StudentGender,
-                              "grade": StudentGrade,
-                              "photo" : '',
-                              "state": "false"
-                            });
-                            OverlayLoadingProgress.stop();
-                            PanaraInfoDialog.show(
-                              context,
-                              title: "Done that save correct",
-                              message: "Now you can click LogIn",
-                              buttonText: "Go to Login",
-                              onTapDismiss: () {
-                                Navigator.pop(context);
-                                Navigator.pop(context);
-                                Navigator.pop(context);
-                              },
-                              panaraDialogType: PanaraDialogType.success,
-                              barrierDismissible: false,
-                            );
-                          }
-                        },
-                        child: Container(
-                          alignment: Alignment.center,
-                          height: 50,
-                          width: 120,
-                          decoration: BoxDecoration(
-                              color: const Color.fromARGB(255, 74, 193, 241),
-                              borderRadius: BorderRadius.circular(30)),
-                          child: const Text(
-                            "sign up",
-                            style: TextStyle(
-                                fontSize: 20,
-                                color: Color.fromARGB(255, 255, 255, 255),
-                                fontWeight: FontWeight.w700),
-                          ),
-                        ),
-                      );
-    List <Widget>AlreadyHaveAnAccountElements=[Container(
-                                alignment: Alignment.centerRight,
-                                child: const Text(
-                                  "Already have an account ? ",
-                                  style: TextStyle(
-                                      fontSize: 15,
-                                      color: Color.fromARGB(255, 206, 206, 206),
-                                      fontWeight: FontWeight.w500),
-                                ),
-                              ),
-                              Container(
-                              margin: const EdgeInsets.only(left: 20),
-                              alignment: Alignment.centerLeft,
-                              child: TextButton(
-                                onPressed: () {
-                                  Navigator.pushNamed(context, "LogInPage");
-                                },
-                                child: const Text(
-                                  "Log in",
-                                  style: TextStyle(
-                                      fontSize: 15,
-                                      color: Color.fromARGB(255, 74, 193, 241),
-                                      fontWeight: FontWeight.w500),
-                                ),
-                              ),
-                            ),
-                              ];
+        alignment: Alignment.center,
+        height: 50,
+        width: 120,
+        decoration: BoxDecoration(
+            color: const Color.fromARGB(255, 74, 193, 241),
+            borderRadius: BorderRadius.circular(30)),
+        child: const Text(
+          "sign up",
+          style: TextStyle(
+              fontSize: 20,
+              color: Color.fromARGB(255, 255, 255, 255),
+              fontWeight: FontWeight.w700),
+        ),
+      ),
+    );
+    List<Widget> AlreadyHaveAnAccountElements = [
+      Container(
+        alignment: Alignment.centerRight,
+        child: const Text(
+          "Already have an account ? ",
+          style: TextStyle(
+              fontSize: 15,
+              color: Color.fromARGB(255, 206, 206, 206),
+              fontWeight: FontWeight.w500),
+        ),
+      ),
+      Container(
+        margin: const EdgeInsets.only(left: 20),
+        alignment: Alignment.centerLeft,
+        child: TextButton(
+          onPressed: () {
+            Navigator.pushNamed(context, "LogInPage");
+          },
+          child: const Text(
+            "Log in",
+            style: TextStyle(
+                fontSize: 15,
+                color: Color.fromARGB(255, 74, 193, 241),
+                fontWeight: FontWeight.w500),
+          ),
+        ),
+      ),
+    ];
     SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersiveSticky);
     if (PageWidth(context) < 550) {
       setState(() {
@@ -628,238 +677,349 @@ class _StudentMobileSignUpPageState extends State<StudentMobileSignUpPage> {
             key: key,
             child: CMaker(
               height: PageHeight(context),
-              child: ListView(children: [
-                Container(
-                  width: double.infinity,
-                  height: 250,
-                  decoration: const BoxDecoration(gradient: LinearGradient(
-                          begin: Alignment.bottomLeft,
-                          end: Alignment.topRight,
-                          colors: [
-                        Color.fromARGB(255, 8, 125, 159),
-                        Color.fromARGB(255, 74, 193, 241)
-                      ])),
-                      child: Row(children: [
-                        Expanded(child: Column(children: [
-                          Expanded(child: Container(child:BackButton),),
-                          Expanded(flex: 2,child: SignUpCircle,),
-                        ]
-                        )),
-                        Expanded(child: CMaker(height: double.infinity,alignment:Alignment.center,child: Logo))
-                      ],),
+              child: ListView(
+                children: [
+                  Container(
+                    width: double.infinity,
+                    height: 250,
+                    decoration: const BoxDecoration(
+                        gradient: LinearGradient(
+                            begin: Alignment.bottomLeft,
+                            end: Alignment.topRight,
+                            colors: [
+                          Color.fromARGB(255, 8, 125, 159),
+                          Color.fromARGB(255, 74, 193, 241)
+                        ])),
+                    child: Row(
+                      children: [
+                        Expanded(
+                            child: Column(children: [
+                          Expanded(
+                            child: Container(child: BackButton),
+                          ),
+                          Expanded(
+                            flex: 2,
+                            child: SignUpCircle,
+                          ),
+                        ])),
+                        Expanded(
+                            child: CMaker(
+                                height: double.infinity,
+                                alignment: Alignment.center,
+                                child: Logo))
+                      ],
+                    ),
                   ),
                   CMaker(
-                    padding: const EdgeInsets.symmetric(horizontal: 20),
-                    child: Column(children: [
-                  const Padding(padding:EdgeInsets.only(bottom: 20)),
-                  StudentWithArro,
-                  const Padding(padding:EdgeInsets.only(bottom: 20)),
-                  NameTFF,
-                  GardianPhoneTFF,
-                  PhoneNumberTFF,
-                  EmailTFF,
-                  PasswordTFF,
-                  ConfirmTFF,
-                  const Padding(padding:EdgeInsets.only(bottom: 20)),
-                  BirthDateTC,
-                  const Padding(padding:EdgeInsets.only(bottom: 40)),
-                  CMaker(alignment: Alignment.center,child: BirthDateW),
-                  const Padding(padding:EdgeInsets.only(bottom: 40)),
-                  GenederText,
-                  const Padding(padding:EdgeInsets.only(bottom: 20)),
-                  CMaker(padding: const EdgeInsets.symmetric(horizontal: 20),height: 100,width: double.infinity,child: Row(children: [
-                    Expanded(flex: 5,child: GenederWidgets[0]),
-                    Expanded(child: Container(),),
-                    Expanded(flex: 5,child: GenederWidgets[1]),
-                  ],)),
-                  const Padding(padding:EdgeInsets.only(bottom: 20)),
-                  GradeText,
-                  const Padding(padding:EdgeInsets.only(bottom: 20)),
-                  GradeDDB,
-                  const Padding(padding:EdgeInsets.only(bottom: 60)),
-                  CMaker(alignment: Alignment.center,child: SignUpButton),
-                  const Padding(padding:EdgeInsets.only(bottom: 20)),
-                  CMaker(width: double.infinity,child: Row(children: [
-                    Expanded(child: Container()),
-                    Expanded(flex: 10,child: AlreadyHaveAnAccountElements[0]),
-                    Expanded(child: Container()),
-                    Expanded(flex: 6,child: AlreadyHaveAnAccountElements[1]),
-                    Expanded(child: Container()),
-                  ],)),
-                  const Padding(padding:EdgeInsets.only(bottom: 40)),
-                  ],))
-              ],),
+                      padding: const EdgeInsets.symmetric(horizontal: 20),
+                      child: Column(
+                        children: [
+                          const Padding(padding: EdgeInsets.only(bottom: 20)),
+                          StudentWithArro,
+                          const Padding(padding: EdgeInsets.only(bottom: 20)),
+                          NameTFF,
+                          GardianPhoneTFF,
+                          PhoneNumberTFF,
+                          EmailTFF,
+                          PasswordTFF,
+                          ConfirmTFF,
+                          const Padding(padding: EdgeInsets.only(bottom: 20)),
+                          BirthDateTC,
+                          const Padding(padding: EdgeInsets.only(bottom: 40)),
+                          CMaker(
+                              alignment: Alignment.center, child: BirthDateW),
+                          const Padding(padding: EdgeInsets.only(bottom: 40)),
+                          GenederText,
+                          const Padding(padding: EdgeInsets.only(bottom: 20)),
+                          CMaker(
+                              padding:
+                                  const EdgeInsets.symmetric(horizontal: 20),
+                              height: 100,
+                              width: double.infinity,
+                              child: Row(
+                                children: [
+                                  Expanded(flex: 5, child: GenederWidgets[0]),
+                                  Expanded(
+                                    child: Container(),
+                                  ),
+                                  Expanded(flex: 5, child: GenederWidgets[1]),
+                                ],
+                              )),
+                          const Padding(padding: EdgeInsets.only(bottom: 20)),
+                          GradeText,
+                          const Padding(padding: EdgeInsets.only(bottom: 20)),
+                          GradeDDB,
+                          const Padding(padding: EdgeInsets.only(bottom: 60)),
+                          CMaker(
+                              alignment: Alignment.center, child: SignUpButton),
+                          const Padding(padding: EdgeInsets.only(bottom: 20)),
+                          CMaker(
+                              width: double.infinity,
+                              child: Row(
+                                children: [
+                                  Expanded(child: Container()),
+                                  Expanded(
+                                      flex: 10,
+                                      child: AlreadyHaveAnAccountElements[0]),
+                                  Expanded(child: Container()),
+                                  Expanded(
+                                      flex: 6,
+                                      child: AlreadyHaveAnAccountElements[1]),
+                                  Expanded(child: Container()),
+                                ],
+                              )),
+                          const Padding(padding: EdgeInsets.only(bottom: 40)),
+                        ],
+                      ))
+                ],
+              ),
             ),
           ),
         );
       });
-    } else if (PageWidth(context) >= 550&&PageHeight(context)>=900) {
+    } else if (PageWidth(context) >= 550 && PageHeight(context) >= 900) {
       setState(() {
         StudentSignUpBody = Scaffold(
           body: Form(
             key: key,
             child: CMaker(
-              alignment: Alignment.center,
-              width: double.infinity,
-              height:double.infinity,
-              gradient: const LinearGradient(
-                          begin: Alignment.bottomLeft,
-                          end: Alignment.topRight,
-                          colors: [
-                        Color.fromARGB(255, 8, 125, 159),
-                        Color.fromARGB(255, 74, 193, 241)
-                      ]),
-              child: Column(
-                children: [
-                  Expanded(child: Container()),
-                  Expanded(flex: 3,child: Row(
-                    children: [
-                      Expanded(child: Container()),
-                      CMaker(width: 70,height: 70,child: BackButton,),
-                      Expanded(flex: 20,
-                        child: Image.asset(
-                                                  "images/Logo.png",
-                                                  fit: BoxFit.contain,
-                                                ),
+                alignment: Alignment.center,
+                width: double.infinity,
+                height: double.infinity,
+                gradient: const LinearGradient(
+                    begin: Alignment.bottomLeft,
+                    end: Alignment.topRight,
+                    colors: [
+                      Color.fromARGB(255, 8, 125, 159),
+                      Color.fromARGB(255, 74, 193, 241)
+                    ]),
+                child: Column(
+                  children: [
+                    Expanded(child: Container()),
+                    Expanded(
+                      flex: 3,
+                      child: Row(
+                        children: [
+                          Expanded(child: Container()),
+                          CMaker(
+                            width: 70,
+                            height: 70,
+                            child: BackButton,
+                          ),
+                          Expanded(
+                            flex: 20,
+                            child: Image.asset(
+                              "images/Logo.png",
+                              fit: BoxFit.contain,
+                            ),
+                          ),
+                          const SizedBox(width: 70, height: 70),
+                          Expanded(child: Container()),
+                        ],
                       ),
-                      const SizedBox(width: 70,height: 70),
-                      Expanded(child: Container()),
-                    ],
-                  ),),
-                  CMaker(circularRadius: 20,
-                  color: Colors.white,
-                  height: 800,
-                  width: 450,
-                  padding: const EdgeInsets.only(top: 20,right: 20,left: 20),
-                  child: ListView(children: [
-                    const Padding(padding:EdgeInsets.only(bottom: 20)),
-                      StudentWithArro,
-                    const Padding(padding:EdgeInsets.only(bottom: 20)),
-                      NameTFF,
-                      GardianPhoneTFF,
-                      PhoneNumberTFF,
-                      EmailTFF,
-                      PasswordTFF,
-                      ConfirmTFF,
-                      const Padding(padding:EdgeInsets.only(bottom: 20)),
-                      BirthDateTC,
-                      const Padding(padding:EdgeInsets.only(bottom: 40)),
-                      CMaker(alignment: Alignment.center,child: BirthDateW),
-                      const Padding(padding:EdgeInsets.only(bottom: 40)),
-                      GenederText,
-                      const Padding(padding:EdgeInsets.only(bottom: 20)),
-                      CMaker(padding: const EdgeInsets.symmetric(horizontal: 20),height: 100,width: double.infinity,child: Row(children: [
-                        Expanded(flex: 5,child: GenederWidgets[0]),
-                        Expanded(child: Container(),),
-                        Expanded(flex: 5,child: GenederWidgets[1]),
-                      ],)),
-                      const Padding(padding:EdgeInsets.only(bottom: 20)),
-                      GradeText,
-                      const Padding(padding:EdgeInsets.only(bottom: 20)),
-                      GradeDDB,
-                      const Padding(padding:EdgeInsets.only(bottom: 60)),
-                      CMaker(alignment: Alignment.center,child: SignUpButton),
-                      const Padding(padding:EdgeInsets.only(bottom: 20)),
-                      CMaker(width: double.infinity,child: Row(children: [
-                        Expanded(child: Container()),
-                        Expanded(flex: 10,child: AlreadyHaveAnAccountElements[0]),
-                        Expanded(child: Container()),
-                        Expanded(flex: 6,child: AlreadyHaveAnAccountElements[1]),
-                        Expanded(child: Container()),
-                      ],)),
-                      const Padding(padding:EdgeInsets.only(bottom: 40)),
-                              ],)),
-                      Expanded(flex: 2,child: Container()),
-                ],
-              )),
+                    ),
+                    CMaker(
+                        circularRadius: 20,
+                        color: Colors.white,
+                        height: 800,
+                        width: 450,
+                        padding:
+                            const EdgeInsets.only(top: 20, right: 20, left: 20),
+                        child: ListView(
+                          children: [
+                            const Padding(padding: EdgeInsets.only(bottom: 20)),
+                            StudentWithArro,
+                            const Padding(padding: EdgeInsets.only(bottom: 20)),
+                            NameTFF,
+                            GardianPhoneTFF,
+                            PhoneNumberTFF,
+                            EmailTFF,
+                            PasswordTFF,
+                            ConfirmTFF,
+                            const Padding(padding: EdgeInsets.only(bottom: 20)),
+                            BirthDateTC,
+                            const Padding(padding: EdgeInsets.only(bottom: 40)),
+                            CMaker(
+                                alignment: Alignment.center, child: BirthDateW),
+                            const Padding(padding: EdgeInsets.only(bottom: 40)),
+                            GenederText,
+                            const Padding(padding: EdgeInsets.only(bottom: 20)),
+                            CMaker(
+                                padding:
+                                    const EdgeInsets.symmetric(horizontal: 20),
+                                height: 100,
+                                width: double.infinity,
+                                child: Row(
+                                  children: [
+                                    Expanded(flex: 5, child: GenederWidgets[0]),
+                                    Expanded(
+                                      child: Container(),
+                                    ),
+                                    Expanded(flex: 5, child: GenederWidgets[1]),
+                                  ],
+                                )),
+                            const Padding(padding: EdgeInsets.only(bottom: 20)),
+                            GradeText,
+                            const Padding(padding: EdgeInsets.only(bottom: 20)),
+                            GradeDDB,
+                            const Padding(padding: EdgeInsets.only(bottom: 60)),
+                            CMaker(
+                                alignment: Alignment.center,
+                                child: SignUpButton),
+                            const Padding(padding: EdgeInsets.only(bottom: 20)),
+                            CMaker(
+                                width: double.infinity,
+                                child: Row(
+                                  children: [
+                                    Expanded(child: Container()),
+                                    Expanded(
+                                        flex: 10,
+                                        child: AlreadyHaveAnAccountElements[0]),
+                                    Expanded(child: Container()),
+                                    Expanded(
+                                        flex: 6,
+                                        child: AlreadyHaveAnAccountElements[1]),
+                                    Expanded(child: Container()),
+                                  ],
+                                )),
+                            const Padding(padding: EdgeInsets.only(bottom: 40)),
+                          ],
+                        )),
+                    Expanded(flex: 2, child: Container()),
+                  ],
+                )),
           ),
         );
       });
-    }else if (PageWidth(context) >= 550&&PageHeight(context)<900) {
+    } else if (PageWidth(context) >= 550 && PageHeight(context) < 900) {
       setState(() {
         StudentSignUpBody = Scaffold(
           body: Form(
             key: key,
             child: CMaker(
-              alignment: Alignment.center,
-              width: double.infinity,
-              height:double.infinity,
-              gradient: const LinearGradient(
-                          begin: Alignment.bottomLeft,
-                          end: Alignment.topRight,
-                          colors: [
-                        Color.fromARGB(255, 8, 125, 159),
-                        Color.fromARGB(255, 74, 193, 241)
-                      ]),
-              child: Row(
-                children: [
-                  Expanded(child: Container()),
-                  Expanded(flex: 3,child: Column(
-                    children: [
-                      Expanded(child: Container(),),
-                      CMaker(width: 70,height: 70,child: BackButton,),
-                      (PageWidth(context)<800)?Expanded(flex: 20,
-                        child: Image.asset(
-                                                  "images/Logo.png",
-                                                  fit: BoxFit.contain,
-                                                ),
-                      ):Expanded(flex: 20,child: CMaker(width: 200,
-                        child: Image.asset(
-                                                  "images/Logo.png",
-                                                  fit: BoxFit.contain,
-                                                ),),
+                alignment: Alignment.center,
+                width: double.infinity,
+                height: double.infinity,
+                gradient: const LinearGradient(
+                    begin: Alignment.bottomLeft,
+                    end: Alignment.topRight,
+                    colors: [
+                      Color.fromARGB(255, 8, 125, 159),
+                      Color.fromARGB(255, 74, 193, 241)
+                    ]),
+                child: Row(
+                  children: [
+                    Expanded(child: Container()),
+                    Expanded(
+                      flex: 3,
+                      child: Column(
+                        children: [
+                          Expanded(
+                            child: Container(),
+                          ),
+                          CMaker(
+                            width: 70,
+                            height: 70,
+                            child: BackButton,
+                          ),
+                          (PageWidth(context) < 800)
+                              ? Expanded(
+                                  flex: 20,
+                                  child: Image.asset(
+                                    "images/Logo.png",
+                                    fit: BoxFit.contain,
+                                  ),
+                                )
+                              : Expanded(
+                                  flex: 20,
+                                  child: CMaker(
+                                    width: 200,
+                                    child: Image.asset(
+                                      "images/Logo.png",
+                                      fit: BoxFit.contain,
+                                    ),
+                                  ),
+                                ),
+                          const SizedBox(width: 70, height: 70),
+                          Expanded(
+                            child: Container(),
+                          ),
+                        ],
                       ),
-                      const SizedBox(width: 70,height: 70),
-                      Expanded(child: Container(),),
-                    ],
-                  ),),
-                  Expanded(child: Container()),
-                  CMaker(circularRadius: 20,
-                  color: Colors.white,
-                  height: 400,
-                  width:(PageWidth(context)<800)? PageWidth(context)/2:400,
-                  padding: const EdgeInsets.only(top: 20,right: 20,left: 20),
-                  child: ListView(children: [
-                    const Padding(padding:EdgeInsets.only(bottom: 20)),
-                      StudentWithArro,
-                    const Padding(padding:EdgeInsets.only(bottom: 20)),
-                      NameTFF,
-                      GardianPhoneTFF,
-                      PhoneNumberTFF,
-                      EmailTFF,
-                      PasswordTFF,
-                      ConfirmTFF,
-                      const Padding(padding:EdgeInsets.only(bottom: 20)),
-                      BirthDateTC,
-                      const Padding(padding:EdgeInsets.only(bottom: 40)),
-                      CMaker(alignment: Alignment.center,child: BirthDateW),
-                      const Padding(padding:EdgeInsets.only(bottom: 40)),
-                      GenederText,
-                      const Padding(padding:EdgeInsets.only(bottom: 20)),
-                      CMaker(padding: const EdgeInsets.symmetric(horizontal: 20),height: 100,width: double.infinity,child: Row(children: [
-                        Expanded(flex: 5,child: GenederWidgets[0]),
-                        Expanded(child: Container(),),
-                        Expanded(flex: 5,child: GenederWidgets[1]),
-                      ],)),
-                      const Padding(padding:EdgeInsets.only(bottom: 20)),
-                      GradeText,
-                      const Padding(padding:EdgeInsets.only(bottom: 20)),
-                      GradeDDB,
-                      const Padding(padding:EdgeInsets.only(bottom: 60)),
-                      CMaker(alignment: Alignment.center,child: SignUpButton),
-                      const Padding(padding:EdgeInsets.only(bottom: 20)),
-                      CMaker(width: double.infinity,child: Row(children: [
-                        Expanded(child: Container()),
-                        Expanded(flex: 10,child: AlreadyHaveAnAccountElements[0]),
-                        Expanded(child: Container()),
-                        Expanded(flex: 6,child: AlreadyHaveAnAccountElements[1]),
-                        Expanded(child: Container()),
-                      ],)),
-                      const Padding(padding:EdgeInsets.only(bottom: 40)),
-                              ],)),
-                      Expanded(flex: 2,child: Container()),
-                ],
-              )),
+                    ),
+                    Expanded(child: Container()),
+                    CMaker(
+                        circularRadius: 20,
+                        color: Colors.white,
+                        height: 400,
+                        width: (PageWidth(context) < 800)
+                            ? PageWidth(context) / 2
+                            : 400,
+                        padding:
+                            const EdgeInsets.only(top: 20, right: 20, left: 20),
+                        child: ListView(
+                          children: [
+                            const Padding(padding: EdgeInsets.only(bottom: 20)),
+                            StudentWithArro,
+                            const Padding(padding: EdgeInsets.only(bottom: 20)),
+                            NameTFF,
+                            GardianPhoneTFF,
+                            PhoneNumberTFF,
+                            EmailTFF,
+                            PasswordTFF,
+                            ConfirmTFF,
+                            const Padding(padding: EdgeInsets.only(bottom: 20)),
+                            BirthDateTC,
+                            const Padding(padding: EdgeInsets.only(bottom: 40)),
+                            CMaker(
+                                alignment: Alignment.center, child: BirthDateW),
+                            const Padding(padding: EdgeInsets.only(bottom: 40)),
+                            GenederText,
+                            const Padding(padding: EdgeInsets.only(bottom: 20)),
+                            CMaker(
+                                padding:
+                                    const EdgeInsets.symmetric(horizontal: 20),
+                                height: 100,
+                                width: double.infinity,
+                                child: Row(
+                                  children: [
+                                    Expanded(flex: 5, child: GenederWidgets[0]),
+                                    Expanded(
+                                      child: Container(),
+                                    ),
+                                    Expanded(flex: 5, child: GenederWidgets[1]),
+                                  ],
+                                )),
+                            const Padding(padding: EdgeInsets.only(bottom: 20)),
+                            GradeText,
+                            const Padding(padding: EdgeInsets.only(bottom: 20)),
+                            GradeDDB,
+                            const Padding(padding: EdgeInsets.only(bottom: 60)),
+                            CMaker(
+                                alignment: Alignment.center,
+                                child: SignUpButton),
+                            const Padding(padding: EdgeInsets.only(bottom: 20)),
+                            CMaker(
+                                width: double.infinity,
+                                child: Row(
+                                  children: [
+                                    Expanded(child: Container()),
+                                    Expanded(
+                                        flex: 10,
+                                        child: AlreadyHaveAnAccountElements[0]),
+                                    Expanded(child: Container()),
+                                    Expanded(
+                                        flex: 6,
+                                        child: AlreadyHaveAnAccountElements[1]),
+                                    Expanded(child: Container()),
+                                  ],
+                                )),
+                            const Padding(padding: EdgeInsets.only(bottom: 40)),
+                          ],
+                        )),
+                    Expanded(flex: 2, child: Container()),
+                  ],
+                )),
           ),
         );
       });

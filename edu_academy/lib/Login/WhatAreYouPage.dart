@@ -149,12 +149,12 @@ class _WhatAreYouPageState extends State<WhatAreYouPage> {
                                                 fontWeight: FontWeight.w700),
                                           ),
                                         ));
-    Widget Logo=SizedBox(
-                                          height: double.infinity,
-                                          child: Image.asset(
-                                            "images/Logo.png",
-                                            fit: BoxFit.contain,
-                                          ));
+    Widget Logo = SizedBox(
+        height: 150,
+        child: Image.asset(
+          "images/Logo.png",
+          fit: BoxFit.contain,
+        ));
     if (PageWidth(context) <= 550) {
       setState(() {
         WhatAreYouBody = Scaffold(
