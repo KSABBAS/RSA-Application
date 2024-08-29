@@ -5,7 +5,8 @@ import 'package:edu_academy/service/Databse_Service.dart';
 import 'package:flutter/material.dart';
 import 'package:edu_academy/StudentPages/StudentMainPage.dart';
 import 'package:insta_image_viewer/insta_image_viewer.dart';
-
+import 'package:overlay_loading_progress/overlay_loading_progress.dart';
+import 'package:panara_dialogs/panara_dialogs.dart';
 class ThirdPage extends StatefulWidget {
   const ThirdPage({super.key});
 
@@ -531,7 +532,7 @@ class _ThirdPageState extends State<ThirdPage> {
                               height: 70,
                               alignment: Alignment.center,
                               child: InkWell(
-                                onTap: () {
+                                onTap: () async{
                                   print(HomeWorks[HomeWorkIndex]
                                       [HomeworkSelected + 1][4]); // hw files
                                   print(StudentHomeWorkAnswer); // hw solve body
@@ -539,6 +540,21 @@ class _ThirdPageState extends State<ThirdPage> {
                                       [HomeworkSelected + 1][8]); // hw id
                                   print(student_id);
                                   // hw id,student_id,hw solve body,hw files
+                                  OverlayLoadingProgress.start(
+                                  context,
+                                  widget: CMaker(
+                                    circularRadius: 15,
+                                    color: const Color.fromARGB(198, 255, 255, 255),
+                                    width: MediaQuery.of(context).size.width / 3.6,
+                                    padding: EdgeInsets.all(MediaQuery.of(context).size.width / 13),
+                                    child: const AspectRatio(
+                                      aspectRatio: 1,
+                                      child: CircularProgressIndicator(
+                                        color: Colors.blue,
+                                      ),
+                                    ),
+                                  ),
+                                );
                                   dbService.FiAdd_Solve(
                                       [grade,HomeWorks[HomeWorkIndex]
                                           [HomeworkSelected],HomeWorks[HomeWorkIndex]
@@ -547,7 +563,23 @@ class _ThirdPageState extends State<ThirdPage> {
                                       StudentHomeWorkAnswer,
                                       HomeWorks[HomeWorkIndex]
                                       [HomeworkSelected + 1][4]);
-                                  // send sovle hw
+                                OverlayLoadingProgress.stop();
+                                PanaraInfoDialog.show(
+                                    context,
+                                    title: "Success",
+                                    message: "Now you are good to go",
+                                    buttonText: "Okay",
+                                    onTapDismiss: () {
+                                      setState(() {
+                                        Navigator.of(context).pop();
+                                        StartedSoving = false;
+                                        HomeWorkOpend = true;
+                        ThirdPageThirdPage = false;
+                                      });
+                                    },
+                                    panaraDialogType: PanaraDialogType.success,
+                                    barrierDismissible: false,
+                                  );
                                 },
                                 child: CMaker(
                                     circularRadius: 17,
@@ -679,7 +711,55 @@ class _ThirdPageState extends State<ThirdPage> {
                               height: 70,
                               alignment: Alignment.center,
                               child: InkWell(
-                                onTap: () {},
+                                onTap: () async{
+                                  print(HomeWorks[HomeWorkIndex]
+                                      [HomeworkSelected + 1][4]); // hw files
+                                  print(StudentHomeWorkAnswer); // hw solve body
+                                  print(HomeWorks[HomeWorkIndex]
+                                      [HomeworkSelected + 1][8]); // hw id
+                                  print(student_id);
+                                  // hw id,student_id,hw solve body,hw files
+                                  OverlayLoadingProgress.start(
+                                  context,
+                                  widget: CMaker(
+                                    circularRadius: 15,
+                                    color: const Color.fromARGB(198, 255, 255, 255),
+                                    width: MediaQuery.of(context).size.width / 3.6,
+                                    padding: EdgeInsets.all(MediaQuery.of(context).size.width / 13),
+                                    child: const AspectRatio(
+                                      aspectRatio: 1,
+                                      child: CircularProgressIndicator(
+                                        color: Colors.blue,
+                                      ),
+                                    ),
+                                  ),
+                                );
+                                  dbService.FiAdd_Solve(
+                                      [grade,HomeWorks[HomeWorkIndex]
+                                          [HomeworkSelected],HomeWorks[HomeWorkIndex]
+                                          [HomeworkSelected + 1][8]],
+                                      student_id,
+                                      StudentHomeWorkAnswer,
+                                      HomeWorks[HomeWorkIndex]
+                                      [HomeworkSelected + 1][4]);
+                                OverlayLoadingProgress.stop();
+                                PanaraInfoDialog.show(
+                                    context,
+                                    title: "Success",
+                                    message: "Now you are good to go",
+                                    buttonText: "Okay",
+                                    onTapDismiss: () {
+                                      setState(() {
+                                        Navigator.of(context).pop();
+                                        StartedSoving = false;
+                                        HomeWorkOpend = true;
+                        ThirdPageThirdPage = false;
+                                      });
+                                    },
+                                    panaraDialogType: PanaraDialogType.success,
+                                    barrierDismissible: false,
+                                  );
+                                },
                                 child: CMaker(
                                     circularRadius: 17,
                                     padding: const EdgeInsets.only(
@@ -814,26 +894,74 @@ class _ThirdPageState extends State<ThirdPage> {
                                   )),
                               const Padding(padding: EdgeInsets.only(top: 30)),
                               CMaker(
-                                  height: 70,
-                                  alignment: Alignment.center,
-                                  child: InkWell(
-                                    onTap: () {},
-                                    child: CMaker(
-                                        circularRadius: 17,
-                                        padding: const EdgeInsets.only(
-                                            top: 10,
-                                            bottom: 10,
-                                            left: 30,
-                                            right: 30),
+                              height: 70,
+                              alignment: Alignment.center,
+                              child: InkWell(
+                                onTap: () async{
+                                  print(HomeWorks[HomeWorkIndex]
+                                      [HomeworkSelected + 1][4]); // hw files
+                                  print(StudentHomeWorkAnswer); // hw solve body
+                                  print(HomeWorks[HomeWorkIndex]
+                                      [HomeworkSelected + 1][8]); // hw id
+                                  print(student_id);
+                                  // hw id,student_id,hw solve body,hw files
+                                  OverlayLoadingProgress.start(
+                                  context,
+                                  widget: CMaker(
+                                    circularRadius: 15,
+                                    color: const Color.fromARGB(198, 255, 255, 255),
+                                    width: MediaQuery.of(context).size.width / 3.6,
+                                    padding: EdgeInsets.all(MediaQuery.of(context).size.width / 13),
+                                    child: const AspectRatio(
+                                      aspectRatio: 1,
+                                      child: CircularProgressIndicator(
+                                        color: Colors.blue,
+                                      ),
+                                    ),
+                                  ),
+                                );
+                                  dbService.FiAdd_Solve(
+                                      [grade,HomeWorks[HomeWorkIndex]
+                                          [HomeworkSelected],HomeWorks[HomeWorkIndex]
+                                          [HomeworkSelected + 1][8]],
+                                      student_id,
+                                      StudentHomeWorkAnswer,
+                                      HomeWorks[HomeWorkIndex]
+                                      [HomeworkSelected + 1][4]);
+                                OverlayLoadingProgress.stop();
+                                PanaraInfoDialog.show(
+                                    context,
+                                    title: "Success",
+                                    message: "Now you are good to go",
+                                    buttonText: "Okay",
+                                    onTapDismiss: () {
+                                      setState(() {
+                                        Navigator.of(context).pop();
+                                        StartedSoving = false;
+                                        HomeWorkOpend = true;
+                        ThirdPageThirdPage = false;
+                                      });
+                                    },
+                                    panaraDialogType: PanaraDialogType.success,
+                                    barrierDismissible: false,
+                                  );
+                                },
+                                child: CMaker(
+                                    circularRadius: 17,
+                                    padding: const EdgeInsets.only(
+                                        top: 10,
+                                        bottom: 10,
+                                        left: 30,
+                                        right: 30),
+                                    color: const Color.fromARGB(
+                                        255, 233, 255, 247),
+                                    child: TMaker(
+                                        text: "Send",
+                                        fontSize: 20,
+                                        fontWeight: FontWeight.w600,
                                         color: const Color.fromARGB(
-                                            255, 233, 255, 247),
-                                        child: TMaker(
-                                            text: "Send",
-                                            fontSize: 20,
-                                            fontWeight: FontWeight.w600,
-                                            color: const Color.fromARGB(
-                                                255, 0, 0, 0))),
-                                  )),
+                                            255, 0, 0, 0))),
+                              )),
                               const Padding(padding: EdgeInsets.only(top: 30)),
                               ],),))
                             ],
@@ -1267,7 +1395,55 @@ class _ThirdPageState extends State<ThirdPage> {
                               height: 70,
                               alignment: Alignment.center,
                               child: InkWell(
-                                onTap: () {},
+                                onTap: () async{
+                                  print(HomeWorks[HomeWorkIndex]
+                                      [HomeworkSelected + 1][4]); // hw files
+                                  print(StudentHomeWorkAnswer); // hw solve body
+                                  print(HomeWorks[HomeWorkIndex]
+                                      [HomeworkSelected + 1][8]); // hw id
+                                  print(student_id);
+                                  // hw id,student_id,hw solve body,hw files
+                                  OverlayLoadingProgress.start(
+                                  context,
+                                  widget: CMaker(
+                                    circularRadius: 15,
+                                    color: const Color.fromARGB(198, 255, 255, 255),
+                                    width: MediaQuery.of(context).size.width / 3.6,
+                                    padding: EdgeInsets.all(MediaQuery.of(context).size.width / 13),
+                                    child: const AspectRatio(
+                                      aspectRatio: 1,
+                                      child: CircularProgressIndicator(
+                                        color: Colors.blue,
+                                      ),
+                                    ),
+                                  ),
+                                );
+                                  dbService.FiAdd_Solve(
+                                      [grade,HomeWorks[HomeWorkIndex]
+                                          [HomeworkSelected],HomeWorks[HomeWorkIndex]
+                                          [HomeworkSelected + 1][8]],
+                                      student_id,
+                                      StudentHomeWorkAnswer,
+                                      HomeWorks[HomeWorkIndex]
+                                      [HomeworkSelected + 1][4]);
+                                OverlayLoadingProgress.stop();
+                                PanaraInfoDialog.show(
+                                    context,
+                                    title: "Success",
+                                    message: "Now you are good to go",
+                                    buttonText: "Okay",
+                                    onTapDismiss: () {
+                                      setState(() {
+                                        Navigator.of(context).pop();
+                                        StartedSoving = false;
+                                        HomeWorkOpend = true;
+                        ThirdPageThirdPage = false;
+                                      });
+                                    },
+                                    panaraDialogType: PanaraDialogType.success,
+                                    barrierDismissible: false,
+                                  );
+                                },
                                 child: CMaker(
                                     circularRadius: 17,
                                     padding: const EdgeInsets.only(
@@ -1398,7 +1574,55 @@ class _ThirdPageState extends State<ThirdPage> {
                               height: 70,
                               alignment: Alignment.center,
                               child: InkWell(
-                                onTap: () {},
+                                onTap: () async{
+                                  print(HomeWorks[HomeWorkIndex]
+                                      [HomeworkSelected + 1][4]); // hw files
+                                  print(StudentHomeWorkAnswer); // hw solve body
+                                  print(HomeWorks[HomeWorkIndex]
+                                      [HomeworkSelected + 1][8]); // hw id
+                                  print(student_id);
+                                  // hw id,student_id,hw solve body,hw files
+                                  OverlayLoadingProgress.start(
+                                  context,
+                                  widget: CMaker(
+                                    circularRadius: 15,
+                                    color: const Color.fromARGB(198, 255, 255, 255),
+                                    width: MediaQuery.of(context).size.width / 3.6,
+                                    padding: EdgeInsets.all(MediaQuery.of(context).size.width / 13),
+                                    child: const AspectRatio(
+                                      aspectRatio: 1,
+                                      child: CircularProgressIndicator(
+                                        color: Colors.blue,
+                                      ),
+                                    ),
+                                  ),
+                                );
+                                  dbService.FiAdd_Solve(
+                                      [grade,HomeWorks[HomeWorkIndex]
+                                          [HomeworkSelected],HomeWorks[HomeWorkIndex]
+                                          [HomeworkSelected + 1][8]],
+                                      student_id,
+                                      StudentHomeWorkAnswer,
+                                      HomeWorks[HomeWorkIndex]
+                                      [HomeworkSelected + 1][4]);
+                                OverlayLoadingProgress.stop();
+                                PanaraInfoDialog.show(
+                                    context,
+                                    title: "Success",
+                                    message: "Now you are good to go",
+                                    buttonText: "Okay",
+                                    onTapDismiss: () {
+                                      setState(() {
+                                        Navigator.of(context).pop();
+                                        StartedSoving = false;
+                                        HomeWorkOpend = true;
+                        ThirdPageThirdPage = false;
+                                      });
+                                    },
+                                    panaraDialogType: PanaraDialogType.success,
+                                    barrierDismissible: false,
+                                  );
+                                },
                                 child: CMaker(
                                     circularRadius: 17,
                                     padding: const EdgeInsets.only(
@@ -1529,26 +1753,74 @@ class _ThirdPageState extends State<ThirdPage> {
                               HomeworkStudentImages,
                               const Padding(padding: EdgeInsets.only(top: 30)),
                               CMaker(
-                                  height: 70,
-                                  alignment: Alignment.center,
-                                  child: InkWell(
-                                    onTap: () {},
-                                    child: CMaker(
-                                        circularRadius: 17,
-                                        padding: const EdgeInsets.only(
-                                            top: 10,
-                                            bottom: 10,
-                                            left: 30,
-                                            right: 30),
+                              height: 70,
+                              alignment: Alignment.center,
+                              child: InkWell(
+                                onTap: () async{
+                                  print(HomeWorks[HomeWorkIndex]
+                                      [HomeworkSelected + 1][4]); // hw files
+                                  print(StudentHomeWorkAnswer); // hw solve body
+                                  print(HomeWorks[HomeWorkIndex]
+                                      [HomeworkSelected + 1][8]); // hw id
+                                  print(student_id);
+                                  // hw id,student_id,hw solve body,hw files
+                                  OverlayLoadingProgress.start(
+                                  context,
+                                  widget: CMaker(
+                                    circularRadius: 15,
+                                    color: const Color.fromARGB(198, 255, 255, 255),
+                                    width: MediaQuery.of(context).size.width / 3.6,
+                                    padding: EdgeInsets.all(MediaQuery.of(context).size.width / 13),
+                                    child: const AspectRatio(
+                                      aspectRatio: 1,
+                                      child: CircularProgressIndicator(
+                                        color: Colors.blue,
+                                      ),
+                                    ),
+                                  ),
+                                );
+                                  dbService.FiAdd_Solve(
+                                      [grade,HomeWorks[HomeWorkIndex]
+                                          [HomeworkSelected],HomeWorks[HomeWorkIndex]
+                                          [HomeworkSelected + 1][8]],
+                                      student_id,
+                                      StudentHomeWorkAnswer,
+                                      HomeWorks[HomeWorkIndex]
+                                      [HomeworkSelected + 1][4]);
+                                OverlayLoadingProgress.stop();
+                                PanaraInfoDialog.show(
+                                    context,
+                                    title: "Success",
+                                    message: "Now you are good to go",
+                                    buttonText: "Okay",
+                                    onTapDismiss: () {
+                                      setState(() {
+                                        Navigator.of(context).pop();
+                                        StartedSoving = false;
+                                        HomeWorkOpend = true;
+                        ThirdPageThirdPage = false;
+                                      });
+                                    },
+                                    panaraDialogType: PanaraDialogType.success,
+                                    barrierDismissible: false,
+                                  );
+                                },
+                                child: CMaker(
+                                    circularRadius: 17,
+                                    padding: const EdgeInsets.only(
+                                        top: 10,
+                                        bottom: 10,
+                                        left: 30,
+                                        right: 30),
+                                    color: const Color.fromARGB(
+                                        255, 233, 255, 247),
+                                    child: TMaker(
+                                        text: "Send",
+                                        fontSize: 20,
+                                        fontWeight: FontWeight.w600,
                                         color: const Color.fromARGB(
-                                            255, 233, 255, 247),
-                                        child: TMaker(
-                                            text: "Send",
-                                            fontSize: 20,
-                                            fontWeight: FontWeight.w600,
-                                            color: const Color.fromARGB(
-                                                255, 0, 0, 0))),
-                                  )),
+                                            255, 0, 0, 0))),
+                              )),
                               const Padding(padding: EdgeInsets.only(top: 30)),
                               ],)),)
                             ],
