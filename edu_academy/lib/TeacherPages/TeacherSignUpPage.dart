@@ -7,7 +7,7 @@ import 'package:flutter/services.dart';
 import 'package:overlay_loading_progress/overlay_loading_progress.dart';
 import 'package:panara_dialogs/panara_dialogs.dart';
 import 'package:time_picker_spinner_pop_up/time_picker_spinner_pop_up.dart';
-
+import 'package:omni_datetime_picker/omni_datetime_picker.dart';
 class TeacherSignUpPage extends StatefulWidget {
   const TeacherSignUpPage({super.key});
 
@@ -24,7 +24,7 @@ String TeacherPassword = "";
 String TeacherConfirmPassword = "";
 String TeacherGeneder = "";
 String TeacherDayOfBirth = "";
-String TeacherDateOfBirth = "";
+String TeacherDateOfBirth = "Select a Date";
 String TeacherMonthOfBirth = "";
 String TeacherYearOfBirth = "";
 String TeacherSubject1 = "null";
@@ -98,12 +98,12 @@ class _TeacherSignUpPageState extends State<TeacherSignUpPage> {
                                           },
                                           icon: const Icon(Icons.arrow_back)),
                                     );
-    Widget Logo=SizedBox(
-                                          height: double.infinity,
-                                          child: Image.asset(
-                                            "images/Logo.png",
-                                            fit: BoxFit.contain,
-                                          ));
+    Widget Logo = SizedBox(
+        height: 150,
+        child: Image.asset(
+          "images/Logo.png",
+          fit: BoxFit.contain,
+        ));
     Widget TeacherWithArrow=Container(
                         child: Row(
                           children: [
@@ -385,25 +385,77 @@ class _TeacherSignUpPageState extends State<TeacherSignUpPage> {
                                 fontSize: 25, fontWeight: FontWeight.w600),
                           ),
                         );
-    Widget BirthDateW=TimePickerSpinnerPopUp(
-                          minTime: DateTime.now().subtract(const Duration(days: 36525)),
-                          maxTime: DateTime.now().subtract(const Duration(days: 1824)),
-                          textStyle: const TextStyle(fontSize: 25),
-                          iconSize: 40,
-                          mode: CupertinoDatePickerMode.date,
-                          initTime: forDateInput,
-                          onChange: (dateTime) {
-                            setState(() {
-                              forDateInput=dateTime;
-                              TeacherDayOfBirth = dateTime.day.toString();
-                              TeacherMonthOfBirth = dateTime.month.toString();
-                              TeacherYearOfBirth = dateTime.year.toString();
-                              TeacherDateOfBirth =
-                                "$TeacherDayOfBirth/$TeacherMonthOfBirth/$TeacherYearOfBirth";
-                              print(TeacherDateOfBirth);
-                            });
-                          },
-                        );
+    Widget BirthDateW = (PageWidth(context) > 550 && PageHeight(context) < 900)
+        ? MyButton(
+          padding: EdgeInsets.all(10),
+            buttonColor: Color.fromARGB(255, 74, 193, 241),
+            text: TeacherDateOfBirth,
+            onTap: () async {
+              var TimeSelected=await showOmniDateTimePicker(
+                context: context,
+                initialDate: DateTime.now(),
+                // firstDate: DateTime.now().subtract(const Duration(days: 36525)),
+                // lastDate: DateTime.now().subtract(
+                //   const Duration(days: 1824),
+                // ),
+                type: OmniDateTimePickerType.date,
+                is24HourMode: false,
+                isShowSeconds: false,
+                minutesInterval: 1,
+                secondsInterval: 1,
+                borderRadius: const BorderRadius.all(Radius.circular(16)),
+                constraints: const BoxConstraints(
+                  maxWidth: 350,
+                  maxHeight: 650,
+                ),
+                transitionBuilder: (context, anim1, anim2, child) {
+                  return FadeTransition(
+                    opacity: anim1.drive(
+                      Tween(
+                        begin: 0,
+                        end: 1,
+                      ),
+                    ),
+                    child: child,
+                  );
+                },
+                selectableDayPredicate: (p0) {
+                  if (p0 == DateTime.now()) {
+                        return false;
+                      } else {
+                        return true;
+                      }
+                },
+                transitionDuration: const Duration(milliseconds: 200),
+                barrierDismissible: true,
+              );
+              TeacherDayOfBirth = TimeSelected!.day.toString();
+                  TeacherMonthOfBirth = TimeSelected!.month.toString();
+                  TeacherYearOfBirth = TimeSelected!.year.toString();
+                  TeacherDateOfBirth =
+                    "$TeacherDayOfBirth / $TeacherMonthOfBirth / $TeacherYearOfBirth";
+              setState(() {
+              });
+            })
+        : TimePickerSpinnerPopUp(
+            textStyle: const TextStyle(fontSize: 25),
+            iconSize: 40,
+            minTime: DateTime.now().subtract(const Duration(days: 36525)),
+            maxTime: DateTime.now().subtract(const Duration(days: 1824)),
+            mode: CupertinoDatePickerMode.date,
+            initTime: forDateInput,
+            onChange: (dateTime) {
+              setState(() {
+                forDateInput = dateTime;
+                TeacherDayOfBirth = dateTime.day.toString();
+                TeacherMonthOfBirth = dateTime.month.toString();
+                TeacherYearOfBirth = dateTime.year.toString();
+                TeacherDateOfBirth =
+                    "$TeacherDayOfBirth/$TeacherMonthOfBirth/$TeacherYearOfBirth";
+                print(TeacherDateOfBirth);
+              });
+            },
+          );
     Widget GenederTC=Container(
                         alignment: Alignment.centerLeft,
                         child: const Text(

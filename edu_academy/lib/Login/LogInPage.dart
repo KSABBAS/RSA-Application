@@ -224,7 +224,7 @@ class _LoginPageState extends State<LogInPage> {
       ),
     ];
     Widget Logo = SizedBox(
-        height: double.infinity,
+        height: 150,
         child: Image.asset(
           "images/Logo.png",
           fit: BoxFit.contain,
@@ -252,16 +252,6 @@ class _LoginPageState extends State<LogInPage> {
                 fontWeight: FontWeight.w700),
           ),
         ));
-    Widget BackButton = Container(
-      width: double.infinity,
-      alignment: Alignment.centerLeft,
-      padding: const EdgeInsets.only(left: 20),
-      child: IconButton(
-          onPressed: () {
-            Navigator.pop(context);
-          },
-          icon: const Icon(Icons.arrow_back)),
-    );
     print(PageWidth(context));
     print(PageHeight(context));
     if (PageWidth(context) <= 550) {
@@ -287,16 +277,9 @@ class _LoginPageState extends State<LogInPage> {
                         ])),
                     child: Row(
                       children: [
-                        Flexible(
-                            child: Column(children: [
                           Expanded(
-                            child: Container(child: BackButton),
-                          ),
-                          Expanded(
-                            flex: 2,
                             child: LoginCircle,
                           ),
-                        ])),
                         Flexible(
                             child: CMaker(
                                 height: double.infinity,
@@ -414,12 +397,7 @@ class _LoginPageState extends State<LogInPage> {
                   CMaker(width: PageWidth(context)/3,child: Column(
                     children: [
                       Expanded(child: Container(),),
-                      (PageWidth(context)<800)?Expanded(flex: 20,
-                        child: Image.asset(
-                                                  "images/Logo.png",
-                                                  fit: BoxFit.contain,
-                                                ),
-                      ):Expanded(flex: 20,child: CMaker(width: 200,
+                      Expanded(flex: 20,child: CMaker(width: 200,
                         child: Image.asset(
                                                   "images/Logo.png",
                                                   fit: BoxFit.contain,
