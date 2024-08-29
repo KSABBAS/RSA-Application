@@ -1,9 +1,11 @@
 import 'dart:io';
 
 import 'package:edu_academy/MyTools.dart';
+import 'package:edu_academy/StudentPages/Notifications.dart';
 import 'package:edu_academy/service/Databse_Service.dart';
 import 'package:flutter/material.dart';
 import 'package:edu_academy/StudentPages/StudentMainPage.dart';
+import 'package:get/get.dart';
 import 'package:insta_image_viewer/insta_image_viewer.dart';
 import 'package:overlay_loading_progress/overlay_loading_progress.dart';
 import 'package:panara_dialogs/panara_dialogs.dart';
@@ -280,7 +282,9 @@ class _ThirdPageState extends State<ThirdPage> {
       ),
     );
     Widget Notifications = InkWell(
-      onTap: () {},
+      onTap: () {
+        Get.to(() => StudentNotificationsPage());
+      },
       child: Container(
         width: 70,
         padding: const EdgeInsets.only(top: 10),
@@ -288,13 +292,33 @@ class _ThirdPageState extends State<ThirdPage> {
             color: const Color.fromARGB(255, 255, 255, 255),
             borderRadius: BorderRadius.circular(10)),
         height: (PageWidth(context) < 550) ? 50 : 100,
-        child: Icon(
-          Icons.notifications,
-          size: (PageWidth(context) < 550)
-              ? 25
-              : (PageHeight(context) < 900)
-                  ? 30
-                  : 35,
+        child: Stack(
+          children: [
+            Positioned(
+                right: 15,
+                top: 10,
+                child: Container(
+                  decoration: BoxDecoration(
+                      color: (ThereIsNotifications)
+                          ? Colors.red
+                          : Colors.transparent,
+                      borderRadius: BorderRadius.circular(20)),
+                  height: 7,
+                  width: 7,
+                )),
+            Positioned(
+              right: 15,
+              top: 10,
+              child: Icon(
+                Icons.notifications,
+                size: (PageWidth(context) < 550)
+                    ? 25
+                    : (PageHeight(context) < 900)
+                        ? 30
+                        : 35,
+              ),
+            ),
+          ],
         ),
       ),
     );
@@ -3535,7 +3559,7 @@ class _ThirdPageState extends State<ThirdPage> {
         circularRadius: 8,
         margin: const EdgeInsets.only(top: 30, bottom: 15, left: 15, right: 15),
         width: double.infinity,
-        height: (PageHeight(context) - 430),
+        height: (PageHeight(context) - ((PageWidth(context)>550&&PageHeight(context)<900)?350:420)),
         boxShadow: const [
           BoxShadow(
               offset: Offset(1, 1),
@@ -3563,7 +3587,7 @@ class _ThirdPageState extends State<ThirdPage> {
                         fontWeight: FontWeight.w800,
                         color: const Color.fromARGB(255, 20, 206, 61)))),
             CMaker(
-              height: PageHeight(context) - 490,
+              height: PageHeight(context) - ((PageWidth(context)>550&&PageHeight(context)<900)?410:480),
               child: ListView.builder(
                   itemCount: HomeWorks.length,
                   itemBuilder: (context, index) {

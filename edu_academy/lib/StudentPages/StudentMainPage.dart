@@ -2,6 +2,7 @@
 import 'dart:developer';
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:edu_academy/StudentPages/FirstPageContents.dart';
+import 'package:edu_academy/StudentPages/Notifications.dart';
 import 'package:edu_academy/StudentPages/ProfilePageContents.dart';
 import 'package:edu_academy/StudentPages/SecondPageContents.dart';
 import 'package:edu_academy/StudentPages/ThirdPageContents.dart';
@@ -13,6 +14,7 @@ import 'package:image_picker/image_picker.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:string_extensions/string_extensions.dart';
 import 'package:sidebar_with_animation/animated_side_bar.dart';
+import 'package:liquid_pull_to_refresh/liquid_pull_to_refresh.dart';
 
 class StudentMainPage extends StatefulWidget {
   const StudentMainPage({super.key});
@@ -43,7 +45,17 @@ List<List> TableData = [
   ["الجمعة", "1", "2", "3", "4", "5"],
 ];
 Map<String, dynamic> profile_data = {};
-
+bool ThereIsNotifications = () {
+      bool result = false;
+      for (int i = 0; StudentNotiFications.length != i; i++) {
+        if (StudentNotiFications[i][4] == false) {
+          result = true;
+          break;
+        }
+      }
+      print(result);
+      return result;
+    }();
 class _StudentMainPageState extends State<StudentMainPage> {
   bool isLoading = true;
   late Future<void> dataFuture;
@@ -83,6 +95,17 @@ class _StudentMainPageState extends State<StudentMainPage> {
   String UpdatedPassword = "";
   @override
   Widget build(BuildContext context) {
+    ThereIsNotifications = () {
+      bool result = false;
+      for (int i = 0; StudentNotiFications.length != i; i++) {
+        if (StudentNotiFications[i][4] == false) {
+          result = true;
+          break;
+        }
+      }
+      print(result);
+      return result;
+    }();
     print("start........build");
     late Widget StudentMainPageBody;
     List<Widget> Pages = [
@@ -120,12 +143,14 @@ class _StudentMainPageState extends State<StudentMainPage> {
                               padding: const EdgeInsets.only(top: 10),
                               alignment: Alignment.center,
                               child: InkWell(
-                                onTap: () {
-                                  setState(() {
-                                    PageIndex = 0;
-                                  });
-                                },
-                                child: CircleAvatar(backgroundImage:NetworkImage(profile_data['photo'])))),
+                                  onTap: () {
+                                    setState(() {
+                                      PageIndex = 0;
+                                    });
+                                  },
+                                  child: CircleAvatar(
+                                      backgroundImage: NetworkImage(
+                                          profile_data['photo'])))),
                           Expanded(
                             child: CMaker(
                               child: Row(
@@ -222,12 +247,14 @@ class _StudentMainPageState extends State<StudentMainPage> {
                                   padding: const EdgeInsets.only(top: 10),
                                   alignment: Alignment.center,
                                   child: InkWell(
-                                    onTap: () {
-                                      setState(() {
-                                        PageIndex = 0;
-                                      });
-                                    },
-                                    child: CircleAvatar(backgroundImage:NetworkImage(profile_data['photo'])))),
+                                      onTap: () {
+                                        setState(() {
+                                          PageIndex = 0;
+                                        });
+                                      },
+                                      child: CircleAvatar(
+                                          backgroundImage: NetworkImage(
+                                              profile_data['photo'])))),
                               Expanded(
                                 child: CMaker(
                                   child: Row(
@@ -324,12 +351,15 @@ class _StudentMainPageState extends State<StudentMainPage> {
                                           width: 30,
                                           height: 30,
                                           child: InkWell(
-                                            onTap: () {
-                                              setState(() {
-                                                PageIndex = 0;
-                                              });
-                                            },
-                                            child: CircleAvatar(backgroundImage:NetworkImage(profile_data['photo']))))),
+                                              onTap: () {
+                                                setState(() {
+                                                  PageIndex = 0;
+                                                });
+                                              },
+                                              child: CircleAvatar(
+                                                  backgroundImage: NetworkImage(
+                                                      profile_data[
+                                                          'photo']))))),
                                   Expanded(
                                       flex: 3,
                                       child: CMaker(
@@ -511,7 +541,6 @@ class _StudentMainPageState extends State<StudentMainPage> {
               unselectedIconColor: Colors.black,
               unSelectedTextColor: Colors.black,
               sideBarWidth: 300,
-              
               onTap: (s) {
                 setState(() {
                   PageIndex = s;
@@ -693,6 +722,23 @@ class _StudentMainPageState extends State<StudentMainPage> {
       );
     }
     SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersiveSticky);
-    return(isLoading)? Scaffold(backgroundColor: const Color.fromARGB(255, 233, 255, 247),body: Center(child: CircularProgressIndicator(color: Color.fromARGB(255, 74, 193, 241),))):StudentMainPageBody;
+    return (isLoading)
+        ? Scaffold(
+            backgroundColor: const Color.fromARGB(255, 233, 255, 247),
+            body: Center(
+                child: CircularProgressIndicator(
+              color: Color.fromARGB(255, 74, 193, 241),
+            )))
+        : LiquidPullToRefresh(
+            showChildOpacityTransition: false,
+            backgroundColor: Color.fromARGB(255, 148, 145, 129),
+            color: Color.fromARGB(255, 233, 235, 231),
+            onRefresh: () async {
+              await Future.delayed(Duration(milliseconds: 500));
+              setState(() {
+                fetch();
+              });
+            },
+            child: StudentMainPageBody);
   }
 }

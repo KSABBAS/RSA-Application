@@ -1,9 +1,11 @@
 import 'package:edu_academy/MyTools.dart';
+import 'package:edu_academy/StudentPages/Notifications.dart';
 import 'package:edu_academy/service/Databse_Service.dart';
 import 'package:flutter/material.dart';
 // import 'package:shared_preferences/shared_preferences.dart';
 import 'package:edu_academy/StudentPages/StudentMainPage.dart';
 import 'package:flutter/services.dart';
+import 'package:get/get.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:overlay_loading_progress/overlay_loading_progress.dart';
 
@@ -259,7 +261,9 @@ class _SecondPageState extends State<SecondPage> {
       ),
     );
     Widget Notifications = InkWell(
-      onTap: () {},
+      onTap: () {
+        Get.to(() => StudentNotificationsPage());
+      },
       child: Container(
         width: 70,
         padding: const EdgeInsets.only(top: 10),
@@ -267,13 +271,33 @@ class _SecondPageState extends State<SecondPage> {
             color: const Color.fromARGB(255, 255, 255, 255),
             borderRadius: BorderRadius.circular(10)),
         height: (PageWidth(context) < 550) ? 50 : 100,
-        child: Icon(
-          Icons.notifications,
-          size: (PageWidth(context) < 550)
-              ? 25
-              : (PageHeight(context) < 900)
-                  ? 30
-                  : 35,
+        child: Stack(
+          children: [
+            Positioned(
+                right: 15,
+                top: 10,
+                child: Container(
+                  decoration: BoxDecoration(
+                      color: (ThereIsNotifications)
+                          ? Colors.red
+                          : Colors.transparent,
+                      borderRadius: BorderRadius.circular(20)),
+                  height: 7,
+                  width: 7,
+                )),
+            Positioned(
+              right: 15,
+              top: 10,
+              child: Icon(
+                Icons.notifications,
+                size: (PageWidth(context) < 550)
+                    ? 25
+                    : (PageHeight(context) < 900)
+                        ? 30
+                        : 35,
+              ),
+            ),
+          ],
         ),
       ),
     );
