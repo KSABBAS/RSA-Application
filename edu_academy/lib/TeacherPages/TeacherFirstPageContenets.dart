@@ -1,5 +1,6 @@
 import 'package:edu_academy/MyTools.dart';
 import 'package:flutter/material.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class TeacherFirstPageContenets extends StatefulWidget {
   const TeacherFirstPageContenets({super.key});
@@ -10,6 +11,15 @@ class TeacherFirstPageContenets extends StatefulWidget {
 }
 
 class _TeacherFirstPageContenetsState extends State<TeacherFirstPageContenets> {
+  Future<void> _launchURL({required String url}) async {
+    try {
+      if (!await launchUrl(Uri.parse(url))) {
+        throw 'Could not launch $url';
+      }
+    } catch (e) {
+      //mj
+    }
+  }
   @override
   Widget build(BuildContext context) {
     late Widget FirstPageBody;
@@ -25,8 +35,8 @@ class _TeacherFirstPageContenetsState extends State<TeacherFirstPageContenets> {
         width: 150,
         child: ListTile(
           title: TMaker(
-              text: "Grade 12",
-              fontSize: 25,
+              text: "loading...",
+              fontSize:20,
               fontWeight: FontWeight.w600,
               color: const Color.fromARGB(153, 24, 58, 60)),
           subtitle: TMaker(
@@ -37,6 +47,9 @@ class _TeacherFirstPageContenetsState extends State<TeacherFirstPageContenets> {
         ));
     Widget JoinButton=InkWell(
                       onTap: () {
+                        _launchURL(
+                            url:
+                                "https://us06web.zoom.us/j/3088571822?pwd=E5VM4ANDKYA5jW59RKUuwRvVA2onkA.1");
                         
                       },
                       child: CMaker(

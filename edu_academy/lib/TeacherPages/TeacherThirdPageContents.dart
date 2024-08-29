@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:edu_academy/ParentPages/ParentMainPage.dart';
 import 'package:edu_academy/TeacherPages/TeacherMainPage.dart';
 import 'package:edu_academy/MyTools.dart';
 import 'package:edu_academy/service/Databse_Service.dart';
@@ -8,6 +9,7 @@ import 'package:image_picker/image_picker.dart';
 import 'package:overlay_loading_progress/overlay_loading_progress.dart';
 import 'package:panara_dialogs/panara_dialogs.dart';
 import 'package:insta_image_viewer/insta_image_viewer.dart';
+import 'package:string_extensions/string_extensions.dart';
 
 class TeacherThirdPageContents extends StatefulWidget {
   TeacherThirdPageContents(
@@ -225,6 +227,7 @@ String HomeworkSelectedState = "";
 bool ViewSentSolution = false;
 String GrantedScore = "";
 String TeacherComment = "";
+List student_selected_list = [];
 
 class _TeacherThirdPageContentsState extends State<TeacherThirdPageContents> {
   final dbService = DatabaseService();
@@ -1956,20 +1959,20 @@ class _TeacherThirdPageContentsState extends State<TeacherThirdPageContents> {
             });
           },
           child: CMaker(
-            color: Colors.white,
-            alignment: Alignment.center,
-            padding: EdgeInsets.all(5),
-            circularRadius: 20,
+              color: Colors.white,
+              alignment: Alignment.center,
+              padding: EdgeInsets.all(5),
+              circularRadius: 20,
               child: CMaker(
                 width: 80,
                 padding: EdgeInsets.all(10),
                 circularRadius: 20,
                 color: const Color.fromARGB(255, 22, 177, 255),
                 child: Icon(
-                            Icons.send,
-                            color: Colors.white,
-                            size: 30,
-                          ),
+                  Icons.send,
+                  color: Colors.white,
+                  size: 30,
+                ),
               )));
       if (PageWidth(context) < 550) {
         setState(() {
@@ -2031,11 +2034,13 @@ class _TeacherThirdPageContentsState extends State<TeacherThirdPageContents> {
                               margin: EdgeInsets.symmetric(horizontal: 10),
                               child: Row(
                                 children: [
-                                  const Padding(padding: EdgeInsets.only(left: 10)),
+                                  const Padding(
+                                      padding: EdgeInsets.only(left: 10)),
                                   AddScore,
                                   Expanded(child: Container()),
                                   SendButton,
-                                  const Padding(padding: EdgeInsets.only(left: 10)),
+                                  const Padding(
+                                      padding: EdgeInsets.only(left: 10)),
                                 ],
                               )),
                           const Padding(padding: EdgeInsets.only(top: 40)),
@@ -2119,11 +2124,13 @@ class _TeacherThirdPageContentsState extends State<TeacherThirdPageContents> {
                               margin: EdgeInsets.symmetric(horizontal: 10),
                               child: Row(
                                 children: [
-                                  const Padding(padding: EdgeInsets.only(left: 10)),
+                                  const Padding(
+                                      padding: EdgeInsets.only(left: 10)),
                                   AddScore,
                                   Expanded(child: Container()),
                                   SendButton,
-                                  const Padding(padding: EdgeInsets.only(left: 10)),
+                                  const Padding(
+                                      padding: EdgeInsets.only(left: 10)),
                                 ],
                               )),
                           const Padding(padding: EdgeInsets.only(top: 40)),
@@ -2211,19 +2218,22 @@ class _TeacherThirdPageContentsState extends State<TeacherThirdPageContents> {
                                     )),
                                 const Padding(
                                     padding: EdgeInsets.only(top: 20)),
-                                    CMaker(
-                              width: double.infinity,
-                              alignment: Alignment.center,
-                              margin: EdgeInsets.symmetric(horizontal: 10),
-                              child: Row(
-                                children: [
-                                  const Padding(padding: EdgeInsets.only(left: 10)),
-                                  AddScore,
-                                  Expanded(child: Container()),
-                                  SendButton,
-                                  const Padding(padding: EdgeInsets.only(left: 10)),
-                                ],
-                              )),
+                                CMaker(
+                                    width: double.infinity,
+                                    alignment: Alignment.center,
+                                    margin:
+                                        EdgeInsets.symmetric(horizontal: 10),
+                                    child: Row(
+                                      children: [
+                                        const Padding(
+                                            padding: EdgeInsets.only(left: 10)),
+                                        AddScore,
+                                        Expanded(child: Container()),
+                                        SendButton,
+                                        const Padding(
+                                            padding: EdgeInsets.only(left: 10)),
+                                      ],
+                                    )),
                                 const Padding(
                                     padding: EdgeInsets.only(top: 20)),
                                 Expanded(child: Container()),
@@ -2452,17 +2462,24 @@ class _TeacherThirdPageContentsState extends State<TeacherThirdPageContents> {
           margin: const EdgeInsets.symmetric(horizontal: 20),
           color: const Color.fromARGB(255, 255, 255, 255),
           child: ListView.builder(
-            itemCount: (ListOfGrades.length-1),
+            itemCount:
+                (ListOfGrades[GradeHomeWorkOppenedIndex][1] as List).length,
             itemBuilder: (context, index) {
               return Column(
                 children: [
                   InkWell(
-                    onTap: () {
+                    onTap: () async {
                       setState(() {
+                        student_selected_list =
+                            ListOfGrades[GradeHomeWorkOppenedIndex][1][index];
                         OneStudentHomeWorks = true;
                         HomeWorkIndex = index;
                         GradeHomeWorkIsOppened = false;
                       });
+                      await dbService.FiGet_All_info_with_student_id(
+                          student_selected_list[1],
+                          Grade_selected,
+                          SubjectThatIsSelected);
                     },
                     child: CMaker(
                       height: 80,
@@ -2486,14 +2503,18 @@ class _TeacherThirdPageContentsState extends State<TeacherThirdPageContents> {
                               title: TMaker(
                                 textAlign: TextAlign.start,
                                 text: (() {
-                                  List<String> nameParts = widget
-                                      .ListOfGrades[GradeHomeWorkOppenedIndex]
-                                          [1][index][0]
-                                      .toString()
-                                      .split(" ");
-                                  return nameParts.length > 1
-                                      ? "${nameParts[0]} ${nameParts[1]}"
-                                      : nameParts[0];
+                                  try {
+                                    List<String> nameParts = widget
+                                        .ListOfGrades[GradeHomeWorkOppenedIndex]
+                                            [1][index][0]
+                                        .toString()
+                                        .split(" ");
+                                    return nameParts.length > 1
+                                        ? "${nameParts[0]} ${nameParts[1]}"
+                                        : nameParts[0];
+                                  } catch (e) {
+                                    return 'None';
+                                  }
                                 })(),
                                 fontSize: 20,
                                 fontWeight: FontWeight.w600,
@@ -2552,7 +2573,6 @@ class _TeacherThirdPageContentsState extends State<TeacherThirdPageContents> {
             print(SubjectThatIsSelected);
             print("all_Homeworks $all_Homeworks");
 
-  
             GradeHomeWorkIsOppened = false;
             NewHomeWork = false;
             AllhomeWorks = true;

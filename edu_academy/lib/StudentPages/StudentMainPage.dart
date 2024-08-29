@@ -512,6 +512,7 @@ class _StudentMainPageState extends State<StudentMainPage> {
               unselectedIconColor: Colors.black,
               unSelectedTextColor: Colors.black,
               sideBarWidth: 300,
+              
               onTap: (s) {
                 setState(() {
                   PageIndex = s;
