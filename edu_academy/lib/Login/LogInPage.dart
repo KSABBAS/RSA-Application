@@ -262,7 +262,7 @@ class _LoginPageState extends State<LogInPage> {
             key: key1,
             child: CMaker(
               height: PageHeight(context),
-              child: Column(
+              child: ListView(
                 children: [
                   Container(
                     width: double.infinity,
