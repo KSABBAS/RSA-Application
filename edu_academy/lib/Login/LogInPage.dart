@@ -1,4 +1,5 @@
 import 'dart:developer';
+
 import 'package:edu_academy/MyTools.dart';
 import 'package:edu_academy/service/Databse_Service.dart';
 import 'package:flutter/services.dart';
@@ -261,7 +262,7 @@ class _LoginPageState extends State<LogInPage> {
             key: key1,
             child: CMaker(
               height: PageHeight(context),
-              child: ListView(
+              child: Column(
                 children: [
                   Container(
                     width: double.infinity,
@@ -279,9 +280,8 @@ class _LoginPageState extends State<LogInPage> {
                           Expanded(
                             child: LoginCircle,
                           ),
-                        Flexible(
+                        Expanded(
                             child: CMaker(
-                                height: double.infinity,
                                 alignment: Alignment.center,
                                 child: Logo))
                       ],
@@ -292,7 +292,7 @@ class _LoginPageState extends State<LogInPage> {
                   Expanded(flex: 2,child: Container()),
                             CMaker(alignment: Alignment.center,child: LoginButton),
                   Expanded(flex: 1,child: Container()),
-                            Flexible(
+                            CMaker(
                                 child: Row(
                               children: [
                                 Expanded(
@@ -411,20 +411,22 @@ class _LoginPageState extends State<LogInPage> {
                         height: 400,
                         width: (PageWidth(context)<800)? PageWidth(context)/2:400,
                         padding: const EdgeInsets.only(top: 20, right: 20, left: 20),
-                        child: ListView(
+                        child: Column(
                           children: [
                             InputPart,
                             CMaker(alignment: Alignment.center,child: LoginButton),
                             const Padding(padding:EdgeInsets.only(bottom: 20)),
-                              Row(
-                                children: [
-                                  Expanded(
-                                    child: ToWhatAreYouPage[0],
-                                  ),
-                                  Expanded(
-                                    child: ToWhatAreYouPage[1],
-                                  )
-                                ],
+                              CMaker(
+                                child: Row(
+                                  children: [
+                                    Expanded(
+                                      child: ToWhatAreYouPage[0],
+                                    ),
+                                    Expanded(
+                                      child: ToWhatAreYouPage[1],
+                                    )
+                                  ],
+                                ),
                               ),
                             Expanded(child: Container()),
                           ],
