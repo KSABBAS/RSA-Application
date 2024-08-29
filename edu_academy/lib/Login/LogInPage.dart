@@ -55,7 +55,7 @@ class _LoginPageState extends State<LogInPage> {
                           color: Color.fromARGB(255, 192, 192, 192)),
                       borderRadius: BorderRadius.circular(30)),
                   label: const Text(
-                    "Full Name",
+                    "Email or Phone Number",
                     style: TextStyle(fontSize: 15, fontWeight: FontWeight.w600),
                   ),
                   enabledBorder: OutlineInputBorder(
