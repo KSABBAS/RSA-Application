@@ -120,12 +120,12 @@ class _StudentMainPageState extends State<StudentMainPage> {
                               padding: const EdgeInsets.only(top: 10),
                               alignment: Alignment.center,
                               child: InkWell(
-                                  onTap: () {
-                                    setState(() {
-                                      PageIndex = 0;
-                                    });
-                                  },
-                                  child: Image.asset("images/Book.png"))),
+                                onTap: () {
+                                  setState(() {
+                                    PageIndex = 0;
+                                  });
+                                },
+                                child: CircleAvatar(backgroundImage:NetworkImage(profile_data['photo'])))),
                           Expanded(
                             child: CMaker(
                               child: Row(
@@ -222,12 +222,12 @@ class _StudentMainPageState extends State<StudentMainPage> {
                                   padding: const EdgeInsets.only(top: 10),
                                   alignment: Alignment.center,
                                   child: InkWell(
-                                      onTap: () {
-                                        setState(() {
-                                          PageIndex = 0;
-                                        });
-                                      },
-                                      child: Image.asset("images/Book.png"))),
+                                    onTap: () {
+                                      setState(() {
+                                        PageIndex = 0;
+                                      });
+                                    },
+                                    child: CircleAvatar(backgroundImage:NetworkImage(profile_data['photo'])))),
                               Expanded(
                                 child: CMaker(
                                   child: Row(
@@ -324,13 +324,12 @@ class _StudentMainPageState extends State<StudentMainPage> {
                                           width: 30,
                                           height: 30,
                                           child: InkWell(
-                                              onTap: () {
-                                                setState(() {
-                                                  PageIndex = 0;
-                                                });
-                                              },
-                                              child: Image.asset(
-                                                  "images/Book.png")))),
+                                            onTap: () {
+                                              setState(() {
+                                                PageIndex = 0;
+                                              });
+                                            },
+                                            child: CircleAvatar(backgroundImage:NetworkImage(profile_data['photo']))))),
                                   Expanded(
                                       flex: 3,
                                       child: CMaker(
