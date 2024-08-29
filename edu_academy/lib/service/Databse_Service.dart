@@ -384,6 +384,40 @@ class DatabaseService {
     return downloadUrl as String;
   }
 
+  FiGet_All_info_with_student_id(
+      String student_id, String garde, String subject) async {
+    print("## student_id ${student_id}");
+    // /Homework/Grade 1/عربي/NY63UvWuWPWfjzutq745/Solve/S1
+    //                                                   doc
+    CollectionReference collection = FirebaseFirestore.instance
+        .collection('Homework')
+        .doc(garde)
+        .collection(subject);
+
+    QuerySnapshot querySnapshot = await collection.get();
+    // hh@gmail.com
+    // print("## ddaadd ${ddaadd}");
+    List<dynamic> out_list = [];
+    for (var doc in querySnapshot.docs) {
+      print("##doc* ${doc.id}");
+      print("## doc['title'] ${doc["title"]}");
+      print("## doc['body'] ${doc['body']}");
+      try {
+        var collection0 = collection.doc("${doc.id}").collection('Solve');
+        var querySnapshot = await collection0.get();
+        // print({querySnapshot});
+        print("## querySnapshot.docs.length ${querySnapshot.docs.length}");
+        if (querySnapshot.docs.length == 0) continue;
+
+        for (var doc0 in querySnapshot.docs) {
+          print("## doc0 ${doc0.id}");
+        }
+      } catch (e) {
+        print("##not-solve");
+      }
+    }
+  }
+
   // Storage
   stHwStore(var file) async {
     if (file.length != 0) {

@@ -63,6 +63,7 @@ class _TeacherMainPageState extends State<TeacherMainPage> {
 
   Future<void> _initializeData() async {
     print("start .. _initializeData ");
+    ListOfGrades = [];
     print("ListOfGrades $ListOfGrades");
 
     final SharedPreferences prefs = await SharedPreferences.getInstance();
@@ -91,6 +92,7 @@ class _TeacherMainPageState extends State<TeacherMainPage> {
       Map<String, Map<String, List<dynamic>>> data0 =
           await dbService.fiGrades_and_Students(Teacher_Id, subjects_);
       setState(() {
+        
         sub_data = data0;
         int index_ = 0;
         for (String i in sub_data.keys) {
@@ -128,6 +130,8 @@ class _TeacherMainPageState extends State<TeacherMainPage> {
   @override
   Widget build(BuildContext context) {
     print("start .. build ");
+    
+
 
     late Widget TeacherMainPageBody;
     if (Subject2.toString() != "null" && Subject3.toString() == "null") {
