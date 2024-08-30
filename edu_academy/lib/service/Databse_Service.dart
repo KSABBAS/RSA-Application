@@ -3,6 +3,7 @@ import 'dart:io';
 // import 'dart:io';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:edu_academy/ParentPages/ParentMainPage.dart';
 import 'package:edu_academy/StudentPages/SecondPageContents.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:firebase_storage/firebase_storage.dart';
@@ -407,15 +408,82 @@ class DatabaseService {
         var querySnapshot = await collection0.get();
         // print({querySnapshot});
         print("## querySnapshot.docs.length ${querySnapshot.docs.length}");
-        if (querySnapshot.docs.length == 0) continue;
-
+        if (querySnapshot.docs.length == 0) {
+          out_list.add([
+            doc.id,
+            doc["title"],
+            doc['body'],
+            doc['files'],
+            doc['score'],
+          ]);
+          continue;
+        }
+        bool ioSolve = false;
         for (var doc0 in querySnapshot.docs) {
           print("## doc0 ${doc0.id}");
+          if (doc0.id == student_id) ioSolve = true;
+        }
+        if (ioSolve) {
+          ioSolve = false;
+          var collection01 = await collection
+              .doc("${doc.id}")
+              .collection('Solve')
+              .doc(student_id)
+              .get();
+          Map<String, dynamic>? data =
+              collection01.data() as Map<String, dynamic>?;
+
+          out_list.add([
+            doc.id,
+            doc["title"],
+            doc['body'],
+            doc['files'],
+            doc['score'],
+            data?["body"],
+            data?["files"],
+            data?["score"]
+            // doc.id
+          ]);
+        } else {
+          out_list.add([
+            doc.id,
+            doc["title"],
+            doc['body'],
+            doc['files'],
+            doc['score'],
+          ]);
         }
       } catch (e) {
         print("##not-solve");
       }
     }
+    print("##out_list ${out_list}");
+    return out_list as List<dynamic>;
+  }
+
+  FiAdd_score_and_comment(String garde, String subject, String Hw_id,
+      String St_id, String comment, String score) async {
+    ///Homework/Grade 1/عربي/NY63UvWuWPWfjzutq745/Solve/S1
+    print("-${garde}-${subject}-${Hw_id}-${St_id}-${comment}-${score}");
+    try {
+      // DatabaseReference ref = FirebaseDatabase.instance 1
+      //     .ref("Homework/${garde}/${subject}/${Hw_id}/Solve/${St_id}");
+
+      DocumentReference documentReference = fire
+          .collection('Homework')
+          .doc("${garde}")
+          .collection("${subject}")
+          .doc("${Hw_id}")
+          .collection("Solve")
+          .doc("${St_id}");
+
+      print("waselttt");
+      await documentReference.update({"score": score, "comment": comment});
+      return true;
+    } catch (e) {
+      return e;
+    }
+    //pass
   }
 
   // Storage
@@ -448,85 +516,75 @@ class DatabaseService {
   }
 }
 
+// fiGrades_and_Students(String teacherId) async {
+//   QuerySnapshot teacherSnapshot = await fire
+//       .collection('Users')
+//       .doc('Teacher')
+//       .collection('Teacher')
+//       .get();
+//   List grades = [];
+//   for (var doc in teacherSnapshot.docs) {
+//     if (doc.id == teacherId) {
+//       grades = doc['grades'];
+//       break;
+//     }
+//   }
+//   if (grades.isEmpty) return null;
+//   QuerySnapshot StudentsSnapshot = await fire
+//       .collection('Users')
+//       .doc('Student')
+//       .collection('Student')
+//       .get();
+//   Map<String, List<String>> gradesStudents = {};
+//   for (var doc in StudentsSnapshot.docs) {
+//     for (var grade in grades) {
+//       if (grade == doc['grades']) {
+//         gradesStudents[grade]?.add(doc.id);
+//       }
+//     }
+//   }
+//   print(gradesStudents);
+//   return gradesStudents;
+// }
 
-  // fiGrades_and_Students(String teacherId) async {
-  //   QuerySnapshot teacherSnapshot = await fire
-  //       .collection('Users')
-  //       .doc('Teacher')
-  //       .collection('Teacher')
-  //       .get();
-  //   List grades = [];
-  //   for (var doc in teacherSnapshot.docs) {
-  //     if (doc.id == teacherId) {
-  //       grades = doc['grades'];
-  //       break;
-  //     }
-  //   }
-  //   if (grades.isEmpty) return null;
-  //   QuerySnapshot StudentsSnapshot = await fire
-  //       .collection('Users')
-  //       .doc('Student')
-  //       .collection('Student')
-  //       .get();
-  //   Map<String, List<String>> gradesStudents = {};
-  //   for (var doc in StudentsSnapshot.docs) {
-  //     for (var grade in grades) {
-  //       if (grade == doc['grades']) {
-  //         gradesStudents[grade]?.add(doc.id);
-  //       }
-  //     }
-  //   }
-  //   print(gradesStudents);
-  //   return gradesStudents;
-  // }
+// Map<String, List<String>> GradesSubjects_names = {};
+// for (String gg in GradesSubjects.keys) {
+//   for (int nu in GradesSubjects[gg]) {
+//     if (!GradesSubjects_names.containsKey(gg)) GradesSubjects_names[gg] = [];
+//     GradesSubjects_names[gg]?.add(Subjects[nu][1]);
+//   }
+// }
+// print("GradesSubjects_names $GradesSubjects_names");
 
+// print(GradesSubjects_names);
+// DocumentSnapshot<Map<String, dynamic>> teacherSnapshot = await fire
+//     .collection('Users')
+//     .doc('Teacher')
+//     .collection('Teacher')
+//     .doc(teacherId)
+//     .get();
+// List grades = [];
+// for (var doc in teacherSnapshot["grades"]) {
+//   if (doc.id == teacherId) {
+//     grades = doc['grades'];
+//     break;
+//   }
+// }
 
+// if (grades.isEmpty) return null;
 
-    // Map<String, List<String>> GradesSubjects_names = {};
-    // for (String gg in GradesSubjects.keys) {
-    //   for (int nu in GradesSubjects[gg]) {
-    //     if (!GradesSubjects_names.containsKey(gg)) GradesSubjects_names[gg] = [];
-    //     GradesSubjects_names[gg]?.add(Subjects[nu][1]);
-    //   }
-    // }
-    // print("GradesSubjects_names $GradesSubjects_names");
-
-    // print(GradesSubjects_names);
-    // DocumentSnapshot<Map<String, dynamic>> teacherSnapshot = await fire
-    //     .collection('Users')
-    //     .doc('Teacher')
-    //     .collection('Teacher')
-    //     .doc(teacherId)
-    //     .get();
-    // List grades = [];
-    // for (var doc in teacherSnapshot["grades"]) {
-    //   if (doc.id == teacherId) {
-    //     grades = doc['grades'];
-    //     break;
-    //   }
-    // }
-
-    // if (grades.isEmpty) return null;
-
-    // QuerySnapshot StudentsSnapshot = await fire
-    //     .collection('Users')
-    //     .doc('Student')
-    //     .collection('Student')
-    //     .get();
-    // Map<String, List<String>> gradesStudents = {};
-    // for (var doc in StudentsSnapshot.docs) {
-    //   for (var grade in grades) {
-    //     if (grade == doc['grades']) {
-    //       gradesStudents[grade]?.add(doc.id);
-    //     }
-    //   }
-    // }
-    // print(gradesStudents);
-    // return gradesStudents;
-
-
-
-
-
-
-
+// QuerySnapshot StudentsSnapshot = await fire
+//     .collection('Users')
+//     .doc('Student')
+//     .collection('Student')
+//     .get();
+// Map<String, List<String>> gradesStudents = {};
+// for (var doc in StudentsSnapshot.docs) {
+//   for (var grade in grades) {
+//     if (grade == doc['grades']) {
+//       gradesStudents[grade]?.add(doc.id);
+//     }
+//   }
+// }
+// print(gradesStudents);
+// return gradesStudents;

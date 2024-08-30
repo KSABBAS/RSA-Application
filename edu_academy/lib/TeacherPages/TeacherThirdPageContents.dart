@@ -228,6 +228,7 @@ bool ViewSentSolution = false;
 String GrantedScore = "";
 String TeacherComment = "";
 List student_selected_list = [];
+List<dynamic> solved_hw_student = [];
 
 class _TeacherThirdPageContentsState extends State<TeacherThirdPageContents> {
   final dbService = DatabaseService();
@@ -1852,7 +1853,7 @@ class _TeacherThirdPageContentsState extends State<TeacherThirdPageContents> {
           color: const Color.fromARGB(255, 233, 255, 247),
           margin: const EdgeInsets.symmetric(horizontal: 20),
           child: TMaker(
-              text: "${HomeWorks[HomeWorkIndex][HomeworkSelected + 1][2]}",
+              text: "${solved_hw_student[HomeworkSelected][2]}",
               fontSize: 20,
               fontWeight: FontWeight.w800,
               color: const Color.fromARGB(255, 0, 0, 0)));
@@ -1860,7 +1861,7 @@ class _TeacherThirdPageContentsState extends State<TeacherThirdPageContents> {
           alignment: Alignment.center,
           margin: const EdgeInsets.symmetric(horizontal: 10),
           child: TMaker(
-              text: "${HomeWorks[HomeWorkIndex][HomeworkSelected + 1][1]}",
+              text: "${solved_hw_student[HomeworkSelected][1]}",
               fontSize: (PageWidth(context) < 550)
                   ? 15
                   : (PageHeight(context) < 900)
@@ -1880,14 +1881,14 @@ class _TeacherThirdPageContentsState extends State<TeacherThirdPageContents> {
             : 250,
         width: double.infinity,
         child: GridView.builder(
-            itemCount: HomeWorks[HomeWorkIndex][HomeworkSelected + 1][3].length,
+            itemCount: (solved_hw_student[HomeworkSelected][3] as List).length,
             gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                 crossAxisCount: 2),
             itemBuilder: (context, index) {
               return InstaImageViewer(
                 backgroundColor: const Color.fromARGB(137, 104, 104, 104),
-                child: Image.asset(
-                    HomeWorks[HomeWorkIndex][HomeworkSelected + 1][3][index]),
+                child: Image.network(
+                    solved_hw_student[HomeworkSelected][3][index] as String),
               );
             }),
       );
@@ -1942,17 +1943,26 @@ class _TeacherThirdPageContentsState extends State<TeacherThirdPageContents> {
                     ),
                   )),
               TMaker(
-                  text: " / 10",
+                  text: " / ${solved_hw_student[HomeworkSelected][4]}",
                   fontSize: 30,
                   fontWeight: FontWeight.w700,
                   color: Colors.black)
             ],
           ));
       Widget SendButton = InkWell(
-          onTap: () {
+          onTap: () async {
+            print("/tadd score");
+            print(await dbService.FiAdd_score_and_comment(
+                Grade_selected,
+                SubjectThatIsSelected,
+                solved_hw_student[HomeworkSelected][0], // hw id
+                student_selected_list[1], // st id
+                TeacherComment,
+                GrantedScore));
             setState(() {
               if (ScoreKey.currentState!.validate()) {
                 ScoreKey.currentState!.save();
+
                 ViewSentSolution = false;
                 OneStudentHomeWorks = true;
               }
@@ -2275,7 +2285,7 @@ class _TeacherThirdPageContentsState extends State<TeacherThirdPageContents> {
           width: double.infinity,
           color: const Color.fromARGB(255, 36, 160, 209),
           child: ListView.builder(
-              itemCount: HomeWorks[HomeWorkIndex].length - 1,
+              itemCount: solved_hw_student.length,
               itemBuilder: (context, index) {
                 return CMaker(
                   boxShadow: const [
@@ -2302,51 +2312,60 @@ class _TeacherThirdPageContentsState extends State<TeacherThirdPageContents> {
                                 circularRadius: 15,
                                 padding: const EdgeInsets.symmetric(
                                     horizontal: 20, vertical: 10),
-                                color: (HomeWorks[HomeWorkIndex][index + 1][7]
-                                            [0] ==
-                                        false)
-                                    ? const Color.fromARGB(255, 249, 84, 84)
-                                    : (HomeWorks[HomeWorkIndex][index + 1][7]
-                                                .length ==
-                                            2)
-                                        ? const Color.fromARGB(
-                                            255, 66, 133, 241)
-                                        : const Color.fromARGB(
-                                            255, 32, 222, 32),
+                                color: () {
+                                  if ((solved_hw_student[index] as List)
+                                          .length <=
+                                      5) {
+                                    // unsolve
+                                    return const Color.fromARGB(
+                                        255, 249, 84, 84);
+                                  } else {
+                                    if (solved_hw_student[index][7] == '0') {
+                                      // un scored
+                                      return const Color.fromARGB(
+                                          255, 66, 133, 241);
+                                    } else {
+                                      // scored done
+                                      return const Color.fromARGB(
+                                          255, 32, 222, 32);
+                                    }
+                                  }
+                                  //  const Color.fromARGB(255, 66, 133, 241)
+                                  // const Color.fromARGB(255, 32, 222, 32)
+                                }(),
                                 child: TMaker(
-                                    text: (HomeWorks[HomeWorkIndex][index + 1]
-                                                [7][0] ==
-                                            false)
-                                        ? "Un Solved"
-                                        : (HomeWorks[HomeWorkIndex][index + 1]
-                                                        [7]
-                                                    .length ==
-                                                2)
-                                            ? "Being Marked"
-                                            : HomeWorks[HomeWorkIndex]
-                                                [index + 1][7][2][0],
+                                    text: () {
+                                      if ((solved_hw_student[index] as List)
+                                              .length <=
+                                          5) {
+                                        // unsolve
+                                        return "Un Solve";
+                                      } else {
+                                        if (solved_hw_student[index][7] ==
+                                            '0') {
+                                          // un scored
+                                          return "un scored";
+                                        } else {
+                                          // scored done
+                                          return "${solved_hw_student[index][4]}/${solved_hw_student[index][7]}";
+                                        }
+                                      }
+                                      // return "hi";
+                                    }(),
                                     fontSize: 15,
                                     fontWeight: FontWeight.w800,
                                     color: Colors.white)),
                             Expanded(child: CMaker(child: Container())),
-                            InkWell(
+
+                            if (!((solved_hw_student[index] as List)
+                                          .length <=
+                                      5))if (solved_hw_student[index][7] ==
+                                            '0') InkWell(
                               onTap: () {
                                 setState(() {
-                                  OneStudentHomeWorks = false;
-                                  ViewSentSolution = true;
-                                  HomeworkSelected = index;
-                                  HomeworkSelectedState =
-                                      (HomeWorks[HomeWorkIndex][index + 1][7]
-                                                  [0] ==
-                                              false)
-                                          ? "Un Solved"
-                                          : (HomeWorks[HomeWorkIndex][index + 1]
-                                                          [7]
-                                                      .length ==
-                                                  2)
-                                              ? "Being Marked"
-                                              : HomeWorks[HomeWorkIndex]
-                                                  [index + 1][7][2][0];
+                                    OneStudentHomeWorks = false;
+                                    ViewSentSolution = true;
+                                    HomeworkSelected = index;
                                 });
                               },
                               child: CMaker(
@@ -2354,8 +2373,20 @@ class _TeacherThirdPageContentsState extends State<TeacherThirdPageContents> {
                                   padding: const EdgeInsets.symmetric(
                                       horizontal: 20),
                                   circularRadius: 20,
-                                  color:
-                                      const Color.fromARGB(255, 235, 218, 118),
+                                  color: () {
+                                    if ((solved_hw_student[index] as List)
+                                            .length <=
+                                        5) {
+                                      // unsolve
+                                      return const Color.fromARGB(
+                                          123, 179, 176, 176);
+                                    } else {
+                                      return const Color.fromARGB(
+                                          255, 235, 218, 118);
+                                    }
+
+                                    // return
+                                  }(),
                                   margin: const EdgeInsets.symmetric(
                                       horizontal: 15),
                                   height: 40,
@@ -2369,20 +2400,36 @@ class _TeacherThirdPageContentsState extends State<TeacherThirdPageContents> {
                           ],
                         ),
                       ),
-                      Expanded(child: Container()),
                       Expanded(
-                        flex: 5,
-                        child: CMaker(
-                            height: double.infinity,
-                            padding: const EdgeInsets.only(right: 10),
-                            child: TMaker(
-                                textAlign: TextAlign.end,
-                                text:
-                                    "${HomeWorks[HomeWorkIndex][index + 1][1]}",
-                                fontSize: 15,
-                                fontWeight: FontWeight.w600,
-                                color: const Color.fromARGB(255, 0, 0, 0))),
-                      ),
+                          child: CMaker(
+                              child: Column(
+                        children: [
+                          Expanded(
+                            child: CMaker(
+                                height: double.infinity,
+                                width: double.infinity,
+                                padding: const EdgeInsets.only(right: 10),
+                                child: TMaker(
+                                    textAlign: TextAlign.end,
+                                    text: "${solved_hw_student[index][1]}",
+                                    fontSize: 20,
+                                    fontWeight: FontWeight.w600,
+                                    color: const Color.fromARGB(255, 0, 0, 0))),
+                          ),
+                          Expanded(
+                            child: CMaker(
+                                height: double.infinity,
+                                width: double.infinity,
+                                padding: const EdgeInsets.only(right: 10),
+                                child: TMaker(
+                                    textAlign: TextAlign.end,
+                                    text: "${solved_hw_student[index][2]}",
+                                    fontSize: 18,
+                                    fontWeight: FontWeight.w500,
+                                    color: const Color.fromARGB(255, 0, 0, 0))),
+                          ),
+                        ],
+                      )))
                     ],
                   ),
                 );
@@ -2476,10 +2523,11 @@ class _TeacherThirdPageContentsState extends State<TeacherThirdPageContents> {
                         HomeWorkIndex = index;
                         GradeHomeWorkIsOppened = false;
                       });
-                      await dbService.FiGet_All_info_with_student_id(
-                          student_selected_list[1],
-                          Grade_selected,
-                          SubjectThatIsSelected);
+                      solved_hw_student =
+                          await dbService.FiGet_All_info_with_student_id(
+                              student_selected_list[1],
+                              Grade_selected,
+                              SubjectThatIsSelected);
                     },
                     child: CMaker(
                       height: 80,
