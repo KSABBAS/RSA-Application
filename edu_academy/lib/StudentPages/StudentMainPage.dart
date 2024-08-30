@@ -729,16 +729,18 @@ class _StudentMainPageState extends State<StudentMainPage> {
                 child: CircularProgressIndicator(
               color: Color.fromARGB(255, 74, 193, 241),
             )))
-        : LiquidPullToRefresh(
+        : Scaffold(
+      backgroundColor: Color.fromARGB(255, 74, 193, 241),
+      body: LiquidPullToRefresh(
             showChildOpacityTransition: false,
-            backgroundColor: Color.fromARGB(255, 148, 145, 129),
-            color: Color.fromARGB(255, 233, 235, 231),
+            backgroundColor: Color.fromARGB(255, 74, 193, 241),
+            color: const Color.fromARGB(255, 233, 255, 247),
             onRefresh: () async {
               await Future.delayed(Duration(milliseconds: 500));
               setState(() {
                 fetch();
               });
             },
-            child: StudentMainPageBody);
+            child: StudentMainPageBody));
   }
 }

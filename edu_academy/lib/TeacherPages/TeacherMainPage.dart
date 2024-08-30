@@ -2255,16 +2255,19 @@ class _TeacherMainPageState extends State<TeacherMainPage> {
       );
     }
     SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersiveSticky);
-    return LiquidPullToRefresh(
-        showChildOpacityTransition: false,
-        backgroundColor: Color.fromARGB(255, 148, 145, 129),
-        color: Color.fromARGB(255, 233, 235, 231),
-        onRefresh: () async {
-          await Future.delayed(Duration(milliseconds: 500));
-          setState(() {
-            _initializeData();
-          });
-        },
-        child: TeacherMainPageBody);
+    return Scaffold(
+      backgroundColor: Color.fromARGB(255, 74, 193, 241),
+      body: LiquidPullToRefresh(
+          showChildOpacityTransition: false,
+          backgroundColor: Color.fromARGB(255, 74, 193, 241),
+              color: const Color.fromARGB(255, 233, 255, 247),
+          onRefresh: () async {
+            await Future.delayed(Duration(milliseconds: 500));
+            setState(() {
+              _initializeData();
+            });
+          },
+          child: TeacherMainPageBody),
+    );
   }
 }

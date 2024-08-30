@@ -230,6 +230,8 @@ String TeacherComment = "";
 List student_selected_list = [];
 List<dynamic> solved_hw_student = [];
 
+late bool OneStudentHomeWorksIsLoading;
+
 class _TeacherThirdPageContentsState extends State<TeacherThirdPageContents> {
   final dbService = DatabaseService();
   @override
@@ -2266,6 +2268,7 @@ class _TeacherThirdPageContentsState extends State<TeacherThirdPageContents> {
             setState(() {
               OneStudentHomeWorks = false;
               GradeHomeWorkIsOppened = true;
+              OneStudentHomeWorksIsLoading = false;
             });
           },
           child: CMaker(
@@ -2356,47 +2359,46 @@ class _TeacherThirdPageContentsState extends State<TeacherThirdPageContents> {
                                     fontWeight: FontWeight.w800,
                                     color: Colors.white)),
                             Expanded(child: CMaker(child: Container())),
+                            if (!((solved_hw_student[index] as List).length <=
+                                5))
+                              if (solved_hw_student[index][7] == '0')
+                                InkWell(
+                                  onTap: () {
+                                    setState(() {
+                                      OneStudentHomeWorks = false;
+                                      ViewSentSolution = true;
+                                      HomeworkSelected = index;
+                                    });
+                                  },
+                                  child: CMaker(
+                                      alignment: Alignment.center,
+                                      padding: const EdgeInsets.symmetric(
+                                          horizontal: 20),
+                                      circularRadius: 20,
+                                      color: () {
+                                        if ((solved_hw_student[index] as List)
+                                                .length <=
+                                            5) {
+                                          // unsolve
+                                          return const Color.fromARGB(
+                                              123, 179, 176, 176);
+                                        } else {
+                                          return const Color.fromARGB(
+                                              255, 235, 218, 118);
+                                        }
 
-                            if (!((solved_hw_student[index] as List)
-                                          .length <=
-                                      5))if (solved_hw_student[index][7] ==
-                                            '0') InkWell(
-                              onTap: () {
-                                setState(() {
-                                    OneStudentHomeWorks = false;
-                                    ViewSentSolution = true;
-                                    HomeworkSelected = index;
-                                });
-                              },
-                              child: CMaker(
-                                  alignment: Alignment.center,
-                                  padding: const EdgeInsets.symmetric(
-                                      horizontal: 20),
-                                  circularRadius: 20,
-                                  color: () {
-                                    if ((solved_hw_student[index] as List)
-                                            .length <=
-                                        5) {
-                                      // unsolve
-                                      return const Color.fromARGB(
-                                          123, 179, 176, 176);
-                                    } else {
-                                      return const Color.fromARGB(
-                                          255, 235, 218, 118);
-                                    }
-
-                                    // return
-                                  }(),
-                                  margin: const EdgeInsets.symmetric(
-                                      horizontal: 15),
-                                  height: 40,
-                                  child: TMaker(
-                                      text: "View",
-                                      fontSize: 18,
-                                      fontWeight: FontWeight.w600,
-                                      color:
-                                          const Color.fromARGB(255, 0, 0, 0))),
-                            ),
+                                        // return
+                                      }(),
+                                      margin: const EdgeInsets.symmetric(
+                                          horizontal: 15),
+                                      height: 40,
+                                      child: TMaker(
+                                          text: "View",
+                                          fontSize: 18,
+                                          fontWeight: FontWeight.w600,
+                                          color: const Color.fromARGB(
+                                              255, 0, 0, 0))),
+                                ),
                           ],
                         ),
                       ),
@@ -2437,44 +2439,66 @@ class _TeacherThirdPageContentsState extends State<TeacherThirdPageContents> {
       if (PageWidth(context) < 550) {
         print("homework");
         setState(() {
-          ThirdPageBody = CMaker(
-            height: PageHeight(context) - 170,
-            child: Column(
-              children: [
-                const Padding(padding: EdgeInsets.only(top: 20)),
-                SecondPageArrowBack,
-                const Padding(padding: EdgeInsets.only(top: 20)),
-                Expanded(flex: 13, child: HomeWorksBuilder)
-              ],
-            ),
-          );
+          ThirdPageBody = (OneStudentHomeWorksIsLoading)
+              ? CMaker(
+                  height: PageHeight(context) - 150,
+                  width: double.infinity,
+                  child: Center(
+                      child: CircularProgressIndicator(
+                    color: Color.fromARGB(255, 74, 193, 241),
+                  )),
+                )
+              : CMaker(
+                  height: PageHeight(context) - 170,
+                  child: Column(
+                    children: [
+                      const Padding(padding: EdgeInsets.only(top: 20)),
+                      SecondPageArrowBack,
+                      const Padding(padding: EdgeInsets.only(top: 20)),
+                      Expanded(flex: 13, child: HomeWorksBuilder)
+                    ],
+                  ),
+                );
         });
       } else if (PageWidth(context) >= 550 && PageHeight(context) >= 900) {
         setState(() {
-          ThirdPageBody = CMaker(
-            child: Column(
-              children: [
-                const Padding(padding: EdgeInsets.only(top: 20)),
-                SecondPageArrowBack,
-                const Padding(padding: EdgeInsets.only(bottom: 30)),
-                Expanded(flex: 13, child: HomeWorksBuilder)
-              ],
-            ),
-          );
+          ThirdPageBody = (OneStudentHomeWorksIsLoading)
+              ? CMaker(
+                  height: PageHeight(context) - 150,
+                  width: double.infinity,
+                  child: Center(
+                      child: CircularProgressIndicator(
+                    color: Color.fromARGB(255, 74, 193, 241),
+                  )))
+              : CMaker(
+                  child: Column(
+                    children: [
+                      const Padding(padding: EdgeInsets.only(top: 20)),
+                      SecondPageArrowBack,
+                      const Padding(padding: EdgeInsets.only(bottom: 30)),
+                      Expanded(flex: 13, child: HomeWorksBuilder)
+                    ],
+                  ),
+                );
         });
       } else if (PageWidth(context) >= 550 && PageHeight(context) < 900) {
         setState(() {
           ThirdPageBody = Expanded(
-            child: CMaker(
-              child: Column(
-                children: [
-                  const Padding(padding: EdgeInsets.only(top: 20)),
-                  SecondPageArrowBack,
-                  const Padding(padding: EdgeInsets.only(bottom: 30)),
-                  Expanded(flex: 13, child: HomeWorksBuilder)
-                ],
-              ),
-            ),
+            child: (OneStudentHomeWorksIsLoading)
+                ? Center(
+                    child: CircularProgressIndicator(
+                    color: Color.fromARGB(255, 74, 193, 241),
+                  ))
+                : CMaker(
+                    child: Column(
+                      children: [
+                        const Padding(padding: EdgeInsets.only(top: 20)),
+                        SecondPageArrowBack,
+                        const Padding(padding: EdgeInsets.only(bottom: 30)),
+                        Expanded(flex: 13, child: HomeWorksBuilder)
+                      ],
+                    ),
+                  ),
           );
         });
       }
@@ -2516,6 +2540,7 @@ class _TeacherThirdPageContentsState extends State<TeacherThirdPageContents> {
                 children: [
                   InkWell(
                     onTap: () async {
+                      OneStudentHomeWorksIsLoading = true;
                       setState(() {
                         student_selected_list =
                             ListOfGrades[GradeHomeWorkOppenedIndex][1][index];
@@ -2528,6 +2553,8 @@ class _TeacherThirdPageContentsState extends State<TeacherThirdPageContents> {
                               student_selected_list[1],
                               Grade_selected,
                               SubjectThatIsSelected);
+                      OneStudentHomeWorksIsLoading = false;
+                      setState(() {});
                     },
                     child: CMaker(
                       height: 80,
