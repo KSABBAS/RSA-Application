@@ -186,7 +186,7 @@ class DatabaseService {
         Students_in_grades[doc["grade"].toString()] = [];
       }
       Students_in_grades[doc["grade"].toString()]
-          ?.add([doc['name'], doc.id, "image"]);
+          ?.add([doc['name'], doc.id, doc['photo']]);
     }
     print(Students_in_grades);
   }
@@ -242,7 +242,8 @@ class DatabaseService {
     return true;
   }
 
-  fiGet_Hw(String Grade) async {
+  fiGet_Hw(String Grade, String student_id) async {
+    print("fiGet_Hw student_id ${student_id}");
 // Reference to the specific document within the 'Homework' collection
     DocumentReference documentReference =
         FirebaseFirestore.instance.collection('Homework').doc(Grade);
@@ -273,22 +274,108 @@ class DatabaseService {
       }
     }
     for (String sub_name in knownCollections) {
-      print(sub_name);
+      //Homework/Grade 1/عربي/NY63UvWuWPWfjzutq745/Solve/S1
+      print("sub_name ${sub_name}");
       print("out ${out[sub_name]}");
       List hhww = [sub_name];
       for (var j in out[sub_name]!.sublist(1)) {
         print("j.keys ${j.keys}");
-        hhww.add([
-          'mohmm',
-          j["body"],
-          j["title"],
-          j["files"],
-          [],
-          j["date"],
-          j["score"],
-          [false],
-          j["id"],
-        ]);
+        try {
+          var collection0 = documentReference
+              .collection(sub_name)
+              .doc("${j["id"]}")
+              .collection('Solve');
+          var querySnapshot = await collection0.get();
+          // print({querySnapshot});
+          print("## querySnapshot.docs.length ${querySnapshot.docs.length}");
+          if (querySnapshot.docs.length == 0) {
+            hhww.add([
+              'mohmm',
+              j["body"],
+              j["title"],
+              j["files"],
+              [],
+              j["date"],
+              j["score"],
+              [false],
+              j["id"],
+            ]);
+          } else {
+            bool ioSolve = false;
+            for (var doc0 in querySnapshot.docs) {
+              print("## doc0 ${doc0.id}");
+              if (doc0.id == student_id) ioSolve = true;
+            }
+            if (ioSolve) {
+              ioSolve = false;
+              var collection01 = await documentReference
+                  .collection(sub_name)
+                  .doc("${j["id"]}")
+                  .collection('Solve')
+                  .doc(student_id)
+                  .get();
+              Map<String, dynamic>? data =
+                  collection01.data() as Map<String, dynamic>?;
+              if (data?["score"] == '0') {
+                hhww.add([
+                  'mohmm',
+                  j["body"],
+                  j["title"],
+                  j["files"],
+                  [],
+                  j["date"],
+                  j["score"],
+                  [
+                    true,
+                    [data?["body"], data?["files"]]
+                  ],
+                  j["id"],
+                ]);
+              } else {
+                hhww.add([
+                  'mohmm',
+                  j["body"],
+                  j["title"],
+                  j["files"],
+                  [],
+                  j["date"],
+                  j["score"],
+                  [
+                    true,
+                    [data?["body"], data?["files"]],
+                    [data?["score"], data?["comment"]]
+                  ],
+                  j["id"],
+                ]);
+              }
+              // out_list.add([
+              //   doc.id,
+              //   doc["title"],
+              //   doc['body'],
+              //   doc['files'],
+              //   doc['score'],
+              //   data?["body"],
+              //   data?["files"],
+              //   data?["score"]
+              //   // doc.id
+              // ]);
+            } else {
+              hhww.add([
+                'mohmm',
+                j["body"],
+                j["title"],
+                j["files"],
+                [],
+                j["date"],
+                j["score"],
+                [false],
+                j["id"],
+              ]);
+            }
+          }
+        } catch (e) {
+          print("##not-solve");
+        }
       }
       outFinal.add(hhww);
       print("out_final $outFinal");
@@ -300,11 +387,12 @@ class DatabaseService {
       List<dynamic> hw_solve_files) async {
     // hw id,student_id,hw solve body,hw files
 
-    ///Homework/Grade 1/عربي/NY63UvWuWPWfjzutq745
+    ///Homework/Grade 1/عربي/NY63UvWuWPWfjzutq745/solve /id
+    print("FiAdd_Solve hw_id ${hw_id}");
     DocumentReference documentReference = FirebaseFirestore.instance
         .collection('Homework')
         .doc(hw_id[0])
-        .collection(hw_id[1])
+        .collection(hw_id[3])
         .doc(hw_id[2])
         .collection("Solve")
         .doc(student_id);

@@ -34,7 +34,7 @@ bool AllHomeworksAndOneIsOpend = false;
 int IsOpendIndex = 0;
 String Grade_selected = '';
 List<dynamic> all_Homeworks = [];
-String score = '5';
+String score = '0';
 List<dynamic> HomeWorks = [
   [
     "اللغة العربية",
@@ -232,6 +232,15 @@ List<dynamic> solved_hw_student = [];
 
 class _TeacherThirdPageContentsState extends State<TeacherThirdPageContents> {
   final dbService = DatabaseService();
+  //3
+  solved_hw_student_re() async {
+    var solved_hw_student0 = await dbService.FiGet_All_info_with_student_id(
+        student_selected_list[1], Grade_selected, SubjectThatIsSelected);
+    setState(() {
+      solved_hw_student = solved_hw_student0;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     late Widget ThirdPageBody;
@@ -1951,21 +1960,21 @@ class _TeacherThirdPageContentsState extends State<TeacherThirdPageContents> {
           ));
       Widget SendButton = InkWell(
           onTap: () async {
-            print("/tadd score");
-            print(await dbService.FiAdd_score_and_comment(
-                Grade_selected,
-                SubjectThatIsSelected,
-                solved_hw_student[HomeworkSelected][0], // hw id
-                student_selected_list[1], // st id
-                TeacherComment,
-                GrantedScore));
+            if (ScoreKey.currentState!.validate()) {
+              ScoreKey.currentState!.save();
+              print("/tadd score");
+              print(await dbService.FiAdd_score_and_comment(
+                  Grade_selected,
+                  SubjectThatIsSelected,
+                  solved_hw_student[HomeworkSelected][0], // hw id
+                  student_selected_list[1], // st id
+                  TeacherComment,
+                  GrantedScore));
+            }
+            solved_hw_student_re();
             setState(() {
-              if (ScoreKey.currentState!.validate()) {
-                ScoreKey.currentState!.save();
-
-                ViewSentSolution = false;
-                OneStudentHomeWorks = true;
-              }
+              ViewSentSolution = false;
+              OneStudentHomeWorks = true;
             });
           },
           child: CMaker(
@@ -2356,47 +2365,46 @@ class _TeacherThirdPageContentsState extends State<TeacherThirdPageContents> {
                                     fontWeight: FontWeight.w800,
                                     color: Colors.white)),
                             Expanded(child: CMaker(child: Container())),
+                            if (!((solved_hw_student[index] as List).length <=
+                                5))
+                              if (solved_hw_student[index][7] == '0')
+                                InkWell(
+                                  onTap: () {
+                                    setState(() {
+                                      OneStudentHomeWorks = false;
+                                      ViewSentSolution = true;
+                                      HomeworkSelected = index;
+                                    });
+                                  },
+                                  child: CMaker(
+                                      alignment: Alignment.center,
+                                      padding: const EdgeInsets.symmetric(
+                                          horizontal: 20),
+                                      circularRadius: 20,
+                                      color: () {
+                                        if ((solved_hw_student[index] as List)
+                                                .length <=
+                                            5) {
+                                          // unsolve
+                                          return const Color.fromARGB(
+                                              123, 179, 176, 176);
+                                        } else {
+                                          return const Color.fromARGB(
+                                              255, 235, 218, 118);
+                                        }
 
-                            if (!((solved_hw_student[index] as List)
-                                          .length <=
-                                      5))if (solved_hw_student[index][7] ==
-                                            '0') InkWell(
-                              onTap: () {
-                                setState(() {
-                                    OneStudentHomeWorks = false;
-                                    ViewSentSolution = true;
-                                    HomeworkSelected = index;
-                                });
-                              },
-                              child: CMaker(
-                                  alignment: Alignment.center,
-                                  padding: const EdgeInsets.symmetric(
-                                      horizontal: 20),
-                                  circularRadius: 20,
-                                  color: () {
-                                    if ((solved_hw_student[index] as List)
-                                            .length <=
-                                        5) {
-                                      // unsolve
-                                      return const Color.fromARGB(
-                                          123, 179, 176, 176);
-                                    } else {
-                                      return const Color.fromARGB(
-                                          255, 235, 218, 118);
-                                    }
-
-                                    // return
-                                  }(),
-                                  margin: const EdgeInsets.symmetric(
-                                      horizontal: 15),
-                                  height: 40,
-                                  child: TMaker(
-                                      text: "View",
-                                      fontSize: 18,
-                                      fontWeight: FontWeight.w600,
-                                      color:
-                                          const Color.fromARGB(255, 0, 0, 0))),
-                            ),
+                                        // return
+                                      }(),
+                                      margin: const EdgeInsets.symmetric(
+                                          horizontal: 15),
+                                      height: 40,
+                                      child: TMaker(
+                                          text: "View",
+                                          fontSize: 18,
+                                          fontWeight: FontWeight.w600,
+                                          color: const Color.fromARGB(
+                                              255, 0, 0, 0))),
+                                ),
                           ],
                         ),
                       ),
@@ -2523,11 +2531,7 @@ class _TeacherThirdPageContentsState extends State<TeacherThirdPageContents> {
                         HomeWorkIndex = index;
                         GradeHomeWorkIsOppened = false;
                       });
-                      solved_hw_student =
-                          await dbService.FiGet_All_info_with_student_id(
-                              student_selected_list[1],
-                              Grade_selected,
-                              SubjectThatIsSelected);
+                      solved_hw_student_re();
                     },
                     child: CMaker(
                       height: 80,
@@ -2539,12 +2543,12 @@ class _TeacherThirdPageContentsState extends State<TeacherThirdPageContents> {
                               width: 70,
                               child: CircleAvatar(
                                   backgroundImage:
-                                      Image.asset("images/Person.png").image)),
+                                      Image.network(widget.ListOfGrades[GradeHomeWorkOppenedIndex][1][index][2]).image)),
                           Expanded(
                             child: ListTile(
                               subtitle: TMaker(
                                   textAlign: TextAlign.start,
-                                  text: "Last solved : 00:00",
+                                  text: "",
                                   fontSize: 15,
                                   fontWeight: FontWeight.w600,
                                   color: const Color.fromARGB(119, 0, 0, 0)),
@@ -2576,7 +2580,7 @@ class _TeacherThirdPageContentsState extends State<TeacherThirdPageContents> {
                               child: Column(
                                 children: [
                                   TMaker(
-                                      text: "State",
+                                      text: "",
                                       fontSize: 13,
                                       fontWeight: FontWeight.w700,
                                       color:
@@ -2588,10 +2592,9 @@ class _TeacherThirdPageContentsState extends State<TeacherThirdPageContents> {
                                     alignment: Alignment.center,
                                     height: 40,
                                     width: 80,
-                                    color: const Color.fromARGB(
-                                        255, 159, 211, 211),
+                                    color: const Color.fromARGB(255, 70, 183, 66),
                                     child: TMaker(
-                                        text: "check",
+                                        text: "show",
                                         fontSize: 18,
                                         fontWeight: FontWeight.w700,
                                         color: Colors.white),
