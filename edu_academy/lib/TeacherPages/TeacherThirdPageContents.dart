@@ -34,7 +34,7 @@ bool AllHomeworksAndOneIsOpend = false;
 int IsOpendIndex = 0;
 String Grade_selected = '';
 List<dynamic> all_Homeworks = [];
-String score = '5';
+String score = '0';
 List<dynamic> HomeWorks = [
   [
     "اللغة العربية",
@@ -234,6 +234,15 @@ late bool OneStudentHomeWorksIsLoading;
 
 class _TeacherThirdPageContentsState extends State<TeacherThirdPageContents> {
   final dbService = DatabaseService();
+  //3
+  solved_hw_student_re() async {
+    var solved_hw_student0 = await dbService.FiGet_All_info_with_student_id(
+        student_selected_list[1], Grade_selected, SubjectThatIsSelected);
+    setState(() {
+      solved_hw_student = solved_hw_student0;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     late Widget ThirdPageBody;
@@ -1953,21 +1962,21 @@ class _TeacherThirdPageContentsState extends State<TeacherThirdPageContents> {
           ));
       Widget SendButton = InkWell(
           onTap: () async {
-            print("/tadd score");
-            print(await dbService.FiAdd_score_and_comment(
-                Grade_selected,
-                SubjectThatIsSelected,
-                solved_hw_student[HomeworkSelected][0], // hw id
-                student_selected_list[1], // st id
-                TeacherComment,
-                GrantedScore));
+            if (ScoreKey.currentState!.validate()) {
+              ScoreKey.currentState!.save();
+              print("/tadd score");
+              print(await dbService.FiAdd_score_and_comment(
+                  Grade_selected,
+                  SubjectThatIsSelected,
+                  solved_hw_student[HomeworkSelected][0], // hw id
+                  student_selected_list[1], // st id
+                  TeacherComment,
+                  GrantedScore));
+            }
+            solved_hw_student_re();
             setState(() {
-              if (ScoreKey.currentState!.validate()) {
-                ScoreKey.currentState!.save();
-
-                ViewSentSolution = false;
-                OneStudentHomeWorks = true;
-              }
+              ViewSentSolution = false;
+              OneStudentHomeWorks = true;
             });
           },
           child: CMaker(
@@ -2548,11 +2557,7 @@ class _TeacherThirdPageContentsState extends State<TeacherThirdPageContents> {
                         HomeWorkIndex = index;
                         GradeHomeWorkIsOppened = false;
                       });
-                      solved_hw_student =
-                          await dbService.FiGet_All_info_with_student_id(
-                              student_selected_list[1],
-                              Grade_selected,
-                              SubjectThatIsSelected);
+                      solved_hw_student_re();
                       OneStudentHomeWorksIsLoading = false;
                       setState(() {});
                     },
@@ -2566,12 +2571,12 @@ class _TeacherThirdPageContentsState extends State<TeacherThirdPageContents> {
                               width: 70,
                               child: CircleAvatar(
                                   backgroundImage:
-                                      Image.asset("images/Person.png").image)),
+                                      Image.network(widget.ListOfGrades[GradeHomeWorkOppenedIndex][1][index][2]).image)),
                           Expanded(
                             child: ListTile(
                               subtitle: TMaker(
                                   textAlign: TextAlign.start,
-                                  text: "Last solved : 00:00",
+                                  text: "",
                                   fontSize: 15,
                                   fontWeight: FontWeight.w600,
                                   color: const Color.fromARGB(119, 0, 0, 0)),
@@ -2603,7 +2608,7 @@ class _TeacherThirdPageContentsState extends State<TeacherThirdPageContents> {
                               child: Column(
                                 children: [
                                   TMaker(
-                                      text: "State",
+                                      text: "",
                                       fontSize: 13,
                                       fontWeight: FontWeight.w700,
                                       color:
@@ -2615,10 +2620,9 @@ class _TeacherThirdPageContentsState extends State<TeacherThirdPageContents> {
                                     alignment: Alignment.center,
                                     height: 40,
                                     width: 80,
-                                    color: const Color.fromARGB(
-                                        255, 159, 211, 211),
+                                    color: const Color.fromARGB(255, 70, 183, 66),
                                     child: TMaker(
-                                        text: "check",
+                                        text: "show",
                                         fontSize: 18,
                                         fontWeight: FontWeight.w700,
                                         color: Colors.white),

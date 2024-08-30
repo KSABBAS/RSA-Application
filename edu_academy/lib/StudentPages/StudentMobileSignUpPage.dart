@@ -606,7 +606,7 @@ class _StudentMobileSignUpPageState extends State<StudentMobileSignUpPage> {
             "birth_date": StudentDateOfBirth,
             "gender": StudentGender,
             "grade": StudentGrade,
-            "photo": '',
+            "photo": 'https://firebasestorage.googleapis.com/v0/b/rsa-app-3ec3f.appspot.com/o/Profiles%2FPerson.png?alt=media&token=9a526b63-e8ff-40ec-b831-088e270a0013',
             "state": "false"
           });
           OverlayLoadingProgress.stop();

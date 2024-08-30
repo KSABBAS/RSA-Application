@@ -46,29 +46,41 @@ List<List> TableData = [
 ];
 Map<String, dynamic> profile_data = {};
 bool ThereIsNotifications = () {
-      bool result = false;
-      for (int i = 0; StudentNotiFications.length != i; i++) {
-        if (StudentNotiFications[i][4] == false) {
-          result = true;
-          break;
-        }
-      }
-      print(result);
-      return result;
-    }();
+  bool result = false;
+  for (int i = 0; StudentNotiFications.length != i; i++) {
+    if (StudentNotiFications[i][4] == false) {
+      result = true;
+      break;
+    }
+  }
+  print(result);
+  return result;
+}();
+
 class _StudentMainPageState extends State<StudentMainPage> {
+  final dbService = DatabaseService();
   bool isLoading = true;
   late Future<void> dataFuture;
   @override
   void initState() {
     super.initState();
     fetch();
+    
+  }
+
+  regetmessages() async {
+    List ggrtr = await dbService.fiGet_Hw(grade, student_id);
+    // HomeWorks.add(ggrtr);
+    HomeWorks = ggrtr;
+    print(ggrtr);
+    print("add done");
+    print(HomeWorks[HomeWorkIndex][0]);
   }
 
   Future<void> fetch() async {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
     final List<String>? items = await prefs.getStringList('id');
-    final dbService = DatabaseService();
+
     print(items.toString());
     if (items != null && items.isNotEmpty) {
       name = items[2].split("-")[0];
@@ -84,11 +96,12 @@ class _StudentMainPageState extends State<StudentMainPage> {
     print(grade);
     profile_data = await dbService.FiGet_profile_data(student_id, role)
         as Map<String, dynamic>;
+    await regetmessages();
     setState(() {
       isLoading = false;
     });
   }
-
+ // hh@gmail.com  1234
   XFile? Avatar;
   XFile? ProfileAvatar;
   @override
@@ -448,6 +461,7 @@ class _StudentMainPageState extends State<StudentMainPage> {
             height: 75,
             onTap: (val) {
               setState(() {
+                // regetmessages();
                 PageIndex = val;
               });
             },

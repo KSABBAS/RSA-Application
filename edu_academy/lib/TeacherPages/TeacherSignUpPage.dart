@@ -663,7 +663,7 @@ class _TeacherSignUpPageState extends State<TeacherSignUpPage> {
                               "Subject2": (TeacherSubject2 == "null") ? TeacherSubject2 : [TeacherSubject2],
                               "Subject3": (TeacherSubject3 == "null") ? TeacherSubject3 : [TeacherSubject3],
                               "Description": "TeachertDescription",
-                              "photo" : '',
+                              "photo" : 'https://firebasestorage.googleapis.com/v0/b/rsa-app-3ec3f.appspot.com/o/Profiles%2FPerson.png?alt=media&token=9a526b63-e8ff-40ec-b831-088e270a0013',
                               "state": "false"
                             });
                             OverlayLoadingProgress.stop();
