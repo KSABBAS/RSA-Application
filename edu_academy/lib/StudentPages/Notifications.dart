@@ -54,8 +54,6 @@ class _StudentNotificationsPageState extends State<StudentNotificationsPage> {
                     child: IconButton(
                         onPressed: () async {
                           Navigator.of(context).pop();
-                          // await Future.delayed(Duration(seconds: 1));
-                          // setState(() {});
                         },
                         icon: Icon(Icons.arrow_back))),
                 Expanded(
@@ -65,7 +63,6 @@ class _StudentNotificationsPageState extends State<StudentNotificationsPage> {
                       itemBuilder: (context, index) {
                         return InkWell(
                           onTap: () {
-                            StudentNotiFications[index][4] = true;
                             showDialog(
                               context: context,
                               builder: (context) {

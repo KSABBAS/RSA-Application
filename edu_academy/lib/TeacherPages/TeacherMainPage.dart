@@ -12,6 +12,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:internet_connection_checker_plus/internet_connection_checker_plus.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:sidebar_with_animation/animated_side_bar.dart';
 import 'package:string_extensions/string_extensions.dart';
@@ -64,6 +65,7 @@ bool AccountActivation = true;
     }();
 
 class _TeacherMainPageState extends State<TeacherMainPage> {
+  bool ConnectedToInternet = true;
   // ListOfGrades = [];
   // data base start
   final dbService = DatabaseService();
@@ -72,6 +74,23 @@ class _TeacherMainPageState extends State<TeacherMainPage> {
   @override
   void initState() {
     super.initState();
+    final listener =
+        InternetConnection().onStatusChange.listen((InternetStatus status) {
+      switch (status) {
+        case InternetStatus.connected:
+          print("================================\nConnected");
+          setState(() {
+            ConnectedToInternet = true;
+          });
+          break;
+        case InternetStatus.disconnected:
+          print("================================\nDisconnected");
+          setState(() {
+            ConnectedToInternet = false;
+          });
+          break;
+      }
+    });
     _dataFuture = _initializeData();
   }
 
@@ -404,7 +423,7 @@ class _TeacherMainPageState extends State<TeacherMainPage> {
               ),
             )
           : CMaker(
-              child: Column(
+              child: ListView(
                 children: [
                   Container(
                     height: 70,
@@ -2255,7 +2274,8 @@ class _TeacherMainPageState extends State<TeacherMainPage> {
       );
     }
     SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersiveSticky);
-    return Scaffold(
+    if (ConnectedToInternet) {
+      return Scaffold(
       backgroundColor: Color.fromARGB(255, 74, 193, 241),
       body: LiquidPullToRefresh(
           showChildOpacityTransition: false,
@@ -2269,5 +2289,28 @@ class _TeacherMainPageState extends State<TeacherMainPage> {
           },
           child: TeacherMainPageBody),
     );
+    } else {
+      return Scaffold(
+        backgroundColor: const Color.fromARGB(255, 233, 255, 247),
+        body: Center(child:CMaker(
+          height: 150,
+          width: 270,
+              color: Colors.white,
+                boxShadow: [
+                  BoxShadow(
+                      offset: Offset(1, 1),
+                      blurRadius: 6,
+                      spreadRadius: .03,
+                      color: Color.fromARGB(82, 0, 0, 0)),
+                ],
+                circularRadius: 20,
+                alignment: Alignment.center,
+                child: TMaker(
+                    text: "You aren't connected to internet",
+                    fontSize: 20,
+                    fontWeight: FontWeight.w700,
+                    color: Colors.black))),
+      );
+    }
   }
 }

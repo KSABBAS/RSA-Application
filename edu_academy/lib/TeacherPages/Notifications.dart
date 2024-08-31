@@ -10,22 +10,23 @@ class TeacherNotificationsPage extends StatefulWidget {
       _TeacherNotificationsPageState();
 }
 
-  List<List> TeacherNotiFications = [
-    [
-      "https://static-00.iconduck.com/assets.00/push-notifications-icon-2048x2048-wtj9rz41.png",
-      "Title 1",
-      "Body 1ttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttt",
-      "Date",
-      false,
-    ],
-    [
-      "https://static-00.iconduck.com/assets.00/push-notifications-icon-2048x2048-wtj9rz41.png",
-      "Title 2",
-      "Body 2",
-      "Date",
-      true,
-    ],
-  ];
+List<List> TeacherNotiFications = [
+  [
+    "https://static-00.iconduck.com/assets.00/push-notifications-icon-2048x2048-wtj9rz41.png",
+    "Title 1",
+    "Body 1ttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttt",
+    "Date",
+    false,
+  ],
+  [
+    "https://static-00.iconduck.com/assets.00/push-notifications-icon-2048x2048-wtj9rz41.png",
+    "Title 2",
+    "Body 2",
+    "Date",
+    true,
+  ],
+];
+
 class _TeacherNotificationsPageState extends State<TeacherNotificationsPage> {
   @override
   Widget build(BuildContext context) {
@@ -50,36 +51,51 @@ class _TeacherNotificationsPageState extends State<TeacherNotificationsPage> {
               itemBuilder: (context, index) {
                 return InkWell(
                   onTap: () {
+                    TeacherNotiFications[index][4] = true;
+                    print(TeacherNotiFications);
                     showDialog(
                       context: context,
                       builder: (context) {
-                        return Dialog(child: CMaker(height: PageHeight(context)/2,width: PageWidth(context),child:ListView(children: [
-                          CMaker(
-                            padding: EdgeInsets.symmetric(vertical: 20),
-                            alignment: Alignment.center,
-                            child: TMaker(
-                            textAlign: TextAlign.start,
-                            text: TeacherNotiFications[index][1],
-                            fontSize: 30,
-                            fontWeight: FontWeight.w800,
-                            color: Colors.black),
-                          ),
-                          CMaker(
-                            padding: EdgeInsets.symmetric(vertical: 20,horizontal: 10),
-                            alignment: Alignment.center,
-                            child: TMaker(
-                            textAlign: TextAlign.start,
-                            text: TeacherNotiFications[index][2],
-                            fontSize: 20,
-                            fontWeight: FontWeight.w800,
-                            color: const Color.fromARGB(255, 101, 101, 101)),
-                          ),
-                        ],)),);
+                        return Dialog(
+                          child: CMaker(
+                              height: PageHeight(context) / 2,
+                              width: PageWidth(context),
+                              child: ListView(
+                                children: [
+                                  CMaker(
+                                    padding: EdgeInsets.symmetric(vertical: 20),
+                                    alignment: Alignment.center,
+                                    child: TMaker(
+                                        textAlign: TextAlign.start,
+                                        text: TeacherNotiFications[index][1],
+                                        fontSize: 30,
+                                        fontWeight: FontWeight.w800,
+                                        color: Colors.black),
+                                  ),
+                                  CMaker(
+                                    padding: EdgeInsets.symmetric(
+                                        vertical: 20, horizontal: 10),
+                                    alignment: Alignment.center,
+                                    child: TMaker(
+                                        textAlign: TextAlign.start,
+                                        text: TeacherNotiFications[index][2],
+                                        fontSize: 20,
+                                        fontWeight: FontWeight.w800,
+                                        color: const Color.fromARGB(
+                                            255, 101, 101, 101)),
+                                  ),
+                                ],
+                              )),
+                        );
                       },
                     );
                   },
                   child: CMaker(
-                    margin: EdgeInsets.only(bottom: 10,right: 5,left: 5,top: ((index==0)?10:0)),
+                    margin: EdgeInsets.only(
+                        bottom: 10,
+                        right: 5,
+                        left: 5,
+                        top: ((index == 0) ? 10 : 0)),
                     color: Colors.white,
                     boxShadow: [
                       BoxShadow(

@@ -28,6 +28,7 @@ bool NewHomeWork = false;
 String HomeworkTitle = "";
 String HomeworkBody = "";
 GlobalKey<FormState> HomeworkKey = GlobalKey();
+GlobalKey<FormState> ScoreKey = GlobalKey();
 bool AllhomeWorks = false;
 bool OneStudentHomeWorks = false;
 bool AllHomeworksAndOneIsOpend = false;
@@ -260,7 +261,6 @@ class _TeacherThirdPageContentsState extends State<TeacherThirdPageContents> {
               color: Colors.white)),
     );
     if (AllHomeworksAndOneIsOpend) {
-      print("homeworks");
       // third page
       if (PageWidth(context) < 550) {
         setState(() {
@@ -1857,7 +1857,6 @@ class _TeacherThirdPageContentsState extends State<TeacherThirdPageContents> {
         });
       }
     } else if (ViewSentSolution) {
-      GlobalKey<FormState> ScoreKey = GlobalKey();
       Widget ThirdPageHomeworkBody = CMaker(
           circularRadius: 17,
           padding: const EdgeInsets.all(20),
@@ -1879,9 +1878,68 @@ class _TeacherThirdPageContentsState extends State<TeacherThirdPageContents> {
                       ? 25
                       : 25,
               fontWeight: FontWeight.w600,
-              color: const Color.fromARGB(255, 255, 255, 255)));
+              color: const Color.fromARGB(255, 0, 0, 0)));
       Widget HomeworkImages = CMaker(
-        color: const Color.fromARGB(255, 255, 255, 255),
+        boxShadow: const [
+          BoxShadow(
+              offset: Offset(1, 1),
+              blurRadius: 6,
+              spreadRadius: .03,
+              color: Color.fromARGB(58, 0, 0, 0)),
+        ],
+        color: const Color.fromARGB(255, 233, 255, 247),
+        circularRadius: 25,
+        padding: EdgeInsets.all(20),
+        margin: EdgeInsets.symmetric(horizontal: 10),
+        height: (PageWidth(context) >= 550)
+            ? (PageHeight(context) > 900)
+                ? 400
+                : 300
+            : 250,
+        width: double.infinity,
+        child: GridView.builder(
+            itemCount: (solved_hw_student[HomeworkSelected][3] as List).length,
+            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                crossAxisCount: 2),
+            itemBuilder: (context, index) {
+              return InstaImageViewer(
+                backgroundColor: const Color.fromARGB(137, 104, 104, 104),
+                child: Image.network(
+                    solved_hw_student[HomeworkSelected][3][index] as String),
+              );
+            }),
+      );
+      Widget ThirdPageAnswerBody = CMaker(
+          circularRadius: 17,
+          padding: const EdgeInsets.all(20),
+          color: const Color.fromARGB(255, 233, 255, 247),
+          margin: const EdgeInsets.symmetric(horizontal: 20),
+          child: TMaker(
+              text: "${solved_hw_student[HomeworkSelected][2]}",
+              fontSize: 20,
+              fontWeight: FontWeight.w800,
+              color: const Color.fromARGB(255, 0, 0, 0)));
+      Widget ThirdPageAnswerTitle = CMaker(
+          alignment: Alignment.center,
+          margin: const EdgeInsets.symmetric(horizontal: 10),
+          child: TMaker(
+              text: "${solved_hw_student[HomeworkSelected][1]}",
+              fontSize: (PageWidth(context) < 550)
+                  ? 15
+                  : (PageHeight(context) < 900)
+                      ? 25
+                      : 25,
+              fontWeight: FontWeight.w600,
+              color: const Color.fromARGB(255, 0, 0, 0)));
+      Widget AnswerImages = CMaker(
+        boxShadow: const [
+          BoxShadow(
+              offset: Offset(1, 1),
+              blurRadius: 6,
+              spreadRadius: .03,
+              color: Color.fromARGB(58, 0, 0, 0)),
+        ],
+        color: const Color.fromARGB(255, 233, 255, 247),
         circularRadius: 25,
         padding: EdgeInsets.all(20),
         margin: EdgeInsets.symmetric(horizontal: 10),
@@ -1972,12 +2030,12 @@ class _TeacherThirdPageContentsState extends State<TeacherThirdPageContents> {
                   student_selected_list[1], // st id
                   TeacherComment,
                   GrantedScore));
-            }
             solved_hw_student_re();
             setState(() {
               ViewSentSolution = false;
               OneStudentHomeWorks = true;
             });
+            }
           },
           child: CMaker(
               color: Colors.white,
@@ -1999,7 +2057,7 @@ class _TeacherThirdPageContentsState extends State<TeacherThirdPageContents> {
         setState(() {
           ThirdPageBody = CMaker(
             height: PageHeight(context) - 170,
-            child: Column(
+            child: ListView(
               children: [
                 const Padding(padding: EdgeInsets.only(top: 20)),
                 InkWell(
@@ -2010,7 +2068,7 @@ class _TeacherThirdPageContentsState extends State<TeacherThirdPageContents> {
                       });
                     },
                     child: CMaker(
-                        margin: const EdgeInsets.only(left: 15),
+                        margin: const EdgeInsets.only(left: 20),
                         height: 30,
                         width: double.infinity,
                         alignment: Alignment.centerLeft,
@@ -2020,64 +2078,127 @@ class _TeacherThirdPageContentsState extends State<TeacherThirdPageContents> {
                           size: 28,
                         ))),
                 const Padding(padding: EdgeInsets.only(top: 20)),
-                Expanded(
-                    flex: 13,
-                    child: CMaker(
-                      margin: const EdgeInsets.symmetric(horizontal: 20),
-                      circularRadius: 20,
-                      color: const Color.fromARGB(255, 36, 160, 209),
-                      child: ListView(
-                        children: [
-                          const Padding(padding: EdgeInsets.only(top: 20)),
-                          ThirdPageHomeworkTitle,
-                          const Padding(padding: EdgeInsets.only(top: 20)),
-                          CMaker(
-                              height: 100,
-                              alignment: Alignment.center,
-                              child: ThirdPageHomeworkBody),
-                          HomeworkImages,
-                          const Padding(padding: EdgeInsets.only(top: 20)),
-                          CMaker(
-                              width: double.infinity,
-                              alignment: Alignment.center,
-                              margin: EdgeInsets.symmetric(horizontal: 10),
-                              child: CMaker(
-                                padding: EdgeInsets.all(10),
-                                circularRadius: 30,
-                                alignment: Alignment.center,
-                                color: Colors.white,
-                                child: AddComment,
-                              )),
-                          const Padding(padding: EdgeInsets.only(top: 20)),
-                          CMaker(
-                              width: double.infinity,
-                              alignment: Alignment.center,
-                              margin: EdgeInsets.symmetric(horizontal: 10),
-                              child: Row(
-                                children: [
-                                  const Padding(
-                                      padding: EdgeInsets.only(left: 10)),
-                                  AddScore,
-                                  Expanded(child: Container()),
-                                  SendButton,
-                                  const Padding(
-                                      padding: EdgeInsets.only(left: 10)),
-                                ],
-                              )),
-                          const Padding(padding: EdgeInsets.only(top: 40)),
-                        ],
-                      ),
+                CMaker(
+                    boxShadow: const [
+                      BoxShadow(
+                          offset: Offset(1, 1),
+                          blurRadius: 6,
+                          spreadRadius: .03,
+                          color: Color.fromARGB(58, 0, 0, 0)),
+                    ],
+                    circularRadius: 15,
+                    margin: EdgeInsets.symmetric(horizontal: 20),
+                    height: 420,
+                    color: Colors.white,
+                    width: double.infinity,
+                    child: ListView(
+                      children: [
+                        const Padding(padding: EdgeInsets.only(top: 20)),
+                        TMaker(
+                            text: "Homework",
+                            fontSize: (PageWidth(context) < 550)
+                                ? 30
+                                : (PageHeight(context) < 900)
+                                    ? 35
+                                    : 35,
+                            fontWeight: FontWeight.w600,
+                            color: const Color.fromARGB(255, 0, 0, 0)),
+                        const Padding(padding: EdgeInsets.only(top: 20)),
+                        ThirdPageHomeworkTitle,
+                        const Padding(padding: EdgeInsets.only(top: 20)),
+                        CMaker(
+                            height: 100,
+                            alignment: Alignment.center,
+                            child: ThirdPageHomeworkBody),
+                        HomeworkImages,
+                        const Padding(padding: EdgeInsets.only(top: 20)),
+                      ],
                     )),
                 const Padding(padding: EdgeInsets.only(top: 20)),
+                CMaker(
+                    boxShadow: const [
+                      BoxShadow(
+                          offset: Offset(1, 1),
+                          blurRadius: 6,
+                          spreadRadius: .03,
+                          color: Color.fromARGB(58, 0, 0, 0)),
+                    ],
+                    circularRadius: 15,
+                    margin: EdgeInsets.symmetric(horizontal: 20),
+                    height: 420,
+                    color: Colors.white,
+                    width: double.infinity,
+                    child: ListView(
+                      children: [
+                        const Padding(padding: EdgeInsets.only(top: 20)),
+                        TMaker(
+                            text: "Student's Answer",
+                            fontSize: (PageWidth(context) < 550)
+                                ? 30
+                                : (PageHeight(context) < 900)
+                                    ? 35
+                                    : 35,
+                            fontWeight: FontWeight.w600,
+                            color: const Color.fromARGB(255, 0, 0, 0)),
+                        const Padding(padding: EdgeInsets.only(top: 20)),
+                        ThirdPageAnswerTitle,
+                        const Padding(padding: EdgeInsets.only(top: 20)),
+                        CMaker(
+                            height: 100,
+                            alignment: Alignment.center,
+                            child: ThirdPageAnswerBody),
+                        AnswerImages,
+                        const Padding(padding: EdgeInsets.only(top: 20)),
+                      ],
+                    )),
+                const Padding(padding: EdgeInsets.only(top: 20)),
+                CMaker(
+                  height: 300,
+                  margin: const EdgeInsets.symmetric(horizontal: 18),
+                  circularRadius: 20,
+                  color: const Color.fromARGB(255, 36, 160, 209),
+                  child: ListView(
+                    children: [
+                      const Padding(padding: EdgeInsets.only(top: 20)),
+                      CMaker(
+                          width: double.infinity,
+                          alignment: Alignment.center,
+                          margin: EdgeInsets.symmetric(horizontal: 10),
+                          child: CMaker(
+                            padding: EdgeInsets.all(10),
+                            circularRadius: 30,
+                            alignment: Alignment.center,
+                            color: Colors.white,
+                            child: AddComment,
+                          )),
+                      const Padding(padding: EdgeInsets.only(top: 20)),
+                      CMaker(
+                          width: double.infinity,
+                          alignment: Alignment.center,
+                          margin: EdgeInsets.symmetric(horizontal: 10),
+                          child: Row(
+                            children: [
+                              const Padding(padding: EdgeInsets.only(left: 10)),
+                              AddScore,
+                              Expanded(child: Container()),
+                              SendButton,
+                              const Padding(padding: EdgeInsets.only(left: 10)),
+                            ],
+                          )),
+                    ],
+                  ),
+                ),
+                const Padding(padding: EdgeInsets.only(top: 40)),
               ],
             ),
           );
+          const Padding(padding: EdgeInsets.only(top: 20));
         });
       } else if (PageWidth(context) >= 550 && PageHeight(context) >= 900) {
         setState(() {
           ThirdPageBody = CMaker(
             height: PageHeight(context) - 170,
-            child: Column(
+            child: ListView(
               children: [
                 const Padding(padding: EdgeInsets.only(top: 20)),
                 InkWell(
@@ -2088,7 +2209,7 @@ class _TeacherThirdPageContentsState extends State<TeacherThirdPageContents> {
                       });
                     },
                     child: CMaker(
-                        margin: const EdgeInsets.only(left: 15),
+                        margin: const EdgeInsets.only(left: 20),
                         height: 30,
                         width: double.infinity,
                         alignment: Alignment.centerLeft,
@@ -2098,176 +2219,262 @@ class _TeacherThirdPageContentsState extends State<TeacherThirdPageContents> {
                           size: 28,
                         ))),
                 const Padding(padding: EdgeInsets.only(top: 20)),
-                Expanded(
-                    flex: 13,
-                    child: CMaker(
-                      margin: const EdgeInsets.symmetric(horizontal: 20),
-                      circularRadius: 20,
-                      color: const Color.fromARGB(255, 36, 160, 209),
-                      child: ListView(
-                        children: [
-                          const Padding(padding: EdgeInsets.only(top: 20)),
-                          ThirdPageHomeworkTitle,
-                          const Padding(padding: EdgeInsets.only(top: 20)),
-                          CMaker(
-                              height: 100,
-                              alignment: Alignment.center,
-                              child: ThirdPageHomeworkBody),
-                          HomeworkImages,
-                          const Padding(padding: EdgeInsets.only(top: 40)),
-                          CMaker(
-                              margin: EdgeInsets.all(10),
-                              padding: EdgeInsets.all(10),
-                              circularRadius: 25,
-                              color: const Color.fromARGB(255, 255, 255, 255),
-                              child: TMaker(
-                                  text: HomeWorks[HomeWorkIndex]
-                                      [HomeworkSelected + 1][2],
-                                  fontSize: 15,
-                                  fontWeight: FontWeight.w600,
-                                  color: Colors.black)),
-                          const Padding(padding: EdgeInsets.only(top: 20)),
-                          CMaker(
-                              width: double.infinity,
-                              alignment: Alignment.center,
-                              margin: EdgeInsets.symmetric(horizontal: 10),
-                              child: CMaker(
-                                padding: EdgeInsets.all(10),
-                                circularRadius: 30,
-                                alignment: Alignment.center,
-                                color: Colors.white,
-                                child: AddComment,
-                              )),
-                          const Padding(padding: EdgeInsets.only(top: 20)),
-                          CMaker(
-                              width: double.infinity,
-                              alignment: Alignment.center,
-                              margin: EdgeInsets.symmetric(horizontal: 10),
-                              child: Row(
-                                children: [
-                                  const Padding(
-                                      padding: EdgeInsets.only(left: 10)),
-                                  AddScore,
-                                  Expanded(child: Container()),
-                                  SendButton,
-                                  const Padding(
-                                      padding: EdgeInsets.only(left: 10)),
-                                ],
-                              )),
-                          const Padding(padding: EdgeInsets.only(top: 40)),
-                        ],
-                      ),
+                CMaker(
+                    boxShadow: const [
+                      BoxShadow(
+                          offset: Offset(1, 1),
+                          blurRadius: 6,
+                          spreadRadius: .03,
+                          color: Color.fromARGB(58, 0, 0, 0)),
+                    ],
+                    circularRadius: 15,
+                    margin: EdgeInsets.symmetric(horizontal: 20),
+                    height: 420,
+                    color: Colors.white,
+                    width: double.infinity,
+                    child: ListView(
+                      children: [
+                        const Padding(padding: EdgeInsets.only(top: 20)),
+                        TMaker(
+                            text: "Homework",
+                            fontSize: (PageWidth(context) < 550)
+                                ? 30
+                                : (PageHeight(context) < 900)
+                                    ? 35
+                                    : 35,
+                            fontWeight: FontWeight.w600,
+                            color: const Color.fromARGB(255, 0, 0, 0)),
+                        const Padding(padding: EdgeInsets.only(top: 20)),
+                        ThirdPageHomeworkTitle,
+                        const Padding(padding: EdgeInsets.only(top: 20)),
+                        CMaker(
+                            height: 100,
+                            alignment: Alignment.center,
+                            child: ThirdPageHomeworkBody),
+                        HomeworkImages,
+                        const Padding(padding: EdgeInsets.only(top: 20)),
+                      ],
                     )),
                 const Padding(padding: EdgeInsets.only(top: 20)),
+                CMaker(
+                    boxShadow: const [
+                      BoxShadow(
+                          offset: Offset(1, 1),
+                          blurRadius: 6,
+                          spreadRadius: .03,
+                          color: Color.fromARGB(58, 0, 0, 0)),
+                    ],
+                    circularRadius: 15,
+                    margin: EdgeInsets.symmetric(horizontal: 20),
+                    height: 420,
+                    color: Colors.white,
+                    width: double.infinity,
+                    child: ListView(
+                      children: [
+                        const Padding(padding: EdgeInsets.only(top: 20)),
+                        TMaker(
+                            text: "Student's Answer",
+                            fontSize: (PageWidth(context) < 550)
+                                ? 30
+                                : (PageHeight(context) < 900)
+                                    ? 35
+                                    : 35,
+                            fontWeight: FontWeight.w600,
+                            color: const Color.fromARGB(255, 0, 0, 0)),
+                        const Padding(padding: EdgeInsets.only(top: 20)),
+                        ThirdPageAnswerTitle,
+                        const Padding(padding: EdgeInsets.only(top: 20)),
+                        CMaker(
+                            height: 100,
+                            alignment: Alignment.center,
+                            child: ThirdPageAnswerBody),
+                        AnswerImages,
+                        const Padding(padding: EdgeInsets.only(top: 20)),
+                      ],
+                    )),
+                const Padding(padding: EdgeInsets.only(top: 20)),
+                CMaker(
+                  height: 300,
+                  margin: const EdgeInsets.symmetric(horizontal: 18),
+                  circularRadius: 20,
+                  color: const Color.fromARGB(255, 36, 160, 209),
+                  child: ListView(
+                    children: [
+                      const Padding(padding: EdgeInsets.only(top: 20)),
+                      CMaker(
+                          width: double.infinity,
+                          alignment: Alignment.center,
+                          margin: EdgeInsets.symmetric(horizontal: 10),
+                          child: CMaker(
+                            padding: EdgeInsets.all(10),
+                            circularRadius: 30,
+                            alignment: Alignment.center,
+                            color: Colors.white,
+                            child: AddComment,
+                          )),
+                      const Padding(padding: EdgeInsets.only(top: 20)),
+                      CMaker(
+                          width: double.infinity,
+                          alignment: Alignment.center,
+                          margin: EdgeInsets.symmetric(horizontal: 10),
+                          child: Row(
+                            children: [
+                              const Padding(padding: EdgeInsets.only(left: 10)),
+                              AddScore,
+                              Expanded(child: Container()),
+                              SendButton,
+                              const Padding(padding: EdgeInsets.only(left: 10)),
+                            ],
+                          )),
+                    ],
+                  ),
+                ),
+                const Padding(padding: EdgeInsets.only(top: 40)),
               ],
             ),
           );
+          const Padding(padding: EdgeInsets.only(top: 20));
         });
       } else if (PageWidth(context) >= 550 && PageHeight(context) < 900) {
         setState(() {
-          ThirdPageBody = Expanded(
-            child: CMaker(
-              child: Column(
-                children: [
-                  const Padding(padding: EdgeInsets.only(top: 20)),
-                  InkWell(
-                      onTap: () {
-                        setState(() {
-                          ViewSentSolution = false;
-                          OneStudentHomeWorks = true;
-                        });
-                      },
-                      child: CMaker(
-                          margin: const EdgeInsets.only(left: 15),
-                          height: 30,
-                          width: double.infinity,
-                          alignment: Alignment.centerLeft,
-                          circularRadius: 20,
-                          child: const Icon(
-                            Icons.arrow_back,
-                            size: 28,
-                          ))),
-                  const Padding(padding: EdgeInsets.only(top: 20)),
-                  Expanded(
-                      flex: 13,
-                      child: CMaker(
-                        margin: const EdgeInsets.symmetric(horizontal: 20),
+          ThirdPageBody = CMaker(
+            height: PageHeight(context) - 170,
+            child: ListView(
+              children: [
+                const Padding(padding: EdgeInsets.only(top: 20)),
+                InkWell(
+                    onTap: () {
+                      setState(() {
+                        ViewSentSolution = false;
+                        OneStudentHomeWorks = true;
+                      });
+                    },
+                    child: CMaker(
+                        margin: const EdgeInsets.only(left: 20),
+                        height: 30,
+                        width: double.infinity,
+                        alignment: Alignment.centerLeft,
                         circularRadius: 20,
-                        color: const Color.fromARGB(255, 36, 160, 209),
-                        child: Row(
-                          children: [
-                            Expanded(child: Center(child: HomeworkImages)),
-                            Expanded(
-                                child: CMaker(
-                                    child: Column(
-                              children: [
-                                Expanded(child: Container()),
-                                ThirdPageHomeworkTitle,
-                                const Padding(
-                                    padding: EdgeInsets.only(top: 20)),
-                                CMaker(
-                                    height: 100,
-                                    alignment: Alignment.center,
-                                    child: ThirdPageHomeworkBody),
-                                const Padding(
-                                    padding: EdgeInsets.only(top: 40)),
-                                CMaker(
-                                    margin: EdgeInsets.all(10),
-                                    padding: EdgeInsets.all(10),
-                                    circularRadius: 25,
-                                    color: const Color.fromARGB(
-                                        255, 255, 255, 255),
-                                    child: TMaker(
-                                        text: HomeWorks[HomeWorkIndex]
-                                            [HomeworkSelected + 1][2],
-                                        fontSize: 15,
-                                        fontWeight: FontWeight.w600,
-                                        color: Colors.black)),
-                                const Padding(
-                                    padding: EdgeInsets.only(top: 20)),
-                                CMaker(
-                                    width: double.infinity,
-                                    alignment: Alignment.center,
-                                    margin:
-                                        EdgeInsets.symmetric(horizontal: 10),
-                                    child: CMaker(
-                                      padding: EdgeInsets.all(10),
-                                      circularRadius: 30,
-                                      alignment: Alignment.center,
-                                      color: Colors.white,
-                                      child: AddComment,
-                                    )),
-                                const Padding(
-                                    padding: EdgeInsets.only(top: 20)),
-                                CMaker(
-                                    width: double.infinity,
-                                    alignment: Alignment.center,
-                                    margin:
-                                        EdgeInsets.symmetric(horizontal: 10),
-                                    child: Row(
-                                      children: [
-                                        const Padding(
-                                            padding: EdgeInsets.only(left: 10)),
-                                        AddScore,
-                                        Expanded(child: Container()),
-                                        SendButton,
-                                        const Padding(
-                                            padding: EdgeInsets.only(left: 10)),
-                                      ],
-                                    )),
-                                const Padding(
-                                    padding: EdgeInsets.only(top: 20)),
-                                Expanded(child: Container()),
-                              ],
-                            ))),
-                          ],
-                        ),
-                      )),
-                  const Padding(padding: EdgeInsets.only(top: 20)),
-                ],
-              ),
+                        child: const Icon(
+                          Icons.arrow_back,
+                          size: 28,
+                        ))),
+                const Padding(padding: EdgeInsets.only(top: 20)),
+                CMaker(
+                    boxShadow: const [
+                      BoxShadow(
+                          offset: Offset(1, 1),
+                          blurRadius: 6,
+                          spreadRadius: .03,
+                          color: Color.fromARGB(58, 0, 0, 0)),
+                    ],
+                    circularRadius: 15,
+                    margin: EdgeInsets.symmetric(horizontal: 20),
+                    height: 420,
+                    color: Colors.white,
+                    width: double.infinity,
+                    child: ListView(
+                      children: [
+                        const Padding(padding: EdgeInsets.only(top: 20)),
+                        TMaker(
+                            text: "Homework",
+                            fontSize: (PageWidth(context) < 550)
+                                ? 30
+                                : (PageHeight(context) < 900)
+                                    ? 35
+                                    : 35,
+                            fontWeight: FontWeight.w600,
+                            color: const Color.fromARGB(255, 0, 0, 0)),
+                        const Padding(padding: EdgeInsets.only(top: 20)),
+                        ThirdPageHomeworkTitle,
+                        const Padding(padding: EdgeInsets.only(top: 20)),
+                        CMaker(
+                            height: 100,
+                            alignment: Alignment.center,
+                            child: ThirdPageHomeworkBody),
+                        HomeworkImages,
+                        const Padding(padding: EdgeInsets.only(top: 20)),
+                      ],
+                    )),
+                const Padding(padding: EdgeInsets.only(top: 20)),
+                CMaker(
+                    boxShadow: const [
+                      BoxShadow(
+                          offset: Offset(1, 1),
+                          blurRadius: 6,
+                          spreadRadius: .03,
+                          color: Color.fromARGB(58, 0, 0, 0)),
+                    ],
+                    circularRadius: 15,
+                    margin: EdgeInsets.symmetric(horizontal: 20),
+                    height: 420,
+                    color: Colors.white,
+                    width: double.infinity,
+                    child: ListView(
+                      children: [
+                        const Padding(padding: EdgeInsets.only(top: 20)),
+                        TMaker(
+                            text: "Student's Answer",
+                            fontSize: (PageWidth(context) < 550)
+                                ? 30
+                                : (PageHeight(context) < 900)
+                                    ? 35
+                                    : 35,
+                            fontWeight: FontWeight.w600,
+                            color: const Color.fromARGB(255, 0, 0, 0)),
+                        const Padding(padding: EdgeInsets.only(top: 20)),
+                        ThirdPageAnswerTitle,
+                        const Padding(padding: EdgeInsets.only(top: 20)),
+                        CMaker(
+                            height: 100,
+                            alignment: Alignment.center,
+                            child: ThirdPageAnswerBody),
+                        AnswerImages,
+                        const Padding(padding: EdgeInsets.only(top: 20)),
+                      ],
+                    )),
+                const Padding(padding: EdgeInsets.only(top: 20)),
+                CMaker(
+                  height: 300,
+                  margin: const EdgeInsets.symmetric(horizontal: 18),
+                  circularRadius: 20,
+                  color: const Color.fromARGB(255, 36, 160, 209),
+                  child: ListView(
+                    children: [
+                      const Padding(padding: EdgeInsets.only(top: 20)),
+                      CMaker(
+                          width: double.infinity,
+                          alignment: Alignment.center,
+                          margin: EdgeInsets.symmetric(horizontal: 10),
+                          child: CMaker(
+                            padding: EdgeInsets.all(10),
+                            circularRadius: 30,
+                            alignment: Alignment.center,
+                            color: Colors.white,
+                            child: AddComment,
+                          )),
+                      const Padding(padding: EdgeInsets.only(top: 20)),
+                      CMaker(
+                          width: double.infinity,
+                          alignment: Alignment.center,
+                          margin: EdgeInsets.symmetric(horizontal: 10),
+                          child: Row(
+                            children: [
+                              const Padding(padding: EdgeInsets.only(left: 10)),
+                              AddScore,
+                              Expanded(child: Container()),
+                              SendButton,
+                              const Padding(padding: EdgeInsets.only(left: 10)),
+                            ],
+                          )),
+                    ],
+                  ),
+                ),
+                const Padding(padding: EdgeInsets.only(top: 40)),
+              ],
             ),
           );
+          const Padding(padding: EdgeInsets.only(top: 20));
         });
       }
     } else if (OneStudentHomeWorks) {
@@ -2446,7 +2653,6 @@ class _TeacherThirdPageContentsState extends State<TeacherThirdPageContents> {
                 );
               }));
       if (PageWidth(context) < 550) {
-        print("homework");
         setState(() {
           ThirdPageBody = (OneStudentHomeWorksIsLoading)
               ? CMaker(
@@ -2454,7 +2660,7 @@ class _TeacherThirdPageContentsState extends State<TeacherThirdPageContents> {
                   width: double.infinity,
                   child: Center(
                       child: CircularProgressIndicator(
-                    color: Color.fromARGB(255, 74, 193, 241),
+                    color: const Color.fromARGB(255, 36, 160, 209),
                   )),
                 )
               : CMaker(
@@ -2477,7 +2683,7 @@ class _TeacherThirdPageContentsState extends State<TeacherThirdPageContents> {
                   width: double.infinity,
                   child: Center(
                       child: CircularProgressIndicator(
-                    color: Color.fromARGB(255, 74, 193, 241),
+                    color: const Color.fromARGB(255, 36, 160, 209),
                   )))
               : CMaker(
                   child: Column(
@@ -2496,7 +2702,7 @@ class _TeacherThirdPageContentsState extends State<TeacherThirdPageContents> {
             child: (OneStudentHomeWorksIsLoading)
                 ? Center(
                     child: CircularProgressIndicator(
-                    color: Color.fromARGB(255, 74, 193, 241),
+                    color: const Color.fromARGB(255, 36, 160, 209),
                   ))
                 : CMaker(
                     child: Column(
@@ -2549,14 +2755,15 @@ class _TeacherThirdPageContentsState extends State<TeacherThirdPageContents> {
                 children: [
                   InkWell(
                     onTap: () async {
+                      OneStudentHomeWorks = true;
                       OneStudentHomeWorksIsLoading = true;
                       setState(() {
                         student_selected_list =
                             ListOfGrades[GradeHomeWorkOppenedIndex][1][index];
-                        OneStudentHomeWorks = true;
                         HomeWorkIndex = index;
                         GradeHomeWorkIsOppened = false;
                       });
+                      await Future.delayed(Duration(seconds: 1));
                       solved_hw_student_re();
                       OneStudentHomeWorksIsLoading = false;
                       setState(() {});
@@ -2570,8 +2777,11 @@ class _TeacherThirdPageContentsState extends State<TeacherThirdPageContents> {
                               height: 70,
                               width: 70,
                               child: CircleAvatar(
-                                  backgroundImage:
-                                      Image.network(widget.ListOfGrades[GradeHomeWorkOppenedIndex][1][index][2]).image)),
+                                  backgroundImage: Image.network(
+                                          widget.ListOfGrades[
+                                                  GradeHomeWorkOppenedIndex][1]
+                                              [index][2])
+                                      .image)),
                           Expanded(
                             child: ListTile(
                               subtitle: TMaker(
@@ -2620,7 +2830,8 @@ class _TeacherThirdPageContentsState extends State<TeacherThirdPageContents> {
                                     alignment: Alignment.center,
                                     height: 40,
                                     width: 80,
-                                    color: const Color.fromARGB(255, 70, 183, 66),
+                                    color:
+                                        const Color.fromARGB(255, 70, 183, 66),
                                     child: TMaker(
                                         text: "show",
                                         fontSize: 18,

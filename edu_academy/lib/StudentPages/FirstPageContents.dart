@@ -22,7 +22,6 @@ List<dynamic> Messgaes_list = [];
 Object? realTimeValues;
 
 class _StudentFirstMainPageState extends State<StudentFirstMainPage> {
-    
   late Future<void> _dataFuture;
   Future<void> _launchURL({required String url}) async {
     try {

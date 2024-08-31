@@ -11,6 +11,7 @@ import 'package:edu_academy/service/Databse_Service.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:internet_connection_checker_plus/internet_connection_checker_plus.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:string_extensions/string_extensions.dart';
 import 'package:sidebar_with_animation/animated_side_bar.dart';
@@ -58,14 +59,31 @@ bool ThereIsNotifications = () {
 }();
 
 class _StudentMainPageState extends State<StudentMainPage> {
+  bool ConnectedToInternet = true;
   final dbService = DatabaseService();
   bool isLoading = true;
   late Future<void> dataFuture;
   @override
   void initState() {
     super.initState();
+    final listener =
+        InternetConnection().onStatusChange.listen((InternetStatus status) {
+      switch (status) {
+        case InternetStatus.connected:
+          print("================================\nConnected");
+          setState(() {
+            ConnectedToInternet = true;
+          });
+          break;
+        case InternetStatus.disconnected:
+          print("================================\nDisconnected");
+          setState(() {
+            ConnectedToInternet = false;
+          });
+          break;
+      }
+    });
     fetch();
-    
   }
 
   regetmessages() async {
@@ -101,7 +119,8 @@ class _StudentMainPageState extends State<StudentMainPage> {
       isLoading = false;
     });
   }
- // hh@gmail.com  1234
+
+  // hh@gmail.com  1234
   XFile? Avatar;
   XFile? ProfileAvatar;
   @override
@@ -736,25 +755,49 @@ class _StudentMainPageState extends State<StudentMainPage> {
       );
     }
     SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersiveSticky);
-    return (isLoading)
-        ? Scaffold(
-            backgroundColor: const Color.fromARGB(255, 233, 255, 247),
-            body: Center(
-                child: CircularProgressIndicator(
-              color: Color.fromARGB(255, 74, 193, 241),
-            )))
-        : Scaffold(
-      backgroundColor: Color.fromARGB(255, 74, 193, 241),
-      body: LiquidPullToRefresh(
-            showChildOpacityTransition: false,
-            backgroundColor: Color.fromARGB(255, 74, 193, 241),
-            color: const Color.fromARGB(255, 233, 255, 247),
-            onRefresh: () async {
-              await Future.delayed(Duration(milliseconds: 500));
-              setState(() {
-                fetch();
-              });
-            },
-            child: StudentMainPageBody));
+    if (ConnectedToInternet) {
+      return (isLoading)
+          ? Scaffold(
+              backgroundColor: const Color.fromARGB(255, 233, 255, 247),
+              body: Center(
+                  child: CircularProgressIndicator(
+                color: Color.fromARGB(255, 74, 193, 241),
+              )))
+          : Scaffold(
+              backgroundColor: Color.fromARGB(255, 74, 193, 241),
+              body: LiquidPullToRefresh(
+                  showChildOpacityTransition: false,
+                  backgroundColor: Color.fromARGB(255, 74, 193, 241),
+                  color: const Color.fromARGB(255, 233, 255, 247),
+                  onRefresh: () async {
+                    await Future.delayed(Duration(milliseconds: 500));
+                    setState(() {
+                      fetch();
+                    });
+                  },
+                  child: StudentMainPageBody));
+    } else {
+      return Scaffold(
+        backgroundColor: const Color.fromARGB(255, 233, 255, 247),
+        body: Center(child:CMaker(
+          height: 150,
+          width: 270,
+              color: Colors.white,
+                boxShadow: [
+                  BoxShadow(
+                      offset: Offset(1, 1),
+                      blurRadius: 6,
+                      spreadRadius: .03,
+                      color: Color.fromARGB(82, 0, 0, 0)),
+                ],
+                circularRadius: 20,
+                alignment: Alignment.center,
+                child: TMaker(
+                    text: "You aren't connected to internet",
+                    fontSize: 20,
+                    fontWeight: FontWeight.w700,
+                    color: Colors.black))),
+      );
+    }
   }
 }

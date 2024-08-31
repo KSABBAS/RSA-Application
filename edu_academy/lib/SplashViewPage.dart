@@ -3,6 +3,7 @@ import 'dart:developer';
 
 import 'package:edu_academy/Login/LogInPage.dart';
 import 'package:flutter/material.dart';
+import 'package:internet_connection_checker_plus/internet_connection_checker_plus.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class SplashViewPage extends StatefulWidget {
@@ -11,6 +12,7 @@ class SplashViewPage extends StatefulWidget {
   @override
   State<SplashViewPage> createState() => _SplashViewPageState();
 }
+
 class _SplashViewPageState extends State<SplashViewPage>
     with SingleTickerProviderStateMixin {
   AnimationController? animationController;
@@ -27,7 +29,6 @@ class _SplashViewPageState extends State<SplashViewPage>
             Timer(const Duration(milliseconds: 300), () async {
               final SharedPreferences prefs =
                   await SharedPreferences.getInstance();
-
               //  satrt save data writen in login page
               final List<String>? loginLastValue =
                   prefs.getStringList("Login_last_value");

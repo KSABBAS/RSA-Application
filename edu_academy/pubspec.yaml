@@ -31,6 +31,7 @@ dependencies:
   adaptive_dialog: ^2.1.0
   arabic_font: ^0.0.9
   cloud_firestore: ^5.1.0
+  connectivity_plus: ^6.0.5
   cupertino_icons: ^1.0.2
   curved_navigation_bar: ^1.0.1
   firebase_core: ^3.2.0
@@ -43,6 +44,7 @@ dependencies:
   image_picker: ^1.1.2
   input_dialog: ^0.1.1
   insta_image_viewer: ^1.0.4
+  internet_connection_checker_plus: ^2.5.1
   liquid_pull_to_refresh: ^3.0.1
   loader_overlay: ^4.0.1
   omni_datetime_picker: ^2.0.4
