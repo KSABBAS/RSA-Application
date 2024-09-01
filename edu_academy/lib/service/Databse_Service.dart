@@ -1,5 +1,4 @@
 import 'dart:developer';
-import 'dart:io';
 // import 'dart:io';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -546,7 +545,7 @@ class DatabaseService {
       }
     }
     print("##out_list ${out_list}");
-    return out_list as List<dynamic>;
+    return out_list;
   }
 
   FiAdd_score_and_comment(String garde, String subject, String Hw_id,

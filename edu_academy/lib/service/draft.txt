@@ -498,3 +498,15 @@ HomeworkBody
 رابط زوم يحاكي الفصور الدراسيه يعمل على مدار اليوم
 دورات للتقوه في جميع المواد المواد الدراسيه و ايضا تحفيظ القرأن الكريم
 و نهتم ايضا بالمجالات التكنلوجلة مثل كورسات في لغات البرمجه
+
+
+[4:06 pm, 26/08/2024] Mohamed Hosni: all_Homeworks[IsOpendIndex][0]
+[4:07 pm, 26/08/2024] Mohamed Hosni: "Created date: ${all_Homeworks[IsOpendIndex][2]}\nscore:${all_Homeworks[IsOpendIndex][3]}",
+[4:08 pm, 26/08/2024] Mohamed Hosni: (all_Homeworks[IsOpendIndex][4] as List).length
+[4:08 pm, 26/08/2024] Mohamed Hosni: all_Homeworks[IsOpendIndex][4][index]
+[4:10 pm, 26/08/2024] Mohamed Hosni: "${Grade_selected} Homework",
+[4:10 pm, 26/08/2024] Mohamed Hosni: all_Homeworks.length
+[4:10 pm, 26/08/2024] Mohamed Hosni: all_Homeworks[index][0]
+[4:10 pm, 26/08/2024] Mohamed Hosni: (all_Homeworks[index][4] as List).length
+[4:11 pm, 26/08/2024] Mohamed Hosni: Image.network(
+                                              all_Homeworks[index][4][index],

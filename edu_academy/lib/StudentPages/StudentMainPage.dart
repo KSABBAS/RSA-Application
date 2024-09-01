@@ -1,5 +1,4 @@
 // import 'dart:convert';
-import 'dart:developer';
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:edu_academy/StudentPages/FirstPageContents.dart';
 import 'package:edu_academy/StudentPages/Notifications.dart';
