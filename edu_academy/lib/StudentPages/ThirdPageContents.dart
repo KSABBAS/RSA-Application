@@ -1,3 +1,4 @@
+import 'dart:developer';
 import 'dart:io';
 
 import 'package:edu_academy/MyTools.dart';
@@ -31,7 +32,7 @@ List Cols = [
 ];
 List<dynamic> HomeWorks = [
   [
-    "اللغة العربية",
+    "Data is loading....",
     [
       "Teacher Name", //teacher name,
       "Title", //title,
@@ -93,7 +94,7 @@ List<dynamic> HomeWorks = [
     ],
   ],
   [
-    "الرياضيات",
+    "Data is loading....",
     [
       "Teacher Name", //teacher name,
       "Title", //title,
@@ -154,7 +155,7 @@ List<dynamic> HomeWorks = [
     ],
   ],
   [
-    "الكيمياء",
+    "Data is loading....",
     [
       "Teacher Name", //teacher name,
       "Title", //title,
@@ -223,6 +224,7 @@ bool StartedSoving = false;
 String StudentHomeWorkAnswer = "";
 bool EditSolution = false;
 bool ViewSentSolution = false;
+bool hw_in_list_none = false;
 
 class _ThirdPageState extends State<ThirdPage> {
   late Future<void> _dataFuture;
@@ -242,6 +244,7 @@ class _ThirdPageState extends State<ThirdPage> {
     print(ggrtr);
     print("add done");
     print(HomeWorks[HomeWorkIndex][0]);
+    print("#HomeWorks ${HomeWorks}");
   }
 
   @override
@@ -1692,13 +1695,13 @@ class _ThirdPageState extends State<ThirdPage> {
                                 alignment: Alignment.center,
                                 child: InkWell(
                                   onTap: () async {
-                                    print(HomeWorks[HomeWorkIndex]
-                                        [HomeworkSelected + 1][4]); // hw files
-                                    print(
-                                        StudentHomeWorkAnswer); // hw solve body
-                                    print(HomeWorks[HomeWorkIndex]
-                                        [HomeworkSelected + 1][8]); // hw id
-                                    print(student_id);
+                                    // print(HomeWorks[HomeWorkIndex]
+                                    //     [HomeworkSelected + 1][4]); // hw files
+                                    // print(
+                                    //     StudentHomeWorkAnswer); // hw solve body
+                                    // print(HomeWorks[HomeWorkIndex]
+                                    //     [HomeworkSelected + 1][8]); // hw id
+                                    // print(student_id);
                                     // hw id,student_id,hw solve body,hw files
                                     OverlayLoadingProgress.start(
                                       context,
@@ -3093,8 +3096,8 @@ class _ThirdPageState extends State<ThirdPage> {
                                       color: const Color.fromARGB(
                                           255, 233, 255, 247),
                                       child: TMaker(
-                                          text: HomeWorks[HomeWorkIndex]
-                                              [HomeworkSelected + 1][7][2][0],
+                                          text:
+                                              "${HomeWorks[HomeWorkIndex][HomeworkSelected + 1][7][2][0]} / ${HomeWorks[HomeWorkIndex][HomeworkSelected + 1][6]}",
                                           fontSize: 20,
                                           fontWeight: FontWeight.w600,
                                           color: const Color.fromARGB(
@@ -3458,119 +3461,147 @@ class _ThirdPageState extends State<ThirdPage> {
           margin: const EdgeInsets.only(right: 20, left: 20, bottom: 40),
           width: double.infinity,
           color: const Color.fromARGB(255, 36, 160, 209),
-          child: ListView.builder(
-              itemCount: HomeWorks[HomeWorkIndex].length - 1,
-              itemBuilder: (context, index) {
-                return CMaker(
-                  boxShadow: const [
-                    BoxShadow(
-                        offset: Offset(1, 1),
-                        blurRadius: 6,
-                        spreadRadius: .03,
-                        color: Color.fromARGB(58, 0, 0, 0)),
-                  ],
-                  padding: const EdgeInsets.all(10),
-                  circularRadius: 25,
-                  margin: const EdgeInsets.only(bottom: 30),
-                  color: const Color.fromARGB(255, 233, 255, 247),
-                  height: 120,
-                  width: double.infinity,
-                  child: Row(
-                    children: [
-                      CMaker(
-                        width: 140,
-                        child: Column(
-                          children: [
-                            Expanded(child: CMaker(child: Container())),
-                            CMaker(
-                                circularRadius: 15,
-                                padding: const EdgeInsets.symmetric(
-                                    horizontal: 20, vertical: 10),
-                                color: (HomeWorks[HomeWorkIndex][index + 1][7]
+          child: (!(HomeWorks[HomeWorkIndex].length - 1 == 0))  ?ListView.builder(itemCount: HomeWorks[HomeWorkIndex].length - 1, itemBuilder: (context, index) {
+            return CMaker(
+              boxShadow: const [
+                BoxShadow(
+                    offset: Offset(1, 1),
+                    blurRadius: 6,
+                    spreadRadius: .03,
+                    color: Color.fromARGB(58, 0, 0, 0)),
+              ],
+              padding: const EdgeInsets.all(10),
+              circularRadius: 25,
+              margin: const EdgeInsets.only(bottom: 30),
+              gradient: LinearGradient(
+                  begin: Alignment.bottomCenter,
+                  end: Alignment.topCenter,
+                  colors: () {
+                    // hw coloring status
+                    if (!(HomeWorks[HomeWorkIndex][index + 1][7][0] == false)) {
+                      if (!(HomeWorks[HomeWorkIndex][index + 1][7].length ==
+                          2)) {
+                        if (HomeWorks[HomeWorkIndex][index + 1][7][2][0] ==
+                            HomeWorks[HomeWorkIndex][index + 1][6]) {
+                          return [
+                            // full mark
+                            const Color.fromARGB(255, 59, 200, 49),
+                            const Color.fromARGB(255, 160, 253, 55),
+                          ];
+                        } else {
+                          return [
+                            // not full mark
+                            const Color.fromARGB(255, 21, 154, 169),
+                            const Color.fromARGB(255, 233, 255, 247),
+                          ];
+                        }
+                      } else {
+                        return [
+                          // Being Marked
+                          const Color.fromARGB(255, 34, 0, 255),
+                          const Color.fromARGB(255, 220, 176, 141),
+                        ];
+                      }
+                    } else {
+                      return [
+                        // Un Solved
+                        const Color.fromARGB(255, 227, 55, 55),
+                        const Color.fromARGB(255, 251, 255, 233),
+                      ];
+                    }
+                  }()), // white change to full marked theme
+              height: 120,
+              width: double.infinity,
+              child: Row(
+                children: [
+                  CMaker(
+                    width: 140,
+                    child: Column(
+                      children: [
+                        Expanded(child: CMaker(child: Container())),
+                        CMaker(
+                            circularRadius: 15,
+                            padding: const EdgeInsets.symmetric(
+                                horizontal: 20, vertical: 10),
+                            color: (HomeWorks[HomeWorkIndex][index + 1][7][0] ==
+                                    false)
+                                ? const Color.fromARGB(255, 249, 84, 84)
+                                : (HomeWorks[HomeWorkIndex][index + 1][7]
+                                            .length ==
+                                        2)
+                                    ? const Color.fromARGB(255, 66, 133, 241)
+                                    : const Color.fromARGB(255, 32, 222, 32),
+                            child: TMaker(
+                                text: (HomeWorks[HomeWorkIndex][index + 1][7]
                                             [0] ==
                                         false)
-                                    ? const Color.fromARGB(255, 249, 84, 84)
+                                    ? "Un Solved"
                                     : (HomeWorks[HomeWorkIndex][index + 1][7]
                                                 .length ==
                                             2)
-                                        ? const Color.fromARGB(
-                                            255, 66, 133, 241)
-                                        : const Color.fromARGB(
-                                            255, 32, 222, 32),
-                                child: TMaker(
-                                    text: (HomeWorks[HomeWorkIndex][index + 1]
-                                                [7][0] ==
-                                            false)
-                                        ? "Un Solved"
-                                        : (HomeWorks[HomeWorkIndex][index + 1]
-                                                        [7]
-                                                    .length ==
-                                                2)
-                                            ? "Being Marked"
-                                            : HomeWorks[HomeWorkIndex]
-                                                [index + 1][7][2][0],
-                                    fontSize: 15,
-                                    fontWeight: FontWeight.w800,
-                                    color: Colors.white)),
-                            Expanded(child: CMaker(child: Container())),
-                            InkWell(
-                              onTap: () {
-                                setState(() {
-                                  HomeWorkOpend = false;
-                                  ThirdPageThirdPage = true;
-                                  HomeworkSelected = index;
-                                  HomeworkSelectedState =
-                                      (HomeWorks[HomeWorkIndex][index + 1][7]
-                                                  [0] ==
-                                              false)
-                                          ? "Un Solved"
-                                          : (HomeWorks[HomeWorkIndex][index + 1]
-                                                          [7]
-                                                      .length ==
-                                                  2)
-                                              ? "Being Marked"
-                                              : HomeWorks[HomeWorkIndex]
-                                                  [index + 1][7][2][0];
-                                });
-                              },
-                              child: CMaker(
-                                  alignment: Alignment.center,
-                                  padding: const EdgeInsets.symmetric(
-                                      horizontal: 20),
-                                  circularRadius: 20,
-                                  color:
-                                      const Color.fromARGB(255, 235, 218, 118),
-                                  margin: const EdgeInsets.symmetric(
-                                      horizontal: 15),
-                                  height: 40,
-                                  child: TMaker(
-                                      text: "View",
-                                      fontSize: 18,
-                                      fontWeight: FontWeight.w600,
-                                      color:
-                                          const Color.fromARGB(255, 0, 0, 0))),
-                            ),
-                          ],
-                        ),
-                      ),
-                      Expanded(child: Container()),
-                      Expanded(
-                        flex: 5,
-                        child: CMaker(
-                            height: double.infinity,
-                            padding: const EdgeInsets.only(right: 10),
-                            child: TMaker(
-                                textAlign: TextAlign.end,
-                                text:
-                                    "${HomeWorks[HomeWorkIndex][index + 1][1]}",
+                                        ? "Being Marked"
+                                        : "${HomeWorks[HomeWorkIndex][index + 1][7][2][0]} / ${HomeWorks[HomeWorkIndex][index + 1][6]}",
                                 fontSize: 15,
-                                fontWeight: FontWeight.w600,
-                                color: const Color.fromARGB(255, 0, 0, 0))),
-                      ),
-                    ],
+                                fontWeight: FontWeight.w800,
+                                color: Colors.white)),
+                        Expanded(child: CMaker(child: Container())),
+                        InkWell(
+                          onTap: () {
+                            setState(() {
+                              HomeWorkOpend = false;
+                              ThirdPageThirdPage = true;
+                              HomeworkSelected = index;
+                              HomeworkSelectedState = (HomeWorks[HomeWorkIndex]
+                                          [index + 1][7][0] ==
+                                      false)
+                                  ? "Un Solved"
+                                  : (HomeWorks[HomeWorkIndex][index + 1][7]
+                                              .length ==
+                                          2)
+                                      ? "Being Marked"
+                                      : HomeWorks[HomeWorkIndex][index + 1][7]
+                                          [2][0];
+                            });
+                          },
+                          child: CMaker(
+                              alignment: Alignment.center,
+                              padding:
+                                  const EdgeInsets.symmetric(horizontal: 20),
+                              circularRadius: 20,
+                              color: const Color.fromARGB(255, 235, 218, 118),
+                              margin:
+                                  const EdgeInsets.symmetric(horizontal: 15),
+                              height: 40,
+                              child: TMaker(
+                                  text: "View",
+                                  fontSize: 18,
+                                  fontWeight: FontWeight.w600,
+                                  color: const Color.fromARGB(255, 0, 0, 0))),
+                        ),
+                      ],
+                    ),
                   ),
-                );
-              }));
+                  Expanded(child: Container()),
+                  Expanded(
+                    flex: 5,
+                    child: CMaker(
+                        height: double.infinity,
+                        padding: const EdgeInsets.only(right: 10),
+                        child: TMaker(
+                            textAlign: TextAlign.end,
+                            text: "${HomeWorks[HomeWorkIndex][index + 1][1]}",
+                            fontSize: 15,
+                            fontWeight: FontWeight.w600,
+                            color: const Color.fromARGB(255, 0, 0, 0))),
+                  ),
+                ],
+              ),
+            );
+          }): const Text("No homework added",
+           style: TextStyle(
+            fontSize: 50,
+            fontWeight: FontWeight.w500,
+            color: Color.fromARGB(255, 0, 0, 0)),) );
       if (PageWidth(context) < 550) {
         setState(() {
           ThirdPageContents = CMaker(
