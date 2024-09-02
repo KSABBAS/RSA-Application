@@ -69,11 +69,7 @@ class _StudentFirstMainPageState extends State<StudentFirstMainPage> {
 
   @override
   Widget build(BuildContext context) {
-    print("==============================================");
-    print(name);
-    print(grade);
     int DayIndex = DateTime.now().weekday;
-    print(DayIndex);
     late Widget FirstPageBody;
     Widget Logo = InkWell(
         onTap: () {
@@ -152,187 +148,253 @@ class _StudentFirstMainPageState extends State<StudentFirstMainPage> {
         ),
       ),
     );
-    Widget OneDayTable = Column(
-      children: [
-        CMaker(
-            boxShadow: const [
-              BoxShadow(
-                  offset: Offset(1, 1),
-                  blurRadius: 6,
-                  spreadRadius: .03,
-                  color: Color.fromARGB(82, 0, 0, 0)),
-            ],
-            circularRadius: 15,
-            child: Column(
-              children: [
-                Row(
-                  children: [
-                    Expanded(
-                        child: Container(
-                      decoration: const BoxDecoration(
-                          borderRadius:
-                              BorderRadius.only(topLeft: Radius.circular(15)),
-                          color: Color.fromARGB(255, 36, 160, 209)),
-                      height: (PageWidth(context) < 550)
-                          ? 80
-                          : (PageHeight(context) < 900)
-                              ? 100
-                              : 150,
-                      child: TMaker(
-                          text: "",
-                          fontSize: 20,
-                          fontWeight: FontWeight.w600,
-                          color: Colors.white),
-                    )),
-                    Expanded(
-                        child: CMaker(
-                      alignment: Alignment.center,
-                      height: (PageWidth(context) < 550)
-                          ? 80
-                          : (PageHeight(context) < 900)
-                              ? 100
-                              : 150,
-                      color: const Color.fromARGB(255, 36, 160, 209),
-                      child: TMaker(
-                          text: "00:00\nto\n00:00",
-                          fontSize: (PageWidth(context) < 550)
-                              ? 13
-                              : (PageHeight(context) < 900)
-                                  ? 18
-                                  : 20,
-                          fontWeight: FontWeight.w600,
-                          color: Colors.white),
-                    )),
-                    Expanded(
-                        child: CMaker(
-                      alignment: Alignment.center,
-                      height: (PageWidth(context) < 550)
-                          ? 80
-                          : (PageHeight(context) < 900)
-                              ? 100
-                              : 150,
-                      color: const Color.fromARGB(255, 36, 160, 209),
-                      child: TMaker(
-                          text: "00:00\nto\n00:00",
-                          fontSize: (PageWidth(context) < 550)
-                              ? 13
-                              : (PageHeight(context) < 900)
-                                  ? 18
-                                  : 20,
-                          fontWeight: FontWeight.w600,
-                          color: Colors.white),
-                    )),
-                    Expanded(
-                        child: CMaker(
-                      alignment: Alignment.center,
-                      height: (PageWidth(context) < 550)
-                          ? 80
-                          : (PageHeight(context) < 900)
-                              ? 100
-                              : 150,
-                      color: const Color.fromARGB(255, 36, 160, 209),
-                      child: TMaker(
-                          text: "00:00\nto\n00:00",
-                          fontSize: (PageWidth(context) < 550)
-                              ? 13
-                              : (PageHeight(context) < 900)
-                                  ? 18
-                                  : 20,
-                          fontWeight: FontWeight.w600,
-                          color: Colors.white),
-                    )),
-                    Expanded(
-                        child: CMaker(
-                      alignment: Alignment.center,
-                      height: (PageWidth(context) < 550)
-                          ? 80
-                          : (PageHeight(context) < 900)
-                              ? 100
-                              : 150,
-                      color: const Color.fromARGB(255, 36, 160, 209),
-                      child: TMaker(
-                          text: "00:00\nto\n00:00",
-                          fontSize: (PageWidth(context) < 550)
-                              ? 13
-                              : (PageHeight(context) < 900)
-                                  ? 18
-                                  : 20,
-                          fontWeight: FontWeight.w600,
-                          color: Colors.white),
-                    )),
-                    Expanded(
-                        child: Container(
-                      alignment: Alignment.center,
-                      decoration: const BoxDecoration(
-                          borderRadius:
-                              BorderRadius.only(topRight: Radius.circular(15)),
-                          color: Color.fromARGB(255, 36, 160, 209)),
-                      height: (PageWidth(context) < 550)
-                          ? 80
-                          : (PageHeight(context) < 900)
-                              ? 100
-                              : 150,
-                      child: TMaker(
-                          text: "00:00\nto\n00:00",
-                          fontSize: (PageWidth(context) < 550)
-                              ? 13
-                              : (PageHeight(context) < 900)
-                                  ? 18
-                                  : 20,
-                          fontWeight: FontWeight.w600,
-                          color: Colors.white),
-                    )),
-                  ],
-                ),
-                CMaker(
-                    height: 70,
-                    width: PageWidth(context) - 40,
-                    child: ListView.builder(
-                      scrollDirection: Axis.horizontal,
-                      shrinkWrap: false,
-                      physics: const NeverScrollableScrollPhysics(),
-                      itemCount: TableData[0].length,
-                      itemBuilder: (context, index) {
-                        return CMaker(
-                            height: 70,
-                            width: (PageWidth(context) >= 550 &&
-                                    PageWidth(context) < 1200 &&
-                                    PageHeight(context) < 900)
-                                ? (PageWidth(context) - 165) /
-                                    TableData[0].length
-                                : (PageWidth(context) >= 550 &&
-                                        PageWidth(context) >= 1200 &&
-                                        PageHeight(context) < 900)
-                                    ? (PageWidth(context) - 790) /
-                                        TableData[0].length
-                                    : ((PageWidth(context) - 40) /
-                                        TableData[0].length),
-                            child: Container(
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.only(
-                                      bottomLeft: (index == 0)
-                                          ? const Radius.circular(15)
-                                          : const Radius.circular(0),
-                                      bottomRight:
-                                          (index == TableData[0].length - 1)
-                                              ? const Radius.circular(15)
-                                              : const Radius.circular(0)),
-                                  color: Colors.white,
+    Widget FullScadual = CMaker(
+          width: double.infinity,
+          height: 200,
+          child: ListView.builder(
+            scrollDirection: Axis.horizontal,
+            shrinkWrap: false,
+            physics: const NeverScrollableScrollPhysics(),
+            itemCount: TableData[0].length,
+            itemBuilder: (context, ColumnIndex) {
+              return CMaker(
+                  width: (PageWidth(context) - 80) / TableData[0].length,
+                  child: ListView.builder(
+                    scrollDirection: Axis.vertical,
+                    shrinkWrap: false,
+                    physics: const NeverScrollableScrollPhysics(),
+                    itemCount: TableData.length,
+                    itemBuilder: (context, RowIndex) {
+                      return CMaker(
+                          height: (200) / TableData.length,
+                          child: Container(
+                              decoration: BoxDecoration(
+                                border: const Border(
+                                    right: BorderSide(), bottom: BorderSide()),
+                                borderRadius: BorderRadius.only(
+                                  topLeft: ("$ColumnIndex $RowIndex" == "0 0")
+                                      ? const Radius.circular(10)
+                                      : const Radius.circular(0),
+                                  bottomLeft: ("$ColumnIndex $RowIndex" ==
+                                          "0 ${TableData.length - 1}")
+                                      ? const Radius.circular(10)
+                                      : const Radius.circular(0),
+                                  topRight: ("$ColumnIndex $RowIndex" ==
+                                          "${TableData[0].length - 1} 0")
+                                      ? const Radius.circular(10)
+                                      : const Radius.circular(0),
+                                  bottomRight: ("$ColumnIndex $RowIndex" ==
+                                          "${TableData[0].length - 1} ${TableData.length - 1}")
+                                      ? const Radius.circular(10)
+                                      : const Radius.circular(0),
                                 ),
-                                alignment: Alignment.center,
-                                child: TMaker(
-                                    text: "${TableData[DayIndex][index]}",
-                                    fontSize: 15,
-                                    fontWeight: FontWeight.w600,
-                                    color: (index == 0)
-                                        ? const Color.fromARGB(
-                                            255, 36, 160, 209)
-                                        : const Color.fromARGB(255, 0, 0, 0))));
-                      },
-                    ))
+                                color: (ColumnIndex == 0 || RowIndex == 0)
+                                    ? const Color.fromARGB(255, 36, 160, 209)
+                                    : Colors.white,
+                              ),
+                              alignment: Alignment.center,
+                              child: TMaker(
+                                  text: "${TableData[RowIndex][ColumnIndex]}",
+                                  fontSize: 15,
+                                  fontWeight: FontWeight.w600,
+                                  color: (ColumnIndex == 0 || RowIndex == 0)
+                                      ? const Color.fromARGB(255, 255, 255, 255)
+                                      : const Color.fromARGB(255, 0, 0, 0))));
+                    },
+                  ));
+            },
+          ));
+    Widget OneDayTable = InkWell(
+      onTap: () {
+        showDialog(
+          context: context,
+          builder: (context) {
+            return Dialog(child: FullScadual,);
+          },
+        );
+      },
+      child: Column(
+        children: [
+          CMaker(
+              boxShadow: const [
+                BoxShadow(
+                    offset: Offset(1, 1),
+                    blurRadius: 6,
+                    spreadRadius: .03,
+                    color: Color.fromARGB(82, 0, 0, 0)),
               ],
-            )),
-      ],
+              circularRadius: 15,
+              child: Column(
+                children: [
+                  Row(
+                    children: [
+                      Expanded(
+                          child: Container(
+                        decoration: const BoxDecoration(
+                            borderRadius:
+                                BorderRadius.only(topLeft: Radius.circular(15)),
+                            color: Color.fromARGB(255, 36, 160, 209)),
+                        height: (PageWidth(context) < 550)
+                            ? 80
+                            : (PageHeight(context) < 900)
+                                ? 100
+                                : 150,
+                        child: TMaker(
+                            text: "",
+                            fontSize: 20,
+                            fontWeight: FontWeight.w600,
+                            color: Colors.white),
+                      )),
+                      Expanded(
+                          child: CMaker(
+                        alignment: Alignment.center,
+                        height: (PageWidth(context) < 550)
+                            ? 80
+                            : (PageHeight(context) < 900)
+                                ? 100
+                                : 150,
+                        color: const Color.fromARGB(255, 36, 160, 209),
+                        child: TMaker(
+                            text: "00:00\nto\n00:00",
+                            fontSize: (PageWidth(context) < 550)
+                                ? 13
+                                : (PageHeight(context) < 900)
+                                    ? 18
+                                    : 20,
+                            fontWeight: FontWeight.w600,
+                            color: Colors.white),
+                      )),
+                      Expanded(
+                          child: CMaker(
+                        alignment: Alignment.center,
+                        height: (PageWidth(context) < 550)
+                            ? 80
+                            : (PageHeight(context) < 900)
+                                ? 100
+                                : 150,
+                        color: const Color.fromARGB(255, 36, 160, 209),
+                        child: TMaker(
+                            text: "00:00\nto\n00:00",
+                            fontSize: (PageWidth(context) < 550)
+                                ? 13
+                                : (PageHeight(context) < 900)
+                                    ? 18
+                                    : 20,
+                            fontWeight: FontWeight.w600,
+                            color: Colors.white),
+                      )),
+                      Expanded(
+                          child: CMaker(
+                        alignment: Alignment.center,
+                        height: (PageWidth(context) < 550)
+                            ? 80
+                            : (PageHeight(context) < 900)
+                                ? 100
+                                : 150,
+                        color: const Color.fromARGB(255, 36, 160, 209),
+                        child: TMaker(
+                            text: "00:00\nto\n00:00",
+                            fontSize: (PageWidth(context) < 550)
+                                ? 13
+                                : (PageHeight(context) < 900)
+                                    ? 18
+                                    : 20,
+                            fontWeight: FontWeight.w600,
+                            color: Colors.white),
+                      )),
+                      Expanded(
+                          child: CMaker(
+                        alignment: Alignment.center,
+                        height: (PageWidth(context) < 550)
+                            ? 80
+                            : (PageHeight(context) < 900)
+                                ? 100
+                                : 150,
+                        color: const Color.fromARGB(255, 36, 160, 209),
+                        child: TMaker(
+                            text: "00:00\nto\n00:00",
+                            fontSize: (PageWidth(context) < 550)
+                                ? 13
+                                : (PageHeight(context) < 900)
+                                    ? 18
+                                    : 20,
+                            fontWeight: FontWeight.w600,
+                            color: Colors.white),
+                      )),
+                      Expanded(
+                          child: Container(
+                        alignment: Alignment.center,
+                        decoration: const BoxDecoration(
+                            borderRadius:
+                                BorderRadius.only(topRight: Radius.circular(15)),
+                            color: Color.fromARGB(255, 36, 160, 209)),
+                        height: (PageWidth(context) < 550)
+                            ? 80
+                            : (PageHeight(context) < 900)
+                                ? 100
+                                : 150,
+                        child: TMaker(
+                            text: "00:00\nto\n00:00",
+                            fontSize: (PageWidth(context) < 550)
+                                ? 13
+                                : (PageHeight(context) < 900)
+                                    ? 18
+                                    : 20,
+                            fontWeight: FontWeight.w600,
+                            color: Colors.white),
+                      )),
+                    ],
+                  ),
+                  CMaker(
+                      height: 70,
+                      width: PageWidth(context) - 40,
+                      child: ListView.builder(
+                        scrollDirection: Axis.horizontal,
+                        shrinkWrap: false,
+                        physics: const NeverScrollableScrollPhysics(),
+                        itemCount: TableData[0].length,
+                        itemBuilder: (context, index) {
+                          return CMaker(
+                              height: 70,
+                              width: (PageWidth(context) >= 550 &&
+                                      PageWidth(context) < 1200 &&
+                                      PageHeight(context) < 900)
+                                  ? (PageWidth(context) - 165) /
+                                      TableData[0].length
+                                  : (PageWidth(context) >= 550 &&
+                                          PageWidth(context) >= 1200 &&
+                                          PageHeight(context) < 900)
+                                      ? (PageWidth(context) - 790) /
+                                          TableData[0].length
+                                      : ((PageWidth(context) - 40) /
+                                          TableData[0].length),
+                              child: Container(
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.only(
+                                        bottomLeft: (index == 0)
+                                            ? const Radius.circular(15)
+                                            : const Radius.circular(0),
+                                        bottomRight:
+                                            (index == TableData[0].length - 1)
+                                                ? const Radius.circular(15)
+                                                : const Radius.circular(0)),
+                                    color: Colors.white,
+                                  ),
+                                  alignment: Alignment.center,
+                                  child: TMaker(
+                                      text: "${TableData[DayIndex][index]}",
+                                      fontSize: 15,
+                                      fontWeight: FontWeight.w600,
+                                      color: (index == 0)
+                                          ? const Color.fromARGB(
+                                              255, 36, 160, 209)
+                                          : const Color.fromARGB(255, 0, 0, 0))));
+                        },
+                      ))
+                ],
+              )),
+        ],
+      ),
     );
     Widget NextClassTC = CMaker(
         width: 130,
@@ -352,11 +414,11 @@ class _StudentFirstMainPageState extends State<StudentFirstMainPage> {
               color: const Color.fromARGB(153, 24, 58, 60)),
           subtitle: TMaker(
               text:(){
-                 if (int.parse(grade[grade.length-1]) <= 6 && grade[grade.length-2] == " "){
+                  if (int.parse(grade[grade.length-1]) <= 6 && grade[grade.length-2] == " "){
                 return "Password:0000";}
                 else{
                   return "Password:2000";
-                  } 
+                  }
               }(),
               fontSize: 12,
               fontWeight: FontWeight.w600,

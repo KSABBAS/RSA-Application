@@ -56,10 +56,8 @@ class _StudentProfileState extends State<StudentProfile> {
               student_id, role, File(ProfileAvatar!.path));
           // refresh
           profile_data = await dbService.FiGet_profile_data(student_id, role)
-            as Map<String, dynamic>;
-          setState(() {
-            
-          });
+              as Map<String, dynamic>;
+          setState(() {});
         }
       },
       child: CMaker(
@@ -520,7 +518,6 @@ class _StudentProfileState extends State<StudentProfile> {
                             print(
                                 "####widget.StudentPassword ${widget.StudentPassword}");
                             print("####EditMode ${EditMode}");
-                            // Navigator.pop(context);
                             if (EditMode) {
                               ProfileKey.currentState!.save();
                               widget.StudentEmail = NewProfileEmail;
@@ -537,17 +534,17 @@ class _StudentProfileState extends State<StudentProfile> {
                               print(widget.StudentNumber);
                               print(widget.StudentPassword);
                             } else {
-                              if (Check_pass == widget.StudentPassword) {
-                                EditMode = !EditMode;
-                                Navigator.pop(context);
-                                print("####Check_pass ${Check_pass}");
+                              if (Check_pass == widget.StudentPassword&&Check_pass !="0") {
                                 print(
-                                    "####widget.StudentPassword ${widget.StudentPassword}");
+                                    "======================\n password id correct");
+                                print(
+                                    "======================$Check_pass");
+                                EditMode = !EditMode;
+                                print(EditMode);
+                                Navigator.pop(context);
+                                setState(() {});
                               }
                             }
-                            setState(() {
-                              print("Check_pass ${Check_pass}");
-                            });
                           },
                           child: Text(
                             "ok",
@@ -654,6 +651,45 @@ class _StudentProfileState extends State<StudentProfile> {
                           height: 80,
                           alignment: Alignment.center,
                           child: EditAndSaveButton),
+                          (EditMode)
+                          ? CMaker(
+                            width: double.infinity,
+                            alignment: Alignment.center,
+                            child: InkWell(
+                                onTap: () {
+                                  EditMode = false;
+                                  setState(() {
+                                  });
+                                },
+                                child: CMaker(
+                                  alignment: Alignment.center,
+                                  width: 170,
+                                    height: (PageWidth(context) < 550)
+                                        ? 60
+                                        : (PageHeight(context) < 900)
+                                            ? 80
+                                            : 80,
+                                    boxShadow: const [
+                                      BoxShadow(
+                                          offset: Offset(1, 1),
+                                          blurRadius: 6,
+                                          spreadRadius: .03,
+                                          color: Color.fromARGB(58, 0, 0, 0)),
+                                    ],
+                                    circularRadius: 25,
+                                    color: const Color.fromARGB(255, 233, 255, 247),
+                                    padding: EdgeInsets.only(right: 10),
+                                    child: TMaker(
+                                        text: "Cancel",
+                                        fontSize: 25,
+                                        fontWeight: FontWeight.w600,
+                                        color: const Color.fromARGB(255, 0, 0, 0))),
+                              ),
+                          )
+                          : Container(
+                              height: 0,
+                              width: 0,
+                            ),
                     ],
                   )),
               Expanded(child: Container())
@@ -728,6 +764,50 @@ class _StudentProfileState extends State<StudentProfile> {
                           height: 80,
                           alignment: Alignment.center,
                           child: EditAndSaveButton),
+                          CMaker(
+                          width: double.infinity,
+                          height: 80,
+                          alignment: Alignment.center,
+                          child: EditAndSaveButton),
+                          (EditMode)
+                          ? CMaker(
+                            width: double.infinity,
+                            alignment: Alignment.center,
+                            child: InkWell(
+                                onTap: () {
+                                  EditMode = false;
+                                  setState(() {
+                                  });
+                                },
+                                child: CMaker(
+                                  alignment: Alignment.center,
+                                  width: 170,
+                                    height: (PageWidth(context) < 550)
+                                        ? 60
+                                        : (PageHeight(context) < 900)
+                                            ? 80
+                                            : 80,
+                                    boxShadow: const [
+                                      BoxShadow(
+                                          offset: Offset(1, 1),
+                                          blurRadius: 6,
+                                          spreadRadius: .03,
+                                          color: Color.fromARGB(58, 0, 0, 0)),
+                                    ],
+                                    circularRadius: 25,
+                                    color: const Color.fromARGB(255, 233, 255, 247),
+                                    padding: EdgeInsets.only(right: 10),
+                                    child: TMaker(
+                                        text: "Cancel",
+                                        fontSize: 25,
+                                        fontWeight: FontWeight.w600,
+                                        color: const Color.fromARGB(255, 0, 0, 0))),
+                              ),
+                          )
+                          : Container(
+                              height: 0,
+                              width: 0,
+                            ),
                     ],
                   )),
               Expanded(child: Container())
@@ -802,6 +882,50 @@ class _StudentProfileState extends State<StudentProfile> {
                           height: 80,
                           alignment: Alignment.center,
                           child: EditAndSaveButton),
+                          CMaker(
+                          width: double.infinity,
+                          height: 80,
+                          alignment: Alignment.center,
+                          child: EditAndSaveButton),
+                          (EditMode)
+                          ? CMaker(
+                            width: double.infinity,
+                            alignment: Alignment.center,
+                            child: InkWell(
+                                onTap: () {
+                                  EditMode = false;
+                                  setState(() {
+                                  });
+                                },
+                                child: CMaker(
+                                  alignment: Alignment.center,
+                                  width: 170,
+                                    height: (PageWidth(context) < 550)
+                                        ? 60
+                                        : (PageHeight(context) < 900)
+                                            ? 80
+                                            : 80,
+                                    boxShadow: const [
+                                      BoxShadow(
+                                          offset: Offset(1, 1),
+                                          blurRadius: 6,
+                                          spreadRadius: .03,
+                                          color: Color.fromARGB(58, 0, 0, 0)),
+                                    ],
+                                    circularRadius: 25,
+                                    color: const Color.fromARGB(255, 233, 255, 247),
+                                    padding: EdgeInsets.only(right: 10),
+                                    child: TMaker(
+                                        text: "Cancel",
+                                        fontSize: 25,
+                                        fontWeight: FontWeight.w600,
+                                        color: const Color.fromARGB(255, 0, 0, 0))),
+                              ),
+                          )
+                          : Container(
+                              height: 0,
+                              width: 0,
+                            ),
                     ],
                   )),
               Expanded(child: Container())

@@ -3456,14 +3456,13 @@ class _ThirdPageState extends State<ThirdPage> {
                 Icons.arrow_back,
                 size: 28,
               )));
-      Widget HomeWorksBuilder = CMaker(
+      Widget HomeWorksBuilder = (!(HomeWorks[HomeWorkIndex].length - 1 == 0))?CMaker(
           padding: const EdgeInsets.only(top: 50, right: 15, left: 15),
           circularRadius: 25,
           margin: const EdgeInsets.only(right: 20, left: 20, bottom: 40),
           width: double.infinity,
           color: const Color.fromARGB(255, 36, 160, 209),
-          child: (!(HomeWorks[HomeWorkIndex].length - 1 == 0))
-              ? ListView.builder(
+          child:ListView.builder(
                   itemCount: HomeWorks[HomeWorkIndex].length - 1,
                   itemBuilder: (context, index) {
                     return CMaker(
@@ -3478,8 +3477,8 @@ class _ThirdPageState extends State<ThirdPage> {
                       circularRadius: 25,
                       margin: const EdgeInsets.only(bottom: 30),
                       gradient: LinearGradient(
-                          begin: Alignment.bottomCenter,
-                          end: Alignment.topCenter,
+                          begin: Alignment.centerRight,
+                          end: Alignment.centerLeft,
                           colors: () {
                             // hw coloring status
                             if (!(HomeWorks[HomeWorkIndex][index + 1][7][0] ==
@@ -3492,28 +3491,28 @@ class _ThirdPageState extends State<ThirdPage> {
                                     HomeWorks[HomeWorkIndex][index + 1][6]) {
                                   return [
                                     // full mark
-                                    const Color.fromARGB(255, 59, 200, 49),
                                     const Color.fromARGB(255, 160, 253, 55),
+                                    const Color.fromARGB(255, 255, 255, 255),
                                   ];
                                 } else {
                                   return [
                                     // not full mark
-                                    const Color.fromARGB(255, 21, 154, 169),
-                                    const Color.fromARGB(255, 233, 255, 247),
+                                    const Color.fromARGB(255, 160, 253, 55),
+                                    const Color.fromARGB(255, 255, 255, 255),
                                   ];
                                 }
                               } else {
                                 return [
                                   // Being Marked
-                                  const Color.fromARGB(255, 34, 0, 255),
-                                  const Color.fromARGB(255, 220, 176, 141),
+                                  const Color.fromARGB(255, 82, 55, 255),
+                                  const Color.fromARGB(255, 255, 255, 255),
                                 ];
                               }
                             } else {
                               return [
                                 // Un Solved
-                                const Color.fromARGB(255, 227, 55, 55),
-                                const Color.fromARGB(255, 251, 255, 233),
+                                const Color.fromARGB(255, 255, 59, 59),
+                                const Color.fromARGB(255, 255, 255, 255),
                               ];
                             }
                           }()), // white change to full marked theme
@@ -3618,13 +3617,25 @@ class _ThirdPageState extends State<ThirdPage> {
                       ),
                     );
                   })
-              : const Text(
-                  "No homework added",
-                  style: TextStyle(
-                      fontSize: 50,
-                      fontWeight: FontWeight.w500,
-                      color: Color.fromARGB(255, 0, 0, 0)),
-                ));
+              )
+              :CMaker(
+                height: double.infinity,
+                width: double.infinity,
+                alignment: Alignment.center,
+                child: CMaker(
+                  height: 200,
+                  width: 300,
+                  alignment: Alignment.center,
+                  circularRadius: 20,
+                  color: const Color.fromARGB(255, 36, 160, 209),
+                  child: const Text(
+                      "No homework added",
+                      style: TextStyle(
+                          fontSize: 30,
+                          fontWeight: FontWeight.w500,
+                          color: Color.fromARGB(255, 255, 255, 255)),
+                    )),
+              );
       if (PageWidth(context) < 550) {
         setState(() {
           ThirdPageContents = CMaker(
@@ -3892,16 +3903,6 @@ class _ThirdPageState extends State<ThirdPage> {
                             ],
                           ),
                           const Padding(padding: EdgeInsets.only(bottom: 2)),
-                          // CMaker(
-                          //     alignment: Alignment.centerRight,
-                          //     padding: const EdgeInsets.only(right: 10),
-                          //     child: TMaker(
-                          //         text: "",
-                          //         fontSize: 13,
-                          //         fontWeight: FontWeight.w500,
-                          //         color: const Color.fromARGB(
-                          //             255, 101, 239, 106))),
-                          const Padding(padding: EdgeInsets.only(bottom: 2)),
                           Row(
                             children: [
                               InkWell(
@@ -3944,7 +3945,7 @@ class _ThirdPageState extends State<ThirdPage> {
                                     fontSize: 15,
                                     fontWeight: FontWeight.w500,
                                     color:
-                                        const Color.fromARGB(255, 255, 36, 36)),
+                                        (hw_conter > 0)?const Color.fromARGB(255, 255, 36, 36):const Color.fromARGB(255, 108, 219, 110)),
                               ),
                             ],
                           )

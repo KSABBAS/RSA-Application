@@ -664,6 +664,45 @@ class _TeacherProfilePageState extends State<TeacherProfilePage> {
                           height: 80,
                           alignment: Alignment.center,
                           child: EditAndSaveButton),
+                          (EditMode)
+                          ? CMaker(
+                            width: double.infinity,
+                            alignment: Alignment.center,
+                            child: InkWell(
+                                onTap: () {
+                                  EditMode = false;
+                                  setState(() {
+                                  });
+                                },
+                                child: CMaker(
+                                  alignment: Alignment.center,
+                                  width: 170,
+                                    height: (PageWidth(context) < 550)
+                                        ? 60
+                                        : (PageHeight(context) < 900)
+                                            ? 80
+                                            : 80,
+                                    boxShadow: const [
+                                      BoxShadow(
+                                          offset: Offset(1, 1),
+                                          blurRadius: 6,
+                                          spreadRadius: .03,
+                                          color: Color.fromARGB(58, 0, 0, 0)),
+                                    ],
+                                    circularRadius: 25,
+                                    color: const Color.fromARGB(255, 233, 255, 247),
+                                    padding: EdgeInsets.only(right: 10),
+                                    child: TMaker(
+                                        text: "Cancel",
+                                        fontSize: 25,
+                                        fontWeight: FontWeight.w600,
+                                        color: const Color.fromARGB(255, 0, 0, 0))),
+                              ),
+                          )
+                          : Container(
+                              height: 0,
+                              width: 0,
+                            ),
                     ],
                   )),
               Expanded(child: Container()),
@@ -744,6 +783,45 @@ class _TeacherProfilePageState extends State<TeacherProfilePage> {
                           height: 80,
                           alignment: Alignment.center,
                           child: EditAndSaveButton),
+                          (EditMode)
+                          ? CMaker(
+                            width: double.infinity,
+                            alignment: Alignment.center,
+                            child: InkWell(
+                                onTap: () {
+                                  EditMode = false;
+                                  setState(() {
+                                  });
+                                },
+                                child: CMaker(
+                                  alignment: Alignment.center,
+                                  width: 170,
+                                    height: (PageWidth(context) < 550)
+                                        ? 60
+                                        : (PageHeight(context) < 900)
+                                            ? 80
+                                            : 80,
+                                    boxShadow: const [
+                                      BoxShadow(
+                                          offset: Offset(1, 1),
+                                          blurRadius: 6,
+                                          spreadRadius: .03,
+                                          color: Color.fromARGB(58, 0, 0, 0)),
+                                    ],
+                                    circularRadius: 25,
+                                    color: const Color.fromARGB(255, 233, 255, 247),
+                                    padding: EdgeInsets.only(right: 10),
+                                    child: TMaker(
+                                        text: "Cancel",
+                                        fontSize: 25,
+                                        fontWeight: FontWeight.w600,
+                                        color: const Color.fromARGB(255, 0, 0, 0))),
+                              ),
+                          )
+                          : Container(
+                              height: 0,
+                              width: 0,
+                            ),
                     ],
                   )),
               Expanded(child: Container()),
@@ -824,6 +902,45 @@ class _TeacherProfilePageState extends State<TeacherProfilePage> {
                           height: 80,
                           alignment: Alignment.center,
                           child: EditAndSaveButton),
+                          (EditMode)
+                          ? CMaker(
+                            width: double.infinity,
+                            alignment: Alignment.center,
+                            child: InkWell(
+                                onTap: () {
+                                  EditMode = false;
+                                  setState(() {
+                                  });
+                                },
+                                child: CMaker(
+                                  alignment: Alignment.center,
+                                  width: 170,
+                                    height: (PageWidth(context) < 550)
+                                        ? 60
+                                        : (PageHeight(context) < 900)
+                                            ? 80
+                                            : 80,
+                                    boxShadow: const [
+                                      BoxShadow(
+                                          offset: Offset(1, 1),
+                                          blurRadius: 6,
+                                          spreadRadius: .03,
+                                          color: Color.fromARGB(58, 0, 0, 0)),
+                                    ],
+                                    circularRadius: 25,
+                                    color: const Color.fromARGB(255, 233, 255, 247),
+                                    padding: EdgeInsets.only(right: 10),
+                                    child: TMaker(
+                                        text: "Cancel",
+                                        fontSize: 25,
+                                        fontWeight: FontWeight.w600,
+                                        color: const Color.fromARGB(255, 0, 0, 0))),
+                              ),
+                          )
+                          : Container(
+                              height: 0,
+                              width: 0,
+                            ),
                     ],
                   )),
               Expanded(child: Container()),

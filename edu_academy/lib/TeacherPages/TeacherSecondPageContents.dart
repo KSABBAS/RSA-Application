@@ -26,6 +26,7 @@ List<List<dynamic>> Books_data = [];
 
 class _TeacherSecondPageContentsState extends State<TeacherSecondPageContents> {
   final dbService = DatabaseService();
+  late bool BooksAreLoading = true;
   late Future<void> _dataFuture;
 
   final TextEditingController _MessageController = TextEditingController();
@@ -37,12 +38,11 @@ class _TeacherSecondPageContentsState extends State<TeacherSecondPageContents> {
   @override
   void initState() {
     super.initState();
-    _dataFuture = books_load();
   }
 
   books_load() async {
-    //widget.ListOfGrades[GradeOpenedIndex][0]
-    //SubjectThatIsSelected
+    BooksAreLoading = true;
+    setState(() {});
     print("#### ${widget.ListOfGrades[GradeOpenedIndex][0]}");
     print("#### ${SubjectThatIsSelected}");
     var Books_data0 = await dbService.fiRead_Books(
@@ -50,13 +50,14 @@ class _TeacherSecondPageContentsState extends State<TeacherSecondPageContents> {
     print("Books_data $Books_data");
     setState(() {
       Books_data = Books_data0;
+      BooksAreLoading = false;
     });
   }
 
   pick_file() async {
     File? file;
     FilePickerResult? result;
-    String name = '';
+    String? name = '';
     result = await FilePicker.platform.pickFiles(
         type: FileType.custom,
         allowedExtensions: ['pdf'],
@@ -184,16 +185,16 @@ class _TeacherSecondPageContentsState extends State<TeacherSecondPageContents> {
               minWidth: 150,
               color: const Color.fromARGB(255, 54, 244, 92),
               onPressed: () async {
-                List<dynamic> files = await pick_file();
+                List<dynamic>? files = await pick_file();
                 print(files);
-                List<dynamic> file_links =
-                    await dbService.stHwStore([files[0]]);
+                List<dynamic>? file_links =
+                    await dbService.stHwStore([files?[0]]);
                 print("file_links $file_links");
                 dbService.FiAdd_book_file(
                     widget.ListOfGrades[GradeOpenedIndex][0],
                     SubjectThatIsSelected,
-                    file_links[0],
-                    files[1]);
+                    file_links?[0],
+                    files?[1]);
                 books_load();
               },
               child: TMaker(
@@ -207,45 +208,72 @@ class _TeacherSecondPageContentsState extends State<TeacherSecondPageContents> {
       );
       if (PageWidth(context) < 550) {
         setState(() {
-          SecondPageBody = CMaker(
-              height: PageHeight(context) - 145,
-              width: PageWidth(context),
-              padding: const EdgeInsets.symmetric(horizontal: 10),
-              child: ListView(children: [
-                Row(
-                  children: [ThirdPageBackBotton, ThirdPageGradeWindow],
-                ),
-                const Padding(padding: EdgeInsets.only(bottom: 20)),
-                BooksAndFilesWindow
-              ]));
+          SecondPageBody = (BooksAreLoading)
+              ? CMaker(
+                  height: PageHeight(context) - 150,
+                  width: double.infinity,
+                  child: Center(
+                      child: CircularProgressIndicator(
+                    color: const Color.fromARGB(255, 36, 160, 209),
+                  )),
+                )
+              : CMaker(
+                  height: PageHeight(context) - 145,
+                  width: PageWidth(context),
+                  padding: const EdgeInsets.symmetric(horizontal: 10),
+                  child: ListView(children: [
+                    Row(
+                      children: [ThirdPageBackBotton, ThirdPageGradeWindow],
+                    ),
+                    const Padding(padding: EdgeInsets.only(bottom: 20)),
+                    BooksAndFilesWindow
+                  ]));
         });
       } else if (PageWidth(context) >= 550 && PageHeight(context) >= 900) {
         setState(() {
-          SecondPageBody = CMaker(
-              height: PageHeight(context) - 145,
-              width: PageWidth(context),
-              padding: const EdgeInsets.symmetric(horizontal: 10),
-              child: ListView(children: [
-                Row(
-                  children: [ThirdPageBackBotton, ThirdPageGradeWindow],
-                ),
-                const Padding(padding: EdgeInsets.only(bottom: 20)),
-                BooksAndFilesWindow
-              ]));
+          SecondPageBody = (BooksAreLoading)
+              ? CMaker(
+                  height: PageHeight(context) - 150,
+                  width: double.infinity,
+                  child: Center(
+                      child: CircularProgressIndicator(
+                    color: const Color.fromARGB(255, 36, 160, 209),
+                  )),
+                )
+              : CMaker(
+                  height: PageHeight(context) - 145,
+                  width: PageWidth(context),
+                  padding: const EdgeInsets.symmetric(horizontal: 10),
+                  child: ListView(children: [
+                    Row(
+                      children: [ThirdPageBackBotton, ThirdPageGradeWindow],
+                    ),
+                    const Padding(padding: EdgeInsets.only(bottom: 20)),
+                    BooksAndFilesWindow
+                  ]));
         });
       } else if (PageWidth(context) >= 550 && PageHeight(context) < 900) {
         setState(() {
-          SecondPageBody = CMaker(
-              height: PageHeight(context) - 145,
-              width: PageWidth(context),
-              padding: const EdgeInsets.symmetric(horizontal: 10),
-              child: ListView(children: [
-                Row(
-                  children: [ThirdPageBackBotton, ThirdPageGradeWindow],
-                ),
-                const Padding(padding: EdgeInsets.only(bottom: 20)),
-                BooksAndFilesWindow
-              ]));
+          SecondPageBody = (BooksAreLoading)
+              ? CMaker(
+                  height: PageHeight(context) - 150,
+                  width: double.infinity,
+                  child: Center(
+                      child: CircularProgressIndicator(
+                    color: const Color.fromARGB(255, 36, 160, 209),
+                  )),
+                )
+              : CMaker(
+                  height: PageHeight(context) - 145,
+                  width: PageWidth(context),
+                  padding: const EdgeInsets.symmetric(horizontal: 10),
+                  child: ListView(children: [
+                    Row(
+                      children: [ThirdPageBackBotton, ThirdPageGradeWindow],
+                    ),
+                    const Padding(padding: EdgeInsets.only(bottom: 20)),
+                    BooksAndFilesWindow
+                  ]));
         });
       }
     } else if (GradeIsOpened) {

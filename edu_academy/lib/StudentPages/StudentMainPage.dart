@@ -37,7 +37,14 @@ String NewEmail = "";
 String NewPassWord = "";
 String NewPhoneNumber = "";
 List<List> TableData = [
-  ["الوقت//التاريخ", "الحصة الاولى", "الحصة الثانية", "الحصة الثالثة", "الحصة الرابعه", "الحصة الخامسة"],
+  [
+    "الوقت//التاريخ",
+    "الحصة الاولى",
+    "الحصة الثانية",
+    "الحصة الثالثة",
+    "الحصة الرابعه",
+    "الحصة الخامسة"
+  ],
   ["السبت", "عربي", "انجليزي", "رياضيات", "رسم", "دين"],
   ["الاحد", "عربي", "انجليزي", "رياضيات", "رسم", "دين"],
   ["الاثنين", "عربي", "انجليزي", "رياضيات", "رسم", "دين"],
@@ -782,10 +789,11 @@ class _StudentMainPageState extends State<StudentMainPage> {
     } else {
       return Scaffold(
         backgroundColor: const Color.fromARGB(255, 233, 255, 247),
-        body: Center(child:CMaker(
-          height: 150,
-          width: 270,
-              color: Colors.white,
+        body: Center(
+            child: CMaker(
+                height: 150,
+                width: 270,
+                color: Colors.white,
                 boxShadow: [
                   BoxShadow(
                       offset: Offset(1, 1),

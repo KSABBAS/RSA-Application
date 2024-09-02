@@ -837,7 +837,8 @@ class _TeacherThirdPageContentsState extends State<TeacherThirdPageContents> {
                                     height: 180,
                                     color: const Color.fromARGB(
                                         255, 233, 255, 247),
-                                    child: Column(
+                                    child: ListView(
+                                      shrinkWrap: true,
                                       children: [
                                         const Padding(
                                             padding:
@@ -2762,8 +2763,7 @@ class _TeacherThirdPageContentsState extends State<TeacherThirdPageContents> {
                         HomeWorkIndex = index;
                         GradeHomeWorkIsOppened = false;
                       });
-                      await Future.delayed(Duration(seconds: 1));
-                      solved_hw_student_re();
+                      await solved_hw_student_re();
                       OneStudentHomeWorksIsLoading = false;
                       setState(() {});
                     },
