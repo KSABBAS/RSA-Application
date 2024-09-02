@@ -349,7 +349,8 @@ class _TeacherThirdPageContentsState extends State<TeacherThirdPageContents> {
                       width: double.infinity,
                       margin: EdgeInsets.symmetric(horizontal: 20),
                       child: GridView.builder(
-                        itemCount: (all_Homeworks[IsOpendIndex][4] as List).length,
+                        itemCount:
+                            (all_Homeworks[IsOpendIndex][4] as List).length,
                         gridDelegate:
                             const SliverGridDelegateWithFixedCrossAxisCount(
                                 crossAxisCount: 2,
@@ -360,7 +361,8 @@ class _TeacherThirdPageContentsState extends State<TeacherThirdPageContents> {
                             onTap: () {
                               setState(() {});
                             },
-                            child: Image.network(all_Homeworks[IsOpendIndex][4][index],
+                            child: Image.network(
+                              all_Homeworks[IsOpendIndex][4][index],
                               fit: BoxFit.fitWidth,
                             ),
                           );
@@ -368,28 +370,65 @@ class _TeacherThirdPageContentsState extends State<TeacherThirdPageContents> {
                       ),
                     ),
                     const Padding(padding: EdgeInsets.only(bottom: 20)),
-                    CMaker(
-                      width: double.infinity,
-                      alignment: Alignment.center,
-                      child: InkWell(
-                          onTap: () {},
-                          child: CMaker(
-                              padding: EdgeInsets.all(10),
-                              circularRadius: 15,
-                              boxShadow: const [
-                                BoxShadow(
-                                    color: Color.fromARGB(61, 0, 0, 0),
-                                    offset: Offset(1, 1),
-                                    blurRadius: 1,
-                                    spreadRadius: .06)
-                              ],
-                              color: const Color.fromARGB(255, 233, 255, 247),
-                              child: TMaker(
-                                  text: "Edit(soon)",
-                                  fontSize: 20,
-                                  fontWeight: FontWeight.w600,
-                                  color: Colors.black))),
-                    ),
+                    CMaker( // edit and delete buttons
+                        width: double.infinity,
+                        alignment: Alignment.center,
+                        child: Row(
+                          children: [
+                            InkWell(
+                                onTap: () {},
+                                child: CMaker(
+                                    padding: EdgeInsets.all(10),
+                                    circularRadius: 15,
+                                    boxShadow: const [
+                                      BoxShadow(
+                                          color: Color.fromARGB(61, 0, 0, 0),
+                                          offset: Offset(1, 1),
+                                          blurRadius: 1,
+                                          spreadRadius: .06)
+                                    ],
+                                    color: const Color.fromARGB(
+                                        255, 233, 255, 247),
+                                    child: TMaker(
+                                        text: "Edit(soon)",
+                                        fontSize: 20,
+                                        fontWeight: FontWeight.w600,
+                                        color: Colors.black))),
+                            const Padding(padding: EdgeInsets.all(20)),
+                            InkWell(
+                                onTap: () async {
+                                  //delete hw start
+                                  await dbService.FiDelete_Hw_techer(
+                                      Grade_selected,
+                                      SubjectThatIsSelected,
+                                      all_Homeworks[IsOpendIndex][5] as String); // delete function
+                                  
+                                  all_Homeworks = await dbService.Fi_getAll_HW(
+                                    Grade_selected, SubjectThatIsSelected); // update all hw data
+                                  setState(() {});
+                                  //delete hw end
+                                  
+                                },
+                                child: CMaker(
+                                    padding: EdgeInsets.all(10),
+                                    circularRadius: 15,
+                                    boxShadow: const [
+                                      BoxShadow(
+                                          color: Color.fromARGB(61, 0, 0, 0),
+                                          offset: Offset(1, 1),
+                                          blurRadius: 1,
+                                          spreadRadius: .06)
+                                    ],
+                                    color: const Color.fromARGB(
+                                        255, 233, 255, 247),
+                                    child: TMaker(
+                                        text: "Delete Homework",
+                                        fontSize: 20,
+                                        fontWeight: FontWeight.w600,
+                                        color: const Color.fromARGB(
+                                            255, 191, 0, 0)))),
+                          ],
+                        )),
                     const Padding(padding: EdgeInsets.only(bottom: 20)),
                     CMaker(
                         width: double.infinity,
@@ -797,8 +836,7 @@ class _TeacherThirdPageContentsState extends State<TeacherThirdPageContents> {
                           circularRadius: 20,
                           margin: const EdgeInsets.only(left: 20, right: 20),
                           child: TMaker(
-                              text:
-                                  "${Grade_selected} Homework",
+                              text: "${Grade_selected} Homework",
                               fontSize: 30,
                               fontWeight: FontWeight.w600,
                               color: const Color.fromARGB(255, 0, 0, 0))),
@@ -873,7 +911,9 @@ class _TeacherThirdPageContentsState extends State<TeacherThirdPageContents> {
                                           height: 70,
                                           width: double.infinity,
                                           child: GridView.builder(
-                                            itemCount: (all_Homeworks[index][4] as List).length,
+                                            itemCount: (all_Homeworks[index][4]
+                                                    as List)
+                                                .length,
                                             gridDelegate:
                                                 const SliverGridDelegateWithFixedCrossAxisCount(
                                                     crossAxisCount: 6,
@@ -885,7 +925,8 @@ class _TeacherThirdPageContentsState extends State<TeacherThirdPageContents> {
                                                   setState(() {});
                                                 },
                                                 child: Image.network(
-                                              all_Homeworks[index][4][index],
+                                                  all_Homeworks[index][4]
+                                                      [index],
                                                   fit: BoxFit.fitWidth,
                                                 ),
                                               );
@@ -2030,11 +2071,11 @@ class _TeacherThirdPageContentsState extends State<TeacherThirdPageContents> {
                   student_selected_list[1], // st id
                   TeacherComment,
                   GrantedScore));
-            solved_hw_student_re();
-            setState(() {
-              ViewSentSolution = false;
-              OneStudentHomeWorks = true;
-            });
+              solved_hw_student_re();
+              setState(() {
+                ViewSentSolution = false;
+                OneStudentHomeWorks = true;
+              });
             }
           },
           child: CMaker(

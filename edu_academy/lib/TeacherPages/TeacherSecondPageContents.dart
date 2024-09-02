@@ -854,36 +854,48 @@ class _TeacherSecondPageContentsState extends State<TeacherSecondPageContents> {
                               )),
                           const Padding(padding: EdgeInsets.only(bottom: 30)),
                           Expanded(
-                            child: ListView.builder(
-                                itemCount: widget.ListOfGrades[index][1].length,
-                                itemBuilder: (context, StudentIndex) {
-                                  return Column(
-                                    children: [
-                                      ListTile(
-                                        leading: CMaker(
-                                            height: 70,
-                                            width: 70,
-                                            child: CircleAvatar(
-                                                backgroundImage: Image.asset(
-                                                        "images/Person.png")
-                                                    .image)),
-                                        title: TMaker(
-                                          textAlign: TextAlign.start,
-                                          text: widget.ListOfGrades[index][1]
-                                                  [StudentIndex][0]
-                                              .toString(),
-                                          fontSize: 20,
-                                          fontWeight: FontWeight.w600,
-                                          color: const Color.fromARGB(
-                                              255, 0, 0, 0),
-                                        ),
-                                      ),
-                                      const Padding(
-                                        padding: EdgeInsets.only(bottom: 20),
-                                      ),
-                                    ],
-                                  );
-                                }),
+                            child: (!(widget.ListOfGrades[index][1].length ==
+                                    0))
+                                ? ListView.builder(
+                                    itemCount:
+                                        widget.ListOfGrades[index][1].length,
+                                    itemBuilder: (context, StudentIndex) {
+                                      return Column(
+                                        children: [
+                                          ListTile(
+                                            leading: CMaker(
+                                                height: 70,
+                                                width: 70,
+                                                child: CircleAvatar(
+                                                    backgroundImage: Image.network(
+                                                            widget.ListOfGrades[
+                                                                    index][1][
+                                                                StudentIndex][2])
+                                                        .image)),
+                                            title: TMaker(
+                                              textAlign: TextAlign.start,
+                                              text: widget.ListOfGrades[index]
+                                                      [1][StudentIndex][0]
+                                                  .toString(),
+                                              fontSize: 20,
+                                              fontWeight: FontWeight.w600,
+                                              color: const Color.fromARGB(
+                                                  255, 0, 0, 0),
+                                            ),
+                                          ),
+                                          const Padding(
+                                            padding:
+                                                EdgeInsets.only(bottom: 20),
+                                          ),
+                                        ],
+                                      );
+                                    })
+                                : const Text(
+                                  "No students Added",
+                                  style: TextStyle(
+                                      fontSize: 20,
+                                      fontWeight: FontWeight.w800),
+                                ),
                           ),
                         ],
                       )),

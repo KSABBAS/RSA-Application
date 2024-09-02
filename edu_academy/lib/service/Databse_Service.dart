@@ -424,8 +424,14 @@ class DatabaseService {
     List<dynamic> out_hw = [];
     for (var doc in querySnapshot.docs) {
       print('Data: ${doc.data()}\n');
-      out_hw.add(
-          [doc['title'], doc['body'], doc['date'], doc['score'], doc['files']]);
+      out_hw.add([
+        doc['title'],
+        doc['body'],
+        doc['date'],
+        doc['score'],
+        doc['files'],
+        doc["id"]
+      ]);
     }
     return out_hw;
   }
@@ -620,10 +626,20 @@ class DatabaseService {
         .collection(role)
         .doc(student_id);
     studentSnapshot.update({
-      "email":StudentEmail,
-      "phone":NewProfileNumber,
-      "password":NewProfilePassword,
-      });
+      "email": StudentEmail,
+      "phone": NewProfileNumber,
+      "password": NewProfilePassword,
+    });
+  }
+
+  FiDelete_Hw_techer(String garde, String subject, String hw_id) async {
+    DocumentReference studentSnapshot = fire
+        .collection('Homework')
+        .doc("${garde}")
+        .collection("${subject}")
+        .doc("${hw_id}");
+
+    studentSnapshot.delete();
   }
 
   // Storage
