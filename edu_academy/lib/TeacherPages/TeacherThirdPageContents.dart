@@ -370,87 +370,73 @@ class _TeacherThirdPageContentsState extends State<TeacherThirdPageContents> {
                       ),
                     ),
                     const Padding(padding: EdgeInsets.only(bottom: 20)),
-                    CMaker( // edit and delete buttons
-                        width: double.infinity,
-                        alignment: Alignment.center,
-                        child: Row(
-                          children: [
-                            InkWell(
-                                onTap: () {},
-                                child: CMaker(
-                                    padding: EdgeInsets.all(10),
-                                    circularRadius: 15,
-                                    boxShadow: const [
-                                      BoxShadow(
-                                          color: Color.fromARGB(61, 0, 0, 0),
-                                          offset: Offset(1, 1),
-                                          blurRadius: 1,
-                                          spreadRadius: .06)
-                                    ],
-                                    color: const Color.fromARGB(
-                                        255, 233, 255, 247),
-                                    child: TMaker(
-                                        text: "Edit(soon)",
-                                        fontSize: 20,
-                                        fontWeight: FontWeight.w600,
-                                        color: Colors.black))),
-                            const Padding(padding: EdgeInsets.all(20)),
-                            InkWell(
-                                onTap: () async {
-                                  //delete hw start
-                                  await dbService.FiDelete_Hw_techer(
-                                      Grade_selected,
-                                      SubjectThatIsSelected,
-                                      all_Homeworks[IsOpendIndex][5] as String); // delete function
-                                  
-                                  all_Homeworks = await dbService.Fi_getAll_HW(
-                                    Grade_selected, SubjectThatIsSelected); // update all hw data
-                                  setState(() {});
-                                  //delete hw end
-                                  
-                                },
-                                child: CMaker(
-                                    padding: EdgeInsets.all(10),
-                                    circularRadius: 15,
-                                    boxShadow: const [
-                                      BoxShadow(
-                                          color: Color.fromARGB(61, 0, 0, 0),
-                                          offset: Offset(1, 1),
-                                          blurRadius: 1,
-                                          spreadRadius: .06)
-                                    ],
-                                    color: const Color.fromARGB(
-                                        255, 233, 255, 247),
-                                    child: TMaker(
-                                        text: "Delete Homework",
-                                        fontSize: 20,
-                                        fontWeight: FontWeight.w600,
-                                        color: const Color.fromARGB(
-                                            255, 191, 0, 0)))),
-                          ],
-                        )),
-                    const Padding(padding: EdgeInsets.only(bottom: 20)),
                     CMaker(
-                        width: double.infinity,
-                        alignment: Alignment.center,
-                        child: InkWell(
-                            onTap: () {},
-                            child: CMaker(
-                                padding: EdgeInsets.all(10),
-                                circularRadius: 15,
-                                boxShadow: const [
-                                  BoxShadow(
-                                      color: Color.fromARGB(61, 0, 0, 0),
-                                      offset: Offset(1, 1),
-                                      blurRadius: 1,
-                                      spreadRadius: .06)
-                                ],
-                                color: const Color.fromARGB(255, 233, 255, 247),
-                                child: TMaker(
-                                    text: "Delete",
-                                    fontSize: 20,
-                                    fontWeight: FontWeight.w600,
-                                    color: Colors.black)))),
+                      width: double.infinity,
+                      alignment: Alignment.center,
+                      child: InkWell(
+                          onTap: () {},
+                          child: CMaker(
+                              padding: EdgeInsets.all(10),
+                              circularRadius: 15,
+                              boxShadow: const [
+                                BoxShadow(
+                                    color: Color.fromARGB(61, 0, 0, 0),
+                                    offset: Offset(1, 1),
+                                    blurRadius: 1,
+                                    spreadRadius: .06)
+                              ],
+                              color: const Color.fromARGB(255, 233, 255, 247),
+                              child: TMaker(
+                                  text: "Edit(soon)",
+                                  fontSize: 20,
+                                  fontWeight: FontWeight.w600,
+                                  color: Colors.black))),
+                    ),
+                    const Padding(padding: EdgeInsets.all(20)),
+                    CMaker(
+                      child: InkWell(
+                          onTap: () async {
+                            PanaraInfoDialog.show(
+                              context,
+                              title: "Wait",
+                              message:
+                                  "Are you sure you want to delete this homework",
+                              buttonText: "Delete",
+                              onTapDismiss: () async {
+                                Navigator.pop(context);
+                                //delete hw start
+                                await dbService.FiDelete_Hw_techer(
+                                    Grade_selected,
+                                    SubjectThatIsSelected,
+                                    all_Homeworks[IsOpendIndex][5] as String);
+                              },
+                              panaraDialogType: PanaraDialogType.warning,
+                              barrierDismissible: false,
+                            );
+                            all_Homeworks = await dbService.Fi_getAll_HW(
+                                Grade_selected,
+                                SubjectThatIsSelected); // update all hw data
+                            setState(() {});
+                            //delete hw end
+                          },
+                          child: CMaker(
+                              padding: EdgeInsets.all(10),
+                              circularRadius: 15,
+                              boxShadow: const [
+                                BoxShadow(
+                                    color: Color.fromARGB(61, 0, 0, 0),
+                                    offset: Offset(1, 1),
+                                    blurRadius: 1,
+                                    spreadRadius: .06)
+                              ],
+                              color: const Color.fromARGB(255, 233, 255, 247),
+                              child: TMaker(
+                                  text: "Delete Homework",
+                                  fontSize: 20,
+                                  fontWeight: FontWeight.w600,
+                                  color:
+                                      const Color.fromARGB(255, 191, 0, 0)))),
+                    ),
                     const Padding(padding: EdgeInsets.only(bottom: 20)),
                   ],
                 ),
