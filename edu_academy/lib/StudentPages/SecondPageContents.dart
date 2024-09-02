@@ -8,6 +8,7 @@ import 'package:edu_academy/StudentPages/StudentMainPage.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:pdfx/pdfx.dart';
+import 'package:syncfusion_flutter_pdfviewer/pdfviewer.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:overlay_loading_progress/overlay_loading_progress.dart';
 
@@ -331,7 +332,7 @@ class _SecondPageState extends State<SecondPage> {
               Expanded(child: Container()),
               TMaker(
                   // book name text
-                  text: "${all_books[bookOpend][2]}",
+                  text: "${(all_books[bookOpend][2].length>10)?all_books[bookOpend][2].substring(0,10)+"....":all_books[bookOpend][2]}",
                   fontSize: 30,
                   fontWeight: FontWeight.w600,
                   color: const Color.fromARGB(255, 255, 255, 255)),
@@ -365,14 +366,8 @@ class _SecondPageState extends State<SecondPage> {
           color: const Color.fromARGB(255, 217, 216, 216),
           width: (PageWidth(context) < 800) ? double.infinity : 600,
           height: (PageHeight(context) - 390),
-          child: Text("File view")
-          // () {
-            // final PdfController = PdfControllerPinch(
-            //     document: PdfDocument.(File.fromUri(all_books[bookOpend][0]).path.toString())); //all_books[bookOpend][0]));
-            // return Expanded(child: PdfViewPinch(controller: PdfController));
-          // }()
+          child: SfPdfViewer.network(maxZoomLevel: 20,all_books[bookOpend][0])
           );
-      // print(all_books[bookOpend][0]);
       if (PageWidth(context) < 550) {
         setState(() {
           SecondPageContents = Column(
@@ -633,7 +628,7 @@ class _SecondPageState extends State<SecondPage> {
                         width: double.infinity,
                         child: TMaker(
                             text:
-                                "$index${index + 1}- ${all_books[index][2]}", //////
+                                "${index + 1}- ${"${(all_books[index][2].length>15)?all_books[index][2].substring(0,15)+"....":all_books[index][2]}"}", //////
                             fontSize: (PageWidth(context) < 550)
                                 ? 30
                                 : (PageHeight(context) < 900)

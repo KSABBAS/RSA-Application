@@ -3588,7 +3588,7 @@ class _ThirdPageState extends State<ThirdPage> {
                                       margin: const EdgeInsets.symmetric(
                                           horizontal: 15),
                                       height: 40,
-                                      child: 
+                                      child:
                                           TMaker(
                                           text: "View",
                                           fontSize: 18,

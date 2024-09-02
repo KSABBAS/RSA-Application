@@ -5,6 +5,7 @@ import 'package:edu_academy/TeacherPages/TeacherThirdPageContents.dart';
 import 'package:edu_academy/service/Databse_Service.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
+import 'package:panara_dialogs/panara_dialogs.dart';
 
 class TeacherSecondPageContents extends StatefulWidget {
   TeacherSecondPageContents(
@@ -148,7 +149,8 @@ class _TeacherSecondPageContentsState extends State<TeacherSecondPageContents> {
                           children: [
                             TMaker(
                                 textAlign: TextAlign.start,
-                                text: Books_data[index][2],
+                                text:
+                                    "${(Books_data[index][2].length > 10) ? Books_data[index][2].substring(0, 10) + "...." : Books_data[index][2]}",
                                 fontSize: 25,
                                 fontWeight: FontWeight.w600,
                                 color: const Color.fromARGB(255, 0, 0, 0)),
@@ -157,11 +159,24 @@ class _TeacherSecondPageContentsState extends State<TeacherSecondPageContents> {
                               color: Colors.red,
                               onPressed: () async {
                                 // delete
-                                await dbService.FiDelete_books_file(
-                                    widget.ListOfGrades[GradeOpenedIndex][0],
-                                    SubjectThatIsSelected,
-                                    Books_data[index][3]);
+                                PanaraInfoDialog.show(
+                                  context,
+                                  title: "Wait",
+                                  message: "Do you want to delete this book?",
+                                  buttonText: "Delete",
+                                  onTapDismiss: () async {
+                                    print("book deleted");
+                                    await dbService.FiDelete_books_file(
+                                        widget.ListOfGrades[GradeOpenedIndex]
+                                            [0],
+                                        SubjectThatIsSelected,
+                                        Books_data[index][3]);
                                 books_load();
+                                    Navigator.pop(context);
+                                  },
+                                  panaraDialogType: PanaraDialogType.warning,
+                                  barrierDismissible: true,
+                                );
                               },
                               child: TMaker(
                                   text: "حذف",
@@ -190,12 +205,23 @@ class _TeacherSecondPageContentsState extends State<TeacherSecondPageContents> {
                 List<dynamic>? file_links =
                     await dbService.stHwStore([files?[0]]);
                 print("file_links $file_links");
-                dbService.FiAdd_book_file(
-                    widget.ListOfGrades[GradeOpenedIndex][0],
-                    SubjectThatIsSelected,
-                    file_links?[0],
-                    files?[1]);
-                books_load();
+                PanaraInfoDialog.show(
+                  context,
+                  title: "Sucess",
+                  message: "A books is added successfully",
+                  buttonText: "Okey",
+                  onTapDismiss: () async {
+                    await dbService.FiAdd_book_file(
+                  widget.ListOfGrades[GradeOpenedIndex][0],
+                  SubjectThatIsSelected,
+                  file_links?[0],
+                  files?[1]);
+                  books_load();
+                    Navigator.pop(context);
+                  },
+                  panaraDialogType: PanaraDialogType.warning,
+                  barrierDismissible: false,
+                );
               },
               child: TMaker(
                   text: " (Only PDF) إضافة",
@@ -891,11 +917,11 @@ class _TeacherSecondPageContentsState extends State<TeacherSecondPageContents> {
                                       );
                                     })
                                 : const Text(
-                                  "No students Added",
-                                  style: TextStyle(
-                                      fontSize: 20,
-                                      fontWeight: FontWeight.w800),
-                                ),
+                                    "No students Added",
+                                    style: TextStyle(
+                                        fontSize: 20,
+                                        fontWeight: FontWeight.w800),
+                                  ),
                           ),
                         ],
                       )),
