@@ -321,7 +321,7 @@ class _TeacherThirdPageContentsState extends State<TeacherThirdPageContents> {
                         circularRadius: 20,
                         margin: const EdgeInsets.only(left: 20, right: 20),
                         child: TMaker(
-                            text: "Title ${IsOpendIndex + 1}",
+                            text: "${all_Homeworks[IsOpendIndex][0]}",
                             fontSize: 30,
                             fontWeight: FontWeight.w600,
                             color: const Color.fromARGB(255, 0, 0, 0))),
@@ -331,7 +331,7 @@ class _TeacherThirdPageContentsState extends State<TeacherThirdPageContents> {
                         padding: const EdgeInsets.only(left: 30),
                         child: TMaker(
                             textAlign: TextAlign.start,
-                            text: "Body",
+                            text: all_Homeworks[IsOpendIndex][1],
                             fontSize: 25,
                             fontWeight: FontWeight.w700,
                             color: const Color.fromARGB(255, 86, 86, 86))),
@@ -349,7 +349,7 @@ class _TeacherThirdPageContentsState extends State<TeacherThirdPageContents> {
                       width: double.infinity,
                       margin: EdgeInsets.symmetric(horizontal: 20),
                       child: GridView.builder(
-                        itemCount: 4,
+                        itemCount: (all_Homeworks[IsOpendIndex][4] as List).length,
                         gridDelegate:
                             const SliverGridDelegateWithFixedCrossAxisCount(
                                 crossAxisCount: 2,
@@ -360,8 +360,7 @@ class _TeacherThirdPageContentsState extends State<TeacherThirdPageContents> {
                             onTap: () {
                               setState(() {});
                             },
-                            child: Image.asset(
-                              "images/Logo.png",
+                            child: Image.network(all_Homeworks[IsOpendIndex][4][index],
                               fit: BoxFit.fitWidth,
                             ),
                           );
@@ -386,7 +385,7 @@ class _TeacherThirdPageContentsState extends State<TeacherThirdPageContents> {
                               ],
                               color: const Color.fromARGB(255, 233, 255, 247),
                               child: TMaker(
-                                  text: "Edit",
+                                  text: "Edit(soon)",
                                   fontSize: 20,
                                   fontWeight: FontWeight.w600,
                                   color: Colors.black))),
@@ -799,7 +798,7 @@ class _TeacherThirdPageContentsState extends State<TeacherThirdPageContents> {
                           margin: const EdgeInsets.only(left: 20, right: 20),
                           child: TMaker(
                               text:
-                                  "Grade ${GradeHomeWorkOppenedIndex + 1} Homework",
+                                  "${Grade_selected} Homework",
                               fontSize: 30,
                               fontWeight: FontWeight.w600,
                               color: const Color.fromARGB(255, 0, 0, 0))),
@@ -808,7 +807,7 @@ class _TeacherThirdPageContentsState extends State<TeacherThirdPageContents> {
                         circularRadius: 20,
                         height: PageHeight(context) - 420,
                         child: ListView.builder(
-                            itemCount: 3,
+                            itemCount: all_Homeworks.length,
                             itemBuilder: (context, index) {
                               return InkWell(
                                   onTap: () {
@@ -848,7 +847,7 @@ class _TeacherThirdPageContentsState extends State<TeacherThirdPageContents> {
                                             padding:
                                                 const EdgeInsets.only(left: 10),
                                             child: TMaker(
-                                                text: "Title",
+                                                text: all_Homeworks[index][0],
                                                 fontSize: 30,
                                                 fontWeight: FontWeight.w700,
                                                 color: Colors.black)),
@@ -861,7 +860,7 @@ class _TeacherThirdPageContentsState extends State<TeacherThirdPageContents> {
                                                 const EdgeInsets.only(left: 10),
                                             child: TMaker(
                                                 textAlign: TextAlign.start,
-                                                text: "Body",
+                                                text: all_Homeworks[index][1],
                                                 fontSize: 17,
                                                 fontWeight: FontWeight.w700,
                                                 color: const Color.fromARGB(
@@ -873,7 +872,7 @@ class _TeacherThirdPageContentsState extends State<TeacherThirdPageContents> {
                                           height: 70,
                                           width: double.infinity,
                                           child: GridView.builder(
-                                            itemCount: 4,
+                                            itemCount: (all_Homeworks[index][4] as List).length,
                                             gridDelegate:
                                                 const SliverGridDelegateWithFixedCrossAxisCount(
                                                     crossAxisCount: 6,
@@ -884,8 +883,8 @@ class _TeacherThirdPageContentsState extends State<TeacherThirdPageContents> {
                                                 onTap: () {
                                                   setState(() {});
                                                 },
-                                                child: Image.asset(
-                                                  "images/Logo.png",
+                                                child: Image.network(
+                                              all_Homeworks[index][4][index],
                                                   fit: BoxFit.fitWidth,
                                                 ),
                                               );

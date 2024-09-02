@@ -165,7 +165,8 @@ class DatabaseService {
         .get();
 
     for (var i in studentSnapshot.docs) {
-      retList.add(["${i['link']}", "${i['date']}", "${i['title']}"]);
+      retList
+          .add(["${i['link']}", "${i['date']}", "${i['title']}", "${i['id']}"]);
     }
     log(retList.toString());
     return retList;
@@ -571,6 +572,58 @@ class DatabaseService {
       return e;
     }
     //pass
+  }
+
+  FiAdd_book_file(
+      String grade, String subject, String link, String file_name) async {
+    //Book/SubjectsBooks/Grades/Grade 1/عربي/Book1
+    var studentSnapshot = await fire
+        .collection('Book')
+        .doc("SubjectsBooks")
+        .collection("Grades")
+        .doc(grade)
+        .collection(subject);
+
+    var doc_id = studentSnapshot.doc();
+    doc_id.set({
+      "title": file_name,
+      "link": link,
+      "date": "currnt_date",
+      "id": doc_id.id,
+    });
+  }
+
+  FiDelete_books_file(String grade, String subject, String doc_id) async {
+    //Book/SubjectsBooks/Grades/Grade 1/عربي/Book1
+    var studentSnapshot = await fire
+        .collection('Book')
+        .doc("SubjectsBooks")
+        .collection("Grades")
+        .doc(grade)
+        .collection(subject)
+        .doc(doc_id);
+
+    studentSnapshot.delete();
+  }
+
+  FiUpdate_profile_data(
+      String grade,
+      String role,
+      String student_id,
+      String StudentEmail,
+      String NewProfileNumber,
+      String NewProfilePassword) async {
+    //Users/Students/Students/S1
+    var studentSnapshot = await fire
+        .collection('Users')
+        .doc(role)
+        .collection(role)
+        .doc(student_id);
+    studentSnapshot.update({
+      "email":StudentEmail,
+      "phone":NewProfileNumber,
+      "password":NewProfilePassword,
+      });
   }
 
   // Storage

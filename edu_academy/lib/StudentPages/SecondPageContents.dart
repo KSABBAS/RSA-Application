@@ -323,17 +323,19 @@ class _SecondPageState extends State<SecondPage> {
                 color: const Color.fromARGB(255, 36, 160, 209),
                 circularRadius: 8,
                 alignment: Alignment.center,
-                child: Column(
+                child: Row(
                   children: [
                     Expanded(child: Container()),
-                    TMaker(
-                        text: "hi${bookOpend + 1}- ${all_books[bookOpend][2]}",
+                    TMaker( // book name text
+                        text: "${all_books[bookOpend][2]}",
                         fontSize: 30,
                         fontWeight: FontWeight.w600,
                         color: const Color.fromARGB(255, 255, 255, 255)),
                     Expanded(child: Container()),
                     InkWell(
                       onTap: () {
+                         _launchURL(url: all_books[bookOpend][0]);
+                        //${all_books[bookOpend][0]}
                           // in here you must add ,the download function and its animation all by yourself
                         },
                       child: CMaker(
@@ -360,7 +362,7 @@ class _SecondPageState extends State<SecondPage> {
               width: (PageWidth(context)<800)?double.infinity:600,
               height: (PageHeight(context) - 390),
               child: TMaker(
-                  text: "file view \n ${all_books[bookOpend][0]}",
+                  text: "file view",
                   fontSize: 30,
                   fontWeight: FontWeight.w400,
                   color: Colors.black),
@@ -604,7 +606,7 @@ class _SecondPageState extends State<SecondPage> {
                           },
                           child: CMaker(
                             height: (PageWidth(context) < 550)? 50: (PageHeight(context) < 900)? 80: 80,
-                              alignment: Alignment.center,
+                              alignment: Alignment.centerLeft,
                               padding:
                                   const EdgeInsets.symmetric(horizontal: 20),
                               circularRadius: 5,
@@ -615,8 +617,8 @@ class _SecondPageState extends State<SecondPage> {
                               width: double.infinity,
                               child: TMaker(
                                   text:
-                                      "$index${index + 1}- ${all_books[index][2]}\ndate:${all_books[index][1]}", //////
-                                  fontSize: (PageWidth(context) < 550)? 20: (PageHeight(context) < 900)? 30: 30,
+                                      "$index${index + 1}- ${all_books[index][2]}", //////
+                                  fontSize: (PageWidth(context) < 550)? 30: (PageHeight(context) < 900)? 40: 40,
                                   fontWeight: FontWeight.w500,
                                   color: const Color.fromARGB(255, 255, 255, 255)))),
                       const Padding(

@@ -1,7 +1,9 @@
+import 'dart:io';
 import 'package:edu_academy/MyTools.dart';
 import 'package:edu_academy/TeacherPages/TeacherMainPage.dart';
 import 'package:edu_academy/TeacherPages/TeacherThirdPageContents.dart';
 import 'package:edu_academy/service/Databse_Service.dart';
+import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 
 class TeacherSecondPageContents extends StatefulWidget {
@@ -20,15 +22,55 @@ int GradeOpenedIndex = 0;
 String TheMessageDuration = "for 24 hours";
 String CurrentMessage = "";
 String CurrentMessageTime = DateTime.now().toString();
+List<List<dynamic>> Books_data = [];
 
 class _TeacherSecondPageContentsState extends State<TeacherSecondPageContents> {
   final dbService = DatabaseService();
+  late Future<void> _dataFuture;
 
   final TextEditingController _MessageController = TextEditingController();
   List AllMessages = [
     // عينه للتفهيم
     ["Message", "Date", "Duration"]
   ];
+
+  @override
+  void initState() {
+    super.initState();
+    _dataFuture = books_load();
+  }
+
+  books_load() async {
+    //widget.ListOfGrades[GradeOpenedIndex][0]
+    //SubjectThatIsSelected
+    print("#### ${widget.ListOfGrades[GradeOpenedIndex][0]}");
+    print("#### ${SubjectThatIsSelected}");
+    var Books_data0 = await dbService.fiRead_Books(
+        widget.ListOfGrades[GradeOpenedIndex][0], SubjectThatIsSelected);
+    print("Books_data $Books_data");
+    setState(() {
+      Books_data = Books_data0;
+    });
+  }
+
+  pick_file() async {
+    File? file;
+    FilePickerResult? result;
+    String name = '';
+    result = await FilePicker.platform.pickFiles(
+        type: FileType.custom,
+        allowedExtensions: ['pdf'],
+        allowMultiple: false);
+    if (result != null) {
+      file = File(result.files.single.path!);
+      name = result.files.first.name;
+    } else {
+      // User canceled the picker
+    }
+    print("#-file $file");
+    return [file, name] as List<dynamic>;
+  }
+
   @override
   Widget build(BuildContext context) {
     late Widget SecondPageBody;
@@ -90,7 +132,7 @@ class _TeacherSecondPageContentsState extends State<TeacherSecondPageContents> {
               width: double.infinity,
               height: PageHeight(context) - 400,
               child: ListView.builder(
-                itemCount: 7,
+                itemCount: Books_data.length,
                 itemBuilder: (context, index) {
                   return Column(
                     children: [
@@ -105,14 +147,21 @@ class _TeacherSecondPageContentsState extends State<TeacherSecondPageContents> {
                           children: [
                             TMaker(
                                 textAlign: TextAlign.start,
-                                text: "File number ${index + 1}",
+                                text: Books_data[index][2],
                                 fontSize: 25,
                                 fontWeight: FontWeight.w600,
                                 color: const Color.fromARGB(255, 0, 0, 0)),
                             Expanded(child: Container()),
                             MaterialButton(
                               color: Colors.red,
-                              onPressed: () {},
+                              onPressed: () async {
+                                // delete
+                                await dbService.FiDelete_books_file(
+                                    widget.ListOfGrades[GradeOpenedIndex][0],
+                                    SubjectThatIsSelected,
+                                    Books_data[index][3]);
+                                books_load();
+                              },
                               child: TMaker(
                                   text: "حذف",
                                   fontSize: 22,
@@ -134,9 +183,21 @@ class _TeacherSecondPageContentsState extends State<TeacherSecondPageContents> {
               height: 45,
               minWidth: 150,
               color: const Color.fromARGB(255, 54, 244, 92),
-              onPressed: () {},
+              onPressed: () async {
+                List<dynamic> files = await pick_file();
+                print(files);
+                List<dynamic> file_links =
+                    await dbService.stHwStore([files[0]]);
+                print("file_links $file_links");
+                dbService.FiAdd_book_file(
+                    widget.ListOfGrades[GradeOpenedIndex][0],
+                    SubjectThatIsSelected,
+                    file_links[0],
+                    files[1]);
+                books_load();
+              },
               child: TMaker(
-                  text: "إضافة",
+                  text: " (Only PDF) إضافة",
                   fontSize: 22,
                   fontWeight: FontWeight.w700,
                   color: Colors.white),
@@ -242,6 +303,8 @@ class _TeacherSecondPageContentsState extends State<TeacherSecondPageContents> {
               InkWell(
                 onTap: () {
                   setState(() {
+                    // open books button
+                    books_load();
                     GradeIsOpened = false;
                     BooksAreOpened = true;
                   });
@@ -287,12 +350,14 @@ class _TeacherSecondPageContentsState extends State<TeacherSecondPageContents> {
                           height: 70,
                           width: 70,
                           child: CircleAvatar(
-                              backgroundImage:
-                                  Image.asset("images/Person.png").image)),
+                              backgroundImage: Image.network(
+                                      widget.ListOfGrades[GradeOpenedIndex][1]
+                                          [StudentIndex][2])
+                                  .image)),
                       title: TMaker(
                         textAlign: TextAlign.start,
                         text:
-                            '${widget.ListOfGrades[GradeOpenedIndex][1][StudentIndex][0]} ${widget.ListOfGrades[GradeOpenedIndex][1][StudentIndex][2]}',
+                            '${widget.ListOfGrades[GradeOpenedIndex][1][StudentIndex][0]}',
                         fontSize: 20,
                         fontWeight: FontWeight.w600,
                         color: const Color.fromARGB(255, 0, 0, 0),
@@ -454,7 +519,8 @@ class _TeacherSecondPageContentsState extends State<TeacherSecondPageContents> {
                                 //rePublicMessages_Send(String sub, String Grade,String messgae,String date,String duration)
                                 dbService.rePublicMessages_Send(
                                     SubjectThatIsSelected,
-                                    widget.ListOfGrades[GradeHomeWorkOppenedIndex][0],
+                                    widget.ListOfGrades[
+                                        GradeHomeWorkOppenedIndex][0],
                                     CurrentMessage,
                                     CurrentMessageTime,
                                     TheMessageDuration,

@@ -55,12 +55,16 @@ class _StudentProfileState extends State<StudentProfile> {
           widget.profile_photo = await dbService.FiAdd_photo(
               student_id, role, File(ProfileAvatar!.path));
           // refresh
-          setState(() {});
+          profile_data = await dbService.FiGet_profile_data(student_id, role)
+            as Map<String, dynamic>;
+          setState(() {
+            
+          });
         }
       },
       child: CMaker(
         circularRadius: 130,
-        boxShadow: [
+        boxShadow: const [
           BoxShadow(
               offset: Offset(1, 1),
               blurRadius: 6,
@@ -74,10 +78,11 @@ class _StudentProfileState extends State<StudentProfile> {
           fit: StackFit.expand,
           children: [
             (ProfileAvatar == null && widget.profile_photo == "")
-                ? CircleAvatar(
+                ? const CircleAvatar(
                     backgroundImage: AssetImage("images/personDeafult.png"))
                 : CircleAvatar(
-                    backgroundImage: Image.network((widget.profile_photo)).image,
+                    backgroundImage:
+                        Image.network((widget.profile_photo)).image,
                   ),
             Positioned(
               bottom: 6,
@@ -475,8 +480,8 @@ class _StudentProfileState extends State<StudentProfile> {
                       height: 100,
                       alignment: Alignment.center,
                       child: TextFormField(
-                        onSaved: (newValue) {
-                          Check_pass = newValue!;
+                        onChanged: (newValue) {
+                          Check_pass = newValue;
                         },
                         obscureText: obscureText,
                         decoration: InputDecoration(
@@ -511,19 +516,37 @@ class _StudentProfileState extends State<StudentProfile> {
                           )),
                       TextButton(
                           onPressed: () async {
+                            print("####Check_pass ${Check_pass}");
+                            print(
+                                "####widget.StudentPassword ${widget.StudentPassword}");
+                            print("####EditMode ${EditMode}");
                             // Navigator.pop(context);
                             if (EditMode) {
                               ProfileKey.currentState!.save();
                               widget.StudentEmail = NewProfileEmail;
                               widget.StudentNumber = NewProfileNumber;
                               widget.StudentPassword = NewProfilePassword;
+                              dbService.FiUpdate_profile_data(
+                                  grade,
+                                  "Students",
+                                  student_id,
+                                  widget.StudentEmail,
+                                  widget.StudentNumber,
+                                  widget.StudentPassword);
                               print(widget.StudentEmail);
                               print(widget.StudentNumber);
                               print(widget.StudentPassword);
+                            } else {
+                              if (Check_pass == widget.StudentPassword) {
+                                EditMode = !EditMode;
+                                Navigator.pop(context);
+                                print("####Check_pass ${Check_pass}");
+                                print(
+                                    "####widget.StudentPassword ${widget.StudentPassword}");
+                              }
                             }
                             setState(() {
                               print("Check_pass ${Check_pass}");
-                              // EditMode = !EditMode;
                             });
                           },
                           child: Text(

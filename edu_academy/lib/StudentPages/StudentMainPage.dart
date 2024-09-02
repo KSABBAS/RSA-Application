@@ -1,4 +1,6 @@
 // import 'dart:convert';
+import 'dart:developer';
+
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:edu_academy/StudentPages/FirstPageContents.dart';
 import 'package:edu_academy/StudentPages/Notifications.dart';
@@ -35,16 +37,17 @@ String NewEmail = "";
 String NewPassWord = "";
 String NewPhoneNumber = "";
 List<List> TableData = [
-  ["", "arabic", "English", "math", "geo", "other"],
-  ["السبت", "1", "2", "3", "4", "5"],
-  ["الاحد", "1", "2", "3", "4", "5"],
-  ["الاثنين", "1", "2", "3", "4", "5"],
-  ["الثلاثاء", "1", "2", "3", "4", "5"],
-  ["الاربعاء", "1", "2", "3", "4", "5"],
-  ["الخميس", "1", "2", "3", "4", "5"],
-  ["الجمعة", "1", "2", "3", "4", "5"],
+  ["الوقت//التاريخ", "الحصة الاولى", "الحصة الثانية", "الحصة الثالثة", "الحصة الرابعه", "الحصة الخامسة"],
+  ["السبت", "عربي", "انجليزي", "رياضيات", "رسم", "دين"],
+  ["الاحد", "عربي", "انجليزي", "رياضيات", "رسم", "دين"],
+  ["الاثنين", "عربي", "انجليزي", "رياضيات", "رسم", "دين"],
+  ["الثلاثاء", "عربي", "انجليزي", "رياضيات", "رسم", "دين"],
+  ["الاربعاء", "عربي", "انجليزي", "رياضيات", "رسم", "دين"],
+  ["الخميس", "عربي", "انجليزي", "رياضيات", "رسم", "دين"],
+  ["الجمعة", "عربي", "انجليزي", "رياضيات", "رسم", "دين"],
 ];
 Map<String, dynamic> profile_data = {};
+
 bool ThereIsNotifications = () {
   bool result = false;
   for (int i = 0; StudentNotiFications.length != i; i++) {
@@ -92,6 +95,7 @@ class _StudentMainPageState extends State<StudentMainPage> {
     print(ggrtr);
     print("add done");
     print(HomeWorks[HomeWorkIndex][0]);
+    log("#HomeWorks ${HomeWorks}");
   }
 
   Future<void> fetch() async {
@@ -246,7 +250,7 @@ class _StudentMainPageState extends State<StudentMainPage> {
                       StudentGrade: profile_data['grade'],
                       StudentEmail: profile_data['email'],
                       StudentNumber: profile_data['phone'],
-                      StudentPassword: profile_data['name'],
+                      StudentPassword: profile_data['password'],
                       profile_photo: profile_data['photo'],
                     )
                   ],
@@ -350,7 +354,7 @@ class _StudentMainPageState extends State<StudentMainPage> {
                           StudentGrade: profile_data['grade'],
                           StudentEmail: profile_data['email'],
                           StudentNumber: profile_data['phone'],
-                          StudentPassword: profile_data['name'],
+                          StudentPassword: profile_data['password'],
                           profile_photo: profile_data['photo'],
                         )
                       ],
@@ -460,7 +464,7 @@ class _StudentMainPageState extends State<StudentMainPage> {
                             StudentGrade: profile_data['grade'],
                             StudentEmail: profile_data['email'],
                             StudentNumber: profile_data['phone'],
-                            StudentPassword: profile_data['name'],
+                            StudentPassword: profile_data['password'],
                             profile_photo: profile_data['photo'],
                           ),
                         ],

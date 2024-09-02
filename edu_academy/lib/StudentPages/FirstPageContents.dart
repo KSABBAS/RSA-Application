@@ -346,21 +346,28 @@ class _StudentFirstMainPageState extends State<StudentFirstMainPage> {
         width: 150,
         child: ListTile(
           title: TMaker(
-              text: "${TableData[DayIndex][2]}",
+              text: "join 👇",//
               fontSize: 25,
               fontWeight: FontWeight.w600,
               color: const Color.fromARGB(153, 24, 58, 60)),
           subtitle: TMaker(
-              text: "AT 00:00",
-              fontSize: 13,
+              text:(){
+                 if (int.parse(grade[grade.length-1]) <= 6 && grade[grade.length-2] == " "){
+                return "Password:0000";}
+                else{
+                  return "Password:2000";
+                  } 
+              }(),
+              fontSize: 12,
               fontWeight: FontWeight.w600,
               color: const Color.fromARGB(153, 24, 58, 60)),
         ));
     Widget JoinButton = InkWell(
       onTap: () {
         _launchURL(
-            url:
-                "https://us06web.zoom.us/j/3088571822?pwd=E5VM4ANDKYA5jW59RKUuwRvVA2onkA.1");
+            url: (int.parse(grade[grade.length-1]) <= 6 && grade[grade.length-2] == " ")
+                ?"https://us06web.zoom.us/j/3088571822?pwd=E5VM4ANDKYA5jW59RKUuwRvVA2onkA.1"
+                :"https://us06web.zoom.us/j/5052829198");
       },
       child: CMaker(
         alignment: Alignment.center,
