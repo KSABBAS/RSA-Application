@@ -104,6 +104,7 @@ class _SplashViewPageState extends State<SplashViewPage>
                               child: Image.asset("images/Logo.png"),
                             ),
                           )),
+                      Expanded(flex: 1, child: Container()),
                     ],
                   )),
               Expanded(flex: 10, child: Container()),
