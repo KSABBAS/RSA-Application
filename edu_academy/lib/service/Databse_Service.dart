@@ -193,6 +193,7 @@ class DatabaseService {
 
   fiGrades_and_Students(String teacherId, List<dynamic> Subjects) async {
     print("im running.......");
+    print("teacherId $teacherId Subjects $Subjects");
     await get_all_students_with_grade();
     //  sub           garde   [gardes]
     Map<String, Map<String, List<dynamic>>> lastRe = {};

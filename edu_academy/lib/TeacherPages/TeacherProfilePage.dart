@@ -503,12 +503,12 @@ class _TeacherProfilePageState extends State<TeacherProfilePage> {
     );
     Widget EditAndSaveButton = InkWell(
       onTap: () {
-        if (ProfileKey.currentState!.validate())
+        if (false) { //ProfileKey.currentState!.validate()
           showDialog(
               context: context,
               builder: (context) {
                 return AlertDialog(
-                    title: Text("Enter the password                  "),
+                    title: const Text("Enter the password                  "),
                     content: CMaker(
                       height: 100,
                       alignment: Alignment.center,
@@ -564,6 +564,7 @@ class _TeacherProfilePageState extends State<TeacherProfilePage> {
                           )),
                     ]);
               });
+        }
       },
       child: CMaker(
         width: 170,
@@ -587,7 +588,7 @@ class _TeacherProfilePageState extends State<TeacherProfilePage> {
             CMaker(
                 padding: EdgeInsets.only(right: 10),
                 child: TMaker(
-                    text: (EditMode) ? "Save" : "Edit",
+                    text: (EditMode) ? "Save" : "Edit (soon)",
                     fontSize: (PageWidth(context) < 550)
                         ? 25
                         : (PageHeight(context) < 900)
