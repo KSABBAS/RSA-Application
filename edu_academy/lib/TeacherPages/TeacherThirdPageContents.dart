@@ -359,14 +359,17 @@ class _TeacherThirdPageContentsState extends State<TeacherThirdPageContents> {
                                 mainAxisSpacing: 10),
                         itemBuilder: (context, index) {
                           return InkWell(
-                            onTap: () {
-                              setState(() {});
-                            },
-                            child: Image.network(
-                              all_Homeworks[IsOpendIndex][4][index],
-                              fit: BoxFit.fitWidth,
-                            ),
-                          );
+                              onTap: () {
+                                setState(() {});
+                              },
+                              child: InstaImageViewer(
+                                backgroundColor:
+                                    const Color.fromARGB(255, 233, 255, 247),
+                                child: Image.network(
+                                  all_Homeworks[IsOpendIndex][4][index],
+                                  fit: BoxFit.fitWidth,
+                                ),
+                              ));
                         },
                       ),
                     ),
@@ -947,8 +950,9 @@ class _TeacherThirdPageContentsState extends State<TeacherThirdPageContents> {
                                                       const EdgeInsets.only(
                                                           left: 10),
                                                   child: TMaker(
-                                                      text: all_Homeworks[index1]
-                                                          [0],
+                                                      text:
+                                                          all_Homeworks[index1]
+                                                              [0],
                                                       fontSize: 30,
                                                       fontWeight:
                                                           FontWeight.w700,
@@ -965,8 +969,9 @@ class _TeacherThirdPageContentsState extends State<TeacherThirdPageContents> {
                                                   child: TMaker(
                                                       textAlign:
                                                           TextAlign.start,
-                                                      text: all_Homeworks[index1]
-                                                          [1],
+                                                      text:
+                                                          all_Homeworks[index1]
+                                                              [1],
                                                       fontSize: 17,
                                                       fontWeight:
                                                           FontWeight.w700,
@@ -980,6 +985,7 @@ class _TeacherThirdPageContentsState extends State<TeacherThirdPageContents> {
                                                   padding: EdgeInsets.only(
                                                       bottom: 20)),
                                               CMaker(
+                                                margin: const EdgeInsets.symmetric(horizontal: 10),
                                                 height: 70,
                                                 width: double.infinity,
                                                 child: GridView.builder(
@@ -998,13 +1004,14 @@ class _TeacherThirdPageContentsState extends State<TeacherThirdPageContents> {
                                                       onTap: () {
                                                         setState(() {});
                                                       },
-                                                      child: Image.network((){
-                                                        print("=================================\n$all_Homeworks");
-                                                        print(index);
-                                                        return
-                                                        all_Homeworks[index1][4]
-                                                            [index];
-                                                      }(),
+                                                      child: Image.network(
+                                                        () {
+                                                          print(
+                                                              "=================================\n$all_Homeworks");
+                                                          print(index);
+                                                          return all_Homeworks[
+                                                              index1][4][index];
+                                                        }(),
                                                         fit: BoxFit.fitWidth,
                                                       ),
                                                     );
@@ -2018,21 +2025,21 @@ class _TeacherThirdPageContentsState extends State<TeacherThirdPageContents> {
         });
       }
     } else if (ViewSentSolution) {
-      Widget ThirdPageHomeworkBody = CMaker(
+      Widget ThirdPageHomeworkTitle = CMaker(
           circularRadius: 17,
           padding: const EdgeInsets.all(20),
           color: const Color.fromARGB(255, 233, 255, 247),
           margin: const EdgeInsets.symmetric(horizontal: 20),
           child: TMaker(
-              text: "${solved_hw_student[HomeworkSelected][2]}",
+              text: "${solved_hw_student[HomeworkSelected][1]}",
               fontSize: 20,
               fontWeight: FontWeight.w800,
               color: const Color.fromARGB(255, 0, 0, 0)));
-      Widget ThirdPageHomeworkTitle = CMaker(
+      Widget ThirdPageHomeworkBody = CMaker(
           alignment: Alignment.center,
           margin: const EdgeInsets.symmetric(horizontal: 10),
           child: TMaker(
-              text: "${solved_hw_student[HomeworkSelected][1]}",
+              text: "${solved_hw_student[HomeworkSelected][2]}",
               fontSize: (PageWidth(context) < 550)
                   ? 15
                   : (PageHeight(context) < 900)
@@ -2064,33 +2071,18 @@ class _TeacherThirdPageContentsState extends State<TeacherThirdPageContents> {
                 crossAxisCount: 2),
             itemBuilder: (context, index) {
               return InstaImageViewer(
-                backgroundColor: const Color.fromARGB(137, 104, 104, 104),
+                backgroundColor: const Color.fromARGB(255, 233, 255, 247),
                 child: Image.network(
                     solved_hw_student[HomeworkSelected][3][index] as String),
               );
             }),
       );
-      Widget ThirdPageAnswerBody = CMaker(
-          circularRadius: 17,
-          padding: const EdgeInsets.all(20),
-          color: const Color.fromARGB(255, 233, 255, 247),
+      Widget ThirdPageAnswerTitle = CMaker(
           margin: const EdgeInsets.symmetric(horizontal: 20),
           child: TMaker(
-              text: "${solved_hw_student[HomeworkSelected][2]}",
-              fontSize: 20,
-              fontWeight: FontWeight.w800,
-              color: const Color.fromARGB(255, 0, 0, 0)));
-      Widget ThirdPageAnswerTitle = CMaker(
-          alignment: Alignment.center,
-          margin: const EdgeInsets.symmetric(horizontal: 10),
-          child: TMaker(
               text: "${solved_hw_student[HomeworkSelected][1]}",
-              fontSize: (PageWidth(context) < 550)
-                  ? 15
-                  : (PageHeight(context) < 900)
-                      ? 25
-                      : 25,
-              fontWeight: FontWeight.w600,
+              fontSize: 15,
+              fontWeight: FontWeight.w500,
               color: const Color.fromARGB(255, 0, 0, 0)));
       Widget AnswerImages = CMaker(
         boxShadow: const [
@@ -2116,7 +2108,7 @@ class _TeacherThirdPageContentsState extends State<TeacherThirdPageContents> {
                 crossAxisCount: 2),
             itemBuilder: (context, index) {
               return InstaImageViewer(
-                backgroundColor: const Color.fromARGB(137, 104, 104, 104),
+                backgroundColor: const Color.fromARGB(255, 233, 255, 247),
                 child: Image.network(
                     solved_hw_student[HomeworkSelected][3][index] as String),
               );
@@ -2265,12 +2257,12 @@ class _TeacherThirdPageContentsState extends State<TeacherThirdPageContents> {
                             fontWeight: FontWeight.w600,
                             color: const Color.fromARGB(255, 0, 0, 0)),
                         const Padding(padding: EdgeInsets.only(top: 20)),
-                        ThirdPageHomeworkTitle,
-                        const Padding(padding: EdgeInsets.only(top: 20)),
                         CMaker(
                             height: 100,
                             alignment: Alignment.center,
-                            child: ThirdPageHomeworkBody),
+                            child: ThirdPageHomeworkTitle),
+                        ThirdPageHomeworkBody,
+                        const Padding(padding: EdgeInsets.only(top: 20)),
                         HomeworkImages,
                         const Padding(padding: EdgeInsets.only(top: 20)),
                       ],
@@ -2302,12 +2294,8 @@ class _TeacherThirdPageContentsState extends State<TeacherThirdPageContents> {
                             fontWeight: FontWeight.w600,
                             color: const Color.fromARGB(255, 0, 0, 0)),
                         const Padding(padding: EdgeInsets.only(top: 20)),
-                        ThirdPageAnswerTitle,
+                        CMaker(width: double.infinity,alignment: Alignment.center,child: ThirdPageAnswerTitle),
                         const Padding(padding: EdgeInsets.only(top: 20)),
-                        CMaker(
-                            height: 100,
-                            alignment: Alignment.center,
-                            child: ThirdPageAnswerBody),
                         AnswerImages,
                         const Padding(padding: EdgeInsets.only(top: 20)),
                       ],
@@ -2406,12 +2394,12 @@ class _TeacherThirdPageContentsState extends State<TeacherThirdPageContents> {
                             fontWeight: FontWeight.w600,
                             color: const Color.fromARGB(255, 0, 0, 0)),
                         const Padding(padding: EdgeInsets.only(top: 20)),
-                        ThirdPageHomeworkTitle,
-                        const Padding(padding: EdgeInsets.only(top: 20)),
                         CMaker(
                             height: 100,
                             alignment: Alignment.center,
-                            child: ThirdPageHomeworkBody),
+                            child: ThirdPageHomeworkTitle),
+                        ThirdPageHomeworkBody,
+                        const Padding(padding: EdgeInsets.only(top: 20)),
                         HomeworkImages,
                         const Padding(padding: EdgeInsets.only(top: 20)),
                       ],
@@ -2443,12 +2431,8 @@ class _TeacherThirdPageContentsState extends State<TeacherThirdPageContents> {
                             fontWeight: FontWeight.w600,
                             color: const Color.fromARGB(255, 0, 0, 0)),
                         const Padding(padding: EdgeInsets.only(top: 20)),
-                        ThirdPageAnswerTitle,
+                        CMaker(width: double.infinity,alignment: Alignment.center,child: ThirdPageAnswerTitle),
                         const Padding(padding: EdgeInsets.only(top: 20)),
-                        CMaker(
-                            height: 100,
-                            alignment: Alignment.center,
-                            child: ThirdPageAnswerBody),
                         AnswerImages,
                         const Padding(padding: EdgeInsets.only(top: 20)),
                       ],
@@ -2547,12 +2531,12 @@ class _TeacherThirdPageContentsState extends State<TeacherThirdPageContents> {
                             fontWeight: FontWeight.w600,
                             color: const Color.fromARGB(255, 0, 0, 0)),
                         const Padding(padding: EdgeInsets.only(top: 20)),
-                        ThirdPageHomeworkTitle,
-                        const Padding(padding: EdgeInsets.only(top: 20)),
                         CMaker(
                             height: 100,
                             alignment: Alignment.center,
-                            child: ThirdPageHomeworkBody),
+                            child: ThirdPageHomeworkTitle),
+                        ThirdPageHomeworkBody,
+                        const Padding(padding: EdgeInsets.only(top: 20)),
                         HomeworkImages,
                         const Padding(padding: EdgeInsets.only(top: 20)),
                       ],
@@ -2584,12 +2568,8 @@ class _TeacherThirdPageContentsState extends State<TeacherThirdPageContents> {
                             fontWeight: FontWeight.w600,
                             color: const Color.fromARGB(255, 0, 0, 0)),
                         const Padding(padding: EdgeInsets.only(top: 20)),
-                        ThirdPageAnswerTitle,
+                        CMaker(width: double.infinity,alignment: Alignment.center,child: ThirdPageAnswerTitle),
                         const Padding(padding: EdgeInsets.only(top: 20)),
-                        CMaker(
-                            height: 100,
-                            alignment: Alignment.center,
-                            child: ThirdPageAnswerBody),
                         AnswerImages,
                         const Padding(padding: EdgeInsets.only(top: 20)),
                       ],

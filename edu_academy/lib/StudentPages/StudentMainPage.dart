@@ -11,6 +11,7 @@ import 'package:edu_academy/MyTools.dart';
 import 'package:edu_academy/service/Databse_Service.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:internet_connection_checker_plus/internet_connection_checker_plus.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -164,7 +165,7 @@ class _StudentMainPageState extends State<StudentMainPage> {
                 child: ListView(
                   children: [
                     Container(
-                      height: 70,
+                      height: 80,
                       decoration: const BoxDecoration(
                           boxShadow: [
                             BoxShadow(
@@ -179,25 +180,26 @@ class _StudentMainPageState extends State<StudentMainPage> {
                               bottomRight: Radius.circular(20))),
                       child: Row(
                         children: [
-                          Container(
-                              width: 70,
-                              height: 50,
-                              padding: const EdgeInsets.only(top: 10),
-                              alignment: Alignment.center,
-                              child: InkWell(
-                                  onTap: () {
-                                    setState(() {
-                                      PageIndex = 0;
-                                    });
-                                  },
-                                  child: CircleAvatar(
-                                      backgroundImage: NetworkImage(
-                                          profile_data['photo'])))),
                           Expanded(
+                            child:CMaker(
+                              height: 30,
+                              child: InkWell(
+                                      onTap: () {
+                                        setState(() {
+                                          PageIndex = 0;
+                                        });
+                                      },
+                                      child: CircleAvatar(
+                                          backgroundImage: NetworkImage(
+                                              profile_data['photo']))),
+                            ),
+                          ),
+                          Expanded(flex: 5,
                             child: CMaker(
                               child: Row(
                                 children: [
                                   Expanded(
+                                    flex: 3,
                                     child: CMaker(
                                       alignment: Alignment.bottomCenter,
                                       child: Text(
@@ -210,7 +212,7 @@ class _StudentMainPageState extends State<StudentMainPage> {
                                       ),
                                     ),
                                   ),
-                                  Expanded(
+                                  Expanded(flex: 2,
                                     child: CMaker(
                                       alignment: Alignment.bottomCenter,
                                       child: Text(
@@ -227,23 +229,25 @@ class _StudentMainPageState extends State<StudentMainPage> {
                               ),
                             ),
                           ),
-                          InkWell(
-                            onTap: () async {
-                              final SharedPreferences prefs =
-                                  await SharedPreferences.getInstance();
-                              prefs.remove("id");
-                              Navigator.pushReplacementNamed(
-                                  context, "SplashView");
-                            },
-                            child: Container(
-                              width: 70,
-                              padding: const EdgeInsets.only(top: 10),
-                              decoration: BoxDecoration(
-                                  color:
-                                      const Color.fromARGB(255, 255, 255, 255),
-                                  borderRadius: BorderRadius.circular(10)),
-                              height: 50,
-                              child: const Icon(Icons.logout),
+                          Expanded(
+                            child: InkWell(
+                              onTap: () async {
+                                final SharedPreferences prefs =
+                                    await SharedPreferences.getInstance();
+                                prefs.remove("id");
+                                Navigator.pushReplacementNamed(
+                                    context, "SplashView");
+                              },
+                              child: Container(
+                                width: 70,
+                                padding: const EdgeInsets.only(top: 10),
+                                decoration: BoxDecoration(
+                                    color:
+                                        const Color.fromARGB(255, 255, 255, 255),
+                                    borderRadius: BorderRadius.circular(10)),
+                                height: 50,
+                                child: const Icon(Icons.logout),
+                              ),
                             ),
                           ),
                         ],
