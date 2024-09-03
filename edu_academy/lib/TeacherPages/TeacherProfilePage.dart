@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:edu_academy/MyTools.dart';
 import 'package:edu_academy/TeacherPages/TeacherMainPage.dart';
+import 'package:edu_academy/service/Databse_Service.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 
@@ -12,12 +13,14 @@ class TeacherProfilePage extends StatefulWidget {
       required this.TeacherEmail,
       required this.ProfileSubjectsAvailable,
       required this.TeacherNumber,
+      required this.TeacherPhoto,
       required this.TeacherPassword});
   String TeacherName;
   String ProfileSubjectsAvailable;
   String TeacherEmail;
   String TeacherPassword;
   String TeacherNumber;
+  String TeacherPhoto;
 
   @override
   State<TeacherProfilePage> createState() => _TeacherProfilePageState();
@@ -35,15 +38,24 @@ class _TeacherProfilePageState extends State<TeacherProfilePage> {
     late Widget TeacherProfileBody;
     Widget ProfilePicture = InkWell(
       onTap: () async {
+        
         XFile? Avatar = await PhotoImageFromGalary();
         if (Avatar != null) {
+          final dbService = DatabaseService();
           ProfileAvatar = Avatar;
+          print("File(ProfileAvatar!.path) ${File(ProfileAvatar!.path)}");
+          print("Teacher_role ${Teacher_role}");
+          widget.TeacherPhoto = await dbService.FiAdd_photo(
+              Teacher_Id, Teacher_role, File(ProfileAvatar!.path));
+          // refresh
+          teacher_profile_data = await dbService.FiGet_profile_data(Teacher_Id, Teacher_role)
+              as Map<String, dynamic>;
           setState(() {});
         }
       },
       child: CMaker(
         circularRadius: 130,
-        boxShadow: [
+        boxShadow: const [
           BoxShadow(
               offset: Offset(1, 1),
               blurRadius: 6,
@@ -56,12 +68,9 @@ class _TeacherProfilePageState extends State<TeacherProfilePage> {
         child: Stack(
           fit: StackFit.expand,
           children: [
-            (ProfileAvatar == null)
-                ? CircleAvatar(
-                    backgroundImage: AssetImage("images/personDeafult.png"))
-                : CircleAvatar(
+             CircleAvatar(
                     backgroundImage:
-                        Image.file(File(ProfileAvatar!.path)).image,
+                        Image.network(widget.TeacherPhoto).image,
                   ),
             Positioned(
               bottom: 6,

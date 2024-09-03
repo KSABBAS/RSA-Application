@@ -238,11 +238,9 @@ class _TeacherThirdPageContentsState extends State<TeacherThirdPageContents> {
   final dbService = DatabaseService();
   //3
   solved_hw_student_re() async {
-    var solved_hw_student0 = await dbService.FiGet_All_info_with_student_id(
+    solved_hw_student = await dbService.FiGet_All_info_with_student_id(
         student_selected_list[1], Grade_selected, SubjectThatIsSelected);
-    setState(() {
-      solved_hw_student = solved_hw_student0;
-    });
+    setState(() {});
   }
 
   @override
@@ -2103,7 +2101,7 @@ class _TeacherThirdPageContentsState extends State<TeacherThirdPageContents> {
             : 250,
         width: double.infinity,
         child: GridView.builder(
-            itemCount: (solved_hw_student[HomeworkSelected][3] as List).length,
+            itemCount: (solved_hw_student[HomeworkSelected][6] as List).length,
             gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                 crossAxisCount: 2),
             itemBuilder: (context, index) {
@@ -2278,7 +2276,7 @@ class _TeacherThirdPageContentsState extends State<TeacherThirdPageContents> {
                     ],
                     circularRadius: 15,
                     margin: EdgeInsets.symmetric(horizontal: 20),
-                    height: 420,
+                    height: 450,
                     color: Colors.white,
                     width: double.infinity,
                     child: ListView(
