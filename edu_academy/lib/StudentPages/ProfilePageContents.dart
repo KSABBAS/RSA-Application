@@ -53,7 +53,7 @@ class _StudentProfileState extends State<StudentProfile> {
           ProfileAvatar = Avatar;
           print("File(ProfileAvatar!.path) ${File(ProfileAvatar!.path)}");
           widget.profile_photo = await dbService.FiAdd_photo(
-              student_id, role, File(ProfileAvatar!.path));
+              student_id, "${role}s", File(ProfileAvatar!.path));
           // refresh
           profile_data = await dbService.FiGet_profile_data(student_id, role)
               as Map<String, dynamic>;

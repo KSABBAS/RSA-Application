@@ -122,7 +122,7 @@ class _StudentMainPageState extends State<StudentMainPage> {
     print("role $role");
     print(name);
     print(grade);
-    profile_data = await dbService.FiGet_profile_data(student_id, role)
+    profile_data = await dbService.FiGet_profile_data(student_id, "${role}s")
         as Map<String, dynamic>;
     await regetmessages();
     setState(() {

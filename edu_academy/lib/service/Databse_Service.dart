@@ -399,7 +399,7 @@ class DatabaseService {
 
     documentReference.set({
       "body": hw_solve_body,
-      "files": "hw_solve_files",
+      "files": hw_solve_files,
       'date': "current_date",
       'score': '0'
     });
@@ -439,8 +439,8 @@ class DatabaseService {
   FiGet_profile_data(String id, String role) async {
     DocumentReference documentReference = FirebaseFirestore.instance
         .collection('Users')
-        .doc(role + "s")
-        .collection(role + "s")
+        .doc(role)
+        .collection(role)
         .doc(id);
 
     ///Users/Students/Students/S5  Student
@@ -448,10 +448,11 @@ class DatabaseService {
     print(documentSnapshot);
     Map<String, dynamic>? data =
         documentSnapshot.data() as Map<String, dynamic>?;
-    print(data);
+    print("FiGet_profile_data $data");
     return data as Map<String, dynamic>;
   }
 
+  // ignore: non_constant_identifier_names
   FiAdd_photo(String id, String role, var photo) async {
     // print(file[0]);
     // List<String> name = photo.toString().split("/");
@@ -464,8 +465,8 @@ class DatabaseService {
     print(downloadUrl);
     DocumentReference documentReference = FirebaseFirestore.instance
         .collection('Users')
-        .doc(role + "s")
-        .collection(role + "s")
+        .doc(role)
+        .collection(role)
         .doc(id);
     documentReference.update({'photo': "$downloadUrl"});
 
@@ -672,75 +673,3 @@ class DatabaseService {
   }
 }
 
-// fiGrades_and_Students(String teacherId) async {
-//   QuerySnapshot teacherSnapshot = await fire
-//       .collection('Users')
-//       .doc('Teacher')
-//       .collection('Teacher')
-//       .get();
-//   List grades = [];
-//   for (var doc in teacherSnapshot.docs) {
-//     if (doc.id == teacherId) {
-//       grades = doc['grades'];
-//       break;
-//     }
-//   }
-//   if (grades.isEmpty) return null;
-//   QuerySnapshot StudentsSnapshot = await fire
-//       .collection('Users')
-//       .doc('Student')
-//       .collection('Student')
-//       .get();
-//   Map<String, List<String>> gradesStudents = {};
-//   for (var doc in StudentsSnapshot.docs) {
-//     for (var grade in grades) {
-//       if (grade == doc['grades']) {
-//         gradesStudents[grade]?.add(doc.id);
-//       }
-//     }
-//   }
-//   print(gradesStudents);
-//   return gradesStudents;
-// }
-
-// Map<String, List<String>> GradesSubjects_names = {};
-// for (String gg in GradesSubjects.keys) {
-//   for (int nu in GradesSubjects[gg]) {
-//     if (!GradesSubjects_names.containsKey(gg)) GradesSubjects_names[gg] = [];
-//     GradesSubjects_names[gg]?.add(Subjects[nu][1]);
-//   }
-// }
-// print("GradesSubjects_names $GradesSubjects_names");
-
-// print(GradesSubjects_names);
-// DocumentSnapshot<Map<String, dynamic>> teacherSnapshot = await fire
-//     .collection('Users')
-//     .doc('Teacher')
-//     .collection('Teacher')
-//     .doc(teacherId)
-//     .get();
-// List grades = [];
-// for (var doc in teacherSnapshot["grades"]) {
-//   if (doc.id == teacherId) {
-//     grades = doc['grades'];
-//     break;
-//   }
-// }
-
-// if (grades.isEmpty) return null;
-
-// QuerySnapshot StudentsSnapshot = await fire
-//     .collection('Users')
-//     .doc('Student')
-//     .collection('Student')
-//     .get();
-// Map<String, List<String>> gradesStudents = {};
-// for (var doc in StudentsSnapshot.docs) {
-//   for (var grade in grades) {
-//     if (grade == doc['grades']) {
-//       gradesStudents[grade]?.add(doc.id);
-//     }
-//   }
-// }
-// print(gradesStudents);
-// return gradesStudents;

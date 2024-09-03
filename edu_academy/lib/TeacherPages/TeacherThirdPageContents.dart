@@ -238,11 +238,9 @@ class _TeacherThirdPageContentsState extends State<TeacherThirdPageContents> {
   final dbService = DatabaseService();
   //3
   solved_hw_student_re() async {
-    var solved_hw_student0 = await dbService.FiGet_All_info_with_student_id(
+    solved_hw_student = await dbService.FiGet_All_info_with_student_id(
         student_selected_list[1], Grade_selected, SubjectThatIsSelected);
-    setState(() {
-      solved_hw_student = solved_hw_student0;
-    });
+    setState(() {});
   }
 
   @override
@@ -2076,7 +2074,7 @@ class _TeacherThirdPageContentsState extends State<TeacherThirdPageContents> {
           color: const Color.fromARGB(255, 233, 255, 247),
           margin: const EdgeInsets.symmetric(horizontal: 20),
           child: TMaker(
-              text: "${solved_hw_student[HomeworkSelected][2]}",
+              text: "delete this",
               fontSize: 20,
               fontWeight: FontWeight.w800,
               color: const Color.fromARGB(255, 0, 0, 0)));
@@ -2084,7 +2082,7 @@ class _TeacherThirdPageContentsState extends State<TeacherThirdPageContents> {
           alignment: Alignment.center,
           margin: const EdgeInsets.symmetric(horizontal: 10),
           child: TMaker(
-              text: "${solved_hw_student[HomeworkSelected][1]}",
+              text: "${solved_hw_student[HomeworkSelected][5]}",
               fontSize: (PageWidth(context) < 550)
                   ? 15
                   : (PageHeight(context) < 900)
@@ -2111,7 +2109,7 @@ class _TeacherThirdPageContentsState extends State<TeacherThirdPageContents> {
             : 250,
         width: double.infinity,
         child: GridView.builder(
-            itemCount: (solved_hw_student[HomeworkSelected][3] as List).length,
+            itemCount: (solved_hw_student[HomeworkSelected][6] as List).length,
             gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                 crossAxisCount: 2),
             itemBuilder: (context, index) {
@@ -2286,7 +2284,7 @@ class _TeacherThirdPageContentsState extends State<TeacherThirdPageContents> {
                     ],
                     circularRadius: 15,
                     margin: EdgeInsets.symmetric(horizontal: 20),
-                    height: 420,
+                    height: 450,
                     color: Colors.white,
                     width: double.infinity,
                     child: ListView(

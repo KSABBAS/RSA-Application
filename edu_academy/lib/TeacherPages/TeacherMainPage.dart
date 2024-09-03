@@ -43,26 +43,27 @@ XFile? ProfileAvatar;
 int numberOfSubjects = 1;
 String SubjectThatIsSelected = Subject1;
 String ProfileSubjectsAvailable = "";
-
+Map<String, dynamic> teacher_profile_data = {};
 // data base start
 String name = '';
 String Teacher_Id = '';
 List subjects_ = [];
 String subjects_string = '';
 Map<String, Map<String, List<dynamic>>> sub_data = {};
+String Teacher_role = '';
 bool AccountActivation = true;
 // data base end
-    bool ThereIsNotifications = () {
-      bool result = false;
-      for (int i = 0; TeacherNotiFications.length != i; i++) {
-        if (TeacherNotiFications[i][4] == false) {
-          result = true;
-          break;
-        }
-      }
-      print(result);
-      return result;
-    }();
+bool ThereIsNotifications = () {
+  bool result = false;
+  for (int i = 0; TeacherNotiFications.length != i; i++) {
+    if (TeacherNotiFications[i][4] == false) {
+      result = true;
+      break;
+    }
+  }
+  print(result);
+  return result;
+}();
 List<List> TableData = [
   [
     "الوقت//التاريخ",
@@ -80,6 +81,7 @@ List<List> TableData = [
   ["الخميس", "عربي", "انجليزي", "رياضيات", "رسم", "دين"],
   ["الجمعة", "عربي", "انجليزي", "رياضيات", "رسم", "دين"],
 ];
+
 class _TeacherMainPageState extends State<TeacherMainPage> {
   bool ConnectedToInternet = true;
   // ListOfGrades = [];
@@ -128,6 +130,8 @@ class _TeacherMainPageState extends State<TeacherMainPage> {
         subjects_.removeWhere((item) => item == 'null');
         print("subjects_ $subjects_");
         Teacher_Id = items[0].split("#")[1];
+        Teacher_role = items[0].toString().split("#")[0];
+        print("Teacher_role $Teacher_role");
         subjects_string = items[2]
             .split('-')
             .sublist(1)
@@ -172,12 +176,15 @@ class _TeacherMainPageState extends State<TeacherMainPage> {
         //   print(i);
         // }
       });
+    teacher_profile_data = await dbService.FiGet_profile_data(Teacher_Id, Teacher_role)
+        as Map<String, dynamic>;
+    print("teacher_profile_data $teacher_profile_data");
     }
   }
 
   @override
   Widget build(BuildContext context) {
-  ThereIsNotifications = () {
+    ThereIsNotifications = () {
       bool result = false;
       for (int i = 0; TeacherNotiFications.length != i; i++) {
         if (TeacherNotiFications[i][4] == false) {
@@ -387,48 +394,49 @@ class _TeacherMainPageState extends State<TeacherMainPage> {
                             ),
                           ),
                           Expanded(
-                            child: InkWell(
-      onTap: () {
-        Get.to(() => TeacherNotificationsPage());
-      },
-      child: Container(
-        width: 70,
-        padding: const EdgeInsets.only(top: 10),
-        decoration: BoxDecoration(
-            color: const Color.fromARGB(255, 255, 255, 255),
-            borderRadius: BorderRadius.circular(10)),
-        height: (PageWidth(context) < 550) ? 50 : 100,
-        child: Stack(
-          children: [
-            Positioned(
-                right: 15,
-                top: 10,
-                child: Container(
-                  decoration: BoxDecoration(
-                      color: (ThereIsNotifications)
-                          ? Colors.red
-                          : Colors.transparent,
-                      borderRadius: BorderRadius.circular(20)),
-                  height: 7,
-                  width: 7,
-                )),
-            Positioned(
-              right: 15,
-              top: 10,
-              child: Icon(
-                Icons.notifications,
-                size: (PageWidth(context) < 550)
-                    ? 25
-                    : (PageHeight(context) < 900)
-                        ? 30
-                        : 35,
-              ),
-            ),
-          ],
-        ),
-      ),
-    )
-                          ),
+                              child: InkWell(
+                            onTap: () {
+                              Get.to(() => TeacherNotificationsPage());
+                            },
+                            child: Container(
+                              width: 70,
+                              padding: const EdgeInsets.only(top: 10),
+                              decoration: BoxDecoration(
+                                  color:
+                                      const Color.fromARGB(255, 255, 255, 255),
+                                  borderRadius: BorderRadius.circular(10)),
+                              height: (PageWidth(context) < 550) ? 50 : 100,
+                              child: Stack(
+                                children: [
+                                  Positioned(
+                                      right: 15,
+                                      top: 10,
+                                      child: Container(
+                                        decoration: BoxDecoration(
+                                            color: (ThereIsNotifications)
+                                                ? Colors.red
+                                                : Colors.transparent,
+                                            borderRadius:
+                                                BorderRadius.circular(20)),
+                                        height: 7,
+                                        width: 7,
+                                      )),
+                                  Positioned(
+                                    right: 15,
+                                    top: 10,
+                                    child: Icon(
+                                      Icons.notifications,
+                                      size: (PageWidth(context) < 550)
+                                          ? 25
+                                          : (PageHeight(context) < 900)
+                                              ? 30
+                                              : 35,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          )),
                         ],
                       ),
                     ),
@@ -615,48 +623,48 @@ class _TeacherMainPageState extends State<TeacherMainPage> {
                           ),
                         ),
                         Expanded(
-                          child: InkWell(
-      onTap: () {
-        Get.to(() => TeacherNotificationsPage());
-      },
-      child: Container(
-        width: 70,
-        padding: const EdgeInsets.only(top: 10),
-        decoration: BoxDecoration(
-            color: const Color.fromARGB(255, 255, 255, 255),
-            borderRadius: BorderRadius.circular(10)),
-        height: (PageWidth(context) < 550) ? 50 : 100,
-        child: Stack(
-          children: [
-            Positioned(
-                right: 15,
-                top: 10,
-                child: Container(
-                  decoration: BoxDecoration(
-                      color: (ThereIsNotifications)
-                          ? Colors.red
-                          : Colors.transparent,
-                      borderRadius: BorderRadius.circular(20)),
-                  height: 7,
-                  width: 7,
-                )),
-            Positioned(
-              right: 15,
-              top: 10,
-              child: Icon(
-                Icons.notifications,
-                size: (PageWidth(context) < 550)
-                    ? 25
-                    : (PageHeight(context) < 900)
-                        ? 30
-                        : 35,
-              ),
-            ),
-          ],
-        ),
-      ),
-    )
-                        ),
+                            child: InkWell(
+                          onTap: () {
+                            Get.to(() => TeacherNotificationsPage());
+                          },
+                          child: Container(
+                            width: 70,
+                            padding: const EdgeInsets.only(top: 10),
+                            decoration: BoxDecoration(
+                                color: const Color.fromARGB(255, 255, 255, 255),
+                                borderRadius: BorderRadius.circular(10)),
+                            height: (PageWidth(context) < 550) ? 50 : 100,
+                            child: Stack(
+                              children: [
+                                Positioned(
+                                    right: 15,
+                                    top: 10,
+                                    child: Container(
+                                      decoration: BoxDecoration(
+                                          color: (ThereIsNotifications)
+                                              ? Colors.red
+                                              : Colors.transparent,
+                                          borderRadius:
+                                              BorderRadius.circular(20)),
+                                      height: 7,
+                                      width: 7,
+                                    )),
+                                Positioned(
+                                  right: 15,
+                                  top: 10,
+                                  child: Icon(
+                                    Icons.notifications,
+                                    size: (PageWidth(context) < 550)
+                                        ? 25
+                                        : (PageHeight(context) < 900)
+                                            ? 30
+                                            : 35,
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        )),
                       ],
                     ),
                   ),
@@ -853,48 +861,49 @@ class _TeacherMainPageState extends State<TeacherMainPage> {
                               ),
                             ),
                             Expanded(
-                              child: InkWell(
-      onTap: () {
-        Get.to(() => TeacherNotificationsPage());
-      },
-      child: Container(
-        width: 70,
-        padding: const EdgeInsets.only(top: 10),
-        decoration: BoxDecoration(
-            color: const Color.fromARGB(255, 255, 255, 255),
-            borderRadius: BorderRadius.circular(10)),
-        height: (PageWidth(context) < 550) ? 50 : 100,
-        child: Stack(
-          children: [
-            Positioned(
-                right: 15,
-                top: 10,
-                child: Container(
-                  decoration: BoxDecoration(
-                      color: (ThereIsNotifications)
-                          ? Colors.red
-                          : Colors.transparent,
-                      borderRadius: BorderRadius.circular(20)),
-                  height: 7,
-                  width: 7,
-                )),
-            Positioned(
-              right: 15,
-              top: 10,
-              child: Icon(
-                Icons.notifications,
-                size: (PageWidth(context) < 550)
-                    ? 25
-                    : (PageHeight(context) < 900)
-                        ? 30
-                        : 35,
-              ),
-            ),
-          ],
-        ),
-      ),
-    )
-                            ),
+                                child: InkWell(
+                              onTap: () {
+                                Get.to(() => TeacherNotificationsPage());
+                              },
+                              child: Container(
+                                width: 70,
+                                padding: const EdgeInsets.only(top: 10),
+                                decoration: BoxDecoration(
+                                    color: const Color.fromARGB(
+                                        255, 255, 255, 255),
+                                    borderRadius: BorderRadius.circular(10)),
+                                height: (PageWidth(context) < 550) ? 50 : 100,
+                                child: Stack(
+                                  children: [
+                                    Positioned(
+                                        right: 15,
+                                        top: 10,
+                                        child: Container(
+                                          decoration: BoxDecoration(
+                                              color: (ThereIsNotifications)
+                                                  ? Colors.red
+                                                  : Colors.transparent,
+                                              borderRadius:
+                                                  BorderRadius.circular(20)),
+                                          height: 7,
+                                          width: 7,
+                                        )),
+                                    Positioned(
+                                      right: 15,
+                                      top: 10,
+                                      child: Icon(
+                                        Icons.notifications,
+                                        size: (PageWidth(context) < 550)
+                                            ? 25
+                                            : (PageHeight(context) < 900)
+                                                ? 30
+                                                : 35,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            )),
                           ],
                         ),
                       ),
@@ -1096,48 +1105,49 @@ class _TeacherMainPageState extends State<TeacherMainPage> {
                             ),
                           ),
                           Expanded(
-                            child: InkWell(
-      onTap: () {
-        Get.to(() => TeacherNotificationsPage());
-      },
-      child: Container(
-        width: 70,
-        padding: const EdgeInsets.only(top: 10),
-        decoration: BoxDecoration(
-            color: const Color.fromARGB(255, 255, 255, 255),
-            borderRadius: BorderRadius.circular(10)),
-        height: (PageWidth(context) < 550) ? 50 : 100,
-        child: Stack(
-          children: [
-            Positioned(
-                right: 15,
-                top: 10,
-                child: Container(
-                  decoration: BoxDecoration(
-                      color: (ThereIsNotifications)
-                          ? Colors.red
-                          : Colors.transparent,
-                      borderRadius: BorderRadius.circular(20)),
-                  height: 7,
-                  width: 7,
-                )),
-            Positioned(
-              right: 15,
-              top: 10,
-              child: Icon(
-                Icons.notifications,
-                size: (PageWidth(context) < 550)
-                    ? 25
-                    : (PageHeight(context) < 900)
-                        ? 30
-                        : 35,
-              ),
-            ),
-          ],
-        ),
-      ),
-    )
-                          ),
+                              child: InkWell(
+                            onTap: () {
+                              Get.to(() => TeacherNotificationsPage());
+                            },
+                            child: Container(
+                              width: 70,
+                              padding: const EdgeInsets.only(top: 10),
+                              decoration: BoxDecoration(
+                                  color:
+                                      const Color.fromARGB(255, 255, 255, 255),
+                                  borderRadius: BorderRadius.circular(10)),
+                              height: (PageWidth(context) < 550) ? 50 : 100,
+                              child: Stack(
+                                children: [
+                                  Positioned(
+                                      right: 15,
+                                      top: 10,
+                                      child: Container(
+                                        decoration: BoxDecoration(
+                                            color: (ThereIsNotifications)
+                                                ? Colors.red
+                                                : Colors.transparent,
+                                            borderRadius:
+                                                BorderRadius.circular(20)),
+                                        height: 7,
+                                        width: 7,
+                                      )),
+                                  Positioned(
+                                    right: 15,
+                                    top: 10,
+                                    child: Icon(
+                                      Icons.notifications,
+                                      size: (PageWidth(context) < 550)
+                                          ? 25
+                                          : (PageHeight(context) < 900)
+                                              ? 30
+                                              : 35,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          )),
                         ],
                       ),
                     ),
@@ -1325,48 +1335,49 @@ class _TeacherMainPageState extends State<TeacherMainPage> {
                                   },
                                 )),
                             Expanded(
-                            child: InkWell(
-      onTap: () {
-        Get.to(() => TeacherNotificationsPage());
-      },
-      child: Container(
-        width: 70,
-        padding: const EdgeInsets.only(top: 10),
-        decoration: BoxDecoration(
-            color: const Color.fromARGB(255, 255, 255, 255),
-            borderRadius: BorderRadius.circular(10)),
-        height: (PageWidth(context) < 550) ? 50 : 100,
-        child: Stack(
-          children: [
-            Positioned(
-                right: 15,
-                top: 10,
-                child: Container(
-                  decoration: BoxDecoration(
-                      color: (ThereIsNotifications)
-                          ? Colors.red
-                          : Colors.transparent,
-                      borderRadius: BorderRadius.circular(20)),
-                  height: 7,
-                  width: 7,
-                )),
-            Positioned(
-              right: 15,
-              top: 10,
-              child: Icon(
-                Icons.notifications,
-                size: (PageWidth(context) < 550)
-                    ? 25
-                    : (PageHeight(context) < 900)
-                        ? 30
-                        : 35,
-              ),
-            ),
-          ],
-        ),
-      ),
-    )
-                          ),
+                                child: InkWell(
+                              onTap: () {
+                                Get.to(() => TeacherNotificationsPage());
+                              },
+                              child: Container(
+                                width: 70,
+                                padding: const EdgeInsets.only(top: 10),
+                                decoration: BoxDecoration(
+                                    color: const Color.fromARGB(
+                                        255, 255, 255, 255),
+                                    borderRadius: BorderRadius.circular(10)),
+                                height: (PageWidth(context) < 550) ? 50 : 100,
+                                child: Stack(
+                                  children: [
+                                    Positioned(
+                                        right: 15,
+                                        top: 10,
+                                        child: Container(
+                                          decoration: BoxDecoration(
+                                              color: (ThereIsNotifications)
+                                                  ? Colors.red
+                                                  : Colors.transparent,
+                                              borderRadius:
+                                                  BorderRadius.circular(20)),
+                                          height: 7,
+                                          width: 7,
+                                        )),
+                                    Positioned(
+                                      right: 15,
+                                      top: 10,
+                                      child: Icon(
+                                        Icons.notifications,
+                                        size: (PageWidth(context) < 550)
+                                            ? 25
+                                            : (PageHeight(context) < 900)
+                                                ? 30
+                                                : 35,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            )),
                           ],
                         )),
                     const Padding(
@@ -1551,48 +1562,49 @@ class _TeacherMainPageState extends State<TeacherMainPage> {
                                 },
                               )),
                           Expanded(
-                            child: InkWell(
-      onTap: () {
-        Get.to(() => TeacherNotificationsPage());
-      },
-      child: Container(
-        width: 70,
-        padding: const EdgeInsets.only(top: 10),
-        decoration: BoxDecoration(
-            color: const Color.fromARGB(255, 255, 255, 255),
-            borderRadius: BorderRadius.circular(10)),
-        height: (PageWidth(context) < 550) ? 50 : 100,
-        child: Stack(
-          children: [
-            Positioned(
-                right: 15,
-                top: 10,
-                child: Container(
-                  decoration: BoxDecoration(
-                      color: (ThereIsNotifications)
-                          ? Colors.red
-                          : Colors.transparent,
-                      borderRadius: BorderRadius.circular(20)),
-                  height: 7,
-                  width: 7,
-                )),
-            Positioned(
-              right: 15,
-              top: 10,
-              child: Icon(
-                Icons.notifications,
-                size: (PageWidth(context) < 550)
-                    ? 25
-                    : (PageHeight(context) < 900)
-                        ? 30
-                        : 35,
-              ),
-            ),
-          ],
-        ),
-      ),
-    )
-                          ),
+                              child: InkWell(
+                            onTap: () {
+                              Get.to(() => TeacherNotificationsPage());
+                            },
+                            child: Container(
+                              width: 70,
+                              padding: const EdgeInsets.only(top: 10),
+                              decoration: BoxDecoration(
+                                  color:
+                                      const Color.fromARGB(255, 255, 255, 255),
+                                  borderRadius: BorderRadius.circular(10)),
+                              height: (PageWidth(context) < 550) ? 50 : 100,
+                              child: Stack(
+                                children: [
+                                  Positioned(
+                                      right: 15,
+                                      top: 10,
+                                      child: Container(
+                                        decoration: BoxDecoration(
+                                            color: (ThereIsNotifications)
+                                                ? Colors.red
+                                                : Colors.transparent,
+                                            borderRadius:
+                                                BorderRadius.circular(20)),
+                                        height: 7,
+                                        width: 7,
+                                      )),
+                                  Positioned(
+                                    right: 15,
+                                    top: 10,
+                                    child: Icon(
+                                      Icons.notifications,
+                                      size: (PageWidth(context) < 550)
+                                          ? 25
+                                          : (PageHeight(context) < 900)
+                                              ? 30
+                                              : 35,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          )),
                         ],
                       )),
                   const Padding(
@@ -1799,11 +1811,12 @@ class _TeacherMainPageState extends State<TeacherMainPage> {
                       ],
                     )),
                 TeacherProfilePage(
-                    TeacherName: "kareem said hassan",
-                    TeacherEmail: "kareemsaid234@gmail.com",
+                    TeacherName: teacher_profile_data["name"],
+                    TeacherEmail: teacher_profile_data["email"],
                     ProfileSubjectsAvailable: ProfileSubjectsAvailable,
-                    TeacherNumber: "01006270833",
-                    TeacherPassword: "1234")
+                    TeacherNumber: teacher_profile_data["phone"],
+                    TeacherPhoto: teacher_profile_data["photo"],
+                    TeacherPassword: teacher_profile_data["password"])
               ])),
             )
           : Container(
@@ -1996,11 +2009,12 @@ class _TeacherMainPageState extends State<TeacherMainPage> {
                     ],
                   )),
               TeacherProfilePage(
-                  TeacherName: "kareem said hassan",
-                  TeacherEmail: "kareemsaid234@gmail.com",
-                  ProfileSubjectsAvailable: ProfileSubjectsAvailable,
-                  TeacherNumber: "01006270833",
-                  TeacherPassword: "1234")
+                    TeacherName: teacher_profile_data["name"],
+                    TeacherEmail: teacher_profile_data["email"],
+                    ProfileSubjectsAvailable: ProfileSubjectsAvailable,
+                    TeacherNumber: teacher_profile_data["phone"],
+                    TeacherPhoto: teacher_profile_data["photo"],
+                    TeacherPassword: teacher_profile_data["password"])
             ])),
     ];
 
@@ -2292,26 +2306,27 @@ class _TeacherMainPageState extends State<TeacherMainPage> {
     SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersiveSticky);
     if (ConnectedToInternet) {
       return Scaffold(
-      backgroundColor: Color.fromARGB(255, 74, 193, 241),
-      body: LiquidPullToRefresh(
-          showChildOpacityTransition: false,
-          backgroundColor: Color.fromARGB(255, 74, 193, 241),
-              color: const Color.fromARGB(255, 233, 255, 247),
-          onRefresh: () async {
-            await Future.delayed(Duration(milliseconds: 500));
-            setState(() {
-              _initializeData();
-            });
-          },
-          child: TeacherMainPageBody),
-    );
+        backgroundColor: Color.fromARGB(255, 74, 193, 241),
+        body: LiquidPullToRefresh(
+            showChildOpacityTransition: false,
+            backgroundColor: Color.fromARGB(255, 74, 193, 241),
+            color: const Color.fromARGB(255, 233, 255, 247),
+            onRefresh: () async {
+              await Future.delayed(Duration(milliseconds: 500));
+              setState(() {
+                _initializeData();
+              });
+            },
+            child: TeacherMainPageBody),
+      );
     } else {
       return Scaffold(
         backgroundColor: const Color.fromARGB(255, 233, 255, 247),
-        body: Center(child:CMaker(
-          height: 150,
-          width: 270,
-              color: Colors.white,
+        body: Center(
+            child: CMaker(
+                height: 150,
+                width: 270,
+                color: Colors.white,
                 boxShadow: [
                   BoxShadow(
                       offset: Offset(1, 1),
