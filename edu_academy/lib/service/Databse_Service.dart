@@ -448,6 +448,25 @@ class DatabaseService {
     return data as Map<String, dynamic>;
   }
 
+  FiAdd_photo0(String id, String role, var photo) async {
+    var snapshot = await storage
+        .ref()
+        .child('Profiles/${role}/${id}/${id}profile_image')
+        .putData(
+          photo,
+          SettableMetadata(
+            contentType: "image/jpeg",
+          ),
+        );
+    var downloadUrl = await snapshot.ref.getDownloadURL();
+    print(downloadUrl);
+    DocumentReference documentReference =
+        fire.collection('Users').doc(role).collection(role).doc(id);
+    documentReference.update({'photo': "$downloadUrl"});
+
+    return downloadUrl as String;
+  }
+
   // ignore: non_constant_identifier_names
   FiAdd_photo(String id, String role, var photo) async {
     // print(file[0]);
@@ -642,7 +661,7 @@ class DatabaseService {
     // for (var i in querySnapshot.docs) {
     //   print("#@ i ${i.id} ");
     //   print("#@ i['name'] ${i['name']} ");
-      
+
     // }
     print("#@ querySnapshot.docs ${querySnapshot.docs} ");
     return querySnapshot.docs;

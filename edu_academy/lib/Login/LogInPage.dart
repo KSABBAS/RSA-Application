@@ -22,8 +22,8 @@ bool loggedIn = false;
 List l = [2.2];
 GlobalKey<FormState> key1 = GlobalKey();
 
-String last_input1_value = '';
-String last_input2_value = '';
+String last_input1_value = '0';
+String last_input2_value = '0';
 
 class _LoginPageState extends State<LogInPage> {
   final dbService = DatabaseService();

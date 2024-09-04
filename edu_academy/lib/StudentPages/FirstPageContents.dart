@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:edu_academy/MyTools.dart';
 import 'package:edu_academy/StudentPages/Notifications.dart';
 import 'package:edu_academy/StudentPages/StudentAppBar.dart';
@@ -41,99 +43,105 @@ class _StudentFirstMainPageState extends State<StudentFirstMainPage> {
   }
 
   regetmessages() async {
-    final SharedPreferences prefs = await SharedPreferences.getInstance();
-    final List<String>? items = prefs.getStringList('id');
-    grade = items![2].split("-")[1];
-    final real = FirebaseDatabase.instance;
-    final allMes = real.ref("Messages").child(grade);
-    print("grade $grade");
-    allMes.onValue.listen(
-      (event) {
-        setState(() {
-          try {
-            realTimeValues = event.snapshot.value;
-            print("realTimeValues $realTimeValues");
-            Map map = realTimeValues as Map;
-            print("map.keys ${map.keys}");
-            for (var i in map.keys) {
-              for (var j in map[i].keys) {
-                Messgaes_list.add([i, map[i][j][3], map[i][j][0]]);
+    try {
+      final SharedPreferences prefs = await SharedPreferences.getInstance();
+      final List<String>? items = prefs.getStringList('id');
+      grade = items![2].split("-")[1];
+      final real = FirebaseDatabase.instance;
+      final allMes = real.ref("Messages").child(grade);
+      print("grade $grade");
+      allMes.onValue.listen(
+        (event) {
+          setState(() {
+            try {
+              realTimeValues = event.snapshot.value;
+              print("realTimeValues $realTimeValues");
+              Map map = realTimeValues as Map;
+              print("map.keys ${map.keys}");
+              for (var i in map.keys) {
+                for (var j in map[i].keys) {
+                  Messgaes_list.add([i, map[i][j][3], map[i][j][0]]);
+                }
               }
+            } catch (e) {
+              print("e $e");
             }
-          } catch (e) {
-            print("e $e");
-          }
-        });
-      },
-    );
+          });
+        },
+      );
+    } catch (e) {
+      log("e ${e}");
+    }
   }
 
   @override
   Widget build(BuildContext context) {
     int DayIndex = DateTime.now().weekday;
     late Widget FirstPageBody;
-        Widget FullScadual = CMaker(
-          width: double.infinity,
-          height: 200,
-          child: ListView.builder(
-            scrollDirection: Axis.horizontal,
-            shrinkWrap: false,
-            physics: const NeverScrollableScrollPhysics(),
-            itemCount: TableData[0].length,
-            itemBuilder: (context, ColumnIndex) {
-              return CMaker(
-                  width: (PageWidth(context) - 80) / TableData[0].length,
-                  child: ListView.builder(
-                    scrollDirection: Axis.vertical,
-                    shrinkWrap: false,
-                    physics: const NeverScrollableScrollPhysics(),
-                    itemCount: TableData.length,
-                    itemBuilder: (context, RowIndex) {
-                      return CMaker(
-                          height: (200) / TableData.length,
-                          child: Container(
-                              decoration: BoxDecoration(
-                                border: const Border(
-                                    right: BorderSide(), bottom: BorderSide()),
-                                borderRadius: BorderRadius.only(
-                                  topLeft: ("$ColumnIndex $RowIndex" == "0 0")
-                                      ? const Radius.circular(10)
-                                      : const Radius.circular(0),
-                                  bottomLeft: ("$ColumnIndex $RowIndex" ==
-                                          "0 ${TableData.length - 1}")
-                                      ? const Radius.circular(10)
-                                      : const Radius.circular(0),
-                                  topRight: ("$ColumnIndex $RowIndex" ==
-                                          "${TableData[0].length - 1} 0")
-                                      ? const Radius.circular(10)
-                                      : const Radius.circular(0),
-                                  bottomRight: ("$ColumnIndex $RowIndex" ==
-                                          "${TableData[0].length - 1} ${TableData.length - 1}")
-                                      ? const Radius.circular(10)
-                                      : const Radius.circular(0),
-                                ),
-                                color: (ColumnIndex == 0 || RowIndex == 0)
-                                    ? const Color.fromARGB(255, 36, 160, 209)
-                                    : Colors.white,
+    Widget FullScadual = CMaker(
+        width: double.infinity,
+        height: 200,
+        child: ListView.builder(
+          scrollDirection: Axis.horizontal,
+          shrinkWrap: false,
+          physics: const NeverScrollableScrollPhysics(),
+          itemCount: TableData[0].length,
+          itemBuilder: (context, ColumnIndex) {
+            return CMaker(
+                width: (PageWidth(context) - 80) / TableData[0].length,
+                child: ListView.builder(
+                  scrollDirection: Axis.vertical,
+                  shrinkWrap: false,
+                  physics: const NeverScrollableScrollPhysics(),
+                  itemCount: TableData.length,
+                  itemBuilder: (context, RowIndex) {
+                    return CMaker(
+                        height: (200) / TableData.length,
+                        child: Container(
+                            decoration: BoxDecoration(
+                              border: const Border(
+                                  right: BorderSide(), bottom: BorderSide()),
+                              borderRadius: BorderRadius.only(
+                                topLeft: ("$ColumnIndex $RowIndex" == "0 0")
+                                    ? const Radius.circular(10)
+                                    : const Radius.circular(0),
+                                bottomLeft: ("$ColumnIndex $RowIndex" ==
+                                        "0 ${TableData.length - 1}")
+                                    ? const Radius.circular(10)
+                                    : const Radius.circular(0),
+                                topRight: ("$ColumnIndex $RowIndex" ==
+                                        "${TableData[0].length - 1} 0")
+                                    ? const Radius.circular(10)
+                                    : const Radius.circular(0),
+                                bottomRight: ("$ColumnIndex $RowIndex" ==
+                                        "${TableData[0].length - 1} ${TableData.length - 1}")
+                                    ? const Radius.circular(10)
+                                    : const Radius.circular(0),
                               ),
-                              alignment: Alignment.center,
-                              child: TMaker(
-                                  text: "${TableData[RowIndex][ColumnIndex]}",
-                                  fontSize: 15,
-                                  fontWeight: FontWeight.w600,
-                                  color: (ColumnIndex == 0 || RowIndex == 0)
-                                      ? const Color.fromARGB(255, 255, 255, 255)
-                                      : const Color.fromARGB(255, 0, 0, 0))));
-                    },
-                  ));
-            },
-          ));
+                              color: (ColumnIndex == 0 || RowIndex == 0)
+                                  ? const Color.fromARGB(255, 36, 160, 209)
+                                  : Colors.white,
+                            ),
+                            alignment: Alignment.center,
+                            child: TMaker(
+                                text: "${TableData[RowIndex][ColumnIndex]}",
+                                fontSize: 15,
+                                fontWeight: FontWeight.w600,
+                                color: (ColumnIndex == 0 || RowIndex == 0)
+                                    ? const Color.fromARGB(255, 255, 255, 255)
+                                    : const Color.fromARGB(255, 0, 0, 0))));
+                  },
+                ));
+          },
+        ));
     Widget OneDayTable = InkWell(
       onTap: () {
         showDialog(
           context: context,
           builder: (context) {
-            return Dialog(child: FullScadual,);
+            return Dialog(
+              child: FullScadual,
+            );
           },
         );
       },
@@ -249,8 +257,8 @@ class _StudentFirstMainPageState extends State<StudentFirstMainPage> {
                           child: Container(
                         alignment: Alignment.center,
                         decoration: const BoxDecoration(
-                            borderRadius:
-                                BorderRadius.only(topRight: Radius.circular(15)),
+                            borderRadius: BorderRadius.only(
+                                topRight: Radius.circular(15)),
                             color: Color.fromARGB(255, 36, 160, 209)),
                         height: (PageWidth(context) < 550)
                             ? 80
@@ -312,7 +320,8 @@ class _StudentFirstMainPageState extends State<StudentFirstMainPage> {
                                       color: (index == 0)
                                           ? const Color.fromARGB(
                                               255, 36, 160, 209)
-                                          : const Color.fromARGB(255, 0, 0, 0))));
+                                          : const Color.fromARGB(
+                                              255, 0, 0, 0))));
                         },
                       ))
                 ],
@@ -332,17 +341,18 @@ class _StudentFirstMainPageState extends State<StudentFirstMainPage> {
         width: 150,
         child: ListTile(
           title: TMaker(
-              text: "join 👇",//
+              text: "join 👇", //
               fontSize: 25,
               fontWeight: FontWeight.w600,
               color: const Color.fromARGB(153, 24, 58, 60)),
           subtitle: TMaker(
-              text:(){
-                  if (int.parse(grade[grade.length-1]) <= 6 && grade[grade.length-2] == " "){
-                return "Password:0000";}
-                else{
+              text: () {
+                if (int.parse(grade[grade.length - 1]) <= 6 &&
+                    grade[grade.length - 2] == " ") {
+                  return "Password:0000";
+                } else {
                   return "Password:2000";
-                  }
+                }
               }(),
               fontSize: 12,
               fontWeight: FontWeight.w600,
@@ -351,9 +361,10 @@ class _StudentFirstMainPageState extends State<StudentFirstMainPage> {
     Widget JoinButton = InkWell(
       onTap: () {
         _launchURL(
-            url: (int.parse(grade[grade.length-1]) <= 6 && grade[grade.length-2] == " ")
-                ?"https://us06web.zoom.us/j/3088571822?pwd=E5VM4ANDKYA5jW59RKUuwRvVA2onkA.1"
-                :"https://us06web.zoom.us/j/5052829198");
+            url: (int.parse(grade[grade.length - 1]) <= 6 &&
+                    grade[grade.length - 2] == " ")
+                ? "https://us06web.zoom.us/j/3088571822?pwd=E5VM4ANDKYA5jW59RKUuwRvVA2onkA.1"
+                : "https://us06web.zoom.us/j/5052829198");
       },
       child: CMaker(
         alignment: Alignment.center,
