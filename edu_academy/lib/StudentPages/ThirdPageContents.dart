@@ -3119,7 +3119,7 @@ class _ThirdPageState extends State<ThirdPage> {
             itemCount: TableData[0].length,
             itemBuilder: (context, ColumnIndex) {
               return CMaker(
-                  width: (PageWidth(context) - 40) / TableData[0].length,
+                  width: (PageWidth(context)>550&&PageHeight(context)<900)?(PageWidth(context)<1200)?(PageWidth(context) - 164.5) / TableData[0].length:(PageWidth(context) - 379) / TableData[0].length:(PageWidth(context) - 41) / TableData[0].length,
                   child: ListView.builder(
                     scrollDirection: Axis.vertical,
                     shrinkWrap: false,
