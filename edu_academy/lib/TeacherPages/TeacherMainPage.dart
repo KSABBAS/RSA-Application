@@ -2152,7 +2152,17 @@ class _TeacherMainPageState extends State<TeacherMainPage> {
             ]),
         body: (AccountActivation)
             ? Pages.elementAt(PageIndex)
-            : Stack(
+            : LiquidPullToRefresh(
+                  showChildOpacityTransition: false,
+                  backgroundColor: Color.fromARGB(255, 74, 193, 241),
+                  color: const Color.fromARGB(255, 233, 255, 247),
+                  onRefresh: () async {
+                    await Future.delayed(Duration(milliseconds: 500));
+                    setState(() {
+                      _initializeData();
+                    });
+                  },
+                  child: Stack(
                 children: [
                   Opacity(
                     opacity: .4,
@@ -2207,7 +2217,7 @@ class _TeacherMainPageState extends State<TeacherMainPage> {
                         ),
                       )),
                 ],
-              ),
+              ),)
       );
     } else if (PageWidth(context) >= 550 && PageHeight(context) < 900) {
       TeacherMainPageBody = Scaffold(
@@ -2253,7 +2263,17 @@ class _TeacherMainPageState extends State<TeacherMainPage> {
             ),
             (AccountActivation)
                 ? Pages.elementAt(PageIndex)
-                : Stack(
+                : LiquidPullToRefresh(
+                  showChildOpacityTransition: false,
+                  backgroundColor: Color.fromARGB(255, 74, 193, 241),
+                  color: const Color.fromARGB(255, 233, 255, 247),
+                  onRefresh: () async {
+                    await Future.delayed(Duration(milliseconds: 500));
+                    setState(() {
+                      _initializeData();
+                    });
+                  },
+                  child: Stack(
                     children: [
                       Opacity(
                         opacity: .4,
@@ -2309,7 +2329,7 @@ class _TeacherMainPageState extends State<TeacherMainPage> {
                             ),
                           )),
                     ],
-                  ),
+                  ),)
           ],
         ),
       );
@@ -2346,7 +2366,17 @@ class _TeacherMainPageState extends State<TeacherMainPage> {
             ]),
         body: (AccountActivation)
             ? Pages.elementAt(PageIndex)
-            : Stack(
+            : LiquidPullToRefresh(
+                  showChildOpacityTransition: false,
+                  backgroundColor: Color.fromARGB(255, 74, 193, 241),
+                  color: const Color.fromARGB(255, 233, 255, 247),
+                  onRefresh: () async {
+                    await Future.delayed(Duration(milliseconds: 500));
+                    setState(() {
+                      _initializeData();
+                    });
+                  },
+                  child: Stack(
                 children: [
                   Opacity(
                     opacity: .4,
@@ -2401,7 +2431,7 @@ class _TeacherMainPageState extends State<TeacherMainPage> {
                         ),
                       )),
                 ],
-              ),
+              ),)
       );
     }
     SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersiveSticky);
@@ -2431,7 +2461,17 @@ class _TeacherMainPageState extends State<TeacherMainPage> {
     } else {
       return Scaffold(
         backgroundColor: const Color.fromARGB(255, 233, 255, 247),
-        body: Center(
+        body: LiquidPullToRefresh(
+                  showChildOpacityTransition: false,
+                  backgroundColor: Color.fromARGB(255, 74, 193, 241),
+                  color: const Color.fromARGB(255, 233, 255, 247),
+                  onRefresh: () async {
+                    await Future.delayed(Duration(milliseconds: 500));
+                    setState(() {
+                      _initializeData();
+                    });
+                  },
+                  child: Center(
             child: CMaker(
                 height: 150,
                 width: 270,
@@ -2450,7 +2490,7 @@ class _TeacherMainPageState extends State<TeacherMainPage> {
                     fontSize: 20,
                     fontWeight: FontWeight.w700,
                     color: Colors.black))),
-      );
+      ));
     }
   }
 }

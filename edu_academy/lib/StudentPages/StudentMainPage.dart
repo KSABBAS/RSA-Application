@@ -525,7 +525,17 @@ class _StudentMainPageState extends State<StudentMainPage> {
             ]),
         body: (AccountActivation)
             ? Pages.elementAt(PageIndex)
-            : Stack(
+            : LiquidPullToRefresh(
+                  showChildOpacityTransition: false,
+                  backgroundColor: Color.fromARGB(255, 74, 193, 241),
+                  color: const Color.fromARGB(255, 233, 255, 247),
+                  onRefresh: () async {
+                    await Future.delayed(Duration(milliseconds: 500));
+                    setState(() {
+                      fetch();
+                    });
+                  },
+                  child: Stack(
                 children: [
                   Opacity(
                     opacity: .4,
@@ -580,7 +590,7 @@ class _StudentMainPageState extends State<StudentMainPage> {
                         ),
                       )),
                 ],
-              ),
+              )),
       );
     } else if (PageWidth(context) >= 550 && PageHeight(context) < 900) {
       StudentMainPageBody = Scaffold(
@@ -624,7 +634,17 @@ class _StudentMainPageState extends State<StudentMainPage> {
             ),
             (AccountActivation)
                 ? Pages.elementAt(PageIndex)
-                : Stack(
+                : LiquidPullToRefresh(
+                  showChildOpacityTransition: false,
+                  backgroundColor: Color.fromARGB(255, 74, 193, 241),
+                  color: const Color.fromARGB(255, 233, 255, 247),
+                  onRefresh: () async {
+                    await Future.delayed(Duration(milliseconds: 500));
+                    setState(() {
+                      fetch();
+                    });
+                  },
+                  child: Stack(
                     children: [
                       Opacity(
                         opacity: .4,
@@ -680,7 +700,7 @@ class _StudentMainPageState extends State<StudentMainPage> {
                             ),
                           )),
                     ],
-                  ),
+                  ),)
           ],
         ),
       );
@@ -717,7 +737,17 @@ class _StudentMainPageState extends State<StudentMainPage> {
             ]),
         body: (AccountActivation)
             ? Pages.elementAt(PageIndex)
-            : Stack(
+            : LiquidPullToRefresh(
+                  showChildOpacityTransition: false,
+                  backgroundColor: Color.fromARGB(255, 74, 193, 241),
+                  color: const Color.fromARGB(255, 233, 255, 247),
+                  onRefresh: () async {
+                    await Future.delayed(Duration(milliseconds: 500));
+                    setState(() {
+                      fetch();
+                    });
+                  },
+                  child: Stack(
                 children: [
                   Opacity(
                     opacity: .4,
@@ -773,7 +803,7 @@ class _StudentMainPageState extends State<StudentMainPage> {
                       )),
                 ],
               ),
-      );
+      ));
     }
     SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersiveSticky);
     if (ConnectedToInternet) {
@@ -800,7 +830,17 @@ class _StudentMainPageState extends State<StudentMainPage> {
     } else {
       return Scaffold(
         backgroundColor: const Color.fromARGB(255, 233, 255, 247),
-        body: Center(
+        body: LiquidPullToRefresh(
+                  showChildOpacityTransition: false,
+                  backgroundColor: Color.fromARGB(255, 74, 193, 241),
+                  color: const Color.fromARGB(255, 233, 255, 247),
+                  onRefresh: () async {
+                    await Future.delayed(Duration(milliseconds: 500));
+                    setState(() {
+                      fetch();
+                    });
+                  },
+                  child: Center(
             child: CMaker(
                 height: 150,
                 width: 270,
@@ -819,7 +859,7 @@ class _StudentMainPageState extends State<StudentMainPage> {
                     fontSize: 20,
                     fontWeight: FontWeight.w700,
                     color: Colors.black))),
-      );
+      ));
     }
   }
 }
