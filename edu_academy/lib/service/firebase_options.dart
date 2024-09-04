@@ -41,12 +41,13 @@ class DefaultFirebaseOptions {
   }
 
   static const FirebaseOptions web = FirebaseOptions(
-    apiKey: 'AIzaSyCKVcdizgixVTCDebrzbWpWXQ7vUBk2SRo',
-    appId: '1:683845387878:web:ea70e31090d15e64ba0fa7',
-    messagingSenderId: '683845387878',
-    projectId: 'rsa-app-3ec3f',
-    authDomain: 'rsa-app-3ec3f.firebaseapp.com',
-    storageBucket: 'rsa-app-3ec3f.appspot.com',
+  apiKey: "AIzaSyCKVcdizgixVTCDebrzbWpWXQ7vUBk2SRo",
+  authDomain: "rsa-app-3ec3f.firebaseapp.com",
+  databaseURL: "https://rsa-app-3ec3f-default-rtdb.firebaseio.com",
+  projectId: "rsa-app-3ec3f",
+  storageBucket: "rsa-app-3ec3f.appspot.com",
+  messagingSenderId: "683845387878",
+  appId: "1:683845387878:web:ea70e31090d15e64ba0fa7"
   );
 
   static const FirebaseOptions android = FirebaseOptions(

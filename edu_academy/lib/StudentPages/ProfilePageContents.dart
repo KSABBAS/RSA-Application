@@ -1,10 +1,12 @@
 import 'dart:io';
+import 'dart:typed_data';
 
 import 'package:edu_academy/Login/LogInPage.dart';
 import 'package:edu_academy/MyTools.dart';
 import 'package:edu_academy/StudentPages/StudentMainPage.dart';
 import 'package:edu_academy/TeacherPages/TeacherMainPage.dart';
 import 'package:edu_academy/service/Databse_Service.dart';
+import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
 import 'package:get/get.dart';
@@ -38,6 +40,23 @@ String NewProfileNumber = "";
 String NewProfilePassword = "";
 String Check_pass = "";
 
+pick_file() async {
+  Uint8List? file;
+  FilePickerResult? result;
+  String? name = '';
+  result = await FilePicker.platform
+      .pickFiles(type: FileType.image, allowMultiple: false);
+  if (result != null) {
+    // file = File(result.files.single.path!);
+    file = result.files.single.bytes;
+    name = result.files.first.name;
+    return file;
+  } else {
+    // User canceled the picker
+  }
+  // print("#-file $file");
+}
+
 class _StudentProfileState extends State<StudentProfile> {
   bool EditMode = false;
   final dbService = DatabaseService();
@@ -48,17 +67,13 @@ class _StudentProfileState extends State<StudentProfile> {
     late Widget StudentProfileBody;
     Widget ProfilePicture = InkWell(
       onTap: () async {
-        XFile? Avatar = await PhotoImageFromGalary();
-        if (Avatar != null) {
-          ProfileAvatar = Avatar;
-          print("File(ProfileAvatar!.path) ${File(ProfileAvatar!.path)}");
-          widget.profile_photo = await dbService.FiAdd_photo(
-              student_id, "${role}s", File(ProfileAvatar!.path));
-          // refresh
-          profile_data = await dbService.FiGet_profile_data(student_id, role)
-              as Map<String, dynamic>;
-          setState(() {});
-        }
+        var image_data = await pick_file();
+        widget.profile_photo =
+            await dbService.FiAdd_photo0(student_id, "${role}s", image_data);
+        // refresh
+        profile_data = await dbService.FiGet_profile_data(student_id, role)
+            as Map<String, dynamic>;
+        setState(() {});
       },
       child: CMaker(
         circularRadius: 130,
@@ -534,11 +549,11 @@ class _StudentProfileState extends State<StudentProfile> {
                               print(widget.StudentNumber);
                               print(widget.StudentPassword);
                             } else {
-                              if (Check_pass == widget.StudentPassword&&Check_pass !="0") {
+                              if (Check_pass == widget.StudentPassword &&
+                                  Check_pass != "0") {
                                 print(
                                     "======================\n password id correct");
-                                print(
-                                    "======================$Check_pass");
+                                print("======================$Check_pass");
                                 EditMode = !EditMode;
                                 print(EditMode);
                                 Navigator.pop(context);
@@ -651,19 +666,18 @@ class _StudentProfileState extends State<StudentProfile> {
                           height: 80,
                           alignment: Alignment.center,
                           child: EditAndSaveButton),
-                          (EditMode)
+                      (EditMode)
                           ? CMaker(
-                            width: double.infinity,
-                            alignment: Alignment.center,
-                            child: InkWell(
+                              width: double.infinity,
+                              alignment: Alignment.center,
+                              child: InkWell(
                                 onTap: () {
                                   EditMode = false;
-                                  setState(() {
-                                  });
+                                  setState(() {});
                                 },
                                 child: CMaker(
-                                  alignment: Alignment.center,
-                                  width: 170,
+                                    alignment: Alignment.center,
+                                    width: 170,
                                     height: (PageWidth(context) < 550)
                                         ? 60
                                         : (PageHeight(context) < 900)
@@ -677,15 +691,17 @@ class _StudentProfileState extends State<StudentProfile> {
                                           color: Color.fromARGB(58, 0, 0, 0)),
                                     ],
                                     circularRadius: 25,
-                                    color: const Color.fromARGB(255, 233, 255, 247),
+                                    color: const Color.fromARGB(
+                                        255, 233, 255, 247),
                                     padding: EdgeInsets.only(right: 10),
                                     child: TMaker(
                                         text: "Cancel",
                                         fontSize: 25,
                                         fontWeight: FontWeight.w600,
-                                        color: const Color.fromARGB(255, 0, 0, 0))),
+                                        color: const Color.fromARGB(
+                                            255, 0, 0, 0))),
                               ),
-                          )
+                            )
                           : Container(
                               height: 0,
                               width: 0,
@@ -764,24 +780,23 @@ class _StudentProfileState extends State<StudentProfile> {
                           height: 80,
                           alignment: Alignment.center,
                           child: EditAndSaveButton),
-                          CMaker(
+                      CMaker(
                           width: double.infinity,
                           height: 80,
                           alignment: Alignment.center,
                           child: EditAndSaveButton),
-                          (EditMode)
+                      (EditMode)
                           ? CMaker(
-                            width: double.infinity,
-                            alignment: Alignment.center,
-                            child: InkWell(
+                              width: double.infinity,
+                              alignment: Alignment.center,
+                              child: InkWell(
                                 onTap: () {
                                   EditMode = false;
-                                  setState(() {
-                                  });
+                                  setState(() {});
                                 },
                                 child: CMaker(
-                                  alignment: Alignment.center,
-                                  width: 170,
+                                    alignment: Alignment.center,
+                                    width: 170,
                                     height: (PageWidth(context) < 550)
                                         ? 60
                                         : (PageHeight(context) < 900)
@@ -795,15 +810,17 @@ class _StudentProfileState extends State<StudentProfile> {
                                           color: Color.fromARGB(58, 0, 0, 0)),
                                     ],
                                     circularRadius: 25,
-                                    color: const Color.fromARGB(255, 233, 255, 247),
+                                    color: const Color.fromARGB(
+                                        255, 233, 255, 247),
                                     padding: EdgeInsets.only(right: 10),
                                     child: TMaker(
                                         text: "Cancel",
                                         fontSize: 25,
                                         fontWeight: FontWeight.w600,
-                                        color: const Color.fromARGB(255, 0, 0, 0))),
+                                        color: const Color.fromARGB(
+                                            255, 0, 0, 0))),
                               ),
-                          )
+                            )
                           : Container(
                               height: 0,
                               width: 0,
@@ -882,24 +899,23 @@ class _StudentProfileState extends State<StudentProfile> {
                           height: 80,
                           alignment: Alignment.center,
                           child: EditAndSaveButton),
-                          CMaker(
+                      CMaker(
                           width: double.infinity,
                           height: 80,
                           alignment: Alignment.center,
                           child: EditAndSaveButton),
-                          (EditMode)
+                      (EditMode)
                           ? CMaker(
-                            width: double.infinity,
-                            alignment: Alignment.center,
-                            child: InkWell(
+                              width: double.infinity,
+                              alignment: Alignment.center,
+                              child: InkWell(
                                 onTap: () {
                                   EditMode = false;
-                                  setState(() {
-                                  });
+                                  setState(() {});
                                 },
                                 child: CMaker(
-                                  alignment: Alignment.center,
-                                  width: 170,
+                                    alignment: Alignment.center,
+                                    width: 170,
                                     height: (PageWidth(context) < 550)
                                         ? 60
                                         : (PageHeight(context) < 900)
@@ -913,15 +929,17 @@ class _StudentProfileState extends State<StudentProfile> {
                                           color: Color.fromARGB(58, 0, 0, 0)),
                                     ],
                                     circularRadius: 25,
-                                    color: const Color.fromARGB(255, 233, 255, 247),
+                                    color: const Color.fromARGB(
+                                        255, 233, 255, 247),
                                     padding: EdgeInsets.only(right: 10),
                                     child: TMaker(
                                         text: "Cancel",
                                         fontSize: 25,
                                         fontWeight: FontWeight.w600,
-                                        color: const Color.fromARGB(255, 0, 0, 0))),
+                                        color: const Color.fromARGB(
+                                            255, 0, 0, 0))),
                               ),
-                          )
+                            )
                           : Container(
                               height: 0,
                               width: 0,
