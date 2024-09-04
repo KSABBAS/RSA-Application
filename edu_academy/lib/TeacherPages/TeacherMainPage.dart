@@ -52,6 +52,11 @@ String subjects_string = '';
 Map<String, Map<String, List<dynamic>>> sub_data = {};
 String Teacher_role = '';
 bool AccountActivation = true;
+
+bool stringToBool(String value) {
+  print("stringToBool ${value} ${value.toLowerCase() == 'true'}");
+  return value.toLowerCase() == 'true';
+}
 // data base end
 bool ThereIsNotifications = () {
   bool result = false;
@@ -177,6 +182,7 @@ class _TeacherMainPageState extends State<TeacherMainPage> {
           await dbService.FiGet_profile_data(Teacher_Id, Teacher_role)
               as Map<String, dynamic>;
       print("teacher_profile_data $teacher_profile_data");
+      AccountActivation = stringToBool(teacher_profile_data['state']);
       TeacherMainPageIsLoading = false;
       setState(() {});
     }
@@ -492,9 +498,9 @@ class _TeacherMainPageState extends State<TeacherMainPage> {
                                   child: CMaker(
                                     padding: const EdgeInsets.only(bottom: 13),
                                     alignment: Alignment.bottomCenter,
-                                    child: const Text(
-                                      "kareem said",
-                                      style: TextStyle(
+                                    child: Text(
+                                      teacher_profile_data["name"],
+                                      style: const TextStyle(
                                           fontSize: 17,
                                           fontWeight: FontWeight.w500,
                                           color:

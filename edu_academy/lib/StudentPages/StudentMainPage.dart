@@ -26,6 +26,11 @@ class StudentMainPage extends StatefulWidget {
   State<StudentMainPage> createState() => _StudentMainPageState();
 }
 
+bool stringToBool(String value) {
+  print("stringToBool ${value} ${value.toLowerCase() == 'true'}");
+  return value.toLowerCase() == 'true';
+}
+
 bool AccountActivation = true;
 int PageIndex = 0;
 
@@ -104,6 +109,7 @@ class _StudentMainPageState extends State<StudentMainPage> {
     print("add done");
     print(HomeWorks[HomeWorkIndex][0]);
     log("#HomeWorks ${HomeWorks}");
+    setState(() {});
   }
 
   Future<void> fetch() async {
@@ -126,6 +132,7 @@ class _StudentMainPageState extends State<StudentMainPage> {
     profile_data = await dbService.FiGet_profile_data(student_id, "${role}s")
         as Map<String, dynamic>;
     await regetmessages();
+    AccountActivation = stringToBool(profile_data['state']);
     setState(() {
       isLoading = false;
     });

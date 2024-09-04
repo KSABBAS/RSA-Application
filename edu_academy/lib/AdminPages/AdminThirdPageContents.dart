@@ -1,4 +1,6 @@
+import 'package:edu_academy/AdminPages/AdminMainPage.dart';
 import 'package:edu_academy/MyTools.dart';
+import 'package:edu_academy/service/Databse_Service.dart';
 import 'package:flutter/material.dart';
 import 'package:on_off_switch/on_off_switch.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -11,34 +13,36 @@ class AdminThirdPageContenets extends StatefulWidget {
       _AdminThirdPageContenetsState();
 }
 
+bool stringToBool(String value) {
+  print("stringToBool ${value} ${value.toLowerCase() == 'true'}");
+  return value.toLowerCase() == 'true';
+}
+
 bool StudentOpend = false;
-List<List> Students = [
-  [
-    "images/Person.png", //image
-    "Ali Ahmed", //Name,
-    "kareemsaid234@gmail.com", //Email,
-    "+201065866283", //Number,
-    "Active" //State
-  ],
-  [
-    "images/Person.png", //image
-    "Tarek Esam", //Name,
-    "kareemsaid234@gmail.com", //Email,
-    "+201065866283", //Number,
-    "Active" //State
-  ],
-  [
-    "images/Person.png", //image
-    "Weal monir", //Name,
-    "kareemsaid234@gmail.com", //Email,
-    "+201065866283", //Number,
-    "Not Active" //State
-  ],
-];
+
 int StudentSelected = 0;
-bool StudentState = (Students[StudentSelected][4] == "Active") ? true : false;
 
 class _AdminThirdPageContenetsState extends State<AdminThirdPageContenets> {
+  final dbService = DatabaseService();
+  @override
+  Students_data_() async {
+    var da_ = await dbService.FiGet_all_users_data("Students");
+    Students = [];
+    for (var i in da_) {
+      Students.add([
+        i['photo'],
+        i['name'],
+        i['email'],
+        i['phone'],
+        i['state'],
+        i.id,
+      ]);
+    }
+    print("Students $Students");
+    setState(() {});
+    // Students.sort((a, b) => b[4].compareTo(a[4]));
+  }
+
   @override
   Widget build(BuildContext context) {
     late Widget ThirdPageBody;
@@ -124,6 +128,7 @@ class _AdminThirdPageContenetsState extends State<AdminThirdPageContenets> {
                   InkWell(
                       onTap: () {
                         setState(() {
+                          Students_data_();
                           StudentOpend = false;
                         });
                       },
@@ -162,8 +167,8 @@ class _AdminThirdPageContenetsState extends State<AdminThirdPageContenets> {
                     height: 130,
                     width: 130,
                     child: CircleAvatar(
-                      backgroundImage: AssetImage(Students[StudentSelected][0]),
-                    )),
+                        backgroundImage:
+                            NetworkImage(Students[StudentSelected][0]))),
                 const Padding(padding: EdgeInsets.only(top: 20)),
                 CMaker(
                   width: double.infinity,
@@ -173,42 +178,6 @@ class _AdminThirdPageContenetsState extends State<AdminThirdPageContenets> {
                       fontSize: 30,
                       fontWeight: FontWeight.w700,
                       color: Colors.black),
-                ),
-                Expanded(child: Container()),
-                CMaker(
-                  margin: EdgeInsets.symmetric(horizontal: 20),
-                  height: (PageWidth(context) < 550)
-                      ? 60
-                      : (PageHeight(context) < 900)
-                          ? 80
-                          : 80,
-                  boxShadow: const [
-                    BoxShadow(
-                        offset: Offset(1, 1),
-                        blurRadius: 6,
-                        spreadRadius: .03,
-                        color: Color.fromARGB(58, 0, 0, 0)),
-                  ],
-                  circularRadius: 20,
-                  color: const Color.fromARGB(255, 233, 255, 247),
-                  width: double.infinity,
-                  child: Row(
-                    children: [
-                      Expanded(child: Container()),
-                      CMaker(
-                          padding: EdgeInsets.only(right: 10),
-                          child: TMaker(
-                              text: Students[StudentSelected][4],
-                              fontSize: (PageWidth(context) < 550)
-                                  ? 20
-                                  : (PageHeight(context) < 900)
-                                      ? 40
-                                      : 40,
-                              fontWeight: FontWeight.w600,
-                              color: const Color.fromARGB(255, 0, 0, 0))),
-                      Expanded(child: Container()),
-                    ],
-                  ),
                 ),
                 Expanded(child: Container()),
                 CMaker(
@@ -284,6 +253,42 @@ class _AdminThirdPageContenetsState extends State<AdminThirdPageContenets> {
                 ),
                 Expanded(child: Container()),
                 CMaker(
+                  margin: EdgeInsets.symmetric(horizontal: 20),
+                  height: (PageWidth(context) < 550)
+                      ? 60
+                      : (PageHeight(context) < 900)
+                          ? 80
+                          : 80,
+                  boxShadow: const [
+                    BoxShadow(
+                        offset: Offset(1, 1),
+                        blurRadius: 6,
+                        spreadRadius: .03,
+                        color: Color.fromARGB(58, 0, 0, 0)),
+                  ],
+                  circularRadius: 20,
+                  color: const Color.fromARGB(255, 233, 255, 247),
+                  width: double.infinity,
+                  child: Row(
+                    children: [
+                      Expanded(child: Container()),
+                      CMaker(
+                          padding: EdgeInsets.only(right: 10),
+                          child: TMaker(
+                              text: Students[StudentSelected][5],
+                              fontSize: (PageWidth(context) < 550)
+                                  ? 20
+                                  : (PageHeight(context) < 900)
+                                      ? 40
+                                      : 40,
+                              fontWeight: FontWeight.w600,
+                              color: const Color.fromARGB(255, 0, 0, 0))),
+                      Expanded(child: Container()),
+                    ],
+                  ),
+                ),
+                Expanded(child: Container()),
+                CMaker(
                   width: double.infinity,
                   alignment: Alignment.center,
                   child: CMaker(
@@ -319,10 +324,14 @@ class _AdminThirdPageContenetsState extends State<AdminThirdPageContenets> {
                                 color: const Color.fromARGB(255, 0, 0, 0))),
                         Expanded(child: Container()),
                         OnOffSwitch(
-                          value: StudentState,
-                          onChanged: (bool newValue) {
+                          value: () {
+                            return stringToBool(Students[StudentSelected][4]);
+                          }(),
+                          onChanged: (bool newValue) async {
+                            await dbService.FiChange_state(
+                                'Students', Students[StudentSelected][5],stringToBool(Students[StudentSelected][4]));
                             setState(() {
-                              StudentState = newValue;
+                              Students_data_();
                             });
                           },
                         ),
@@ -409,13 +418,19 @@ class _AdminThirdPageContenetsState extends State<AdminThirdPageContenets> {
                         children: [
                           Expanded(child: Container()),
                           TMaker(
-                              text: "Number : 3",
+                              text: "Number : ${Students.length}",
                               fontSize: 20,
                               fontWeight: FontWeight.w700,
                               color: Colors.black),
                           Expanded(child: Container()),
                           TMaker(
-                              text: "Active : 2",
+                              text: () {
+                                int conter = 0;
+                                for (var i in Students) {
+                                  if (i[4] == 'true') conter += 1;
+                                }
+                                return "Active : $conter";
+                              }(),
                               fontSize: 20,
                               fontWeight: FontWeight.w700,
                               color: Color.fromARGB(255, 65, 215, 54)),
@@ -441,7 +456,7 @@ class _AdminThirdPageContenetsState extends State<AdminThirdPageContenets> {
                         circularRadius: 20,
                         width: double.infinity,
                         child: ListView.builder(
-                          itemCount: 3,
+                          itemCount: Students.length,
                           itemBuilder: (context, index) {
                             return InkWell(
                               onTap: () {
@@ -452,7 +467,7 @@ class _AdminThirdPageContenetsState extends State<AdminThirdPageContenets> {
                               },
                               child: CMaker(
                                   circularRadius: 20,
-                                  boxShadow: [
+                                  boxShadow: const [
                                     BoxShadow(
                                         offset: Offset(1, 1),
                                         blurRadius: 6,
@@ -461,27 +476,30 @@ class _AdminThirdPageContenetsState extends State<AdminThirdPageContenets> {
                                   ],
                                   height: 80,
                                   alignment: Alignment.center,
-                                  color: Color.fromARGB(255, 233, 255, 247),
-                                  margin: EdgeInsets.only(
+                                  color:
+                                      const Color.fromARGB(255, 233, 255, 247),
+                                  margin: const EdgeInsets.only(
                                       bottom: 30, right: 20, left: 20),
                                   child: ListTile(
                                     leading: CMaker(
                                         height: 70,
                                         width: 70,
                                         child: CircleAvatar(
-                                          backgroundImage:
-                                              AssetImage((Students[index][0])),
-                                        )),
+                                            backgroundImage: NetworkImage(
+                                                Students[index][0]))),
                                     title: TMaker(
                                         text: Students[index][1],
                                         fontSize: 20,
                                         fontWeight: FontWeight.w700,
                                         color: Colors.black),
                                     trailing: TMaker(
-                                        text: Students[index][4],
+                                        text: (stringToBool(Students[index][4]))
+                                            ? "Active"
+                                            : 'Inactive',
                                         fontSize: 18,
                                         fontWeight: FontWeight.w700,
-                                        color: (Students[index][4] == "Active")
+                                        color: (stringToBool(
+                                                Students[index][4]))
                                             ? Color.fromARGB(255, 73, 213, 31)
                                             : const Color.fromARGB(
                                                 255, 224, 9, 9)),

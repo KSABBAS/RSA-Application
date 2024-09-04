@@ -40,6 +40,7 @@ class _SplashViewPageState extends State<SplashViewPage>
 
               try {
                 final List<String>? data = prefs.getStringList('id');
+                // Navigator.pushReplacementNamed(context, "LogInPage"); //delete
 
                 log(data.toString());
                 if (data != null) {

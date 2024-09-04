@@ -247,7 +247,7 @@ class DatabaseService {
     print("fiGet_Hw student_id ${student_id}");
 // Reference to the specific document within the 'Homework' collection
     DocumentReference documentReference =
-        FirebaseFirestore.instance.collection('Homework').doc(Grade);
+        fire.collection('Homework').doc(Grade);
 
     // List of known sub-collection names
     List<String> knownCollections = [];
@@ -390,7 +390,7 @@ class DatabaseService {
 
     ///Homework/Grade 1/عربي/NY63UvWuWPWfjzutq745/solve /id
     print("FiAdd_Solve hw_id ${hw_id}");
-    DocumentReference documentReference = FirebaseFirestore.instance
+    DocumentReference documentReference = fire
         .collection('Homework')
         .doc(hw_id[0])
         .collection(hw_id[3])
@@ -416,10 +416,8 @@ class DatabaseService {
   }
 
   Fi_getAll_HW(String grade, String subject) async {
-    CollectionReference collection = FirebaseFirestore.instance
-        .collection('Homework')
-        .doc(grade)
-        .collection(subject);
+    CollectionReference collection =
+        fire.collection('Homework').doc(grade).collection(subject);
 
     QuerySnapshot querySnapshot = await collection.get();
     List<dynamic> out_hw = [];
@@ -438,11 +436,8 @@ class DatabaseService {
   }
 
   FiGet_profile_data(String id, String role) async {
-    DocumentReference documentReference = FirebaseFirestore.instance
-        .collection('Users')
-        .doc(role)
-        .collection(role)
-        .doc(id);
+    DocumentReference documentReference =
+        fire.collection('Users').doc(role).collection(role).doc(id);
 
     ///Users/Students/Students/S5  Student
     DocumentSnapshot documentSnapshot = await documentReference.get();
@@ -464,11 +459,8 @@ class DatabaseService {
         .putFile(photo);
     var downloadUrl = await snapshot.ref.getDownloadURL();
     print(downloadUrl);
-    DocumentReference documentReference = FirebaseFirestore.instance
-        .collection('Users')
-        .doc(role)
-        .collection(role)
-        .doc(id);
+    DocumentReference documentReference =
+        fire.collection('Users').doc(role).collection(role).doc(id);
     documentReference.update({'photo': "$downloadUrl"});
 
     // ///Users/Students/Students/S5  Student
@@ -486,10 +478,8 @@ class DatabaseService {
     print("## student_id ${student_id}");
     // /Homework/Grade 1/عربي/NY63UvWuWPWfjzutq745/Solve/S1
     //                                                   doc
-    CollectionReference collection = FirebaseFirestore.instance
-        .collection('Homework')
-        .doc(garde)
-        .collection(subject);
+    CollectionReference collection =
+        fire.collection('Homework').doc(garde).collection(subject);
 
     QuerySnapshot querySnapshot = await collection.get();
     // hh@gmail.com
@@ -644,6 +634,28 @@ class DatabaseService {
     studentSnapshot.delete();
   }
 
+  //  star Admin data
+  FiGet_all_users_data(String role) async {
+    var collections = fire.collection('Users').doc(role).collection(role);
+    List<List<dynamic>> out_data = [];
+    QuerySnapshot querySnapshot = await collections.get();
+    // for (var i in querySnapshot.docs) {
+    //   print("#@ i ${i.id} ");
+    //   print("#@ i['name'] ${i['name']} ");
+      
+    // }
+    print("#@ querySnapshot.docs ${querySnapshot.docs} ");
+    return querySnapshot.docs;
+  }
+
+  FiChange_state(String role, String id, bool current_state) async {
+    var collections =
+        fire.collection('Users').doc(role).collection(role).doc(id);
+    collections.update({"state": "${!current_state}"});
+  }
+
+  //  end Admin data
+
   // Storage
   stHwStore(var file) async {
     if (file.length != 0) {
@@ -673,4 +685,3 @@ class DatabaseService {
     }
   }
 }
-

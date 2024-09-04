@@ -3,6 +3,7 @@ import 'package:edu_academy/AdminPages/AdminFirstPageContents.dart';
 import 'package:edu_academy/AdminPages/AdminSocendPageContenets.dart';
 import 'package:edu_academy/AdminPages/AdminThirdPageContents.dart';
 import 'package:edu_academy/MyTools.dart';
+import 'package:edu_academy/service/Databse_Service.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:internet_connection_checker_plus/internet_connection_checker_plus.dart';
@@ -17,8 +18,12 @@ class AdminMainPage extends StatefulWidget {
 }
 
 int PageIndex = 0;
+List<List> Teachers = [];
+List<List> Students = [];
 
 class _AdminMainPageState extends State<AdminMainPage> {
+  final dbService = DatabaseService();
+
   bool ConnectedToInternet = true;
   @override
   void initState() {
@@ -40,6 +45,44 @@ class _AdminMainPageState extends State<AdminMainPage> {
           break;
       }
     });
+    Teacher_data();
+    Students_data_();
+  }
+
+  @override
+  Teacher_data() async {
+    var da_ = await dbService.FiGet_all_users_data("Teacher");
+    Teachers = [];
+    for (var i in da_) {
+      Teachers.add([
+        i['photo'],
+        i['name'],
+        i['email'],
+        i['phone'],
+        i['state'],
+        i.id,
+        [i['Subject1'], i['Subject2'], i['Subject3']]
+      ]);
+    }
+    print("##Teachers $Teachers");
+    // Teachers.sort((a, b) => b[4].compareTo(a[4]));
+  }
+
+  @override
+  Students_data_() async {
+    var da_ = await dbService.FiGet_all_users_data("Students");
+    Students = [];
+    for (var i in da_) {
+      Students.add([
+        i['photo'],
+        i['name'],
+        i['email'],
+        i['phone'],
+        i['state'],
+        i.id,
+      ]);
+    }
+    // Students.sort((a, b) => b[4].compareTo(a[4]));
   }
 
   @override
