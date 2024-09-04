@@ -1,4 +1,6 @@
+import 'package:edu_academy/AdminPages/AdminMainPage.dart';
 import 'package:edu_academy/MyTools.dart';
+import 'package:edu_academy/service/Databse_Service.dart';
 import 'package:flutter/material.dart';
 import 'package:on_off_switch/on_off_switch.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -11,40 +13,35 @@ class AdminSocendPageContenets extends StatefulWidget {
       _AdminSocendPageContenetsState();
 }
 
+bool stringToBool(String value) {
+  print("stringToBool ${value} ${value.toLowerCase() == 'true'}");
+  return value.toLowerCase() == 'true';
+}
+
 bool TeacherOpend = false;
-List<List> Teachers = [
-  [
-    "images/Person.png", //image
-    "Kareem said", //Name,
-    "kareemsaid234@gmail.com", //Email,
-    "+201065866283", //Number,
-    "Grade 1 - Grade 2 - Grade 3", //Grades,
-    "Arabic - English - Math", //Subjects,
-    "Active" //State
-  ],
-  [
-    "images/Person.png", //image
-    "Kareem said", //Name,
-    "kareemsaid234@gmail.com", //Email,
-    "+201065866283", //Number,
-    "Grade 1 - Grade 2 - Grade 3", //Grades,
-    "Arabic - English - Math", //Subjects,
-    "Active" //State
-  ],
-  [
-    "images/Person.png", //image
-    "Kareem said", //Name,
-    "kareemsaid234@gmail.com", //Email,
-    "+201065866283", //Number,
-    "Grade 1 - Grade 2 - Grade 3", //Grades,
-    "Arabic - English - Math", //Subjects,
-    "Not Active" //State
-  ],
-];
 int TeacherSelected = 0;
-bool TeacherState = (Teachers[TeacherSelected][6] == "Active") ? true : false;
+// bool TeacherState = ;
 
 class _AdminSocendPageContenetsState extends State<AdminSocendPageContenets> {
+  final dbService = DatabaseService();
+
+  @override
+  Teacher_data() async {
+    var da_ = await dbService.FiGet_all_users_data("Teacher");
+    Teachers = [];
+    for (var i in da_){
+    Teachers.add([
+        i['photo'],
+        i['name'],
+        i['email'],
+        i['phone'],
+        i['state'],
+        i.id,
+        [i['Subject1'], i['Subject2'], i['Subject3']]
+      ]);}
+    setState(() {});
+  }
+
   @override
   Widget build(BuildContext context) {
     late Widget SecondPageBody;
@@ -78,22 +75,21 @@ class _AdminSocendPageContenetsState extends State<AdminSocendPageContenets> {
       ),
     );
     Widget LogOutButton = InkWell(
-                  onTap: () async {
-                    final SharedPreferences prefs =
-                        await SharedPreferences.getInstance();
-                    prefs.remove("id");
-                    Navigator.pushReplacementNamed(context, "SplashView");
-                  },
-                  child: Container(
-                    width: 70,
-                    padding: const EdgeInsets.only(top: 10),
-                    decoration: BoxDecoration(
-                        color: const Color.fromARGB(255, 255, 255, 255),
-                        borderRadius: BorderRadius.circular(10)),
-                    height: 50,
-                    child: const Icon(Icons.logout),
-                  ),
-                );
+      onTap: () async {
+        final SharedPreferences prefs = await SharedPreferences.getInstance();
+        prefs.remove("id");
+        Navigator.pushReplacementNamed(context, "SplashView");
+      },
+      child: Container(
+        width: 70,
+        padding: const EdgeInsets.only(top: 10),
+        decoration: BoxDecoration(
+            color: const Color.fromARGB(255, 255, 255, 255),
+            borderRadius: BorderRadius.circular(10)),
+        height: 50,
+        child: const Icon(Icons.logout),
+      ),
+    );
     if (TeacherOpend) {
       SecondPageBody = CMaker(
           child: Column(
@@ -131,6 +127,7 @@ class _AdminSocendPageContenetsState extends State<AdminSocendPageContenets> {
                   InkWell(
                       onTap: () {
                         setState(() {
+                          Teacher_data();
                           TeacherOpend = false;
                         });
                       },
@@ -166,11 +163,12 @@ class _AdminSocendPageContenetsState extends State<AdminSocendPageContenets> {
               children: [
                 const Padding(padding: EdgeInsets.only(top: 20)),
                 CMaker(
-                    height: 130,
-                    width: 130,
-                    child: CircleAvatar(
-                      backgroundImage: AssetImage(Teachers[TeacherSelected][0]),
-                    )),
+                  height: 130,
+                  width: 130,
+                  child: CircleAvatar(
+                      backgroundImage:
+                          NetworkImage(Teachers[TeacherSelected][0])),
+                ),
                 const Padding(padding: EdgeInsets.only(top: 20)),
                 CMaker(
                   width: double.infinity,
@@ -180,42 +178,6 @@ class _AdminSocendPageContenetsState extends State<AdminSocendPageContenets> {
                       fontSize: 30,
                       fontWeight: FontWeight.w700,
                       color: Colors.black),
-                ),
-                Expanded(child: Container()),
-                CMaker(
-                  margin: EdgeInsets.symmetric(horizontal: 20),
-                  height: (PageWidth(context) < 550)
-                      ? 60
-                      : (PageHeight(context) < 900)
-                          ? 80
-                          : 80,
-                  boxShadow: const [
-                    BoxShadow(
-                        offset: Offset(1, 1),
-                        blurRadius: 6,
-                        spreadRadius: .03,
-                        color: Color.fromARGB(58, 0, 0, 0)),
-                  ],
-                  circularRadius: 20,
-                  color: const Color.fromARGB(255, 233, 255, 247),
-                  width: double.infinity,
-                  child: Row(
-                    children: [
-                      Expanded(child: Container()),
-                      CMaker(
-                          padding: EdgeInsets.only(right: 10),
-                          child: TMaker(
-                              text: Teachers[TeacherSelected][4],
-                              fontSize: (PageWidth(context) < 550)
-                                  ? 20
-                                  : (PageHeight(context) < 900)
-                                      ? 40
-                                      : 40,
-                              fontWeight: FontWeight.w600,
-                              color: const Color.fromARGB(255, 0, 0, 0))),
-                      Expanded(child: Container()),
-                    ],
-                  ),
                 ),
                 Expanded(child: Container()),
                 CMaker(
@@ -327,6 +289,56 @@ class _AdminSocendPageContenetsState extends State<AdminSocendPageContenets> {
                 ),
                 Expanded(child: Container()),
                 CMaker(
+                  margin: EdgeInsets.symmetric(horizontal: 20),
+                  height: (PageWidth(context) < 550)
+                      ? 60
+                      : (PageHeight(context) < 900)
+                          ? 80
+                          : 80,
+                  boxShadow: const [
+                    BoxShadow(
+                        offset: Offset(1, 1),
+                        blurRadius: 6,
+                        spreadRadius: .03,
+                        color: Color.fromARGB(58, 0, 0, 0)),
+                  ],
+                  circularRadius: 20,
+                  color: const Color.fromARGB(255, 233, 255, 247),
+                  width: double.infinity,
+                  child: Row(
+                    children: [
+                      Expanded(child: Container()),
+                      CMaker(
+                          padding: EdgeInsets.only(right: 10),
+                          child: TMaker(
+                              text: () {
+                                String out = '';
+                                for (var i in Teachers[TeacherSelected][6]) {
+                                  if (i == "null") continue;
+
+                                  print("1# i $i");
+                                  out = out + "${i[0]}";
+                                  for (var j in (i as List).sublist(1)) {
+                                    out = out + "\n -$j";
+                                  }
+                                  out = out + "\n";
+                                }
+                                print("1# out $out");
+                                return out;
+                              }(),
+                              fontSize: (PageWidth(context) < 550)
+                                  ? 20
+                                  : (PageHeight(context) < 900)
+                                      ? 40
+                                      : 40,
+                              fontWeight: FontWeight.w600,
+                              color: const Color.fromARGB(255, 0, 0, 0))),
+                      Expanded(child: Container()),
+                    ],
+                  ),
+                ),
+                Expanded(child: Container()),
+                CMaker(
                   width: double.infinity,
                   alignment: Alignment.center,
                   child: CMaker(
@@ -362,10 +374,15 @@ class _AdminSocendPageContenetsState extends State<AdminSocendPageContenets> {
                                 color: const Color.fromARGB(255, 0, 0, 0))),
                         Expanded(child: Container()),
                         OnOffSwitch(
-                          value: TeacherState,
-                          onChanged: (bool newValue) {
+                          value: () {
+                            return stringToBool(Teachers[TeacherSelected][4]);
+                          }(),
+                          onChanged: (bool newValue) async {
+                            await dbService.FiChange_state(
+                                'Teacher', Teachers[TeacherSelected][5],stringToBool(Teachers[TeacherSelected][4]));
                             setState(() {
-                              TeacherState = newValue;
+                              Teacher_data();
+                              // TeacherState = newValue;
                             });
                           },
                         ),
@@ -452,16 +469,22 @@ class _AdminSocendPageContenetsState extends State<AdminSocendPageContenets> {
                         children: [
                           Expanded(child: Container()),
                           TMaker(
-                              text: "Number : 3",
+                              text: "Number : ${Teachers.length}",
                               fontSize: 20,
                               fontWeight: FontWeight.w700,
                               color: Colors.black),
                           Expanded(child: Container()),
                           TMaker(
-                              text: "Active : 2",
+                              text: () {
+                                int conter = 0;
+                                for (var i in Teachers) {
+                                  if (i[4] == 'true') conter += 1;
+                                }
+                                return "Active : $conter";
+                              }(),
                               fontSize: 20,
                               fontWeight: FontWeight.w700,
-                              color: Color.fromARGB(255, 65, 215, 54)),
+                              color: const Color.fromARGB(255, 65, 215, 54)),
                           Expanded(child: Container()),
                         ],
                       ))),
@@ -471,7 +494,7 @@ class _AdminSocendPageContenetsState extends State<AdminSocendPageContenets> {
                     width: double.infinity,
                     alignment: Alignment.center,
                     child: CMaker(
-                        padding: EdgeInsets.only(top: 20),
+                        padding: const EdgeInsets.only(top: 20),
                         boxShadow: const [
                           BoxShadow(
                               offset: Offset(1, 1),
@@ -484,7 +507,7 @@ class _AdminSocendPageContenetsState extends State<AdminSocendPageContenets> {
                         circularRadius: 20,
                         width: double.infinity,
                         child: ListView.builder(
-                          itemCount: 3,
+                          itemCount: Teachers.length, // items
                           itemBuilder: (context, index) {
                             return InkWell(
                               onTap: () {
@@ -495,7 +518,7 @@ class _AdminSocendPageContenetsState extends State<AdminSocendPageContenets> {
                               },
                               child: CMaker(
                                   circularRadius: 20,
-                                  boxShadow: [
+                                  boxShadow: const [
                                     BoxShadow(
                                         offset: Offset(1, 1),
                                         blurRadius: 6,
@@ -505,26 +528,30 @@ class _AdminSocendPageContenetsState extends State<AdminSocendPageContenets> {
                                   height: 80,
                                   alignment: Alignment.center,
                                   color: Color.fromARGB(255, 233, 255, 247),
-                                  margin: EdgeInsets.only(
+                                  margin: const EdgeInsets.only(
                                       bottom: 30, right: 20, left: 20),
                                   child: ListTile(
                                     leading: CMaker(
                                         height: 70,
                                         width: 70,
                                         child: CircleAvatar(
-                                          backgroundImage:
-                                              AssetImage((Teachers[index][0])),
-                                        )),
+                                            backgroundImage: NetworkImage(
+                                                Teachers[index][0]))),
                                     title: TMaker(
-                                        text: Teachers[index][1],
+                                        text: Teachers[index][1]
+                                            .split(' ')
+                                            .take(2)
+                                            .join(' '),
                                         fontSize: 20,
                                         fontWeight: FontWeight.w700,
                                         color: Colors.black),
                                     trailing: TMaker(
-                                        text: Teachers[index][6],
+                                        text:
+                                            "${(stringToBool(Teachers[index][4])) ? 'Active' : 'Inactive '}",
                                         fontSize: 18,
                                         fontWeight: FontWeight.w700,
-                                        color: (Teachers[index][6] == "Active")
+                                        color: (stringToBool(
+                                                Teachers[index][4]))
                                             ? Color.fromARGB(255, 73, 213, 31)
                                             : const Color.fromARGB(
                                                 255, 224, 9, 9)),
