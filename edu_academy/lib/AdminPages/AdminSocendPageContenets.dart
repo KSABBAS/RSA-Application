@@ -1,5 +1,6 @@
 import 'package:edu_academy/AdminPages/AdminMainPage.dart';
 import 'package:edu_academy/MyTools.dart';
+import 'package:edu_academy/StudentPages/SecondPageContents.dart';
 import 'package:edu_academy/service/Databse_Service.dart';
 import 'package:flutter/material.dart';
 import 'package:on_off_switch/on_off_switch.dart';
@@ -21,16 +22,18 @@ bool stringToBool(String value) {
 bool TeacherOpend = false;
 int TeacherSelected = 0;
 // bool TeacherState = ;
+String TeacherSubject1 = "null";
+String TeacherSubject2 = "null";
+String TeacherSubject3 = "null";
 
 class _AdminSocendPageContenetsState extends State<AdminSocendPageContenets> {
   final dbService = DatabaseService();
-
   @override
   Teacher_data() async {
     var da_ = await dbService.FiGet_all_users_data("Teacher");
     Teachers = [];
-    for (var i in da_){
-    Teachers.add([
+    for (var i in da_) {
+      Teachers.add([
         i['photo'],
         i['name'],
         i['email'],
@@ -38,8 +41,37 @@ class _AdminSocendPageContenetsState extends State<AdminSocendPageContenets> {
         i['state'],
         i.id,
         [i['Subject1'], i['Subject2'], i['Subject3']]
-      ]);}
+      ]);
+    }
     setState(() {});
+  }
+
+  List<DropdownMenuItem<String>>? SubjectsMaker(String TeacherSubjectNumber) {
+    List<DropdownMenuItem<String>>? list = [
+      DropdownMenuItem(
+        value: "null",
+        child: CMaker(
+            child: TMaker(
+                text: "null",
+                fontSize: 20,
+                fontWeight: FontWeight.w600,
+                color: Colors.black)),
+      ),
+    ];
+    for (int i = 0; i < Subjects.length; i++) {
+      list.add(
+        DropdownMenuItem(
+          value: Subjects[i][1],
+          child: CMaker(
+              child: TMaker(
+                  text: Subjects[i][1],
+                  fontSize: 20,
+                  fontWeight: FontWeight.w600,
+                  color: Colors.black)),
+        ),
+      );
+    }
+    return list;
   }
 
   @override
@@ -159,7 +191,7 @@ class _AdminSocendPageContenetsState extends State<AdminSocendPageContenets> {
                   spreadRadius: .03,
                   color: Color.fromARGB(82, 0, 0, 0)),
             ],
-            child: Column(
+            child: ListView(
               children: [
                 const Padding(padding: EdgeInsets.only(top: 20)),
                 CMaker(
@@ -173,13 +205,14 @@ class _AdminSocendPageContenetsState extends State<AdminSocendPageContenets> {
                 CMaker(
                   width: double.infinity,
                   alignment: Alignment.center,
+                  margin: EdgeInsets.symmetric(horizontal: 20),
                   child: TMaker(
                       text: Teachers[TeacherSelected][1],
                       fontSize: 30,
                       fontWeight: FontWeight.w700,
                       color: Colors.black),
                 ),
-                Expanded(child: Container()),
+                const Padding(padding: EdgeInsets.only(top: 20)),
                 CMaker(
                   margin: EdgeInsets.symmetric(horizontal: 20),
                   height: (PageWidth(context) < 550)
@@ -215,7 +248,7 @@ class _AdminSocendPageContenetsState extends State<AdminSocendPageContenets> {
                     ],
                   ),
                 ),
-                Expanded(child: Container()),
+                const Padding(padding: EdgeInsets.only(top: 20)),
                 CMaker(
                   margin: EdgeInsets.symmetric(horizontal: 20),
                   height: (PageWidth(context) < 550)
@@ -251,7 +284,7 @@ class _AdminSocendPageContenetsState extends State<AdminSocendPageContenets> {
                     ],
                   ),
                 ),
-                Expanded(child: Container()),
+                const Padding(padding: EdgeInsets.only(top: 20)),
                 CMaker(
                   margin: EdgeInsets.symmetric(horizontal: 20),
                   height: (PageWidth(context) < 550)
@@ -287,57 +320,146 @@ class _AdminSocendPageContenetsState extends State<AdminSocendPageContenets> {
                     ],
                   ),
                 ),
-                Expanded(child: Container()),
-                CMaker(
-                  margin: EdgeInsets.symmetric(horizontal: 20),
-                  height: (PageWidth(context) < 550)
-                      ? 60
-                      : (PageHeight(context) < 900)
-                          ? 80
-                          : 80,
-                  boxShadow: const [
-                    BoxShadow(
-                        offset: Offset(1, 1),
-                        blurRadius: 6,
-                        spreadRadius: .03,
-                        color: Color.fromARGB(58, 0, 0, 0)),
-                  ],
-                  circularRadius: 20,
-                  color: const Color.fromARGB(255, 233, 255, 247),
-                  width: double.infinity,
-                  child: Row(
-                    children: [
-                      Expanded(child: Container()),
-                      CMaker(
-                          padding: EdgeInsets.only(right: 10),
-                          child: TMaker(
-                              text: () {
-                                String out = '';
-                                for (var i in Teachers[TeacherSelected][6]) {
-                                  if (i == "null") continue;
-
-                                  print("1# i $i");
-                                  out = out + "${i[0]}";
-                                  for (var j in (i as List).sublist(1)) {
-                                    out = out + "\n -$j";
-                                  }
-                                  out = out + "\n";
-                                }
-                                print("1# out $out");
-                                return out;
-                              }(),
-                              fontSize: (PageWidth(context) < 550)
-                                  ? 20
-                                  : (PageHeight(context) < 900)
-                                      ? 40
-                                      : 40,
-                              fontWeight: FontWeight.w600,
-                              color: const Color.fromARGB(255, 0, 0, 0))),
-                      Expanded(child: Container()),
-                    ],
-                  ),
-                ),
-                Expanded(child: Container()),
+                const Padding(padding: EdgeInsets.only(top: 20)),
+                (Teachers[TeacherSelected][6][0] != "null")
+                    ? InkWell(
+                        onTap: () {
+                          showDialog(
+                            context: context,
+                            builder: (context) {
+                              return Dialog(
+                                child: CMaker(
+                                    height: 700,
+                                    color: Colors.white,
+                                    circularRadius: 20,
+                                    child: ListView(
+                                      children: [
+                                        const Padding(
+                                            padding: EdgeInsets.only(top: 20)),
+                                        CMaker(
+                                          width: double.infinity,
+                                          alignment: Alignment.center,
+                                          child: DropdownButton<String>(
+                                            items:
+                                                SubjectsMaker(TeacherSubject1),
+                                            value: TeacherSubject1,
+                                            onChanged: (s1) {
+                                              TeacherSubject1 = s1!.toString();
+                                            },
+                                          ),
+                                        ),
+                                        CMaker(
+                                          height: 600,
+                                                child: ListView.builder(
+                                                  itemCount: 20,
+                                          itemBuilder: (context, index) {
+                                            return Row(
+                                              children: [
+                                                Expanded(
+                                                  child: CMaker(
+                                                    margin: EdgeInsets.only(right: 7,left: 20,bottom: 20),
+                                                    circularRadius: 15,
+                                                    color:const Color.fromARGB(255, 233, 255, 247),
+                                                    padding: EdgeInsets.symmetric(
+                                                        vertical: 10, horizontal: 15),
+                                                    child: Row(
+                                                      children: [
+                                                        Expanded(
+                                                          child: TMaker(
+                                                              text: "hi",
+                                                              fontSize: 20,
+                                                              fontWeight: FontWeight.w400,
+                                                              color: Colors.black),
+                                                        ),
+                                                        Checkbox(value: true, onChanged: (newValue){})
+                                                      ],
+                                                    ),
+                                                  ),
+                                                ),
+                                                Expanded(
+                                                  child: CMaker(
+                                                    margin: EdgeInsets.only(right: 20,left: 7,bottom: 20),
+                                                    circularRadius: 15,
+                                                    color:const Color.fromARGB(255, 233, 255, 247),
+                                                    padding: EdgeInsets.symmetric(
+                                                        vertical: 10, horizontal: 15),
+                                                    child: Row(
+                                                      children: [
+                                                        Expanded(
+                                                          child: TMaker(
+                                                              text: "hi",
+                                                              fontSize: 20,
+                                                              fontWeight: FontWeight.w400,
+                                                              color: Colors.black),
+                                                        ),
+                                                        Checkbox(
+                                                          value: true, onChanged: (newValue){
+                                                        }),
+                                                        ])
+                                                  ),
+                                                ),
+                                              ],
+                                            );
+                                          },
+                                        ))
+                                      ],
+                                    )),
+                              );
+                            },
+                          );
+                        },
+                        child: CMaker(
+                          margin:
+                              EdgeInsets.only(bottom: 20, right: 20, left: 20),
+                          boxShadow: const [
+                            BoxShadow(
+                                offset: Offset(1, 1),
+                                blurRadius: 6,
+                                spreadRadius: .03,
+                                color: Color.fromARGB(58, 0, 0, 0)),
+                          ],
+                          circularRadius: 20,
+                          color: const Color.fromARGB(255, 233, 255, 247),
+                          width: double.infinity,
+                          child: Row(
+                            children: [
+                              Expanded(child: Container()),
+                              CMaker(
+                                  padding: EdgeInsets.only(right: 10),
+                                  child: TMaker(
+                                      text: () {
+                                        String out = '';
+                                        for (var i in Teachers[TeacherSelected]
+                                            [6]) {
+                                          if (i == "null") continue;
+                                          print("1# i $i");
+                                          out = out + "${i[0]}";
+                                          for (var j
+                                              in (i as List).sublist(1)) {
+                                            out = out + "\n -$j";
+                                          }
+                                          out = out + "\n";
+                                        }
+                                        print("1# out $out");
+                                        return out;
+                                      }(),
+                                      fontSize: (PageWidth(context) < 550)
+                                          ? 20
+                                          : (PageHeight(context) < 900)
+                                              ? 40
+                                              : 40,
+                                      fontWeight: FontWeight.w600,
+                                      color:
+                                          const Color.fromARGB(255, 0, 0, 0))),
+                              Expanded(child: Container()),
+                            ],
+                          ),
+                        ),
+                      )
+                    : Container(
+                        height: 0,
+                        width: 0,
+                      ),
                 CMaker(
                   width: double.infinity,
                   alignment: Alignment.center,
@@ -379,7 +501,9 @@ class _AdminSocendPageContenetsState extends State<AdminSocendPageContenets> {
                           }(),
                           onChanged: (bool newValue) async {
                             await dbService.FiChange_state(
-                                'Teacher', Teachers[TeacherSelected][5],stringToBool(Teachers[TeacherSelected][4]));
+                                'Teacher',
+                                Teachers[TeacherSelected][5],
+                                stringToBool(Teachers[TeacherSelected][4]));
                             setState(() {
                               Teacher_data();
                               // TeacherState = newValue;

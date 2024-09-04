@@ -26,11 +26,6 @@ class StudentMainPage extends StatefulWidget {
   State<StudentMainPage> createState() => _StudentMainPageState();
 }
 
-bool stringToBool(String value) {
-  print("stringToBool ${value} ${value.toLowerCase() == 'true'}");
-  return value.toLowerCase() == 'true';
-}
-
 bool AccountActivation = true;
 int PageIndex = 0;
 
@@ -109,7 +104,6 @@ class _StudentMainPageState extends State<StudentMainPage> {
     print("add done");
     print(HomeWorks[HomeWorkIndex][0]);
     log("#HomeWorks ${HomeWorks}");
-    setState(() {});
   }
 
   Future<void> fetch() async {
@@ -132,7 +126,6 @@ class _StudentMainPageState extends State<StudentMainPage> {
     profile_data = await dbService.FiGet_profile_data(student_id, "${role}s")
         as Map<String, dynamic>;
     await regetmessages();
-    AccountActivation = stringToBool(profile_data['state']);
     setState(() {
       isLoading = false;
     });
@@ -525,17 +518,7 @@ class _StudentMainPageState extends State<StudentMainPage> {
             ]),
         body: (AccountActivation)
             ? Pages.elementAt(PageIndex)
-            : LiquidPullToRefresh(
-                  showChildOpacityTransition: false,
-                  backgroundColor: Color.fromARGB(255, 74, 193, 241),
-                  color: const Color.fromARGB(255, 233, 255, 247),
-                  onRefresh: () async {
-                    await Future.delayed(Duration(milliseconds: 500));
-                    setState(() {
-                      fetch();
-                    });
-                  },
-                  child: Stack(
+            : Stack(
                 children: [
                   Opacity(
                     opacity: .4,
@@ -590,7 +573,7 @@ class _StudentMainPageState extends State<StudentMainPage> {
                         ),
                       )),
                 ],
-              )),
+              ),
       );
     } else if (PageWidth(context) >= 550 && PageHeight(context) < 900) {
       StudentMainPageBody = Scaffold(
@@ -634,17 +617,7 @@ class _StudentMainPageState extends State<StudentMainPage> {
             ),
             (AccountActivation)
                 ? Pages.elementAt(PageIndex)
-                : LiquidPullToRefresh(
-                  showChildOpacityTransition: false,
-                  backgroundColor: Color.fromARGB(255, 74, 193, 241),
-                  color: const Color.fromARGB(255, 233, 255, 247),
-                  onRefresh: () async {
-                    await Future.delayed(Duration(milliseconds: 500));
-                    setState(() {
-                      fetch();
-                    });
-                  },
-                  child: Stack(
+                : Stack(
                     children: [
                       Opacity(
                         opacity: .4,
@@ -700,7 +673,7 @@ class _StudentMainPageState extends State<StudentMainPage> {
                             ),
                           )),
                     ],
-                  ),)
+                  ),
           ],
         ),
       );
@@ -737,17 +710,7 @@ class _StudentMainPageState extends State<StudentMainPage> {
             ]),
         body: (AccountActivation)
             ? Pages.elementAt(PageIndex)
-            : LiquidPullToRefresh(
-                  showChildOpacityTransition: false,
-                  backgroundColor: Color.fromARGB(255, 74, 193, 241),
-                  color: const Color.fromARGB(255, 233, 255, 247),
-                  onRefresh: () async {
-                    await Future.delayed(Duration(milliseconds: 500));
-                    setState(() {
-                      fetch();
-                    });
-                  },
-                  child: Stack(
+            : Stack(
                 children: [
                   Opacity(
                     opacity: .4,
@@ -803,7 +766,7 @@ class _StudentMainPageState extends State<StudentMainPage> {
                       )),
                 ],
               ),
-      ));
+      );
     }
     SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersiveSticky);
     if (ConnectedToInternet) {
@@ -830,17 +793,7 @@ class _StudentMainPageState extends State<StudentMainPage> {
     } else {
       return Scaffold(
         backgroundColor: const Color.fromARGB(255, 233, 255, 247),
-        body: LiquidPullToRefresh(
-                  showChildOpacityTransition: false,
-                  backgroundColor: Color.fromARGB(255, 74, 193, 241),
-                  color: const Color.fromARGB(255, 233, 255, 247),
-                  onRefresh: () async {
-                    await Future.delayed(Duration(milliseconds: 500));
-                    setState(() {
-                      fetch();
-                    });
-                  },
-                  child: Center(
+        body: Center(
             child: CMaker(
                 height: 150,
                 width: 270,
@@ -859,7 +812,7 @@ class _StudentMainPageState extends State<StudentMainPage> {
                     fontSize: 20,
                     fontWeight: FontWeight.w700,
                     color: Colors.black))),
-      ));
+      );
     }
   }
 }
