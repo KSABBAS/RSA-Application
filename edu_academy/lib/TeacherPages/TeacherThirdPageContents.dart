@@ -2263,25 +2263,6 @@ class _TeacherThirdPageContentsState extends State<TeacherThirdPageContents> {
                         const Padding(padding: EdgeInsets.only(top: 20)),
                         HomeworkImages,
                         const Padding(padding: EdgeInsets.only(top: 20)),
-                      ],
-                    )),
-                const Padding(padding: EdgeInsets.only(top: 20)),
-                CMaker(
-                    boxShadow: const [
-                      BoxShadow(
-                          offset: Offset(1, 1),
-                          blurRadius: 6,
-                          spreadRadius: .03,
-                          color: Color.fromARGB(58, 0, 0, 0)),
-                    ],
-                    circularRadius: 15,
-                    margin: EdgeInsets.symmetric(horizontal: 20),
-                    height: 450,
-                    color: Colors.white,
-                    width: double.infinity,
-                    child: ListView(
-                      children: [
-                        const Padding(padding: EdgeInsets.only(top: 20)),
                         TMaker(
                             text: "Student's Answer",
                             fontSize: (PageWidth(context) < 550)
