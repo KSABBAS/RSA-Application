@@ -351,7 +351,168 @@ class _AdminSocendPageContenetsState extends State<AdminSocendPageContenets> {
                                         CMaker(
                                           height: 600,
                                                 child: ListView.builder(
-                                                  itemCount: 20,
+                                                  itemCount:GradesSubjects.keys.length-((GradesSubjects.keys.length/2).floor()),
+                                          itemBuilder: (context, index) {
+                                            bool SelectedCheckBoxGrade=false;
+                                            return Row(
+                                              children: [
+                                                Expanded(
+                                                  child: InkWell(
+
+                                                    child: CMaker(
+                                                      margin: EdgeInsets.only(right: 7,left: 20,bottom: 20),
+                                                      circularRadius: 15,
+                                                      color:const Color.fromARGB(255, 233, 255, 247),
+                                                      padding: EdgeInsets.symmetric(
+                                                          vertical: 10, horizontal: 15),
+                                                      child: Row(
+                                                        children: [
+                                                          Expanded(
+                                                            child: TMaker(
+                                                                text: "${GradesSubjects.keys.elementAt
+                                                                  (index*2)
+                                                                  }",
+                                                                fontSize: 20,
+                                                                fontWeight: FontWeight.w400,
+                                                                color: Colors.black),
+                                                          ),
+                                                          Checkbox(value: (){
+                                                            for(int i=1;i<Teachers[TeacherSelected][6][0].length;i++){
+                                                              if(int.parse(Teachers[TeacherSelected][6][0][i].split(" ")[1])==(index*2)+1){
+                                                                return true;
+                                                              }
+                                                            }
+                                                            return false;
+                                                          }(), onChanged: (newValue){})
+                                                        ],
+                                                      ),
+                                                    ),
+                                                  ),
+                                                ),
+                                                (GradesSubjects.keys.length.isEven)?Expanded(
+                                                  child: CMaker(
+                                                    margin: EdgeInsets.only(right: 20,left: 7,bottom: 20),
+                                                    circularRadius: 15,
+                                                    color:const Color.fromARGB(255, 233, 255, 247),
+                                                    padding: EdgeInsets.symmetric(
+                                                        vertical: 10, horizontal: 15),
+                                                    child: Row(
+                                                      children: [
+                                                        Expanded(
+                                                          child: TMaker(
+                                                              text: "${GradesSubjects.keys.elementAt
+                                                                ((index*2)+1)
+                                                                }",
+                                                              fontSize: 20,
+                                                              fontWeight: FontWeight.w400,
+                                                              color: Colors.black),
+                                                        ),
+                                                        Checkbox(
+                                                          value:(){
+                                                            for(int i=1;i<Teachers[TeacherSelected][6][0].length;i++){
+                                                              if(int.parse(Teachers[TeacherSelected][6][0][i].split(" ")[1])==(index*2)+2){
+                                                                return true;
+                                                              }
+                                                            }
+                                                            return false;
+                                                          }(), onChanged: (newValue){
+                                                        }),
+                                                        ])
+                                                  ),
+                                                ):Expanded(child: Container()),
+                                              ],
+                                            );
+                                          },
+                                        ))
+                                      ],
+                                    )),
+                              );
+                            },
+                          );
+                        },
+                        child: CMaker(
+                          margin:
+                              EdgeInsets.only(bottom: 20, right: 20, left: 20),
+                          boxShadow: const [
+                            BoxShadow(
+                                offset: Offset(1, 1),
+                                blurRadius: 6,
+                                spreadRadius: .03,
+                                color: Color.fromARGB(58, 0, 0, 0)),
+                          ],
+                          circularRadius: 20,
+                          color: const Color.fromARGB(255, 233, 255, 247),
+                          width: double.infinity,
+                          child: Row(
+                            children: [
+                              Expanded(child: Container()),
+                              CMaker(
+                                  padding: EdgeInsets.only(right: 10),
+                                  child: TMaker(
+                                      text: () {
+                                        String out = '';
+                                        for (var i in Teachers[TeacherSelected]
+                                            [6]) {
+                                          if (i == "null") continue;
+                                          print("1# i $i");
+                                          out = out + "${i[0]}";
+                                          for (var j
+                                              in (i as List).sublist(1)) {
+                                            out = out + "\n -$j";
+                                          }
+                                          out = out + "\n";
+                                        }
+                                        print("1# out $out");
+                                        return out;
+                                      }(),
+                                      fontSize: (PageWidth(context) < 550)
+                                          ? 20
+                                          : (PageHeight(context) < 900)
+                                              ? 40
+                                              : 40,
+                                      fontWeight: FontWeight.w600,
+                                      color:
+                                          const Color.fromARGB(255, 0, 0, 0))),
+                              Expanded(child: Container()),
+                            ],
+                          ),
+                        ),
+                      )
+                    : Container(
+                        height: 0,
+                        width: 0,
+                      ),
+                (Teachers[TeacherSelected][6][1] != "null")
+                    ? InkWell(
+                        onTap: () {
+                          showDialog(
+                            context: context,
+                            builder: (context) {
+                              return Dialog(
+                                child: CMaker(
+                                    height: 700,
+                                    color: Colors.white,
+                                    circularRadius: 20,
+                                    child: ListView(
+                                      children: [
+                                        const Padding(
+                                            padding: EdgeInsets.only(top: 20)),
+                                        CMaker(
+                                          width: double.infinity,
+                                          alignment: Alignment.center,
+                                          child: DropdownButton<String>(
+                                            items:
+                                                SubjectsMaker(TeacherSubject2),
+                                            value: TeacherSubject2,
+                                            onChanged: (s2) {
+                                              TeacherSubject2 = s2!.toString();
+                                            },
+                                          ),
+                                        ),
+                                        CMaker(
+                                          height: 600,
+                                                child: ListView.builder(
+                                                  itemCount:GradesSubjects.keys.length-((GradesSubjects.keys.length/2).floor()),
                                           itemBuilder: (context, index) {
                                             return Row(
                                               children: [
@@ -366,7 +527,9 @@ class _AdminSocendPageContenetsState extends State<AdminSocendPageContenets> {
                                                       children: [
                                                         Expanded(
                                                           child: TMaker(
-                                                              text: "hi",
+                                                              text: "${GradesSubjects.keys.elementAt
+                                                                (index*2)
+                                                                }",
                                                               fontSize: 20,
                                                               fontWeight: FontWeight.w400,
                                                               color: Colors.black),
@@ -376,7 +539,7 @@ class _AdminSocendPageContenetsState extends State<AdminSocendPageContenets> {
                                                     ),
                                                   ),
                                                 ),
-                                                Expanded(
+                                                (GradesSubjects.keys.length.isEven)?Expanded(
                                                   child: CMaker(
                                                     margin: EdgeInsets.only(right: 20,left: 7,bottom: 20),
                                                     circularRadius: 15,
@@ -387,7 +550,9 @@ class _AdminSocendPageContenetsState extends State<AdminSocendPageContenets> {
                                                       children: [
                                                         Expanded(
                                                           child: TMaker(
-                                                              text: "hi",
+                                                              text: "${GradesSubjects.keys.elementAt
+                                                                ((index*2)+1)
+                                                                }",
                                                               fontSize: 20,
                                                               fontWeight: FontWeight.w400,
                                                               color: Colors.black),
@@ -397,7 +562,150 @@ class _AdminSocendPageContenetsState extends State<AdminSocendPageContenets> {
                                                         }),
                                                         ])
                                                   ),
+                                                ):Expanded(child: Container()),
+                                              ],
+                                            );
+                                          },
+                                        ))
+                                      ],
+                                    )),
+                              );
+                            },
+                          );
+                        },
+                        child: CMaker(
+                          margin:
+                              EdgeInsets.only(bottom: 20, right: 20, left: 20),
+                          boxShadow: const [
+                            BoxShadow(
+                                offset: Offset(1, 1),
+                                blurRadius: 6,
+                                spreadRadius: .03,
+                                color: Color.fromARGB(58, 0, 0, 0)),
+                          ],
+                          circularRadius: 20,
+                          color: const Color.fromARGB(255, 233, 255, 247),
+                          width: double.infinity,
+                          child: Row(
+                            children: [
+                              Expanded(child: Container()),
+                              CMaker(
+                                  padding: EdgeInsets.only(right: 10),
+                                  child: TMaker(
+                                      text: () {
+                                        String out = '';
+                                        for (var i in Teachers[TeacherSelected]
+                                            [6]) {
+                                          if (i == "null") continue;
+                                          print("1# i $i");
+                                          out = out + "${i[0]}";
+                                          for (var j
+                                              in (i as List).sublist(1)) {
+                                            out = out + "\n -$j";
+                                          }
+                                          out = out + "\n";
+                                        }
+                                        print("1# out $out");
+                                        return out;
+                                      }(),
+                                      fontSize: (PageWidth(context) < 550)
+                                          ? 20
+                                          : (PageHeight(context) < 900)
+                                              ? 40
+                                              : 40,
+                                      fontWeight: FontWeight.w600,
+                                      color:
+                                          const Color.fromARGB(255, 0, 0, 0))),
+                              Expanded(child: Container()),
+                            ],
+                          ),
+                        ),
+                      )
+                    : Container(
+                        height: 0,
+                        width: 0,
+                      ),
+                (Teachers[TeacherSelected][6][2] != "null")
+                    ? InkWell(
+                        onTap: () {
+                          showDialog(
+                            context: context,
+                            builder: (context) {
+                              return Dialog(
+                                child: CMaker(
+                                    height: 700,
+                                    color: Colors.white,
+                                    circularRadius: 20,
+                                    child: ListView(
+                                      children: [
+                                        const Padding(
+                                            padding: EdgeInsets.only(top: 20)),
+                                        CMaker(
+                                          width: double.infinity,
+                                          alignment: Alignment.center,
+                                          child: DropdownButton<String>(
+                                            items:
+                                                SubjectsMaker(TeacherSubject3),
+                                            value: TeacherSubject3,
+                                            onChanged: (s3) {
+                                              TeacherSubject3 = s3!.toString();
+                                            },
+                                          ),
+                                        ),
+                                        CMaker(
+                                          height: 600,
+                                                child: ListView.builder(
+                                                  itemCount:GradesSubjects.keys.length-((GradesSubjects.keys.length/2).floor()),
+                                          itemBuilder: (context, index) {
+                                            return Row(
+                                              children: [
+                                                Expanded(
+                                                  child: CMaker(
+                                                    margin: EdgeInsets.only(right: 7,left: 20,bottom: 20),
+                                                    circularRadius: 15,
+                                                    color:const Color.fromARGB(255, 233, 255, 247),
+                                                    padding: EdgeInsets.symmetric(
+                                                        vertical: 10, horizontal: 15),
+                                                    child: Row(
+                                                      children: [
+                                                        Expanded(
+                                                          child: TMaker(
+                                                              text: "${GradesSubjects.keys.elementAt
+                                                                (index*2)
+                                                                }",
+                                                              fontSize: 20,
+                                                              fontWeight: FontWeight.w400,
+                                                              color: Colors.black),
+                                                        ),
+                                                        Checkbox(value: true, onChanged: (newValue){})
+                                                      ],
+                                                    ),
+                                                  ),
                                                 ),
+                                                (GradesSubjects.keys.length.isEven)?Expanded(
+                                                  child: CMaker(
+                                                    margin: EdgeInsets.only(right: 20,left: 7,bottom: 20),
+                                                    circularRadius: 15,
+                                                    color:const Color.fromARGB(255, 233, 255, 247),
+                                                    padding: EdgeInsets.symmetric(
+                                                        vertical: 10, horizontal: 15),
+                                                    child: Row(
+                                                      children: [
+                                                        Expanded(
+                                                          child: TMaker(
+                                                              text: "${GradesSubjects.keys.elementAt
+                                                                ((index*2)+1)
+                                                                }",
+                                                              fontSize: 20,
+                                                              fontWeight: FontWeight.w400,
+                                                              color: Colors.black),
+                                                        ),
+                                                        Checkbox(
+                                                          value: true, onChanged: (newValue){
+                                                        }),
+                                                        ])
+                                                  ),
+                                                ):Expanded(child: Container()),
                                               ],
                                             );
                                           },

@@ -1,6 +1,4 @@
-// import 'dart:convert';
 import 'dart:developer';
-
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:edu_academy/StudentPages/FirstPageContents.dart';
 import 'package:edu_academy/StudentPages/Notifications.dart';
@@ -11,7 +9,6 @@ import 'package:edu_academy/MyTools.dart';
 import 'package:edu_academy/service/Databse_Service.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:internet_connection_checker_plus/internet_connection_checker_plus.dart';
 import 'package:shared_preferences/shared_preferences.dart';
