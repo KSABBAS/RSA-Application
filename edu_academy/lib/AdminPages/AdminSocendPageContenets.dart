@@ -853,6 +853,7 @@ class _ChangeSubjectsAndGradesState extends State<ChangeSubjectsAndGrades> {
                           );
                         },
                       )),
+                      Padding(padding:EdgeInsets.only(bottom: 150)),
                 ],
               )),
         Positioned(bottom: 60,right: (PageWidth(context)-300)/2,child: CMaker(width: 300,child: Row(children: [
