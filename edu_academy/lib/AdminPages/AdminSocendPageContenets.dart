@@ -815,7 +815,7 @@ class _ChangeSubjectsAndGradesState extends State<ChangeSubjectsAndGrades> {
                                 vertical: 10, horizontal: 15),
                             child: CheckboxListTile(
                                 title: Text(
-                                    "${GradesSubjects.keys.elementAt(index * 2)}"),
+                                    "${GradesSubjects.keys.elementAt((index * 2)+1)}"),
                                 value: check
                                 // () {
                                             //   for (int i = 1;
