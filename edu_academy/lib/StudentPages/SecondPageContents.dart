@@ -181,8 +181,9 @@ List<List> Subjects = [
   ["images/SubjectsIcons/هندسة.png", "هندسة"],
   ["images/SubjectsIcons/اكتشف.png", "اكتشف"],
   ["images/SubjectsIcons/عربي.png", "عربي"],
+  ["images/SubjectsIcons/الجغرافيا.png", "دراسات"],
 ];
-
+//22
 Map<String, dynamic> GradesSubjects = {
   'Grade 1': [30, 7, 14, 29],
   'Grade 2': [30, 7, 14, 29],
@@ -190,6 +191,7 @@ Map<String, dynamic> GradesSubjects = {
   'Grade 4': [30, 20, 8, 26, 17, 7, 14],
   'Grade 5': [30, 20, 8, 26, 17, 7, 14],
   'Grade 6': [30, 20, 8, 26, 17, 7, 14],
+  'Grade 7': [30, 12, 20, 8, 31, 5, 14],
 };
 
 bool anySubjectSelected = false;

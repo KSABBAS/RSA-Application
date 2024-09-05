@@ -11,8 +11,7 @@ class AdminSocendPageContenets extends StatefulWidget {
   AdminSocendPageContenets({super.key, required this.AdminName});
   String AdminName;
   @override
-  State<AdminSocendPageContenets> createState() =>
-      _AdminSocendPageContenetsState();
+  State<AdminSocendPageContenets> createState() => _AdminSocendPageContenetsState();
 }
 
 bool stringToBool(String value) {
@@ -26,6 +25,7 @@ int TeacherSelected = 0;
 String TeacherSubject1 = "null";
 String TeacherSubject2 = "null";
 String TeacherSubject3 = "null";
+Map<String, bool> sub = {};
 
 class _AdminSocendPageContenetsState extends State<AdminSocendPageContenets> {
   final dbService = DatabaseService();
@@ -88,9 +88,7 @@ class _AdminSocendPageContenetsState extends State<AdminSocendPageContenets> {
       child: Container(
         width: 70,
         padding: const EdgeInsets.only(top: 10),
-        decoration: BoxDecoration(
-            color: const Color.fromARGB(255, 255, 255, 255),
-            borderRadius: BorderRadius.circular(10)),
+        decoration: BoxDecoration(color: const Color.fromARGB(255, 255, 255, 255), borderRadius: BorderRadius.circular(10)),
         height: 50,
         child: const Icon(Icons.logout),
       ),
@@ -103,16 +101,10 @@ class _AdminSocendPageContenetsState extends State<AdminSocendPageContenets> {
               width: double.infinity,
               decoration: const BoxDecoration(
                   boxShadow: [
-                    BoxShadow(
-                        offset: Offset(1, 1),
-                        blurRadius: 6,
-                        spreadRadius: .03,
-                        color: Color.fromARGB(82, 0, 0, 0)),
+                    BoxShadow(offset: Offset(1, 1), blurRadius: 6, spreadRadius: .03, color: Color.fromARGB(82, 0, 0, 0)),
                   ],
                   color: Color.fromARGB(255, 255, 255, 255),
-                  borderRadius: BorderRadius.only(
-                      bottomLeft: Radius.circular(20),
-                      bottomRight: Radius.circular(20))),
+                  borderRadius: BorderRadius.only(bottomLeft: Radius.circular(20), bottomRight: Radius.circular(20))),
               height: 80,
               child: Row(
                 children: [
@@ -136,17 +128,9 @@ class _AdminSocendPageContenetsState extends State<AdminSocendPageContenets> {
                           TeacherOpend = false;
                         });
                       },
-                      child: CMaker(
-                          height: 50,
-                          width: 50,
-                          circularRadius: 50,
-                          child: Icon(Icons.arrow_back))),
+                      child: CMaker(height: 50, width: 50, circularRadius: 50, child: Icon(Icons.arrow_back))),
                   Expanded(child: Container()),
-                  TMaker(
-                      text: "Informations",
-                      fontSize: 30,
-                      fontWeight: FontWeight.w700,
-                      color: Colors.black),
+                  TMaker(text: "Informations", fontSize: 30, fontWeight: FontWeight.w700, color: Colors.black),
                   Expanded(child: Container()),
                 ],
               )),
@@ -158,11 +142,7 @@ class _AdminSocendPageContenetsState extends State<AdminSocendPageContenets> {
             color: Colors.white,
             circularRadius: 20,
             boxShadow: const [
-              BoxShadow(
-                  offset: Offset(1, 1),
-                  blurRadius: 6,
-                  spreadRadius: .03,
-                  color: Color.fromARGB(82, 0, 0, 0)),
+              BoxShadow(offset: Offset(1, 1), blurRadius: 6, spreadRadius: .03, color: Color.fromARGB(82, 0, 0, 0)),
             ],
             child: ListView(
               children: [
@@ -170,20 +150,14 @@ class _AdminSocendPageContenetsState extends State<AdminSocendPageContenets> {
                 CMaker(
                   height: 130,
                   width: 130,
-                  child: CircleAvatar(
-                      backgroundImage:
-                          NetworkImage(Teachers[TeacherSelected][0])),
+                  child: CircleAvatar(backgroundImage: NetworkImage(Teachers[TeacherSelected][0])),
                 ),
                 const Padding(padding: EdgeInsets.only(top: 20)),
                 CMaker(
                   width: double.infinity,
                   alignment: Alignment.center,
                   margin: EdgeInsets.symmetric(horizontal: 20),
-                  child: TMaker(
-                      text: Teachers[TeacherSelected][1],
-                      fontSize: 30,
-                      fontWeight: FontWeight.w700,
-                      color: Colors.black),
+                  child: TMaker(text: Teachers[TeacherSelected][1], fontSize: 30, fontWeight: FontWeight.w700, color: Colors.black),
                 ),
                 const Padding(padding: EdgeInsets.only(top: 20)),
                 CMaker(
@@ -194,11 +168,7 @@ class _AdminSocendPageContenetsState extends State<AdminSocendPageContenets> {
                           ? 80
                           : 80,
                   boxShadow: const [
-                    BoxShadow(
-                        offset: Offset(1, 1),
-                        blurRadius: 6,
-                        spreadRadius: .03,
-                        color: Color.fromARGB(58, 0, 0, 0)),
+                    BoxShadow(offset: Offset(1, 1), blurRadius: 6, spreadRadius: .03, color: Color.fromARGB(58, 0, 0, 0)),
                   ],
                   circularRadius: 20,
                   color: const Color.fromARGB(255, 233, 255, 247),
@@ -230,11 +200,7 @@ class _AdminSocendPageContenetsState extends State<AdminSocendPageContenets> {
                           ? 80
                           : 80,
                   boxShadow: const [
-                    BoxShadow(
-                        offset: Offset(1, 1),
-                        blurRadius: 6,
-                        spreadRadius: .03,
-                        color: Color.fromARGB(58, 0, 0, 0)),
+                    BoxShadow(offset: Offset(1, 1), blurRadius: 6, spreadRadius: .03, color: Color.fromARGB(58, 0, 0, 0)),
                   ],
                   circularRadius: 20,
                   color: const Color.fromARGB(255, 233, 255, 247),
@@ -266,11 +232,7 @@ class _AdminSocendPageContenetsState extends State<AdminSocendPageContenets> {
                           ? 80
                           : 80,
                   boxShadow: const [
-                    BoxShadow(
-                        offset: Offset(1, 1),
-                        blurRadius: 6,
-                        spreadRadius: .03,
-                        color: Color.fromARGB(58, 0, 0, 0)),
+                    BoxShadow(offset: Offset(1, 1), blurRadius: 6, spreadRadius: .03, color: Color.fromARGB(58, 0, 0, 0)),
                   ],
                   circularRadius: 20,
                   color: const Color.fromARGB(255, 233, 255, 247),
@@ -297,19 +259,12 @@ class _AdminSocendPageContenetsState extends State<AdminSocendPageContenets> {
                 (Teachers[TeacherSelected][6][0] != "null")
                     ? InkWell(
                         onTap: () {
-                          Get.to(() => ChangeSubjectsAndGrades(
-                              TeacherSelected: TeacherSelected,
-                              TeacherSubject: TeacherSubject1));
+                          Get.to(() => ChangeSubjectsAndGrades(TeacherSelected: TeacherSelected, TeacherSubject: TeacherSubject1, List_index: 0));
                         },
                         child: CMaker(
-                          margin:
-                              EdgeInsets.only(bottom: 20, right: 20, left: 20),
+                          margin: EdgeInsets.only(bottom: 20, right: 20, left: 20),
                           boxShadow: const [
-                            BoxShadow(
-                                offset: Offset(1, 1),
-                                blurRadius: 6,
-                                spreadRadius: .03,
-                                color: Color.fromARGB(58, 0, 0, 0)),
+                            BoxShadow(offset: Offset(1, 1), blurRadius: 6, spreadRadius: .03, color: Color.fromARGB(58, 0, 0, 0)),
                           ],
                           circularRadius: 20,
                           color: const Color.fromARGB(255, 233, 255, 247),
@@ -321,19 +276,10 @@ class _AdminSocendPageContenetsState extends State<AdminSocendPageContenets> {
                                   padding: EdgeInsets.only(right: 10),
                                   child: TMaker(
                                       text: () {
-                                        String out = '';
-                                        for (var i in Teachers[TeacherSelected]
-                                            [6]) {
-                                          if (i == "null") continue;
-                                          print("1# i $i");
-                                          out = out + "${i[0]}";
-                                          for (var j
-                                              in (i as List).sublist(1)) {
-                                            out = out + "\n -$j";
-                                          }
-                                          out = out + "\n";
+                                        String out = "${Teachers[TeacherSelected][6][0][0]}";
+                                        for (var i in (Teachers[TeacherSelected][6][0] as List).sublist(1)) {
+                                          out = out + "\n\t -$i";
                                         }
-                                        print("1# out $out");
                                         return out;
                                       }(),
                                       fontSize: (PageWidth(context) < 550)
@@ -342,8 +288,7 @@ class _AdminSocendPageContenetsState extends State<AdminSocendPageContenets> {
                                               ? 40
                                               : 40,
                                       fontWeight: FontWeight.w600,
-                                      color:
-                                          const Color.fromARGB(255, 0, 0, 0))),
+                                      color: const Color.fromARGB(255, 0, 0, 0))),
                               Expanded(child: Container()),
                             ],
                           ),
@@ -356,19 +301,12 @@ class _AdminSocendPageContenetsState extends State<AdminSocendPageContenets> {
                 (Teachers[TeacherSelected][6][1] != "null")
                     ? InkWell(
                         onTap: () {
-                          Get.to(() => ChangeSubjectsAndGrades(
-                              TeacherSelected: TeacherSelected,
-                              TeacherSubject: TeacherSubject2));
+                          Get.to(() => ChangeSubjectsAndGrades(TeacherSelected: TeacherSelected, TeacherSubject: TeacherSubject2, List_index: 1));
                         },
                         child: CMaker(
-                          margin:
-                              EdgeInsets.only(bottom: 20, right: 20, left: 20),
+                          margin: EdgeInsets.only(bottom: 20, right: 20, left: 20),
                           boxShadow: const [
-                            BoxShadow(
-                                offset: Offset(1, 1),
-                                blurRadius: 6,
-                                spreadRadius: .03,
-                                color: Color.fromARGB(58, 0, 0, 0)),
+                            BoxShadow(offset: Offset(1, 1), blurRadius: 6, spreadRadius: .03, color: Color.fromARGB(58, 0, 0, 0)),
                           ],
                           circularRadius: 20,
                           color: const Color.fromARGB(255, 233, 255, 247),
@@ -380,19 +318,10 @@ class _AdminSocendPageContenetsState extends State<AdminSocendPageContenets> {
                                   padding: EdgeInsets.only(right: 10),
                                   child: TMaker(
                                       text: () {
-                                        String out = '';
-                                        for (var i in Teachers[TeacherSelected]
-                                            [6]) {
-                                          if (i == "null") continue;
-                                          print("1# i $i");
-                                          out = out + "${i[0]}";
-                                          for (var j
-                                              in (i as List).sublist(1)) {
-                                            out = out + "\n -$j";
-                                          }
-                                          out = out + "\n";
+                                        String out = "${Teachers[TeacherSelected][6][1][0]}";
+                                        for (var i in (Teachers[TeacherSelected][6][1] as List).sublist(1)) {
+                                          out = out + "\n\t -$i";
                                         }
-                                        print("1# out $out");
                                         return out;
                                       }(),
                                       fontSize: (PageWidth(context) < 550)
@@ -401,8 +330,7 @@ class _AdminSocendPageContenetsState extends State<AdminSocendPageContenets> {
                                               ? 40
                                               : 40,
                                       fontWeight: FontWeight.w600,
-                                      color:
-                                          const Color.fromARGB(255, 0, 0, 0))),
+                                      color: const Color.fromARGB(255, 0, 0, 0))),
                               Expanded(child: Container()),
                             ],
                           ),
@@ -415,19 +343,12 @@ class _AdminSocendPageContenetsState extends State<AdminSocendPageContenets> {
                 (Teachers[TeacherSelected][6][2] != "null")
                     ? InkWell(
                         onTap: () {
-                          Get.to(() => ChangeSubjectsAndGrades(
-                              TeacherSelected: TeacherSelected,
-                              TeacherSubject: TeacherSubject3));
+                          Get.to(() => ChangeSubjectsAndGrades(TeacherSelected: TeacherSelected, TeacherSubject: TeacherSubject3, List_index: 2));
                         },
                         child: CMaker(
-                          margin:
-                              EdgeInsets.only(bottom: 20, right: 20, left: 20),
+                          margin: EdgeInsets.only(bottom: 20, right: 20, left: 20),
                           boxShadow: const [
-                            BoxShadow(
-                                offset: Offset(1, 1),
-                                blurRadius: 6,
-                                spreadRadius: .03,
-                                color: Color.fromARGB(58, 0, 0, 0)),
+                            BoxShadow(offset: Offset(1, 1), blurRadius: 6, spreadRadius: .03, color: Color.fromARGB(58, 0, 0, 0)),
                           ],
                           circularRadius: 20,
                           color: const Color.fromARGB(255, 233, 255, 247),
@@ -439,19 +360,10 @@ class _AdminSocendPageContenetsState extends State<AdminSocendPageContenets> {
                                   padding: EdgeInsets.only(right: 10),
                                   child: TMaker(
                                       text: () {
-                                        String out = '';
-                                        for (var i in Teachers[TeacherSelected]
-                                            [6]) {
-                                          if (i == "null") continue;
-                                          print("1# i $i");
-                                          out = out + "${i[0]}";
-                                          for (var j
-                                              in (i as List).sublist(1)) {
-                                            out = out + "\n -$j";
-                                          }
-                                          out = out + "\n";
+                                        String out = "${Teachers[TeacherSelected][6][0][0]}";
+                                        for (var i in (Teachers[TeacherSelected][6][0] as List).sublist(1)) {
+                                          out = out + "\n\t -$i";
                                         }
-                                        print("1# out $out");
                                         return out;
                                       }(),
                                       fontSize: (PageWidth(context) < 550)
@@ -460,8 +372,7 @@ class _AdminSocendPageContenetsState extends State<AdminSocendPageContenets> {
                                               ? 40
                                               : 40,
                                       fontWeight: FontWeight.w600,
-                                      color:
-                                          const Color.fromARGB(255, 0, 0, 0))),
+                                      color: const Color.fromARGB(255, 0, 0, 0))),
                               Expanded(child: Container()),
                             ],
                           ),
@@ -482,11 +393,7 @@ class _AdminSocendPageContenetsState extends State<AdminSocendPageContenets> {
                             ? 80
                             : 80,
                     boxShadow: const [
-                      BoxShadow(
-                          offset: Offset(1, 1),
-                          blurRadius: 6,
-                          spreadRadius: .03,
-                          color: Color.fromARGB(58, 0, 0, 0)),
+                      BoxShadow(offset: Offset(1, 1), blurRadius: 6, spreadRadius: .03, color: Color.fromARGB(58, 0, 0, 0)),
                     ],
                     circularRadius: 20,
                     color: const Color.fromARGB(255, 233, 255, 247),
@@ -511,10 +418,7 @@ class _AdminSocendPageContenetsState extends State<AdminSocendPageContenets> {
                             return stringToBool(Teachers[TeacherSelected][4]);
                           }(),
                           onChanged: (bool newValue) async {
-                            await dbService.FiChange_state(
-                                'Teacher',
-                                Teachers[TeacherSelected][5],
-                                stringToBool(Teachers[TeacherSelected][4]));
+                            await dbService.FiChange_state('Teacher', Teachers[TeacherSelected][5], stringToBool(Teachers[TeacherSelected][4]));
                             setState(() {
                               Teacher_data();
                               // TeacherState = newValue;
@@ -541,21 +445,14 @@ class _AdminSocendPageContenetsState extends State<AdminSocendPageContenets> {
                   width: double.infinity,
                   decoration: const BoxDecoration(
                       boxShadow: [
-                        BoxShadow(
-                            offset: Offset(1, 1),
-                            blurRadius: 6,
-                            spreadRadius: .03,
-                            color: Color.fromARGB(82, 0, 0, 0)),
+                        BoxShadow(offset: Offset(1, 1), blurRadius: 6, spreadRadius: .03, color: Color.fromARGB(82, 0, 0, 0)),
                       ],
                       color: Color.fromARGB(255, 255, 255, 255),
-                      borderRadius: BorderRadius.only(
-                          bottomLeft: Radius.circular(20),
-                          bottomRight: Radius.circular(20))),
+                      borderRadius: BorderRadius.only(bottomLeft: Radius.circular(20), bottomRight: Radius.circular(20))),
                   height: 80,
                   child: Row(
                     children: [
-                      Expanded(
-                          child: SizedBox(width: 30, height: 30, child: Logo)),
+                      Expanded(child: SizedBox(width: 30, height: 30, child: Logo)),
                       Expanded(flex: 3, child: StudentNameTC),
                       Expanded(flex: 2, child: StateTC),
                       Expanded(child: LogOutButton)
@@ -567,33 +464,21 @@ class _AdminSocendPageContenetsState extends State<AdminSocendPageContenets> {
                   alignment: Alignment.center,
                   child: CMaker(
                       boxShadow: const [
-                        BoxShadow(
-                            offset: Offset(1, 1),
-                            blurRadius: 6,
-                            spreadRadius: .03,
-                            color: Color.fromARGB(82, 0, 0, 0)),
+                        BoxShadow(offset: Offset(1, 1), blurRadius: 6, spreadRadius: .03, color: Color.fromARGB(82, 0, 0, 0)),
                       ],
                       color: Colors.white,
                       alignment: Alignment.center,
                       circularRadius: 20,
                       height: 70,
                       width: 200,
-                      child: TMaker(
-                          text: "Teachers",
-                          fontSize: 30,
-                          fontWeight: FontWeight.w700,
-                          color: Colors.black))),
+                      child: TMaker(text: "Teachers", fontSize: 30, fontWeight: FontWeight.w700, color: Colors.black))),
               const Padding(padding: EdgeInsets.only(top: 20)),
               CMaker(
                   width: double.infinity,
                   alignment: Alignment.center,
                   child: CMaker(
                       boxShadow: const [
-                        BoxShadow(
-                            offset: Offset(1, 1),
-                            blurRadius: 6,
-                            spreadRadius: .03,
-                            color: Color.fromARGB(82, 0, 0, 0)),
+                        BoxShadow(offset: Offset(1, 1), blurRadius: 6, spreadRadius: .03, color: Color.fromARGB(82, 0, 0, 0)),
                       ],
                       color: Colors.white,
                       alignment: Alignment.center,
@@ -603,11 +488,7 @@ class _AdminSocendPageContenetsState extends State<AdminSocendPageContenets> {
                       child: Row(
                         children: [
                           Expanded(child: Container()),
-                          TMaker(
-                              text: "Number : ${Teachers.length}",
-                              fontSize: 20,
-                              fontWeight: FontWeight.w700,
-                              color: Colors.black),
+                          TMaker(text: "Number : ${Teachers.length}", fontSize: 20, fontWeight: FontWeight.w700, color: Colors.black),
                           Expanded(child: Container()),
                           TMaker(
                               text: () {
@@ -631,11 +512,7 @@ class _AdminSocendPageContenetsState extends State<AdminSocendPageContenets> {
                     child: CMaker(
                         padding: const EdgeInsets.only(top: 20),
                         boxShadow: const [
-                          BoxShadow(
-                              offset: Offset(1, 1),
-                              blurRadius: 6,
-                              spreadRadius: .03,
-                              color: Color.fromARGB(82, 0, 0, 0)),
+                          BoxShadow(offset: Offset(1, 1), blurRadius: 6, spreadRadius: .03, color: Color.fromARGB(82, 0, 0, 0)),
                         ],
                         color: Colors.white,
                         alignment: Alignment.center,
@@ -654,42 +531,26 @@ class _AdminSocendPageContenetsState extends State<AdminSocendPageContenets> {
                               child: CMaker(
                                   circularRadius: 20,
                                   boxShadow: const [
-                                    BoxShadow(
-                                        offset: Offset(1, 1),
-                                        blurRadius: 6,
-                                        spreadRadius: .03,
-                                        color: Color.fromARGB(82, 0, 0, 0)),
+                                    BoxShadow(offset: Offset(1, 1), blurRadius: 6, spreadRadius: .03, color: Color.fromARGB(82, 0, 0, 0)),
                                   ],
                                   height: 80,
                                   alignment: Alignment.center,
                                   color: Color.fromARGB(255, 233, 255, 247),
-                                  margin: const EdgeInsets.only(
-                                      bottom: 30, right: 20, left: 20),
+                                  margin: const EdgeInsets.only(bottom: 30, right: 20, left: 20),
                                   child: ListTile(
-                                    leading: CMaker(
-                                        height: 70,
-                                        width: 70,
-                                        child: CircleAvatar(
-                                            backgroundImage: NetworkImage(
-                                                Teachers[index][0]))),
+                                    leading: CMaker(height: 70, width: 70, child: CircleAvatar(backgroundImage: NetworkImage(Teachers[index][0]))),
                                     title: TMaker(
-                                        text: Teachers[index][1]
-                                            .split(' ')
-                                            .take(2)
-                                            .join(' '),
+                                        text: Teachers[index][1].split(' ').take(2).join(' '),
                                         fontSize: 20,
                                         fontWeight: FontWeight.w700,
                                         color: Colors.black),
                                     trailing: TMaker(
-                                        text:
-                                            "${(stringToBool(Teachers[index][4])) ? 'Active' : 'Inactive '}",
+                                        text: "${(stringToBool(Teachers[index][4])) ? 'Active' : 'Inactive '}",
                                         fontSize: 18,
                                         fontWeight: FontWeight.w700,
-                                        color: (stringToBool(
-                                                Teachers[index][4]))
+                                        color: (stringToBool(Teachers[index][4]))
                                             ? Color.fromARGB(255, 73, 213, 31)
-                                            : const Color.fromARGB(
-                                                255, 224, 9, 9)),
+                                            : const Color.fromARGB(255, 224, 9, 9)),
                                   )),
                             );
                           },
@@ -704,13 +565,12 @@ class _AdminSocendPageContenetsState extends State<AdminSocendPageContenets> {
 }
 
 class ChangeSubjectsAndGrades extends StatefulWidget {
-  ChangeSubjectsAndGrades(
-      {super.key, required this.TeacherSelected, required this.TeacherSubject});
+  ChangeSubjectsAndGrades({super.key, required this.TeacherSelected, required this.TeacherSubject, required this.List_index});
   int TeacherSelected;
   String TeacherSubject;
+  int List_index;
   @override
-  State<ChangeSubjectsAndGrades> createState() =>
-      _ChangeSubjectsAndGradesState();
+  State<ChangeSubjectsAndGrades> createState() => _ChangeSubjectsAndGradesState();
 }
 
 class _ChangeSubjectsAndGradesState extends State<ChangeSubjectsAndGrades> {
@@ -718,24 +578,14 @@ class _ChangeSubjectsAndGradesState extends State<ChangeSubjectsAndGrades> {
     List<DropdownMenuItem<String>>? list = [
       DropdownMenuItem(
         value: "null",
-        child: CMaker(
-            child: TMaker(
-                text: "null",
-                fontSize: 20,
-                fontWeight: FontWeight.w600,
-                color: Colors.black)),
+        child: CMaker(child: TMaker(text: Teachers[TeacherSelected][6][widget.List_index][0], fontSize: 20, fontWeight: FontWeight.w600, color: Colors.black)),
       ),
     ];
     for (int i = 0; i < Subjects.length; i++) {
       list.add(
         DropdownMenuItem(
           value: Subjects[i][1],
-          child: CMaker(
-              child: TMaker(
-                  text: Subjects[i][1],
-                  fontSize: 20,
-                  fontWeight: FontWeight.w600,
-                  color: Colors.black)),
+          child: CMaker(child: TMaker(text: Subjects[i][1], fontSize: 20, fontWeight: FontWeight.w600, color: Colors.black)),
         ),
       );
     }
@@ -745,9 +595,12 @@ class _ChangeSubjectsAndGradesState extends State<ChangeSubjectsAndGrades> {
   bool check = false;
   @override
   Widget build(BuildContext context) {
+    print("Teachers[TeacherSelected][6][widget.List_index][0] ${Teachers[TeacherSelected][6][widget.List_index][0]}");
     return Scaffold(
       backgroundColor: Colors.white,
-      appBar: AppBar(backgroundColor: Colors.white,),
+      appBar: AppBar(
+        backgroundColor: Colors.white,
+      ),
       body: CMaker(
           height: 700,
           color: Colors.white,
@@ -769,81 +622,67 @@ class _ChangeSubjectsAndGradesState extends State<ChangeSubjectsAndGrades> {
               CMaker(
                   height: 600,
                   child: ListView.builder(
-                    itemCount: GradesSubjects.keys.length -
-                        ((GradesSubjects.keys.length / 2).floor()),
+                    itemCount: GradesSubjects.keys.length - ((GradesSubjects.keys.length / 2).floor()),
                     itemBuilder: (context, index) {
                       bool SelectedCheckBoxGrade = false;
                       return Row(
                         children: [
                           Expanded(
                               child: CMaker(
-                            margin:
-                                EdgeInsets.only(right: 7, left: 20, bottom: 20),
+                            margin: const EdgeInsets.only(right: 7, left: 20, bottom: 20),
                             circularRadius: 15,
                             color: const Color.fromARGB(255, 233, 255, 247),
-                            padding: EdgeInsets.symmetric(
-                                vertical: 10, horizontal: 15),
+                            padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 15),
                             child: CheckboxListTile(
-                                title: Text(
-                                    "${GradesSubjects.keys.elementAt(index * 2)}"),
-                                value: check
-                                // (){
-                                //   for(int i=1;i<Teachers[TeacherSelected][6][0].length;i++){
-                                //     if(int.parse(Teachers[TeacherSelected][6][0][i].split(" ")[1])==(index*2)+1){
-                                //       return true;
-                                //     }
-                                //   }
-                                //   return false;
-                                // }()
-                                ,
+                                title: Text(GradesSubjects.keys.elementAt(index * 2)),
+                                value: () {
+                                  print(Teachers[TeacherSelected][6][widget.List_index]);
+                                  if ((Teachers[TeacherSelected][6][widget.List_index] as List).contains(GradesSubjects.keys.elementAt(index * 2))) {
+                                    sub[GradesSubjects.keys.elementAt(index * 2)] = true;
+                                    print(sub);
+                                    return true;
+                                  } else {
+                                    sub[GradesSubjects.keys.elementAt(index * 2)] = false;
+                                    print(sub);
+                                    return false;
+                                  }
+                                }(),
                                 onChanged: (newValue) {
                                   setState(() {
-                                    check = newValue!;
+                                    sub[GradesSubjects.keys.elementAt(index * 2)] = newValue!;
                                   });
-                                  print("=========================" +
-                                      "$SelectedCheckBoxGrade");
+                                  print("=========================" + "$SelectedCheckBoxGrade");
                                 }),
                           )),
                           (GradesSubjects.keys.length.isEven)
-                              ?Expanded(
-                              child: CMaker(
-                            margin:
-                                EdgeInsets.only(right: 7, left: 20, bottom: 20),
-                            circularRadius: 15,
-                            color: const Color.fromARGB(255, 233, 255, 247),
-                            padding: EdgeInsets.symmetric(
-                                vertical: 10, horizontal: 15),
-                            child: CheckboxListTile(
-                                title: Text(
-                                    "${GradesSubjects.keys.elementAt((index * 2)+1)}"),
-                                value: check
-                                // () {
-                                            //   for (int i = 1;
-                                            //       i <
-                                            //           Teachers[widget
-                                            //                       .TeacherSelected]
-                                            //                   [6][0]
-                                            //               .length;
-                                            //       i++) {
-                                            //     if (int.parse(Teachers[widget
-                                            //                     .TeacherSelected]
-                                            //                 [6][0][i]
-                                            //             .split(" ")[1]) ==
-                                            //         (index * 2) + 2) {
-                                            //       return true;
-                                            //     }
-                                            //   }
-                                            //   return false;
-                                            // }(),
-                                ,
-                                onChanged: (newValue) {
-                                  setState(() {
-                                    check = newValue!;
-                                  });
-                                  print("=========================" +
-                                      "$SelectedCheckBoxGrade");
-                                }),
-                          ))
+                              ? Expanded(
+                                  child: CMaker(
+                                  margin: const EdgeInsets.only(right: 7, left: 20, bottom: 20),
+                                  circularRadius: 15,
+                                  color: const Color.fromARGB(255, 233, 255, 247),
+                                  padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 15),
+                                  child: CheckboxListTile(
+                                      title: Text(GradesSubjects.keys.elementAt((index * 2) + 1)),
+                                      value: () {
+                                        print(Teachers[TeacherSelected][6][widget.List_index]);
+                                        if ((Teachers[TeacherSelected][6][widget.List_index] as List)
+                                            .contains(GradesSubjects.keys.elementAt((index * 2) + 1))) {
+                                          sub[GradesSubjects.keys.elementAt((index * 2) + 1)] = true;
+                                          print(sub);
+                                          return true;
+                                        } else {
+                                          sub[GradesSubjects.keys.elementAt((index * 2) + 1)] = false;
+                                          print(sub);
+                                          return false;
+                                        }
+                                      }(),
+                                      onChanged: (newValue) {
+                                        setState(() {
+                                          sub[GradesSubjects.keys.elementAt((index * 2) + 1)] = newValue!;
+                                        });
+                                        print("=========================" + "$SelectedCheckBoxGrade");
+                                      }),
+                                ))
                               : Expanded(child: Container()),
                         ],
                       );
