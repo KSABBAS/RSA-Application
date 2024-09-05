@@ -4,6 +4,7 @@ import 'package:edu_academy/StudentPages/SecondPageContents.dart';
 import 'package:edu_academy/service/Databse_Service.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:get/get_connect/http/src/utils/utils.dart';
 import 'package:on_off_switch/on_off_switch.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -659,46 +660,46 @@ class _ChangeSubjectsAndGradesState extends State<ChangeSubjectsAndGrades> {
                                           "$SelectedCheckBoxGrade");
                                     }),
                               )),
-                              (GradesSubjects.keys.length.isEven)
+                              (((index * 2)+1)<GradesSubjects.keys.length)
                                   ?Expanded(
-                                  child: CMaker(
-                                margin:
-                                    EdgeInsets.only(right: 7, left: 20, bottom: 20),
-                                circularRadius: 15,
-                                color: const Color.fromARGB(255, 233, 255, 247),
-                                padding: EdgeInsets.symmetric(
-                                    vertical: 10, horizontal: 15),
-                                child: CheckboxListTile(
-                                    title: Text(
-                                        "${GradesSubjects.keys.elementAt((index * 2)+1)}"),
-                                    value: check
-                                    // () {
-                                                //   for (int i = 1;
-                                                //       i <
-                                                //           Teachers[widget
-                                                //                       .TeacherSelected]
-                                                //                   [6][0]
-                                                //               .length;
-                                                //       i++) {
-                                                //     if (int.parse(Teachers[widget
-                                                //                     .TeacherSelected]
-                                                //                 [6][0][i]
-                                                //             .split(" ")[1]) ==
-                                                //         (index * 2) + 2) {
-                                                //       return true;
-                                                //     }
-                                                //   }
-                                                //   return false;
-                                                // }(),
-                                    ,
-                                    onChanged: (newValue) {
-                                      setState(() {
-                                        check = newValue!;
-                                      });
-                                      print("=========================" +
-                                          "$SelectedCheckBoxGrade");
-                                    }),
-                              ))
+                              child: CMaker(
+                            margin:
+                                EdgeInsets.only(right: 7, left: 20, bottom: 20),
+                            circularRadius: 15,
+                            color: const Color.fromARGB(255, 233, 255, 247),
+                            padding: EdgeInsets.symmetric(
+                                vertical: 10, horizontal: 15),
+                            child: CheckboxListTile(
+                                title: Text(
+                                    "${GradesSubjects.keys.elementAt((index * 2)+1)}"),
+                                value: check
+                                // () {
+                                            //   for (int i = 1;
+                                            //       i <
+                                            //           Teachers[widget
+                                            //                       .TeacherSelected]
+                                            //                   [6][0]
+                                            //               .length;
+                                            //       i++) {
+                                            //     if (int.parse(Teachers[widget
+                                            //                     .TeacherSelected]
+                                            //                 [6][0][i]
+                                            //             .split(" ")[1]) ==
+                                            //         (index * 2) + 2) {
+                                            //       return true;
+                                            //     }
+                                            //   }
+                                            //   return false;
+                                            // }(),
+                                ,
+                                onChanged: (newValue) {
+                                  setState(() {
+                                    check = newValue!;
+                                  });
+                                  print("=========================" +
+                                      "$SelectedCheckBoxGrade");
+                                }),
+                          ))
                                   : Expanded(child: Container()),
                             ],
                           );
@@ -709,7 +710,7 @@ class _ChangeSubjectsAndGradesState extends State<ChangeSubjectsAndGrades> {
               )),
         Positioned(bottom: 60,right: (PageWidth(context)-300)/2,child: CMaker(width: 300,child: Row(children: [
           Expanded(child: MyButton(onTap: () {
-            
+            Get.back();
           }, buttonHeight: 70,buttonColor: Colors.red,text: "Cancel")),
           Padding(padding:EdgeInsets.only(left: 20)),
           Expanded(child: MyButton(onTap: () {
