@@ -3,6 +3,7 @@ import 'package:edu_academy/MyTools.dart';
 import 'package:edu_academy/StudentPages/SecondPageContents.dart';
 import 'package:edu_academy/service/Databse_Service.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:on_off_switch/on_off_switch.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -44,34 +45,6 @@ class _AdminSocendPageContenetsState extends State<AdminSocendPageContenets> {
       ]);
     }
     setState(() {});
-  }
-
-  List<DropdownMenuItem<String>>? SubjectsMaker(String TeacherSubjectNumber) {
-    List<DropdownMenuItem<String>>? list = [
-      DropdownMenuItem(
-        value: "null",
-        child: CMaker(
-            child: TMaker(
-                text: "null",
-                fontSize: 20,
-                fontWeight: FontWeight.w600,
-                color: Colors.black)),
-      ),
-    ];
-    for (int i = 0; i < Subjects.length; i++) {
-      list.add(
-        DropdownMenuItem(
-          value: Subjects[i][1],
-          child: CMaker(
-              child: TMaker(
-                  text: Subjects[i][1],
-                  fontSize: 20,
-                  fontWeight: FontWeight.w600,
-                  color: Colors.black)),
-        ),
-      );
-    }
-    return list;
   }
 
   @override
@@ -324,111 +297,9 @@ class _AdminSocendPageContenetsState extends State<AdminSocendPageContenets> {
                 (Teachers[TeacherSelected][6][0] != "null")
                     ? InkWell(
                         onTap: () {
-                          showDialog(
-                            context: context,
-                            builder: (context) {
-                              return Dialog(
-                                child: CMaker(
-                                    height: 700,
-                                    color: Colors.white,
-                                    circularRadius: 20,
-                                    child: ListView(
-                                      children: [
-                                        const Padding(
-                                            padding: EdgeInsets.only(top: 20)),
-                                        CMaker(
-                                          width: double.infinity,
-                                          alignment: Alignment.center,
-                                          child: DropdownButton<String>(
-                                            items:
-                                                SubjectsMaker(TeacherSubject1),
-                                            value: TeacherSubject1,
-                                            onChanged: (s1) {
-                                              TeacherSubject1 = s1!.toString();
-                                            },
-                                          ),
-                                        ),
-                                        CMaker(
-                                          height: 600,
-                                                child: ListView.builder(
-                                                  itemCount:GradesSubjects.keys.length-((GradesSubjects.keys.length/2).floor()),
-                                          itemBuilder: (context, index) {
-                                            bool SelectedCheckBoxGrade=false;
-                                            return Row(
-                                              children: [
-                                                Expanded(
-                                                  child: InkWell(
-
-                                                    child: CMaker(
-                                                      margin: EdgeInsets.only(right: 7,left: 20,bottom: 20),
-                                                      circularRadius: 15,
-                                                      color:const Color.fromARGB(255, 233, 255, 247),
-                                                      padding: EdgeInsets.symmetric(
-                                                          vertical: 10, horizontal: 15),
-                                                      child: Row(
-                                                        children: [
-                                                          Expanded(
-                                                            child: TMaker(
-                                                                text: "${GradesSubjects.keys.elementAt
-                                                                  (index*2)
-                                                                  }",
-                                                                fontSize: 20,
-                                                                fontWeight: FontWeight.w400,
-                                                                color: Colors.black),
-                                                          ),
-                                                          Checkbox(value: (){
-                                                            for(int i=1;i<Teachers[TeacherSelected][6][0].length;i++){
-                                                              if(int.parse(Teachers[TeacherSelected][6][0][i].split(" ")[1])==(index*2)+1){
-                                                                return true;
-                                                              }
-                                                            }
-                                                            return false;
-                                                          }(), onChanged: (newValue){})
-                                                        ],
-                                                      ),
-                                                    ),
-                                                  ),
-                                                ),
-                                                (GradesSubjects.keys.length.isEven)?Expanded(
-                                                  child: CMaker(
-                                                    margin: EdgeInsets.only(right: 20,left: 7,bottom: 20),
-                                                    circularRadius: 15,
-                                                    color:const Color.fromARGB(255, 233, 255, 247),
-                                                    padding: EdgeInsets.symmetric(
-                                                        vertical: 10, horizontal: 15),
-                                                    child: Row(
-                                                      children: [
-                                                        Expanded(
-                                                          child: TMaker(
-                                                              text: "${GradesSubjects.keys.elementAt
-                                                                ((index*2)+1)
-                                                                }",
-                                                              fontSize: 20,
-                                                              fontWeight: FontWeight.w400,
-                                                              color: Colors.black),
-                                                        ),
-                                                        Checkbox(
-                                                          value:(){
-                                                            for(int i=1;i<Teachers[TeacherSelected][6][0].length;i++){
-                                                              if(int.parse(Teachers[TeacherSelected][6][0][i].split(" ")[1])==(index*2)+2){
-                                                                return true;
-                                                              }
-                                                            }
-                                                            return false;
-                                                          }(), onChanged: (newValue){
-                                                        }),
-                                                        ])
-                                                  ),
-                                                ):Expanded(child: Container()),
-                                              ],
-                                            );
-                                          },
-                                        ))
-                                      ],
-                                    )),
-                              );
-                            },
-                          );
+                          Get.to(() => ChangeSubjectsAndGrades(
+                              TeacherSelected: TeacherSelected,
+                              TeacherSubject: TeacherSubject1));
                         },
                         child: CMaker(
                           margin:
@@ -485,93 +356,9 @@ class _AdminSocendPageContenetsState extends State<AdminSocendPageContenets> {
                 (Teachers[TeacherSelected][6][1] != "null")
                     ? InkWell(
                         onTap: () {
-                          showDialog(
-                            context: context,
-                            builder: (context) {
-                              return Dialog(
-                                child: CMaker(
-                                    height: 700,
-                                    color: Colors.white,
-                                    circularRadius: 20,
-                                    child: ListView(
-                                      children: [
-                                        const Padding(
-                                            padding: EdgeInsets.only(top: 20)),
-                                        CMaker(
-                                          width: double.infinity,
-                                          alignment: Alignment.center,
-                                          child: DropdownButton<String>(
-                                            items:
-                                                SubjectsMaker(TeacherSubject2),
-                                            value: TeacherSubject2,
-                                            onChanged: (s2) {
-                                              TeacherSubject2 = s2!.toString();
-                                            },
-                                          ),
-                                        ),
-                                        CMaker(
-                                          height: 600,
-                                                child: ListView.builder(
-                                                  itemCount:GradesSubjects.keys.length-((GradesSubjects.keys.length/2).floor()),
-                                          itemBuilder: (context, index) {
-                                            return Row(
-                                              children: [
-                                                Expanded(
-                                                  child: CMaker(
-                                                    margin: EdgeInsets.only(right: 7,left: 20,bottom: 20),
-                                                    circularRadius: 15,
-                                                    color:const Color.fromARGB(255, 233, 255, 247),
-                                                    padding: EdgeInsets.symmetric(
-                                                        vertical: 10, horizontal: 15),
-                                                    child: Row(
-                                                      children: [
-                                                        Expanded(
-                                                          child: TMaker(
-                                                              text: "${GradesSubjects.keys.elementAt
-                                                                (index*2)
-                                                                }",
-                                                              fontSize: 20,
-                                                              fontWeight: FontWeight.w400,
-                                                              color: Colors.black),
-                                                        ),
-                                                        Checkbox(value: true, onChanged: (newValue){})
-                                                      ],
-                                                    ),
-                                                  ),
-                                                ),
-                                                (GradesSubjects.keys.length.isEven)?Expanded(
-                                                  child: CMaker(
-                                                    margin: EdgeInsets.only(right: 20,left: 7,bottom: 20),
-                                                    circularRadius: 15,
-                                                    color:const Color.fromARGB(255, 233, 255, 247),
-                                                    padding: EdgeInsets.symmetric(
-                                                        vertical: 10, horizontal: 15),
-                                                    child: Row(
-                                                      children: [
-                                                        Expanded(
-                                                          child: TMaker(
-                                                              text: "${GradesSubjects.keys.elementAt
-                                                                ((index*2)+1)
-                                                                }",
-                                                              fontSize: 20,
-                                                              fontWeight: FontWeight.w400,
-                                                              color: Colors.black),
-                                                        ),
-                                                        Checkbox(
-                                                          value: true, onChanged: (newValue){
-                                                        }),
-                                                        ])
-                                                  ),
-                                                ):Expanded(child: Container()),
-                                              ],
-                                            );
-                                          },
-                                        ))
-                                      ],
-                                    )),
-                              );
-                            },
-                          );
+                          Get.to(() => ChangeSubjectsAndGrades(
+                              TeacherSelected: TeacherSelected,
+                              TeacherSubject: TeacherSubject2));
                         },
                         child: CMaker(
                           margin:
@@ -628,93 +415,9 @@ class _AdminSocendPageContenetsState extends State<AdminSocendPageContenets> {
                 (Teachers[TeacherSelected][6][2] != "null")
                     ? InkWell(
                         onTap: () {
-                          showDialog(
-                            context: context,
-                            builder: (context) {
-                              return Dialog(
-                                child: CMaker(
-                                    height: 700,
-                                    color: Colors.white,
-                                    circularRadius: 20,
-                                    child: ListView(
-                                      children: [
-                                        const Padding(
-                                            padding: EdgeInsets.only(top: 20)),
-                                        CMaker(
-                                          width: double.infinity,
-                                          alignment: Alignment.center,
-                                          child: DropdownButton<String>(
-                                            items:
-                                                SubjectsMaker(TeacherSubject3),
-                                            value: TeacherSubject3,
-                                            onChanged: (s3) {
-                                              TeacherSubject3 = s3!.toString();
-                                            },
-                                          ),
-                                        ),
-                                        CMaker(
-                                          height: 600,
-                                                child: ListView.builder(
-                                                  itemCount:GradesSubjects.keys.length-((GradesSubjects.keys.length/2).floor()),
-                                          itemBuilder: (context, index) {
-                                            return Row(
-                                              children: [
-                                                Expanded(
-                                                  child: CMaker(
-                                                    margin: EdgeInsets.only(right: 7,left: 20,bottom: 20),
-                                                    circularRadius: 15,
-                                                    color:const Color.fromARGB(255, 233, 255, 247),
-                                                    padding: EdgeInsets.symmetric(
-                                                        vertical: 10, horizontal: 15),
-                                                    child: Row(
-                                                      children: [
-                                                        Expanded(
-                                                          child: TMaker(
-                                                              text: "${GradesSubjects.keys.elementAt
-                                                                (index*2)
-                                                                }",
-                                                              fontSize: 20,
-                                                              fontWeight: FontWeight.w400,
-                                                              color: Colors.black),
-                                                        ),
-                                                        Checkbox(value: true, onChanged: (newValue){})
-                                                      ],
-                                                    ),
-                                                  ),
-                                                ),
-                                                (GradesSubjects.keys.length.isEven)?Expanded(
-                                                  child: CMaker(
-                                                    margin: EdgeInsets.only(right: 20,left: 7,bottom: 20),
-                                                    circularRadius: 15,
-                                                    color:const Color.fromARGB(255, 233, 255, 247),
-                                                    padding: EdgeInsets.symmetric(
-                                                        vertical: 10, horizontal: 15),
-                                                    child: Row(
-                                                      children: [
-                                                        Expanded(
-                                                          child: TMaker(
-                                                              text: "${GradesSubjects.keys.elementAt
-                                                                ((index*2)+1)
-                                                                }",
-                                                              fontSize: 20,
-                                                              fontWeight: FontWeight.w400,
-                                                              color: Colors.black),
-                                                        ),
-                                                        Checkbox(
-                                                          value: true, onChanged: (newValue){
-                                                        }),
-                                                        ])
-                                                  ),
-                                                ):Expanded(child: Container()),
-                                              ],
-                                            );
-                                          },
-                                        ))
-                                      ],
-                                    )),
-                              );
-                            },
-                          );
+                          Get.to(() => ChangeSubjectsAndGrades(
+                              TeacherSelected: TeacherSelected,
+                              TeacherSubject: TeacherSubject3));
                         },
                         child: CMaker(
                           margin:
@@ -997,5 +700,157 @@ class _AdminSocendPageContenetsState extends State<AdminSocendPageContenets> {
           ));
     }
     return SecondPageBody;
+  }
+}
+
+class ChangeSubjectsAndGrades extends StatefulWidget {
+  ChangeSubjectsAndGrades(
+      {super.key, required this.TeacherSelected, required this.TeacherSubject});
+  int TeacherSelected;
+  String TeacherSubject;
+  @override
+  State<ChangeSubjectsAndGrades> createState() =>
+      _ChangeSubjectsAndGradesState();
+}
+
+class _ChangeSubjectsAndGradesState extends State<ChangeSubjectsAndGrades> {
+  List<DropdownMenuItem<String>>? SubjectsMaker(String TeacherSubjectNumber) {
+    List<DropdownMenuItem<String>>? list = [
+      DropdownMenuItem(
+        value: "null",
+        child: CMaker(
+            child: TMaker(
+                text: "null",
+                fontSize: 20,
+                fontWeight: FontWeight.w600,
+                color: Colors.black)),
+      ),
+    ];
+    for (int i = 0; i < Subjects.length; i++) {
+      list.add(
+        DropdownMenuItem(
+          value: Subjects[i][1],
+          child: CMaker(
+              child: TMaker(
+                  text: Subjects[i][1],
+                  fontSize: 20,
+                  fontWeight: FontWeight.w600,
+                  color: Colors.black)),
+        ),
+      );
+    }
+    return list;
+  }
+
+  bool check = false;
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      backgroundColor: Colors.white,
+      appBar: AppBar(backgroundColor: Colors.white,),
+      body: CMaker(
+          height: 700,
+          color: Colors.white,
+          circularRadius: 20,
+          child: ListView(
+            children: [
+              const Padding(padding: EdgeInsets.only(top: 20)),
+              CMaker(
+                width: double.infinity,
+                alignment: Alignment.center,
+                child: DropdownButton<String>(
+                  items: SubjectsMaker(widget.TeacherSubject),
+                  value: widget.TeacherSubject,
+                  onChanged: (s1) {
+                    widget.TeacherSubject = s1!.toString();
+                  },
+                ),
+              ),
+              CMaker(
+                  height: 600,
+                  child: ListView.builder(
+                    itemCount: GradesSubjects.keys.length -
+                        ((GradesSubjects.keys.length / 2).floor()),
+                    itemBuilder: (context, index) {
+                      bool SelectedCheckBoxGrade = false;
+                      return Row(
+                        children: [
+                          Expanded(
+                              child: CMaker(
+                            margin:
+                                EdgeInsets.only(right: 7, left: 20, bottom: 20),
+                            circularRadius: 15,
+                            color: const Color.fromARGB(255, 233, 255, 247),
+                            padding: EdgeInsets.symmetric(
+                                vertical: 10, horizontal: 15),
+                            child: CheckboxListTile(
+                                title: Text(
+                                    "${GradesSubjects.keys.elementAt(index * 2)}"),
+                                value: check
+                                // (){
+                                //   for(int i=1;i<Teachers[TeacherSelected][6][0].length;i++){
+                                //     if(int.parse(Teachers[TeacherSelected][6][0][i].split(" ")[1])==(index*2)+1){
+                                //       return true;
+                                //     }
+                                //   }
+                                //   return false;
+                                // }()
+                                ,
+                                onChanged: (newValue) {
+                                  setState(() {
+                                    check = newValue!;
+                                  });
+                                  print("=========================" +
+                                      "$SelectedCheckBoxGrade");
+                                }),
+                          )),
+                          (GradesSubjects.keys.length.isEven)
+                              ?Expanded(
+                              child: CMaker(
+                            margin:
+                                EdgeInsets.only(right: 7, left: 20, bottom: 20),
+                            circularRadius: 15,
+                            color: const Color.fromARGB(255, 233, 255, 247),
+                            padding: EdgeInsets.symmetric(
+                                vertical: 10, horizontal: 15),
+                            child: CheckboxListTile(
+                                title: Text(
+                                    "${GradesSubjects.keys.elementAt(index * 2)}"),
+                                value: check
+                                // () {
+                                            //   for (int i = 1;
+                                            //       i <
+                                            //           Teachers[widget
+                                            //                       .TeacherSelected]
+                                            //                   [6][0]
+                                            //               .length;
+                                            //       i++) {
+                                            //     if (int.parse(Teachers[widget
+                                            //                     .TeacherSelected]
+                                            //                 [6][0][i]
+                                            //             .split(" ")[1]) ==
+                                            //         (index * 2) + 2) {
+                                            //       return true;
+                                            //     }
+                                            //   }
+                                            //   return false;
+                                            // }(),
+                                ,
+                                onChanged: (newValue) {
+                                  setState(() {
+                                    check = newValue!;
+                                  });
+                                  print("=========================" +
+                                      "$SelectedCheckBoxGrade");
+                                }),
+                          ))
+                              : Expanded(child: Container()),
+                        ],
+                      );
+                    },
+                  )),
+            ],
+          )),
+    );
   }
 }
