@@ -746,111 +746,126 @@ class _ChangeSubjectsAndGradesState extends State<ChangeSubjectsAndGrades> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
-      appBar: AppBar(backgroundColor: Colors.white,),
-      body: CMaker(
-          height: 700,
-          color: Colors.white,
-          circularRadius: 20,
-          child: ListView(
-            children: [
-              const Padding(padding: EdgeInsets.only(top: 20)),
-              CMaker(
-                width: double.infinity,
-                alignment: Alignment.center,
-                child: DropdownButton<String>(
-                  items: SubjectsMaker(widget.TeacherSubject),
-                  value: widget.TeacherSubject,
-                  onChanged: (s1) {
-                    widget.TeacherSubject = s1!.toString();
-                  },
-                ),
-              ),
-              CMaker(
-                  height: 600,
-                  child: ListView.builder(
-                    itemCount: GradesSubjects.keys.length -
-                        ((GradesSubjects.keys.length / 2).floor()),
-                    itemBuilder: (context, index) {
-                      bool SelectedCheckBoxGrade = false;
-                      return Row(
-                        children: [
-                          Expanded(
-                              child: CMaker(
-                            margin:
-                                EdgeInsets.only(right: 7, left: 20, bottom: 20),
-                            circularRadius: 15,
-                            color: const Color.fromARGB(255, 233, 255, 247),
-                            padding: EdgeInsets.symmetric(
-                                vertical: 10, horizontal: 15),
-                            child: CheckboxListTile(
-                                title: Text(
-                                    "${GradesSubjects.keys.elementAt(index * 2)}"),
-                                value: check
-                                // (){
-                                //   for(int i=1;i<Teachers[TeacherSelected][6][0].length;i++){
-                                //     if(int.parse(Teachers[TeacherSelected][6][0][i].split(" ")[1])==(index*2)+1){
-                                //       return true;
-                                //     }
-                                //   }
-                                //   return false;
-                                // }()
-                                ,
-                                onChanged: (newValue) {
-                                  setState(() {
-                                    check = newValue!;
-                                  });
-                                  print("=========================" +
-                                      "$SelectedCheckBoxGrade");
-                                }),
-                          )),
-                          (GradesSubjects.keys.length.isEven)
-                              ?Expanded(
-                              child: CMaker(
-                            margin:
-                                EdgeInsets.only(right: 7, left: 20, bottom: 20),
-                            circularRadius: 15,
-                            color: const Color.fromARGB(255, 233, 255, 247),
-                            padding: EdgeInsets.symmetric(
-                                vertical: 10, horizontal: 15),
-                            child: CheckboxListTile(
-                                title: Text(
-                                    "${GradesSubjects.keys.elementAt((index * 2)+1)}"),
-                                value: check
-                                // () {
-                                            //   for (int i = 1;
-                                            //       i <
-                                            //           Teachers[widget
-                                            //                       .TeacherSelected]
-                                            //                   [6][0]
-                                            //               .length;
-                                            //       i++) {
-                                            //     if (int.parse(Teachers[widget
-                                            //                     .TeacherSelected]
-                                            //                 [6][0][i]
-                                            //             .split(" ")[1]) ==
-                                            //         (index * 2) + 2) {
-                                            //       return true;
-                                            //     }
-                                            //   }
-                                            //   return false;
-                                            // }(),
-                                ,
-                                onChanged: (newValue) {
-                                  setState(() {
-                                    check = newValue!;
-                                  });
-                                  print("=========================" +
-                                      "$SelectedCheckBoxGrade");
-                                }),
-                          ))
-                              : Expanded(child: Container()),
-                        ],
-                      );
-                    },
-                  )),
-            ],
-          )),
+      backgroundColor: const Color.fromARGB(255, 255, 255, 255),
+      body: Stack(
+        children: [
+          CMaker(
+              height: PageHeight(context),
+              color: Colors.white,
+              circularRadius: 20,
+              child: ListView(
+                children: [
+                  const Padding(padding: EdgeInsets.only(top: 40)),
+                  CMaker(
+                    width: double.infinity,
+                    alignment: Alignment.center,
+                    child: DropdownButton<String>(
+                      items: SubjectsMaker(widget.TeacherSubject),
+                      value: widget.TeacherSubject,
+                      onChanged: (s1) {
+                        widget.TeacherSubject = s1!.toString();
+                        setState(() {
+                        });
+                      },
+                    ),
+                  ),
+                  const Padding(padding: EdgeInsets.only(top: 30)),
+                  CMaker(
+                      height: 600,
+                      child: ListView.builder(
+                        itemCount: GradesSubjects.keys.length -
+                            ((GradesSubjects.keys.length / 2).floor()),
+                        itemBuilder: (context, index) {
+                          bool SelectedCheckBoxGrade = false;
+                          return Row(
+                            children: [
+                              Expanded(
+                                  child: CMaker(
+                                margin:
+                                    EdgeInsets.only(right: 7, left: 20, bottom: 20),
+                                circularRadius: 15,
+                                color: const Color.fromARGB(255, 233, 255, 247),
+                                padding: EdgeInsets.symmetric(
+                                    vertical: 10, horizontal: 15),
+                                child: CheckboxListTile(
+                                    title: Text(
+                                        "${GradesSubjects.keys.elementAt(index * 2)}"),
+                                    value: check
+                                    // (){
+                                    //   for(int i=1;i<Teachers[TeacherSelected][6][0].length;i++){
+                                    //     if(int.parse(Teachers[TeacherSelected][6][0][i].split(" ")[1])==(index*2)+1){
+                                    //       return true;
+                                    //     }
+                                    //   }
+                                    //   return false;
+                                    // }()
+                                    ,
+                                    onChanged: (newValue) {
+                                      setState(() {
+                                        check = newValue!;
+                                      });
+                                      print("=========================" +
+                                          "$SelectedCheckBoxGrade");
+                                    }),
+                              )),
+                              (GradesSubjects.keys.length.isEven)
+                                  ?Expanded(
+                                  child: CMaker(
+                                margin:
+                                    EdgeInsets.only(right: 7, left: 20, bottom: 20),
+                                circularRadius: 15,
+                                color: const Color.fromARGB(255, 233, 255, 247),
+                                padding: EdgeInsets.symmetric(
+                                    vertical: 10, horizontal: 15),
+                                child: CheckboxListTile(
+                                    title: Text(
+                                        "${GradesSubjects.keys.elementAt((index * 2)+1)}"),
+                                    value: check
+                                    // () {
+                                                //   for (int i = 1;
+                                                //       i <
+                                                //           Teachers[widget
+                                                //                       .TeacherSelected]
+                                                //                   [6][0]
+                                                //               .length;
+                                                //       i++) {
+                                                //     if (int.parse(Teachers[widget
+                                                //                     .TeacherSelected]
+                                                //                 [6][0][i]
+                                                //             .split(" ")[1]) ==
+                                                //         (index * 2) + 2) {
+                                                //       return true;
+                                                //     }
+                                                //   }
+                                                //   return false;
+                                                // }(),
+                                    ,
+                                    onChanged: (newValue) {
+                                      setState(() {
+                                        check = newValue!;
+                                      });
+                                      print("=========================" +
+                                          "$SelectedCheckBoxGrade");
+                                    }),
+                              ))
+                                  : Expanded(child: Container()),
+                            ],
+                          );
+                        },
+                      )),
+                ],
+              )),
+        Positioned(bottom: 60,right: (PageWidth(context)-300)/2,child: CMaker(width: 300,child: Row(children: [
+          Expanded(child: MyButton(onTap: () {
+            
+          }, buttonHeight: 70,buttonColor: Colors.red,text: "Cancel")),
+          Padding(padding:EdgeInsets.only(left: 20)),
+          Expanded(child: MyButton(onTap: () {
+            
+          },buttonHeight: 70,buttonColor: const Color.fromARGB(255, 27, 255, 42),text: "Ok")),
+        ],)))
+        ],
+      ),
     );
   }
 }
