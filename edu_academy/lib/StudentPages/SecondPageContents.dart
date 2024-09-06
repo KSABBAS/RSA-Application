@@ -148,6 +148,142 @@ List<List<Color>> col = [
     const Color.fromARGB(255, 214, 128, 12),
     const Color.fromARGB(255, 254, 197, 44)
   ],
+  [
+    const Color.fromARGB(255, 214, 128, 12),
+    const Color.fromARGB(255, 254, 197, 44)
+  ],
+  [
+    const Color.fromARGB(255, 9, 220, 206),
+    const Color.fromARGB(255, 146, 206, 22)
+  ],
+  [
+    const Color.fromARGB(255, 247, 68, 110),
+    const Color.fromARGB(255, 148, 80, 225)
+  ],
+  [
+    const Color.fromARGB(255, 214, 128, 12),
+    const Color.fromARGB(255, 254, 197, 44)
+  ],
+  [
+    const Color.fromARGB(255, 248, 67, 114),
+    const Color.fromARGB(255, 248, 152, 68)
+  ],
+  [
+    const Color.fromARGB(255, 254, 165, 41),
+    const Color.fromARGB(255, 251, 99, 26)
+  ],
+  [
+    const Color.fromARGB(255, 31, 229, 175),
+    const Color.fromARGB(255, 55, 114, 242)
+  ],
+  [
+    const Color.fromARGB(255, 9, 220, 206),
+    const Color.fromARGB(255, 146, 206, 22)
+  ],
+  [
+    const Color.fromARGB(255, 247, 68, 110),
+    const Color.fromARGB(255, 148, 80, 225)
+  ],
+  [
+    const Color.fromARGB(255, 214, 128, 12),
+    const Color.fromARGB(255, 254, 197, 44)
+  ],
+  [
+    const Color.fromARGB(255, 248, 67, 114),
+    const Color.fromARGB(255, 248, 152, 68)
+  ],
+  [
+    const Color.fromARGB(255, 254, 165, 41),
+    const Color.fromARGB(255, 251, 99, 26)
+  ],
+  [
+    const Color.fromARGB(255, 31, 229, 175),
+    const Color.fromARGB(255, 55, 114, 242)
+  ],
+  [
+    const Color.fromARGB(255, 9, 220, 206),
+    const Color.fromARGB(255, 146, 206, 22)
+  ],
+  [
+    const Color.fromARGB(255, 247, 68, 110),
+    const Color.fromARGB(255, 148, 80, 225)
+  ],
+  [
+    const Color.fromARGB(255, 214, 128, 12),
+    const Color.fromARGB(255, 254, 197, 44)
+  ],
+  [
+    const Color.fromARGB(255, 248, 67, 114),
+    const Color.fromARGB(255, 248, 152, 68)
+  ],
+  [
+    const Color.fromARGB(255, 254, 165, 41),
+    const Color.fromARGB(255, 251, 99, 26)
+  ],
+  [
+    const Color.fromARGB(255, 31, 229, 175),
+    const Color.fromARGB(255, 55, 114, 242)
+  ],
+  [
+    const Color.fromARGB(255, 9, 220, 206),
+    const Color.fromARGB(255, 146, 206, 22)
+  ],
+  [
+    const Color.fromARGB(255, 247, 68, 110),
+    const Color.fromARGB(255, 148, 80, 225)
+  ],
+  [
+    const Color.fromARGB(255, 214, 128, 12),
+    const Color.fromARGB(255, 254, 197, 44)
+  ],
+  [
+    const Color.fromARGB(255, 248, 67, 114),
+    const Color.fromARGB(255, 248, 152, 68)
+  ],
+  [
+    const Color.fromARGB(255, 254, 165, 41),
+    const Color.fromARGB(255, 251, 99, 26)
+  ],
+  [
+    const Color.fromARGB(255, 31, 229, 175),
+    const Color.fromARGB(255, 55, 114, 242)
+  ],
+  [
+    const Color.fromARGB(255, 9, 220, 206),
+    const Color.fromARGB(255, 146, 206, 22)
+  ],
+  [
+    const Color.fromARGB(255, 247, 68, 110),
+    const Color.fromARGB(255, 148, 80, 225)
+  ],
+  [
+    const Color.fromARGB(255, 214, 128, 12),
+    const Color.fromARGB(255, 254, 197, 44)
+  ],
+  [
+    const Color.fromARGB(255, 248, 67, 114),
+    const Color.fromARGB(255, 248, 152, 68)
+  ],
+  [
+    const Color.fromARGB(255, 254, 165, 41),
+    const Color.fromARGB(255, 251, 99, 26)
+  ],
+  [
+    const Color.fromARGB(255, 31, 229, 175),
+    const Color.fromARGB(255, 55, 114, 242)
+  ],
+  [
+    const Color.fromARGB(255, 9, 220, 206),
+    const Color.fromARGB(255, 146, 206, 22)
+  ],
+  [
+    const Color.fromARGB(255, 214, 128, 12),
+    const Color.fromARGB(255, 254, 197, 44)
+  ],
+  [
+    const Color.fromARGB(255, 214, 128, 12),
+    const Color.fromARGB(255, 254, 197, 44)
+  ],
 ];
 List<List> Subjects = [
   ["images/SubjectsIcons/ألماني.png", "ألماني"],
@@ -183,7 +319,7 @@ List<List> Subjects = [
   ["images/SubjectsIcons/عربي.png", "عربي"],
   ["images/SubjectsIcons/الجغرافيا.png", "دراسات"],
 ];
-//22
+//22 /0
 Map<String, dynamic> GradesSubjects = {
   'Grade 1': [30, 7, 14, 29],
   'Grade 2': [30, 7, 14, 29],
