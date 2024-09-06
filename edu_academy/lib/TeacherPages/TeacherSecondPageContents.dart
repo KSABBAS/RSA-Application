@@ -1,20 +1,21 @@
+import 'dart:developer';
 import 'dart:io';
 import 'package:edu_academy/MyTools.dart';
 import 'package:edu_academy/TeacherPages/TeacherMainPage.dart';
 import 'package:edu_academy/TeacherPages/TeacherThirdPageContents.dart';
 import 'package:edu_academy/service/Databse_Service.dart';
 import 'package:file_picker/file_picker.dart';
+import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:panara_dialogs/panara_dialogs.dart';
 
 class TeacherSecondPageContents extends StatefulWidget {
-  TeacherSecondPageContents(
-      {super.key, required this.ListOfGrades, required this.SubjectName});
+  TeacherSecondPageContents({super.key, required this.ListOfGrades, required this.SubjectName});
   List ListOfGrades;
   String SubjectName;
   @override
-  State<TeacherSecondPageContents> createState() =>
-      _TeacherSecondPageContentsState();
+  State<TeacherSecondPageContents> createState() => _TeacherSecondPageContentsState();
 }
 
 bool GradeIsOpened = false;
@@ -22,8 +23,9 @@ bool BooksAreOpened = false;
 int GradeOpenedIndex = 0;
 String TheMessageDuration = "for 24 hours";
 String CurrentMessage = "";
-String CurrentMessageTime = DateTime.now().toString();
+String CurrentMessageTime = DateFormat('MMMM dd, HH:mm').format(DateTime.now());
 List<List<dynamic>> Books_data = [];
+Object? realTimeValues;
 
 class _TeacherSecondPageContentsState extends State<TeacherSecondPageContents> {
   final dbService = DatabaseService();
@@ -33,12 +35,13 @@ class _TeacherSecondPageContentsState extends State<TeacherSecondPageContents> {
   final TextEditingController _MessageController = TextEditingController();
   List AllMessages = [
     // عينه للتفهيم
-    ["Message", "Date", "Duration"]
+    ["Messgae", "Time", "Duration"] // ارسالة الثالثة التجريبية
   ];
 
   @override
   void initState() {
     super.initState();
+    regetmessages();
   }
 
   books_load() async {
@@ -46,8 +49,7 @@ class _TeacherSecondPageContentsState extends State<TeacherSecondPageContents> {
     setState(() {});
     print("#### ${widget.ListOfGrades[GradeOpenedIndex][0]}");
     print("#### ${SubjectThatIsSelected}");
-    var Books_data0 = await dbService.fiRead_Books(
-        widget.ListOfGrades[GradeOpenedIndex][0], SubjectThatIsSelected);
+    var Books_data0 = await dbService.fiRead_Books(widget.ListOfGrades[GradeOpenedIndex][0], SubjectThatIsSelected);
     print("Books_data $Books_data");
     setState(() {
       Books_data = Books_data0;
@@ -55,14 +57,42 @@ class _TeacherSecondPageContentsState extends State<TeacherSecondPageContents> {
     });
   }
 
+  regetmessages() async {
+    try {
+      final real = FirebaseDatabase.instance;
+      final allMes = real.ref("Messages").child(widget.ListOfGrades[GradeOpenedIndex][0]).child(SubjectThatIsSelected);
+      print("widget.ListOfGrades[GradeOpenedIndex][0] ${widget.ListOfGrades[GradeOpenedIndex][0]}");
+      allMes.onValue.listen(
+        (event) {
+          setState(() {
+            try {
+              realTimeValues = event.snapshot.value;
+              print("realTimeValues $realTimeValues");
+              Map map = realTimeValues as Map;
+              print("map $map");
+              print("map.keys ${map.keys}");
+              AllMessages = [];
+              for (var i in map.keys) {
+                AllMessages.add([map[i][0], map[i][1], map[i][2]]);
+                print("map AllMessages ${AllMessages}");
+              }
+              AllMessages = AllMessages.reversed.toList();
+            } catch (e) {
+              print("map e $e");
+            }
+          });
+        },
+      );
+    } catch (e) {
+      log("e ${e}");
+    }
+  }
+
   pick_file() async {
     File? file;
     FilePickerResult? result;
     String? name = '';
-    result = await FilePicker.platform.pickFiles(
-        type: FileType.custom,
-        allowedExtensions: ['pdf'],
-        allowMultiple: false);
+    result = await FilePicker.platform.pickFiles(type: FileType.custom, allowedExtensions: ['pdf'], allowMultiple: false);
     if (result != null) {
       file = File(result.files.single.path!);
       name = result.files.first.name;
@@ -101,20 +131,10 @@ class _TeacherSecondPageContentsState extends State<TeacherSecondPageContents> {
             width: PageWidth(context) - 150,
             margin: const EdgeInsets.only(left: 20),
             color: const Color.fromARGB(255, 61, 197, 255),
-            child: TMaker(
-                text: widget.ListOfGrades[GradeOpenedIndex][0],
-                fontSize: 30,
-                fontWeight: FontWeight.w600,
-                color: Colors.white)),
+            child: TMaker(text: widget.ListOfGrades[GradeOpenedIndex][0], fontSize: 30, fontWeight: FontWeight.w600, color: Colors.white)),
       );
       Widget BooksAndFilesWindow = CMaker(
-        boxShadow: const [
-          BoxShadow(
-              color: Color.fromARGB(61, 0, 0, 0),
-              offset: Offset(2, 2),
-              blurRadius: 10,
-              spreadRadius: .06)
-        ],
+        boxShadow: const [BoxShadow(color: Color.fromARGB(61, 0, 0, 0), offset: Offset(2, 2), blurRadius: 10, spreadRadius: .06)],
         circularRadius: 20,
         margin: const EdgeInsets.symmetric(horizontal: 15),
         color: const Color.fromARGB(255, 255, 255, 255),
@@ -122,11 +142,7 @@ class _TeacherSecondPageContentsState extends State<TeacherSecondPageContents> {
         child: Column(
           children: [
             const Padding(padding: EdgeInsets.only(bottom: 10)),
-            TMaker(
-                text: "Books and Files",
-                fontSize: 30,
-                fontWeight: FontWeight.w600,
-                color: const Color.fromARGB(255, 0, 0, 0)),
+            TMaker(text: "Books and Files", fontSize: 30, fontWeight: FontWeight.w600, color: const Color.fromARGB(255, 0, 0, 0)),
             const Padding(padding: EdgeInsets.only(bottom: 20)),
             CMaker(
               circularRadius: 20,
@@ -149,8 +165,7 @@ class _TeacherSecondPageContentsState extends State<TeacherSecondPageContents> {
                           children: [
                             TMaker(
                                 textAlign: TextAlign.start,
-                                text:
-                                    "${(Books_data[index][2].length > 10) ? Books_data[index][2].substring(0, 10) + "...." : Books_data[index][2]}",
+                                text: "${(Books_data[index][2].length > 10) ? Books_data[index][2].substring(0, 10) + "...." : Books_data[index][2]}",
                                 fontSize: 25,
                                 fontWeight: FontWeight.w600,
                                 color: const Color.fromARGB(255, 0, 0, 0)),
@@ -167,22 +182,15 @@ class _TeacherSecondPageContentsState extends State<TeacherSecondPageContents> {
                                   onTapDismiss: () async {
                                     print("book deleted");
                                     await dbService.FiDelete_books_file(
-                                        widget.ListOfGrades[GradeOpenedIndex]
-                                            [0],
-                                        SubjectThatIsSelected,
-                                        Books_data[index][3]);
-                                books_load();
+                                        widget.ListOfGrades[GradeOpenedIndex][0], SubjectThatIsSelected, Books_data[index][3]);
+                                    books_load();
                                     Navigator.pop(context);
                                   },
                                   panaraDialogType: PanaraDialogType.warning,
                                   barrierDismissible: true,
                                 );
                               },
-                              child: TMaker(
-                                  text: "حذف",
-                                  fontSize: 22,
-                                  fontWeight: FontWeight.w700,
-                                  color: Colors.white),
+                              child: TMaker(text: "حذف", fontSize: 22, fontWeight: FontWeight.w700, color: Colors.white),
                             ),
                             const Padding(padding: EdgeInsets.only(right: 10))
                           ],
@@ -202,8 +210,7 @@ class _TeacherSecondPageContentsState extends State<TeacherSecondPageContents> {
               onPressed: () async {
                 List<dynamic>? files = await pick_file();
                 print(files);
-                List<dynamic>? file_links =
-                    await dbService.stHwStore([files?[0]]);
+                List<dynamic>? file_links = await dbService.stHwStore([files?[0]]);
                 print("file_links $file_links");
                 PanaraInfoDialog.show(
                   context,
@@ -211,23 +218,15 @@ class _TeacherSecondPageContentsState extends State<TeacherSecondPageContents> {
                   message: "A books is added successfully",
                   buttonText: "Okey",
                   onTapDismiss: () async {
-                    await dbService.FiAdd_book_file(
-                  widget.ListOfGrades[GradeOpenedIndex][0],
-                  SubjectThatIsSelected,
-                  file_links?[0],
-                  files?[1]);
-                  books_load();
+                    await dbService.FiAdd_book_file(widget.ListOfGrades[GradeOpenedIndex][0], SubjectThatIsSelected, file_links?[0], files?[1]);
+                    books_load();
                     Navigator.pop(context);
                   },
                   panaraDialogType: PanaraDialogType.warning,
                   barrierDismissible: false,
                 );
               },
-              child: TMaker(
-                  text: " (Only PDF) إضافة",
-                  fontSize: 22,
-                  fontWeight: FontWeight.w700,
-                  color: Colors.white),
+              child: TMaker(text: " (Only PDF) إضافة", fontSize: 22, fontWeight: FontWeight.w700, color: Colors.white),
             )
           ],
         ),
@@ -261,9 +260,9 @@ class _TeacherSecondPageContentsState extends State<TeacherSecondPageContents> {
               ? CMaker(
                   height: PageHeight(context) - 150,
                   width: double.infinity,
-                  child: Center(
+                  child: const Center(
                       child: CircularProgressIndicator(
-                    color: const Color.fromARGB(255, 36, 160, 209),
+                    color: Color.fromARGB(255, 36, 160, 209),
                   )),
                 )
               : CMaker(
@@ -284,9 +283,9 @@ class _TeacherSecondPageContentsState extends State<TeacherSecondPageContents> {
               ? CMaker(
                   height: PageHeight(context) - 150,
                   width: double.infinity,
-                  child: Center(
+                  child: const Center(
                       child: CircularProgressIndicator(
-                    color: const Color.fromARGB(255, 36, 160, 209),
+                    color: Color.fromARGB(255, 36, 160, 209),
                   )),
                 )
               : CMaker(
@@ -324,33 +323,19 @@ class _TeacherSecondPageContentsState extends State<TeacherSecondPageContents> {
             circularRadius: 20,
             margin: const EdgeInsets.only(left: 20),
             color: const Color.fromARGB(255, 61, 197, 255),
-            child: TMaker(
-                text: widget.ListOfGrades[GradeOpenedIndex][0],
-                fontSize: 30,
-                fontWeight: FontWeight.w600,
-                color: Colors.white)),
+            child: TMaker(text: widget.ListOfGrades[GradeOpenedIndex][0], fontSize: 30, fontWeight: FontWeight.w600, color: Colors.white)),
       );
-      Widget GoToBooksWindow = CMaker(
+      Widget GoToBooksWindow = CMaker(//9
           alignment: Alignment.center,
           height: 60,
-          boxShadow: const [
-            BoxShadow(
-                color: Color.fromARGB(42, 0, 0, 0),
-                offset: Offset(2, 2),
-                blurRadius: 10,
-                spreadRadius: .06)
-          ],
+          boxShadow: const [BoxShadow(color: Color.fromARGB(42, 0, 0, 0), offset: Offset(2, 2), blurRadius: 10, spreadRadius: .06)],
           circularRadius: 20,
           width: PageWidth(context) - 60,
           color: const Color.fromARGB(255, 255, 255, 255),
           child: Row(
             children: [
               const Padding(padding: EdgeInsets.only(left: 20)),
-              TMaker(
-                  text: "books and files",
-                  fontSize: 25,
-                  fontWeight: FontWeight.w400,
-                  color: const Color.fromARGB(255, 0, 0, 0)),
+              TMaker(text: "books and files", fontSize: 25, fontWeight: FontWeight.w400, color: const Color.fromARGB(255, 0, 0, 0)),
               Expanded(child: Container()),
               Expanded(child: Container()),
               Expanded(child: Container()),
@@ -369,11 +354,7 @@ class _TeacherSecondPageContentsState extends State<TeacherSecondPageContents> {
                   color: const Color.fromARGB(255, 54, 244, 92),
                   circularRadius: 20,
                   alignment: Alignment.center,
-                  child: TMaker(
-                      text: "فتح",
-                      fontSize: 22,
-                      fontWeight: FontWeight.w700,
-                      color: Colors.white),
+                  child: TMaker(text: "فتح", fontSize: 22, fontWeight: FontWeight.w700, color: Colors.white),
                 ),
               ),
               Expanded(child: Container()),
@@ -382,13 +363,7 @@ class _TeacherSecondPageContentsState extends State<TeacherSecondPageContents> {
       Widget StudentsWindow = CMaker(
         alignment: Alignment.center,
         height: 280,
-        boxShadow: const [
-          BoxShadow(
-              color: Color.fromARGB(42, 0, 0, 0),
-              offset: Offset(2, 2),
-              blurRadius: 10,
-              spreadRadius: .06)
-        ],
+        boxShadow: const [BoxShadow(color: Color.fromARGB(42, 0, 0, 0), offset: Offset(2, 2), blurRadius: 10, spreadRadius: .06)],
         circularRadius: 20,
         width: PageWidth(context) - 60,
         color: const Color.fromARGB(255, 255, 255, 255),
@@ -403,15 +378,10 @@ class _TeacherSecondPageContentsState extends State<TeacherSecondPageContents> {
                       leading: CMaker(
                           height: 70,
                           width: 70,
-                          child: CircleAvatar(
-                              backgroundImage: Image.network(
-                                      widget.ListOfGrades[GradeOpenedIndex][1]
-                                          [StudentIndex][2])
-                                  .image)),
+                          child: CircleAvatar(backgroundImage: Image.network(widget.ListOfGrades[GradeOpenedIndex][1][StudentIndex][2]).image)),
                       title: TMaker(
                         textAlign: TextAlign.start,
-                        text:
-                            '${widget.ListOfGrades[GradeOpenedIndex][1][StudentIndex][0]}',
+                        text: '${widget.ListOfGrades[GradeOpenedIndex][1][StudentIndex][0]}',
                         fontSize: 20,
                         fontWeight: FontWeight.w600,
                         color: const Color.fromARGB(255, 0, 0, 0),
@@ -439,13 +409,7 @@ class _TeacherSecondPageContentsState extends State<TeacherSecondPageContents> {
                           padding: const EdgeInsets.all(20),
                           alignment: Alignment.topLeft,
                           height: 100.0 + ((AllMessages.length - 1) * 70.0),
-                          boxShadow: const [
-                            BoxShadow(
-                                color: Color.fromARGB(42, 0, 0, 0),
-                                offset: Offset(2, 2),
-                                blurRadius: 10,
-                                spreadRadius: .06)
-                          ],
+                          boxShadow: const [BoxShadow(color: Color.fromARGB(42, 0, 0, 0), offset: Offset(2, 2), blurRadius: 10, spreadRadius: .06)],
                           circularRadius: 20,
                           width: PageWidth(context) - 60,
                           color: const Color.fromARGB(255, 255, 255, 255),
@@ -469,8 +433,7 @@ class _TeacherSecondPageContentsState extends State<TeacherSecondPageContents> {
                                       alignment: Alignment.centerLeft,
                                       child: TMaker(
                                           textAlign: TextAlign.start,
-                                          text:
-                                              "Date : ${AllMessages[index][1]}",
+                                          text: "Date : ${AllMessages[index][1]}",
                                           fontSize: 15,
                                           fontWeight: FontWeight.w600,
                                           color: Colors.black),
@@ -490,13 +453,7 @@ class _TeacherSecondPageContentsState extends State<TeacherSecondPageContents> {
           padding: const EdgeInsets.all(20),
           alignment: Alignment.topLeft,
           height: 120,
-          boxShadow: const [
-            BoxShadow(
-                color: Color.fromARGB(42, 0, 0, 0),
-                offset: Offset(2, 2),
-                blurRadius: 10,
-                spreadRadius: .06)
-          ],
+          boxShadow: const [BoxShadow(color: Color.fromARGB(42, 0, 0, 0), offset: Offset(2, 2), blurRadius: 10, spreadRadius: .06)],
           circularRadius: 20,
           width: PageWidth(context) - 60,
           color: const Color.fromARGB(255, 255, 255, 255),
@@ -527,13 +484,7 @@ class _TeacherSecondPageContentsState extends State<TeacherSecondPageContents> {
       Widget EnterAMessage = CMaker(
           alignment: Alignment.center,
           height: 250,
-          boxShadow: const [
-            BoxShadow(
-                color: Color.fromARGB(42, 0, 0, 0),
-                offset: Offset(2, 2),
-                blurRadius: 10,
-                spreadRadius: .06)
-          ],
+          boxShadow: const [BoxShadow(color: Color.fromARGB(42, 0, 0, 0), offset: Offset(2, 2), blurRadius: 10, spreadRadius: .06)],
           circularRadius: 20,
           width: PageWidth(context) - 60,
           color: const Color.fromARGB(255, 255, 255, 255),
@@ -564,21 +515,15 @@ class _TeacherSecondPageContentsState extends State<TeacherSecondPageContents> {
                           onTap: () {
                             if (CurrentMessage != "") {
                               setState(() {
-                                _MessageController.clear();
-                                AllMessages.add([
-                                  CurrentMessage,
-                                  CurrentMessageTime,
-                                  TheMessageDuration
-                                ]);
+                                // _MessageController.clear();
+                                // AllMessages.add([
+                                //   CurrentMessage,
+                                //   CurrentMessageTime,
+                                //   TheMessageDuration
+                                // ]);
                                 //rePublicMessages_Send(String sub, String Grade,String messgae,String date,String duration)
-                                dbService.rePublicMessages_Send(
-                                    SubjectThatIsSelected,
-                                    widget.ListOfGrades[
-                                        GradeHomeWorkOppenedIndex][0],
-                                    CurrentMessage,
-                                    CurrentMessageTime,
-                                    TheMessageDuration,
-                                    name);
+                                dbService.rePublicMessages_Send(SubjectThatIsSelected, widget.ListOfGrades[GradeHomeWorkOppenedIndex][0],
+                                    CurrentMessage, CurrentMessageTime, TheMessageDuration, name);
                                 CurrentMessage = "";
                                 print(AllMessages);
                               });
@@ -595,25 +540,17 @@ class _TeacherSecondPageContentsState extends State<TeacherSecondPageContents> {
                                 color: Color.fromARGB(255, 255, 255, 255),
                               ))),
                       focusedErrorBorder: OutlineInputBorder(
-                          borderSide: const BorderSide(
-                              color: Color.fromARGB(255, 192, 192, 192)),
-                          borderRadius: BorderRadius.circular(15)),
+                          borderSide: const BorderSide(color: Color.fromARGB(255, 192, 192, 192)), borderRadius: BorderRadius.circular(15)),
                       errorBorder: OutlineInputBorder(
-                          borderSide: const BorderSide(
-                              color: Color.fromARGB(255, 192, 192, 192)),
-                          borderRadius: BorderRadius.circular(15)),
+                          borderSide: const BorderSide(color: Color.fromARGB(255, 192, 192, 192)), borderRadius: BorderRadius.circular(15)),
                       label: const Text(
                         "enter a message",
                         textAlign: TextAlign.start,
-                        style: TextStyle(
-                            fontSize: 15, fontWeight: FontWeight.w600),
+                        style: TextStyle(fontSize: 15, fontWeight: FontWeight.w600),
                       ),
                       enabledBorder: OutlineInputBorder(
-                          borderSide: const BorderSide(
-                              color: Color.fromARGB(255, 192, 192, 192)),
-                          borderRadius: BorderRadius.circular(15)),
-                      focusedBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(15))),
+                          borderSide: const BorderSide(color: Color.fromARGB(255, 192, 192, 192)), borderRadius: BorderRadius.circular(15)),
+                      focusedBorder: OutlineInputBorder(borderRadius: BorderRadius.circular(15))),
                 ),
               ),
               Expanded(child: Container()),
@@ -628,33 +565,32 @@ class _TeacherSecondPageContentsState extends State<TeacherSecondPageContents> {
                           value: "for 24 hours",
                           child: Text("for 24 hours"),
                         ),
-                        DropdownMenuItem(
-                            value: "for 2 days", child: Text("for 2 days")),
-                        DropdownMenuItem(
-                            value: "for 3 days",
-                            child: Text(
-                              "for 3 days",
-                            )),
-                        DropdownMenuItem(
-                            value: "for 4 days", child: Text("for 4 days")),
-                        DropdownMenuItem(
-                            value: "for 5 days", child: Text("for 5 days")),
-                        DropdownMenuItem(
-                            value: "for 6 days", child: Text("for 6 days")),
-                        DropdownMenuItem(
-                            value: "for a week", child: Text("for a week")),
-                        DropdownMenuItem(
-                            value: "for 2 weeks", child: Text("for 2 weeks")),
-                        DropdownMenuItem(
-                            value: "for 3 weeks", child: Text("for 3 weeks")),
-                        DropdownMenuItem(
-                            value: "for a month", child: Text("for a month")),
+                        // DropdownMenuItem(
+                        //     value: "for 2 days", child: Text("for 2 days")),
+                        // DropdownMenuItem(
+                        //     value: "for 3 days",
+                        //     child: Text(
+                        //       "for 3 days",
+                        //     )),
+                        // DropdownMenuItem(
+                        //     value: "for 4 days", child: Text("for 4 days")),
+                        // DropdownMenuItem(
+                        //     value: "for 5 days", child: Text("for 5 days")),
+                        // DropdownMenuItem(
+                        //     value: "for 6 days", child: Text("for 6 days")),
+                        // DropdownMenuItem(
+                        //     value: "for a week", child: Text("for a week")),
+                        // DropdownMenuItem(
+                        //     value: "for 2 weeks", child: Text("for 2 weeks")),
+                        // DropdownMenuItem(
+                        //     value: "for 3 weeks", child: Text("for 3 weeks")),
+                        // DropdownMenuItem(
+                        //     value: "for a month", child: Text("for a month")),
                       ],
                       onChanged: (value) {
                         setState(() {
                           TheMessageDuration = value!;
                         });
-                        print(TheMessageDuration);
                       },
                     ),
                     Expanded(child: Container()),
@@ -750,10 +686,7 @@ class _TeacherSecondPageContentsState extends State<TeacherSecondPageContents> {
                                       GoToBooksWindow,
                                       Expanded(child: Container()),
                                       CMaker(
-                                          margin: const EdgeInsets.symmetric(
-                                              horizontal: 20),
-                                          alignment: Alignment.centerLeft,
-                                          child: StudentsWindow),
+                                          margin: const EdgeInsets.symmetric(horizontal: 20), alignment: Alignment.centerLeft, child: StudentsWindow),
                                       Expanded(child: Container()),
                                     ],
                                   ))),
@@ -766,8 +699,7 @@ class _TeacherSecondPageContentsState extends State<TeacherSecondPageContents> {
                                 children: [
                                   AllMessagesButton,
                                   LastMessageWindow,
-                                  const Padding(
-                                      padding: EdgeInsets.only(top: 20)),
+                                  const Padding(padding: EdgeInsets.only(top: 20)),
                                   EnterAMessage,
                                 ],
                               ),
@@ -815,20 +747,13 @@ class _TeacherSecondPageContentsState extends State<TeacherSecondPageContents> {
                       color: const Color.fromARGB(255, 255, 255, 255),
                       height: (() {
                         try {
-                          return widget.ListOfGrades[index][1][0].length *
-                              100.0;
+                          return widget.ListOfGrades[index][1][0].length * 100.0;
                         } catch (e) {
                           return 2.0 * 100.0;
                         }
                       }()),
                       width: double.infinity,
-                      boxShadow: const [
-                        BoxShadow(
-                            color: Color.fromARGB(70, 0, 0, 0),
-                            offset: Offset(2, 2),
-                            blurRadius: 10,
-                            spreadRadius: .06)
-                      ],
+                      boxShadow: const [BoxShadow(color: Color.fromARGB(70, 0, 0, 0), offset: Offset(2, 2), blurRadius: 10, spreadRadius: .06)],
                       circularRadius: 20,
                       child: Column(
                         children: [
@@ -839,20 +764,16 @@ class _TeacherSecondPageContentsState extends State<TeacherSecondPageContents> {
                               alignment: Alignment.center,
                               height: 60,
                               circularRadius: 10,
-                              margin:
-                                  const EdgeInsets.symmetric(horizontal: 10),
+                              margin: const EdgeInsets.symmetric(horizontal: 10),
                               width: double.infinity,
                               child: Row(
                                 children: [
-                                  const Padding(
-                                      padding: EdgeInsets.only(left: 20)),
+                                  const Padding(padding: EdgeInsets.only(left: 20)),
                                   TMaker(
-                                      text:
-                                          "${widget.ListOfGrades[index][0]} - $SubjectThatIsSelected",
+                                      text: "${widget.ListOfGrades[index][0]} - $SubjectThatIsSelected",
                                       fontSize: 25,
                                       fontWeight: FontWeight.w600,
-                                      color:
-                                          const Color.fromARGB(255, 0, 0, 0)),
+                                      color: const Color.fromARGB(255, 0, 0, 0)),
                                   Expanded(flex: 10, child: Container()),
                                   InkWell(
                                     onTap: () {
@@ -865,14 +786,9 @@ class _TeacherSecondPageContentsState extends State<TeacherSecondPageContents> {
                                       alignment: Alignment.center,
                                       height: 40,
                                       width: 70,
-                                      color: const Color.fromARGB(
-                                          255, 54, 244, 92),
+                                      color: const Color.fromARGB(255, 54, 244, 92),
                                       circularRadius: 20,
-                                      child: TMaker(
-                                          text: "فتح",
-                                          fontSize: 22,
-                                          fontWeight: FontWeight.w700,
-                                          color: Colors.white),
+                                      child: TMaker(text: "فتح", fontSize: 22, fontWeight: FontWeight.w700, color: Colors.white),
                                     ),
                                   ),
                                   Expanded(child: Container()),
@@ -880,11 +796,9 @@ class _TeacherSecondPageContentsState extends State<TeacherSecondPageContents> {
                               )),
                           const Padding(padding: EdgeInsets.only(bottom: 30)),
                           Expanded(
-                            child: (!(widget.ListOfGrades[index][1].length ==
-                                    0))
+                            child: (!(widget.ListOfGrades[index][1].length == 0))
                                 ? ListView.builder(
-                                    itemCount:
-                                        widget.ListOfGrades[index][1].length,
+                                    itemCount: widget.ListOfGrades[index][1].length,
                                     itemBuilder: (context, StudentIndex) {
                                       return Column(
                                         children: [
@@ -893,34 +807,24 @@ class _TeacherSecondPageContentsState extends State<TeacherSecondPageContents> {
                                                 height: 70,
                                                 width: 70,
                                                 child: CircleAvatar(
-                                                    backgroundImage: Image.network(
-                                                            widget.ListOfGrades[
-                                                                    index][1][
-                                                                StudentIndex][2])
-                                                        .image)),
+                                                    backgroundImage: Image.network(widget.ListOfGrades[index][1][StudentIndex][2]).image)),
                                             title: TMaker(
                                               textAlign: TextAlign.start,
-                                              text: widget.ListOfGrades[index]
-                                                      [1][StudentIndex][0]
-                                                  .toString(),
+                                              text: widget.ListOfGrades[index][1][StudentIndex][0].toString(),
                                               fontSize: 20,
                                               fontWeight: FontWeight.w600,
-                                              color: const Color.fromARGB(
-                                                  255, 0, 0, 0),
+                                              color: const Color.fromARGB(255, 0, 0, 0),
                                             ),
                                           ),
                                           const Padding(
-                                            padding:
-                                                EdgeInsets.only(bottom: 20),
+                                            padding: EdgeInsets.only(bottom: 20),
                                           ),
                                         ],
                                       );
                                     })
                                 : const Text(
                                     "No students Added",
-                                    style: TextStyle(
-                                        fontSize: 20,
-                                        fontWeight: FontWeight.w800),
+                                    style: TextStyle(fontSize: 20, fontWeight: FontWeight.w800),
                                   ),
                           ),
                         ],
@@ -932,26 +836,17 @@ class _TeacherSecondPageContentsState extends State<TeacherSecondPageContents> {
       if (PageWidth(context) < 550) {
         setState(() {
           SecondPageBody = CMaker(
-              height: PageHeight(context) - 165,
-              width: PageWidth(context),
-              padding: const EdgeInsets.symmetric(horizontal: 10),
-              child: GradesList);
+              height: PageHeight(context) - 165, width: PageWidth(context), padding: const EdgeInsets.symmetric(horizontal: 10), child: GradesList);
         });
       } else if (PageWidth(context) >= 550 && PageHeight(context) >= 900) {
         setState(() {
           SecondPageBody = CMaker(
-              height: PageHeight(context) - 145,
-              width: PageWidth(context),
-              padding: const EdgeInsets.symmetric(horizontal: 10),
-              child: GradesList);
+              height: PageHeight(context) - 145, width: PageWidth(context), padding: const EdgeInsets.symmetric(horizontal: 10), child: GradesList);
         });
       } else if (PageWidth(context) >= 550 && PageHeight(context) < 900) {
         setState(() {
           SecondPageBody = CMaker(
-              height: PageHeight(context) - 110,
-              width: PageWidth(context),
-              padding: const EdgeInsets.symmetric(horizontal: 10),
-              child: GradesList);
+              height: PageHeight(context) - 110, width: PageWidth(context), padding: const EdgeInsets.symmetric(horizontal: 10), child: GradesList);
         });
       }
     }
