@@ -46,7 +46,14 @@ class _TeacherNotificationsPageState extends State<TeacherNotificationsPage> {
           ),
           body: CMaker(
             margin: EdgeInsets.symmetric(horizontal: 5),
-            child: ListView.builder(
+            child: (TeacherNotiFications.length == 0)
+            ? Center(
+                child: TMaker(
+                    text: "No Notifications",
+                    fontSize: 20,
+                    fontWeight: FontWeight.w700,
+                    color: Colors.black))
+            : ListView.builder(
               itemCount: TeacherNotiFications.length,
               itemBuilder: (context, index) {
                 return InkWell(
@@ -110,7 +117,7 @@ class _TeacherNotificationsPageState extends State<TeacherNotificationsPage> {
                     child: ListTile(
                       title: TMaker(
                           textAlign: TextAlign.start,
-                          text: TeacherNotiFications[index][1],
+                          text: (TeacherNotiFications[index][1].length>10)?TeacherNotiFications[index][1].substring(0,10)+"...":TeacherNotiFications[index][1],
                           fontSize: 25,
                           fontWeight: FontWeight.w600,
                           color: Colors.black),
@@ -120,7 +127,7 @@ class _TeacherNotificationsPageState extends State<TeacherNotificationsPage> {
                       ),
                       subtitle: TMaker(
                           textAlign: TextAlign.start,
-                          text: TeacherNotiFications[index][2],
+                          text: (TeacherNotiFications[index][2].length>20)?TeacherNotiFications[index][2].substring(0,20)+"...":TeacherNotiFications[index][2],
                           fontSize: 20,
                           fontWeight: FontWeight.w600,
                           color: const Color.fromARGB(255, 78, 78, 78)),

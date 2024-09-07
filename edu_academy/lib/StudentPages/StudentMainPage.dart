@@ -107,7 +107,7 @@ class _StudentMainPageState extends State<StudentMainPage> {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
     final List<String>? items = await prefs.getStringList('id');
 
-    print(items.toString());
+    print("==================\n=================\n"+items.toString());
     if (items != null && items.isNotEmpty) {
       name = items[2].split("-")[0];
       name = "${name.split(" ")[0]} ${name.split(" ")[1]}".toTitleCase;

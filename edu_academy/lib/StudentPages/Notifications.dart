@@ -58,7 +58,14 @@ class _StudentNotificationsPageState extends State<StudentNotificationsPage> {
                         icon: Icon(Icons.arrow_back))),
                 Expanded(
                   child: CMaker(
-                    child: ListView.builder(
+                    child: (StudentNotiFications.length == 0)
+            ? Center(
+                child: TMaker(
+                    text: "No Notifications",
+                    fontSize: 20,
+                    fontWeight: FontWeight.w700,
+                    color: Colors.black))
+            : ListView.builder(
                       itemCount: StudentNotiFications.length,
                       itemBuilder: (context, index) {
                         return InkWell(
@@ -125,7 +132,7 @@ class _StudentNotificationsPageState extends State<StudentNotificationsPage> {
                             child: ListTile(
                               title: TMaker(
                                   textAlign: TextAlign.start,
-                                  text: StudentNotiFications[index][1],
+                                  text: (StudentNotiFications[index][1].length>10)?StudentNotiFications[index][1].substring(0,10)+"...":StudentNotiFications[index][1],
                                   fontSize: 25,
                                   fontWeight: FontWeight.w600,
                                   color: Colors.black),
