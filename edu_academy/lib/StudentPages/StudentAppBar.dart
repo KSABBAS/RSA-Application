@@ -20,7 +20,7 @@ class _StudentAppBarState extends State<StudentAppBar> {
           });
         },
         child:
-            CircleAvatar(backgroundImage: NetworkImage(profile_data['photo'])));
+            CircleAvatar(backgroundImage: Image.network(profile_data['photo'],fit:BoxFit.fitHeight,).image));
     Widget StudentNameTC = CMaker(
       alignment: Alignment.bottomCenter,
       child: Text(

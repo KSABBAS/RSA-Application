@@ -666,6 +666,7 @@ class _StudentProfileState extends State<StudentProfile> {
                           height: 80,
                           alignment: Alignment.center,
                           child: EditAndSaveButton),
+                          const Padding(padding: EdgeInsets.only(bottom: 10)),
                       (EditMode)
                           ? CMaker(
                               width: double.infinity,
@@ -706,6 +707,7 @@ class _StudentProfileState extends State<StudentProfile> {
                               height: 0,
                               width: 0,
                             ),
+                            const Padding(padding: EdgeInsets.only(bottom: 20)),
                     ],
                   )),
               Expanded(child: Container())
@@ -780,11 +782,7 @@ class _StudentProfileState extends State<StudentProfile> {
                           height: 80,
                           alignment: Alignment.center,
                           child: EditAndSaveButton),
-                      CMaker(
-                          width: double.infinity,
-                          height: 80,
-                          alignment: Alignment.center,
-                          child: EditAndSaveButton),
+                          const Padding(padding: EdgeInsets.only(bottom: 10)),
                       (EditMode)
                           ? CMaker(
                               width: double.infinity,
@@ -825,6 +823,7 @@ class _StudentProfileState extends State<StudentProfile> {
                               height: 0,
                               width: 0,
                             ),
+                            const Padding(padding: EdgeInsets.only(bottom: 20)),
                     ],
                   )),
               Expanded(child: Container())
@@ -899,11 +898,7 @@ class _StudentProfileState extends State<StudentProfile> {
                           height: 80,
                           alignment: Alignment.center,
                           child: EditAndSaveButton),
-                      CMaker(
-                          width: double.infinity,
-                          height: 80,
-                          alignment: Alignment.center,
-                          child: EditAndSaveButton),
+                          const Padding(padding: EdgeInsets.only(bottom: 10)),
                       (EditMode)
                           ? CMaker(
                               width: double.infinity,
@@ -944,6 +939,7 @@ class _StudentProfileState extends State<StudentProfile> {
                               height: 0,
                               width: 0,
                             ),
+                            const Padding(padding: EdgeInsets.only(bottom: 20)),
                     ],
                   )),
               Expanded(child: Container())

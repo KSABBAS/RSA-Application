@@ -509,6 +509,9 @@ class _RButtonState extends State<RButton> {
 Future PhotoImageFromGalary() async {
   return await ImagePicker().pickImage(source: ImageSource.gallery);
 }
+Future PhotoImageFromCamera() async {
+  return await ImagePicker().pickImage(source: ImageSource.camera);
+}
 class NavBar extends StatefulWidget {
   NavBar(
       {super.key,
