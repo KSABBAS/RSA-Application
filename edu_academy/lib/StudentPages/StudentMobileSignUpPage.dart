@@ -1,6 +1,7 @@
 import 'package:edu_academy/MyTools.dart';
 import 'package:edu_academy/service/Databse_Service.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:overlay_loading_progress/overlay_loading_progress.dart';
@@ -55,7 +56,6 @@ class _StudentMobileSignUpPageState extends State<StudentMobileSignUpPage> {
           if (value.split(" ").length < 3) {
             return "الاسم يجب ان يكون ثلاثى او رباعى";
           }
-          return null;
         },
         decoration: InputDecoration(
             focusedErrorBorder: OutlineInputBorder(
@@ -318,7 +318,7 @@ class _StudentMobileSignUpPageState extends State<StudentMobileSignUpPage> {
         style: TextStyle(fontSize: 25, fontWeight: FontWeight.w600),
       ),
     );
-    Widget BirthDateW = (PageWidth(context) > 550 && PageHeight(context) < 900)
+    Widget BirthDateW = (kIsWeb )//&& (defaultTargetPlatform == TargetPlatform.iOS || defaultTargetPlatform == TargetPlatform.android))
         ? MyButton(
           padding: EdgeInsets.all(10),
             buttonColor: Color.fromARGB(255, 74, 193, 241),
