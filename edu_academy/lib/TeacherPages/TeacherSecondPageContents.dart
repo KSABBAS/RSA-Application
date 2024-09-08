@@ -9,6 +9,9 @@ import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:panara_dialogs/panara_dialogs.dart';
+import 'package:flutter/foundation.dart' show kIsWeb;
+import 'dart:typed_data';
+import 'package:mime/mime.dart';
 
 class TeacherSecondPageContents extends StatefulWidget {
   TeacherSecondPageContents({super.key, required this.ListOfGrades, required this.SubjectName});
@@ -96,11 +99,36 @@ class _TeacherSecondPageContentsState extends State<TeacherSecondPageContents> {
     if (result != null) {
       file = File(result.files.single.path!);
       name = result.files.first.name;
-    } else {
-      // User canceled the picker
+      print("#-file $file");
+      return [file, name] as List<dynamic>;
     }
-    print("#-file $file");
-    return [file, name] as List<dynamic>;
+  }
+
+  Future<List<dynamic>?> webPickFile() async {
+    Uint8List? file;
+    String? name;
+    String? contentType;
+    FilePickerResult? result;
+
+    result = await FilePicker.platform.pickFiles(
+      type: FileType.custom,
+      allowedExtensions: ['pdf'],
+      allowMultiple: false,
+    );
+
+    if (result != null) {
+      file = result.files.single.bytes;
+      name = result.files.single.name;
+
+      contentType = lookupMimeType(name); 
+
+      print('Selected file name: $name');
+      print('Content Type: $contentType');
+
+      return [[file, name, contentType]] as List<dynamic>;
+    }
+
+    return null;
   }
 
   @override
@@ -208,23 +236,40 @@ class _TeacherSecondPageContentsState extends State<TeacherSecondPageContents> {
               minWidth: 150,
               color: const Color.fromARGB(255, 54, 244, 92),
               onPressed: () async {
-                List<dynamic>? files = await pick_file();
-                print(files);
-                List<dynamic>? file_links = await dbService.stHwStore([files?[0]]);
-                print("file_links $file_links");
-                PanaraInfoDialog.show(
-                  context,
-                  title: "Sucess",
-                  message: "A books is added successfully",
-                  buttonText: "Okey",
-                  onTapDismiss: () async {
-                    await dbService.FiAdd_book_file(widget.ListOfGrades[GradeOpenedIndex][0], SubjectThatIsSelected, file_links?[0], files?[1]);
-                    books_load();
-                    Navigator.pop(context);
-                  },
-                  panaraDialogType: PanaraDialogType.warning,
-                  barrierDismissible: false,
-                );
+                var files;
+                if (kIsWeb) {
+                  print("Platform web");
+                  files = await webPickFile();
+                } else {
+                  print("Platform notweb");
+                  files = await pick_file();
+                }
+                if (files != null) {
+                  List<dynamic>? file_links;
+                  if (kIsWeb) {
+                    log(files.toString());
+                    // print([files]);
+                    print("Platform web stBookStore  isweb: true");
+                    file_links = await dbService.stBookStore(files);
+                  } else {
+                    file_links = await dbService.stBookStore([files]);
+                  }
+
+                  print("file_links $file_links");
+                  PanaraInfoDialog.show(
+                    context,
+                    title: "Sucess",
+                    message: "A books is added successfully",
+                    buttonText: "Okey",
+                    onTapDismiss: () async {
+                      await dbService.FiAdd_book_file(widget.ListOfGrades[GradeOpenedIndex][0], SubjectThatIsSelected, file_links?[0], files?[1]);
+                      books_load();
+                      Navigator.pop(context);
+                    },
+                    panaraDialogType: PanaraDialogType.warning,
+                    barrierDismissible: false,
+                  );
+                }
               },
               child: TMaker(text: " (Only PDF) إضافة", fontSize: 22, fontWeight: FontWeight.w700, color: Colors.white),
             )
@@ -325,7 +370,8 @@ class _TeacherSecondPageContentsState extends State<TeacherSecondPageContents> {
             color: const Color.fromARGB(255, 61, 197, 255),
             child: TMaker(text: widget.ListOfGrades[GradeOpenedIndex][0], fontSize: 30, fontWeight: FontWeight.w600, color: Colors.white)),
       );
-      Widget GoToBooksWindow = CMaker(//9
+      Widget GoToBooksWindow = CMaker(
+          //9
           alignment: Alignment.center,
           height: 60,
           boxShadow: const [BoxShadow(color: Color.fromARGB(42, 0, 0, 0), offset: Offset(2, 2), blurRadius: 10, spreadRadius: .06)],

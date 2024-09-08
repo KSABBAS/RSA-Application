@@ -57,6 +57,7 @@ bool stringToBool(String value) {
   print("stringToBool ${value} ${value.toLowerCase() == 'true'}");
   return value.toLowerCase() == 'true';
 }
+
 // data base end
 bool ThereIsNotifications = () {
   bool result = false;
@@ -70,14 +71,7 @@ bool ThereIsNotifications = () {
   return result;
 }();
 List<List> TableData = [
-  [
-    "الوقت//التاريخ",
-    "الحصة الاولى",
-    "الحصة الثانية",
-    "الحصة الثالثة",
-    "الحصة الرابعه",
-    "الحصة الخامسة"
-  ],
+  ["الوقت//التاريخ", "الحصة الاولى", "الحصة الثانية", "الحصة الثالثة", "الحصة الرابعه", "الحصة الخامسة"],
   ["السبت", "عربي", "انجليزي", "رياضيات", "رسم", "دين"],
   ["الاحد", "عربي", "انجليزي", "رياضيات", "رسم", "دين"],
   ["الاثنين", "عربي", "انجليزي", "رياضيات", "رسم", "دين"],
@@ -98,8 +92,7 @@ class _TeacherMainPageState extends State<TeacherMainPage> {
   @override
   void initState() {
     super.initState();
-    final listener =
-        InternetConnection().onStatusChange.listen((InternetStatus status) {
+    final listener = InternetConnection().onStatusChange.listen((InternetStatus status) {
       switch (status) {
         case InternetStatus.connected:
           print("================================\nConnected");
@@ -139,14 +132,12 @@ class _TeacherMainPageState extends State<TeacherMainPage> {
       subjects_string = items[2]
           .split('-')
           .sublist(1)
-          .map((subject) =>
-              subject.replaceAll(RegExp(r"[\[\]']"), '').split(', ')[0])
+          .map((subject) => subject.replaceAll(RegExp(r"[\[\]']"), '').split(', ')[0])
           .where((subject) => subject != 'null')
           .join('-');
       print("subjects_string $subjects_string");
       print("subjects_ $subjects_");
-      Map<String, Map<String, List<dynamic>>> data0 =
-          await dbService.fiGrades_and_Students(Teacher_Id, subjects_);
+      Map<String, Map<String, List<dynamic>>> data0 = await dbService.fiGrades_and_Students(Teacher_Id, subjects_);
       print("data0 $data0");
       sub_data = data0;
       int index_ = 0;
@@ -159,8 +150,7 @@ class _TeacherMainPageState extends State<TeacherMainPage> {
       Subject3 = Subject_techer[2];
       print("sub_data $sub_data");
       print("Subject_techer $Subject_techer");
-      print(
-          "sub_data[SubjectThatIsSelected]!.keys ${sub_data[SubjectThatIsSelected]}");
+      print("sub_data[SubjectThatIsSelected]!.keys ${sub_data[SubjectThatIsSelected]}");
 
       for (var i in sub_data[SubjectThatIsSelected]!.keys) {
         print("i $i");
@@ -178,9 +168,7 @@ class _TeacherMainPageState extends State<TeacherMainPage> {
       // for (var i in sub_data[SubjectThatIsSelected]!.keys) {
       //   print(i);
       // }
-      teacher_profile_data =
-          await dbService.FiGet_profile_data(Teacher_Id, Teacher_role)
-              as Map<String, dynamic>;
+      teacher_profile_data = await dbService.FiGet_profile_data(Teacher_Id, Teacher_role) as Map<String, dynamic>;
       print("teacher_profile_data $teacher_profile_data");
       AccountActivation = stringToBool(teacher_profile_data['state']);
       TeacherMainPageIsLoading = false;
@@ -205,13 +193,11 @@ class _TeacherMainPageState extends State<TeacherMainPage> {
 
     late Widget TeacherMainPageBody;
     if (Subject2.toString() != "null" && Subject3.toString() == "null") {
-      ProfileSubjectsAvailable =
-          "${Subject1.toString()} - ${Subject2.toString()}";
+      ProfileSubjectsAvailable = "${Subject1.toString()} - ${Subject2.toString()}";
     } else if (Subject2.toString() == "null" && Subject3.toString() == "null") {
       ProfileSubjectsAvailable = Subject1.toString();
     } else {
-      ProfileSubjectsAvailable =
-          "${Subject1.toString()} - ${Subject2.toString()} - ${Subject3.toString()}";
+      ProfileSubjectsAvailable = "${Subject1.toString()} - ${Subject2.toString()} - ${Subject3.toString()}";
     }
     SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersiveSticky);
     List<Widget> Pages = [
@@ -224,16 +210,10 @@ class _TeacherMainPageState extends State<TeacherMainPage> {
                       height: 80,
                       decoration: const BoxDecoration(
                           boxShadow: [
-                            BoxShadow(
-                                offset: Offset(1, 1),
-                                blurRadius: 6,
-                                spreadRadius: .03,
-                                color: Color.fromARGB(82, 0, 0, 0)),
+                            BoxShadow(offset: Offset(1, 1), blurRadius: 6, spreadRadius: .03, color: Color.fromARGB(82, 0, 0, 0)),
                           ],
                           color: Color.fromARGB(255, 255, 255, 255),
-                          borderRadius: BorderRadius.only(
-                              bottomLeft: Radius.circular(20),
-                              bottomRight: Radius.circular(20))),
+                          borderRadius: BorderRadius.only(bottomLeft: Radius.circular(20), bottomRight: Radius.circular(20))),
                       child: Row(
                         children: [
                           Expanded(
@@ -258,16 +238,11 @@ class _TeacherMainPageState extends State<TeacherMainPage> {
                                   Expanded(
                                     flex: 3,
                                     child: CMaker(
-                                      padding:
-                                          const EdgeInsets.only(bottom: 13),
+                                      padding: const EdgeInsets.only(bottom: 13),
                                       alignment: Alignment.bottomCenter,
                                       child: const Text(
                                         "kareem said",
-                                        style: TextStyle(
-                                            fontSize: 17,
-                                            fontWeight: FontWeight.w500,
-                                            color: Color.fromARGB(
-                                                255, 5, 123, 151)),
+                                        style: TextStyle(fontSize: 17, fontWeight: FontWeight.w500, color: Color.fromARGB(255, 5, 123, 151)),
                                       ),
                                     ),
                                   ),
@@ -275,27 +250,19 @@ class _TeacherMainPageState extends State<TeacherMainPage> {
                                       flex: 2,
                                       child: Builder(
                                         builder: (context) {
-                                          if (Subject1 != "null" &&
-                                              Subject2 == "null" &&
-                                              Subject3 == "null") {
+                                          if (Subject1 != "null" && Subject2 == "null" && Subject3 == "null") {
                                             numberOfSubjects = 1;
                                             return CMaker(
-                                              padding: const EdgeInsets.only(
-                                                  bottom: 13),
+                                              padding: const EdgeInsets.only(bottom: 13),
                                               alignment: Alignment.bottomCenter,
                                               child: Text(
                                                 Subject1,
                                                 style: const TextStyle(
-                                                    fontSize: 16,
-                                                    fontWeight: FontWeight.w500,
-                                                    color: Color.fromARGB(
-                                                        255, 89, 89, 87)),
+                                                    fontSize: 16, fontWeight: FontWeight.w500, color: Color.fromARGB(255, 89, 89, 87)),
                                               ),
                                             );
                                           }
-                                          if (Subject1 != "null" &&
-                                              Subject2 != "null" &&
-                                              Subject3 == "null") {
+                                          if (Subject1 != "null" && Subject2 != "null" && Subject3 == "null") {
                                             numberOfSubjects = 2;
                                             return CMaker(
                                               alignment: Alignment.bottomCenter,
@@ -311,11 +278,7 @@ class _TeacherMainPageState extends State<TeacherMainPage> {
                                                     child: Text(
                                                       Subject1,
                                                       style: const TextStyle(
-                                                          fontSize: 16,
-                                                          fontWeight:
-                                                              FontWeight.w500,
-                                                          color: Color.fromARGB(
-                                                              255, 89, 89, 87)),
+                                                          fontSize: 16, fontWeight: FontWeight.w500, color: Color.fromARGB(255, 89, 89, 87)),
                                                     ),
                                                   ),
                                                   DropdownMenuItem(
@@ -323,18 +286,14 @@ class _TeacherMainPageState extends State<TeacherMainPage> {
                                                     child: Text(
                                                       Subject2,
                                                       style: const TextStyle(
-                                                          fontSize: 16,
-                                                          fontWeight:
-                                                              FontWeight.w500,
-                                                          color: Color.fromARGB(
-                                                              255, 89, 89, 87)),
+                                                          fontSize: 16, fontWeight: FontWeight.w500, color: Color.fromARGB(255, 89, 89, 87)),
                                                     ),
                                                   ),
                                                 ],
                                                 onChanged: (value) {
                                                   setState(() {
-                                                    SubjectThatIsSelected =
-                                                        value.toString();
+                                                    SubjectThatIsSelected = value.toString();
+                                                    _initializeData();
                                                   });
                                                 },
                                               ),
@@ -355,11 +314,7 @@ class _TeacherMainPageState extends State<TeacherMainPage> {
                                                     child: Text(
                                                       Subject1,
                                                       style: const TextStyle(
-                                                          fontSize: 16,
-                                                          fontWeight:
-                                                              FontWeight.w500,
-                                                          color: Color.fromARGB(
-                                                              255, 89, 89, 87)),
+                                                          fontSize: 16, fontWeight: FontWeight.w500, color: Color.fromARGB(255, 89, 89, 87)),
                                                     ),
                                                   ),
                                                   DropdownMenuItem(
@@ -367,11 +322,7 @@ class _TeacherMainPageState extends State<TeacherMainPage> {
                                                     child: Text(
                                                       Subject2,
                                                       style: const TextStyle(
-                                                          fontSize: 16,
-                                                          fontWeight:
-                                                              FontWeight.w500,
-                                                          color: Color.fromARGB(
-                                                              255, 89, 89, 87)),
+                                                          fontSize: 16, fontWeight: FontWeight.w500, color: Color.fromARGB(255, 89, 89, 87)),
                                                     ),
                                                   ),
                                                   DropdownMenuItem(
@@ -379,18 +330,14 @@ class _TeacherMainPageState extends State<TeacherMainPage> {
                                                     child: Text(
                                                       Subject3,
                                                       style: const TextStyle(
-                                                          fontSize: 16,
-                                                          fontWeight:
-                                                              FontWeight.w500,
-                                                          color: Color.fromARGB(
-                                                              255, 89, 89, 87)),
+                                                          fontSize: 16, fontWeight: FontWeight.w500, color: Color.fromARGB(255, 89, 89, 87)),
                                                     ),
                                                   ),
                                                 ],
                                                 onChanged: (value) {
                                                   setState(() {
-                                                    SubjectThatIsSelected =
-                                                        value.toString();
+                                                    SubjectThatIsSelected = value.toString();
+                                                    _initializeData();
                                                   });
                                                 },
                                               ),
@@ -410,10 +357,7 @@ class _TeacherMainPageState extends State<TeacherMainPage> {
                             child: Container(
                               width: 70,
                               padding: const EdgeInsets.only(top: 10),
-                              decoration: BoxDecoration(
-                                  color:
-                                      const Color.fromARGB(255, 255, 255, 255),
-                                  borderRadius: BorderRadius.circular(10)),
+                              decoration: BoxDecoration(color: const Color.fromARGB(255, 255, 255, 255), borderRadius: BorderRadius.circular(10)),
                               height: (PageWidth(context) < 550) ? 50 : 100,
                               child: Stack(
                                 children: [
@@ -422,11 +366,7 @@ class _TeacherMainPageState extends State<TeacherMainPage> {
                                       top: 10,
                                       child: Container(
                                         decoration: BoxDecoration(
-                                            color: (ThereIsNotifications)
-                                                ? Colors.red
-                                                : Colors.transparent,
-                                            borderRadius:
-                                                BorderRadius.circular(20)),
+                                            color: (ThereIsNotifications) ? Colors.red : Colors.transparent, borderRadius: BorderRadius.circular(20)),
                                         height: 7,
                                         width: 7,
                                       )),
@@ -462,16 +402,10 @@ class _TeacherMainPageState extends State<TeacherMainPage> {
                     height: 80,
                     decoration: const BoxDecoration(
                         boxShadow: [
-                          BoxShadow(
-                              offset: Offset(1, 1),
-                              blurRadius: 6,
-                              spreadRadius: .03,
-                              color: Color.fromARGB(82, 0, 0, 0)),
+                          BoxShadow(offset: Offset(1, 1), blurRadius: 6, spreadRadius: .03, color: Color.fromARGB(82, 0, 0, 0)),
                         ],
                         color: Color.fromARGB(255, 255, 255, 255),
-                        borderRadius: BorderRadius.only(
-                            bottomLeft: Radius.circular(20),
-                            bottomRight: Radius.circular(20))),
+                        borderRadius: BorderRadius.only(bottomLeft: Radius.circular(20), bottomRight: Radius.circular(20))),
                     child: Row(
                       children: [
                         Expanded(
@@ -500,11 +434,7 @@ class _TeacherMainPageState extends State<TeacherMainPage> {
                                     alignment: Alignment.bottomCenter,
                                     child: Text(
                                       teacher_profile_data["name"],
-                                      style: const TextStyle(
-                                          fontSize: 17,
-                                          fontWeight: FontWeight.w500,
-                                          color:
-                                              Color.fromARGB(255, 5, 123, 151)),
+                                      style: const TextStyle(fontSize: 17, fontWeight: FontWeight.w500, color: Color.fromARGB(255, 5, 123, 151)),
                                     ),
                                   ),
                                 ),
@@ -512,27 +442,19 @@ class _TeacherMainPageState extends State<TeacherMainPage> {
                                     flex: 2,
                                     child: Builder(
                                       builder: (context) {
-                                        if (Subject1 != "null" &&
-                                            Subject2 == "null" &&
-                                            Subject3 == "null") {
+                                        if (Subject1 != "null" && Subject2 == "null" && Subject3 == "null") {
                                           numberOfSubjects = 1;
                                           return CMaker(
-                                            padding: const EdgeInsets.only(
-                                                bottom: 13),
+                                            padding: const EdgeInsets.only(bottom: 13),
                                             alignment: Alignment.bottomCenter,
                                             child: Text(
                                               Subject1,
-                                              style: const TextStyle(
-                                                  fontSize: 16,
-                                                  fontWeight: FontWeight.w500,
-                                                  color: Color.fromARGB(
-                                                      255, 89, 89, 87)),
+                                              style:
+                                                  const TextStyle(fontSize: 16, fontWeight: FontWeight.w500, color: Color.fromARGB(255, 89, 89, 87)),
                                             ),
                                           );
                                         }
-                                        if (Subject1 != "null" &&
-                                            Subject2 != "null" &&
-                                            Subject3 == "null") {
+                                        if (Subject1 != "null" && Subject2 != "null" && Subject3 == "null") {
                                           numberOfSubjects = 2;
                                           return CMaker(
                                             alignment: Alignment.bottomCenter,
@@ -548,11 +470,7 @@ class _TeacherMainPageState extends State<TeacherMainPage> {
                                                   child: Text(
                                                     Subject1,
                                                     style: const TextStyle(
-                                                        fontSize: 16,
-                                                        fontWeight:
-                                                            FontWeight.w500,
-                                                        color: Color.fromARGB(
-                                                            255, 89, 89, 87)),
+                                                        fontSize: 16, fontWeight: FontWeight.w500, color: Color.fromARGB(255, 89, 89, 87)),
                                                   ),
                                                 ),
                                                 DropdownMenuItem(
@@ -560,18 +478,14 @@ class _TeacherMainPageState extends State<TeacherMainPage> {
                                                   child: Text(
                                                     Subject2,
                                                     style: const TextStyle(
-                                                        fontSize: 16,
-                                                        fontWeight:
-                                                            FontWeight.w500,
-                                                        color: Color.fromARGB(
-                                                            255, 89, 89, 87)),
+                                                        fontSize: 16, fontWeight: FontWeight.w500, color: Color.fromARGB(255, 89, 89, 87)),
                                                   ),
                                                 ),
                                               ],
                                               onChanged: (value) {
                                                 setState(() {
-                                                  SubjectThatIsSelected =
-                                                      value.toString();
+                                                  SubjectThatIsSelected = value.toString();
+                                                  _initializeData();
                                                 });
                                               },
                                             ),
@@ -592,11 +506,7 @@ class _TeacherMainPageState extends State<TeacherMainPage> {
                                                   child: Text(
                                                     Subject1,
                                                     style: const TextStyle(
-                                                        fontSize: 16,
-                                                        fontWeight:
-                                                            FontWeight.w500,
-                                                        color: Color.fromARGB(
-                                                            255, 89, 89, 87)),
+                                                        fontSize: 16, fontWeight: FontWeight.w500, color: Color.fromARGB(255, 89, 89, 87)),
                                                   ),
                                                 ),
                                                 DropdownMenuItem(
@@ -604,11 +514,7 @@ class _TeacherMainPageState extends State<TeacherMainPage> {
                                                   child: Text(
                                                     Subject2,
                                                     style: const TextStyle(
-                                                        fontSize: 16,
-                                                        fontWeight:
-                                                            FontWeight.w500,
-                                                        color: Color.fromARGB(
-                                                            255, 89, 89, 87)),
+                                                        fontSize: 16, fontWeight: FontWeight.w500, color: Color.fromARGB(255, 89, 89, 87)),
                                                   ),
                                                 ),
                                                 DropdownMenuItem(
@@ -616,18 +522,14 @@ class _TeacherMainPageState extends State<TeacherMainPage> {
                                                   child: Text(
                                                     Subject3,
                                                     style: const TextStyle(
-                                                        fontSize: 16,
-                                                        fontWeight:
-                                                            FontWeight.w500,
-                                                        color: Color.fromARGB(
-                                                            255, 89, 89, 87)),
+                                                        fontSize: 16, fontWeight: FontWeight.w500, color: Color.fromARGB(255, 89, 89, 87)),
                                                   ),
                                                 ),
                                               ],
                                               onChanged: (value) {
                                                 setState(() {
-                                                  SubjectThatIsSelected =
-                                                      value.toString();
+                                                  SubjectThatIsSelected = value.toString();
+                                                  _initializeData();
                                                 });
                                               },
                                             ),
@@ -647,9 +549,7 @@ class _TeacherMainPageState extends State<TeacherMainPage> {
                           child: Container(
                             width: 70,
                             padding: const EdgeInsets.only(top: 10),
-                            decoration: BoxDecoration(
-                                color: const Color.fromARGB(255, 255, 255, 255),
-                                borderRadius: BorderRadius.circular(10)),
+                            decoration: BoxDecoration(color: const Color.fromARGB(255, 255, 255, 255), borderRadius: BorderRadius.circular(10)),
                             height: (PageWidth(context) < 550) ? 50 : 100,
                             child: Stack(
                               children: [
@@ -658,11 +558,7 @@ class _TeacherMainPageState extends State<TeacherMainPage> {
                                     top: 10,
                                     child: Container(
                                       decoration: BoxDecoration(
-                                          color: (ThereIsNotifications)
-                                              ? Colors.red
-                                              : Colors.transparent,
-                                          borderRadius:
-                                              BorderRadius.circular(20)),
+                                          color: (ThereIsNotifications) ? Colors.red : Colors.transparent, borderRadius: BorderRadius.circular(20)),
                                       height: 7,
                                       width: 7,
                                     )),
@@ -702,16 +598,10 @@ class _TeacherMainPageState extends State<TeacherMainPage> {
                         height: 80,
                         decoration: const BoxDecoration(
                             boxShadow: [
-                              BoxShadow(
-                                  offset: Offset(1, 1),
-                                  blurRadius: 6,
-                                  spreadRadius: .03,
-                                  color: Color.fromARGB(82, 0, 0, 0)),
+                              BoxShadow(offset: Offset(1, 1), blurRadius: 6, spreadRadius: .03, color: Color.fromARGB(82, 0, 0, 0)),
                             ],
                             color: Color.fromARGB(255, 255, 255, 255),
-                            borderRadius: BorderRadius.only(
-                                bottomLeft: Radius.circular(20),
-                                bottomRight: Radius.circular(20))),
+                            borderRadius: BorderRadius.only(bottomLeft: Radius.circular(20), bottomRight: Radius.circular(20))),
                         child: Row(
                           children: [
                             Expanded(
@@ -736,16 +626,11 @@ class _TeacherMainPageState extends State<TeacherMainPage> {
                                     Expanded(
                                       flex: 3,
                                       child: CMaker(
-                                        padding:
-                                            const EdgeInsets.only(bottom: 13),
+                                        padding: const EdgeInsets.only(bottom: 13),
                                         alignment: Alignment.bottomCenter,
                                         child: const Text(
                                           "kareem said",
-                                          style: TextStyle(
-                                              fontSize: 17,
-                                              fontWeight: FontWeight.w500,
-                                              color: Color.fromARGB(
-                                                  255, 5, 123, 151)),
+                                          style: TextStyle(fontSize: 17, fontWeight: FontWeight.w500, color: Color.fromARGB(255, 5, 123, 151)),
                                         ),
                                       ),
                                     ),
@@ -753,33 +638,22 @@ class _TeacherMainPageState extends State<TeacherMainPage> {
                                         flex: 2,
                                         child: Builder(
                                           builder: (context) {
-                                            if (Subject1 != "null" &&
-                                                Subject2 == "null" &&
-                                                Subject3 == "null") {
+                                            if (Subject1 != "null" && Subject2 == "null" && Subject3 == "null") {
                                               numberOfSubjects = 1;
                                               return CMaker(
-                                                padding: const EdgeInsets.only(
-                                                    bottom: 13),
-                                                alignment:
-                                                    Alignment.bottomCenter,
+                                                padding: const EdgeInsets.only(bottom: 13),
+                                                alignment: Alignment.bottomCenter,
                                                 child: Text(
                                                   Subject1,
                                                   style: const TextStyle(
-                                                      fontSize: 16,
-                                                      fontWeight:
-                                                          FontWeight.w500,
-                                                      color: Color.fromARGB(
-                                                          255, 89, 89, 87)),
+                                                      fontSize: 16, fontWeight: FontWeight.w500, color: Color.fromARGB(255, 89, 89, 87)),
                                                 ),
                                               );
                                             }
-                                            if (Subject1 != "null" &&
-                                                Subject2 != "null" &&
-                                                Subject3 == "null") {
+                                            if (Subject1 != "null" && Subject2 != "null" && Subject3 == "null") {
                                               numberOfSubjects = 2;
                                               return CMaker(
-                                                alignment:
-                                                    Alignment.bottomCenter,
+                                                alignment: Alignment.bottomCenter,
                                                 child: DropdownButton(
                                                   underline: const SizedBox(
                                                     height: 0,
@@ -792,15 +666,7 @@ class _TeacherMainPageState extends State<TeacherMainPage> {
                                                       child: Text(
                                                         Subject1,
                                                         style: const TextStyle(
-                                                            fontSize: 16,
-                                                            fontWeight:
-                                                                FontWeight.w500,
-                                                            color:
-                                                                Color.fromARGB(
-                                                                    255,
-                                                                    89,
-                                                                    89,
-                                                                    87)),
+                                                            fontSize: 16, fontWeight: FontWeight.w500, color: Color.fromARGB(255, 89, 89, 87)),
                                                       ),
                                                     ),
                                                     DropdownMenuItem(
@@ -808,22 +674,14 @@ class _TeacherMainPageState extends State<TeacherMainPage> {
                                                       child: Text(
                                                         Subject2,
                                                         style: const TextStyle(
-                                                            fontSize: 16,
-                                                            fontWeight:
-                                                                FontWeight.w500,
-                                                            color:
-                                                                Color.fromARGB(
-                                                                    255,
-                                                                    89,
-                                                                    89,
-                                                                    87)),
+                                                            fontSize: 16, fontWeight: FontWeight.w500, color: Color.fromARGB(255, 89, 89, 87)),
                                                       ),
                                                     ),
                                                   ],
                                                   onChanged: (value) {
                                                     setState(() {
-                                                      SubjectThatIsSelected =
-                                                          value.toString();
+                                                      SubjectThatIsSelected = value.toString();
+                                                      _initializeData();
                                                     });
                                                   },
                                                 ),
@@ -831,8 +689,7 @@ class _TeacherMainPageState extends State<TeacherMainPage> {
                                             } else {
                                               numberOfSubjects = 3;
                                               return CMaker(
-                                                alignment:
-                                                    Alignment.bottomCenter,
+                                                alignment: Alignment.bottomCenter,
                                                 child: DropdownButton(
                                                   underline: const SizedBox(
                                                     height: 0,
@@ -845,15 +702,7 @@ class _TeacherMainPageState extends State<TeacherMainPage> {
                                                       child: Text(
                                                         Subject1,
                                                         style: const TextStyle(
-                                                            fontSize: 16,
-                                                            fontWeight:
-                                                                FontWeight.w500,
-                                                            color:
-                                                                Color.fromARGB(
-                                                                    255,
-                                                                    89,
-                                                                    89,
-                                                                    87)),
+                                                            fontSize: 16, fontWeight: FontWeight.w500, color: Color.fromARGB(255, 89, 89, 87)),
                                                       ),
                                                     ),
                                                     DropdownMenuItem(
@@ -861,15 +710,7 @@ class _TeacherMainPageState extends State<TeacherMainPage> {
                                                       child: Text(
                                                         Subject2,
                                                         style: const TextStyle(
-                                                            fontSize: 16,
-                                                            fontWeight:
-                                                                FontWeight.w500,
-                                                            color:
-                                                                Color.fromARGB(
-                                                                    255,
-                                                                    89,
-                                                                    89,
-                                                                    87)),
+                                                            fontSize: 16, fontWeight: FontWeight.w500, color: Color.fromARGB(255, 89, 89, 87)),
                                                       ),
                                                     ),
                                                     DropdownMenuItem(
@@ -877,22 +718,14 @@ class _TeacherMainPageState extends State<TeacherMainPage> {
                                                       child: Text(
                                                         Subject3,
                                                         style: const TextStyle(
-                                                            fontSize: 16,
-                                                            fontWeight:
-                                                                FontWeight.w500,
-                                                            color:
-                                                                Color.fromARGB(
-                                                                    255,
-                                                                    89,
-                                                                    89,
-                                                                    87)),
+                                                            fontSize: 16, fontWeight: FontWeight.w500, color: Color.fromARGB(255, 89, 89, 87)),
                                                       ),
                                                     ),
                                                   ],
                                                   onChanged: (value) {
                                                     setState(() {
-                                                      SubjectThatIsSelected =
-                                                          value.toString();
+                                                      SubjectThatIsSelected = value.toString();
+                                                      _initializeData();
                                                     });
                                                   },
                                                 ),
@@ -912,10 +745,7 @@ class _TeacherMainPageState extends State<TeacherMainPage> {
                               child: Container(
                                 width: 70,
                                 padding: const EdgeInsets.only(top: 10),
-                                decoration: BoxDecoration(
-                                    color: const Color.fromARGB(
-                                        255, 255, 255, 255),
-                                    borderRadius: BorderRadius.circular(10)),
+                                decoration: BoxDecoration(color: const Color.fromARGB(255, 255, 255, 255), borderRadius: BorderRadius.circular(10)),
                                 height: (PageWidth(context) < 550) ? 50 : 100,
                                 child: Stack(
                                   children: [
@@ -924,11 +754,8 @@ class _TeacherMainPageState extends State<TeacherMainPage> {
                                         top: 10,
                                         child: Container(
                                           decoration: BoxDecoration(
-                                              color: (ThereIsNotifications)
-                                                  ? Colors.red
-                                                  : Colors.transparent,
-                                              borderRadius:
-                                                  BorderRadius.circular(20)),
+                                              color: (ThereIsNotifications) ? Colors.red : Colors.transparent,
+                                              borderRadius: BorderRadius.circular(20)),
                                           height: 7,
                                           width: 7,
                                         )),
@@ -953,10 +780,8 @@ class _TeacherMainPageState extends State<TeacherMainPage> {
                       ),
                       const Padding(padding: EdgeInsets.only(top: 10)),
                       TeacherSecondPageContents(
-                        ListOfGrades:
-                            ListOfGrades, // put the list of grades and its students from the database here
-                        SubjectName:
-                            SubjectName, // put the teacher subject here
+                        ListOfGrades: ListOfGrades, // put the list of grades and its students from the database here
+                        SubjectName: SubjectName, // put the teacher subject here
                       ),
                     ],
                   ),
@@ -973,16 +798,10 @@ class _TeacherMainPageState extends State<TeacherMainPage> {
                       height: 80,
                       decoration: const BoxDecoration(
                           boxShadow: [
-                            BoxShadow(
-                                offset: Offset(1, 1),
-                                blurRadius: 6,
-                                spreadRadius: .03,
-                                color: Color.fromARGB(82, 0, 0, 0)),
+                            BoxShadow(offset: Offset(1, 1), blurRadius: 6, spreadRadius: .03, color: Color.fromARGB(82, 0, 0, 0)),
                           ],
                           color: Color.fromARGB(255, 255, 255, 255),
-                          borderRadius: BorderRadius.only(
-                              bottomLeft: Radius.circular(20),
-                              bottomRight: Radius.circular(20))),
+                          borderRadius: BorderRadius.only(bottomLeft: Radius.circular(20), bottomRight: Radius.circular(20))),
                       child: Row(
                         children: [
                           Expanded(
@@ -1007,16 +826,11 @@ class _TeacherMainPageState extends State<TeacherMainPage> {
                                   Expanded(
                                     flex: 3,
                                     child: CMaker(
-                                      padding:
-                                          const EdgeInsets.only(bottom: 13),
+                                      padding: const EdgeInsets.only(bottom: 13),
                                       alignment: Alignment.bottomCenter,
-                                      child: const Text(
-                                        "kareem said",
-                                        style: TextStyle(
-                                            fontSize: 17,
-                                            fontWeight: FontWeight.w500,
-                                            color: Color.fromARGB(
-                                                255, 5, 123, 151)),
+                                      child: Text(
+                                        teacher_profile_data["name"],
+                                        style: const TextStyle(fontSize: 17, fontWeight: FontWeight.w500, color: Color.fromARGB(255, 5, 123, 151)),
                                       ),
                                     ),
                                   ),
@@ -1024,27 +838,19 @@ class _TeacherMainPageState extends State<TeacherMainPage> {
                                       flex: 2,
                                       child: Builder(
                                         builder: (context) {
-                                          if (Subject1 != "null" &&
-                                              Subject2 == "null" &&
-                                              Subject3 == "null") {
+                                          if (Subject1 != "null" && Subject2 == "null" && Subject3 == "null") {
                                             numberOfSubjects = 1;
                                             return CMaker(
-                                              padding: const EdgeInsets.only(
-                                                  bottom: 13),
+                                              padding: const EdgeInsets.only(bottom: 13),
                                               alignment: Alignment.bottomCenter,
                                               child: Text(
                                                 Subject1,
                                                 style: const TextStyle(
-                                                    fontSize: 16,
-                                                    fontWeight: FontWeight.w500,
-                                                    color: Color.fromARGB(
-                                                        255, 89, 89, 87)),
+                                                    fontSize: 16, fontWeight: FontWeight.w500, color: Color.fromARGB(255, 89, 89, 87)),
                                               ),
                                             );
                                           }
-                                          if (Subject1 != "null" &&
-                                              Subject2 != "null" &&
-                                              Subject3 == "null") {
+                                          if (Subject1 != "null" && Subject2 != "null" && Subject3 == "null") {
                                             numberOfSubjects = 2;
                                             return CMaker(
                                               alignment: Alignment.bottomCenter,
@@ -1060,11 +866,7 @@ class _TeacherMainPageState extends State<TeacherMainPage> {
                                                     child: Text(
                                                       Subject1,
                                                       style: const TextStyle(
-                                                          fontSize: 16,
-                                                          fontWeight:
-                                                              FontWeight.w500,
-                                                          color: Color.fromARGB(
-                                                              255, 89, 89, 87)),
+                                                          fontSize: 16, fontWeight: FontWeight.w500, color: Color.fromARGB(255, 89, 89, 87)),
                                                     ),
                                                   ),
                                                   DropdownMenuItem(
@@ -1072,18 +874,14 @@ class _TeacherMainPageState extends State<TeacherMainPage> {
                                                     child: Text(
                                                       Subject2,
                                                       style: const TextStyle(
-                                                          fontSize: 16,
-                                                          fontWeight:
-                                                              FontWeight.w500,
-                                                          color: Color.fromARGB(
-                                                              255, 89, 89, 87)),
+                                                          fontSize: 16, fontWeight: FontWeight.w500, color: Color.fromARGB(255, 89, 89, 87)),
                                                     ),
                                                   ),
                                                 ],
                                                 onChanged: (value) {
                                                   setState(() {
-                                                    SubjectThatIsSelected =
-                                                        value.toString();
+                                                    SubjectThatIsSelected = value.toString();
+                                                    _initializeData();
                                                   });
                                                 },
                                               ),
@@ -1104,11 +902,7 @@ class _TeacherMainPageState extends State<TeacherMainPage> {
                                                     child: Text(
                                                       Subject1,
                                                       style: const TextStyle(
-                                                          fontSize: 16,
-                                                          fontWeight:
-                                                              FontWeight.w500,
-                                                          color: Color.fromARGB(
-                                                              255, 89, 89, 87)),
+                                                          fontSize: 16, fontWeight: FontWeight.w500, color: Color.fromARGB(255, 89, 89, 87)),
                                                     ),
                                                   ),
                                                   DropdownMenuItem(
@@ -1116,11 +910,7 @@ class _TeacherMainPageState extends State<TeacherMainPage> {
                                                     child: Text(
                                                       Subject2,
                                                       style: const TextStyle(
-                                                          fontSize: 16,
-                                                          fontWeight:
-                                                              FontWeight.w500,
-                                                          color: Color.fromARGB(
-                                                              255, 89, 89, 87)),
+                                                          fontSize: 16, fontWeight: FontWeight.w500, color: Color.fromARGB(255, 89, 89, 87)),
                                                     ),
                                                   ),
                                                   DropdownMenuItem(
@@ -1128,18 +918,14 @@ class _TeacherMainPageState extends State<TeacherMainPage> {
                                                     child: Text(
                                                       Subject3,
                                                       style: const TextStyle(
-                                                          fontSize: 16,
-                                                          fontWeight:
-                                                              FontWeight.w500,
-                                                          color: Color.fromARGB(
-                                                              255, 89, 89, 87)),
+                                                          fontSize: 16, fontWeight: FontWeight.w500, color: Color.fromARGB(255, 89, 89, 87)),
                                                     ),
                                                   ),
                                                 ],
                                                 onChanged: (value) {
                                                   setState(() {
-                                                    SubjectThatIsSelected =
-                                                        value.toString();
+                                                    SubjectThatIsSelected = value.toString();
+                                                    _initializeData();
                                                   });
                                                 },
                                               ),
@@ -1159,10 +945,7 @@ class _TeacherMainPageState extends State<TeacherMainPage> {
                             child: Container(
                               width: 70,
                               padding: const EdgeInsets.only(top: 10),
-                              decoration: BoxDecoration(
-                                  color:
-                                      const Color.fromARGB(255, 255, 255, 255),
-                                  borderRadius: BorderRadius.circular(10)),
+                              decoration: BoxDecoration(color: const Color.fromARGB(255, 255, 255, 255), borderRadius: BorderRadius.circular(10)),
                               height: (PageWidth(context) < 550) ? 50 : 100,
                               child: Stack(
                                 children: [
@@ -1171,11 +954,7 @@ class _TeacherMainPageState extends State<TeacherMainPage> {
                                       top: 10,
                                       child: Container(
                                         decoration: BoxDecoration(
-                                            color: (ThereIsNotifications)
-                                                ? Colors.red
-                                                : Colors.transparent,
-                                            borderRadius:
-                                                BorderRadius.circular(20)),
+                                            color: (ThereIsNotifications) ? Colors.red : Colors.transparent, borderRadius: BorderRadius.circular(20)),
                                         height: 7,
                                         width: 7,
                                       )),
@@ -1200,8 +979,7 @@ class _TeacherMainPageState extends State<TeacherMainPage> {
                     ),
                     const Padding(padding: EdgeInsets.only(top: 10)),
                     TeacherSecondPageContents(
-                      ListOfGrades:
-                          ListOfGrades, // put the list of grades and its students from the database here
+                      ListOfGrades: ListOfGrades, // put the list of grades and its students from the database here
                       SubjectName: SubjectName, // put the teacher subject here
                     ),
                   ],
@@ -1217,16 +995,10 @@ class _TeacherMainPageState extends State<TeacherMainPage> {
                       height: 80,
                       decoration: const BoxDecoration(
                           boxShadow: [
-                            BoxShadow(
-                                offset: Offset(1, 1),
-                                blurRadius: 6,
-                                spreadRadius: .03,
-                                color: Color.fromARGB(82, 0, 0, 0)),
+                            BoxShadow(offset: Offset(1, 1), blurRadius: 6, spreadRadius: .03, color: Color.fromARGB(82, 0, 0, 0)),
                           ],
                           color: Color.fromARGB(255, 255, 255, 255),
-                          borderRadius: BorderRadius.only(
-                              bottomLeft: Radius.circular(20),
-                              bottomRight: Radius.circular(20))),
+                          borderRadius: BorderRadius.only(bottomLeft: Radius.circular(20), bottomRight: Radius.circular(20))),
                       child: Row(
                         children: [
                           Expanded(
@@ -1251,16 +1023,11 @@ class _TeacherMainPageState extends State<TeacherMainPage> {
                                   Expanded(
                                     flex: 3,
                                     child: CMaker(
-                                      padding:
-                                          const EdgeInsets.only(bottom: 13),
+                                      padding: const EdgeInsets.only(bottom: 13),
                                       alignment: Alignment.bottomCenter,
                                       child: const Text(
                                         "kareem said",
-                                        style: TextStyle(
-                                            fontSize: 17,
-                                            fontWeight: FontWeight.w500,
-                                            color: Color.fromARGB(
-                                                255, 5, 123, 151)),
+                                        style: TextStyle(fontSize: 17, fontWeight: FontWeight.w500, color: Color.fromARGB(255, 5, 123, 151)),
                                       ),
                                     ),
                                   ),
@@ -1268,27 +1035,19 @@ class _TeacherMainPageState extends State<TeacherMainPage> {
                                       flex: 2,
                                       child: Builder(
                                         builder: (context) {
-                                          if (Subject1 != "null" &&
-                                              Subject2 == "null" &&
-                                              Subject3 == "null") {
+                                          if (Subject1 != "null" && Subject2 == "null" && Subject3 == "null") {
                                             numberOfSubjects = 1;
                                             return CMaker(
-                                              padding: const EdgeInsets.only(
-                                                  bottom: 13),
+                                              padding: const EdgeInsets.only(bottom: 13),
                                               alignment: Alignment.bottomCenter,
                                               child: Text(
                                                 Subject1,
                                                 style: const TextStyle(
-                                                    fontSize: 16,
-                                                    fontWeight: FontWeight.w500,
-                                                    color: Color.fromARGB(
-                                                        255, 89, 89, 87)),
+                                                    fontSize: 16, fontWeight: FontWeight.w500, color: Color.fromARGB(255, 89, 89, 87)),
                                               ),
                                             );
                                           }
-                                          if (Subject1 != "null" &&
-                                              Subject2 != "null" &&
-                                              Subject3 == "null") {
+                                          if (Subject1 != "null" && Subject2 != "null" && Subject3 == "null") {
                                             numberOfSubjects = 2;
                                             return CMaker(
                                               alignment: Alignment.bottomCenter,
@@ -1304,11 +1063,7 @@ class _TeacherMainPageState extends State<TeacherMainPage> {
                                                     child: Text(
                                                       Subject1,
                                                       style: const TextStyle(
-                                                          fontSize: 16,
-                                                          fontWeight:
-                                                              FontWeight.w500,
-                                                          color: Color.fromARGB(
-                                                              255, 89, 89, 87)),
+                                                          fontSize: 16, fontWeight: FontWeight.w500, color: Color.fromARGB(255, 89, 89, 87)),
                                                     ),
                                                   ),
                                                   DropdownMenuItem(
@@ -1316,18 +1071,14 @@ class _TeacherMainPageState extends State<TeacherMainPage> {
                                                     child: Text(
                                                       Subject2,
                                                       style: const TextStyle(
-                                                          fontSize: 16,
-                                                          fontWeight:
-                                                              FontWeight.w500,
-                                                          color: Color.fromARGB(
-                                                              255, 89, 89, 87)),
+                                                          fontSize: 16, fontWeight: FontWeight.w500, color: Color.fromARGB(255, 89, 89, 87)),
                                                     ),
                                                   ),
                                                 ],
                                                 onChanged: (value) {
                                                   setState(() {
-                                                    SubjectThatIsSelected =
-                                                        value.toString();
+                                                    SubjectThatIsSelected = value.toString();
+                                                    _initializeData();
                                                   });
                                                 },
                                               ),
@@ -1348,11 +1099,7 @@ class _TeacherMainPageState extends State<TeacherMainPage> {
                                                     child: Text(
                                                       Subject1,
                                                       style: const TextStyle(
-                                                          fontSize: 16,
-                                                          fontWeight:
-                                                              FontWeight.w500,
-                                                          color: Color.fromARGB(
-                                                              255, 89, 89, 87)),
+                                                          fontSize: 16, fontWeight: FontWeight.w500, color: Color.fromARGB(255, 89, 89, 87)),
                                                     ),
                                                   ),
                                                   DropdownMenuItem(
@@ -1360,11 +1107,7 @@ class _TeacherMainPageState extends State<TeacherMainPage> {
                                                     child: Text(
                                                       Subject2,
                                                       style: const TextStyle(
-                                                          fontSize: 16,
-                                                          fontWeight:
-                                                              FontWeight.w500,
-                                                          color: Color.fromARGB(
-                                                              255, 89, 89, 87)),
+                                                          fontSize: 16, fontWeight: FontWeight.w500, color: Color.fromARGB(255, 89, 89, 87)),
                                                     ),
                                                   ),
                                                   DropdownMenuItem(
@@ -1372,18 +1115,14 @@ class _TeacherMainPageState extends State<TeacherMainPage> {
                                                     child: Text(
                                                       Subject3,
                                                       style: const TextStyle(
-                                                          fontSize: 16,
-                                                          fontWeight:
-                                                              FontWeight.w500,
-                                                          color: Color.fromARGB(
-                                                              255, 89, 89, 87)),
+                                                          fontSize: 16, fontWeight: FontWeight.w500, color: Color.fromARGB(255, 89, 89, 87)),
                                                     ),
                                                   ),
                                                 ],
                                                 onChanged: (value) {
                                                   setState(() {
-                                                    SubjectThatIsSelected =
-                                                        value.toString();
+                                                    SubjectThatIsSelected = value.toString();
+                                                    _initializeData();
                                                   });
                                                 },
                                               ),
@@ -1403,10 +1142,7 @@ class _TeacherMainPageState extends State<TeacherMainPage> {
                             child: Container(
                               width: 70,
                               padding: const EdgeInsets.only(top: 10),
-                              decoration: BoxDecoration(
-                                  color:
-                                      const Color.fromARGB(255, 255, 255, 255),
-                                  borderRadius: BorderRadius.circular(10)),
+                              decoration: BoxDecoration(color: const Color.fromARGB(255, 255, 255, 255), borderRadius: BorderRadius.circular(10)),
                               height: (PageWidth(context) < 550) ? 50 : 100,
                               child: Stack(
                                 children: [
@@ -1415,11 +1151,7 @@ class _TeacherMainPageState extends State<TeacherMainPage> {
                                       top: 10,
                                       child: Container(
                                         decoration: BoxDecoration(
-                                            color: (ThereIsNotifications)
-                                                ? Colors.red
-                                                : Colors.transparent,
-                                            borderRadius:
-                                                BorderRadius.circular(20)),
+                                            color: (ThereIsNotifications) ? Colors.red : Colors.transparent, borderRadius: BorderRadius.circular(20)),
                                         height: 7,
                                         width: 7,
                                       )),
@@ -1460,16 +1192,10 @@ class _TeacherMainPageState extends State<TeacherMainPage> {
                     height: 80,
                     decoration: const BoxDecoration(
                         boxShadow: [
-                          BoxShadow(
-                              offset: Offset(1, 1),
-                              blurRadius: 6,
-                              spreadRadius: .03,
-                              color: Color.fromARGB(82, 0, 0, 0)),
+                          BoxShadow(offset: Offset(1, 1), blurRadius: 6, spreadRadius: .03, color: Color.fromARGB(82, 0, 0, 0)),
                         ],
                         color: Color.fromARGB(255, 255, 255, 255),
-                        borderRadius: BorderRadius.only(
-                            bottomLeft: Radius.circular(20),
-                            bottomRight: Radius.circular(20))),
+                        borderRadius: BorderRadius.only(bottomLeft: Radius.circular(20), bottomRight: Radius.circular(20))),
                     child: Row(
                       children: [
                         Expanded(
@@ -1496,13 +1222,9 @@ class _TeacherMainPageState extends State<TeacherMainPage> {
                                   child: CMaker(
                                     padding: const EdgeInsets.only(bottom: 13),
                                     alignment: Alignment.bottomCenter,
-                                    child: const Text(
-                                      "kareem said",
-                                      style: TextStyle(
-                                          fontSize: 17,
-                                          fontWeight: FontWeight.w500,
-                                          color:
-                                              Color.fromARGB(255, 5, 123, 151)),
+                                    child: Text(
+                                      teacher_profile_data["name"],
+                                      style: const TextStyle(fontSize: 17, fontWeight: FontWeight.w500, color: Color.fromARGB(255, 5, 123, 151)),
                                     ),
                                   ),
                                 ),
@@ -1510,27 +1232,19 @@ class _TeacherMainPageState extends State<TeacherMainPage> {
                                     flex: 2,
                                     child: Builder(
                                       builder: (context) {
-                                        if (Subject1 != "null" &&
-                                            Subject2 == "null" &&
-                                            Subject3 == "null") {
+                                        if (Subject1 != "null" && Subject2 == "null" && Subject3 == "null") {
                                           numberOfSubjects = 1;
                                           return CMaker(
-                                            padding: const EdgeInsets.only(
-                                                bottom: 13),
+                                            padding: const EdgeInsets.only(bottom: 13),
                                             alignment: Alignment.bottomCenter,
                                             child: Text(
                                               Subject1,
-                                              style: const TextStyle(
-                                                  fontSize: 16,
-                                                  fontWeight: FontWeight.w500,
-                                                  color: Color.fromARGB(
-                                                      255, 89, 89, 87)),
+                                              style:
+                                                  const TextStyle(fontSize: 16, fontWeight: FontWeight.w500, color: Color.fromARGB(255, 89, 89, 87)),
                                             ),
                                           );
                                         }
-                                        if (Subject1 != "null" &&
-                                            Subject2 != "null" &&
-                                            Subject3 == "null") {
+                                        if (Subject1 != "null" && Subject2 != "null" && Subject3 == "null") {
                                           numberOfSubjects = 2;
                                           return CMaker(
                                             alignment: Alignment.bottomCenter,
@@ -1546,11 +1260,7 @@ class _TeacherMainPageState extends State<TeacherMainPage> {
                                                   child: Text(
                                                     Subject1,
                                                     style: const TextStyle(
-                                                        fontSize: 16,
-                                                        fontWeight:
-                                                            FontWeight.w500,
-                                                        color: Color.fromARGB(
-                                                            255, 89, 89, 87)),
+                                                        fontSize: 16, fontWeight: FontWeight.w500, color: Color.fromARGB(255, 89, 89, 87)),
                                                   ),
                                                 ),
                                                 DropdownMenuItem(
@@ -1558,18 +1268,14 @@ class _TeacherMainPageState extends State<TeacherMainPage> {
                                                   child: Text(
                                                     Subject2,
                                                     style: const TextStyle(
-                                                        fontSize: 16,
-                                                        fontWeight:
-                                                            FontWeight.w500,
-                                                        color: Color.fromARGB(
-                                                            255, 89, 89, 87)),
+                                                        fontSize: 16, fontWeight: FontWeight.w500, color: Color.fromARGB(255, 89, 89, 87)),
                                                   ),
                                                 ),
                                               ],
                                               onChanged: (value) {
                                                 setState(() {
-                                                  SubjectThatIsSelected =
-                                                      value.toString();
+                                                  SubjectThatIsSelected = value.toString();
+                                                  _initializeData();
                                                 });
                                               },
                                             ),
@@ -1590,11 +1296,7 @@ class _TeacherMainPageState extends State<TeacherMainPage> {
                                                   child: Text(
                                                     Subject1,
                                                     style: const TextStyle(
-                                                        fontSize: 16,
-                                                        fontWeight:
-                                                            FontWeight.w500,
-                                                        color: Color.fromARGB(
-                                                            255, 89, 89, 87)),
+                                                        fontSize: 16, fontWeight: FontWeight.w500, color: Color.fromARGB(255, 89, 89, 87)),
                                                   ),
                                                 ),
                                                 DropdownMenuItem(
@@ -1602,11 +1304,7 @@ class _TeacherMainPageState extends State<TeacherMainPage> {
                                                   child: Text(
                                                     Subject2,
                                                     style: const TextStyle(
-                                                        fontSize: 16,
-                                                        fontWeight:
-                                                            FontWeight.w500,
-                                                        color: Color.fromARGB(
-                                                            255, 89, 89, 87)),
+                                                        fontSize: 16, fontWeight: FontWeight.w500, color: Color.fromARGB(255, 89, 89, 87)),
                                                   ),
                                                 ),
                                                 DropdownMenuItem(
@@ -1614,18 +1312,14 @@ class _TeacherMainPageState extends State<TeacherMainPage> {
                                                   child: Text(
                                                     Subject3,
                                                     style: const TextStyle(
-                                                        fontSize: 16,
-                                                        fontWeight:
-                                                            FontWeight.w500,
-                                                        color: Color.fromARGB(
-                                                            255, 89, 89, 87)),
+                                                        fontSize: 16, fontWeight: FontWeight.w500, color: Color.fromARGB(255, 89, 89, 87)),
                                                   ),
                                                 ),
                                               ],
                                               onChanged: (value) {
                                                 setState(() {
-                                                  SubjectThatIsSelected =
-                                                      value.toString();
+                                                  SubjectThatIsSelected = value.toString();
+                                                  _initializeData();
                                                 });
                                               },
                                             ),
@@ -1645,9 +1339,7 @@ class _TeacherMainPageState extends State<TeacherMainPage> {
                           child: Container(
                             width: 70,
                             padding: const EdgeInsets.only(top: 10),
-                            decoration: BoxDecoration(
-                                color: const Color.fromARGB(255, 255, 255, 255),
-                                borderRadius: BorderRadius.circular(10)),
+                            decoration: BoxDecoration(color: const Color.fromARGB(255, 255, 255, 255), borderRadius: BorderRadius.circular(10)),
                             height: (PageWidth(context) < 550) ? 50 : 100,
                             child: Stack(
                               children: [
@@ -1656,11 +1348,7 @@ class _TeacherMainPageState extends State<TeacherMainPage> {
                                     top: 10,
                                     child: Container(
                                       decoration: BoxDecoration(
-                                          color: (ThereIsNotifications)
-                                              ? Colors.red
-                                              : Colors.transparent,
-                                          borderRadius:
-                                              BorderRadius.circular(20)),
+                                          color: (ThereIsNotifications) ? Colors.red : Colors.transparent, borderRadius: BorderRadius.circular(20)),
                                       height: 7,
                                       width: 7,
                                     )),
@@ -1701,16 +1389,10 @@ class _TeacherMainPageState extends State<TeacherMainPage> {
                     height: 80,
                     decoration: const BoxDecoration(
                         boxShadow: [
-                          BoxShadow(
-                              offset: Offset(1, 1),
-                              blurRadius: 6,
-                              spreadRadius: .03,
-                              color: Color.fromARGB(82, 0, 0, 0)),
+                          BoxShadow(offset: Offset(1, 1), blurRadius: 6, spreadRadius: .03, color: Color.fromARGB(82, 0, 0, 0)),
                         ],
                         color: Color.fromARGB(255, 255, 255, 255),
-                        borderRadius: BorderRadius.only(
-                            bottomLeft: Radius.circular(20),
-                            bottomRight: Radius.circular(20))),
+                        borderRadius: BorderRadius.only(bottomLeft: Radius.circular(20), bottomRight: Radius.circular(20))),
                     child: Row(
                       children: [
                         Expanded(
@@ -1739,11 +1421,7 @@ class _TeacherMainPageState extends State<TeacherMainPage> {
                                     alignment: Alignment.bottomCenter,
                                     child: const Text(
                                       "kareem said",
-                                      style: TextStyle(
-                                          fontSize: 17,
-                                          fontWeight: FontWeight.w500,
-                                          color:
-                                              Color.fromARGB(255, 5, 123, 151)),
+                                      style: TextStyle(fontSize: 17, fontWeight: FontWeight.w500, color: Color.fromARGB(255, 5, 123, 151)),
                                     ),
                                   ),
                                 ),
@@ -1751,27 +1429,19 @@ class _TeacherMainPageState extends State<TeacherMainPage> {
                                     flex: 2,
                                     child: Builder(
                                       builder: (context) {
-                                        if (Subject1 != "null" &&
-                                            Subject2 == "null" &&
-                                            Subject3 == "null") {
+                                        if (Subject1 != "null" && Subject2 == "null" && Subject3 == "null") {
                                           numberOfSubjects = 1;
                                           return CMaker(
-                                            padding: const EdgeInsets.only(
-                                                bottom: 13),
+                                            padding: const EdgeInsets.only(bottom: 13),
                                             alignment: Alignment.bottomCenter,
                                             child: Text(
                                               Subject1,
-                                              style: const TextStyle(
-                                                  fontSize: 16,
-                                                  fontWeight: FontWeight.w500,
-                                                  color: Color.fromARGB(
-                                                      255, 89, 89, 87)),
+                                              style:
+                                                  const TextStyle(fontSize: 16, fontWeight: FontWeight.w500, color: Color.fromARGB(255, 89, 89, 87)),
                                             ),
                                           );
                                         }
-                                        if (Subject1 != "null" &&
-                                            Subject2 != "null" &&
-                                            Subject3 == "null") {
+                                        if (Subject1 != "null" && Subject2 != "null" && Subject3 == "null") {
                                           numberOfSubjects = 2;
                                           return CMaker(
                                             alignment: Alignment.bottomCenter,
@@ -1787,11 +1457,7 @@ class _TeacherMainPageState extends State<TeacherMainPage> {
                                                   child: Text(
                                                     Subject1,
                                                     style: const TextStyle(
-                                                        fontSize: 16,
-                                                        fontWeight:
-                                                            FontWeight.w500,
-                                                        color: Color.fromARGB(
-                                                            255, 89, 89, 87)),
+                                                        fontSize: 16, fontWeight: FontWeight.w500, color: Color.fromARGB(255, 89, 89, 87)),
                                                   ),
                                                 ),
                                                 DropdownMenuItem(
@@ -1799,18 +1465,14 @@ class _TeacherMainPageState extends State<TeacherMainPage> {
                                                   child: Text(
                                                     Subject2,
                                                     style: const TextStyle(
-                                                        fontSize: 16,
-                                                        fontWeight:
-                                                            FontWeight.w500,
-                                                        color: Color.fromARGB(
-                                                            255, 89, 89, 87)),
+                                                        fontSize: 16, fontWeight: FontWeight.w500, color: Color.fromARGB(255, 89, 89, 87)),
                                                   ),
                                                 ),
                                               ],
                                               onChanged: (value) {
                                                 setState(() {
-                                                  SubjectThatIsSelected =
-                                                      value.toString();
+                                                  SubjectThatIsSelected = value.toString();
+                                                  _initializeData();
                                                 });
                                               },
                                             ),
@@ -1831,11 +1493,7 @@ class _TeacherMainPageState extends State<TeacherMainPage> {
                                                   child: Text(
                                                     Subject1,
                                                     style: const TextStyle(
-                                                        fontSize: 16,
-                                                        fontWeight:
-                                                            FontWeight.w500,
-                                                        color: Color.fromARGB(
-                                                            255, 89, 89, 87)),
+                                                        fontSize: 16, fontWeight: FontWeight.w500, color: Color.fromARGB(255, 89, 89, 87)),
                                                   ),
                                                 ),
                                                 DropdownMenuItem(
@@ -1843,11 +1501,7 @@ class _TeacherMainPageState extends State<TeacherMainPage> {
                                                   child: Text(
                                                     Subject2,
                                                     style: const TextStyle(
-                                                        fontSize: 16,
-                                                        fontWeight:
-                                                            FontWeight.w500,
-                                                        color: Color.fromARGB(
-                                                            255, 89, 89, 87)),
+                                                        fontSize: 16, fontWeight: FontWeight.w500, color: Color.fromARGB(255, 89, 89, 87)),
                                                   ),
                                                 ),
                                                 DropdownMenuItem(
@@ -1855,18 +1509,14 @@ class _TeacherMainPageState extends State<TeacherMainPage> {
                                                   child: Text(
                                                     Subject3,
                                                     style: const TextStyle(
-                                                        fontSize: 16,
-                                                        fontWeight:
-                                                            FontWeight.w500,
-                                                        color: Color.fromARGB(
-                                                            255, 89, 89, 87)),
+                                                        fontSize: 16, fontWeight: FontWeight.w500, color: Color.fromARGB(255, 89, 89, 87)),
                                                   ),
                                                 ),
                                               ],
                                               onChanged: (value) {
                                                 setState(() {
-                                                  SubjectThatIsSelected =
-                                                      value.toString();
+                                                  SubjectThatIsSelected = value.toString();
+                                                  _initializeData();
                                                 });
                                               },
                                             ),
@@ -1881,19 +1531,14 @@ class _TeacherMainPageState extends State<TeacherMainPage> {
                         Expanded(
                           child: InkWell(
                             onTap: () async {
-                              final SharedPreferences prefs =
-                                  await SharedPreferences.getInstance();
+                              final SharedPreferences prefs = await SharedPreferences.getInstance();
                               prefs.remove("id");
-                              Navigator.pushReplacementNamed(
-                                  context, "SplashView");
+                              Navigator.pushReplacementNamed(context, "SplashView");
                             },
                             child: Container(
                               width: 70,
                               padding: const EdgeInsets.only(top: 10),
-                              decoration: BoxDecoration(
-                                  color:
-                                      const Color.fromARGB(255, 255, 255, 255),
-                                  borderRadius: BorderRadius.circular(10)),
+                              decoration: BoxDecoration(color: const Color.fromARGB(255, 255, 255, 255), borderRadius: BorderRadius.circular(10)),
                               height: 50,
                               child: const Icon(Icons.logout),
                             ),
@@ -1916,16 +1561,10 @@ class _TeacherMainPageState extends State<TeacherMainPage> {
                 height: 80,
                 decoration: const BoxDecoration(
                     boxShadow: [
-                      BoxShadow(
-                          offset: Offset(1, 1),
-                          blurRadius: 6,
-                          spreadRadius: .03,
-                          color: Color.fromARGB(82, 0, 0, 0)),
+                      BoxShadow(offset: Offset(1, 1), blurRadius: 6, spreadRadius: .03, color: Color.fromARGB(82, 0, 0, 0)),
                     ],
                     color: Color.fromARGB(255, 255, 255, 255),
-                    borderRadius: BorderRadius.only(
-                        bottomLeft: Radius.circular(20),
-                        bottomRight: Radius.circular(20))),
+                    borderRadius: BorderRadius.only(bottomLeft: Radius.circular(20), bottomRight: Radius.circular(20))),
                 child: Row(
                   children: [
                     Expanded(
@@ -1952,12 +1591,9 @@ class _TeacherMainPageState extends State<TeacherMainPage> {
                               child: CMaker(
                                 padding: const EdgeInsets.only(bottom: 13),
                                 alignment: Alignment.bottomCenter,
-                                child: const Text(
-                                  "kareem said",
-                                  style: TextStyle(
-                                      fontSize: 17,
-                                      fontWeight: FontWeight.w500,
-                                      color: Color.fromARGB(255, 5, 123, 151)),
+                                child: Text(
+                                  teacher_profile_data["name"],
+                                  style: const TextStyle(fontSize: 17, fontWeight: FontWeight.w500, color: Color.fromARGB(255, 5, 123, 151)),
                                 ),
                               ),
                             ),
@@ -1965,27 +1601,18 @@ class _TeacherMainPageState extends State<TeacherMainPage> {
                                 flex: 2,
                                 child: Builder(
                                   builder: (context) {
-                                    if (Subject1 != "null" &&
-                                        Subject2 == "null" &&
-                                        Subject3 == "null") {
+                                    if (Subject1 != "null" && Subject2 == "null" && Subject3 == "null") {
                                       numberOfSubjects = 1;
                                       return CMaker(
-                                        padding:
-                                            const EdgeInsets.only(bottom: 13),
+                                        padding: const EdgeInsets.only(bottom: 13),
                                         alignment: Alignment.bottomCenter,
                                         child: Text(
                                           Subject1,
-                                          style: const TextStyle(
-                                              fontSize: 16,
-                                              fontWeight: FontWeight.w500,
-                                              color: Color.fromARGB(
-                                                  255, 89, 89, 87)),
+                                          style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w500, color: Color.fromARGB(255, 89, 89, 87)),
                                         ),
                                       );
                                     }
-                                    if (Subject1 != "null" &&
-                                        Subject2 != "null" &&
-                                        Subject3 == "null") {
+                                    if (Subject1 != "null" && Subject2 != "null" && Subject3 == "null") {
                                       numberOfSubjects = 2;
                                       return CMaker(
                                         alignment: Alignment.bottomCenter,
@@ -2001,10 +1628,7 @@ class _TeacherMainPageState extends State<TeacherMainPage> {
                                               child: Text(
                                                 Subject1,
                                                 style: const TextStyle(
-                                                    fontSize: 16,
-                                                    fontWeight: FontWeight.w500,
-                                                    color: Color.fromARGB(
-                                                        255, 89, 89, 87)),
+                                                    fontSize: 16, fontWeight: FontWeight.w500, color: Color.fromARGB(255, 89, 89, 87)),
                                               ),
                                             ),
                                             DropdownMenuItem(
@@ -2012,17 +1636,14 @@ class _TeacherMainPageState extends State<TeacherMainPage> {
                                               child: Text(
                                                 Subject2,
                                                 style: const TextStyle(
-                                                    fontSize: 16,
-                                                    fontWeight: FontWeight.w500,
-                                                    color: Color.fromARGB(
-                                                        255, 89, 89, 87)),
+                                                    fontSize: 16, fontWeight: FontWeight.w500, color: Color.fromARGB(255, 89, 89, 87)),
                                               ),
                                             ),
                                           ],
                                           onChanged: (value) {
                                             setState(() {
-                                              SubjectThatIsSelected =
-                                                  value.toString();
+                                              SubjectThatIsSelected = value.toString();
+                                              _initializeData();
                                             });
                                           },
                                         ),
@@ -2043,10 +1664,7 @@ class _TeacherMainPageState extends State<TeacherMainPage> {
                                               child: Text(
                                                 Subject1,
                                                 style: const TextStyle(
-                                                    fontSize: 16,
-                                                    fontWeight: FontWeight.w500,
-                                                    color: Color.fromARGB(
-                                                        255, 89, 89, 87)),
+                                                    fontSize: 16, fontWeight: FontWeight.w500, color: Color.fromARGB(255, 89, 89, 87)),
                                               ),
                                             ),
                                             DropdownMenuItem(
@@ -2054,10 +1672,7 @@ class _TeacherMainPageState extends State<TeacherMainPage> {
                                               child: Text(
                                                 Subject2,
                                                 style: const TextStyle(
-                                                    fontSize: 16,
-                                                    fontWeight: FontWeight.w500,
-                                                    color: Color.fromARGB(
-                                                        255, 89, 89, 87)),
+                                                    fontSize: 16, fontWeight: FontWeight.w500, color: Color.fromARGB(255, 89, 89, 87)),
                                               ),
                                             ),
                                             DropdownMenuItem(
@@ -2065,17 +1680,14 @@ class _TeacherMainPageState extends State<TeacherMainPage> {
                                               child: Text(
                                                 Subject3,
                                                 style: const TextStyle(
-                                                    fontSize: 16,
-                                                    fontWeight: FontWeight.w500,
-                                                    color: Color.fromARGB(
-                                                        255, 89, 89, 87)),
+                                                    fontSize: 16, fontWeight: FontWeight.w500, color: Color.fromARGB(255, 89, 89, 87)),
                                               ),
                                             ),
                                           ],
                                           onChanged: (value) {
                                             setState(() {
-                                              SubjectThatIsSelected =
-                                                  value.toString();
+                                              SubjectThatIsSelected = value.toString();
+                                              _initializeData();
                                             });
                                           },
                                         ),
@@ -2090,17 +1702,14 @@ class _TeacherMainPageState extends State<TeacherMainPage> {
                     Expanded(
                       child: InkWell(
                         onTap: () async {
-                          final SharedPreferences prefs =
-                              await SharedPreferences.getInstance();
+                          final SharedPreferences prefs = await SharedPreferences.getInstance();
                           prefs.remove("id");
                           Navigator.pushReplacementNamed(context, "SplashView");
                         },
                         child: Container(
                           width: 70,
                           padding: const EdgeInsets.only(top: 10),
-                          decoration: BoxDecoration(
-                              color: const Color.fromARGB(255, 255, 255, 255),
-                              borderRadius: BorderRadius.circular(10)),
+                          decoration: BoxDecoration(color: const Color.fromARGB(255, 255, 255, 255), borderRadius: BorderRadius.circular(10)),
                           height: 50,
                           child: const Icon(Icons.logout),
                         ),
@@ -2121,149 +1730,38 @@ class _TeacherMainPageState extends State<TeacherMainPage> {
 
     if (PageWidth(context) < 550) {
       TeacherMainPageBody = Scaffold(
-        backgroundColor: const Color.fromARGB(255, 233, 255, 247),
-        bottomNavigationBar: CurvedNavigationBar(
-            color: const Color.fromARGB(255, 255, 255, 255),
-            backgroundColor: const Color.fromARGB(255, 233, 255, 247),
-            index: PageIndex,
-            height: 75,
-            onTap: (val) {
-              setState(() {
-                PageIndex = val;
-              });
-            },
-            items: const [
-              Icon(
-                Icons.home,
-                color: Colors.black,
-              ),
-              Icon(
-                Icons.school,
-                color: Colors.black,
-              ),
-              Icon(
-                Icons.book,
-                color: Colors.black,
-              ),
-              Icon(
-                Icons.person,
-                color: Colors.black,
-              ),
-            ]),
-        body: (AccountActivation)
-            ? Pages.elementAt(PageIndex)
-            : LiquidPullToRefresh(
-                  showChildOpacityTransition: false,
-                  backgroundColor: Color.fromARGB(255, 74, 193, 241),
-                  color: const Color.fromARGB(255, 233, 255, 247),
-                  onRefresh: () async {
-                    await Future.delayed(Duration(milliseconds: 500));
-                    setState(() {
-                      _initializeData();
-                    });
-                  },
-                  child: Stack(
-                children: [
-                  Opacity(
-                    opacity: .4,
-                    child: Pages.elementAt(PageIndex),
-                  ),
-                  CMaker(
-                      width: double.infinity,
-                      alignment: Alignment.center,
-                      height: PageHeight(context) - 90,
-                      color: const Color.fromARGB(168, 137, 137, 137),
-                      child: CMaker(
-                        alignment: Alignment.center,
-                        circularRadius: 20,
-                        width: PageWidth(context) / 1.5,
-                        height: PageHeight(context) / 5,
-                        color: Colors.white,
-                        child: Column(
-                          children: [
-                            Expanded(child: Container()),
-                            TMaker(
-                                text: "Your Account Is Not Activated",
-                                fontSize: 20,
-                                fontWeight: FontWeight.w700,
-                                color: Colors.black),
-                            Expanded(child: Container()),
-                            InkWell(
-                              onTap: () async {
-                                final SharedPreferences prefs =
-                                    await SharedPreferences.getInstance();
-                                prefs.remove("id");
-                                Navigator.pushReplacementNamed(
-                                    context, "SplashView");
-                              },
-                              child: CMaker(
-                                  width: double.infinity,
-                                  alignment: Alignment.center,
-                                  child: CMaker(
-                                    padding: EdgeInsets.symmetric(
-                                        horizontal: 20, vertical: 10),
-                                    circularRadius: 15,
-                                    color: Color.fromARGB(255, 74, 193, 241),
-                                    child: TMaker(
-                                        text: "Log Out",
-                                        fontSize: 20,
-                                        fontWeight: FontWeight.w700,
-                                        color: const Color.fromARGB(
-                                            255, 255, 255, 255)),
-                                  )),
-                            ),
-                            Expanded(child: Container()),
-                          ],
-                        ),
-                      )),
-                ],
-              ),)
-      );
-    } else if (PageWidth(context) >= 550 && PageHeight(context) < 900) {
-      TeacherMainPageBody = Scaffold(
-        backgroundColor: const Color.fromARGB(255, 233, 255, 247),
-        body: Row(
-          children: [
-            SideBarAnimated(
-              dividerColor: const Color.fromARGB(255, 0, 0, 0),
-              sideBarColor: const Color.fromARGB(255, 36, 160, 209),
-              selectedIconColor: Colors.white,
-              hoverColor: const Color.fromARGB(255, 255, 255, 255),
-              unselectedIconColor: Colors.black,
-              unSelectedTextColor: Colors.black,
-              sideBarWidth: 300,
-              onTap: (s) {
+          backgroundColor: const Color.fromARGB(255, 233, 255, 247),
+          bottomNavigationBar: CurvedNavigationBar(
+              color: const Color.fromARGB(255, 255, 255, 255),
+              backgroundColor: const Color.fromARGB(255, 233, 255, 247),
+              index: PageIndex,
+              height: 75,
+              onTap: (val) {
                 setState(() {
-                  PageIndex = s;
+                  PageIndex = val;
                 });
               },
-              widthSwitch:
-                  (PageWidth(context) > 600 && PageWidth(context) < 900)
-                      ? 800
-                      : 1200,
-              mainLogoImage: 'images/Logo.png',
-              sidebarItems: [
-                SideBarItem(
-                  iconSelected: Icons.home_rounded,
-                  text: 'Home',
+              items: const [
+                Icon(
+                  Icons.home,
+                  color: Colors.black,
                 ),
-                SideBarItem(
-                  iconSelected: Icons.school,
-                  text: 'Grades',
+                Icon(
+                  Icons.school,
+                  color: Colors.black,
                 ),
-                SideBarItem(
-                  iconSelected: Icons.book,
-                  text: 'Homework',
+                Icon(
+                  Icons.book,
+                  color: Colors.black,
                 ),
-                SideBarItem(
-                  iconSelected: Icons.person,
-                  text: 'Profile',
+                Icon(
+                  Icons.person,
+                  color: Colors.black,
                 ),
-              ],
-            ),
-            (AccountActivation)
-                ? Pages.elementAt(PageIndex)
-                : LiquidPullToRefresh(
+              ]),
+          body: (AccountActivation)
+              ? Pages.elementAt(PageIndex)
+              : LiquidPullToRefresh(
                   showChildOpacityTransition: false,
                   backgroundColor: Color.fromARGB(255, 74, 193, 241),
                   color: const Color.fromARGB(255, 233, 255, 247),
@@ -2293,35 +1791,26 @@ class _TeacherMainPageState extends State<TeacherMainPage> {
                             child: Column(
                               children: [
                                 Expanded(child: Container()),
-                                TMaker(
-                                    text: "Your Account Is Not Activated",
-                                    fontSize: 20,
-                                    fontWeight: FontWeight.w700,
-                                    color: Colors.black),
+                                TMaker(text: "Your Account Is Not Activated", fontSize: 20, fontWeight: FontWeight.w700, color: Colors.black),
                                 Expanded(child: Container()),
                                 InkWell(
                                   onTap: () async {
-                                    final SharedPreferences prefs =
-                                        await SharedPreferences.getInstance();
+                                    final SharedPreferences prefs = await SharedPreferences.getInstance();
                                     prefs.remove("id");
-                                    Navigator.pushReplacementNamed(
-                                        context, "SplashView");
+                                    Navigator.pushReplacementNamed(context, "SplashView");
                                   },
                                   child: CMaker(
                                       width: double.infinity,
                                       alignment: Alignment.center,
                                       child: CMaker(
-                                        padding: EdgeInsets.symmetric(
-                                            horizontal: 20, vertical: 10),
+                                        padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
                                         circularRadius: 15,
-                                        color:
-                                            Color.fromARGB(255, 74, 193, 241),
+                                        color: Color.fromARGB(255, 74, 193, 241),
                                         child: TMaker(
                                             text: "Log Out",
                                             fontSize: 20,
                                             fontWeight: FontWeight.w700,
-                                            color: const Color.fromARGB(
-                                                255, 255, 255, 255)),
+                                            color: const Color.fromARGB(255, 255, 255, 255)),
                                       )),
                                 ),
                                 Expanded(child: Container()),
@@ -2329,44 +1818,145 @@ class _TeacherMainPageState extends State<TeacherMainPage> {
                             ),
                           )),
                     ],
-                  ),)
+                  ),
+                ));
+    } else if (PageWidth(context) >= 550 && PageHeight(context) < 900) {
+      TeacherMainPageBody = Scaffold(
+        backgroundColor: const Color.fromARGB(255, 233, 255, 247),
+        body: Row(
+          children: [
+            SideBarAnimated(
+              dividerColor: const Color.fromARGB(255, 0, 0, 0),
+              sideBarColor: const Color.fromARGB(255, 36, 160, 209),
+              selectedIconColor: Colors.white,
+              hoverColor: const Color.fromARGB(255, 255, 255, 255),
+              unselectedIconColor: Colors.black,
+              unSelectedTextColor: Colors.black,
+              sideBarWidth: 300,
+              onTap: (s) {
+                setState(() {
+                  PageIndex = s;
+                });
+              },
+              widthSwitch: (PageWidth(context) > 600 && PageWidth(context) < 900) ? 800 : 1200,
+              mainLogoImage: 'images/Logo.png',
+              sidebarItems: [
+                SideBarItem(
+                  iconSelected: Icons.home_rounded,
+                  text: 'Home',
+                ),
+                SideBarItem(
+                  iconSelected: Icons.school,
+                  text: 'Grades',
+                ),
+                SideBarItem(
+                  iconSelected: Icons.book,
+                  text: 'Homework',
+                ),
+                SideBarItem(
+                  iconSelected: Icons.person,
+                  text: 'Profile',
+                ),
+              ],
+            ),
+            (AccountActivation)
+                ? Pages.elementAt(PageIndex)
+                : LiquidPullToRefresh(
+                    showChildOpacityTransition: false,
+                    backgroundColor: Color.fromARGB(255, 74, 193, 241),
+                    color: const Color.fromARGB(255, 233, 255, 247),
+                    onRefresh: () async {
+                      await Future.delayed(Duration(milliseconds: 500));
+                      setState(() {
+                        _initializeData();
+                      });
+                    },
+                    child: Stack(
+                      children: [
+                        Opacity(
+                          opacity: .4,
+                          child: Pages.elementAt(PageIndex),
+                        ),
+                        CMaker(
+                            width: double.infinity,
+                            alignment: Alignment.center,
+                            height: PageHeight(context) - 90,
+                            color: const Color.fromARGB(168, 137, 137, 137),
+                            child: CMaker(
+                              alignment: Alignment.center,
+                              circularRadius: 20,
+                              width: PageWidth(context) / 1.5,
+                              height: PageHeight(context) / 5,
+                              color: Colors.white,
+                              child: Column(
+                                children: [
+                                  Expanded(child: Container()),
+                                  TMaker(text: "Your Account Is Not Activated", fontSize: 20, fontWeight: FontWeight.w700, color: Colors.black),
+                                  Expanded(child: Container()),
+                                  InkWell(
+                                    onTap: () async {
+                                      final SharedPreferences prefs = await SharedPreferences.getInstance();
+                                      prefs.remove("id");
+                                      Navigator.pushReplacementNamed(context, "SplashView");
+                                    },
+                                    child: CMaker(
+                                        width: double.infinity,
+                                        alignment: Alignment.center,
+                                        child: CMaker(
+                                          padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                                          circularRadius: 15,
+                                          color: Color.fromARGB(255, 74, 193, 241),
+                                          child: TMaker(
+                                              text: "Log Out",
+                                              fontSize: 20,
+                                              fontWeight: FontWeight.w700,
+                                              color: const Color.fromARGB(255, 255, 255, 255)),
+                                        )),
+                                  ),
+                                  Expanded(child: Container()),
+                                ],
+                              ),
+                            )),
+                      ],
+                    ),
+                  )
           ],
         ),
       );
     } else if (PageWidth(context) >= 550 && PageHeight(context) >= 900) {
       TeacherMainPageBody = Scaffold(
-        backgroundColor: const Color.fromARGB(255, 233, 255, 247),
-        bottomNavigationBar: CurvedNavigationBar(
-            color: const Color.fromARGB(255, 255, 255, 255),
-            backgroundColor: const Color.fromARGB(255, 233, 255, 247),
-            index: PageIndex,
-            height: 75,
-            onTap: (val) {
-              setState(() {
-                PageIndex = val;
-              });
-            },
-            items: const [
-              Icon(
-                Icons.home,
-                color: Colors.black,
-              ),
-              Icon(
-                Icons.school,
-                color: Colors.black,
-              ),
-              Icon(
-                Icons.book,
-                color: Colors.black,
-              ),
-              Icon(
-                Icons.person,
-                color: Colors.black,
-              ),
-            ]),
-        body: (AccountActivation)
-            ? Pages.elementAt(PageIndex)
-            : LiquidPullToRefresh(
+          backgroundColor: const Color.fromARGB(255, 233, 255, 247),
+          bottomNavigationBar: CurvedNavigationBar(
+              color: const Color.fromARGB(255, 255, 255, 255),
+              backgroundColor: const Color.fromARGB(255, 233, 255, 247),
+              index: PageIndex,
+              height: 75,
+              onTap: (val) {
+                setState(() {
+                  PageIndex = val;
+                });
+              },
+              items: const [
+                Icon(
+                  Icons.home,
+                  color: Colors.black,
+                ),
+                Icon(
+                  Icons.school,
+                  color: Colors.black,
+                ),
+                Icon(
+                  Icons.book,
+                  color: Colors.black,
+                ),
+                Icon(
+                  Icons.person,
+                  color: Colors.black,
+                ),
+              ]),
+          body: (AccountActivation)
+              ? Pages.elementAt(PageIndex)
+              : LiquidPullToRefresh(
                   showChildOpacityTransition: false,
                   backgroundColor: Color.fromARGB(255, 74, 193, 241),
                   color: const Color.fromARGB(255, 233, 255, 247),
@@ -2377,62 +1967,54 @@ class _TeacherMainPageState extends State<TeacherMainPage> {
                     });
                   },
                   child: Stack(
-                children: [
-                  Opacity(
-                    opacity: .4,
-                    child: Pages.elementAt(PageIndex),
-                  ),
-                  CMaker(
-                      width: double.infinity,
-                      alignment: Alignment.center,
-                      height: PageHeight(context) - 90,
-                      color: const Color.fromARGB(168, 137, 137, 137),
-                      child: CMaker(
-                        alignment: Alignment.center,
-                        circularRadius: 20,
-                        width: PageWidth(context) / 1.5,
-                        height: PageHeight(context) / 5,
-                        color: Colors.white,
-                        child: Column(
-                          children: [
-                            Expanded(child: Container()),
-                            TMaker(
-                                text: "Your Account Is Not Activated",
-                                fontSize: 20,
-                                fontWeight: FontWeight.w700,
-                                color: Colors.black),
-                            Expanded(child: Container()),
-                            InkWell(
-                              onTap: () async {
-                                final SharedPreferences prefs =
-                                    await SharedPreferences.getInstance();
-                                prefs.remove("id");
-                                Navigator.pushReplacementNamed(
-                                    context, "SplashView");
-                              },
-                              child: CMaker(
-                                  width: double.infinity,
-                                  alignment: Alignment.center,
+                    children: [
+                      Opacity(
+                        opacity: .4,
+                        child: Pages.elementAt(PageIndex),
+                      ),
+                      CMaker(
+                          width: double.infinity,
+                          alignment: Alignment.center,
+                          height: PageHeight(context) - 90,
+                          color: const Color.fromARGB(168, 137, 137, 137),
+                          child: CMaker(
+                            alignment: Alignment.center,
+                            circularRadius: 20,
+                            width: PageWidth(context) / 1.5,
+                            height: PageHeight(context) / 5,
+                            color: Colors.white,
+                            child: Column(
+                              children: [
+                                Expanded(child: Container()),
+                                TMaker(text: "Your Account Is Not Activated", fontSize: 20, fontWeight: FontWeight.w700, color: Colors.black),
+                                Expanded(child: Container()),
+                                InkWell(
+                                  onTap: () async {
+                                    final SharedPreferences prefs = await SharedPreferences.getInstance();
+                                    prefs.remove("id");
+                                    Navigator.pushReplacementNamed(context, "SplashView");
+                                  },
                                   child: CMaker(
-                                    padding: EdgeInsets.symmetric(
-                                        horizontal: 20, vertical: 10),
-                                    circularRadius: 15,
-                                    color: Color.fromARGB(255, 74, 193, 241),
-                                    child: TMaker(
-                                        text: "Log Out",
-                                        fontSize: 20,
-                                        fontWeight: FontWeight.w700,
-                                        color: const Color.fromARGB(
-                                            255, 255, 255, 255)),
-                                  )),
+                                      width: double.infinity,
+                                      alignment: Alignment.center,
+                                      child: CMaker(
+                                        padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                                        circularRadius: 15,
+                                        color: Color.fromARGB(255, 74, 193, 241),
+                                        child: TMaker(
+                                            text: "Log Out",
+                                            fontSize: 20,
+                                            fontWeight: FontWeight.w700,
+                                            color: const Color.fromARGB(255, 255, 255, 255)),
+                                      )),
+                                ),
+                                Expanded(child: Container()),
+                              ],
                             ),
-                            Expanded(child: Container()),
-                          ],
-                        ),
-                      )),
-                ],
-              ),)
-      );
+                          )),
+                    ],
+                  ),
+                ));
     }
     SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersiveSticky);
     if (ConnectedToInternet) {
@@ -2460,37 +2042,29 @@ class _TeacherMainPageState extends State<TeacherMainPage> {
             );
     } else {
       return Scaffold(
-        backgroundColor: const Color.fromARGB(255, 233, 255, 247),
-        body: LiquidPullToRefresh(
-                  showChildOpacityTransition: false,
-                  backgroundColor: Color.fromARGB(255, 74, 193, 241),
-                  color: const Color.fromARGB(255, 233, 255, 247),
-                  onRefresh: () async {
-                    await Future.delayed(Duration(milliseconds: 500));
-                    setState(() {
-                      _initializeData();
-                    });
-                  },
-                  child: Center(
-            child: CMaker(
-                height: 150,
-                width: 270,
-                color: Colors.white,
-                boxShadow: [
-                  BoxShadow(
-                      offset: Offset(1, 1),
-                      blurRadius: 6,
-                      spreadRadius: .03,
-                      color: Color.fromARGB(82, 0, 0, 0)),
-                ],
-                circularRadius: 20,
-                alignment: Alignment.center,
-                child: TMaker(
-                    text: "You aren't connected to internet",
-                    fontSize: 20,
-                    fontWeight: FontWeight.w700,
-                    color: Colors.black))),
-      ));
+          backgroundColor: const Color.fromARGB(255, 233, 255, 247),
+          body: LiquidPullToRefresh(
+            showChildOpacityTransition: false,
+            backgroundColor: Color.fromARGB(255, 74, 193, 241),
+            color: const Color.fromARGB(255, 233, 255, 247),
+            onRefresh: () async {
+              await Future.delayed(Duration(milliseconds: 500));
+              setState(() {
+                _initializeData();
+              });
+            },
+            child: Center(
+                child: CMaker(
+                    height: 150,
+                    width: 270,
+                    color: Colors.white,
+                    boxShadow: [
+                      BoxShadow(offset: Offset(1, 1), blurRadius: 6, spreadRadius: .03, color: Color.fromARGB(82, 0, 0, 0)),
+                    ],
+                    circularRadius: 20,
+                    alignment: Alignment.center,
+                    child: TMaker(text: "You aren't connected to internet", fontSize: 20, fontWeight: FontWeight.w700, color: Colors.black))),
+          ));
     }
   }
 }
