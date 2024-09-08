@@ -2,6 +2,7 @@ import 'package:edu_academy/StudentPages/SecondPageContents.dart';
 import 'package:edu_academy/MyTools.dart';
 import 'package:edu_academy/service/Databse_Service.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:overlay_loading_progress/overlay_loading_progress.dart';
@@ -385,7 +386,7 @@ class _TeacherSignUpPageState extends State<TeacherSignUpPage> {
                                 fontSize: 25, fontWeight: FontWeight.w600),
                           ),
                         );
-    Widget BirthDateW = (PageWidth(context) > 550 && PageHeight(context) < 900)
+    Widget BirthDateW = (kIsWeb)
         ? MyButton(
           padding: EdgeInsets.all(10),
             buttonColor: Color.fromARGB(255, 74, 193, 241),
@@ -705,66 +706,68 @@ class _TeacherSignUpPageState extends State<TeacherSignUpPage> {
             key: key3,
             child: CMaker(
               height: PageHeight(context),
-              child: ListView(children: [
-                Container(
-                  width: double.infinity,
-                  height: 250,
-                  decoration: const BoxDecoration(gradient: LinearGradient(
-                          begin: Alignment.bottomLeft,
-                          end: Alignment.topRight,
-                          colors: [
-                        Color.fromARGB(255, 8, 125, 159),
-                        Color.fromARGB(255, 74, 193, 241)
-                      ])),
-                      child: Row(children: [
-                        Expanded(child: Column(children: [
-                          Expanded(child: Container(child:BackButton),),
-                          Expanded(flex: 2,child: SignUpCircle,),
-                        ]
-                        )),
-                        Expanded(child: CMaker(height: double.infinity,alignment:Alignment.center,child: Logo))
-                      ],),
-                  ),
-                  CMaker(
-                    padding: const EdgeInsets.symmetric(horizontal: 20),
-                    child: Column(children: [
-                  const Padding(padding:EdgeInsets.only(bottom: 20)),
-                  TeacherWithArrow,
-                  const Padding(padding:EdgeInsets.only(bottom: 20)),
-                  NameTFF,
-                  PhoneTFF,
-                  EmailTFF,
-                  PasswordTFF,
-                  ConfirmTFF,
-                  const Padding(padding:EdgeInsets.only(bottom: 20)),
-                  BirthDateTC,
-                  const Padding(padding:EdgeInsets.only(bottom: 40)),
-                  CMaker(alignment: Alignment.center,child: BirthDateW),
-                  const Padding(padding:EdgeInsets.only(bottom: 40)),
-                  GenederTC,
-                  const Padding(padding:EdgeInsets.only(bottom: 20)),
-                  CMaker(padding: const EdgeInsets.symmetric(horizontal: 20),height: 100,width: double.infinity,child: Row(children: [
-                    Expanded(flex: 5,child: GenederWidegts[0]),
-                    Expanded(child: Container(),),
-                    Expanded(flex: 5,child: GenederWidegts[1]),
-                  ],)),
-                  const Padding(padding:EdgeInsets.only(bottom: 20)),
-                  SubjectsWidgets,
-                  const Padding(padding:EdgeInsets.only(bottom: 20)),
-                  BreefWidge,
-                  const Padding(padding:EdgeInsets.only(bottom: 20)),
-                  CMaker(alignment: Alignment.center,child: SignUpButton),
-                  const Padding(padding:EdgeInsets.only(bottom: 20)),
-                  CMaker(width: double.infinity,child: Row(children: [
-                    Expanded(child: Container()),
-                    Expanded(flex: 10,child: AlreadyHaveAnAccountElements[0]),
-                    Expanded(child: Container()),
-                    Expanded(flex: 6,child: AlreadyHaveAnAccountElements[1]),
-                    Expanded(child: Container()),
-                  ],)),
-                  const Padding(padding:EdgeInsets.only(bottom: 40)),
-                  ],))
-              ],),
+              child: SingleChildScrollView(
+                child: Column(children: [
+                  Container(
+                    width: double.infinity,
+                    height: 250,
+                    decoration: const BoxDecoration(gradient: LinearGradient(
+                            begin: Alignment.bottomLeft,
+                            end: Alignment.topRight,
+                            colors: [
+                          Color.fromARGB(255, 8, 125, 159),
+                          Color.fromARGB(255, 74, 193, 241)
+                        ])),
+                        child: Row(children: [
+                          Expanded(child: Column(children: [
+                            Expanded(child: Container(child:BackButton),),
+                            Expanded(flex: 2,child: SignUpCircle,),
+                          ]
+                          )),
+                          Expanded(child: CMaker(height: double.infinity,alignment:Alignment.center,child: Logo))
+                        ],),
+                    ),
+                    CMaker(
+                      padding: const EdgeInsets.symmetric(horizontal: 20),
+                      child: Column(children: [
+                    const Padding(padding:EdgeInsets.only(bottom: 20)),
+                    TeacherWithArrow,
+                    const Padding(padding:EdgeInsets.only(bottom: 20)),
+                    NameTFF,
+                    PhoneTFF,
+                    EmailTFF,
+                    PasswordTFF,
+                    ConfirmTFF,
+                    const Padding(padding:EdgeInsets.only(bottom: 20)),
+                    BirthDateTC,
+                    const Padding(padding:EdgeInsets.only(bottom: 40)),
+                    CMaker(alignment: Alignment.center,child: BirthDateW),
+                    const Padding(padding:EdgeInsets.only(bottom: 40)),
+                    GenederTC,
+                    const Padding(padding:EdgeInsets.only(bottom: 20)),
+                    CMaker(padding: const EdgeInsets.symmetric(horizontal: 20),height: 100,width: double.infinity,child: Row(children: [
+                      Expanded(flex: 5,child: GenederWidegts[0]),
+                      Expanded(child: Container(),),
+                      Expanded(flex: 5,child: GenederWidegts[1]),
+                    ],)),
+                    const Padding(padding:EdgeInsets.only(bottom: 20)),
+                    SubjectsWidgets,
+                    const Padding(padding:EdgeInsets.only(bottom: 20)),
+                    BreefWidge,
+                    const Padding(padding:EdgeInsets.only(bottom: 20)),
+                    CMaker(alignment: Alignment.center,child: SignUpButton),
+                    const Padding(padding:EdgeInsets.only(bottom: 20)),
+                    CMaker(width: double.infinity,child: Row(children: [
+                      Expanded(child: Container()),
+                      Expanded(flex: 10,child: AlreadyHaveAnAccountElements[0]),
+                      Expanded(child: Container()),
+                      Expanded(flex: 6,child: AlreadyHaveAnAccountElements[1]),
+                      Expanded(child: Container()),
+                    ],)),
+                    const Padding(padding:EdgeInsets.only(bottom: 40)),
+                    ],))
+                ],),
+              ),
             ),
           ),
         );
@@ -807,43 +810,45 @@ class _TeacherSignUpPageState extends State<TeacherSignUpPage> {
                   height: 800,
                   width: 450,
                   padding: const EdgeInsets.only(top: 20,right: 20,left: 20),
-                  child: ListView(children: [
-                    const Padding(padding:EdgeInsets.only(bottom: 20)),
-                      TeacherWithArrow,
-                    const Padding(padding:EdgeInsets.only(bottom: 20)),
-                      NameTFF,
-                      PhoneTFF,
-                      EmailTFF,
-                      PasswordTFF,
-                      ConfirmTFF,
+                  child: SingleChildScrollView(
+                    child: Column(children: [
                       const Padding(padding:EdgeInsets.only(bottom: 20)),
-                      BirthDateTC,
-                      const Padding(padding:EdgeInsets.only(bottom: 40)),
-  CMaker(alignment: Alignment.center,child: BirthDateW),
-                      const Padding(padding:EdgeInsets.only(bottom: 40)),
-                      GenederTC,
+                        TeacherWithArrow,
                       const Padding(padding:EdgeInsets.only(bottom: 20)),
-                      CMaker(padding: const EdgeInsets.symmetric(horizontal: 20),height: 100,width: double.infinity,child: Row(children: [
-                        Expanded(flex: 5,child: GenederWidegts[0]),
-                        Expanded(child: Container(),),
-                        Expanded(flex: 5,child: GenederWidegts[1]),
-                      ],)),
-                      const Padding(padding:EdgeInsets.only(bottom: 20)),
-                      SubjectsWidgets,
-                      const Padding(padding:EdgeInsets.only(bottom: 20)),
-                      BreefWidge,
-                      const Padding(padding:EdgeInsets.only(bottom: 20)),
-                      CMaker(alignment: Alignment.center,child: SignUpButton),
-                      const Padding(padding:EdgeInsets.only(bottom: 20)),
-                      CMaker(width: double.infinity,child: Row(children: [
-                        Expanded(child: Container()),
-                        Expanded(flex: 10,child: AlreadyHaveAnAccountElements[0]),
-                        Expanded(child: Container()),
-                        Expanded(flex: 6,child: AlreadyHaveAnAccountElements[1]),
-                        Expanded(child: Container()),
-                      ],)),
-                      const Padding(padding:EdgeInsets.only(bottom: 40)),
-                              ],)),
+                        NameTFF,
+                        PhoneTFF,
+                        EmailTFF,
+                        PasswordTFF,
+                        ConfirmTFF,
+                        const Padding(padding:EdgeInsets.only(bottom: 20)),
+                        BirthDateTC,
+                        const Padding(padding:EdgeInsets.only(bottom: 40)),
+                      CMaker(alignment: Alignment.center,child: BirthDateW),
+                        const Padding(padding:EdgeInsets.only(bottom: 40)),
+                        GenederTC,
+                        const Padding(padding:EdgeInsets.only(bottom: 20)),
+                        CMaker(padding: const EdgeInsets.symmetric(horizontal: 20),height: 100,width: double.infinity,child: Row(children: [
+                          Expanded(flex: 5,child: GenederWidegts[0]),
+                          Expanded(child: Container(),),
+                          Expanded(flex: 5,child: GenederWidegts[1]),
+                        ],)),
+                        const Padding(padding:EdgeInsets.only(bottom: 20)),
+                        SubjectsWidgets,
+                        const Padding(padding:EdgeInsets.only(bottom: 20)),
+                        BreefWidge,
+                        const Padding(padding:EdgeInsets.only(bottom: 20)),
+                        CMaker(alignment: Alignment.center,child: SignUpButton),
+                        const Padding(padding:EdgeInsets.only(bottom: 20)),
+                        CMaker(width: double.infinity,child: Row(children: [
+                          Expanded(child: Container()),
+                          Expanded(flex: 10,child: AlreadyHaveAnAccountElements[0]),
+                          Expanded(child: Container()),
+                          Expanded(flex: 6,child: AlreadyHaveAnAccountElements[1]),
+                          Expanded(child: Container()),
+                        ],)),
+                        const Padding(padding:EdgeInsets.only(bottom: 40)),
+                                ],),
+                  )),
                       Expanded(flex: 2,child: Container()),
                 ],
               )),
@@ -894,43 +899,45 @@ class _TeacherSignUpPageState extends State<TeacherSignUpPage> {
                   height: 400,
                   width:(PageWidth(context)<800)? PageWidth(context)/2:400,
                   padding: const EdgeInsets.only(top: 20,right: 20,left: 20),
-                  child: ListView(children: [
-                    const Padding(padding:EdgeInsets.only(bottom: 20)),
-                      TeacherWithArrow,
-                    const Padding(padding:EdgeInsets.only(bottom: 20)),
-                      NameTFF,
-                      PhoneTFF,
-                      EmailTFF,
-                      PasswordTFF,
-                      ConfirmTFF,
+                  child: SingleChildScrollView(
+                    child: Column(children: [
                       const Padding(padding:EdgeInsets.only(bottom: 20)),
-                      BirthDateTC,
-                      const Padding(padding:EdgeInsets.only(bottom: 40)),
-  CMaker(alignment: Alignment.center,child: BirthDateW),
-                      const Padding(padding:EdgeInsets.only(bottom: 40)),
-                      GenederTC,
+                        TeacherWithArrow,
                       const Padding(padding:EdgeInsets.only(bottom: 20)),
-                      CMaker(padding: const EdgeInsets.symmetric(horizontal: 20),height: 100,width: double.infinity,child: Row(children: [
-                        Expanded(flex: 5,child: GenederWidegts[0]),
-                        Expanded(child: Container(),),
-                        Expanded(flex: 5,child: GenederWidegts[1]),
-                      ],)),
-                      const Padding(padding:EdgeInsets.only(bottom: 20)),
-                      SubjectsWidgets,
-                      const Padding(padding:EdgeInsets.only(bottom: 20)),
-                      BreefWidge,
-                      const Padding(padding:EdgeInsets.only(bottom: 20)),
-                      CMaker(alignment: Alignment.center,child: SignUpButton),
-                      const Padding(padding:EdgeInsets.only(bottom: 20)),
-                      CMaker(width: double.infinity,child: Row(children: [
-                        Expanded(child: Container()),
-                        Expanded(flex: 10,child: AlreadyHaveAnAccountElements[0]),
-                        Expanded(child: Container()),
-                        Expanded(flex: 6,child: AlreadyHaveAnAccountElements[1]),
-                        Expanded(child: Container()),
-                      ],)),
-                      const Padding(padding:EdgeInsets.only(bottom: 40)),
-                              ],)),
+                        NameTFF,
+                        PhoneTFF,
+                        EmailTFF,
+                        PasswordTFF,
+                        ConfirmTFF,
+                        const Padding(padding:EdgeInsets.only(bottom: 20)),
+                        BirthDateTC,
+                        const Padding(padding:EdgeInsets.only(bottom: 40)),
+                        CMaker(alignment: Alignment.center,child: BirthDateW),
+                        const Padding(padding:EdgeInsets.only(bottom: 40)),
+                        GenederTC,
+                        const Padding(padding:EdgeInsets.only(bottom: 20)),
+                        CMaker(padding: const EdgeInsets.symmetric(horizontal: 20),height: 100,width: double.infinity,child: Row(children: [
+                          Expanded(flex: 5,child: GenederWidegts[0]),
+                          Expanded(child: Container(),),
+                          Expanded(flex: 5,child: GenederWidegts[1]),
+                        ],)),
+                        const Padding(padding:EdgeInsets.only(bottom: 20)),
+                        SubjectsWidgets,
+                        const Padding(padding:EdgeInsets.only(bottom: 20)),
+                        BreefWidge,
+                        const Padding(padding:EdgeInsets.only(bottom: 20)),
+                        CMaker(alignment: Alignment.center,child: SignUpButton),
+                        const Padding(padding:EdgeInsets.only(bottom: 20)),
+                        CMaker(width: double.infinity,child: Row(children: [
+                          Expanded(child: Container()),
+                          Expanded(flex: 10,child: AlreadyHaveAnAccountElements[0]),
+                          Expanded(child: Container()),
+                          Expanded(flex: 6,child: AlreadyHaveAnAccountElements[1]),
+                          Expanded(child: Container()),
+                        ],)),
+                        const Padding(padding:EdgeInsets.only(bottom: 40)),
+                                ],),
+                  )),
                       Expanded(flex: 2,child: Container()),
                 ],
               )),

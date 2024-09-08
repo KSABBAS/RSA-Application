@@ -335,8 +335,7 @@ class _ParentSignUpPageState extends State<ParentSignUpPage> {
     ];
     Widget SignUpButton = InkWell(
       onTap: () async {
-        if (true) {
-          //key2.currentState!.validate()) {
+        if (key2.currentState!.validate()) {
           key2.currentState!.save();
           OverlayLoadingProgress.start(
             context,
@@ -401,70 +400,72 @@ class _ParentSignUpPageState extends State<ParentSignUpPage> {
             key: key2,
             child: CMaker(
               height: PageHeight(context),
-              child: ListView(
-                children: [
-                  Container(
-                    width: double.infinity,
-                    height: 250,
-                    decoration: const BoxDecoration(
-                        gradient: LinearGradient(
-                            begin: Alignment.bottomLeft,
-                            end: Alignment.topRight,
-                            colors: [
-                          Color.fromARGB(255, 8, 125, 159),
-                          Color.fromARGB(255, 74, 193, 241)
-                        ])),
-                    child: Row(
-                      children: [
-                        Expanded(
-                            child: Column(children: [
-                          Expanded(
-                            child: Container(child: BackButton),
-                          ),
-                          Expanded(
-                            flex: 2,
-                            child: SignUpCircle,
-                          ),
-                        ])),
-                        Expanded(
-                            child: CMaker(
-                                height: double.infinity,
-                                alignment: Alignment.center,
-                                child: Logo))
-                      ],
-                    ),
-                  ),
-                  CMaker(
-                      padding: const EdgeInsets.symmetric(horizontal: 20),
-                      child: Column(
+              child: SingleChildScrollView(
+                child: Column(
+                  children: [
+                    Container(
+                      width: double.infinity,
+                      height: 250,
+                      decoration: const BoxDecoration(
+                          gradient: LinearGradient(
+                              begin: Alignment.bottomLeft,
+                              end: Alignment.topRight,
+                              colors: [
+                            Color.fromARGB(255, 8, 125, 159),
+                            Color.fromARGB(255, 74, 193, 241)
+                          ])),
+                      child: Row(
                         children: [
-                          const Padding(padding: EdgeInsets.only(bottom: 20)),
-                          ParentWithArro,
-                          const Padding(padding: EdgeInsets.only(bottom: 20)),
-                          TFFS,
-                          const Padding(padding: EdgeInsets.only(bottom: 20)),
-                          CMaker(
-                              alignment: Alignment.center, child: SignUpButton),
-                          const Padding(padding: EdgeInsets.only(bottom: 20)),
-                          CMaker(
-                              width: double.infinity,
-                              child: Row(
-                                children: [
-                                  Expanded(child: Container()),
-                                  Expanded(
-                                      flex: 10,
-                                      child: AlreadyHaveAnAccountElements[0]),
-                                  Expanded(child: Container()),
-                                  Expanded(
-                                      flex: 6,
-                                      child: AlreadyHaveAnAccountElements[1]),
-                                  Expanded(child: Container()),
-                                ],
-                              )),
-                          const Padding(padding: EdgeInsets.only(bottom: 40)),
+                          Expanded(
+                              child: Column(children: [
+                            Expanded(
+                              child: Container(child: BackButton),
+                            ),
+                            Expanded(
+                              flex: 2,
+                              child: SignUpCircle,
+                            ),
+                          ])),
+                          Expanded(
+                              child: CMaker(
+                                  height: double.infinity,
+                                  alignment: Alignment.center,
+                                  child: Logo))
                         ],
-                      ))
-                ],
+                      ),
+                    ),
+                    CMaker(
+                        padding: const EdgeInsets.symmetric(horizontal: 20),
+                        child: Column(
+                          children: [
+                            const Padding(padding: EdgeInsets.only(bottom: 20)),
+                            ParentWithArro,
+                            const Padding(padding: EdgeInsets.only(bottom: 20)),
+                            TFFS,
+                            const Padding(padding: EdgeInsets.only(bottom: 20)),
+                            CMaker(
+                                alignment: Alignment.center, child: SignUpButton),
+                            const Padding(padding: EdgeInsets.only(bottom: 20)),
+                            CMaker(
+                                width: double.infinity,
+                                child: Row(
+                                  children: [
+                                    Expanded(child: Container()),
+                                    Expanded(
+                                        flex: 10,
+                                        child: AlreadyHaveAnAccountElements[0]),
+                                    Expanded(child: Container()),
+                                    Expanded(
+                                        flex: 6,
+                                        child: AlreadyHaveAnAccountElements[1]),
+                                    Expanded(child: Container()),
+                                  ],
+                                )),
+                            const Padding(padding: EdgeInsets.only(bottom: 40)),
+                          ],
+                        ))
+                  ],
+                ),
               ),
             ),
           ),
@@ -513,34 +514,36 @@ class _ParentSignUpPageState extends State<ParentSignUpPage> {
                         height: 500,
                         width: 450,
                         padding: const EdgeInsets.only(top: 20, right: 20, left: 20),
-                        child: ListView(
-                          children: [
-                            const Padding(padding: EdgeInsets.only(bottom: 20)),
-                            ParentWithArro,
-                            const Padding(padding: EdgeInsets.only(bottom: 20)),
-                            TFFS,
-                            const Padding(padding: EdgeInsets.only(bottom: 20)),
-                            CMaker(
-                                alignment: Alignment.center,
-                                child: SignUpButton),
-                            const Padding(padding: EdgeInsets.only(bottom: 20)),
-                            CMaker(
-                                width: double.infinity,
-                                child: Row(
-                                  children: [
-                                    Expanded(child: Container()),
-                                    Expanded(
-                                        flex: 10,
-                                        child: AlreadyHaveAnAccountElements[0]),
-                                    Expanded(child: Container()),
-                                    Expanded(
-                                        flex: 6,
-                                        child: AlreadyHaveAnAccountElements[1]),
-                                    Expanded(child: Container()),
-                                  ],
-                                )),
-                            const Padding(padding: EdgeInsets.only(bottom: 40)),
-                          ],
+                        child: SingleChildScrollView(
+                          child: Column(
+                            children: [
+                              const Padding(padding: EdgeInsets.only(bottom: 20)),
+                              ParentWithArro,
+                              const Padding(padding: EdgeInsets.only(bottom: 20)),
+                              TFFS,
+                              const Padding(padding: EdgeInsets.only(bottom: 20)),
+                              CMaker(
+                                  alignment: Alignment.center,
+                                  child: SignUpButton),
+                              const Padding(padding: EdgeInsets.only(bottom: 20)),
+                              CMaker(
+                                  width: double.infinity,
+                                  child: Row(
+                                    children: [
+                                      Expanded(child: Container()),
+                                      Expanded(
+                                          flex: 10,
+                                          child: AlreadyHaveAnAccountElements[0]),
+                                      Expanded(child: Container()),
+                                      Expanded(
+                                          flex: 6,
+                                          child: AlreadyHaveAnAccountElements[1]),
+                                      Expanded(child: Container()),
+                                    ],
+                                  )),
+                              const Padding(padding: EdgeInsets.only(bottom: 40)),
+                            ],
+                          ),
                         )),
                     Expanded(flex: 2, child: Container()),
                   ],
@@ -609,34 +612,36 @@ class _ParentSignUpPageState extends State<ParentSignUpPage> {
                             ? PageWidth(context) / 2
                             : 400,
                         padding: const EdgeInsets.only(top: 20, right: 20, left: 20),
-                        child: ListView(
-                          children: [
-                            const Padding(padding: EdgeInsets.only(bottom: 20)),
-                            ParentWithArro,
-                            const Padding(padding: EdgeInsets.only(bottom: 20)),
-                            TFFS,
-                            const Padding(padding: EdgeInsets.only(bottom: 20)),
-                            CMaker(
-                                alignment: Alignment.center,
-                                child: SignUpButton),
-                            const Padding(padding: EdgeInsets.only(bottom: 20)),
-                            CMaker(
-                                width: double.infinity,
-                                child: Row(
-                                  children: [
-                                    Expanded(child: Container()),
-                                    Expanded(
-                                        flex: 10,
-                                        child: AlreadyHaveAnAccountElements[0]),
-                                    Expanded(child: Container()),
-                                    Expanded(
-                                        flex: 6,
-                                        child: AlreadyHaveAnAccountElements[1]),
-                                    Expanded(child: Container()),
-                                  ],
-                                )),
-                            const Padding(padding: EdgeInsets.only(bottom: 40)),
-                          ],
+                        child: SingleChildScrollView(
+                          child: Column(
+                            children: [
+                              const Padding(padding: EdgeInsets.only(bottom: 20)),
+                              ParentWithArro,
+                              const Padding(padding: EdgeInsets.only(bottom: 20)),
+                              TFFS,
+                              const Padding(padding: EdgeInsets.only(bottom: 20)),
+                              CMaker(
+                                  alignment: Alignment.center,
+                                  child: SignUpButton),
+                              const Padding(padding: EdgeInsets.only(bottom: 20)),
+                              CMaker(
+                                  width: double.infinity,
+                                  child: Row(
+                                    children: [
+                                      Expanded(child: Container()),
+                                      Expanded(
+                                          flex: 10,
+                                          child: AlreadyHaveAnAccountElements[0]),
+                                      Expanded(child: Container()),
+                                      Expanded(
+                                          flex: 6,
+                                          child: AlreadyHaveAnAccountElements[1]),
+                                      Expanded(child: Container()),
+                                    ],
+                                  )),
+                              const Padding(padding: EdgeInsets.only(bottom: 40)),
+                            ],
+                          ),
                         )),
                     Expanded(flex: 2, child: Container()),
                   ],
