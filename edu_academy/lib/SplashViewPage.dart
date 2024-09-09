@@ -13,29 +13,23 @@ class SplashViewPage extends StatefulWidget {
   State<SplashViewPage> createState() => _SplashViewPageState();
 }
 
-class _SplashViewPageState extends State<SplashViewPage>
-    with SingleTickerProviderStateMixin {
+class _SplashViewPageState extends State<SplashViewPage> with SingleTickerProviderStateMixin {
   AnimationController? animationController;
   Animation? fading;
   @override
   void initState() {
     super.initState();
-    animationController = AnimationController(
-        vsync: this, duration: const Duration(milliseconds: 3000));
+    animationController = AnimationController(vsync: this, duration: const Duration(milliseconds: 3000));
     fading = Tween<double>(begin: 0, end: 1).animate(animationController!)
       ..addListener(() {
         setState(() {
           if (animationController!.isCompleted) {
             Timer(const Duration(milliseconds: 300), () async {
-              final SharedPreferences prefs =
-                  await SharedPreferences.getInstance();
+              final SharedPreferences prefs = await SharedPreferences.getInstance();
               //  satrt save data writen in login page
-              final List<String>? loginLastValue =
-                  prefs.getStringList("Login_last_value");
-              // last_input1_value =
-              //     loginLastValue?.isNotEmpty == true ? loginLastValue![0] : '';
-              // last_input2_value =
-              //     loginLastValue?.isNotEmpty == true ? loginLastValue![1] : '';
+              final List<String>? loginLastValue = prefs.getStringList("Login_last_value");
+              last_input1_value = loginLastValue?.isNotEmpty == true ? loginLastValue![0] : '';
+              last_input2_value = loginLastValue?.isNotEmpty == true ? loginLastValue![1] : '';
               // end
 
               try {
@@ -77,12 +71,7 @@ class _SplashViewPageState extends State<SplashViewPage>
         width: double.infinity,
         decoration: const BoxDecoration(
             gradient: LinearGradient(
-                begin: Alignment.bottomLeft,
-                end: Alignment.topRight,
-                colors: [
-              Color.fromARGB(255, 8, 125, 159),
-              Color.fromARGB(255, 74, 193, 241)
-            ])),
+                begin: Alignment.bottomLeft, end: Alignment.topRight, colors: [Color.fromARGB(255, 8, 125, 159), Color.fromARGB(255, 74, 193, 241)])),
         alignment: Alignment.center,
         child: Padding(
           padding: const EdgeInsets.all(10.0),

@@ -231,6 +231,7 @@ bool EditSolution = false;
 bool ViewSentSolution = false;
 bool hw_in_list_none = false;
 GlobalKey<FormState> Homeworkkey = GlobalKey();
+
 class _ThirdPageState extends State<ThirdPage> {
   late Future<void> _dataFuture;
   final dbService = DatabaseService();
@@ -328,15 +329,19 @@ class _ThirdPageState extends State<ThirdPage> {
                 : 300
             : 250,
         width: double.infinity,
-        child: (HomeWorks[HomeWorkIndex][HomeworkSelected + 1][3].length==0)?Center(child: TMaker(text:"No Files", fontSize: 20, fontWeight: FontWeight.w500, color: Colors.black),):GridView.builder(
-            itemCount: HomeWorks[HomeWorkIndex][HomeworkSelected + 1][3].length,
-            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2),
-            itemBuilder: (context, index) {
-              return InstaImageViewer(
-                backgroundColor: const Color.fromARGB(255, 233, 255, 247),
-                child: Image.network(HomeWorks[HomeWorkIndex][HomeworkSelected + 1][3][index]),
-              );
-            }),
+        child: (HomeWorks[HomeWorkIndex][HomeworkSelected + 1][3].length == 0)
+            ? Center(
+                child: TMaker(text: "No Files", fontSize: 20, fontWeight: FontWeight.w500, color: Colors.black),
+              )
+            : GridView.builder(
+                itemCount: HomeWorks[HomeWorkIndex][HomeworkSelected + 1][3].length,
+                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2),
+                itemBuilder: (context, index) {
+                  return InstaImageViewer(
+                    backgroundColor: const Color.fromARGB(255, 233, 255, 247),
+                    child: Image.network(HomeWorks[HomeWorkIndex][HomeworkSelected + 1][3][index]),
+                  );
+                }),
       );
       Widget HomeworkStudentImages = CMaker(
         color: const Color.fromARGB(255, 255, 255, 255),
@@ -351,9 +356,9 @@ class _ThirdPageState extends State<ThirdPage> {
             itemBuilder: (context, index) {
               return InstaImageViewer(
                   backgroundColor: const Color.fromARGB(255, 233, 255, 247),
-                  child: Image(
+                  child: (!kIsWeb) ?Image(
                     image: Image.file(HomeWorks[HomeWorkIndex][HomeworkSelected + 1][4][index]).image,
-                  ));
+                  ): Image.memory(HomeWorks[HomeWorkIndex][HomeworkSelected + 1][4][index]));
             }),
       );
       Widget StarsOf10 = CMaker(
@@ -374,10 +379,10 @@ class _ThirdPageState extends State<ThirdPage> {
           key: Homeworkkey,
           child: TextFormField(
             validator: (value) {
-          if (value!.isEmpty) {
-            return "الحقل فارغ";
-          }
-        },
+              if (value!.isEmpty) {
+                return "الحقل فارغ";
+              }
+            },
             onSaved: (value) {
               StudentHomeWorkAnswer = value!;
             },
@@ -560,21 +565,18 @@ class _ThirdPageState extends State<ThirdPage> {
                                         "HomeWorks[HomeWorkIndex][HomeworkSelected + 1][8] ${HomeWorks[HomeWorkIndex][HomeworkSelected + 1][8]}"); // hw id
                                     print("student_id ${student_id}");
                                     // hw id,student_id,hw solve body,hw files
-                                    OverlayLoadingProgress.start(
-                                      context,
-                                      widget: CMaker(
-                                        circularRadius: 15,
-                                        color: const Color.fromARGB(198, 255, 255, 255),
-                                        width: MediaQuery.of(context).size.width / 3.6,
-                                        padding: EdgeInsets.all(MediaQuery.of(context).size.width / 13),
-                                        child: const AspectRatio(
-                                          aspectRatio: 1,
-                                          child: CircularProgressIndicator(
-                                            color: Colors.blue,
-                                          ),
-                                        ),
-                                      ),
-                                    );
+                                    OverlayLoadingProgress.start(context,
+                                        widget: CMaker(
+                                            circularRadius: 15,
+                                            color: const Color.fromARGB(198, 255, 255, 255),
+                                            width: MediaQuery.of(context).size.width / 3.6,
+                                            padding: EdgeInsets.all(MediaQuery.of(context).size.width / 13),
+                                            child: const AspectRatio(
+                                              aspectRatio: 1,
+                                              child: CircularProgressIndicator(
+                                                color: Colors.blue,
+                                              ),
+                                            )));
                                     print(HomeWorks[HomeWorkIndex][HomeworkSelected + 1][4]);
                                     if (HomeWorks[HomeWorkIndex][HomeworkSelected + 1][4].length != 0) {
                                       HomeWorks[HomeWorkIndex][HomeworkSelected + 1][4] =
@@ -605,7 +607,6 @@ class _ThirdPageState extends State<ThirdPage> {
                                       panaraDialogType: PanaraDialogType.success,
                                       barrierDismissible: false,
                                     );
-                                  }
                                   },
                                   child: CMaker(
                                       circularRadius: 17,
@@ -2632,29 +2633,43 @@ class _ThirdPageState extends State<ThirdPage> {
                                         fontWeight: FontWeight.w800,
                                         color: Colors.white)),
                                 Expanded(child: CMaker(child: Container())),
-                                (!(HomeWorks[HomeWorkIndex][index + 1][7][0] == false))? !(HomeWorks[HomeWorkIndex][index + 1][7].length == 2)? !(HomeWorks[HomeWorkIndex][index + 1][7][2][1] == "")?
-                                InkWell(
-                                  onTap: () {
-                                    showDialog(context: context, builder:(context) {
-                                      return Dialog(child: CMaker(circularRadius: 20,padding: EdgeInsets.all(20),child: TMaker(
-                                        textAlign: TextAlign.start,
-                                          text: HomeWorks[HomeWorkIndex][index + 1][7][2][1],
-                                          fontSize: 18,
-                                          fontWeight: FontWeight.w800,
-                                          color: const Color.fromARGB(255, 0, 0, 0))),);
-                                    },);
-                                  },
-                                  child: CMaker(
-                                      circularRadius: 20,
-                                      padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-                                      color: const Color.fromARGB(
-                                                255, 235, 218, 118),
-                                      child:  TMaker(
-                                          text: (HomeWorks[HomeWorkIndex][index + 1][7][2][1].length>8)?HomeWorks[HomeWorkIndex][index + 1][7][2][1].substring(0,8)+"...":HomeWorks[HomeWorkIndex][index + 1][7][2][1],
-                                          fontSize: 18,
-                                          fontWeight: FontWeight.w800,
-                                          color: const Color.fromARGB(255, 0, 0, 0))),
-                                ):Container() :Container():Container(),
+                                (!(HomeWorks[HomeWorkIndex][index + 1][7][0] == false))
+                                    ? !(HomeWorks[HomeWorkIndex][index + 1][7].length == 2)
+                                        ? !(HomeWorks[HomeWorkIndex][index + 1][7][2][1] == "")
+                                            ? InkWell(
+                                                onTap: () {
+                                                  showDialog(
+                                                    context: context,
+                                                    builder: (context) {
+                                                      return Dialog(
+                                                        child: CMaker(
+                                                            circularRadius: 20,
+                                                            padding: EdgeInsets.all(20),
+                                                            child: TMaker(
+                                                                textAlign: TextAlign.start,
+                                                                text: HomeWorks[HomeWorkIndex][index + 1][7][2][1],
+                                                                fontSize: 18,
+                                                                fontWeight: FontWeight.w800,
+                                                                color: const Color.fromARGB(255, 0, 0, 0))),
+                                                      );
+                                                    },
+                                                  );
+                                                },
+                                                child: CMaker(
+                                                    circularRadius: 20,
+                                                    padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                                                    color: const Color.fromARGB(255, 235, 218, 118),
+                                                    child: TMaker(
+                                                        text: (HomeWorks[HomeWorkIndex][index + 1][7][2][1].length > 8)
+                                                            ? HomeWorks[HomeWorkIndex][index + 1][7][2][1].substring(0, 8) + "..."
+                                                            : HomeWorks[HomeWorkIndex][index + 1][7][2][1],
+                                                        fontSize: 18,
+                                                        fontWeight: FontWeight.w800,
+                                                        color: const Color.fromARGB(255, 0, 0, 0))),
+                                              )
+                                            : Container()
+                                        : Container()
+                                    : Container(),
                                 Expanded(child: CMaker(child: Container())),
                                 InkWell(
                                   onTap: () {

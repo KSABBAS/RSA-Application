@@ -1719,7 +1719,7 @@ class _TeacherThirdPageContentsState extends State<TeacherThirdPageContents> {
             itemBuilder: (context, index) {
               return InstaImageViewer(
                 backgroundColor: const Color.fromARGB(255, 233, 255, 247),
-                child: Image.network(solved_hw_student[HomeworkSelected][3][index] as String),
+                child: Image.network(solved_hw_student[HomeworkSelected][6][index] as String),
               );
             }),
       );
