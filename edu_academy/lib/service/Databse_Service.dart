@@ -6,8 +6,13 @@ import 'package:edu_academy/ParentPages/ParentMainPage.dart';
 import 'package:edu_academy/StudentPages/SecondPageContents.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:firebase_storage/firebase_storage.dart';
+import 'package:intl/intl.dart';
+import 'package:mime/mime.dart';
+import 'package:flutter/foundation.dart' show kIsWeb;
 
 Map<String, List<List<String>>> Students_in_grades = {};
+
+String CurrentDateTime = DateFormat('MMMM dd, HH:mm').format(DateTime.now());
 
 class DatabaseService {
   final real = FirebaseDatabase.instance;
@@ -15,17 +20,14 @@ class DatabaseService {
   final storage = FirebaseStorage.instance;
 
   // RealTime
-  rePublicMessages_Send(String sub, String Grade, String messgae, String date,
-      String duration, String name) async {
+  rePublicMessages_Send(String sub, String Grade, String messgae, String date, String duration, String name) async {
     try {
       final allStudents = real.ref("Messages").child(Grade).child(sub);
       final oness = await allStudents.once();
       print(oness.snapshot.value);
       int numS = oness.snapshot.children.length;
       log(numS.toString());
-      await allStudents
-          .child("messgae${numS + 1}")
-          .set([messgae, date, duration, name]);
+      await allStudents.child("messgae${numS + 1}").set([messgae, date, duration, name]);
     } catch (e) {
       log(e.toString());
     }
@@ -34,8 +36,7 @@ class DatabaseService {
   // FireStore
   fiCreate(String rref, userData) async {
     try {
-      CollectionReference usersCollection =
-          fire.collection('Users').doc(rref).collection(rref);
+      CollectionReference usersCollection = fire.collection('Users').doc(rref).collection(rref);
 
       QuerySnapshot querySnapshot = await usersCollection.get();
       int numS = querySnapshot.size;
@@ -58,67 +59,37 @@ class DatabaseService {
         for (var doc in categorySnapshot.docs) {
           String email = (doc['email'] ?? '').toString().replaceAll(' ', '');
           String phone = (doc['phone'] ?? '').toString().replaceAll(' ', '');
-          String storedPassword =
-              (doc['password'] ?? '').toString().replaceAll(' ', '');
+          String storedPassword = (doc['password'] ?? '').toString().replaceAll(' ', '');
           log("$userType: ${doc.id} $email / $phone / $storedPassword");
 
-          if ((email == input || phone == input) &&
-              storedPassword == password) {
+          if ((email == input || phone == input) && storedPassword == password) {
             log('Login successful as $userType: ${doc.id}');
 
             if (userType == "Student") {
-              return [
-                true,
-                '$userType#${doc.id}',
-                '${doc['state']}',
-                "${doc['name']}-${doc['grade']}"
-              ];
+              return [true, '$userType#${doc.id}', '${doc['state']}', "${doc['name']}-${doc['grade']}"];
             } else if (userType == "Teacher") {
-              return [
-                true,
-                '$userType#${doc.id}',
-                '${doc['state']}',
-                "${doc['name']}-${doc['Subject1']}-${doc['Subject2']}-${doc['Subject3']}"
-              ];
+              return [true, '$userType#${doc.id}', '${doc['state']}', "${doc['name']}-${doc['Subject1']}-${doc['Subject2']}-${doc['Subject3']}"];
             } else {
-              return [
-                true,
-                '$userType#${doc.id}',
-                '${doc['state']}',
-                "${doc['name']}"
-              ];
+              return [true, '$userType#${doc.id}', '${doc['state']}', "${doc['name']}"];
             }
           }
         }
         return null;
       }
 
-      QuerySnapshot studentSnapshot = await fire
-          .collection('Users')
-          .doc('Students')
-          .collection('Students')
-          .get();
+      QuerySnapshot studentSnapshot = await fire.collection('Users').doc('Students').collection('Students').get();
       var result = checkCredentials(studentSnapshot, 'Student');
       if (result != null) return result;
 
-      QuerySnapshot parentSnapshot = await fire
-          .collection('Users')
-          .doc('Parent')
-          .collection('Parent')
-          .get();
+      QuerySnapshot parentSnapshot = await fire.collection('Users').doc('Parent').collection('Parent').get();
       result = checkCredentials(parentSnapshot, 'Parent');
       if (result != null) return result;
 
-      QuerySnapshot teacherSnapshot = await fire
-          .collection('Users')
-          .doc('Teacher')
-          .collection('Teacher')
-          .get();
+      QuerySnapshot teacherSnapshot = await fire.collection('Users').doc('Teacher').collection('Teacher').get();
       result = checkCredentials(teacherSnapshot, 'Teacher');
       if (result != null) return result;
 
-      QuerySnapshot adminSnapshot =
-          await fire.collection('Users').doc('Admin').collection('Admin').get();
+      QuerySnapshot adminSnapshot = await fire.collection('Users').doc('Admin').collection('Admin').get();
       result = checkCredentials(adminSnapshot, 'Admin');
       if (result != null) return result;
 
@@ -135,13 +106,7 @@ class DatabaseService {
     List<List<dynamic>> retList = [];
 
     ///Records/Zoom/Grades/Grade 1/G1Arabic/REC1
-    QuerySnapshot studentSnapshot = await fire
-        .collection('Records')
-        .doc("Zoom")
-        .collection("Grades")
-        .doc(grade)
-        .collection(subject)
-        .get();
+    QuerySnapshot studentSnapshot = await fire.collection('Records').doc("Zoom").collection("Grades").doc(grade).collection(subject).get();
 
     for (var i in studentSnapshot.docs) {
       retList.add(["${i['link']}", "${i['date']}"]);
@@ -156,17 +121,10 @@ class DatabaseService {
     log(subject);
     List<List<dynamic>> retList = [];
     //Book/SubjectsBooks/Grades/Grade 1/عربي/Book1
-    QuerySnapshot studentSnapshot = await fire
-        .collection('Book')
-        .doc("SubjectsBooks")
-        .collection("Grades")
-        .doc(grade)
-        .collection(subject)
-        .get();
+    QuerySnapshot studentSnapshot = await fire.collection('Book').doc("SubjectsBooks").collection("Grades").doc(grade).collection(subject).get();
 
     for (var i in studentSnapshot.docs) {
-      retList
-          .add(["${i['link']}", "${i['date']}", "${i['title']}", "${i['id']}"]);
+      retList.add(["${i['link']}", "${i['date']}", "${i['title']}", "${i['id']}"]);
     }
     log(retList.toString());
     return retList;
@@ -176,17 +134,12 @@ class DatabaseService {
     Students_in_grades = {};
 
     ///Users/Students/Students/S1
-    QuerySnapshot StudentsSnapshot = await fire
-        .collection('Users')
-        .doc('Students')
-        .collection('Students')
-        .get();
+    QuerySnapshot StudentsSnapshot = await fire.collection('Users').doc('Students').collection('Students').get();
     for (var doc in StudentsSnapshot.docs) {
       if (!Students_in_grades.containsKey(doc["grade"])) {
         Students_in_grades[doc["grade"].toString()] = [];
       }
-      Students_in_grades[doc["grade"].toString()]
-          ?.add([doc['name'], doc.id, doc['photo']]);
+      Students_in_grades[doc["grade"].toString()]?.add([doc['name'], doc.id, doc['photo']]);
     }
     print(Students_in_grades);
   }
@@ -215,30 +168,15 @@ class DatabaseService {
     return lastRe;
   }
 
-  fiAdd_Hw(
-      String Grade,
-      String Subject,
-      String teacherId,
-      List<dynamic> filesList,
-      String HomeworkTitle,
-      String HomeworkBody,
-      String score) async {
+  fiAdd_Hw(String Grade, String Subject, String teacherId, List<dynamic> filesList, String HomeworkTitle, String HomeworkBody, String score) async {
     ///Homework/Grade 1/عربي
-    CollectionReference Homework =
-        fire.collection('Homework').doc(Grade).collection(Subject);
+    CollectionReference Homework = fire.collection('Homework').doc(Grade).collection(Subject);
 
     QuerySnapshot querySnapshot = await Homework.get();
     int numHw = (querySnapshot.size) + 1;
     log(numHw.toString());
     var doc_id = Homework.doc();
-    doc_id.set({
-      "title": HomeworkTitle,
-      "body": HomeworkBody,
-      "files": filesList,
-      "score": score,
-      "date": "current_date",
-      'id': doc_id.id
-    });
+    doc_id.set({"title": HomeworkTitle, "body": HomeworkBody, "files": filesList, "score": score, "date": CurrentDateTime, 'id': doc_id.id});
 
     return true;
   }
@@ -246,8 +184,7 @@ class DatabaseService {
   fiGet_Hw(String Grade, String student_id) async {
     print("fiGet_Hw student_id ${student_id}");
 // Reference to the specific document within the 'Homework' collection
-    DocumentReference documentReference =
-        fire.collection('Homework').doc(Grade);
+    DocumentReference documentReference = fire.collection('Homework').doc(Grade);
 
     // List of known sub-collection names
     List<String> knownCollections = [];
@@ -260,14 +197,12 @@ class DatabaseService {
     List<dynamic> outFinal = [];
 
     for (String collectionName in knownCollections) {
-      CollectionReference collection =
-          documentReference.collection(collectionName);
+      CollectionReference collection = documentReference.collection(collectionName);
 
       out[collectionName] = [collectionName];
 
       QuerySnapshot querySnapshot = await collection.get();
-      print(
-          'Collection: $collectionName, Document count: ${querySnapshot.size}');
+      print('Collection: $collectionName, Document count: ${querySnapshot.size}');
 
       for (var doc in querySnapshot.docs) {
         print('Document ID: ${doc.id}, Data: ${doc.data()}');
@@ -282,10 +217,7 @@ class DatabaseService {
       for (var j in out[sub_name]!.sublist(1)) {
         print("j.keys ${j.keys}");
         try {
-          var collection0 = documentReference
-              .collection(sub_name)
-              .doc("${j["id"]}")
-              .collection('Solve');
+          var collection0 = documentReference.collection(sub_name).doc("${j["id"]}").collection('Solve');
           var querySnapshot = await collection0.get();
           // print({querySnapshot});
           print("## querySnapshot.docs.length ${querySnapshot.docs.length}");
@@ -309,14 +241,8 @@ class DatabaseService {
             }
             if (ioSolve) {
               ioSolve = false;
-              var collection01 = await documentReference
-                  .collection(sub_name)
-                  .doc("${j["id"]}")
-                  .collection('Solve')
-                  .doc(student_id)
-                  .get();
-              Map<String, dynamic>? data =
-                  collection01.data() as Map<String, dynamic>?;
+              var collection01 = await documentReference.collection(sub_name).doc("${j["id"]}").collection('Solve').doc(student_id).get();
+              Map<String, dynamic>? data = collection01.data() as Map<String, dynamic>?;
               if (data?["score"] == '0') {
                 hhww.add([
                   'mohmm',
@@ -384,26 +310,15 @@ class DatabaseService {
     return outFinal;
   }
 
-  FiAdd_Solve(List<dynamic> hw_id, String student_id, String hw_solve_body,
-      List<dynamic> hw_solve_files) async {
+  FiAdd_Solve(List<dynamic> hw_id, String student_id, String hw_solve_body, List<dynamic> hw_solve_files) async {
     // hw id,student_id,hw solve body,hw files
 
     ///Homework/Grade 1/عربي/NY63UvWuWPWfjzutq745/solve /id
     print("FiAdd_Solve hw_id ${hw_id}");
-    DocumentReference documentReference = fire
-        .collection('Homework')
-        .doc(hw_id[0])
-        .collection(hw_id[3])
-        .doc(hw_id[2])
-        .collection("Solve")
-        .doc(student_id);
+    DocumentReference documentReference =
+        fire.collection('Homework').doc(hw_id[0]).collection(hw_id[3]).doc(hw_id[2]).collection("Solve").doc(student_id);
 
-    documentReference.set({
-      "body": hw_solve_body,
-      "files": hw_solve_files,
-      'date': "current_date",
-      'score': '0'
-    });
+    documentReference.set({"body": hw_solve_body, "files": hw_solve_files, 'date': CurrentDateTime, 'score': '0'});
 
     return true;
 
@@ -416,43 +331,30 @@ class DatabaseService {
   }
 
   Fi_getAll_HW(String grade, String subject) async {
-    CollectionReference collection =
-        fire.collection('Homework').doc(grade).collection(subject);
+    CollectionReference collection = fire.collection('Homework').doc(grade).collection(subject);
 
     QuerySnapshot querySnapshot = await collection.get();
     List<dynamic> out_hw = [];
     for (var doc in querySnapshot.docs) {
       print('Data: ${doc.data()}\n');
-      out_hw.add([
-        doc['title'],
-        doc['body'],
-        doc['date'],
-        doc['score'],
-        doc['files'],
-        doc["id"]
-      ]);
+      out_hw.add([doc['title'], doc['body'], doc['date'], doc['score'], doc['files'], doc["id"]]);
     }
     return out_hw;
   }
 
   FiGet_profile_data(String id, String role) async {
-    DocumentReference documentReference =
-        fire.collection('Users').doc(role).collection(role).doc(id);
+    DocumentReference documentReference = fire.collection('Users').doc(role).collection(role).doc(id);
 
     ///Users/Students/Students/S5  Student
     DocumentSnapshot documentSnapshot = await documentReference.get();
     print(documentSnapshot);
-    Map<String, dynamic>? data =
-        documentSnapshot.data() as Map<String, dynamic>?;
+    Map<String, dynamic>? data = documentSnapshot.data() as Map<String, dynamic>?;
     print("FiGet_profile_data $data");
     return data as Map<String, dynamic>;
   }
 
   FiAdd_photo0(String id, String role, var photo) async {
-    var snapshot = await storage
-        .ref()
-        .child('Profiles/${role}/${id}/${id}profile_image')
-        .putData(
+    var snapshot = await storage.ref().child('Profiles/${role}/${id}/${id}profile_image').putData(
           photo,
           SettableMetadata(
             contentType: "image/jpeg",
@@ -460,8 +362,7 @@ class DatabaseService {
         );
     var downloadUrl = await snapshot.ref.getDownloadURL();
     print(downloadUrl);
-    DocumentReference documentReference =
-        fire.collection('Users').doc(role).collection(role).doc(id);
+    DocumentReference documentReference = fire.collection('Users').doc(role).collection(role).doc(id);
     documentReference.update({'photo': "$downloadUrl"});
 
     return downloadUrl as String;
@@ -472,14 +373,10 @@ class DatabaseService {
     // print(file[0]);
     // List<String> name = photo.toString().split("/");
     // String fileName = name[name.length - 1].replaceAll("'", "");
-    var snapshot = await storage
-        .ref()
-        .child('Profiles/${role}/${id}/${id}profile_image')
-        .putFile(photo);
+    var snapshot = await storage.ref().child('Profiles/${role}/${id}/${id}profile_image').putFile(photo);
     var downloadUrl = await snapshot.ref.getDownloadURL();
     print(downloadUrl);
-    DocumentReference documentReference =
-        fire.collection('Users').doc(role).collection(role).doc(id);
+    DocumentReference documentReference = fire.collection('Users').doc(role).collection(role).doc(id);
     documentReference.update({'photo': "$downloadUrl"});
 
     // ///Users/Students/Students/S5  Student
@@ -492,13 +389,11 @@ class DatabaseService {
     return downloadUrl as String;
   }
 
-  FiGet_All_info_with_student_id(
-      String student_id, String garde, String subject) async {
+  FiGet_All_info_with_student_id(String student_id, String garde, String subject) async {
     print("## student_id ${student_id}");
     // /Homework/Grade 1/عربي/NY63UvWuWPWfjzutq745/Solve/S1
     //                                                   doc
-    CollectionReference collection =
-        fire.collection('Homework').doc(garde).collection(subject);
+    CollectionReference collection = fire.collection('Homework').doc(garde).collection(subject);
 
     QuerySnapshot querySnapshot = await collection.get();
     // hh@gmail.com
@@ -530,13 +425,8 @@ class DatabaseService {
         }
         if (ioSolve) {
           ioSolve = false;
-          var collection01 = await collection
-              .doc("${doc.id}")
-              .collection('Solve')
-              .doc(student_id)
-              .get();
-          Map<String, dynamic>? data =
-              collection01.data() as Map<String, dynamic>?;
+          var collection01 = await collection.doc("${doc.id}").collection('Solve').doc(student_id).get();
+          Map<String, dynamic>? data = collection01.data() as Map<String, dynamic>?;
 
           out_list.add([
             doc.id,
@@ -566,21 +456,15 @@ class DatabaseService {
     return out_list;
   }
 
-  FiAdd_score_and_comment(String garde, String subject, String Hw_id,
-      String St_id, String comment, String score) async {
+  FiAdd_score_and_comment(String garde, String subject, String Hw_id, String St_id, String comment, String score) async {
     ///Homework/Grade 1/عربي/NY63UvWuWPWfjzutq745/Solve/S1
     print("-${garde}-${subject}-${Hw_id}-${St_id}-${comment}-${score}");
     try {
       // DatabaseReference ref = FirebaseDatabase.instance 1
       //     .ref("Homework/${garde}/${subject}/${Hw_id}/Solve/${St_id}");
 
-      DocumentReference documentReference = fire
-          .collection('Homework')
-          .doc("${garde}")
-          .collection("${subject}")
-          .doc("${Hw_id}")
-          .collection("Solve")
-          .doc("${St_id}");
+      DocumentReference documentReference =
+          fire.collection('Homework').doc("${garde}").collection("${subject}").doc("${Hw_id}").collection("Solve").doc("${St_id}");
 
       print("waselttt");
       await documentReference.update({"score": score, "comment": comment});
@@ -591,51 +475,28 @@ class DatabaseService {
     //pass
   }
 
-  FiAdd_book_file(
-      String grade, String subject, String link, String file_name) async {
+  FiAdd_book_file(String grade, String subject, String link, String file_name) async {
     //Book/SubjectsBooks/Grades/Grade 1/عربي/Book1
-    var studentSnapshot = await fire
-        .collection('Book')
-        .doc("SubjectsBooks")
-        .collection("Grades")
-        .doc(grade)
-        .collection(subject);
-
+    var studentSnapshot = await fire.collection('Book').doc("SubjectsBooks").collection("Grades").doc(grade).collection(subject);
     var doc_id = studentSnapshot.doc();
     doc_id.set({
       "title": file_name,
       "link": link,
-      "date": "currnt_date",
+      "date": CurrentDateTime,
       "id": doc_id.id,
     });
   }
 
   FiDelete_books_file(String grade, String subject, String doc_id) async {
     //Book/SubjectsBooks/Grades/Grade 1/عربي/Book1
-    var studentSnapshot = await fire
-        .collection('Book')
-        .doc("SubjectsBooks")
-        .collection("Grades")
-        .doc(grade)
-        .collection(subject)
-        .doc(doc_id);
+    var studentSnapshot = await fire.collection('Book').doc("SubjectsBooks").collection("Grades").doc(grade).collection(subject).doc(doc_id);
 
     studentSnapshot.delete();
   }
 
-  FiUpdate_profile_data(
-      String grade,
-      String role,
-      String student_id,
-      String StudentEmail,
-      String NewProfileNumber,
-      String NewProfilePassword) async {
+  FiUpdate_profile_data(String grade, String role, String student_id, String StudentEmail, String NewProfileNumber, String NewProfilePassword) async {
     //Users/Students/Students/S1
-    var studentSnapshot = await fire
-        .collection('Users')
-        .doc(role)
-        .collection(role)
-        .doc(student_id);
+    var studentSnapshot = await fire.collection('Users').doc(role).collection(role).doc(student_id);
     studentSnapshot.update({
       "email": StudentEmail,
       "phone": NewProfileNumber,
@@ -644,11 +505,7 @@ class DatabaseService {
   }
 
   FiDelete_Hw_techer(String garde, String subject, String hw_id) async {
-    DocumentReference studentSnapshot = fire
-        .collection('Homework')
-        .doc("${garde}")
-        .collection("${subject}")
-        .doc("${hw_id}");
+    DocumentReference studentSnapshot = fire.collection('Homework').doc("${garde}").collection("${subject}").doc("${hw_id}");
 
     studentSnapshot.delete();
   }
@@ -668,8 +525,7 @@ class DatabaseService {
   }
 
   FiChange_state(String role, String id, bool current_state) async {
-    var collections =
-        fire.collection('Users').doc(role).collection(role).doc(id);
+    var collections = fire.collection('Users').doc(role).collection(role).doc(id);
     collections.update({"state": "${!current_state}"});
   }
 
@@ -677,30 +533,135 @@ class DatabaseService {
 
   // Storage
   stHwStore(var file) async {
-    if (file.length != 0) {
-      if (file.length > 1) {
-        List<String> outList = [];
-        for (var file in file) {
-          print(file);
-          List<String> name = file.toString().split("/");
-          String fileName = name[name.length - 1].replaceAll("'", "");
-          var snapshot =
-              await storage.ref().child('Homeworks/$fileName').putFile(file);
-          var downloadUrl = await snapshot.ref.getDownloadURL();
-          outList.add(downloadUrl);
+    if (kIsWeb) {
+      print("Platform web");
+      log("file.length  ${file.length}");
+      if (file.length != 0) {
+        if (file.length > 1) {
+          List<dynamic> downloadUrls = [];
+          try {
+            for (int i = 0; i < file.length; i++) {
+              String fileName = 'homework_image_${DateTime.now().millisecondsSinceEpoch}_$i.png';
+
+              var snapshot = await FirebaseStorage.instance.ref('Homeworks/$fileName').putData(
+                    file[i],
+                    SettableMetadata(contentType: 'image/png'),
+                  );
+
+              String downloadUrl = await snapshot.ref.getDownloadURL();
+              downloadUrls.add(downloadUrl);
+
+              print("Uploaded $fileName - URL: $downloadUrl");
+            }
+
+            return downloadUrls;
+          } catch (e) {
+            print("Error during upload: $e");
+            return [];
+          }
+        } else {
+          List<dynamic> nameParts = file[0][1].toString().split(".");
+          String fileName = nameParts[0];
+
+          try {
+            var snapshot = await FirebaseStorage.instance.ref('Homeworks/$fileName').putData(
+                  file[0][0],
+                  SettableMetadata(
+                    contentType: lookupMimeType(file[0][1]),
+                  ),
+                );
+
+            print("Upload complete");
+
+            var downloadUrl = await snapshot.ref.getDownloadURL();
+            print("Download URL: $downloadUrl");
+
+            return [downloadUrl];
+          } catch (e) {
+            print("Error during upload: $e");
+          }
         }
-        return outList;
-      } else {
-        print(file[0]);
-        List<String> name = file[0].toString().split("/");
-        String fileName = name[name.length - 1].replaceAll("'", "");
-        var snapshot =
-            await storage.ref().child('Homeworks/$fileName').putFile(file[0]);
+       }} else {
+        print("Platform notweb....");
+        print("file $file");
+        if (file.length != 0) {
+          if (file.length > 1) {
+            print("file.length > 1");
+            List<dynamic> outList = [];
+            for (var file in file) {
+              print(file);
+              List<dynamic> name = file.toString().split("/");
+              String fileName = name[name.length - 1].replaceAll("'", "");
+              var snapshot = await storage.ref().child('Homeworks/$fileName').putFile(file);
+              var downloadUrl = await snapshot.ref.getDownloadURL();
+              outList.add(downloadUrl);
+            }
+            return outList;
+          } else {
+            print(file[0]);
+            List<dynamic> name = file[0].toString().split("/");
+            String fileName = name[name.length - 1].replaceAll("'", "");
+            var snapshot = await storage.ref().child('Homeworks/$fileName').putFile(file[0]);
+            var downloadUrl = await snapshot.ref.getDownloadURL();
+            return [downloadUrl];
+          }
+        } else {
+          print("emty files");
+        }
+      }
+   
+  }
+
+  stBookStore(var file) async {
+    if (kIsWeb) {
+      List<dynamic> nameParts = file[0][1].toString().split(".");
+      String fileName = nameParts[0];
+
+      print("Full name: ${nameParts} - name parts");
+      print("File name: ${fileName} - file name");
+
+      try {
+        var snapshot = await FirebaseStorage.instance.ref('Books/$fileName').putData(
+              file[0][0],
+              SettableMetadata(
+                contentType: lookupMimeType(file[0][1]),
+              ),
+            );
+
+        print("Upload complete");
+
         var downloadUrl = await snapshot.ref.getDownloadURL();
+        print("Download URL: $downloadUrl");
+
         return [downloadUrl];
+      } catch (e) {
+        print("Error during upload: $e");
+        return "Error: $e";
       }
     } else {
-      print("emty files");
+      if (file.length != 0) {
+        if (file.length > 1) {
+          List<dynamic> outList = [];
+          for (var file in file) {
+            print("file ${file}");
+            List<dynamic> name = file.toString().split("/");
+            String fileName = name[name.length - 1].replaceAll("'", "");
+            var snapshot = await storage.ref().child('Books/$fileName').putFile(file);
+            var downloadUrl = await snapshot.ref.getDownloadURL();
+            outList.add(downloadUrl);
+          }
+          return outList;
+        } else {
+          print(file[0]);
+          List<dynamic> name = file[0].toString().split("/");
+          String fileName = name[name.length - 1].replaceAll("'", "");
+          var snapshot = await storage.ref().child('Books/$fileName').putFile(file[0]);
+          var downloadUrl = await snapshot.ref.getDownloadURL();
+          return [downloadUrl];
+        }
+      } else {
+        print("emty files");
+      }
     }
   }
 }

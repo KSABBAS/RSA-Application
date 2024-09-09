@@ -13,6 +13,7 @@ import 'package:get/get.dart';
 import 'package:edu_academy/SplashViewPage.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'service/firebase_options.dart' ;
+//hh@gmail.com 1234  00 22
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(

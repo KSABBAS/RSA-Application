@@ -51,7 +51,7 @@ class _StudentAppBarState extends State<StudentAppBar> {
     );
     Widget Notifications = InkWell(
       onTap: () {
-        Get.to(() => StudentNotificationsPage());
+        Get.to(() => const StudentNotificationsPage());
       },
       child: Container(
         width: 70,

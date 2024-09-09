@@ -32,10 +32,10 @@ class _SplashViewPageState extends State<SplashViewPage>
               //  satrt save data writen in login page
               final List<String>? loginLastValue =
                   prefs.getStringList("Login_last_value");
-              last_input1_value =
-                  loginLastValue?.isNotEmpty == true ? loginLastValue![0] : '';
-              last_input2_value =
-                  loginLastValue?.isNotEmpty == true ? loginLastValue![1] : '';
+              // last_input1_value =
+              //     loginLastValue?.isNotEmpty == true ? loginLastValue![0] : '';
+              // last_input2_value =
+              //     loginLastValue?.isNotEmpty == true ? loginLastValue![1] : '';
               // end
 
               try {

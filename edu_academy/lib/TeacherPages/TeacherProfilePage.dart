@@ -3,8 +3,11 @@ import 'dart:io';
 import 'package:edu_academy/MyTools.dart';
 import 'package:edu_academy/TeacherPages/TeacherMainPage.dart';
 import 'package:edu_academy/service/Databse_Service.dart';
+import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:flutter/foundation.dart' show kIsWeb;
+import 'dart:typed_data';
 
 class TeacherProfilePage extends StatefulWidget {
   TeacherProfilePage(
@@ -32,35 +35,49 @@ String NewProfileEmail = "";
 String NewProfileNumber = "";
 String NewProfilePassword = "";
 
+web_pick_file() async {
+  Uint8List? file;
+  FilePickerResult? result;
+  String? name = '';
+  result = await FilePicker.platform.pickFiles(type: FileType.image, allowMultiple: false);
+  if (result != null) {
+    // file = File(result.files.single.path!);
+    file = result.files.single.bytes;
+    name = result.files.first.name;
+    print("##-#name ${name}");
+    return file;
+  } else {
+    // User canceled the picker
+  }
+  // print("#-file $file");
+}
+
 class _TeacherProfilePageState extends State<TeacherProfilePage> {
+  final dbService = DatabaseService();
   @override
   Widget build(BuildContext context) {
     late Widget TeacherProfileBody;
     Widget ProfilePicture = InkWell(
       onTap: () async {
-        
-        XFile? Avatar = await PhotoImageFromGalary();
-        if (Avatar != null) {
-          final dbService = DatabaseService();
-          ProfileAvatar = Avatar;
-          print("File(ProfileAvatar!.path) ${File(ProfileAvatar!.path)}");
-          print("Teacher_role ${Teacher_role}");
-          widget.TeacherPhoto = await dbService.FiAdd_photo(
-              Teacher_Id, Teacher_role, File(ProfileAvatar!.path));
-          // refresh
-          teacher_profile_data = await dbService.FiGet_profile_data(Teacher_Id, Teacher_role)
-              as Map<String, dynamic>;
-          setState(() {});
+        if (kIsWeb) {
+          var image_data = await web_pick_file();
+          widget.TeacherPhoto = await dbService.FiAdd_photo0(Teacher_Id, Teacher_role, image_data);
+        } else {
+          XFile? Avatar = await PhotoImageFromGalary();
+          if (Avatar != null) {
+            final dbService = DatabaseService();
+            ProfileAvatar = Avatar;
+            widget.TeacherPhoto = await dbService.FiAdd_photo(Teacher_Id, Teacher_role, File(ProfileAvatar!.path));
+          }
         }
+        // refresh
+        teacher_profile_data = await dbService.FiGet_profile_data(Teacher_Id, Teacher_role) as Map<String, dynamic>;
+        setState(() {});
       },
       child: CMaker(
         circularRadius: 130,
         boxShadow: const [
-          BoxShadow(
-              offset: Offset(1, 1),
-              blurRadius: 6,
-              spreadRadius: .03,
-              color: Color.fromARGB(69, 0, 0, 0)),
+          BoxShadow(offset: Offset(1, 1), blurRadius: 6, spreadRadius: .03, color: Color.fromARGB(69, 0, 0, 0)),
         ],
         alignment: Alignment.center,
         width: 160,
@@ -68,16 +85,14 @@ class _TeacherProfilePageState extends State<TeacherProfilePage> {
         child: Stack(
           fit: StackFit.expand,
           children: [
-             CircleAvatar(
-                    backgroundImage:
-                        Image.network(widget.TeacherPhoto).image,
-                  ),
+            CircleAvatar(
+              backgroundImage: Image.network(widget.TeacherPhoto).image,
+            ),
             Positioned(
               bottom: 6,
               right: -4,
               child: CMaker(
-                border: Border.all(
-                    width: 4, color: Color.fromARGB(255, 233, 255, 247)),
+                border: Border.all(width: 4, color: Color.fromARGB(255, 233, 255, 247)),
                 height: 40,
                 width: 40,
                 circularRadius: 50,
@@ -113,11 +128,7 @@ class _TeacherProfilePageState extends State<TeacherProfilePage> {
                   ? 80
                   : 80,
           boxShadow: const [
-            BoxShadow(
-                offset: Offset(1, 1),
-                blurRadius: 6,
-                spreadRadius: .03,
-                color: Color.fromARGB(58, 0, 0, 0)),
+            BoxShadow(offset: Offset(1, 1), blurRadius: 6, spreadRadius: .03, color: Color.fromARGB(58, 0, 0, 0)),
           ],
           circularRadius: 20,
           color: const Color.fromARGB(255, 233, 255, 247),
@@ -165,11 +176,7 @@ class _TeacherProfilePageState extends State<TeacherProfilePage> {
                   ? 80
                   : 80,
           boxShadow: const [
-            BoxShadow(
-                offset: Offset(1, 1),
-                blurRadius: 6,
-                spreadRadius: .03,
-                color: Color.fromARGB(58, 0, 0, 0)),
+            BoxShadow(offset: Offset(1, 1), blurRadius: 6, spreadRadius: .03, color: Color.fromARGB(58, 0, 0, 0)),
           ],
           circularRadius: 20,
           color: const Color.fromARGB(255, 233, 255, 247),
@@ -216,11 +223,7 @@ class _TeacherProfilePageState extends State<TeacherProfilePage> {
                   ? 80
                   : 80,
           boxShadow: const [
-            BoxShadow(
-                offset: Offset(1, 1),
-                blurRadius: 6,
-                spreadRadius: .03,
-                color: Color.fromARGB(58, 0, 0, 0)),
+            BoxShadow(offset: Offset(1, 1), blurRadius: 6, spreadRadius: .03, color: Color.fromARGB(58, 0, 0, 0)),
           ],
           circularRadius: 20,
           color: const Color.fromARGB(255, 233, 255, 247),
@@ -270,11 +273,7 @@ class _TeacherProfilePageState extends State<TeacherProfilePage> {
                     ? 80
                     : 80,
             boxShadow: const [
-              BoxShadow(
-                  offset: Offset(1, 1),
-                  blurRadius: 6,
-                  spreadRadius: .03,
-                  color: Color.fromARGB(58, 0, 0, 0)),
+              BoxShadow(offset: Offset(1, 1), blurRadius: 6, spreadRadius: .03, color: Color.fromARGB(58, 0, 0, 0)),
             ],
             circularRadius: 20,
             color: const Color.fromARGB(255, 233, 255, 247),
@@ -288,10 +287,7 @@ class _TeacherProfilePageState extends State<TeacherProfilePage> {
                       if (value!.isEmpty) {
                         return "الحقل فارغ";
                       }
-                      if ((!value.endsWith("@gmail.com") ||
-                              !(value.length > 10)) &&
-                          (!value.endsWith("@yahoo.com") ||
-                              !(value.length > 10))) {
+                      if ((!value.endsWith("@gmail.com") || !(value.length > 10)) && (!value.endsWith("@yahoo.com") || !(value.length > 10))) {
                         return "صيغة الايميل ليسة صحيحة";
                       }
                       return null;
@@ -308,15 +304,9 @@ class _TeacherProfilePageState extends State<TeacherProfilePage> {
                         color: const Color.fromARGB(255, 0, 0, 0)),
                     decoration: InputDecoration(
                         errorBorder: OutlineInputBorder(
-                            borderSide: const BorderSide(
-                                color: Color.fromARGB(255, 192, 192, 192)),
-                            borderRadius: BorderRadius.circular(20)),
-                        enabledBorder: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(20),
-                            borderSide: BorderSide(width: 0)),
-                        focusedBorder: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(20),
-                            borderSide: BorderSide(width: 0))),
+                            borderSide: const BorderSide(color: Color.fromARGB(255, 192, 192, 192)), borderRadius: BorderRadius.circular(20)),
+                        enabledBorder: OutlineInputBorder(borderRadius: BorderRadius.circular(20), borderSide: BorderSide(width: 0)),
+                        focusedBorder: OutlineInputBorder(borderRadius: BorderRadius.circular(20), borderSide: BorderSide(width: 0))),
                   )
                 : TMaker(
                     text: widget.TeacherEmail,
@@ -354,11 +344,7 @@ class _TeacherProfilePageState extends State<TeacherProfilePage> {
                     ? 80
                     : 80,
             boxShadow: const [
-              BoxShadow(
-                  offset: Offset(1, 1),
-                  blurRadius: 6,
-                  spreadRadius: .03,
-                  color: Color.fromARGB(58, 0, 0, 0)),
+              BoxShadow(offset: Offset(1, 1), blurRadius: 6, spreadRadius: .03, color: Color.fromARGB(58, 0, 0, 0)),
             ],
             circularRadius: 20,
             color: const Color.fromARGB(255, 233, 255, 247),
@@ -389,15 +375,9 @@ class _TeacherProfilePageState extends State<TeacherProfilePage> {
                         color: const Color.fromARGB(255, 0, 0, 0)),
                     decoration: InputDecoration(
                         errorBorder: OutlineInputBorder(
-                            borderSide: const BorderSide(
-                                color: Color.fromARGB(255, 192, 192, 192)),
-                            borderRadius: BorderRadius.circular(20)),
-                        enabledBorder: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(20),
-                            borderSide: BorderSide(width: 0)),
-                        focusedBorder: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(20),
-                            borderSide: BorderSide(width: 0))),
+                            borderSide: const BorderSide(color: Color.fromARGB(255, 192, 192, 192)), borderRadius: BorderRadius.circular(20)),
+                        enabledBorder: OutlineInputBorder(borderRadius: BorderRadius.circular(20), borderSide: BorderSide(width: 0)),
+                        focusedBorder: OutlineInputBorder(borderRadius: BorderRadius.circular(20), borderSide: BorderSide(width: 0))),
                   )
                 : TMaker(
                     text: widget.TeacherEmail,
@@ -435,11 +415,7 @@ class _TeacherProfilePageState extends State<TeacherProfilePage> {
                   ? 80
                   : 80,
           boxShadow: const [
-            BoxShadow(
-                offset: Offset(1, 1),
-                blurRadius: 6,
-                spreadRadius: .03,
-                color: Color.fromARGB(58, 0, 0, 0)),
+            BoxShadow(offset: Offset(1, 1), blurRadius: 6, spreadRadius: .03, color: Color.fromARGB(58, 0, 0, 0)),
           ],
           circularRadius: 20,
           color: const Color.fromARGB(255, 233, 255, 247),
@@ -475,19 +451,11 @@ class _TeacherProfilePageState extends State<TeacherProfilePage> {
                       color: const Color.fromARGB(255, 0, 0, 0)),
                   decoration: InputDecoration(
                       focusedErrorBorder: OutlineInputBorder(
-                          borderSide: const BorderSide(
-                              color: Color.fromARGB(255, 192, 192, 192)),
-                          borderRadius: BorderRadius.circular(20)),
+                          borderSide: const BorderSide(color: Color.fromARGB(255, 192, 192, 192)), borderRadius: BorderRadius.circular(20)),
                       errorBorder: OutlineInputBorder(
-                          borderSide: const BorderSide(
-                              color: Color.fromARGB(255, 192, 192, 192)),
-                          borderRadius: BorderRadius.circular(20)),
-                      enabledBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(20),
-                          borderSide: BorderSide(width: 0)),
-                      focusedBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(20),
-                          borderSide: BorderSide(width: 0))),
+                          borderSide: const BorderSide(color: Color.fromARGB(255, 192, 192, 192)), borderRadius: BorderRadius.circular(20)),
+                      enabledBorder: OutlineInputBorder(borderRadius: BorderRadius.circular(20), borderSide: BorderSide(width: 0)),
+                      focusedBorder: OutlineInputBorder(borderRadius: BorderRadius.circular(20), borderSide: BorderSide(width: 0))),
                 )
               : TMaker(
                   text: widget.TeacherPassword,
@@ -503,7 +471,8 @@ class _TeacherProfilePageState extends State<TeacherProfilePage> {
     );
     Widget EditAndSaveButton = InkWell(
       onTap: () {
-        if (false) { //ProfileKey.currentState!.validate()
+        if (false) {
+          //ProfileKey.currentState!.validate()
           showDialog(
               context: context,
               builder: (context) {
@@ -515,24 +484,16 @@ class _TeacherProfilePageState extends State<TeacherProfilePage> {
                       child: TextFormField(
                         decoration: InputDecoration(
                             focusedErrorBorder: OutlineInputBorder(
-                                borderSide: const BorderSide(
-                                    color: Color.fromARGB(255, 192, 192, 192)),
-                                borderRadius: BorderRadius.circular(30)),
+                                borderSide: const BorderSide(color: Color.fromARGB(255, 192, 192, 192)), borderRadius: BorderRadius.circular(30)),
                             errorBorder: OutlineInputBorder(
-                                borderSide: const BorderSide(
-                                    color: Color.fromARGB(255, 192, 192, 192)),
-                                borderRadius: BorderRadius.circular(30)),
+                                borderSide: const BorderSide(color: Color.fromARGB(255, 192, 192, 192)), borderRadius: BorderRadius.circular(30)),
                             label: const Text(
                               "Password",
-                              style: TextStyle(
-                                  fontSize: 15, fontWeight: FontWeight.w600),
+                              style: TextStyle(fontSize: 15, fontWeight: FontWeight.w600),
                             ),
                             enabledBorder: OutlineInputBorder(
-                                borderSide: const BorderSide(
-                                    color: Color.fromARGB(255, 192, 192, 192)),
-                                borderRadius: BorderRadius.circular(30)),
-                            focusedBorder: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(15))),
+                                borderSide: const BorderSide(color: Color.fromARGB(255, 192, 192, 192)), borderRadius: BorderRadius.circular(30)),
+                            focusedBorder: OutlineInputBorder(borderRadius: BorderRadius.circular(15))),
                       ),
                     ),
                     actions: [
@@ -574,11 +535,7 @@ class _TeacherProfilePageState extends State<TeacherProfilePage> {
                 ? 80
                 : 80,
         boxShadow: const [
-          BoxShadow(
-              offset: Offset(1, 1),
-              blurRadius: 6,
-              spreadRadius: .03,
-              color: Color.fromARGB(58, 0, 0, 0)),
+          BoxShadow(offset: Offset(1, 1), blurRadius: 6, spreadRadius: .03, color: Color.fromARGB(58, 0, 0, 0)),
         ],
         circularRadius: 25,
         color: const Color.fromARGB(255, 233, 255, 247),
@@ -666,49 +623,37 @@ class _TeacherProfilePageState extends State<TeacherProfilePage> {
                               height: 0,
                               width: 0,
                             ),
-                            const Padding(padding: EdgeInsets.only(bottom: 10)),
+                      const Padding(padding: EdgeInsets.only(bottom: 10)),
                       NumberField,
-                      const Padding(padding:EdgeInsets.only(bottom: 10)),
-                      CMaker(
-                          width: double.infinity,
-                          height: 80,
-                          alignment: Alignment.center,
-                          child: EditAndSaveButton),
-                          (EditMode)
+                      const Padding(padding: EdgeInsets.only(bottom: 10)),
+                      CMaker(width: double.infinity, height: 80, alignment: Alignment.center, child: EditAndSaveButton),
+                      (EditMode)
                           ? CMaker(
-                            width: double.infinity,
-                            alignment: Alignment.center,
-                            child: InkWell(
+                              width: double.infinity,
+                              alignment: Alignment.center,
+                              child: InkWell(
                                 onTap: () {
                                   EditMode = false;
-                                  setState(() {
-                                  });
+                                  setState(() {});
                                 },
                                 child: CMaker(
-                                  alignment: Alignment.center,
-                                  width: 170,
+                                    alignment: Alignment.center,
+                                    width: 170,
                                     height: (PageWidth(context) < 550)
                                         ? 60
                                         : (PageHeight(context) < 900)
                                             ? 80
                                             : 80,
                                     boxShadow: const [
-                                      BoxShadow(
-                                          offset: Offset(1, 1),
-                                          blurRadius: 6,
-                                          spreadRadius: .03,
-                                          color: Color.fromARGB(58, 0, 0, 0)),
+                                      BoxShadow(offset: Offset(1, 1), blurRadius: 6, spreadRadius: .03, color: Color.fromARGB(58, 0, 0, 0)),
                                     ],
                                     circularRadius: 25,
                                     color: const Color.fromARGB(255, 233, 255, 247),
                                     padding: EdgeInsets.only(right: 10),
-                                    child: TMaker(
-                                        text: "Cancel",
-                                        fontSize: 25,
-                                        fontWeight: FontWeight.w600,
-                                        color: const Color.fromARGB(255, 0, 0, 0))),
+                                    child:
+                                        TMaker(text: "Cancel", fontSize: 25, fontWeight: FontWeight.w600, color: const Color.fromARGB(255, 0, 0, 0))),
                               ),
-                          )
+                            )
                           : Container(
                               height: 0,
                               width: 0,
@@ -785,49 +730,37 @@ class _TeacherProfilePageState extends State<TeacherProfilePage> {
                               height: 0,
                               width: 0,
                             ),
-                            const Padding(padding: EdgeInsets.only(bottom: 10)),
+                      const Padding(padding: EdgeInsets.only(bottom: 10)),
                       NumberField,
-                      const Padding(padding:EdgeInsets.only(bottom: 10)),
-                      CMaker(
-                          width: double.infinity,
-                          height: 80,
-                          alignment: Alignment.center,
-                          child: EditAndSaveButton),
-                          (EditMode)
+                      const Padding(padding: EdgeInsets.only(bottom: 10)),
+                      CMaker(width: double.infinity, height: 80, alignment: Alignment.center, child: EditAndSaveButton),
+                      (EditMode)
                           ? CMaker(
-                            width: double.infinity,
-                            alignment: Alignment.center,
-                            child: InkWell(
+                              width: double.infinity,
+                              alignment: Alignment.center,
+                              child: InkWell(
                                 onTap: () {
                                   EditMode = false;
-                                  setState(() {
-                                  });
+                                  setState(() {});
                                 },
                                 child: CMaker(
-                                  alignment: Alignment.center,
-                                  width: 170,
+                                    alignment: Alignment.center,
+                                    width: 170,
                                     height: (PageWidth(context) < 550)
                                         ? 60
                                         : (PageHeight(context) < 900)
                                             ? 80
                                             : 80,
                                     boxShadow: const [
-                                      BoxShadow(
-                                          offset: Offset(1, 1),
-                                          blurRadius: 6,
-                                          spreadRadius: .03,
-                                          color: Color.fromARGB(58, 0, 0, 0)),
+                                      BoxShadow(offset: Offset(1, 1), blurRadius: 6, spreadRadius: .03, color: Color.fromARGB(58, 0, 0, 0)),
                                     ],
                                     circularRadius: 25,
                                     color: const Color.fromARGB(255, 233, 255, 247),
                                     padding: EdgeInsets.only(right: 10),
-                                    child: TMaker(
-                                        text: "Cancel",
-                                        fontSize: 25,
-                                        fontWeight: FontWeight.w600,
-                                        color: const Color.fromARGB(255, 0, 0, 0))),
+                                    child:
+                                        TMaker(text: "Cancel", fontSize: 25, fontWeight: FontWeight.w600, color: const Color.fromARGB(255, 0, 0, 0))),
                               ),
-                          )
+                            )
                           : Container(
                               height: 0,
                               width: 0,
@@ -904,49 +837,37 @@ class _TeacherProfilePageState extends State<TeacherProfilePage> {
                               height: 0,
                               width: 0,
                             ),
-                            const Padding(padding: EdgeInsets.only(bottom: 10)),
+                      const Padding(padding: EdgeInsets.only(bottom: 10)),
                       NumberField,
-                      const Padding(padding:EdgeInsets.only(bottom: 10)),
-                      CMaker(
-                          width: double.infinity,
-                          height: 80,
-                          alignment: Alignment.center,
-                          child: EditAndSaveButton),
-                          (EditMode)
+                      const Padding(padding: EdgeInsets.only(bottom: 10)),
+                      CMaker(width: double.infinity, height: 80, alignment: Alignment.center, child: EditAndSaveButton),
+                      (EditMode)
                           ? CMaker(
-                            width: double.infinity,
-                            alignment: Alignment.center,
-                            child: InkWell(
+                              width: double.infinity,
+                              alignment: Alignment.center,
+                              child: InkWell(
                                 onTap: () {
                                   EditMode = false;
-                                  setState(() {
-                                  });
+                                  setState(() {});
                                 },
                                 child: CMaker(
-                                  alignment: Alignment.center,
-                                  width: 170,
+                                    alignment: Alignment.center,
+                                    width: 170,
                                     height: (PageWidth(context) < 550)
                                         ? 60
                                         : (PageHeight(context) < 900)
                                             ? 80
                                             : 80,
                                     boxShadow: const [
-                                      BoxShadow(
-                                          offset: Offset(1, 1),
-                                          blurRadius: 6,
-                                          spreadRadius: .03,
-                                          color: Color.fromARGB(58, 0, 0, 0)),
+                                      BoxShadow(offset: Offset(1, 1), blurRadius: 6, spreadRadius: .03, color: Color.fromARGB(58, 0, 0, 0)),
                                     ],
                                     circularRadius: 25,
                                     color: const Color.fromARGB(255, 233, 255, 247),
                                     padding: EdgeInsets.only(right: 10),
-                                    child: TMaker(
-                                        text: "Cancel",
-                                        fontSize: 25,
-                                        fontWeight: FontWeight.w600,
-                                        color: const Color.fromARGB(255, 0, 0, 0))),
+                                    child:
+                                        TMaker(text: "Cancel", fontSize: 25, fontWeight: FontWeight.w600, color: const Color.fromARGB(255, 0, 0, 0))),
                               ),
-                          )
+                            )
                           : Container(
                               height: 0,
                               width: 0,

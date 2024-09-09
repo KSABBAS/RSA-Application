@@ -43,13 +43,13 @@ List<List> TableData = [
     "الحصة الرابعه",
     "الحصة الخامسة"
   ],
-  ["السبت", "عربي", "انجليزي", "رياضيات", "رسم", "دين"],
-  ["الاحد", "عربي", "انجليزي", "رياضيات", "رسم", "دين"],
-  ["الاثنين", "عربي", "انجليزي", "رياضيات", "رسم", "دين"],
-  ["الثلاثاء", "عربي", "انجليزي", "رياضيات", "رسم", "دين"],
-  ["الاربعاء", "عربي", "انجليزي", "رياضيات", "رسم", "دين"],
-  ["الخميس", "عربي", "انجليزي", "رياضيات", "رسم", "دين"],
-  ["الجمعة", "عربي", "انجليزي", "رياضيات", "رسم", "دين"],
+  ["الاثنين", "Soon", "Soon", "Soon", "Soon", "Soon"],
+  ["الثلاثاء", "Soon", "Soon", "Soon", "Soon", "Soon"],
+  ["الاربعاء", "Soon", "Soon", "Soon", "Soon", "Soon"],
+  ["الخميس", "Soon", "Soon", "Soon", "Soon", "Soon"],
+  ["الجمعة", "Soon", "Soon", "Soon", "Soon", "Soon"],
+  ["السبت", "Soon", "Soon", "Soon", "Soon", "Soon"],
+  ["الاحد", "Soon", "Soon", "Soon", "Soon", "Soon"],
 ];
 Map<String, dynamic> profile_data = {};
 
@@ -147,6 +147,7 @@ class _StudentMainPageState extends State<StudentMainPage> {
       return result;
     }();
     print("start........build");
+    print("ThereIsNotifications $ThereIsNotifications");
     late Widget StudentMainPageBody;
     List<Widget> Pages = [
       Container(

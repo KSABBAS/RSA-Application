@@ -1,27 +1,34 @@
 import 'dart:io';
+import 'dart:typed_data';
 
 import 'package:edu_academy/ParentPages/ParentMainPage.dart';
 import 'package:edu_academy/TeacherPages/TeacherMainPage.dart';
 import 'package:edu_academy/MyTools.dart';
 import 'package:edu_academy/service/Databse_Service.dart';
+import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:overlay_loading_progress/overlay_loading_progress.dart';
 import 'package:panara_dialogs/panara_dialogs.dart';
 import 'package:insta_image_viewer/insta_image_viewer.dart';
 import 'package:string_extensions/string_extensions.dart';
+import 'package:flutter/foundation.dart' show kIsWeb;
 
 class TeacherThirdPageContents extends StatefulWidget {
-  TeacherThirdPageContents(
-      {super.key, required this.ListOfGrades, required this.SubjectName});
+  TeacherThirdPageContents({super.key, required this.ListOfGrades, required this.SubjectName});
   List ListOfGrades;
   String SubjectName;
   @override
-  State<TeacherThirdPageContents> createState() =>
-      _TeacherThirdPageContentsState();
+  State<TeacherThirdPageContents> createState() => _TeacherThirdPageContentsState();
 }
 
-List<File> HomeworkImagesLinks = [];
+// List<dynamic> UiHomeworkImagesLinks = [];
+
+List<dynamic> HomeworkImagesLinks = [];
+
+// HomeworkImagesLinks = [];
+// List<Uint8List> HomeworkImagesLinks = [];
+// List<File> HomeworkImagesLinks = [];
 bool GradeHomeWorkIsOppened = false;
 int GradeHomeWorkOppenedIndex = 0;
 bool NewHomeWork = false;
@@ -238,9 +245,28 @@ class _TeacherThirdPageContentsState extends State<TeacherThirdPageContents> {
   final dbService = DatabaseService();
   //3
   solved_hw_student_re() async {
-    solved_hw_student = await dbService.FiGet_All_info_with_student_id(
-        student_selected_list[1], Grade_selected, SubjectThatIsSelected);
+    solved_hw_student = await dbService.FiGet_All_info_with_student_id(student_selected_list[1], Grade_selected, SubjectThatIsSelected);
     setState(() {});
+  }
+
+  Future<void> pickImageFromGallery() async {
+    try {
+      FilePickerResult? result = await FilePicker.platform.pickFiles(
+        type: FileType.image,
+        allowMultiple: false,
+      );
+
+      if (result != null) {
+        PlatformFile file = result.files.single;
+        // Access file data as Uint8List
+        Uint8List fileBytes = file.bytes!;
+        setState(() {
+          HomeworkImagesLinks.add(fileBytes);
+        });
+      }
+    } catch (e) {
+      print("Error picking file: $e");
+    }
   }
 
   @override
@@ -253,11 +279,7 @@ class _TeacherThirdPageContentsState extends State<TeacherThirdPageContents> {
           circularRadius: 20,
           margin: const EdgeInsets.only(left: 20, right: 20),
           color: const Color.fromARGB(255, 61, 197, 255),
-          child: TMaker(
-              text: "${Grade_selected} Homework",
-              fontSize: 20,
-              fontWeight: FontWeight.w600,
-              color: Colors.white)),
+          child: TMaker(text: "${Grade_selected} Homework", fontSize: 20, fontWeight: FontWeight.w600, color: Colors.white)),
     );
     if (AllHomeworksAndOneIsOpend) {
       // third page
@@ -289,11 +311,7 @@ class _TeacherThirdPageContentsState extends State<TeacherThirdPageContents> {
                       circularRadius: 20,
                       margin: EdgeInsets.only(right: 20),
                       height: 70,
-                      child: TMaker(
-                          text: "All Homeworks",
-                          fontSize: 30,
-                          fontWeight: FontWeight.w700,
-                          color: const Color.fromARGB(255, 0, 0, 0)),
+                      child: TMaker(text: "All Homeworks", fontSize: 30, fontWeight: FontWeight.w700, color: const Color.fromARGB(255, 0, 0, 0)),
                     ))
                   ])),
               Padding(padding: EdgeInsets.only(bottom: 20)),
@@ -303,13 +321,7 @@ class _TeacherThirdPageContentsState extends State<TeacherThirdPageContents> {
                 margin: EdgeInsets.only(left: 20, right: 20),
                 circularRadius: 20,
                 alignment: Alignment.center,
-                boxShadow: const [
-                  BoxShadow(
-                      color: Color.fromARGB(61, 0, 0, 0),
-                      offset: Offset(2, 2),
-                      blurRadius: 10,
-                      spreadRadius: .06)
-                ],
+                boxShadow: const [BoxShadow(color: Color.fromARGB(61, 0, 0, 0), offset: Offset(2, 2), blurRadius: 10, spreadRadius: .06)],
                 color: Color.fromARGB(255, 255, 255, 255),
                 child: ListView(
                   children: [
@@ -337,32 +349,20 @@ class _TeacherThirdPageContentsState extends State<TeacherThirdPageContents> {
                     const Padding(padding: EdgeInsets.only(bottom: 20)),
                     CMaker(
                       height: 300,
-                      boxShadow: const [
-                        BoxShadow(
-                            color: Color.fromARGB(61, 0, 0, 0),
-                            offset: Offset(1, 1),
-                            blurRadius: 1,
-                            spreadRadius: .06)
-                      ],
+                      boxShadow: const [BoxShadow(color: Color.fromARGB(61, 0, 0, 0), offset: Offset(1, 1), blurRadius: 1, spreadRadius: .06)],
                       color: const Color.fromARGB(255, 233, 255, 247),
                       width: double.infinity,
                       margin: EdgeInsets.symmetric(horizontal: 20),
                       child: GridView.builder(
-                        itemCount:
-                            (all_Homeworks[IsOpendIndex][4] as List).length,
-                        gridDelegate:
-                            const SliverGridDelegateWithFixedCrossAxisCount(
-                                crossAxisCount: 2,
-                                crossAxisSpacing: 10,
-                                mainAxisSpacing: 10),
+                        itemCount: (all_Homeworks[IsOpendIndex][4] as List).length,
+                        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2, crossAxisSpacing: 10, mainAxisSpacing: 10),
                         itemBuilder: (context, index) {
                           return InkWell(
                               onTap: () {
                                 setState(() {});
                               },
                               child: InstaImageViewer(
-                                backgroundColor:
-                                    const Color.fromARGB(255, 233, 255, 247),
+                                backgroundColor: const Color.fromARGB(255, 233, 255, 247),
                                 child: Image.network(
                                   all_Homeworks[IsOpendIndex][4][index],
                                   fit: BoxFit.fitWidth,
@@ -381,18 +381,10 @@ class _TeacherThirdPageContentsState extends State<TeacherThirdPageContents> {
                               padding: EdgeInsets.all(10),
                               circularRadius: 15,
                               boxShadow: const [
-                                BoxShadow(
-                                    color: Color.fromARGB(61, 0, 0, 0),
-                                    offset: Offset(1, 1),
-                                    blurRadius: 1,
-                                    spreadRadius: .06)
+                                BoxShadow(color: Color.fromARGB(61, 0, 0, 0), offset: Offset(1, 1), blurRadius: 1, spreadRadius: .06)
                               ],
                               color: const Color.fromARGB(255, 233, 255, 247),
-                              child: TMaker(
-                                  text: "Edit(soon)",
-                                  fontSize: 20,
-                                  fontWeight: FontWeight.w600,
-                                  color: Colors.black))),
+                              child: TMaker(text: "Edit(soon)", fontSize: 20, fontWeight: FontWeight.w600, color: Colors.black))),
                     ),
                     const Padding(padding: EdgeInsets.all(20)),
                     CMaker(
@@ -401,20 +393,14 @@ class _TeacherThirdPageContentsState extends State<TeacherThirdPageContents> {
                             PanaraInfoDialog.show(
                               context,
                               title: "Wait",
-                              message:
-                                  "Are you sure you want to delete this homework",
+                              message: "Are you sure you want to delete this homework",
                               buttonText: "Delete",
                               onTapDismiss: () async {
                                 //delete hw start
-                                await dbService.FiDelete_Hw_techer(
-                                    Grade_selected,
-                                    SubjectThatIsSelected,
-                                    all_Homeworks[IsOpendIndex][5] as String);
-                                all_Homeworks = await dbService.Fi_getAll_HW(
-                                    Grade_selected, SubjectThatIsSelected);
+                                await dbService.FiDelete_Hw_techer(Grade_selected, SubjectThatIsSelected, all_Homeworks[IsOpendIndex][5] as String);
+                                all_Homeworks = await dbService.Fi_getAll_HW(Grade_selected, SubjectThatIsSelected);
                                 AllhomeWorks = true;
-                                AllHomeworksAndOneIsOpend =
-                                    false; // update all hw data
+                                AllHomeworksAndOneIsOpend = false; // update all hw data
                                 Navigator.pop(context);
                                 setState(() {});
                               },
@@ -430,19 +416,11 @@ class _TeacherThirdPageContentsState extends State<TeacherThirdPageContents> {
                                 padding: EdgeInsets.all(10),
                                 circularRadius: 15,
                                 boxShadow: const [
-                                  BoxShadow(
-                                      color: Color.fromARGB(61, 0, 0, 0),
-                                      offset: Offset(1, 1),
-                                      blurRadius: 1,
-                                      spreadRadius: .06)
+                                  BoxShadow(color: Color.fromARGB(61, 0, 0, 0), offset: Offset(1, 1), blurRadius: 1, spreadRadius: .06)
                                 ],
                                 color: const Color.fromARGB(255, 233, 255, 247),
                                 child: TMaker(
-                                    text: "Delete Homework",
-                                    fontSize: 20,
-                                    fontWeight: FontWeight.w600,
-                                    color:
-                                        const Color.fromARGB(255, 191, 0, 0))),
+                                    text: "Delete Homework", fontSize: 20, fontWeight: FontWeight.w600, color: const Color.fromARGB(255, 191, 0, 0))),
                           )),
                     ),
                     const Padding(padding: EdgeInsets.only(bottom: 20)),
@@ -462,8 +440,7 @@ class _TeacherThirdPageContentsState extends State<TeacherThirdPageContents> {
                   child: Row(children: [
                     InkWell(
                       onTap: () async {
-                        all_Homeworks = await dbService.Fi_getAll_HW(
-                            Grade_selected, SubjectThatIsSelected);
+                        all_Homeworks = await dbService.Fi_getAll_HW(Grade_selected, SubjectThatIsSelected);
                         setState(() {
                           AllhomeWorks = true;
                           AllHomeworksAndOneIsOpend = false;
@@ -482,11 +459,7 @@ class _TeacherThirdPageContentsState extends State<TeacherThirdPageContents> {
                       circularRadius: 20,
                       margin: EdgeInsets.only(right: 20),
                       height: 70,
-                      child: TMaker(
-                          text: "All Homeworks",
-                          fontSize: 30,
-                          fontWeight: FontWeight.w700,
-                          color: const Color.fromARGB(255, 0, 0, 0)),
+                      child: TMaker(text: "All Homeworks", fontSize: 30, fontWeight: FontWeight.w700, color: const Color.fromARGB(255, 0, 0, 0)),
                     ))
                   ])),
               Padding(padding: EdgeInsets.only(bottom: 20)),
@@ -496,13 +469,7 @@ class _TeacherThirdPageContentsState extends State<TeacherThirdPageContents> {
                 margin: EdgeInsets.only(left: 20, right: 20),
                 circularRadius: 20,
                 alignment: Alignment.center,
-                boxShadow: const [
-                  BoxShadow(
-                      color: Color.fromARGB(61, 0, 0, 0),
-                      offset: Offset(2, 2),
-                      blurRadius: 10,
-                      spreadRadius: .06)
-                ],
+                boxShadow: const [BoxShadow(color: Color.fromARGB(61, 0, 0, 0), offset: Offset(2, 2), blurRadius: 10, spreadRadius: .06)],
                 color: Color.fromARGB(255, 255, 255, 255),
                 child: ListView(
                   children: [
@@ -513,10 +480,7 @@ class _TeacherThirdPageContentsState extends State<TeacherThirdPageContents> {
                         circularRadius: 20,
                         margin: const EdgeInsets.only(left: 20, right: 20),
                         child: TMaker(
-                            text: "Title ${IsOpendIndex + 1}",
-                            fontSize: 30,
-                            fontWeight: FontWeight.w600,
-                            color: const Color.fromARGB(255, 0, 0, 0))),
+                            text: "Title ${IsOpendIndex + 1}", fontSize: 30, fontWeight: FontWeight.w600, color: const Color.fromARGB(255, 0, 0, 0))),
                     Padding(padding: EdgeInsets.only(bottom: 20)),
                     CMaker(
                         alignment: Alignment.centerLeft,
@@ -530,23 +494,13 @@ class _TeacherThirdPageContentsState extends State<TeacherThirdPageContents> {
                     const Padding(padding: EdgeInsets.only(bottom: 20)),
                     CMaker(
                       height: 300,
-                      boxShadow: const [
-                        BoxShadow(
-                            color: Color.fromARGB(61, 0, 0, 0),
-                            offset: Offset(1, 1),
-                            blurRadius: 1,
-                            spreadRadius: .06)
-                      ],
+                      boxShadow: const [BoxShadow(color: Color.fromARGB(61, 0, 0, 0), offset: Offset(1, 1), blurRadius: 1, spreadRadius: .06)],
                       color: const Color.fromARGB(255, 233, 255, 247),
                       width: double.infinity,
                       margin: EdgeInsets.symmetric(horizontal: 20),
                       child: GridView.builder(
                         itemCount: 4,
-                        gridDelegate:
-                            const SliverGridDelegateWithFixedCrossAxisCount(
-                                crossAxisCount: 2,
-                                crossAxisSpacing: 10,
-                                mainAxisSpacing: 10),
+                        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2, crossAxisSpacing: 10, mainAxisSpacing: 10),
                         itemBuilder: (context, index) {
                           return InkWell(
                             onTap: () {
@@ -570,18 +524,10 @@ class _TeacherThirdPageContentsState extends State<TeacherThirdPageContents> {
                               padding: EdgeInsets.all(10),
                               circularRadius: 15,
                               boxShadow: const [
-                                BoxShadow(
-                                    color: Color.fromARGB(61, 0, 0, 0),
-                                    offset: Offset(1, 1),
-                                    blurRadius: 1,
-                                    spreadRadius: .06)
+                                BoxShadow(color: Color.fromARGB(61, 0, 0, 0), offset: Offset(1, 1), blurRadius: 1, spreadRadius: .06)
                               ],
                               color: const Color.fromARGB(255, 233, 255, 247),
-                              child: TMaker(
-                                  text: "Edit",
-                                  fontSize: 20,
-                                  fontWeight: FontWeight.w600,
-                                  color: Colors.black))),
+                              child: TMaker(text: "Edit", fontSize: 20, fontWeight: FontWeight.w600, color: Colors.black))),
                     ),
                     const Padding(padding: EdgeInsets.only(bottom: 20)),
                     CMaker(
@@ -590,18 +536,12 @@ class _TeacherThirdPageContentsState extends State<TeacherThirdPageContents> {
                             PanaraInfoDialog.show(
                               context,
                               title: "Wait",
-                              message:
-                                  "Are you sure you want to delete this homework",
+                              message: "Are you sure you want to delete this homework",
                               buttonText: "Delete",
                               onTapDismiss: () async {
                                 //delete hw start
-                                await dbService.FiDelete_Hw_techer(
-                                    Grade_selected,
-                                    SubjectThatIsSelected,
-                                    all_Homeworks[IsOpendIndex][5] as String);
-                                all_Homeworks = await dbService.Fi_getAll_HW(
-                                    Grade_selected,
-                                    SubjectThatIsSelected); // update all hw data
+                                await dbService.FiDelete_Hw_techer(Grade_selected, SubjectThatIsSelected, all_Homeworks[IsOpendIndex][5] as String);
+                                all_Homeworks = await dbService.Fi_getAll_HW(Grade_selected, SubjectThatIsSelected); // update all hw data
                                 Navigator.pop(context);
                                 setState(() {});
                               },
@@ -617,19 +557,11 @@ class _TeacherThirdPageContentsState extends State<TeacherThirdPageContents> {
                                 padding: EdgeInsets.all(10),
                                 circularRadius: 15,
                                 boxShadow: const [
-                                  BoxShadow(
-                                      color: Color.fromARGB(61, 0, 0, 0),
-                                      offset: Offset(1, 1),
-                                      blurRadius: 1,
-                                      spreadRadius: .06)
+                                  BoxShadow(color: Color.fromARGB(61, 0, 0, 0), offset: Offset(1, 1), blurRadius: 1, spreadRadius: .06)
                                 ],
                                 color: const Color.fromARGB(255, 233, 255, 247),
                                 child: TMaker(
-                                    text: "Delete Homework",
-                                    fontSize: 20,
-                                    fontWeight: FontWeight.w600,
-                                    color:
-                                        const Color.fromARGB(255, 191, 0, 0))),
+                                    text: "Delete Homework", fontSize: 20, fontWeight: FontWeight.w600, color: const Color.fromARGB(255, 191, 0, 0))),
                           )),
                     ),
                     const Padding(padding: EdgeInsets.only(bottom: 20)),
@@ -649,8 +581,7 @@ class _TeacherThirdPageContentsState extends State<TeacherThirdPageContents> {
                   child: Row(children: [
                     InkWell(
                       onTap: () async {
-                        all_Homeworks = await dbService.Fi_getAll_HW(
-                            Grade_selected, SubjectThatIsSelected);
+                        all_Homeworks = await dbService.Fi_getAll_HW(Grade_selected, SubjectThatIsSelected);
                         setState(() {
                           AllhomeWorks = true;
                           AllHomeworksAndOneIsOpend = false;
@@ -669,11 +600,7 @@ class _TeacherThirdPageContentsState extends State<TeacherThirdPageContents> {
                       circularRadius: 20,
                       margin: EdgeInsets.only(right: 20),
                       height: 70,
-                      child: TMaker(
-                          text: "All Homeworks",
-                          fontSize: 30,
-                          fontWeight: FontWeight.w700,
-                          color: const Color.fromARGB(255, 0, 0, 0)),
+                      child: TMaker(text: "All Homeworks", fontSize: 30, fontWeight: FontWeight.w700, color: const Color.fromARGB(255, 0, 0, 0)),
                     ))
                   ])),
               Padding(padding: EdgeInsets.only(bottom: 20)),
@@ -683,13 +610,7 @@ class _TeacherThirdPageContentsState extends State<TeacherThirdPageContents> {
                 margin: EdgeInsets.only(left: 20, right: 20),
                 circularRadius: 20,
                 alignment: Alignment.center,
-                boxShadow: const [
-                  BoxShadow(
-                      color: Color.fromARGB(61, 0, 0, 0),
-                      offset: Offset(2, 2),
-                      blurRadius: 10,
-                      spreadRadius: .06)
-                ],
+                boxShadow: const [BoxShadow(color: Color.fromARGB(61, 0, 0, 0), offset: Offset(2, 2), blurRadius: 10, spreadRadius: .06)],
                 color: Color.fromARGB(255, 255, 255, 255),
                 child: ListView(
                   children: [
@@ -700,10 +621,7 @@ class _TeacherThirdPageContentsState extends State<TeacherThirdPageContents> {
                         circularRadius: 20,
                         margin: const EdgeInsets.only(left: 20, right: 20),
                         child: TMaker(
-                            text: "Title ${IsOpendIndex + 1}",
-                            fontSize: 30,
-                            fontWeight: FontWeight.w600,
-                            color: const Color.fromARGB(255, 0, 0, 0))),
+                            text: "Title ${IsOpendIndex + 1}", fontSize: 30, fontWeight: FontWeight.w600, color: const Color.fromARGB(255, 0, 0, 0))),
                     Padding(padding: EdgeInsets.only(bottom: 20)),
                     CMaker(
                         alignment: Alignment.centerLeft,
@@ -717,23 +635,13 @@ class _TeacherThirdPageContentsState extends State<TeacherThirdPageContents> {
                     const Padding(padding: EdgeInsets.only(bottom: 20)),
                     CMaker(
                       height: 300,
-                      boxShadow: const [
-                        BoxShadow(
-                            color: Color.fromARGB(61, 0, 0, 0),
-                            offset: Offset(1, 1),
-                            blurRadius: 1,
-                            spreadRadius: .06)
-                      ],
+                      boxShadow: const [BoxShadow(color: Color.fromARGB(61, 0, 0, 0), offset: Offset(1, 1), blurRadius: 1, spreadRadius: .06)],
                       color: const Color.fromARGB(255, 233, 255, 247),
                       width: double.infinity,
                       margin: EdgeInsets.symmetric(horizontal: 20),
                       child: GridView.builder(
                         itemCount: 4,
-                        gridDelegate:
-                            const SliverGridDelegateWithFixedCrossAxisCount(
-                                crossAxisCount: 2,
-                                crossAxisSpacing: 10,
-                                mainAxisSpacing: 10),
+                        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2, crossAxisSpacing: 10, mainAxisSpacing: 10),
                         itemBuilder: (context, index) {
                           return InkWell(
                             onTap: () {
@@ -757,18 +665,10 @@ class _TeacherThirdPageContentsState extends State<TeacherThirdPageContents> {
                               padding: EdgeInsets.all(10),
                               circularRadius: 15,
                               boxShadow: const [
-                                BoxShadow(
-                                    color: Color.fromARGB(61, 0, 0, 0),
-                                    offset: Offset(1, 1),
-                                    blurRadius: 1,
-                                    spreadRadius: .06)
+                                BoxShadow(color: Color.fromARGB(61, 0, 0, 0), offset: Offset(1, 1), blurRadius: 1, spreadRadius: .06)
                               ],
                               color: const Color.fromARGB(255, 233, 255, 247),
-                              child: TMaker(
-                                  text: "Edit",
-                                  fontSize: 20,
-                                  fontWeight: FontWeight.w600,
-                                  color: Colors.black))),
+                              child: TMaker(text: "Edit", fontSize: 20, fontWeight: FontWeight.w600, color: Colors.black))),
                     ),
                     const Padding(padding: EdgeInsets.only(bottom: 20)),
                     CMaker(
@@ -777,18 +677,12 @@ class _TeacherThirdPageContentsState extends State<TeacherThirdPageContents> {
                             PanaraInfoDialog.show(
                               context,
                               title: "Wait",
-                              message:
-                                  "Are you sure you want to delete this homework",
+                              message: "Are you sure you want to delete this homework",
                               buttonText: "Delete",
                               onTapDismiss: () async {
                                 //delete hw start
-                                await dbService.FiDelete_Hw_techer(
-                                    Grade_selected,
-                                    SubjectThatIsSelected,
-                                    all_Homeworks[IsOpendIndex][5] as String);
-                                all_Homeworks = await dbService.Fi_getAll_HW(
-                                    Grade_selected,
-                                    SubjectThatIsSelected); // update all hw data
+                                await dbService.FiDelete_Hw_techer(Grade_selected, SubjectThatIsSelected, all_Homeworks[IsOpendIndex][5] as String);
+                                all_Homeworks = await dbService.Fi_getAll_HW(Grade_selected, SubjectThatIsSelected); // update all hw data
                                 Navigator.pop(context);
                                 setState(() {});
                               },
@@ -804,19 +698,11 @@ class _TeacherThirdPageContentsState extends State<TeacherThirdPageContents> {
                                 padding: EdgeInsets.all(10),
                                 circularRadius: 15,
                                 boxShadow: const [
-                                  BoxShadow(
-                                      color: Color.fromARGB(61, 0, 0, 0),
-                                      offset: Offset(1, 1),
-                                      blurRadius: 1,
-                                      spreadRadius: .06)
+                                  BoxShadow(color: Color.fromARGB(61, 0, 0, 0), offset: Offset(1, 1), blurRadius: 1, spreadRadius: .06)
                                 ],
                                 color: const Color.fromARGB(255, 233, 255, 247),
                                 child: TMaker(
-                                    text: "Delete Homework",
-                                    fontSize: 20,
-                                    fontWeight: FontWeight.w600,
-                                    color:
-                                        const Color.fromARGB(255, 191, 0, 0))),
+                                    text: "Delete Homework", fontSize: 20, fontWeight: FontWeight.w600, color: const Color.fromARGB(255, 191, 0, 0))),
                           )),
                     ),
                     const Padding(padding: EdgeInsets.only(bottom: 20)),
@@ -863,11 +749,8 @@ class _TeacherThirdPageContentsState extends State<TeacherThirdPageContents> {
                             circularRadius: 20,
                             margin: EdgeInsets.only(right: 20),
                             height: 70,
-                            child: TMaker(
-                                text: "All Homeworks",
-                                fontSize: 30,
-                                fontWeight: FontWeight.w700,
-                                color: const Color.fromARGB(255, 0, 0, 0)),
+                            child:
+                                TMaker(text: "All Homeworks", fontSize: 30, fontWeight: FontWeight.w700, color: const Color.fromARGB(255, 0, 0, 0)),
                           ))
                         ])),
                     Padding(padding: EdgeInsets.only(bottom: 20)),
@@ -877,13 +760,7 @@ class _TeacherThirdPageContentsState extends State<TeacherThirdPageContents> {
                         margin: EdgeInsets.only(left: 20, right: 20),
                         circularRadius: 20,
                         alignment: Alignment.center,
-                        boxShadow: const [
-                          BoxShadow(
-                              color: Color.fromARGB(61, 0, 0, 0),
-                              offset: Offset(2, 2),
-                              blurRadius: 10,
-                              spreadRadius: .06)
-                        ],
+                        boxShadow: const [BoxShadow(color: Color.fromARGB(61, 0, 0, 0), offset: Offset(2, 2), blurRadius: 10, spreadRadius: .06)],
                         color: Color.fromARGB(255, 255, 255, 255),
                         child: Column(
                           children: [
@@ -892,8 +769,7 @@ class _TeacherThirdPageContentsState extends State<TeacherThirdPageContents> {
                                 alignment: Alignment.centerLeft,
                                 height: 60,
                                 circularRadius: 20,
-                                margin:
-                                    const EdgeInsets.only(left: 20, right: 20),
+                                margin: const EdgeInsets.only(left: 20, right: 20),
                                 child: TMaker(
                                     text: "${Grade_selected} Homework",
                                     fontSize: 30,
@@ -918,97 +794,54 @@ class _TeacherThirdPageContentsState extends State<TeacherThirdPageContents> {
                                         },
                                         child: CMaker(
                                           boxShadow: const [
-                                            BoxShadow(
-                                                color:
-                                                    Color.fromARGB(61, 0, 0, 0),
-                                                offset: Offset(2, 2),
-                                                blurRadius: 10,
-                                                spreadRadius: .06)
+                                            BoxShadow(color: Color.fromARGB(61, 0, 0, 0), offset: Offset(2, 2), blurRadius: 10, spreadRadius: .06)
                                           ],
                                           circularRadius: 20,
-                                          margin: EdgeInsets.only(
-                                              top: 15,
-                                              bottom: 15,
-                                              left: 20,
-                                              right: 20),
+                                          margin: EdgeInsets.only(top: 15, bottom: 15, left: 20, right: 20),
                                           width: double.infinity,
                                           height: 180,
-                                          color: const Color.fromARGB(
-                                              255, 233, 255, 247),
+                                          color: const Color.fromARGB(255, 233, 255, 247),
                                           child: ListView(
                                             shrinkWrap: true,
                                             children: [
-                                              const Padding(
-                                                  padding: EdgeInsets.only(
-                                                      bottom: 10)),
+                                              const Padding(padding: EdgeInsets.only(bottom: 10)),
                                               CMaker(
-                                                  alignment:
-                                                      Alignment.centerLeft,
-                                                  padding:
-                                                      const EdgeInsets.only(
-                                                          left: 10),
+                                                  alignment: Alignment.centerLeft,
+                                                  padding: const EdgeInsets.only(left: 10),
                                                   child: TMaker(
-                                                      text:
-                                                          all_Homeworks[index1]
-                                                              [0],
+                                                      text: all_Homeworks[index1][0],
                                                       fontSize: 30,
-                                                      fontWeight:
-                                                          FontWeight.w700,
+                                                      fontWeight: FontWeight.w700,
                                                       color: Colors.black)),
-                                              const Padding(
-                                                  padding: EdgeInsets.only(
-                                                      bottom: 10)),
+                                              const Padding(padding: EdgeInsets.only(bottom: 10)),
                                               CMaker(
-                                                  alignment:
-                                                      Alignment.centerLeft,
-                                                  padding:
-                                                      const EdgeInsets.only(
-                                                          left: 10),
+                                                  alignment: Alignment.centerLeft,
+                                                  padding: const EdgeInsets.only(left: 10),
                                                   child: TMaker(
-                                                      textAlign:
-                                                          TextAlign.start,
-                                                      text:
-                                                          all_Homeworks[index1]
-                                                              [1],
+                                                      textAlign: TextAlign.start,
+                                                      text: all_Homeworks[index1][1],
                                                       fontSize: 17,
-                                                      fontWeight:
-                                                          FontWeight.w700,
-                                                      color:
-                                                          const Color.fromARGB(
-                                                              255,
-                                                              86,
-                                                              86,
-                                                              86))),
-                                              const Padding(
-                                                  padding: EdgeInsets.only(
-                                                      bottom: 20)),
+                                                      fontWeight: FontWeight.w700,
+                                                      color: const Color.fromARGB(255, 86, 86, 86))),
+                                              const Padding(padding: EdgeInsets.only(bottom: 20)),
                                               CMaker(
                                                 margin: const EdgeInsets.symmetric(horizontal: 10),
                                                 height: 70,
                                                 width: double.infinity,
                                                 child: GridView.builder(
-                                                  itemCount:
-                                                      (all_Homeworks[index1][4]
-                                                              as List)
-                                                          .length,
-                                                  gridDelegate:
-                                                      const SliverGridDelegateWithFixedCrossAxisCount(
-                                                          crossAxisCount: 6,
-                                                          crossAxisSpacing: 10,
-                                                          mainAxisSpacing: 10),
-                                                  itemBuilder:
-                                                      (context, index) {
+                                                  itemCount: (all_Homeworks[index1][4] as List).length,
+                                                  gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                                                      crossAxisCount: 6, crossAxisSpacing: 10, mainAxisSpacing: 10),
+                                                  itemBuilder: (context, index) {
                                                     return InkWell(
                                                       onTap: () {
                                                         setState(() {});
                                                       },
                                                       child: Image.network(
                                                         () {
-                                                          print(
-                                                              "=================================\n$all_Homeworks");
+                                                          print("=================================\n$all_Homeworks");
                                                           print(index);
-                                                          return all_Homeworks[
-                                                              index1][4][index];
+                                                          return all_Homeworks[index1][4][index];
                                                         }(),
                                                         fit: BoxFit.fitWidth,
                                                       ),
@@ -1042,8 +875,7 @@ class _TeacherThirdPageContentsState extends State<TeacherThirdPageContents> {
                         child: Row(children: [
                           InkWell(
                             onTap: () async {
-                              all_Homeworks = await dbService.Fi_getAll_HW(
-                                  Grade_selected, SubjectThatIsSelected);
+                              all_Homeworks = await dbService.Fi_getAll_HW(Grade_selected, SubjectThatIsSelected);
                               setState(() {
                                 GradeHomeWorkIsOppened = true;
                                 NewHomeWork = false;
@@ -1063,11 +895,8 @@ class _TeacherThirdPageContentsState extends State<TeacherThirdPageContents> {
                             circularRadius: 20,
                             margin: EdgeInsets.only(right: 20),
                             height: 70,
-                            child: TMaker(
-                                text: "All Homeworks",
-                                fontSize: 30,
-                                fontWeight: FontWeight.w700,
-                                color: const Color.fromARGB(255, 0, 0, 0)),
+                            child:
+                                TMaker(text: "All Homeworks", fontSize: 30, fontWeight: FontWeight.w700, color: const Color.fromARGB(255, 0, 0, 0)),
                           ))
                         ])),
                     Padding(padding: EdgeInsets.only(bottom: 20)),
@@ -1077,13 +906,7 @@ class _TeacherThirdPageContentsState extends State<TeacherThirdPageContents> {
                         margin: EdgeInsets.only(left: 20, right: 20),
                         circularRadius: 20,
                         alignment: Alignment.center,
-                        boxShadow: const [
-                          BoxShadow(
-                              color: Color.fromARGB(61, 0, 0, 0),
-                              offset: Offset(2, 2),
-                              blurRadius: 10,
-                              spreadRadius: .06)
-                        ],
+                        boxShadow: const [BoxShadow(color: Color.fromARGB(61, 0, 0, 0), offset: Offset(2, 2), blurRadius: 10, spreadRadius: .06)],
                         color: Color.fromARGB(255, 255, 255, 255),
                         child: Column(
                           children: [
@@ -1092,11 +915,9 @@ class _TeacherThirdPageContentsState extends State<TeacherThirdPageContents> {
                                 alignment: Alignment.centerLeft,
                                 height: 60,
                                 circularRadius: 20,
-                                margin:
-                                    const EdgeInsets.only(left: 20, right: 20),
+                                margin: const EdgeInsets.only(left: 20, right: 20),
                                 child: TMaker(
-                                    text:
-                                        "Grade ${GradeHomeWorkOppenedIndex + 1} Homework",
+                                    text: "Grade ${GradeHomeWorkOppenedIndex + 1} Homework",
                                     fontSize: 30,
                                     fontWeight: FontWeight.w600,
                                     color: const Color.fromARGB(255, 0, 0, 0))),
@@ -1119,77 +940,39 @@ class _TeacherThirdPageContentsState extends State<TeacherThirdPageContents> {
                                         },
                                         child: CMaker(
                                           boxShadow: const [
-                                            BoxShadow(
-                                                color:
-                                                    Color.fromARGB(61, 0, 0, 0),
-                                                offset: Offset(2, 2),
-                                                blurRadius: 10,
-                                                spreadRadius: .06)
+                                            BoxShadow(color: Color.fromARGB(61, 0, 0, 0), offset: Offset(2, 2), blurRadius: 10, spreadRadius: .06)
                                           ],
                                           circularRadius: 20,
-                                          margin: EdgeInsets.only(
-                                              top: 15,
-                                              bottom: 15,
-                                              left: 20,
-                                              right: 20),
+                                          margin: EdgeInsets.only(top: 15, bottom: 15, left: 20, right: 20),
                                           width: double.infinity,
                                           height: 180,
-                                          color: const Color.fromARGB(
-                                              255, 233, 255, 247),
+                                          color: const Color.fromARGB(255, 233, 255, 247),
                                           child: Column(
                                             children: [
-                                              const Padding(
-                                                  padding: EdgeInsets.only(
-                                                      bottom: 10)),
+                                              const Padding(padding: EdgeInsets.only(bottom: 10)),
                                               CMaker(
-                                                  alignment:
-                                                      Alignment.centerLeft,
-                                                  padding:
-                                                      const EdgeInsets.only(
-                                                          left: 10),
-                                                  child: TMaker(
-                                                      text: "Title",
-                                                      fontSize: 30,
-                                                      fontWeight:
-                                                          FontWeight.w700,
-                                                      color: Colors.black)),
-                                              const Padding(
-                                                  padding: EdgeInsets.only(
-                                                      bottom: 10)),
+                                                  alignment: Alignment.centerLeft,
+                                                  padding: const EdgeInsets.only(left: 10),
+                                                  child: TMaker(text: "Title", fontSize: 30, fontWeight: FontWeight.w700, color: Colors.black)),
+                                              const Padding(padding: EdgeInsets.only(bottom: 10)),
                                               CMaker(
-                                                  alignment:
-                                                      Alignment.centerLeft,
-                                                  padding:
-                                                      const EdgeInsets.only(
-                                                          left: 10),
+                                                  alignment: Alignment.centerLeft,
+                                                  padding: const EdgeInsets.only(left: 10),
                                                   child: TMaker(
-                                                      textAlign:
-                                                          TextAlign.start,
+                                                      textAlign: TextAlign.start,
                                                       text: "Body",
                                                       fontSize: 17,
-                                                      fontWeight:
-                                                          FontWeight.w700,
-                                                      color:
-                                                          const Color.fromARGB(
-                                                              255,
-                                                              86,
-                                                              86,
-                                                              86))),
-                                              const Padding(
-                                                  padding: EdgeInsets.only(
-                                                      bottom: 20)),
+                                                      fontWeight: FontWeight.w700,
+                                                      color: const Color.fromARGB(255, 86, 86, 86))),
+                                              const Padding(padding: EdgeInsets.only(bottom: 20)),
                                               CMaker(
                                                 height: 70,
                                                 width: double.infinity,
                                                 child: GridView.builder(
                                                   itemCount: 4,
-                                                  gridDelegate:
-                                                      const SliverGridDelegateWithFixedCrossAxisCount(
-                                                          crossAxisCount: 6,
-                                                          crossAxisSpacing: 10,
-                                                          mainAxisSpacing: 10),
-                                                  itemBuilder:
-                                                      (context, index) {
+                                                  gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                                                      crossAxisCount: 6, crossAxisSpacing: 10, mainAxisSpacing: 10),
+                                                  itemBuilder: (context, index) {
                                                     return InkWell(
                                                       onTap: () {
                                                         setState(() {});
@@ -1247,11 +1030,8 @@ class _TeacherThirdPageContentsState extends State<TeacherThirdPageContents> {
                             circularRadius: 20,
                             margin: EdgeInsets.only(right: 20),
                             height: 70,
-                            child: TMaker(
-                                text: "All Homeworks",
-                                fontSize: 30,
-                                fontWeight: FontWeight.w700,
-                                color: const Color.fromARGB(255, 0, 0, 0)),
+                            child:
+                                TMaker(text: "All Homeworks", fontSize: 30, fontWeight: FontWeight.w700, color: const Color.fromARGB(255, 0, 0, 0)),
                           ))
                         ])),
                     Padding(padding: EdgeInsets.only(bottom: 20)),
@@ -1261,13 +1041,7 @@ class _TeacherThirdPageContentsState extends State<TeacherThirdPageContents> {
                         margin: EdgeInsets.only(left: 20, right: 20),
                         circularRadius: 20,
                         alignment: Alignment.center,
-                        boxShadow: const [
-                          BoxShadow(
-                              color: Color.fromARGB(61, 0, 0, 0),
-                              offset: Offset(2, 2),
-                              blurRadius: 10,
-                              spreadRadius: .06)
-                        ],
+                        boxShadow: const [BoxShadow(color: Color.fromARGB(61, 0, 0, 0), offset: Offset(2, 2), blurRadius: 10, spreadRadius: .06)],
                         color: Color.fromARGB(255, 255, 255, 255),
                         child: Column(
                           children: [
@@ -1276,11 +1050,9 @@ class _TeacherThirdPageContentsState extends State<TeacherThirdPageContents> {
                                 alignment: Alignment.centerLeft,
                                 height: 60,
                                 circularRadius: 20,
-                                margin:
-                                    const EdgeInsets.only(left: 20, right: 20),
+                                margin: const EdgeInsets.only(left: 20, right: 20),
                                 child: TMaker(
-                                    text:
-                                        "Grade ${GradeHomeWorkOppenedIndex + 1} Homework",
+                                    text: "Grade ${GradeHomeWorkOppenedIndex + 1} Homework",
                                     fontSize: 30,
                                     fontWeight: FontWeight.w600,
                                     color: const Color.fromARGB(255, 0, 0, 0))),
@@ -1303,77 +1075,39 @@ class _TeacherThirdPageContentsState extends State<TeacherThirdPageContents> {
                                         },
                                         child: CMaker(
                                           boxShadow: const [
-                                            BoxShadow(
-                                                color:
-                                                    Color.fromARGB(61, 0, 0, 0),
-                                                offset: Offset(2, 2),
-                                                blurRadius: 10,
-                                                spreadRadius: .06)
+                                            BoxShadow(color: Color.fromARGB(61, 0, 0, 0), offset: Offset(2, 2), blurRadius: 10, spreadRadius: .06)
                                           ],
                                           circularRadius: 20,
-                                          margin: EdgeInsets.only(
-                                              top: 15,
-                                              bottom: 15,
-                                              left: 20,
-                                              right: 20),
+                                          margin: EdgeInsets.only(top: 15, bottom: 15, left: 20, right: 20),
                                           width: double.infinity,
                                           height: 180,
-                                          color: const Color.fromARGB(
-                                              255, 233, 255, 247),
+                                          color: const Color.fromARGB(255, 233, 255, 247),
                                           child: Column(
                                             children: [
-                                              const Padding(
-                                                  padding: EdgeInsets.only(
-                                                      bottom: 10)),
+                                              const Padding(padding: EdgeInsets.only(bottom: 10)),
                                               CMaker(
-                                                  alignment:
-                                                      Alignment.centerLeft,
-                                                  padding:
-                                                      const EdgeInsets.only(
-                                                          left: 10),
-                                                  child: TMaker(
-                                                      text: "Title",
-                                                      fontSize: 30,
-                                                      fontWeight:
-                                                          FontWeight.w700,
-                                                      color: Colors.black)),
-                                              const Padding(
-                                                  padding: EdgeInsets.only(
-                                                      bottom: 10)),
+                                                  alignment: Alignment.centerLeft,
+                                                  padding: const EdgeInsets.only(left: 10),
+                                                  child: TMaker(text: "Title", fontSize: 30, fontWeight: FontWeight.w700, color: Colors.black)),
+                                              const Padding(padding: EdgeInsets.only(bottom: 10)),
                                               CMaker(
-                                                  alignment:
-                                                      Alignment.centerLeft,
-                                                  padding:
-                                                      const EdgeInsets.only(
-                                                          left: 10),
+                                                  alignment: Alignment.centerLeft,
+                                                  padding: const EdgeInsets.only(left: 10),
                                                   child: TMaker(
-                                                      textAlign:
-                                                          TextAlign.start,
+                                                      textAlign: TextAlign.start,
                                                       text: "Body",
                                                       fontSize: 17,
-                                                      fontWeight:
-                                                          FontWeight.w700,
-                                                      color:
-                                                          const Color.fromARGB(
-                                                              255,
-                                                              86,
-                                                              86,
-                                                              86))),
-                                              const Padding(
-                                                  padding: EdgeInsets.only(
-                                                      bottom: 20)),
+                                                      fontWeight: FontWeight.w700,
+                                                      color: const Color.fromARGB(255, 86, 86, 86))),
+                                              const Padding(padding: EdgeInsets.only(bottom: 20)),
                                               CMaker(
                                                 height: 70,
                                                 width: double.infinity,
                                                 child: GridView.builder(
                                                   itemCount: 4,
-                                                  gridDelegate:
-                                                      const SliverGridDelegateWithFixedCrossAxisCount(
-                                                          crossAxisCount: 6,
-                                                          crossAxisSpacing: 10,
-                                                          mainAxisSpacing: 10),
-                                                  itemBuilder:
-                                                      (context, index) {
+                                                  gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                                                      crossAxisCount: 6, crossAxisSpacing: 10, mainAxisSpacing: 10),
+                                                  itemBuilder: (context, index) {
                                                     return InkWell(
                                                       onTap: () {
                                                         setState(() {});
@@ -1413,13 +1147,7 @@ class _TeacherThirdPageContentsState extends State<TeacherThirdPageContents> {
         ),
       );
       Widget HomeworkTitleTFF = CMaker(
-          boxShadow: const [
-            BoxShadow(
-                color: Color.fromARGB(61, 0, 0, 0),
-                offset: Offset(2, 2),
-                blurRadius: 10,
-                spreadRadius: .06)
-          ],
+          boxShadow: const [BoxShadow(color: Color.fromARGB(61, 0, 0, 0), offset: Offset(2, 2), blurRadius: 10, spreadRadius: .06)],
           color: const Color.fromARGB(255, 255, 255, 255),
           alignment: Alignment.center,
           margin: const EdgeInsets.symmetric(horizontal: 20),
@@ -1429,12 +1157,7 @@ class _TeacherThirdPageContentsState extends State<TeacherThirdPageContents> {
             children: [
               CMaker(
                   width: double.infinity,
-                  child: TMaker(
-                      textAlign: TextAlign.start,
-                      text: "Title",
-                      fontSize: 25,
-                      fontWeight: FontWeight.w700,
-                      color: Colors.black)),
+                  child: TMaker(textAlign: TextAlign.start, text: "Title", fontSize: 25, fontWeight: FontWeight.w700, color: Colors.black)),
               SizedBox(
                 height: 70,
                 child: TextFormField(
@@ -1454,35 +1177,23 @@ class _TeacherThirdPageContentsState extends State<TeacherThirdPageContents> {
                   },
                   decoration: InputDecoration(
                       focusedErrorBorder: OutlineInputBorder(
-                          borderSide: const BorderSide(
-                              color: Color.fromARGB(255, 192, 192, 192)),
-                          borderRadius: BorderRadius.circular(30)),
+                          borderSide: const BorderSide(color: Color.fromARGB(255, 192, 192, 192)), borderRadius: BorderRadius.circular(30)),
                       errorBorder: OutlineInputBorder(
-                          borderSide: const BorderSide(
-                              color: Color.fromARGB(255, 192, 192, 192)),
-                          borderRadius: BorderRadius.circular(30)),
+                          borderSide: const BorderSide(color: Color.fromARGB(255, 192, 192, 192)), borderRadius: BorderRadius.circular(30)),
                       label: const Text(
                         "Add Title",
-                        style: TextStyle(
-                            fontSize: 15, fontWeight: FontWeight.w600),
+                        style: TextStyle(fontSize: 15, fontWeight: FontWeight.w600),
                       ),
                       enabledBorder: OutlineInputBorder(
-                          borderSide: const BorderSide(
-                              color: Color.fromARGB(255, 192, 192, 192)),
-                          borderRadius: BorderRadius.circular(30)),
-                      focusedBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(15))),
+                          borderSide: const BorderSide(color: Color.fromARGB(255, 192, 192, 192)), borderRadius: BorderRadius.circular(30)),
+                      focusedBorder: OutlineInputBorder(borderRadius: BorderRadius.circular(15))),
                 ),
               ),
             ],
           ));
       Widget HomeworkBodyTFF = CMaker(
           boxShadow: const [
-            BoxShadow(
-                color: Color.fromARGB(61, 0, 0, 0),
-                offset: Offset(2, 2),
-                blurRadius: 10,
-                spreadRadius: .06),
+            BoxShadow(color: Color.fromARGB(61, 0, 0, 0), offset: Offset(2, 2), blurRadius: 10, spreadRadius: .06),
           ],
           color: const Color.fromARGB(255, 255, 255, 255),
           alignment: Alignment.center,
@@ -1493,12 +1204,7 @@ class _TeacherThirdPageContentsState extends State<TeacherThirdPageContents> {
             children: [
               CMaker(
                   width: double.infinity,
-                  child: TMaker(
-                      textAlign: TextAlign.start,
-                      text: "Body",
-                      fontSize: 25,
-                      fontWeight: FontWeight.w700,
-                      color: Colors.black)),
+                  child: TMaker(textAlign: TextAlign.start, text: "Body", fontSize: 25, fontWeight: FontWeight.w700, color: Colors.black)),
               SizedBox(
                 height: 220,
                 child: TextFormField(
@@ -1520,36 +1226,22 @@ class _TeacherThirdPageContentsState extends State<TeacherThirdPageContents> {
                   },
                   decoration: InputDecoration(
                       focusedErrorBorder: OutlineInputBorder(
-                          borderSide: const BorderSide(
-                              color: Color.fromARGB(255, 192, 192, 192)),
-                          borderRadius: BorderRadius.circular(30)),
+                          borderSide: const BorderSide(color: Color.fromARGB(255, 192, 192, 192)), borderRadius: BorderRadius.circular(30)),
                       errorBorder: OutlineInputBorder(
-                          borderSide: const BorderSide(
-                              color: Color.fromARGB(255, 192, 192, 192)),
-                          borderRadius: BorderRadius.circular(30)),
+                          borderSide: const BorderSide(color: Color.fromARGB(255, 192, 192, 192)), borderRadius: BorderRadius.circular(30)),
                       label: const Text(
                         "Add Body",
-                        style: TextStyle(
-                            fontSize: 15, fontWeight: FontWeight.w600),
+                        style: TextStyle(fontSize: 15, fontWeight: FontWeight.w600),
                       ),
                       enabledBorder: OutlineInputBorder(
-                          borderSide: const BorderSide(
-                              color: Color.fromARGB(255, 192, 192, 192)),
-                          borderRadius: BorderRadius.circular(30)),
-                      focusedBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(15))),
+                          borderSide: const BorderSide(color: Color.fromARGB(255, 192, 192, 192)), borderRadius: BorderRadius.circular(30)),
+                      focusedBorder: OutlineInputBorder(borderRadius: BorderRadius.circular(15))),
                 ),
               ),
             ],
           ));
       Widget ScoreTFF = CMaker(
-          boxShadow: const [
-            BoxShadow(
-                color: Color.fromARGB(61, 0, 0, 0),
-                offset: Offset(2, 2),
-                blurRadius: 10,
-                spreadRadius: .06)
-          ],
+          boxShadow: const [BoxShadow(color: Color.fromARGB(61, 0, 0, 0), offset: Offset(2, 2), blurRadius: 10, spreadRadius: .06)],
           color: const Color.fromARGB(255, 255, 255, 255),
           alignment: Alignment.center,
           margin: const EdgeInsets.symmetric(horizontal: 20),
@@ -1561,12 +1253,7 @@ class _TeacherThirdPageContentsState extends State<TeacherThirdPageContents> {
               Expanded(child: Container()),
               CMaker(
                   width: 80,
-                  child: TMaker(
-                      textAlign: TextAlign.start,
-                      text: "Score",
-                      fontSize: 25,
-                      fontWeight: FontWeight.w700,
-                      color: Colors.black)),
+                  child: TMaker(textAlign: TextAlign.start, text: "Score", fontSize: 25, fontWeight: FontWeight.w700, color: Colors.black)),
               CMaker(
                 alignment: Alignment.center,
                 height: 60,
@@ -1588,24 +1275,16 @@ class _TeacherThirdPageContentsState extends State<TeacherThirdPageContents> {
                   },
                   decoration: InputDecoration(
                       focusedErrorBorder: OutlineInputBorder(
-                          borderSide: const BorderSide(
-                              color: Color.fromARGB(255, 192, 192, 192)),
-                          borderRadius: BorderRadius.circular(30)),
+                          borderSide: const BorderSide(color: Color.fromARGB(255, 192, 192, 192)), borderRadius: BorderRadius.circular(30)),
                       errorBorder: OutlineInputBorder(
-                          borderSide: const BorderSide(
-                              color: Color.fromARGB(255, 192, 192, 192)),
-                          borderRadius: BorderRadius.circular(30)),
+                          borderSide: const BorderSide(color: Color.fromARGB(255, 192, 192, 192)), borderRadius: BorderRadius.circular(30)),
                       label: const Text(
                         "Add Score",
-                        style: TextStyle(
-                            fontSize: 15, fontWeight: FontWeight.w600),
+                        style: TextStyle(fontSize: 15, fontWeight: FontWeight.w600),
                       ),
                       enabledBorder: OutlineInputBorder(
-                          borderSide: const BorderSide(
-                              color: Color.fromARGB(255, 192, 192, 192)),
-                          borderRadius: BorderRadius.circular(30)),
-                      focusedBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(15))),
+                          borderSide: const BorderSide(color: Color.fromARGB(255, 192, 192, 192)), borderRadius: BorderRadius.circular(30)),
+                      focusedBorder: OutlineInputBorder(borderRadius: BorderRadius.circular(15))),
                 ),
               ),
               Expanded(child: Container()),
@@ -1621,10 +1300,15 @@ class _TeacherThirdPageContentsState extends State<TeacherThirdPageContents> {
             children: [
               InkWell(
                 onTap: () async {
-                  XFile? Image = await PhotoImageFromGalary();
-                  if (Image != null) {
-                    HomeworkImagesLinks.add(File(Image.path));
-                    setState(() {});
+                  print("kIsWeb $kIsWeb");
+                  if (kIsWeb) {
+                    await pickImageFromGallery();
+                  } else {
+                    XFile? Image = await PhotoImageFromGalary();
+                    if (Image != null) {
+                      HomeworkImagesLinks.add(File(Image.path));
+                      setState(() {});
+                    }
                   }
                 },
                 child: CMaker(
@@ -1632,21 +1316,11 @@ class _TeacherThirdPageContentsState extends State<TeacherThirdPageContents> {
                     height: 60,
                     color: Colors.white,
                     width: 150,
-                    boxShadow: const [
-                      BoxShadow(
-                          color: Color.fromARGB(61, 0, 0, 0),
-                          offset: Offset(2, 2),
-                          blurRadius: 10,
-                          spreadRadius: .06)
-                    ],
+                    boxShadow: const [BoxShadow(color: Color.fromARGB(61, 0, 0, 0), offset: Offset(2, 2), blurRadius: 10, spreadRadius: .06)],
                     child: Row(
                       children: [
                         Expanded(child: Container()),
-                        TMaker(
-                            text: "add a photo",
-                            fontSize: 15,
-                            fontWeight: FontWeight.w800,
-                            color: Colors.black),
+                        TMaker(text: "add a photo", fontSize: 15, fontWeight: FontWeight.w800, color: Colors.black),
                         Expanded(child: Container()),
                         const Icon(Icons.photo_library),
                         Expanded(child: Container()),
@@ -1662,11 +1336,7 @@ class _TeacherThirdPageContentsState extends State<TeacherThirdPageContents> {
           CMaker(
               alignment: Alignment.centerLeft,
               padding: const EdgeInsets.only(left: 10),
-              child: TMaker(
-                  text: HomeworkTitle,
-                  fontSize: 30,
-                  fontWeight: FontWeight.w700,
-                  color: Colors.black)),
+              child: TMaker(text: HomeworkTitle, fontSize: 30, fontWeight: FontWeight.w700, color: Colors.black)),
           const Padding(padding: EdgeInsets.only(bottom: 10)),
           CMaker(
               alignment: Alignment.centerLeft,
@@ -1679,14 +1349,11 @@ class _TeacherThirdPageContentsState extends State<TeacherThirdPageContents> {
                   color: const Color.fromARGB(255, 86, 86, 86))),
           const Padding(padding: EdgeInsets.only(bottom: 20)),
           CMaker(
-            height: (HomeworkImagesLinks.length % 2 == 0)
-                ? HomeworkImagesLinks.length * 80
-                : (HomeworkImagesLinks.length + 1) * 80,
+            height: (HomeworkImagesLinks.length % 2 == 0) ? HomeworkImagesLinks.length * 80 : (HomeworkImagesLinks.length + 1) * 80,
             width: double.infinity,
             child: GridView.builder(
               itemCount: HomeworkImagesLinks.length,
-              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: 2, crossAxisSpacing: 10, mainAxisSpacing: 10),
+              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2, crossAxisSpacing: 10, mainAxisSpacing: 10),
               itemBuilder: (context, index) {
                 return InkWell(
                   onTap: () {
@@ -1694,10 +1361,15 @@ class _TeacherThirdPageContentsState extends State<TeacherThirdPageContents> {
                       HomeworkImagesLinks.removeAt(index);
                     });
                   },
-                  child: Image.file(
-                    HomeworkImagesLinks[index],
-                    fit: BoxFit.fitWidth,
-                  ),
+                  child: (kIsWeb)
+                      ? Image.memory(
+                          HomeworkImagesLinks[index],
+                          fit: BoxFit.fitWidth,
+                        )
+                      : Image.file(
+                          HomeworkImagesLinks[index],
+                          fit: BoxFit.fitWidth,
+                        ),
                 );
               },
             ),
@@ -1731,14 +1403,8 @@ class _TeacherThirdPageContentsState extends State<TeacherThirdPageContents> {
             }
             //fiAdd_Hw(String Grade, String Subject, String Teacher_Id, List Files_List,
             //String HomeworkTitle, String HomeworkBody, String score)
-            dbService.fiAdd_Hw(
-                ListOfGrades[GradeHomeWorkOppenedIndex][0],
-                SubjectThatIsSelected,
-                Teacher_Id,
-                Files_List,
-                HomeworkTitle,
-                HomeworkBody,
-                score);
+            await dbService.fiAdd_Hw(
+                ListOfGrades[GradeHomeWorkOppenedIndex][0], SubjectThatIsSelected, Teacher_Id, Files_List, HomeworkTitle, HomeworkBody, score);
 
             OverlayLoadingProgress.stop();
             PanaraInfoDialog.show(
@@ -1764,11 +1430,7 @@ class _TeacherThirdPageContentsState extends State<TeacherThirdPageContents> {
             color: Color.fromARGB(255, 61, 197, 255),
             alignment: Alignment.center,
             circularRadius: 15,
-            child: TMaker(
-                text: "Send",
-                fontSize: 20,
-                fontWeight: FontWeight.w700,
-                color: Colors.white)),
+            child: TMaker(text: "Send", fontSize: 20, fontWeight: FontWeight.w700, color: Colors.white)),
       );
       if (PageWidth(context) < 550) {
         setState(() {
@@ -1798,23 +1460,13 @@ class _TeacherThirdPageContentsState extends State<TeacherThirdPageContents> {
                           width: 140,
                           height: 70,
                           alignment: Alignment.bottomCenter,
-                          child: TMaker(
-                              text: "Final Look",
-                              fontSize: 28,
-                              fontWeight: FontWeight.w700,
-                              color: Colors.black))),
+                          child: TMaker(text: "Final Look", fontSize: 28, fontWeight: FontWeight.w700, color: Colors.black))),
                   const Padding(padding: EdgeInsets.only(bottom: 20)),
                   CMaker(
                       width: double.infinity,
                       height: 200,
                       child: CMaker(
-                          boxShadow: const [
-                            BoxShadow(
-                                color: Color.fromARGB(61, 0, 0, 0),
-                                offset: Offset(2, 2),
-                                blurRadius: 10,
-                                spreadRadius: .06)
-                          ],
+                          boxShadow: const [BoxShadow(color: Color.fromARGB(61, 0, 0, 0), offset: Offset(2, 2), blurRadius: 10, spreadRadius: .06)],
                           color: const Color.fromARGB(255, 255, 255, 255),
                           alignment: Alignment.center,
                           margin: const EdgeInsets.symmetric(horizontal: 20),
@@ -1822,10 +1474,7 @@ class _TeacherThirdPageContentsState extends State<TeacherThirdPageContents> {
                           padding: const EdgeInsets.all(15),
                           child: HomeWorkFinalLook)),
                   const Padding(padding: EdgeInsets.only(bottom: 20)),
-                  CMaker(
-                      width: double.infinity,
-                      alignment: Alignment.center,
-                      child: CMaker(width: 80, child: SendHomeworkButton)),
+                  CMaker(width: double.infinity, alignment: Alignment.center, child: CMaker(width: 80, child: SendHomeworkButton)),
                   Padding(padding: EdgeInsets.only(bottom: 20)),
                 ],
               ),
@@ -1860,23 +1509,13 @@ class _TeacherThirdPageContentsState extends State<TeacherThirdPageContents> {
                           width: 140,
                           height: 70,
                           alignment: Alignment.bottomCenter,
-                          child: TMaker(
-                              text: "Final Look",
-                              fontSize: 28,
-                              fontWeight: FontWeight.w700,
-                              color: Colors.black))),
+                          child: TMaker(text: "Final Look", fontSize: 28, fontWeight: FontWeight.w700, color: Colors.black))),
                   const Padding(padding: EdgeInsets.only(bottom: 20)),
                   CMaker(
                       width: double.infinity,
                       height: 300,
                       child: CMaker(
-                          boxShadow: const [
-                            BoxShadow(
-                                color: Color.fromARGB(61, 0, 0, 0),
-                                offset: Offset(2, 2),
-                                blurRadius: 10,
-                                spreadRadius: .06)
-                          ],
+                          boxShadow: const [BoxShadow(color: Color.fromARGB(61, 0, 0, 0), offset: Offset(2, 2), blurRadius: 10, spreadRadius: .06)],
                           color: const Color.fromARGB(255, 255, 255, 255),
                           alignment: Alignment.center,
                           margin: const EdgeInsets.symmetric(horizontal: 20),
@@ -1884,10 +1523,7 @@ class _TeacherThirdPageContentsState extends State<TeacherThirdPageContents> {
                           padding: const EdgeInsets.all(15),
                           child: HomeWorkFinalLook)),
                   const Padding(padding: EdgeInsets.only(bottom: 20)),
-                  CMaker(
-                      width: double.infinity,
-                      alignment: Alignment.center,
-                      child: CMaker(width: 80, child: SendHomeworkButton)),
+                  CMaker(width: double.infinity, alignment: Alignment.center, child: CMaker(width: 80, child: SendHomeworkButton)),
                   Padding(padding: EdgeInsets.only(bottom: 20)),
                 ],
               ),
@@ -1922,23 +1558,13 @@ class _TeacherThirdPageContentsState extends State<TeacherThirdPageContents> {
                             width: 140,
                             height: 70,
                             alignment: Alignment.bottomCenter,
-                            child: TMaker(
-                                text: "Final Look",
-                                fontSize: 28,
-                                fontWeight: FontWeight.w700,
-                                color: Colors.black))),
+                            child: TMaker(text: "Final Look", fontSize: 28, fontWeight: FontWeight.w700, color: Colors.black))),
                     const Padding(padding: EdgeInsets.only(bottom: 20)),
                     CMaker(
                         width: double.infinity,
                         height: 200,
                         child: CMaker(
-                            boxShadow: const [
-                              BoxShadow(
-                                  color: Color.fromARGB(61, 0, 0, 0),
-                                  offset: Offset(2, 2),
-                                  blurRadius: 10,
-                                  spreadRadius: .06)
-                            ],
+                            boxShadow: const [BoxShadow(color: Color.fromARGB(61, 0, 0, 0), offset: Offset(2, 2), blurRadius: 10, spreadRadius: .06)],
                             color: const Color.fromARGB(255, 255, 255, 255),
                             alignment: Alignment.center,
                             margin: const EdgeInsets.symmetric(horizontal: 20),
@@ -2012,10 +1638,7 @@ class _TeacherThirdPageContentsState extends State<TeacherThirdPageContents> {
                     //         ),
                     Padding(padding: EdgeInsets.only(bottom: 20)),
                     CMaker(
-                        width: double.infinity,
-                        alignment: Alignment.center,
-                        padding: EdgeInsetsDirectional.only(end: 20),
-                        child: SendHomeworkButton),
+                        width: double.infinity, alignment: Alignment.center, padding: EdgeInsetsDirectional.only(end: 20), child: SendHomeworkButton),
                     const Padding(padding: EdgeInsets.only(bottom: 20)),
                   ],
                 )),
@@ -2047,11 +1670,7 @@ class _TeacherThirdPageContentsState extends State<TeacherThirdPageContents> {
               color: const Color.fromARGB(255, 0, 0, 0)));
       Widget HomeworkImages = CMaker(
         boxShadow: const [
-          BoxShadow(
-              offset: Offset(1, 1),
-              blurRadius: 6,
-              spreadRadius: .03,
-              color: Color.fromARGB(58, 0, 0, 0)),
+          BoxShadow(offset: Offset(1, 1), blurRadius: 6, spreadRadius: .03, color: Color.fromARGB(58, 0, 0, 0)),
         ],
         color: const Color.fromARGB(255, 233, 255, 247),
         circularRadius: 25,
@@ -2065,13 +1684,11 @@ class _TeacherThirdPageContentsState extends State<TeacherThirdPageContents> {
         width: double.infinity,
         child: GridView.builder(
             itemCount: (solved_hw_student[HomeworkSelected][3] as List).length,
-            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                crossAxisCount: 2),
+            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2),
             itemBuilder: (context, index) {
               return InstaImageViewer(
                 backgroundColor: const Color.fromARGB(255, 233, 255, 247),
-                child: Image.network(
-                    solved_hw_student[HomeworkSelected][3][index] as String),
+                child: Image.network(solved_hw_student[HomeworkSelected][3][index] as String),
               );
             }),
       );
@@ -2084,11 +1701,7 @@ class _TeacherThirdPageContentsState extends State<TeacherThirdPageContents> {
               color: const Color.fromARGB(255, 0, 0, 0)));
       Widget AnswerImages = CMaker(
         boxShadow: const [
-          BoxShadow(
-              offset: Offset(1, 1),
-              blurRadius: 6,
-              spreadRadius: .03,
-              color: Color.fromARGB(58, 0, 0, 0)),
+          BoxShadow(offset: Offset(1, 1), blurRadius: 6, spreadRadius: .03, color: Color.fromARGB(58, 0, 0, 0)),
         ],
         color: const Color.fromARGB(255, 233, 255, 247),
         circularRadius: 25,
@@ -2102,13 +1715,11 @@ class _TeacherThirdPageContentsState extends State<TeacherThirdPageContents> {
         width: double.infinity,
         child: GridView.builder(
             itemCount: (solved_hw_student[HomeworkSelected][6] as List).length,
-            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                crossAxisCount: 2),
+            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2),
             itemBuilder: (context, index) {
               return InstaImageViewer(
                 backgroundColor: const Color.fromARGB(255, 233, 255, 247),
-                child: Image.network(
-                    solved_hw_student[HomeworkSelected][3][index] as String),
+                child: Image.network(solved_hw_student[HomeworkSelected][3][index] as String),
               );
             }),
       );
@@ -2122,11 +1733,8 @@ class _TeacherThirdPageContentsState extends State<TeacherThirdPageContents> {
           decoration: InputDecoration(
               hintText: "add a comment",
               enabledBorder: OutlineInputBorder(
-                  borderSide: const BorderSide(
-                      color: Color.fromARGB(255, 192, 192, 192)),
-                  borderRadius: BorderRadius.circular(30)),
-              focusedBorder:
-                  OutlineInputBorder(borderRadius: BorderRadius.circular(15))),
+                  borderSide: const BorderSide(color: Color.fromARGB(255, 192, 192, 192)), borderRadius: BorderRadius.circular(30)),
+              focusedBorder: OutlineInputBorder(borderRadius: BorderRadius.circular(15))),
         ),
       );
       Widget AddScore = CMaker(
@@ -2151,22 +1759,14 @@ class _TeacherThirdPageContentsState extends State<TeacherThirdPageContents> {
                         GrantedScore = newValue.toString();
                       },
                       maxLines: 1,
-                      style:
-                          TextStyle(fontSize: 30, fontWeight: FontWeight.w700),
+                      style: TextStyle(fontSize: 30, fontWeight: FontWeight.w700),
                       decoration: InputDecoration(
                           enabledBorder: OutlineInputBorder(
-                              borderSide: const BorderSide(
-                                  color: Color.fromARGB(255, 192, 192, 192)),
-                              borderRadius: BorderRadius.circular(10)),
-                          focusedBorder: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(15))),
+                              borderSide: const BorderSide(color: Color.fromARGB(255, 192, 192, 192)), borderRadius: BorderRadius.circular(10)),
+                          focusedBorder: OutlineInputBorder(borderRadius: BorderRadius.circular(15))),
                     ),
                   )),
-              TMaker(
-                  text: " / ${solved_hw_student[HomeworkSelected][4]}",
-                  fontSize: 30,
-                  fontWeight: FontWeight.w700,
-                  color: Colors.black)
+              TMaker(text: " / ${solved_hw_student[HomeworkSelected][4]}", fontSize: 30, fontWeight: FontWeight.w700, color: Colors.black)
             ],
           ));
       Widget SendButton = InkWell(
@@ -2231,11 +1831,7 @@ class _TeacherThirdPageContentsState extends State<TeacherThirdPageContents> {
                 const Padding(padding: EdgeInsets.only(top: 20)),
                 CMaker(
                     boxShadow: const [
-                      BoxShadow(
-                          offset: Offset(1, 1),
-                          blurRadius: 6,
-                          spreadRadius: .03,
-                          color: Color.fromARGB(58, 0, 0, 0)),
+                      BoxShadow(offset: Offset(1, 1), blurRadius: 6, spreadRadius: .03, color: Color.fromARGB(58, 0, 0, 0)),
                     ],
                     circularRadius: 15,
                     margin: EdgeInsets.symmetric(horizontal: 20),
@@ -2255,10 +1851,7 @@ class _TeacherThirdPageContentsState extends State<TeacherThirdPageContents> {
                             fontWeight: FontWeight.w600,
                             color: const Color.fromARGB(255, 0, 0, 0)),
                         const Padding(padding: EdgeInsets.only(top: 20)),
-                        CMaker(
-                            height: 100,
-                            alignment: Alignment.center,
-                            child: ThirdPageHomeworkTitle),
+                        CMaker(height: 100, alignment: Alignment.center, child: ThirdPageHomeworkTitle),
                         ThirdPageHomeworkBody,
                         const Padding(padding: EdgeInsets.only(top: 20)),
                         HomeworkImages,
@@ -2273,7 +1866,7 @@ class _TeacherThirdPageContentsState extends State<TeacherThirdPageContents> {
                             fontWeight: FontWeight.w600,
                             color: const Color.fromARGB(255, 0, 0, 0)),
                         const Padding(padding: EdgeInsets.only(top: 20)),
-                        CMaker(width: double.infinity,alignment: Alignment.center,child: ThirdPageAnswerTitle),
+                        CMaker(width: double.infinity, alignment: Alignment.center, child: ThirdPageAnswerTitle),
                         const Padding(padding: EdgeInsets.only(top: 20)),
                         AnswerImages,
                         const Padding(padding: EdgeInsets.only(top: 20)),
@@ -2349,11 +1942,7 @@ class _TeacherThirdPageContentsState extends State<TeacherThirdPageContents> {
                 const Padding(padding: EdgeInsets.only(top: 20)),
                 CMaker(
                     boxShadow: const [
-                      BoxShadow(
-                          offset: Offset(1, 1),
-                          blurRadius: 6,
-                          spreadRadius: .03,
-                          color: Color.fromARGB(58, 0, 0, 0)),
+                      BoxShadow(offset: Offset(1, 1), blurRadius: 6, spreadRadius: .03, color: Color.fromARGB(58, 0, 0, 0)),
                     ],
                     circularRadius: 15,
                     margin: EdgeInsets.symmetric(horizontal: 20),
@@ -2373,10 +1962,7 @@ class _TeacherThirdPageContentsState extends State<TeacherThirdPageContents> {
                             fontWeight: FontWeight.w600,
                             color: const Color.fromARGB(255, 0, 0, 0)),
                         const Padding(padding: EdgeInsets.only(top: 20)),
-                        CMaker(
-                            height: 100,
-                            alignment: Alignment.center,
-                            child: ThirdPageHomeworkTitle),
+                        CMaker(height: 100, alignment: Alignment.center, child: ThirdPageHomeworkTitle),
                         ThirdPageHomeworkBody,
                         const Padding(padding: EdgeInsets.only(top: 20)),
                         HomeworkImages,
@@ -2386,11 +1972,7 @@ class _TeacherThirdPageContentsState extends State<TeacherThirdPageContents> {
                 const Padding(padding: EdgeInsets.only(top: 20)),
                 CMaker(
                     boxShadow: const [
-                      BoxShadow(
-                          offset: Offset(1, 1),
-                          blurRadius: 6,
-                          spreadRadius: .03,
-                          color: Color.fromARGB(58, 0, 0, 0)),
+                      BoxShadow(offset: Offset(1, 1), blurRadius: 6, spreadRadius: .03, color: Color.fromARGB(58, 0, 0, 0)),
                     ],
                     circularRadius: 15,
                     margin: EdgeInsets.symmetric(horizontal: 20),
@@ -2410,7 +1992,7 @@ class _TeacherThirdPageContentsState extends State<TeacherThirdPageContents> {
                             fontWeight: FontWeight.w600,
                             color: const Color.fromARGB(255, 0, 0, 0)),
                         const Padding(padding: EdgeInsets.only(top: 20)),
-                        CMaker(width: double.infinity,alignment: Alignment.center,child: ThirdPageAnswerTitle),
+                        CMaker(width: double.infinity, alignment: Alignment.center, child: ThirdPageAnswerTitle),
                         const Padding(padding: EdgeInsets.only(top: 20)),
                         AnswerImages,
                         const Padding(padding: EdgeInsets.only(top: 20)),
@@ -2486,11 +2068,7 @@ class _TeacherThirdPageContentsState extends State<TeacherThirdPageContents> {
                 const Padding(padding: EdgeInsets.only(top: 20)),
                 CMaker(
                     boxShadow: const [
-                      BoxShadow(
-                          offset: Offset(1, 1),
-                          blurRadius: 6,
-                          spreadRadius: .03,
-                          color: Color.fromARGB(58, 0, 0, 0)),
+                      BoxShadow(offset: Offset(1, 1), blurRadius: 6, spreadRadius: .03, color: Color.fromARGB(58, 0, 0, 0)),
                     ],
                     circularRadius: 15,
                     margin: EdgeInsets.symmetric(horizontal: 20),
@@ -2510,10 +2088,7 @@ class _TeacherThirdPageContentsState extends State<TeacherThirdPageContents> {
                             fontWeight: FontWeight.w600,
                             color: const Color.fromARGB(255, 0, 0, 0)),
                         const Padding(padding: EdgeInsets.only(top: 20)),
-                        CMaker(
-                            height: 100,
-                            alignment: Alignment.center,
-                            child: ThirdPageHomeworkTitle),
+                        CMaker(height: 100, alignment: Alignment.center, child: ThirdPageHomeworkTitle),
                         ThirdPageHomeworkBody,
                         const Padding(padding: EdgeInsets.only(top: 20)),
                         HomeworkImages,
@@ -2523,11 +2098,7 @@ class _TeacherThirdPageContentsState extends State<TeacherThirdPageContents> {
                 const Padding(padding: EdgeInsets.only(top: 20)),
                 CMaker(
                     boxShadow: const [
-                      BoxShadow(
-                          offset: Offset(1, 1),
-                          blurRadius: 6,
-                          spreadRadius: .03,
-                          color: Color.fromARGB(58, 0, 0, 0)),
+                      BoxShadow(offset: Offset(1, 1), blurRadius: 6, spreadRadius: .03, color: Color.fromARGB(58, 0, 0, 0)),
                     ],
                     circularRadius: 15,
                     margin: EdgeInsets.symmetric(horizontal: 20),
@@ -2547,7 +2118,7 @@ class _TeacherThirdPageContentsState extends State<TeacherThirdPageContents> {
                             fontWeight: FontWeight.w600,
                             color: const Color.fromARGB(255, 0, 0, 0)),
                         const Padding(padding: EdgeInsets.only(top: 20)),
-                        CMaker(width: double.infinity,alignment: Alignment.center,child: ThirdPageAnswerTitle),
+                        CMaker(width: double.infinity, alignment: Alignment.center, child: ThirdPageAnswerTitle),
                         const Padding(padding: EdgeInsets.only(top: 20)),
                         AnswerImages,
                         const Padding(padding: EdgeInsets.only(top: 20)),
@@ -2628,11 +2199,7 @@ class _TeacherThirdPageContentsState extends State<TeacherThirdPageContents> {
               itemBuilder: (context, index) {
                 return CMaker(
                   boxShadow: const [
-                    BoxShadow(
-                        offset: Offset(1, 1),
-                        blurRadius: 6,
-                        spreadRadius: .03,
-                        color: Color.fromARGB(58, 0, 0, 0)),
+                    BoxShadow(offset: Offset(1, 1), blurRadius: 6, spreadRadius: .03, color: Color.fromARGB(58, 0, 0, 0)),
                   ],
                   padding: const EdgeInsets.all(10),
                   circularRadius: 25,
@@ -2649,24 +2216,18 @@ class _TeacherThirdPageContentsState extends State<TeacherThirdPageContents> {
                             Expanded(child: CMaker(child: Container())),
                             CMaker(
                                 circularRadius: 15,
-                                padding: const EdgeInsets.symmetric(
-                                    horizontal: 20, vertical: 10),
+                                padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
                                 color: () {
-                                  if ((solved_hw_student[index] as List)
-                                          .length <=
-                                      5) {
+                                  if ((solved_hw_student[index] as List).length <= 5) {
                                     // unsolve
-                                    return const Color.fromARGB(
-                                        255, 249, 84, 84);
+                                    return const Color.fromARGB(255, 249, 84, 84);
                                   } else {
                                     if (solved_hw_student[index][7] == '0') {
                                       // un scored
-                                      return const Color.fromARGB(
-                                          255, 66, 133, 241);
+                                      return const Color.fromARGB(255, 66, 133, 241);
                                     } else {
                                       // scored done
-                                      return const Color.fromARGB(
-                                          255, 32, 222, 32);
+                                      return const Color.fromARGB(255, 32, 222, 32);
                                     }
                                   }
                                   //  const Color.fromARGB(255, 66, 133, 241)
@@ -2674,14 +2235,11 @@ class _TeacherThirdPageContentsState extends State<TeacherThirdPageContents> {
                                 }(),
                                 child: TMaker(
                                     text: () {
-                                      if ((solved_hw_student[index] as List)
-                                              .length <=
-                                          5) {
+                                      if ((solved_hw_student[index] as List).length <= 5) {
                                         // unsolve
                                         return "Un Solve";
                                       } else {
-                                        if (solved_hw_student[index][7] ==
-                                            '0') {
+                                        if (solved_hw_student[index][7] == '0') {
                                           // un scored
                                           return "un scored";
                                         } else {
@@ -2695,8 +2253,7 @@ class _TeacherThirdPageContentsState extends State<TeacherThirdPageContents> {
                                     fontWeight: FontWeight.w800,
                                     color: Colors.white)),
                             Expanded(child: CMaker(child: Container())),
-                            if (!((solved_hw_student[index] as List).length <=
-                                5))
+                            if (!((solved_hw_student[index] as List).length <= 5))
                               if (solved_hw_student[index][7] == '0')
                                 InkWell(
                                   onTap: () {
@@ -2708,32 +2265,22 @@ class _TeacherThirdPageContentsState extends State<TeacherThirdPageContents> {
                                   },
                                   child: CMaker(
                                       alignment: Alignment.center,
-                                      padding: const EdgeInsets.symmetric(
-                                          horizontal: 20),
+                                      padding: const EdgeInsets.symmetric(horizontal: 20),
                                       circularRadius: 20,
                                       color: () {
-                                        if ((solved_hw_student[index] as List)
-                                                .length <=
-                                            5) {
+                                        if ((solved_hw_student[index] as List).length <= 5) {
                                           // unsolve
-                                          return const Color.fromARGB(
-                                              123, 179, 176, 176);
+                                          return const Color.fromARGB(123, 179, 176, 176);
                                         } else {
-                                          return const Color.fromARGB(
-                                              255, 235, 218, 118);
+                                          return const Color.fromARGB(255, 235, 218, 118);
                                         }
 
                                         // return
                                       }(),
-                                      margin: const EdgeInsets.symmetric(
-                                          horizontal: 15),
+                                      margin: const EdgeInsets.symmetric(horizontal: 15),
                                       height: 40,
-                                      child: TMaker(
-                                          text: "View",
-                                          fontSize: 18,
-                                          fontWeight: FontWeight.w600,
-                                          color: const Color.fromARGB(
-                                              255, 0, 0, 0))),
+                                      child:
+                                          TMaker(text: "View", fontSize: 18, fontWeight: FontWeight.w600, color: const Color.fromARGB(255, 0, 0, 0))),
                                 ),
                           ],
                         ),
@@ -2854,13 +2401,7 @@ class _TeacherThirdPageContentsState extends State<TeacherThirdPageContents> {
         ),
       );
       Widget GradesStudents = CMaker(
-          boxShadow: const [
-            BoxShadow(
-                color: Color.fromARGB(61, 0, 0, 0),
-                offset: Offset(2, 2),
-                blurRadius: 10,
-                spreadRadius: .06)
-          ],
+          boxShadow: const [BoxShadow(color: Color.fromARGB(61, 0, 0, 0), offset: Offset(2, 2), blurRadius: 10, spreadRadius: .06)],
           circularRadius: 20,
           width: double.infinity,
           padding: const EdgeInsets.only(top: 20, left: 10, right: 10),
@@ -2868,8 +2409,7 @@ class _TeacherThirdPageContentsState extends State<TeacherThirdPageContents> {
           margin: const EdgeInsets.symmetric(horizontal: 20),
           color: const Color.fromARGB(255, 255, 255, 255),
           child: ListView.builder(
-            itemCount:
-                (ListOfGrades[GradeHomeWorkOppenedIndex][1] as List).length,
+            itemCount: (ListOfGrades[GradeHomeWorkOppenedIndex][1] as List).length,
             itemBuilder: (context, index) {
               return Column(
                 children: [
@@ -2878,8 +2418,7 @@ class _TeacherThirdPageContentsState extends State<TeacherThirdPageContents> {
                       OneStudentHomeWorks = true;
                       OneStudentHomeWorksIsLoading = true;
                       setState(() {
-                        student_selected_list =
-                            ListOfGrades[GradeHomeWorkOppenedIndex][1][index];
+                        student_selected_list = ListOfGrades[GradeHomeWorkOppenedIndex][1][index];
                         HomeWorkIndex = index;
                         GradeHomeWorkIsOppened = false;
                       });
@@ -2895,12 +2434,7 @@ class _TeacherThirdPageContentsState extends State<TeacherThirdPageContents> {
                           CMaker(
                               height: 70,
                               width: 70,
-                              child: CircleAvatar(
-                                  backgroundImage: Image.network(
-                                          widget.ListOfGrades[
-                                                  GradeHomeWorkOppenedIndex][1]
-                                              [index][2])
-                                      .image)),
+                              child: CircleAvatar(backgroundImage: Image.network(widget.ListOfGrades[GradeHomeWorkOppenedIndex][1][index][2]).image)),
                           Expanded(
                             child: ListTile(
                               subtitle: TMaker(
@@ -2913,14 +2447,8 @@ class _TeacherThirdPageContentsState extends State<TeacherThirdPageContents> {
                                 textAlign: TextAlign.start,
                                 text: (() {
                                   try {
-                                    List<String> nameParts = widget
-                                        .ListOfGrades[GradeHomeWorkOppenedIndex]
-                                            [1][index][0]
-                                        .toString()
-                                        .split(" ");
-                                    return nameParts.length > 1
-                                        ? "${nameParts[0]} ${nameParts[1]}"
-                                        : nameParts[0];
+                                    List<String> nameParts = widget.ListOfGrades[GradeHomeWorkOppenedIndex][1][index][0].toString().split(" ");
+                                    return nameParts.length > 1 ? "${nameParts[0]} ${nameParts[1]}" : nameParts[0];
                                   } catch (e) {
                                     return 'None';
                                   }
@@ -2936,26 +2464,15 @@ class _TeacherThirdPageContentsState extends State<TeacherThirdPageContents> {
                               alignment: Alignment.centerRight,
                               child: Column(
                                 children: [
-                                  TMaker(
-                                      text: "",
-                                      fontSize: 13,
-                                      fontWeight: FontWeight.w700,
-                                      color:
-                                          const Color.fromARGB(255, 0, 0, 0)),
-                                  const Padding(
-                                      padding: EdgeInsets.only(bottom: 5)),
+                                  TMaker(text: "", fontSize: 13, fontWeight: FontWeight.w700, color: const Color.fromARGB(255, 0, 0, 0)),
+                                  const Padding(padding: EdgeInsets.only(bottom: 5)),
                                   CMaker(
                                     circularRadius: 15,
                                     alignment: Alignment.center,
                                     height: 40,
                                     width: 80,
-                                    color:
-                                        const Color.fromARGB(255, 70, 183, 66),
-                                    child: TMaker(
-                                        text: "show",
-                                        fontSize: 18,
-                                        fontWeight: FontWeight.w700,
-                                        color: Colors.white),
+                                    color: const Color.fromARGB(255, 70, 183, 66),
+                                    child: TMaker(text: "show", fontSize: 18, fontWeight: FontWeight.w700, color: Colors.white),
                                   ),
                                 ],
                               ),
@@ -2979,21 +2496,14 @@ class _TeacherThirdPageContentsState extends State<TeacherThirdPageContents> {
           NewHomeWork = false;
           AllhomeWorks = true;
           setState(() {});
-          all_Homeworks = await dbService.Fi_getAll_HW(
-              Grade_selected, SubjectThatIsSelected);
+          all_Homeworks = await dbService.Fi_getAll_HW(Grade_selected, SubjectThatIsSelected);
           print("Loading is done");
           AllHomeWorksLoading = false;
           setState(() {});
         },
         child: CMaker(
             height: 70,
-            boxShadow: const [
-              BoxShadow(
-                  color: Color.fromARGB(61, 0, 0, 0),
-                  offset: Offset(2, 2),
-                  blurRadius: 10,
-                  spreadRadius: .06)
-            ],
+            boxShadow: const [BoxShadow(color: Color.fromARGB(61, 0, 0, 0), offset: Offset(2, 2), blurRadius: 10, spreadRadius: .06)],
             color: const Color.fromARGB(255, 255, 255, 255),
             width: double.infinity,
             margin: const EdgeInsets.symmetric(horizontal: 20),
@@ -3001,11 +2511,7 @@ class _TeacherThirdPageContentsState extends State<TeacherThirdPageContents> {
             child: Row(
               children: [
                 Expanded(flex: 2, child: Container()),
-                TMaker(
-                    text: "All Homeworks",
-                    fontSize: 25,
-                    fontWeight: FontWeight.w700,
-                    color: const Color.fromARGB(255, 0, 0, 0)),
+                TMaker(text: "All Homeworks", fontSize: 25, fontWeight: FontWeight.w700, color: const Color.fromARGB(255, 0, 0, 0)),
                 Expanded(child: Container()),
                 const Icon(Icons.edit),
                 Expanded(flex: 2, child: Container()),
@@ -3021,13 +2527,7 @@ class _TeacherThirdPageContentsState extends State<TeacherThirdPageContents> {
         },
         child: CMaker(
             height: 70,
-            boxShadow: const [
-              BoxShadow(
-                  color: Color.fromARGB(61, 0, 0, 0),
-                  offset: Offset(2, 2),
-                  blurRadius: 10,
-                  spreadRadius: .06)
-            ],
+            boxShadow: const [BoxShadow(color: Color.fromARGB(61, 0, 0, 0), offset: Offset(2, 2), blurRadius: 10, spreadRadius: .06)],
             color: const Color.fromARGB(255, 255, 255, 255),
             width: double.infinity,
             margin: const EdgeInsets.symmetric(horizontal: 20),
@@ -3035,11 +2535,7 @@ class _TeacherThirdPageContentsState extends State<TeacherThirdPageContents> {
             child: Row(
               children: [
                 Expanded(flex: 2, child: Container()),
-                TMaker(
-                    text: "Add new Homworks",
-                    fontSize: 25,
-                    fontWeight: FontWeight.w700,
-                    color: const Color.fromARGB(255, 0, 0, 0)),
+                TMaker(text: "Add new Homworks", fontSize: 25, fontWeight: FontWeight.w700, color: const Color.fromARGB(255, 0, 0, 0)),
                 Expanded(child: Container()),
                 const Icon(Icons.edit_document),
                 Expanded(flex: 2, child: Container()),
@@ -3168,34 +2664,18 @@ class _TeacherThirdPageContentsState extends State<TeacherThirdPageContents> {
     } else {
       // الصفحة الاولى
       Widget ThirdPageFirstTitle = CMaker(
-          boxShadow: const [
-            BoxShadow(
-                color: Color.fromARGB(61, 0, 0, 0),
-                offset: Offset(2, 2),
-                blurRadius: 10,
-                spreadRadius: .06)
-          ],
+          boxShadow: const [BoxShadow(color: Color.fromARGB(61, 0, 0, 0), offset: Offset(2, 2), blurRadius: 10, spreadRadius: .06)],
           circularRadius: 13,
           width: (PageWidth(context) < 700) ? double.infinity : 500,
           height: 60,
           alignment: Alignment.center,
           margin: const EdgeInsets.symmetric(horizontal: 10),
           color: Colors.white,
-          child: TMaker(
-              text: "Homeworks",
-              fontSize: 30,
-              fontWeight: FontWeight.w700,
-              color: Colors.black));
+          child: TMaker(text: "Homeworks", fontSize: 30, fontWeight: FontWeight.w700, color: Colors.black));
       Widget ThirdPageGrades = CMaker(
           margin: const EdgeInsets.symmetric(horizontal: 20),
           circularRadius: 20,
-          boxShadow: const [
-            BoxShadow(
-                color: Color.fromARGB(61, 0, 0, 0),
-                offset: Offset(2, 2),
-                blurRadius: 10,
-                spreadRadius: .06)
-          ],
+          boxShadow: const [BoxShadow(color: Color.fromARGB(61, 0, 0, 0), offset: Offset(2, 2), blurRadius: 10, spreadRadius: .06)],
           height: PageHeight(context) - 265,
           padding: const EdgeInsets.only(top: 20),
           color: const Color.fromARGB(255, 255, 255, 255),
@@ -3207,13 +2687,7 @@ class _TeacherThirdPageContentsState extends State<TeacherThirdPageContents> {
                 return Column(
                   children: [
                     CMaker(
-                        boxShadow: const [
-                          BoxShadow(
-                              color: Color.fromARGB(61, 0, 0, 0),
-                              offset: Offset(1, 1),
-                              blurRadius: 1,
-                              spreadRadius: .06)
-                        ],
+                        boxShadow: const [BoxShadow(color: Color.fromARGB(61, 0, 0, 0), offset: Offset(1, 1), blurRadius: 1, spreadRadius: .06)],
                         circularRadius: 15,
                         color: const Color.fromARGB(255, 233, 255, 247),
                         height: 70,
@@ -3242,11 +2716,7 @@ class _TeacherThirdPageContentsState extends State<TeacherThirdPageContents> {
                                 color: const Color.fromARGB(255, 54, 244, 92),
                                 circularRadius: 15,
                                 alignment: Alignment.center,
-                                child: TMaker(
-                                    text: "فتح",
-                                    fontSize: 22,
-                                    fontWeight: FontWeight.w700,
-                                    color: Colors.white),
+                                child: TMaker(text: "فتح", fontSize: 22, fontWeight: FontWeight.w700, color: Colors.white),
                               ),
                             ),
                             const Padding(padding: EdgeInsets.only(right: 20)),

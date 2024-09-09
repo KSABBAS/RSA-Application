@@ -327,10 +327,6 @@ class _StudentMobileSignUpPageState extends State<StudentMobileSignUpPage> {
               var TimeSelected=await showOmniDateTimePicker(
                 context: context,
                 initialDate: DateTime.now(),
-                // firstDate: DateTime.now().subtract(const Duration(days: 36525)),
-                // lastDate: DateTime.now().subtract(
-                //   const Duration(days: 1824),
-                // ),
                 type: OmniDateTimePickerType.date,
                 is24HourMode: false,
                 isShowSeconds: false,

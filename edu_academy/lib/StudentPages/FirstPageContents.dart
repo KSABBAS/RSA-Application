@@ -172,9 +172,10 @@ class _StudentFirstMainPageState extends State<StudentFirstMainPage> {
                                 ? 100
                                 : 150,
                         child: TMaker(
-                            text: "",
-                            fontSize: 20,
-                            fontWeight: FontWeight.w600,
+                            textAlign: TextAlign.center,
+                            text: "Time and Day",
+                            fontSize: 17,
+                            fontWeight: FontWeight.w500,
                             color: Colors.white),
                       )),
                       Expanded(
@@ -187,7 +188,7 @@ class _StudentFirstMainPageState extends State<StudentFirstMainPage> {
                                 : 150,
                         color: const Color.fromARGB(255, 36, 160, 209),
                         child: TMaker(
-                            text: "00:00\nto\n00:00",
+                            text: "10:00\nto\n10:45",
                             fontSize: (PageWidth(context) < 550)
                                 ? 13
                                 : (PageHeight(context) < 900)
@@ -206,7 +207,7 @@ class _StudentFirstMainPageState extends State<StudentFirstMainPage> {
                                 : 150,
                         color: const Color.fromARGB(255, 36, 160, 209),
                         child: TMaker(
-                            text: "00:00\nto\n00:00",
+                            text: "10:45\nto\n11:30",
                             fontSize: (PageWidth(context) < 550)
                                 ? 13
                                 : (PageHeight(context) < 900)
@@ -225,7 +226,7 @@ class _StudentFirstMainPageState extends State<StudentFirstMainPage> {
                                 : 150,
                         color: const Color.fromARGB(255, 36, 160, 209),
                         child: TMaker(
-                            text: "00:00\nto\n00:00",
+                            text: "11:30\nto\n12:15",
                             fontSize: (PageWidth(context) < 550)
                                 ? 13
                                 : (PageHeight(context) < 900)
@@ -244,7 +245,7 @@ class _StudentFirstMainPageState extends State<StudentFirstMainPage> {
                                 : 150,
                         color: const Color.fromARGB(255, 36, 160, 209),
                         child: TMaker(
-                            text: "00:00\nto\n00:00",
+                            text: "12:15\nto\n12:30",
                             fontSize: (PageWidth(context) < 550)
                                 ? 13
                                 : (PageHeight(context) < 900)
@@ -266,7 +267,7 @@ class _StudentFirstMainPageState extends State<StudentFirstMainPage> {
                                 ? 100
                                 : 150,
                         child: TMaker(
-                            text: "00:00\nto\n00:00",
+                            text: "12:30\nto\n1:15",//2:00 - 1:15 //2:45 - 2:00
                             fontSize: (PageWidth(context) < 550)
                                 ? 13
                                 : (PageHeight(context) < 900)
