@@ -5,12 +5,16 @@ import 'package:edu_academy/MyTools.dart';
 import 'package:edu_academy/StudentPages/Notifications.dart';
 import 'package:edu_academy/StudentPages/StudentAppBar.dart';
 import 'package:edu_academy/service/Databse_Service.dart';
+import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:edu_academy/StudentPages/StudentMainPage.dart';
 import 'package:get/get.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:insta_image_viewer/insta_image_viewer.dart';
 import 'package:overlay_loading_progress/overlay_loading_progress.dart';
 import 'package:panara_dialogs/panara_dialogs.dart';
+import 'dart:typed_data';
+import 'package:flutter/foundation.dart' show kIsWeb;
 
 class ThirdPage extends StatefulWidget {
   const ThirdPage({super.key});
@@ -248,6 +252,26 @@ class _ThirdPageState extends State<ThirdPage> {
     log("#HomeWorks ${HomeWorks}");
   }
 
+  Future<void> pickImageFromGallery() async {
+    try {
+      FilePickerResult? result = await FilePicker.platform.pickFiles(
+        type: FileType.image,
+        allowMultiple: false,
+      );
+      if (result != null) {
+        PlatformFile file = result.files.single;
+        // Access file data as Uint8List
+        Uint8List fileBytes = file.bytes!;
+        setState(() {
+          HomeWorks[HomeWorkIndex][HomeworkSelected + 1][4].add(fileBytes);
+          print("##4 done added in list ");
+        });
+      }
+    } catch (e) {
+      print("Error picking file: $e");
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     // regetmessages();
@@ -395,10 +419,7 @@ class _ThirdPageState extends State<ThirdPage> {
                         child: ListView(
                           children: [
                             const Padding(padding: EdgeInsets.only(top: 20)),
-                            CMaker(
-                                height: 100,
-                                alignment: Alignment.center,
-                                child: ThirdPageHomeworkBody),
+                            CMaker(height: 100, alignment: Alignment.center, child: ThirdPageHomeworkBody),
                             const Padding(padding: EdgeInsets.only(top: 20)),
                             ThirdPageHomeworkTitle,
                             HomeworkImages,
@@ -424,79 +445,78 @@ class _ThirdPageState extends State<ThirdPage> {
                                             child: Row(
                                               children: [
                                                 Expanded(child: Container()),
-                                                InkWell(
-                                                  onTap: () async {
-                                                    Get.back();
-                                                    HomeWorks[HomeWorkIndex][
-                                                            HomeworkSelected +
-                                                                1][4]
-                                                        .add(File(
-                                                            (await PhotoImageFromCamera())
-                                                                .path));
-                                                  },
-                                                  child: CMaker(
-                                                      padding:
-                                                          EdgeInsets.all(20),
-                                                      color: Color.fromARGB(
-                                                          255, 233, 255, 247),
-                                                      circularRadius: 15,
-                                                      boxShadow: const [
-                                                        BoxShadow(
-                                                            offset:
-                                                                Offset(1, 1),
-                                                            blurRadius: 6,
-                                                            spreadRadius: .03,
-                                                            color:
-                                                                Color.fromARGB(
-                                                                    58,
-                                                                    0,
-                                                                    0,
-                                                                    0)),
-                                                      ],
-                                                      child: TMaker(
-                                                          text: "Camera",
-                                                          fontSize: 20,
-                                                          fontWeight:
-                                                              FontWeight.w600,
-                                                          color: Colors.black)),
+                                                Row(
+                                                  children: [
+                                                    const Icon(
+                                                      Icons.camera_alt,
+                                                      color: Colors.black,
+                                                    ),
+                                                    InkWell(
+                                                      onTap: () async {
+                                                        if (kIsWeb) {
+                                                          pickImageFromGallery();
+                                                        } else {
+                                                          var Camera = await PhotoImageFromCamera();
+                                                          if (Camera != null) {
+                                                            HomeWorks[HomeWorkIndex][HomeworkSelected + 1][4].add(File(Camera.path));
+                                                            print("#Camera# ${HomeWorks[HomeWorkIndex][HomeworkSelected + 1][4]}");
+                                                          }
+                                                        }
+                                                        setState(() {});
+                                                        Get.back();
+                                                      },
+                                                      child: CMaker(
+                                                          padding: EdgeInsets.all(20),
+                                                          color: Color.fromARGB(255, 233, 255, 247),
+                                                          circularRadius: 15,
+                                                          boxShadow: const [
+                                                            BoxShadow(
+                                                                offset: Offset(1, 1),
+                                                                blurRadius: 6,
+                                                                spreadRadius: .03,
+                                                                color: Color.fromARGB(58, 0, 0, 0)),
+                                                          ],
+                                                          child:
+                                                              TMaker(text: "Camera", fontSize: 20, fontWeight: FontWeight.w600, color: Colors.black)),
+                                                    ),
+                                                  ],
                                                 ),
                                                 Expanded(child: Container()),
-                                                InkWell(
-                                                  onTap: () async {
-                                                    Get.back();
-                                                    HomeWorks[HomeWorkIndex][HomeworkSelected + 1][4]
-                                                        .add(File(
-                                                            (await PhotoImageFromGalary())
-                                                                .path));
-                                                    print("========================================\n=======================================\n${HomeWorks[HomeWorkIndex][
-                                                            HomeworkSelected +
-                                                                1][4]}");
-                                                  },
-                                                  child: CMaker(
-                                                      padding:
-                                                          EdgeInsets.all(20),
-                                                      color: Color.fromARGB(
-                                                          255, 233, 255, 247),
-                                                      circularRadius: 15,
-                                                      boxShadow: const [
-                                                        BoxShadow(
-                                                            offset:
-                                                                Offset(1, 1),
-                                                            blurRadius: 6,
-                                                            spreadRadius: .03,
-                                                            color:
-                                                                Color.fromARGB(
-                                                                    58,
-                                                                    0,
-                                                                    0,
-                                                                    0)),
-                                                      ],
-                                                      child: TMaker(
-                                                          text: "Galary",
-                                                          fontSize: 20,
-                                                          fontWeight:
-                                                              FontWeight.w600,
-                                                          color: Colors.black)),
+                                                Row(
+                                                  children: [
+                                                    const Icon(
+                                                      Icons.image,
+                                                      color: Colors.black,
+                                                    ),
+                                                    InkWell(
+                                                      onTap: () async {
+                                                        if (kIsWeb) {
+                                                          pickImageFromGallery();
+                                                        } else {
+                                                          var Galary = await PhotoImageFromGalary();
+                                                          if (Galary != null) {
+                                                            HomeWorks[HomeWorkIndex][HomeworkSelected + 1][4].add(File(Galary.path));
+                                                            print("#Galary# ${HomeWorks[HomeWorkIndex][HomeworkSelected + 1][4]}");
+                                                          }
+                                                        }
+                                                        setState(() {});
+                                                        Get.back();
+                                                      },
+                                                      child: CMaker(
+                                                          padding: EdgeInsets.all(20),
+                                                          color: Color.fromARGB(255, 233, 255, 247),
+                                                          circularRadius: 15,
+                                                          boxShadow: const [
+                                                            BoxShadow(
+                                                                offset: Offset(1, 1),
+                                                                blurRadius: 6,
+                                                                spreadRadius: .03,
+                                                                color: Color.fromARGB(58, 0, 0, 0)),
+                                                          ],
+                                                          child:
+                                                              TMaker(text: "Galary", fontSize: 20, fontWeight: FontWeight.w600, color: Colors.black)),
+                                                    ),
+                                                  ],
                                                 ),
                                                 Expanded(child: Container()),
                                               ],
@@ -525,9 +545,11 @@ class _ThirdPageState extends State<ThirdPage> {
                                 alignment: Alignment.center,
                                 child: InkWell(
                                   onTap: () async {
-                                    print("HomeWorks[HomeWorkIndex][HomeworkSelected + 1][4] ${HomeWorks[HomeWorkIndex][HomeworkSelected + 1][4]}"); // hw files
+                                    print(
+                                        "HomeWorks[HomeWorkIndex][HomeworkSelected + 1][4] ${HomeWorks[HomeWorkIndex][HomeworkSelected + 1][4]}"); // hw files
                                     print(" StudentHomeWorkAnswer ${StudentHomeWorkAnswer}"); // hw solve body
-                                    print("HomeWorks[HomeWorkIndex][HomeworkSelected + 1][8] ${HomeWorks[HomeWorkIndex][HomeworkSelected + 1][8]}"); // hw id
+                                    print(
+                                        "HomeWorks[HomeWorkIndex][HomeworkSelected + 1][8] ${HomeWorks[HomeWorkIndex][HomeworkSelected + 1][8]}"); // hw id
                                     print("student_id ${student_id}");
                                     // hw id,student_id,hw solve body,hw files
                                     OverlayLoadingProgress.start(
@@ -545,18 +567,19 @@ class _ThirdPageState extends State<ThirdPage> {
                                         ),
                                       ),
                                     );
-                                    List<dynamic> Files_List = [];
-                                    print( HomeWorks[HomeWorkIndex][HomeworkSelected + 1][4]);
-                                    if ( HomeWorks[HomeWorkIndex][HomeworkSelected + 1][4].length != 0) {
-                                      Files_List = await dbService.stHwStore( HomeWorks[HomeWorkIndex][HomeworkSelected + 1][4]);
-                                      print("Files_List ${Files_List}");
+                                    print(HomeWorks[HomeWorkIndex][HomeworkSelected + 1][4]);
+                                    if (HomeWorks[HomeWorkIndex][HomeworkSelected + 1][4].length != 0) {
+                                      HomeWorks[HomeWorkIndex][HomeworkSelected + 1][4] =
+                                          await dbService.stsolveStore(HomeWorks[HomeWorkIndex][HomeworkSelected + 1][4]);
                                     }
-                                    dbService.FiAdd_Solve([
+
+                                    await dbService.FiAdd_Solve([
                                       grade,
                                       HomeWorks[HomeWorkIndex][HomeworkSelected],
                                       HomeWorks[HomeWorkIndex][HomeworkSelected + 1][8],
                                       HomeWorks[HomeWorkIndex][0]
                                     ], student_id, StudentHomeWorkAnswer, HomeWorks[HomeWorkIndex][HomeworkSelected + 1][4]);
+                                    await regetmessages();
                                     OverlayLoadingProgress.stop();
                                     PanaraInfoDialog.show(
                                       context,
@@ -566,7 +589,6 @@ class _ThirdPageState extends State<ThirdPage> {
                                       onTapDismiss: () {
                                         setState(() {
                                           Navigator.of(context).pop();
-                                          regetmessages();
                                           StartedSoving = false;
                                           HomeWorkOpend = true;
                                           ThirdPageThirdPage = false;
@@ -625,10 +647,7 @@ class _ThirdPageState extends State<ThirdPage> {
                         child: ListView(
                           children: [
                             const Padding(padding: EdgeInsets.only(top: 20)),
-                            CMaker(
-                                height: 100,
-                                alignment: Alignment.center,
-                                child: ThirdPageHomeworkBody),
+                            CMaker(height: 100, alignment: Alignment.center, child: ThirdPageHomeworkBody),
                             const Padding(padding: EdgeInsets.only(top: 20)),
                             ThirdPageHomeworkTitle,
                             HomeworkImages,
@@ -911,10 +930,7 @@ class _ThirdPageState extends State<ThirdPage> {
                         child: ListView(
                           children: [
                             const Padding(padding: EdgeInsets.only(top: 20)),
-                            CMaker(
-                                height: 100,
-                                alignment: Alignment.center,
-                                child: ThirdPageHomeworkBody),
+                            CMaker(height: 100, alignment: Alignment.center, child: ThirdPageHomeworkBody),
                             const Padding(padding: EdgeInsets.only(top: 20)),
                             ThirdPageHomeworkTitle,
                             HomeworkImages,
@@ -978,10 +994,7 @@ class _ThirdPageState extends State<ThirdPage> {
                         child: ListView(
                           children: [
                             const Padding(padding: EdgeInsets.only(top: 20)),
-                            CMaker(
-                                height: 100,
-                                alignment: Alignment.center,
-                                child: ThirdPageHomeworkBody),
+                            CMaker(height: 100, alignment: Alignment.center, child: ThirdPageHomeworkBody),
                             const Padding(padding: EdgeInsets.only(top: 20)),
                             ThirdPageHomeworkTitle,
                             HomeworkImages,
@@ -1131,10 +1144,7 @@ class _ThirdPageState extends State<ThirdPage> {
                         child: ListView(
                           children: [
                             const Padding(padding: EdgeInsets.only(top: 20)),
-                            CMaker(
-                                height: 100,
-                                alignment: Alignment.center,
-                                child: ThirdPageHomeworkBody),
+                            CMaker(height: 100, alignment: Alignment.center, child: ThirdPageHomeworkBody),
                             const Padding(padding: EdgeInsets.only(top: 20)),
                             ThirdPageHomeworkTitle,
                             HomeworkImages,
@@ -1266,10 +1276,7 @@ class _ThirdPageState extends State<ThirdPage> {
                         child: ListView(
                           children: [
                             const Padding(padding: EdgeInsets.only(top: 20)),
-                            CMaker(
-                                height: 100,
-                                alignment: Alignment.center,
-                                child: ThirdPageHomeworkBody),
+                            CMaker(height: 100, alignment: Alignment.center, child: ThirdPageHomeworkBody),
                             const Padding(padding: EdgeInsets.only(top: 20)),
                             ThirdPageHomeworkTitle,
                             HomeworkImages,
@@ -1549,10 +1556,7 @@ class _ThirdPageState extends State<ThirdPage> {
                         child: ListView(
                           children: [
                             const Padding(padding: EdgeInsets.only(top: 20)),
-                            CMaker(
-                                height: 100,
-                                alignment: Alignment.center,
-                                child: ThirdPageHomeworkBody),
+                            CMaker(height: 100, alignment: Alignment.center, child: ThirdPageHomeworkBody),
                             const Padding(padding: EdgeInsets.only(top: 20)),
                             ThirdPageHomeworkTitle,
                             HomeworkImages,
@@ -1611,10 +1615,7 @@ class _ThirdPageState extends State<ThirdPage> {
                         child: ListView(
                           children: [
                             const Padding(padding: EdgeInsets.only(top: 20)),
-                            CMaker(
-                                height: 100,
-                                alignment: Alignment.center,
-                                child: ThirdPageHomeworkBody),
+                            CMaker(height: 100, alignment: Alignment.center, child: ThirdPageHomeworkBody),
                             const Padding(padding: EdgeInsets.only(top: 20)),
                             ThirdPageHomeworkTitle,
                             HomeworkImages,
@@ -1752,10 +1753,7 @@ class _ThirdPageState extends State<ThirdPage> {
                         child: ListView(
                           children: [
                             const Padding(padding: EdgeInsets.only(top: 20)),
-                            CMaker(
-                                height: 100,
-                                alignment: Alignment.center,
-                                child: ThirdPageHomeworkBody),
+                            CMaker(height: 100, alignment: Alignment.center, child: ThirdPageHomeworkBody),
                             const Padding(padding: EdgeInsets.only(top: 20)),
                             ThirdPageHomeworkTitle,
                             HomeworkImages,
@@ -1854,10 +1852,7 @@ class _ThirdPageState extends State<ThirdPage> {
                         child: ListView(
                           children: [
                             const Padding(padding: EdgeInsets.only(top: 20)),
-                            CMaker(
-                                height: 100,
-                                alignment: Alignment.center,
-                                child: ThirdPageHomeworkBody),
+                            CMaker(height: 100, alignment: Alignment.center, child: ThirdPageHomeworkBody),
                             const Padding(padding: EdgeInsets.only(top: 20)),
                             ThirdPageHomeworkTitle,
                             HomeworkImages,
@@ -2076,10 +2071,7 @@ class _ThirdPageState extends State<ThirdPage> {
                         child: ListView(
                           children: [
                             const Padding(padding: EdgeInsets.only(top: 20)),
-                            CMaker(
-                                height: 100,
-                                alignment: Alignment.center,
-                                child: ThirdPageHomeworkBody),
+                            CMaker(height: 100, alignment: Alignment.center, child: ThirdPageHomeworkBody),
                             const Padding(padding: EdgeInsets.only(top: 20)),
                             ThirdPageHomeworkTitle,
                             HomeworkImages,
@@ -2138,10 +2130,7 @@ class _ThirdPageState extends State<ThirdPage> {
                         child: ListView(
                           children: [
                             const Padding(padding: EdgeInsets.only(top: 20)),
-                            CMaker(
-                                height: 100,
-                                alignment: Alignment.center,
-                                child: ThirdPageHomeworkBody),
+                            CMaker(height: 100, alignment: Alignment.center, child: ThirdPageHomeworkBody),
                             const Padding(padding: EdgeInsets.only(top: 20)),
                             ThirdPageHomeworkTitle,
                             HomeworkImages,
@@ -2272,10 +2261,7 @@ class _ThirdPageState extends State<ThirdPage> {
                         child: ListView(
                           children: [
                             const Padding(padding: EdgeInsets.only(top: 20)),
-                            CMaker(
-                                height: 100,
-                                alignment: Alignment.center,
-                                child: ThirdPageHomeworkBody),
+                            CMaker(height: 100, alignment: Alignment.center, child: ThirdPageHomeworkBody),
                             const Padding(padding: EdgeInsets.only(top: 20)),
                             ThirdPageHomeworkTitle,
                             HomeworkImages,
@@ -2369,10 +2355,7 @@ class _ThirdPageState extends State<ThirdPage> {
                         child: ListView(
                           children: [
                             const Padding(padding: EdgeInsets.only(top: 20)),
-                            CMaker(
-                                height: 100,
-                                alignment: Alignment.center,
-                                child: ThirdPageHomeworkBody),
+                            CMaker(height: 100, alignment: Alignment.center, child: ThirdPageHomeworkBody),
                             const Padding(padding: EdgeInsets.only(top: 20)),
                             ThirdPageHomeworkTitle,
                             HomeworkImages,
@@ -2640,15 +2623,21 @@ class _ThirdPageState extends State<ThirdPage> {
                                         fontWeight: FontWeight.w800,
                                         color: Colors.white)),
                                 Expanded(child: CMaker(child: Container())),
-                                (!(HomeWorks[HomeWorkIndex][index + 1][7][0] == false))? !(HomeWorks[HomeWorkIndex][index + 1][7].length == 2)? !(HomeWorks[HomeWorkIndex][index + 1][7][2][1] == "")?CMaker( 
-                                    circularRadius: 5,
-                                    padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-                                    color: const Color.fromARGB(255, 206, 177, 177),
-                                    child:  TMaker(
-                                        text: HomeWorks[HomeWorkIndex][index + 1][7][2][1],
-                                        fontSize: 15,
-                                        fontWeight: FontWeight.w800,
-                                        color: Colors.white)):Container() :Container():Container(),
+                                (!(HomeWorks[HomeWorkIndex][index + 1][7][0] == false))
+                                    ? !(HomeWorks[HomeWorkIndex][index + 1][7].length == 2)
+                                        ? !(HomeWorks[HomeWorkIndex][index + 1][7][2][1] == "")
+                                            ? CMaker(
+                                                circularRadius: 5,
+                                                padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                                                color: const Color.fromARGB(255, 206, 177, 177),
+                                                child: TMaker(
+                                                    text: HomeWorks[HomeWorkIndex][index + 1][7][2][1],
+                                                    fontSize: 15,
+                                                    fontWeight: FontWeight.w800,
+                                                    color: Colors.white))
+                                            : Container()
+                                        : Container()
+                                    : Container(),
                                 Expanded(child: CMaker(child: Container())),
                                 InkWell(
                                   onTap: () {
@@ -2663,25 +2652,16 @@ class _ThirdPageState extends State<ThirdPage> {
                                               : HomeWorks[HomeWorkIndex][index + 1][7][2][0];
                                     });
                                   },
-                                  child: (HomeWorks[HomeWorkIndex][index + 1][7]
-                                              [0] ==
-                                          false)
+                                  child: (HomeWorks[HomeWorkIndex][index + 1][7][0] == false)
                                       ? CMaker(
                                           alignment: Alignment.center,
-                                          padding: const EdgeInsets.symmetric(
-                                              horizontal: 20),
+                                          padding: const EdgeInsets.symmetric(horizontal: 20),
                                           circularRadius: 20,
-                                          color: const Color.fromARGB(
-                                              255, 235, 218, 118),
-                                          margin: const EdgeInsets.symmetric(
-                                              horizontal: 15),
+                                          color: const Color.fromARGB(255, 235, 218, 118),
+                                          margin: const EdgeInsets.symmetric(horizontal: 15),
                                           height: 40,
                                           child: TMaker(
-                                              text: "View",
-                                              fontSize: 18,
-                                              fontWeight: FontWeight.w600,
-                                              color: const Color.fromARGB(
-                                                  255, 0, 0, 0)))
+                                              text: "View", fontSize: 18, fontWeight: FontWeight.w600, color: const Color.fromARGB(255, 0, 0, 0)))
                                       : Container(),
                                 ),
                               ],
@@ -2716,10 +2696,7 @@ class _ThirdPageState extends State<ThirdPage> {
                   color: const Color.fromARGB(255, 36, 160, 209),
                   child: const Text(
                     "No homework added",
-                    style: TextStyle(
-                        fontSize: 30,
-                        fontWeight: FontWeight.w500,
-                        color: Color.fromARGB(255, 255, 255, 255)),
+                    style: TextStyle(fontSize: 30, fontWeight: FontWeight.w500, color: Color.fromARGB(255, 255, 255, 255)),
                   )),
             );
       if (PageWidth(context) < 550) {
@@ -2887,11 +2864,9 @@ class _ThirdPageState extends State<ThirdPage> {
                                     borderRadius: BorderRadius.circular(50),
                                     color: () {
                                       if (hw_conter > 0) {
-                                        return const Color.fromARGB(
-                                            255, 255, 2, 2);
+                                        return const Color.fromARGB(255, 255, 2, 2);
                                       } else {
-                                        return const Color.fromARGB(
-                                            255, 108, 219, 110);
+                                        return const Color.fromARGB(255, 108, 219, 110);
                                       }
                                     }()),
                               )
@@ -2933,10 +2908,7 @@ class _ThirdPageState extends State<ThirdPage> {
                                     }(),
                                     fontSize: 15,
                                     fontWeight: FontWeight.w500,
-                                    color: (hw_conter > 0)
-                                        ? const Color.fromARGB(255, 255, 36, 36)
-                                        : const Color.fromARGB(
-                                            255, 108, 219, 110)),
+                                    color: (hw_conter > 0) ? const Color.fromARGB(255, 255, 36, 36) : const Color.fromARGB(255, 108, 219, 110)),
                               ),
                             ],
                           )

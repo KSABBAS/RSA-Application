@@ -35,14 +35,7 @@ String NewEmail = "";
 String NewPassWord = "";
 String NewPhoneNumber = "";
 List<List> TableData = [
-  [
-    "الوقت//التاريخ",
-    "الحصة الاولى",
-    "الحصة الثانية",
-    "الحصة الثالثة",
-    "الحصة الرابعه",
-    "الحصة الخامسة"
-  ],
+  ["الوقت//التاريخ", "الحصة الاولى", "الحصة الثانية", "الحصة الثالثة", "الحصة الرابعه", "الحصة الخامسة"],
   ["الاثنين", "Soon", "Soon", "Soon", "Soon", "Soon"],
   ["الثلاثاء", "Soon", "Soon", "Soon", "Soon", "Soon"],
   ["الاربعاء", "Soon", "Soon", "Soon", "Soon", "Soon"],
@@ -73,8 +66,7 @@ class _StudentMainPageState extends State<StudentMainPage> {
   @override
   void initState() {
     super.initState();
-    final listener =
-        InternetConnection().onStatusChange.listen((InternetStatus status) {
+    final listener = InternetConnection().onStatusChange.listen((InternetStatus status) {
       switch (status) {
         case InternetStatus.connected:
           print("================================\nConnected");
@@ -107,7 +99,7 @@ class _StudentMainPageState extends State<StudentMainPage> {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
     final List<String>? items = await prefs.getStringList('id');
 
-    print("==================\n=================\n"+items.toString());
+    print("==================\n=================\n" + items.toString());
     if (items != null && items.isNotEmpty) {
       name = items[2].split("-")[0];
       name = "${name.split(" ")[0]} ${name.split(" ")[1]}".toTitleCase;
@@ -120,8 +112,7 @@ class _StudentMainPageState extends State<StudentMainPage> {
     print("role $role");
     print(name);
     print(grade);
-    profile_data = await dbService.FiGet_profile_data(student_id, "${role}s")
-        as Map<String, dynamic>;
+    profile_data = await dbService.FiGet_profile_data(student_id, "${role}s") as Map<String, dynamic>;
     await regetmessages();
     setState(() {
       isLoading = false;
@@ -166,33 +157,26 @@ class _StudentMainPageState extends State<StudentMainPage> {
                       height: 80,
                       decoration: const BoxDecoration(
                           boxShadow: [
-                            BoxShadow(
-                                offset: Offset(1, 1),
-                                blurRadius: 6,
-                                spreadRadius: .03,
-                                color: Color.fromARGB(82, 0, 0, 0)),
+                            BoxShadow(offset: Offset(1, 1), blurRadius: 6, spreadRadius: .03, color: Color.fromARGB(82, 0, 0, 0)),
                           ],
                           color: Color.fromARGB(255, 255, 255, 255),
-                          borderRadius: BorderRadius.only(
-                              bottomLeft: Radius.circular(20),
-                              bottomRight: Radius.circular(20))),
+                          borderRadius: BorderRadius.only(bottomLeft: Radius.circular(20), bottomRight: Radius.circular(20))),
                       child: Row(
                         children: [
                           Expanded(
-                            child:CMaker(
+                            child: CMaker(
                               height: 30,
                               child: InkWell(
-                                      onTap: () {
-                                        setState(() {
-                                          PageIndex = 0;
-                                        });
-                                      },
-                                      child: CircleAvatar(
-                                          backgroundImage: NetworkImage(
-                                              profile_data['photo']))),
+                                  onTap: () {
+                                    setState(() {
+                                      PageIndex = 0;
+                                    });
+                                  },
+                                  child: CircleAvatar(backgroundImage: NetworkImage(profile_data['photo']))),
                             ),
                           ),
-                          Expanded(flex: 5,
+                          Expanded(
+                            flex: 5,
                             child: CMaker(
                               child: Row(
                                 children: [
@@ -202,24 +186,17 @@ class _StudentMainPageState extends State<StudentMainPage> {
                                       alignment: Alignment.bottomCenter,
                                       child: Text(
                                         name,
-                                        style: const TextStyle(
-                                            fontSize: 17,
-                                            fontWeight: FontWeight.w500,
-                                            color: Color.fromARGB(
-                                                255, 5, 123, 151)),
+                                        style: const TextStyle(fontSize: 17, fontWeight: FontWeight.w500, color: Color.fromARGB(255, 5, 123, 151)),
                                       ),
                                     ),
                                   ),
-                                  Expanded(flex: 2,
+                                  Expanded(
+                                    flex: 2,
                                     child: CMaker(
                                       alignment: Alignment.bottomCenter,
                                       child: Text(
                                         grade,
-                                        style: const TextStyle(
-                                            fontSize: 16,
-                                            fontWeight: FontWeight.w500,
-                                            color: Color.fromARGB(
-                                                255, 89, 89, 87)),
+                                        style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w500, color: Color.fromARGB(255, 89, 89, 87)),
                                       ),
                                     ),
                                   ),
@@ -230,19 +207,14 @@ class _StudentMainPageState extends State<StudentMainPage> {
                           Expanded(
                             child: InkWell(
                               onTap: () async {
-                                final SharedPreferences prefs =
-                                    await SharedPreferences.getInstance();
+                                final SharedPreferences prefs = await SharedPreferences.getInstance();
                                 prefs.remove("id");
-                                Navigator.pushReplacementNamed(
-                                    context, "SplashView");
+                                Navigator.pushReplacementNamed(context, "SplashView");
                               },
                               child: Container(
                                 width: 70,
                                 padding: const EdgeInsets.only(top: 10),
-                                decoration: BoxDecoration(
-                                    color:
-                                        const Color.fromARGB(255, 255, 255, 255),
-                                    borderRadius: BorderRadius.circular(10)),
+                                decoration: BoxDecoration(color: const Color.fromARGB(255, 255, 255, 255), borderRadius: BorderRadius.circular(10)),
                                 height: 50,
                                 child: const Icon(Icons.logout),
                               ),
@@ -273,16 +245,10 @@ class _StudentMainPageState extends State<StudentMainPage> {
                           height: 70,
                           decoration: const BoxDecoration(
                               boxShadow: [
-                                BoxShadow(
-                                    offset: Offset(1, 1),
-                                    blurRadius: 6,
-                                    spreadRadius: .03,
-                                    color: Color.fromARGB(82, 0, 0, 0)),
+                                BoxShadow(offset: Offset(1, 1), blurRadius: 6, spreadRadius: .03, color: Color.fromARGB(82, 0, 0, 0)),
                               ],
                               color: Color.fromARGB(255, 255, 255, 255),
-                              borderRadius: BorderRadius.only(
-                                  bottomLeft: Radius.circular(20),
-                                  bottomRight: Radius.circular(20))),
+                              borderRadius: BorderRadius.only(bottomLeft: Radius.circular(20), bottomRight: Radius.circular(20))),
                           child: Row(
                             children: [
                               Container(
@@ -296,9 +262,7 @@ class _StudentMainPageState extends State<StudentMainPage> {
                                           PageIndex = 0;
                                         });
                                       },
-                                      child: CircleAvatar(
-                                          backgroundImage: NetworkImage(
-                                              profile_data['photo'])))),
+                                      child: CircleAvatar(backgroundImage: NetworkImage(profile_data['photo'])))),
                               Expanded(
                                 child: CMaker(
                                   child: Row(
@@ -308,11 +272,8 @@ class _StudentMainPageState extends State<StudentMainPage> {
                                           alignment: Alignment.bottomCenter,
                                           child: Text(
                                             name,
-                                            style: const TextStyle(
-                                                fontSize: 17,
-                                                fontWeight: FontWeight.w500,
-                                                color: Color.fromARGB(
-                                                    255, 5, 123, 151)),
+                                            style:
+                                                const TextStyle(fontSize: 17, fontWeight: FontWeight.w500, color: Color.fromARGB(255, 5, 123, 151)),
                                           ),
                                         ),
                                       ),
@@ -321,11 +282,7 @@ class _StudentMainPageState extends State<StudentMainPage> {
                                           alignment: Alignment.bottomCenter,
                                           child: Text(
                                             grade,
-                                            style: const TextStyle(
-                                                fontSize: 16,
-                                                fontWeight: FontWeight.w500,
-                                                color: Color.fromARGB(
-                                                    255, 89, 89, 87)),
+                                            style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w500, color: Color.fromARGB(255, 89, 89, 87)),
                                           ),
                                         ),
                                       ),
@@ -335,19 +292,14 @@ class _StudentMainPageState extends State<StudentMainPage> {
                               ),
                               InkWell(
                                 onTap: () async {
-                                  final SharedPreferences prefs =
-                                      await SharedPreferences.getInstance();
+                                  final SharedPreferences prefs = await SharedPreferences.getInstance();
                                   prefs.remove("id");
-                                  Navigator.pushReplacementNamed(
-                                      context, "SplashView");
+                                  Navigator.pushReplacementNamed(context, "SplashView");
                                 },
                                 child: Container(
                                   width: 70,
                                   padding: const EdgeInsets.only(top: 10),
-                                  decoration: BoxDecoration(
-                                      color: const Color.fromARGB(
-                                          255, 255, 255, 255),
-                                      borderRadius: BorderRadius.circular(10)),
+                                  decoration: BoxDecoration(color: const Color.fromARGB(255, 255, 255, 255), borderRadius: BorderRadius.circular(10)),
                                   height: 50,
                                   child: const Icon(Icons.logout),
                                 ),
@@ -377,16 +329,10 @@ class _StudentMainPageState extends State<StudentMainPage> {
                               width: double.infinity,
                               decoration: const BoxDecoration(
                                   boxShadow: [
-                                    BoxShadow(
-                                        offset: Offset(1, 1),
-                                        blurRadius: 6,
-                                        spreadRadius: .03,
-                                        color: Color.fromARGB(82, 0, 0, 0)),
+                                    BoxShadow(offset: Offset(1, 1), blurRadius: 6, spreadRadius: .03, color: Color.fromARGB(82, 0, 0, 0)),
                                   ],
                                   color: Color.fromARGB(255, 255, 255, 255),
-                                  borderRadius: BorderRadius.only(
-                                      bottomLeft: Radius.circular(20),
-                                      bottomRight: Radius.circular(20))),
+                                  borderRadius: BorderRadius.only(bottomLeft: Radius.circular(20), bottomRight: Radius.circular(20))),
                               height: 80,
                               child: Row(
                                 children: [
@@ -400,10 +346,7 @@ class _StudentMainPageState extends State<StudentMainPage> {
                                                   PageIndex = 0;
                                                 });
                                               },
-                                              child: CircleAvatar(
-                                                  backgroundImage: NetworkImage(
-                                                      profile_data[
-                                                          'photo']))))),
+                                              child: CircleAvatar(backgroundImage: NetworkImage(profile_data['photo']))))),
                                   Expanded(
                                       flex: 3,
                                       child: CMaker(
@@ -411,15 +354,13 @@ class _StudentMainPageState extends State<StudentMainPage> {
                                         child: Text(
                                           name,
                                           style: TextStyle(
-                                              fontSize: (PageWidth(context) <
-                                                      550)
+                                              fontSize: (PageWidth(context) < 550)
                                                   ? 17
                                                   : (PageHeight(context) < 900)
                                                       ? 20
                                                       : 20,
                                               fontWeight: FontWeight.w500,
-                                              color: const Color.fromARGB(
-                                                  255, 5, 123, 151)),
+                                              color: const Color.fromARGB(255, 5, 123, 151)),
                                         ),
                                       )),
                                   Expanded(
@@ -429,35 +370,27 @@ class _StudentMainPageState extends State<StudentMainPage> {
                                         child: Text(
                                           grade,
                                           style: TextStyle(
-                                              fontSize: (PageWidth(context) <
-                                                      550)
+                                              fontSize: (PageWidth(context) < 550)
                                                   ? 17
                                                   : (PageHeight(context) < 900)
                                                       ? 20
                                                       : 20,
                                               fontWeight: FontWeight.w500,
-                                              color: const Color.fromARGB(
-                                                  255, 89, 89, 87)),
+                                              color: const Color.fromARGB(255, 89, 89, 87)),
                                         ),
                                       )),
                                   Expanded(
                                     child: InkWell(
                                       onTap: () async {
-                                        final SharedPreferences prefs =
-                                            await SharedPreferences
-                                                .getInstance();
+                                        final SharedPreferences prefs = await SharedPreferences.getInstance();
                                         prefs.remove("id");
-                                        Navigator.pushReplacementNamed(
-                                            context, "SplashView");
+                                        Navigator.pushReplacementNamed(context, "SplashView");
                                       },
                                       child: Container(
                                         width: 70,
                                         padding: const EdgeInsets.only(top: 10),
-                                        decoration: BoxDecoration(
-                                            color: const Color.fromARGB(
-                                                255, 255, 255, 255),
-                                            borderRadius:
-                                                BorderRadius.circular(10)),
+                                        decoration:
+                                            BoxDecoration(color: const Color.fromARGB(255, 255, 255, 255), borderRadius: BorderRadius.circular(10)),
                                         height: 50,
                                         child: const Icon(Icons.logout),
                                       ),
@@ -536,34 +469,23 @@ class _StudentMainPageState extends State<StudentMainPage> {
                         child: Column(
                           children: [
                             Expanded(child: Container()),
-                            TMaker(
-                                text: "Your Account Is Not Activated",
-                                fontSize: 20,
-                                fontWeight: FontWeight.w700,
-                                color: Colors.black),
+                            TMaker(text: "Your Account Is Not Activated", fontSize: 20, fontWeight: FontWeight.w700, color: Colors.black),
                             Expanded(child: Container()),
                             InkWell(
                               onTap: () async {
-                                final SharedPreferences prefs =
-                                    await SharedPreferences.getInstance();
+                                final SharedPreferences prefs = await SharedPreferences.getInstance();
                                 prefs.remove("id");
-                                Navigator.pushReplacementNamed(
-                                    context, "SplashView");
+                                Navigator.pushReplacementNamed(context, "SplashView");
                               },
                               child: CMaker(
                                   width: double.infinity,
                                   alignment: Alignment.center,
                                   child: CMaker(
-                                    padding: EdgeInsets.symmetric(
-                                        horizontal: 20, vertical: 10),
+                                    padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
                                     circularRadius: 15,
                                     color: Color.fromARGB(255, 74, 193, 241),
                                     child: TMaker(
-                                        text: "Log Out",
-                                        fontSize: 20,
-                                        fontWeight: FontWeight.w700,
-                                        color: const Color.fromARGB(
-                                            255, 255, 255, 255)),
+                                        text: "Log Out", fontSize: 20, fontWeight: FontWeight.w700, color: const Color.fromARGB(255, 255, 255, 255)),
                                   )),
                             ),
                             Expanded(child: Container()),
@@ -635,35 +557,26 @@ class _StudentMainPageState extends State<StudentMainPage> {
                             child: Column(
                               children: [
                                 Expanded(child: Container()),
-                                TMaker(
-                                    text: "Your Account Is Not Activated",
-                                    fontSize: 20,
-                                    fontWeight: FontWeight.w700,
-                                    color: Colors.black),
+                                TMaker(text: "Your Account Is Not Activated", fontSize: 20, fontWeight: FontWeight.w700, color: Colors.black),
                                 Expanded(child: Container()),
                                 InkWell(
                                   onTap: () async {
-                                    final SharedPreferences prefs =
-                                        await SharedPreferences.getInstance();
+                                    final SharedPreferences prefs = await SharedPreferences.getInstance();
                                     prefs.remove("id");
-                                    Navigator.pushReplacementNamed(
-                                        context, "SplashView");
+                                    Navigator.pushReplacementNamed(context, "SplashView");
                                   },
                                   child: CMaker(
                                       width: double.infinity,
                                       alignment: Alignment.center,
                                       child: CMaker(
-                                        padding: EdgeInsets.symmetric(
-                                            horizontal: 20, vertical: 10),
+                                        padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
                                         circularRadius: 15,
-                                        color:
-                                            Color.fromARGB(255, 74, 193, 241),
+                                        color: Color.fromARGB(255, 74, 193, 241),
                                         child: TMaker(
                                             text: "Log Out",
                                             fontSize: 20,
                                             fontWeight: FontWeight.w700,
-                                            color: const Color.fromARGB(
-                                                255, 255, 255, 255)),
+                                            color: const Color.fromARGB(255, 255, 255, 255)),
                                       )),
                                 ),
                                 Expanded(child: Container()),
@@ -728,34 +641,23 @@ class _StudentMainPageState extends State<StudentMainPage> {
                         child: Column(
                           children: [
                             Expanded(child: Container()),
-                            TMaker(
-                                text: "Your Account Is Not Activated",
-                                fontSize: 20,
-                                fontWeight: FontWeight.w700,
-                                color: Colors.black),
+                            TMaker(text: "Your Account Is Not Activated", fontSize: 20, fontWeight: FontWeight.w700, color: Colors.black),
                             Expanded(child: Container()),
                             InkWell(
                               onTap: () async {
-                                final SharedPreferences prefs =
-                                    await SharedPreferences.getInstance();
+                                final SharedPreferences prefs = await SharedPreferences.getInstance();
                                 prefs.remove("id");
-                                Navigator.pushReplacementNamed(
-                                    context, "SplashView");
+                                Navigator.pushReplacementNamed(context, "SplashView");
                               },
                               child: CMaker(
                                   width: double.infinity,
                                   alignment: Alignment.center,
                                   child: CMaker(
-                                    padding: EdgeInsets.symmetric(
-                                        horizontal: 20, vertical: 10),
+                                    padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
                                     circularRadius: 15,
                                     color: Color.fromARGB(255, 74, 193, 241),
                                     child: TMaker(
-                                        text: "Log Out",
-                                        fontSize: 20,
-                                        fontWeight: FontWeight.w700,
-                                        color: const Color.fromARGB(
-                                            255, 255, 255, 255)),
+                                        text: "Log Out", fontSize: 20, fontWeight: FontWeight.w700, color: const Color.fromARGB(255, 255, 255, 255)),
                                   )),
                             ),
                             Expanded(child: Container()),
@@ -769,8 +671,8 @@ class _StudentMainPageState extends State<StudentMainPage> {
     SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersiveSticky);
     if (ConnectedToInternet) {
       return (isLoading)
-          ? Scaffold(
-              backgroundColor: const Color.fromARGB(255, 233, 255, 247),
+          ? const Scaffold(
+              backgroundColor: Color.fromARGB(255, 233, 255, 247),
               body: Center(
                   child: CircularProgressIndicator(
                 color: Color.fromARGB(255, 74, 193, 241),
@@ -782,9 +684,11 @@ class _StudentMainPageState extends State<StudentMainPage> {
                   backgroundColor: Color.fromARGB(255, 74, 193, 241),
                   color: const Color.fromARGB(255, 233, 255, 247),
                   onRefresh: () async {
+                    await fetch();
+                    await regetmessages();
                     await Future.delayed(Duration(milliseconds: 500));
                     setState(() {
-                      fetch();
+                      
                     });
                   },
                   child: StudentMainPageBody));
@@ -797,19 +701,11 @@ class _StudentMainPageState extends State<StudentMainPage> {
                 width: 270,
                 color: Colors.white,
                 boxShadow: [
-                  BoxShadow(
-                      offset: Offset(1, 1),
-                      blurRadius: 6,
-                      spreadRadius: .03,
-                      color: Color.fromARGB(82, 0, 0, 0)),
+                  BoxShadow(offset: Offset(1, 1), blurRadius: 6, spreadRadius: .03, color: Color.fromARGB(82, 0, 0, 0)),
                 ],
                 circularRadius: 20,
                 alignment: Alignment.center,
-                child: TMaker(
-                    text: "You aren't connected to internet",
-                    fontSize: 20,
-                    fontWeight: FontWeight.w700,
-                    color: Colors.black))),
+                child: TMaker(text: "You aren't connected to internet", fontSize: 20, fontWeight: FontWeight.w700, color: Colors.black))),
       );
     }
   }

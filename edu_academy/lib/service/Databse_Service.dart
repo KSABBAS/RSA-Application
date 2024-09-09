@@ -314,11 +314,13 @@ class DatabaseService {
     // hw id,student_id,hw solve body,hw files
 
     ///Homework/Grade 1/عربي/NY63UvWuWPWfjzutq745/solve /id
-    print("FiAdd_Solve hw_id ${hw_id}");
+    print("FiAdd_Solve hw_id ${hw_id} ${hw_solve_files}");
     DocumentReference documentReference =
         fire.collection('Homework').doc(hw_id[0]).collection(hw_id[3]).doc(hw_id[2]).collection("Solve").doc(student_id);
+    print("FiAdd_Solve hw_id2 ${hw_id}");
 
     documentReference.set({"body": hw_solve_body, "files": hw_solve_files, 'date': CurrentDateTime, 'score': '0'});
+    print("FiAdd_Solve hw_id4 ${hw_id}");
 
     return true;
 
@@ -532,6 +534,89 @@ class DatabaseService {
   //  end Admin data
 
   // Storage
+    stsolveStore(var file) async {
+    if (kIsWeb) {
+      print("Platform web");
+      // log("file.length  ${file.length}");
+      if (file.length != 0) {
+        print("Platform web file.length != 0");
+        if (file.length > 1) {
+          print("Platform web file.length > 1");
+
+          List<dynamic> downloadUrls = [];
+          try {
+            for (int i = 0; i < file.length; i++) {
+              String fileName = 'homework_image_${DateTime.now().millisecondsSinceEpoch}_$i.png';
+
+              var snapshot = await FirebaseStorage.instance.ref('Homeworks/$fileName').putData(
+                    file[i],
+                    SettableMetadata(contentType: 'image/png'),
+                  );
+
+              String downloadUrl = await snapshot.ref.getDownloadURL();
+              downloadUrls.add(downloadUrl);
+
+              print("Uploaded $fileName - URL: $downloadUrl");
+            }
+
+            return downloadUrls;
+          } catch (e) {
+            print("Error during upload: $e");
+            return [];
+          }
+        } else {
+          print("Platform web NOT file.length > 1");
+          // List<dynamic> nameParts = file[0][1].toString().split(".");
+          // String fileName = nameParts[0];
+
+          try {
+            var snapshot = await FirebaseStorage.instance.ref('solve/solve_image_${DateTime.now().millisecondsSinceEpoch}.png').putData(
+                  file[0],
+                  SettableMetadata(contentType: 'image/png')
+                );
+
+            print("Upload complete");
+
+            var downloadUrl = await snapshot.ref.getDownloadURL();
+            print("Download URL: $downloadUrl");
+
+            return [downloadUrl];
+          } catch (e) {
+            print("Error during upload: $e");
+          }
+        }
+      }
+    } else {
+      print("Platform notweb....");
+      print("file $file");
+      if (file.length != 0) {
+        if (file.length > 1) {
+          print("file.length > 1");
+          List<dynamic> outList = [];
+          for (var file in file) {
+            print(file);
+            List<dynamic> name = file.toString().split("/");
+            String fileName = name[name.length - 1].replaceAll("'", "");
+            var snapshot = await storage.ref().child('Homeworks/$fileName').putFile(file);
+            var downloadUrl = await snapshot.ref.getDownloadURL();
+            outList.add(downloadUrl);
+          }
+          return outList;
+        } else {
+          print(file[0]);
+          List<dynamic> name = file[0].toString().split("/");
+          String fileName = name[name.length - 1].replaceAll("'", "");
+          var snapshot = await storage.ref().child('Homeworks/$fileName').putFile(file[0]);
+          var downloadUrl = await snapshot.ref.getDownloadURL();
+          return [downloadUrl];
+        }
+      } else {
+        print("emty files");
+      }
+    }
+  }
+
+
   stHwStore(var file) async {
     if (kIsWeb) {
       print("Platform web");
@@ -581,35 +666,35 @@ class DatabaseService {
             print("Error during upload: $e");
           }
         }
-       }} else {
-        print("Platform notweb....");
-        print("file $file");
-        if (file.length != 0) {
-          if (file.length > 1) {
-            print("file.length > 1");
-            List<dynamic> outList = [];
-            for (var file in file) {
-              print(file);
-              List<dynamic> name = file.toString().split("/");
-              String fileName = name[name.length - 1].replaceAll("'", "");
-              var snapshot = await storage.ref().child('Homeworks/$fileName').putFile(file);
-              var downloadUrl = await snapshot.ref.getDownloadURL();
-              outList.add(downloadUrl);
-            }
-            return outList;
-          } else {
-            print(file[0]);
-            List<dynamic> name = file[0].toString().split("/");
-            String fileName = name[name.length - 1].replaceAll("'", "");
-            var snapshot = await storage.ref().child('Homeworks/$fileName').putFile(file[0]);
-            var downloadUrl = await snapshot.ref.getDownloadURL();
-            return [downloadUrl];
-          }
-        } else {
-          print("emty files");
-        }
       }
-   
+    } else {
+      print("Platform notweb....");
+      print("file $file");
+      if (file.length != 0) {
+        if (file.length > 1) {
+          print("file.length > 1");
+          List<dynamic> outList = [];
+          for (var file in file) {
+            print(file);
+            List<dynamic> name = file.toString().split("/");
+            String fileName = name[name.length - 1].replaceAll("'", "");
+            var snapshot = await storage.ref().child('Homeworks/$fileName').putFile(file);
+            var downloadUrl = await snapshot.ref.getDownloadURL();
+            outList.add(downloadUrl);
+          }
+          return outList;
+        } else {
+          print(file[0]);
+          List<dynamic> name = file[0].toString().split("/");
+          String fileName = name[name.length - 1].replaceAll("'", "");
+          var snapshot = await storage.ref().child('Homeworks/$fileName').putFile(file[0]);
+          var downloadUrl = await snapshot.ref.getDownloadURL();
+          return [downloadUrl];
+        }
+      } else {
+        print("emty files");
+      }
+    }
   }
 
   stBookStore(var file) async {
