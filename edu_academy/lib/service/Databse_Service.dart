@@ -43,7 +43,7 @@ class DatabaseService {
       log(numS.toString());
 
       String docId = "${rref[0]}${(numS + 1).toString()}";
-      await usersCollection.doc(docId).set(userData);
+      await usersCollection.doc().set(userData);
     } catch (e) {
       log(e.toString());
     }
