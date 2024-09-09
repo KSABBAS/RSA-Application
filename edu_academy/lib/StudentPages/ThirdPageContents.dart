@@ -230,7 +230,7 @@ String StudentHomeWorkAnswer = "";
 bool EditSolution = false;
 bool ViewSentSolution = false;
 bool hw_in_list_none = false;
-
+GlobalKey<FormState> Homeworkkey = GlobalKey();
 class _ThirdPageState extends State<ThirdPage> {
   late Future<void> _dataFuture;
   final dbService = DatabaseService();
@@ -328,7 +328,7 @@ class _ThirdPageState extends State<ThirdPage> {
                 : 300
             : 250,
         width: double.infinity,
-        child: GridView.builder(
+        child: (HomeWorks[HomeWorkIndex][HomeworkSelected + 1][3].length==0)?Center(child: TMaker(text:"No Files", fontSize: 20, fontWeight: FontWeight.w500, color: Colors.black),):GridView.builder(
             itemCount: HomeWorks[HomeWorkIndex][HomeworkSelected + 1][3].length,
             gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2),
             itemBuilder: (context, index) {
@@ -370,16 +370,24 @@ class _ThirdPageState extends State<ThirdPage> {
               child: TMaker(text: "الملاحظات", fontSize: 20, fontWeight: FontWeight.w700, color: const Color.fromARGB(255, 36, 160, 209))));
       Widget StudentHomeWorkBody = SizedBox(
         height: 210,
-        child: TextField(
-          onChanged: (value) {
-            StudentHomeWorkAnswer = value;
-          },
-          maxLines: 8,
-          decoration: InputDecoration(
-              hintText: "Write Something",
-              enabledBorder: OutlineInputBorder(
-                  borderSide: const BorderSide(color: Color.fromARGB(255, 192, 192, 192)), borderRadius: BorderRadius.circular(30)),
-              focusedBorder: OutlineInputBorder(borderRadius: BorderRadius.circular(15))),
+        child: Form(
+          key: Homeworkkey,
+          child: TextFormField(
+            validator: (value) {
+          if (value!.isEmpty) {
+            return "الحقل فارغ";
+          }
+        },
+            onSaved: (value) {
+              StudentHomeWorkAnswer = value!;
+            },
+            maxLines: 8,
+            decoration: InputDecoration(
+                hintText: "Write Something",
+                enabledBorder: OutlineInputBorder(
+                    borderSide: const BorderSide(color: Color.fromARGB(255, 192, 192, 192)), borderRadius: BorderRadius.circular(30)),
+                focusedBorder: OutlineInputBorder(borderRadius: BorderRadius.circular(15))),
+          ),
         ),
       );
       //Third
@@ -597,6 +605,7 @@ class _ThirdPageState extends State<ThirdPage> {
                                       panaraDialogType: PanaraDialogType.success,
                                       barrierDismissible: false,
                                     );
+                                  }
                                   },
                                   child: CMaker(
                                       circularRadius: 17,
@@ -2623,21 +2632,29 @@ class _ThirdPageState extends State<ThirdPage> {
                                         fontWeight: FontWeight.w800,
                                         color: Colors.white)),
                                 Expanded(child: CMaker(child: Container())),
-                                (!(HomeWorks[HomeWorkIndex][index + 1][7][0] == false))
-                                    ? !(HomeWorks[HomeWorkIndex][index + 1][7].length == 2)
-                                        ? !(HomeWorks[HomeWorkIndex][index + 1][7][2][1] == "")
-                                            ? CMaker(
-                                                circularRadius: 5,
-                                                padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-                                                color: const Color.fromARGB(255, 206, 177, 177),
-                                                child: TMaker(
-                                                    text: HomeWorks[HomeWorkIndex][index + 1][7][2][1],
-                                                    fontSize: 15,
-                                                    fontWeight: FontWeight.w800,
-                                                    color: Colors.white))
-                                            : Container()
-                                        : Container()
-                                    : Container(),
+                                (!(HomeWorks[HomeWorkIndex][index + 1][7][0] == false))? !(HomeWorks[HomeWorkIndex][index + 1][7].length == 2)? !(HomeWorks[HomeWorkIndex][index + 1][7][2][1] == "")?
+                                InkWell(
+                                  onTap: () {
+                                    showDialog(context: context, builder:(context) {
+                                      return Dialog(child: CMaker(circularRadius: 20,padding: EdgeInsets.all(20),child: TMaker(
+                                        textAlign: TextAlign.start,
+                                          text: HomeWorks[HomeWorkIndex][index + 1][7][2][1],
+                                          fontSize: 18,
+                                          fontWeight: FontWeight.w800,
+                                          color: const Color.fromARGB(255, 0, 0, 0))),);
+                                    },);
+                                  },
+                                  child: CMaker(
+                                      circularRadius: 20,
+                                      padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                                      color: const Color.fromARGB(
+                                                255, 235, 218, 118),
+                                      child:  TMaker(
+                                          text: (HomeWorks[HomeWorkIndex][index + 1][7][2][1].length>8)?HomeWorks[HomeWorkIndex][index + 1][7][2][1].substring(0,8)+"...":HomeWorks[HomeWorkIndex][index + 1][7][2][1],
+                                          fontSize: 18,
+                                          fontWeight: FontWeight.w800,
+                                          color: const Color.fromARGB(255, 0, 0, 0))),
+                                ):Container() :Container():Container(),
                                 Expanded(child: CMaker(child: Container())),
                                 InkWell(
                                   onTap: () {
