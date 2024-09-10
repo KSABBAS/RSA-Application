@@ -584,7 +584,7 @@ class _SecondPageState extends State<SecondPage> {
                   : 30,
           fontWeight: FontWeight.w700,
           color: Colors.black);
-      Widget PressableBooks = (all_books.length==0)?Center(child: TMaker(text: "لا يوجد حصص", fontSize: 20, fontWeight:FontWeight.w700, color: Colors.black),):ListView.builder(
+      Widget PressableBooks = (all_books.length==0)?Center(child: TMaker(text: "لا يوجد كتب", fontSize: 20, fontWeight:FontWeight.w700, color: Colors.black),):ListView.builder(
           itemCount: all_books.length, //all_books.length,
           scrollDirection: Axis.vertical,
           itemBuilder: (context, index) {

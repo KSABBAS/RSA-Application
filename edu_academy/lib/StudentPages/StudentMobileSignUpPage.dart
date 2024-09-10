@@ -45,6 +45,9 @@ class _StudentMobileSignUpPageState extends State<StudentMobileSignUpPage> {
     Widget NameTFF = SizedBox(
       height: 80,
       child: TextFormField(
+        onChanged: (value) {
+            key.currentState!.validate();
+          },
         initialValue: StudentName,
         onSaved: (newValue) {
           StudentName = newValue!;
@@ -81,6 +84,9 @@ class _StudentMobileSignUpPageState extends State<StudentMobileSignUpPage> {
     Widget GardianPhoneTFF = SizedBox(
       height: 80,
       child: TextFormField(
+        onChanged: (value) {
+            key.currentState!.validate();
+          },
         initialValue: StudentParentMobileNumber,
         onSaved: (newValue) {
           StudentParentMobileNumber = newValue!;
@@ -124,6 +130,9 @@ class _StudentMobileSignUpPageState extends State<StudentMobileSignUpPage> {
     Widget PhoneNumberTFF = SizedBox(
       height: 80,
       child: TextFormField(
+        onChanged: (value) {
+            key.currentState!.validate();
+          },
         initialValue: StudentMobileNumber,
         onSaved: (newValue) {
           StudentMobileNumber = newValue!;
@@ -178,6 +187,9 @@ class _StudentMobileSignUpPageState extends State<StudentMobileSignUpPage> {
     Widget EmailTFF = SizedBox(
       height: 80,
       child: TextFormField(
+        onChanged: (value) {
+            key.currentState!.validate();
+          },
         initialValue: StudentEmail,
         onSaved: (newValue) {
           StudentEmail = newValue!;
@@ -222,7 +234,8 @@ class _StudentMobileSignUpPageState extends State<StudentMobileSignUpPage> {
         },
         onChanged: (value) {
           StudentDemoPassword = value;
-        },
+            key.currentState!.validate();
+          },
         validator: (value) {
           if (value!.length < 4) {
             return "يجب ان يكون الرقم السرى اكبر من 3 (حروف او ارقام)";
@@ -271,7 +284,8 @@ class _StudentMobileSignUpPageState extends State<StudentMobileSignUpPage> {
         },
         onChanged: (value) {
           StudentDemoConfirmPassword = value;
-        },
+            key.currentState!.validate();
+          },
         validator: (value) {
           if (value!.length < 4) {
             return "يجب ان يكون الرقم السرى اكبر من 3 (حروف او ارقام)";
@@ -576,7 +590,7 @@ class _StudentMobileSignUpPageState extends State<StudentMobileSignUpPage> {
     );
     Widget SignUpButton = InkWell(
       onTap: () async {
-        if (key.currentState!.validate()) {
+        if (key.currentState!.validate()&&StudentName!="0"&&StudentParentMobileNumber!="0"&&StudentEmail!="0"&&StudentPassword!="0"&&StudentConfirmPassword!="0") {
           key.currentState!.save();
           OverlayLoadingProgress.start(
             context,

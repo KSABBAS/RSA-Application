@@ -34,6 +34,9 @@ class _ParentSignUpPageState extends State<ParentSignUpPage> {
         SizedBox(
           height: 80,
           child: TextFormField(
+            onChanged: (value) {
+            key2.currentState!.validate();
+          },
             onSaved: (newValue) {
               ParentName = newValue!;
             },
@@ -70,6 +73,9 @@ class _ParentSignUpPageState extends State<ParentSignUpPage> {
         SizedBox(
           height: 80,
           child: TextFormField(
+            onChanged: (value) {
+            key2.currentState!.validate();
+          },
             onSaved: (newValue) {
               ParentNumber = newValue!;
             },
@@ -112,6 +118,9 @@ class _ParentSignUpPageState extends State<ParentSignUpPage> {
         SizedBox(
           height: 80,
           child: TextFormField(
+            onChanged: (value) {
+            key2.currentState!.validate();
+          },
             onSaved: (newValue) {
               ParentEmail = newValue!;
             },
@@ -154,7 +163,8 @@ class _ParentSignUpPageState extends State<ParentSignUpPage> {
             },
             onChanged: (value) {
               ParentDemoPassword = value;
-            },
+            key2.currentState!.validate();
+          },
             validator: (value) {
               if (value!.length < 4) {
                 return "يجب ان يكون الرقم السرى اكبر من 3 (حروف او ارقام)";
@@ -202,7 +212,8 @@ class _ParentSignUpPageState extends State<ParentSignUpPage> {
             },
             onChanged: (value) {
               ParentDemoConfirmPassword = value;
-            },
+            key2.currentState!.validate();
+          },
             validator: (value) {
               if (value!.length < 4) {
                 return "يجب ان يكون الرقم السرى اكبر من 3 (حروف او ارقام)";
@@ -335,7 +346,7 @@ class _ParentSignUpPageState extends State<ParentSignUpPage> {
     ];
     Widget SignUpButton = InkWell(
       onTap: () async {
-        if (key2.currentState!.validate()) {
+        if (key2.currentState!.validate()&&ParentName!="0"&&ParentNumber!="0"&&ParentEmail!="0"&&ParentPassword!="0"&&ParentConfirmPassword!="0") {
           key2.currentState!.save();
           OverlayLoadingProgress.start(
             context,

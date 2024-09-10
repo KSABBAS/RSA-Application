@@ -397,6 +397,23 @@ class _StudentProfileState extends State<StudentProfile> {
     Widget EditAndSaveButton = InkWell(
       onTap: () {
         if (ProfileKey.currentState!.validate()) {
+          if (EditMode) {
+                              ProfileKey.currentState!.save();
+                              widget.StudentEmail = NewProfileEmail;
+                              widget.StudentNumber = NewProfileNumber;
+                              widget.StudentPassword = NewProfilePassword;
+
+                              print(widget.StudentEmail);
+                              print(widget.StudentNumber);
+                              print(widget.StudentPassword);
+                              dbService.FiUpdate_profile_data(
+                                    grade, "Students", student_id, widget.StudentEmail, widget.StudentNumber, widget.StudentPassword);
+                                print("======================\n password id correct");
+                                print("======================$Check_pass");
+                                EditMode=false;
+                                setState(() {
+                                });
+                            }else{
           showDialog(
               context: context,
               builder: (context) {
@@ -437,26 +454,11 @@ class _StudentProfileState extends State<StudentProfile> {
                             print("####Check_pass ${Check_pass}");
                             print("####widget.StudentPassword ${widget.StudentPassword}");
                             print("####EditMode ${EditMode}");
-                            if (EditMode) {
-                              ProfileKey.currentState!.save();
-                              widget.StudentEmail = NewProfileEmail;
-                              widget.StudentNumber = NewProfileNumber;
-                              widget.StudentPassword = NewProfilePassword;
-
-                              print(widget.StudentEmail);
-                              print(widget.StudentNumber);
-                              print(widget.StudentPassword);
-                            } else {
                               if (Check_pass == widget.StudentPassword && Check_pass != "0") {
-                                dbService.FiUpdate_profile_data(
-                                    grade, "Students", student_id, widget.StudentEmail, widget.StudentNumber, widget.StudentPassword);
-                                print("======================\n password id correct");
-                                print("======================$Check_pass");
-                                EditMode = !EditMode;
+                                EditMode = true;
                                 print(EditMode);
                                 Navigator.pop(context);
                                 setState(() {});
-                              }
                             }
                           },
                           child: Text(
@@ -464,6 +466,7 @@ class _StudentProfileState extends State<StudentProfile> {
                           )),
                     ]);
               });
+                            }
         }
       },
       child: CMaker(
