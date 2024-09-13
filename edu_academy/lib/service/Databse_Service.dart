@@ -4,6 +4,7 @@ import 'dart:developer';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:edu_academy/ParentPages/ParentMainPage.dart';
 import 'package:edu_academy/StudentPages/SecondPageContents.dart';
+import 'package:edu_academy/TeacherPages/TeacherMainPage.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:intl/intl.dart';
@@ -531,10 +532,23 @@ class DatabaseService {
     collections.update({"state": "${!current_state}"});
   }
 
+  FiUpdate_Sub(List subjects, String Techer_id) async {
+    var collections = fire.collection('Users').doc("Teacher").collection("Teacher").doc(Techer_id);
+    subjects.remove("null");
+    subjects.remove("null");
+    subjects.remove("null");
+    print("--${subjects} ${subjects.length}");
+    for (int i = 1; i <= subjects.length; i++) {
+      print(i);
+    collections.update({"Subject$i":subjects[i-1] });
+    }
+
+    // if
+  }
   //  end Admin data
 
   // Storage
-    stsolveStore(var file) async {
+  stsolveStore(var file) async {
     if (kIsWeb) {
       print("Platform web");
       // log("file.length  ${file.length}");
@@ -570,10 +584,9 @@ class DatabaseService {
           // String fileName = nameParts[0];
 
           try {
-            var snapshot = await FirebaseStorage.instance.ref('solve/solve_image_${DateTime.now().millisecondsSinceEpoch}.png').putData(
-                  file[0],
-                  SettableMetadata(contentType: 'image/png')
-                );
+            var snapshot = await FirebaseStorage.instance
+                .ref('solve/solve_image_${DateTime.now().millisecondsSinceEpoch}.png')
+                .putData(file[0], SettableMetadata(contentType: 'image/png'));
 
             print("Upload complete");
 
@@ -615,7 +628,6 @@ class DatabaseService {
       }
     }
   }
-
 
   stHwStore(var file) async {
     if (kIsWeb) {

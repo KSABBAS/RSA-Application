@@ -22,7 +22,7 @@ bool stringToBool(String value) {
 
 bool TeacherOpend = false;
 int TeacherSelected = 0;
-// bool TeacherState = ;
+
 String TeacherSubject1 = "null";
 String TeacherSubject2 = "null";
 String TeacherSubject3 = "null";
@@ -45,6 +45,7 @@ class _AdminSocendPageContenetsState extends State<AdminSocendPageContenets> {
         [i['Subject1'], i['Subject2'], i['Subject3']]
       ]);
     }
+    Teachers.sort((a, b) => b[4].compareTo(a[4]));
     setState(() {});
   }
 
@@ -361,8 +362,8 @@ class _AdminSocendPageContenetsState extends State<AdminSocendPageContenets> {
                                   padding: EdgeInsets.only(right: 10),
                                   child: TMaker(
                                       text: () {
-                                        String out = "${Teachers[TeacherSelected][6][0][0]}";
-                                        for (var i in (Teachers[TeacherSelected][6][0] as List).sublist(1)) {
+                                        String out = "${Teachers[TeacherSelected][6][2][0]}";
+                                        for (var i in (Teachers[TeacherSelected][6][2] as List).sublist(1)) {
                                           out = out + "\n\t -$i";
                                         }
                                         return out;
@@ -421,6 +422,7 @@ class _AdminSocendPageContenetsState extends State<AdminSocendPageContenets> {
                           onChanged: (bool newValue) async {
                             await dbService.FiChange_state('Teacher', Teachers[TeacherSelected][5], stringToBool(Teachers[TeacherSelected][4]));
                             setState(() {
+                              TeacherOpend = false;
                               Teacher_data();
                               // TeacherState = newValue;
                             });
@@ -579,7 +581,8 @@ class _ChangeSubjectsAndGradesState extends State<ChangeSubjectsAndGrades> {
     List<DropdownMenuItem<String>>? list = [
       DropdownMenuItem(
         value: "null",
-        child: CMaker(child: TMaker(text: Teachers[TeacherSelected][6][widget.List_index][0], fontSize: 20, fontWeight: FontWeight.w600, color: Colors.black)),
+        child: CMaker(
+            child: TMaker(text: Teachers[TeacherSelected][6][widget.List_index][0], fontSize: 20, fontWeight: FontWeight.w600, color: Colors.black)),
       ),
     ];
     for (int i = 0; i < Subjects.length; i++) {
@@ -594,9 +597,29 @@ class _ChangeSubjectsAndGradesState extends State<ChangeSubjectsAndGrades> {
   }
 
   bool check = false;
+  final dbService = DatabaseService();
+  Teacher_data() async {
+    var da_ = await dbService.FiGet_all_users_data("Teacher");
+    Teachers = [];
+    for (var i in da_) {
+      Teachers.add([
+        i['photo'],
+        i['name'],
+        i['email'],
+        i['phone'],
+        i['state'],
+        i.id,
+        [i['Subject1'], i['Subject2'], i['Subject3']]
+      ]);
+    }
+    Teachers.sort((a, b) => b[4].compareTo(a[4]));
+    setState(() {});
+  }
+
   @override
   Widget build(BuildContext context) {
     print("Teachers[TeacherSelected][6][widget.List_index][0] ${Teachers[TeacherSelected][6][widget.List_index][0]}");
+    print("TeacherSubject ${widget.TeacherSubject}");
     return Scaffold(
       backgroundColor: const Color.fromARGB(255, 255, 255, 255),
       body: Stack(
@@ -614,109 +637,139 @@ class _ChangeSubjectsAndGradesState extends State<ChangeSubjectsAndGrades> {
                     child: DropdownButton<String>(
                       items: SubjectsMaker(widget.TeacherSubject),
                       value: widget.TeacherSubject,
-                      onChanged: (s1) {
+                      onChanged: (s1) async {
                         widget.TeacherSubject = s1!.toString();
-                        setState(() {
-                        });
+                        print("onChanged ${s1.toString()}");
+                        Teachers[TeacherSelected][6][widget.List_index][0] = widget.TeacherSubject;
+                        // await Teacher_data();
+
+                        setState(() {});
                       },
                     ),
-                  ),
+                  ), //22
                   const Padding(padding: EdgeInsets.only(top: 30)),
                   CMaker(
                       height: 600,
                       child: ListView.builder(
-                        itemCount: GradesSubjects.keys.length -
-                            ((GradesSubjects.keys.length / 2).floor()),
+                        itemCount: GradesSubjects.keys.length - ((GradesSubjects.keys.length / 2).floor()),
                         itemBuilder: (context, index) {
                           bool SelectedCheckBoxGrade = false;
                           return Row(
                             children: [
                               Expanded(
                                   child: CMaker(
-                                margin:
-                                    EdgeInsets.only(right: 7, left: 20, bottom: 20),
+                                margin: EdgeInsets.only(right: 7, left: 20, bottom: 20),
                                 circularRadius: 15,
                                 color: const Color.fromARGB(255, 233, 255, 247),
-                                padding: EdgeInsets.symmetric(
-                                    vertical: 10, horizontal: 15),
+                                padding: EdgeInsets.symmetric(vertical: 10, horizontal: 15),
                                 child: CheckboxListTile(
-                                    title: Text(
-                                        "${GradesSubjects.keys.elementAt(index * 2)}"),
-                                    value: check
-                                    // (){
-                                    //   for(int i=1;i<Teachers[TeacherSelected][6][0].length;i++){
-                                    //     if(int.parse(Teachers[TeacherSelected][6][0][i].split(" ")[1])==(index*2)+1){
-                                    //       return true;
-                                    //     }
-                                    //   }
-                                    //   return false;
-                                    // }()
-                                    ,
+                                    title: Text("${GradesSubjects.keys.elementAt(index * 2)}"),
+                                    value: () {
+                                      print(Teachers[TeacherSelected][6][widget.List_index]);
+                                      if ((Teachers[TeacherSelected][6][widget.List_index] as List)
+                                          .contains(GradesSubjects.keys.elementAt(index * 2))) {
+                                        print("sub[GradesSubjects.keys.elementAt(index * 2)] ${sub[GradesSubjects.keys.elementAt(index * 2)]}");
+                                        sub[GradesSubjects.keys.elementAt(index * 2)] = true;
+                                        return sub[GradesSubjects.keys.elementAt(index * 2)];
+                                      } else {
+                                        print("-- sub[GradesSubjects.keys.elementAt(index * 2)] ${sub[GradesSubjects.keys.elementAt(index * 2)]}");
+                                        sub[GradesSubjects.keys.elementAt(index * 2)] = false;
+                                        return sub[GradesSubjects.keys.elementAt(index * 2)];
+                                      }
+                                    }(),
                                     onChanged: (newValue) {
+                                      print("=============" +
+                                          "${sub[GradesSubjects.keys.elementAt(index * 2)]} ** ${GradesSubjects.keys.elementAt(index * 2)}");
                                       setState(() {
-                                        check = newValue!;
+                                        sub[GradesSubjects.keys.elementAt(index * 2)] = newValue!;
+                                        if (sub[GradesSubjects.keys.elementAt(index * 2)] ?? false) {
+                                          (Teachers[TeacherSelected][6][widget.List_index]).add(GradesSubjects.keys.elementAt(index * 2));
+                                          print("Teachers[TeacherSelected][6] ${Teachers[TeacherSelected][6][widget.List_index]}");
+                                        } else {
+                                          (Teachers[TeacherSelected][6][widget.List_index]).remove(GradesSubjects.keys.elementAt(index * 2));
+                                        }
+                                        print("2===========" + "${sub[GradesSubjects.keys.elementAt(index * 2)]}");
                                       });
-                                      print("=========================" +
-                                          "$SelectedCheckBoxGrade");
                                     }),
                               )),
-                              (((index * 2)+1)<GradesSubjects.keys.length)
-                                  ?Expanded(
-                              child: CMaker(
-                            margin:
-                                EdgeInsets.only(right: 7, left: 20, bottom: 20),
-                            circularRadius: 15,
-                            color: const Color.fromARGB(255, 233, 255, 247),
-                            padding: EdgeInsets.symmetric(
-                                vertical: 10, horizontal: 15),
-                            child: CheckboxListTile(
-                                title: Text(
-                                    "${GradesSubjects.keys.elementAt((index * 2)+1)}"),
-                                value: check
-                                // () {
-                                            //   for (int i = 1;
-                                            //       i <
-                                            //           Teachers[widget
-                                            //                       .TeacherSelected]
-                                            //                   [6][0]
-                                            //               .length;
-                                            //       i++) {
-                                            //     if (int.parse(Teachers[widget
-                                            //                     .TeacherSelected]
-                                            //                 [6][0][i]
-                                            //             .split(" ")[1]) ==
-                                            //         (index * 2) + 2) {
-                                            //       return true;
-                                            //     }
-                                            //   }
-                                            //   return false;
-                                            // }(),
-                                ,
-                                onChanged: (newValue) {
-                                  setState(() {
-                                    check = newValue!;
-                                  });
-                                  print("=========================" +
-                                      "$SelectedCheckBoxGrade");
-                                }),
-                          ))
+                              (((index * 2) + 1) < GradesSubjects.keys.length)
+                                  ? Expanded(
+                                      child: CMaker(
+                                      margin: EdgeInsets.only(right: 7, left: 20, bottom: 20),
+                                      circularRadius: 15,
+                                      color: const Color.fromARGB(255, 233, 255, 247),
+                                      padding: EdgeInsets.symmetric(vertical: 10, horizontal: 15),
+                                      child: CheckboxListTile(
+                                          title: Text("${GradesSubjects.keys.elementAt((index * 2) + 1)}"),
+                                          value: () {
+                                            print(Teachers[TeacherSelected][6][widget.List_index]);
+                                            if ((Teachers[TeacherSelected][6][widget.List_index] as List)
+                                                .contains(GradesSubjects.keys.elementAt((index * 2) + 1))) {
+                                              print(
+                                                  "sub[GradesSubjects.keys.elementAt((index * 2) + 1)] ${sub[GradesSubjects.keys.elementAt((index * 2) + 1)]}");
+                                              sub[GradesSubjects.keys.elementAt((index * 2) + 1)] = true;
+                                              return sub[GradesSubjects.keys.elementAt((index * 2) + 1)];
+                                            } else {
+                                              print(
+                                                  "-- sub[GradesSubjects.keys.elementAt((index * 2) + 1)] ${sub[GradesSubjects.keys.elementAt((index * 2) + 1)]}");
+                                              sub[GradesSubjects.keys.elementAt((index * 2) + 1)] = false;
+                                              return sub[GradesSubjects.keys.elementAt((index * 2) + 1)];
+                                            }
+                                          }(),
+                                          onChanged: (newValue) {
+                                            print("=============" +
+                                                "${sub[GradesSubjects.keys.elementAt((index * 2) + 1)]} ** ${GradesSubjects.keys.elementAt((index * 2) + 1)}");
+                                            setState(() {
+                                              sub[GradesSubjects.keys.elementAt((index * 2) + 1)] = newValue!;
+                                              if (sub[GradesSubjects.keys.elementAt((index * 2) + 1)] ?? false) {
+                                                (Teachers[TeacherSelected][6][widget.List_index]).add(GradesSubjects.keys.elementAt((index * 2) + 1));
+                                                print("Teachers[TeacherSelected][6] ${Teachers[TeacherSelected][6][widget.List_index]}");
+                                              } else {
+                                                (Teachers[TeacherSelected][6][widget.List_index])
+                                                    .remove(GradesSubjects.keys.elementAt((index * 2) + 1));
+                                              }
+                                              print("2===========" + "${sub[GradesSubjects.keys.elementAt((index * 2) + 1)]}");
+                                            });
+                                          }),
+                                    ))
                                   : Expanded(child: Container()),
                             ],
                           );
                         },
                       )),
-                      Padding(padding:EdgeInsets.only(bottom: 150)),
+                  Padding(padding: EdgeInsets.only(bottom: 150)),
                 ],
               )),
-        Positioned(bottom: 60,right: (PageWidth(context)-300)/2,child: CMaker(width: 300,child: Row(children: [
-          Expanded(child: MyButton(onTap: () {
-            Get.back();
-          }, buttonHeight: 70,buttonColor: Colors.red,text: "Cancel")),
-          Padding(padding:EdgeInsets.only(left: 20)),
-          Expanded(child: MyButton(onTap: () {
-            
-          },buttonHeight: 70,buttonColor: const Color.fromARGB(255, 27, 255, 42),text: "Ok")),
-        ],)))
+          Positioned(
+              bottom: 60,
+              right: (PageWidth(context) - 300) / 2,
+              child: CMaker(
+                  width: 300,
+                  child: Row(
+                    children: [
+                      Expanded(
+                          child: MyButton(
+                              onTap: () async {
+                                await Teacher_data();
+                                Get.back();
+                              },
+                              buttonHeight: 70,
+                              buttonColor: Colors.red,
+                              text: "Cancel")),
+                      Padding(padding: EdgeInsets.only(left: 20)),
+                      Expanded(
+                          child: MyButton(
+                              onTap: () async {
+                                print("Teachers[TeacherSelected][6] ${Teachers[TeacherSelected][6]}-${Teachers[TeacherSelected][5]}");
+                                await dbService.FiUpdate_Sub(Teachers[TeacherSelected][6], Teachers[TeacherSelected][5]);
+                                await Teacher_data();
+                                Get.back();
+                              },
+                              buttonHeight: 70,
+                              buttonColor: const Color.fromARGB(255, 27, 255, 42),
+                              text: "Ok")),
+                    ],
+                  )))
         ],
       ),
     );

@@ -65,7 +65,7 @@ class _AdminMainPageState extends State<AdminMainPage> {
       ]);
     }
     print("##Teachers $Teachers");
-    // Teachers.sort((a, b) => b[4].compareTo(a[4]));
+    Teachers.sort((a, b) => b[4].compareTo(a[4]));
   }
 
   @override

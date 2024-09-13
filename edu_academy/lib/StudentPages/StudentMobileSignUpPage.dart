@@ -45,6 +45,7 @@ class _StudentMobileSignUpPageState extends State<StudentMobileSignUpPage> {
     Widget NameTFF = SizedBox(
       height: 80,
       child: TextFormField(
+        autovalidateMode: AutovalidateMode.onUserInteraction,
         onChanged: (value) {
             key.currentState!.validate();
           },
@@ -59,6 +60,7 @@ class _StudentMobileSignUpPageState extends State<StudentMobileSignUpPage> {
           if (value.split(" ").length < 3) {
             return "الاسم يجب ان يكون ثلاثى او رباعى";
           }
+          return null;
         },
         decoration: InputDecoration(
             focusedErrorBorder: OutlineInputBorder(
@@ -84,6 +86,7 @@ class _StudentMobileSignUpPageState extends State<StudentMobileSignUpPage> {
     Widget GardianPhoneTFF = SizedBox(
       height: 80,
       child: TextFormField(
+        autovalidateMode: AutovalidateMode.onUserInteraction,
         onChanged: (value) {
             key.currentState!.validate();
           },
@@ -130,6 +133,7 @@ class _StudentMobileSignUpPageState extends State<StudentMobileSignUpPage> {
     Widget PhoneNumberTFF = SizedBox(
       height: 80,
       child: TextFormField(
+        autovalidateMode: AutovalidateMode.onUserInteraction,
         onChanged: (value) {
             key.currentState!.validate();
           },
@@ -187,6 +191,7 @@ class _StudentMobileSignUpPageState extends State<StudentMobileSignUpPage> {
     Widget EmailTFF = SizedBox(
       height: 80,
       child: TextFormField(
+        autovalidateMode: AutovalidateMode.onUserInteraction,
         onChanged: (value) {
             key.currentState!.validate();
           },
@@ -228,6 +233,7 @@ class _StudentMobileSignUpPageState extends State<StudentMobileSignUpPage> {
     Widget PasswordTFF = SizedBox(
       height: 80,
       child: TextFormField(
+        autovalidateMode: AutovalidateMode.onUserInteraction,
         initialValue: StudentPassword,
         onSaved: (newValue) {
           StudentPassword = newValue!;
@@ -278,6 +284,7 @@ class _StudentMobileSignUpPageState extends State<StudentMobileSignUpPage> {
     Widget ConfirmTFF = SizedBox(
       height: 80,
       child: TextFormField(
+        autovalidateMode: AutovalidateMode.onUserInteraction,
         initialValue: StudentConfirmPassword,
         onSaved: (newValue) {
           StudentConfirmPassword = newValue!;
