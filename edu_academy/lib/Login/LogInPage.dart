@@ -266,25 +266,26 @@ class _LoginPageState extends State<LogInPage> {
                       fontSize: 18,
                       fontWeight: FontWeight.w600,
                       color: (PageWidth(context) < 550)
-                          ? const Color.fromARGB(52, 128, 128, 128)
+                          ? const Color.fromARGB(93, 128, 128, 128)
                           : Colors.white))),
           Expanded(
               flex: 25,
-              child: InkWell(
-                onTap: () {
-                  Get.to(()=>PoweredByPage());
-                },
-                child: CMaker(
+              child: CMaker(
                   circularRadius: 15,
                     alignment: Alignment.centerLeft,
-                    child:TMaker(
-                            text: " Codeveloper",
-                            fontSize: 25,
-                            fontWeight: FontWeight.w600,
-                            color: (PageWidth(context) < 550)
-                                ? Color.fromARGB(211, 255, 217, 0)
-                                : Colors.white)),
-              ))
+                    child:TextButton(
+                      onPressed: () {
+                        Get.to(()=>PoweredByPage());
+                      },
+                      child: TMaker(
+                              text: "Codeveloper",
+                              fontSize: 25,
+                              fontWeight: FontWeight.w600,
+                              color: (PageWidth(context) < 550)
+                                  ? Color.fromARGB(138, 82, 82, 82)
+                                  : Colors.white),
+                    )),
+              )
         ],
       ),
     );

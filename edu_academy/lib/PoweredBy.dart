@@ -1,6 +1,7 @@
 import 'package:edu_academy/MyTools.dart';
 import 'package:edu_academy/TeacherPages/TeacherMainPage.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class PoweredByPage extends StatefulWidget {
   const PoweredByPage({super.key});
@@ -14,12 +15,9 @@ class _PoweredByPageState extends State<PoweredByPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
-      appBar: AppBar(
-        toolbarHeight: 100,
-        backgroundColor: Colors.white,
-      ),
       body: ListView(
         children: [
+          CMaker(height: 100,padding: EdgeInsets.only(left: 20),width: double.infinity,alignment: Alignment.centerLeft,child: IconButton(onPressed: (){Get.back();}, icon:Icon(Icons.arrow_back,size: 30,))),
           Padding(padding: EdgeInsets.only(top: 30)),
           CMaker(
               width: double.infinity,

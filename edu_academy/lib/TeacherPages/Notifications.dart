@@ -112,9 +112,10 @@ class _TeacherNotificationsPageState extends State<TeacherNotificationsPage> {
                           color: Color.fromARGB(82, 0, 0, 0)),
                     ],
                     width: double.infinity,
-                    height: 100,
+                    height: 80,
                     circularRadius: 10,
                     child: ListTile(
+                      minTileHeight: 100,
                       title: TMaker(
                           textAlign: TextAlign.start,
                           text: (TeacherNotiFications[index][1].length>10)?TeacherNotiFications[index][1].substring(0,10)+"...":TeacherNotiFications[index][1],
@@ -128,15 +129,18 @@ class _TeacherNotificationsPageState extends State<TeacherNotificationsPage> {
                       subtitle: TMaker(
                           textAlign: TextAlign.start,
                           text: (TeacherNotiFications[index][2].length>20)?TeacherNotiFications[index][2].substring(0,20)+"...":TeacherNotiFications[index][2],
-                          fontSize: 20,
-                          fontWeight: FontWeight.w600,
-                          color: const Color.fromARGB(255, 78, 78, 78)),
-                      trailing: TMaker(
-                          textAlign: TextAlign.end,
-                          text: TeacherNotiFications[index][3],
                           fontSize: 15,
                           fontWeight: FontWeight.w600,
                           color: const Color.fromARGB(255, 78, 78, 78)),
+                      trailing: CMaker(
+                        width: 100,
+                        child: TMaker(
+                            textAlign: TextAlign.end,
+                            text: TeacherNotiFications[index][3],
+                            fontSize: 15,
+                            fontWeight: FontWeight.w600,
+                            color: const Color.fromARGB(255, 78, 78, 78)),
+                      ),
                     ),
                   ),
                 );

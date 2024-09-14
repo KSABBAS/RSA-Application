@@ -45,7 +45,8 @@ web_pick_file() async {
   Uint8List? file;
   FilePickerResult? result;
   String? name = '';
-  result = await FilePicker.platform.pickFiles(type: FileType.image, allowMultiple: false);
+  result = await FilePicker.platform
+      .pickFiles(type: FileType.image, allowMultiple: false);
   if (result != null) {
     // file = File(result.files.single.path!);
     file = result.files.single.bytes;
@@ -69,23 +70,31 @@ class _StudentProfileState extends State<StudentProfile> {
       onTap: () async {
         if (kIsWeb) {
           var image_data = await web_pick_file();
-          widget.profile_photo = await dbService.FiAdd_photo0(student_id, "${role}s", image_data);
+          widget.profile_photo =
+              await dbService.FiAdd_photo0(student_id, "${role}s", image_data);
         } else {
           XFile? Avatar = await PhotoImageFromGalary();
           if (Avatar != null) {
             final dbService = DatabaseService();
             ProfileAvatar = Avatar;
-            widget.profile_photo = await dbService.FiAdd_photo(student_id, "${role}s", File(ProfileAvatar!.path));
+            widget.profile_photo = await dbService.FiAdd_photo(
+                student_id, "${role}s", File(ProfileAvatar!.path));
           }
         }
         // refresh
-        profile_data = await dbService.FiGet_profile_data(student_id, "${role}s") as Map<String, dynamic>;
+        profile_data =
+            await dbService.FiGet_profile_data(student_id, "${role}s")
+                as Map<String, dynamic>;
         setState(() {});
       },
       child: CMaker(
         circularRadius: 130,
         boxShadow: const [
-          BoxShadow(offset: Offset(1, 1), blurRadius: 6, spreadRadius: .03, color: Color.fromARGB(69, 0, 0, 0)),
+          BoxShadow(
+              offset: Offset(1, 1),
+              blurRadius: 6,
+              spreadRadius: .03,
+              color: Color.fromARGB(69, 0, 0, 0)),
         ],
         alignment: Alignment.center,
         width: 160,
@@ -94,15 +103,18 @@ class _StudentProfileState extends State<StudentProfile> {
           fit: StackFit.expand,
           children: [
             (ProfileAvatar == null && widget.profile_photo == "")
-                ? const CircleAvatar(backgroundImage: AssetImage("images/personDeafult.png"))
+                ? const CircleAvatar(
+                    backgroundImage: AssetImage("images/personDeafult.png"))
                 : CircleAvatar(
-                    backgroundImage: Image.network((widget.profile_photo)).image,
+                    backgroundImage:
+                        Image.network((widget.profile_photo)).image,
                   ),
             Positioned(
               bottom: 6,
               right: -4,
               child: CMaker(
-                border: Border.all(width: 4, color: Color.fromARGB(255, 233, 255, 247)),
+                border: Border.all(
+                    width: 4, color: Color.fromARGB(255, 233, 255, 247)),
                 height: 40,
                 width: 40,
                 circularRadius: 50,
@@ -120,8 +132,12 @@ class _StudentProfileState extends State<StudentProfile> {
           padding: EdgeInsets.only(left: 10),
           child: CMaker(
               width: double.infinity,
-              child:
-                  TMaker(textAlign: TextAlign.start, text: "Name", fontSize: 20, fontWeight: FontWeight.w400, color: Color.fromARGB(255, 0, 0, 0))),
+              child: TMaker(
+                  textAlign: TextAlign.start,
+                  text: "Name",
+                  fontSize: 20,
+                  fontWeight: FontWeight.w400,
+                  color: Color.fromARGB(255, 0, 0, 0))),
         ),
         CMaker(
           height: (PageWidth(context) < 550)
@@ -130,7 +146,11 @@ class _StudentProfileState extends State<StudentProfile> {
                   ? 80
                   : 80,
           boxShadow: const [
-            BoxShadow(offset: Offset(1, 1), blurRadius: 6, spreadRadius: .03, color: Color.fromARGB(58, 0, 0, 0)),
+            BoxShadow(
+                offset: Offset(1, 1),
+                blurRadius: 6,
+                spreadRadius: .03,
+                color: Color.fromARGB(58, 0, 0, 0)),
           ],
           circularRadius: 20,
           color: const Color.fromARGB(255, 233, 255, 247),
@@ -140,7 +160,11 @@ class _StudentProfileState extends State<StudentProfile> {
               Expanded(child: Container()),
               CMaker(
                   padding: EdgeInsets.only(right: 10),
-                  child: TMaker(text: widget.StudentName, fontSize: 20, fontWeight: FontWeight.w600, color: const Color.fromARGB(255, 0, 0, 0))),
+                  child: TMaker(
+                      text: widget.StudentName,
+                      fontSize: 20,
+                      fontWeight: FontWeight.w600,
+                      color: const Color.fromARGB(255, 0, 0, 0))),
               Expanded(child: Container()),
             ],
           ),
@@ -159,7 +183,11 @@ class _StudentProfileState extends State<StudentProfile> {
                     child: CMaker(
                         width: double.infinity,
                         child: TMaker(
-                            textAlign: TextAlign.start, text: "Id", fontSize: 20, fontWeight: FontWeight.w400, color: Color.fromARGB(255, 0, 0, 0))),
+                            textAlign: TextAlign.start,
+                            text: "Id",
+                            fontSize: 20,
+                            fontWeight: FontWeight.w400,
+                            color: Color.fromARGB(255, 0, 0, 0))),
                   ),
                   CMaker(
                     height: (PageWidth(context) < 550)
@@ -168,7 +196,11 @@ class _StudentProfileState extends State<StudentProfile> {
                             ? 80
                             : 80,
                     boxShadow: const [
-                      BoxShadow(offset: Offset(1, 1), blurRadius: 6, spreadRadius: .03, color: Color.fromARGB(58, 0, 0, 0)),
+                      BoxShadow(
+                          offset: Offset(1, 1),
+                          blurRadius: 6,
+                          spreadRadius: .03,
+                          color: Color.fromARGB(58, 0, 0, 0)),
                     ],
                     circularRadius: 20,
                     color: const Color.fromARGB(255, 233, 255, 247),
@@ -178,7 +210,11 @@ class _StudentProfileState extends State<StudentProfile> {
                         Expanded(child: Container()),
                         CMaker(
                             padding: EdgeInsets.only(right: 10),
-                            child: TMaker(text: "12345", fontSize: 20, fontWeight: FontWeight.w600, color: const Color.fromARGB(255, 0, 0, 0))),
+                            child: TMaker(
+                                text: "12345",
+                                fontSize: 20,
+                                fontWeight: FontWeight.w600,
+                                color: const Color.fromARGB(255, 0, 0, 0))),
                         Expanded(child: Container()),
                       ],
                     ),
@@ -209,7 +245,11 @@ class _StudentProfileState extends State<StudentProfile> {
                             ? 80
                             : 80,
                     boxShadow: const [
-                      BoxShadow(offset: Offset(1, 1), blurRadius: 6, spreadRadius: .03, color: Color.fromARGB(58, 0, 0, 0)),
+                      BoxShadow(
+                          offset: Offset(1, 1),
+                          blurRadius: 6,
+                          spreadRadius: .03,
+                          color: Color.fromARGB(58, 0, 0, 0)),
                     ],
                     circularRadius: 20,
                     color: const Color.fromARGB(255, 233, 255, 247),
@@ -220,7 +260,10 @@ class _StudentProfileState extends State<StudentProfile> {
                         CMaker(
                             padding: EdgeInsets.only(right: 10),
                             child: TMaker(
-                                text: widget.StudentGrade, fontSize: 20, fontWeight: FontWeight.w600, color: const Color.fromARGB(255, 0, 0, 0))),
+                                text: widget.StudentGrade,
+                                fontSize: 20,
+                                fontWeight: FontWeight.w600,
+                                color: const Color.fromARGB(255, 0, 0, 0))),
                         Expanded(child: Container()),
                       ],
                     ),
@@ -251,7 +294,11 @@ class _StudentProfileState extends State<StudentProfile> {
                     ? 80
                     : 80,
             boxShadow: const [
-              BoxShadow(offset: Offset(1, 1), blurRadius: 6, spreadRadius: .03, color: Color.fromARGB(58, 0, 0, 0)),
+              BoxShadow(
+                  offset: Offset(1, 1),
+                  blurRadius: 6,
+                  spreadRadius: .03,
+                  color: Color.fromARGB(58, 0, 0, 0)),
             ],
             circularRadius: 20,
             color: const Color.fromARGB(255, 233, 255, 247),
@@ -265,21 +312,37 @@ class _StudentProfileState extends State<StudentProfile> {
                       if (value!.isEmpty) {
                         return "الحقل فارغ";
                       }
-                      if ((!value.endsWith("@gmail.com") || !(value.length > 10)) && (!value.endsWith("@yahoo.com") || !(value.length > 10))) {
+                      if ((!value.endsWith("@gmail.com") ||
+                              !(value.length > 10)) &&
+                          (!value.endsWith("@yahoo.com") ||
+                              !(value.length > 10))) {
                         return "صيغة الايميل ليسة صحيحة";
                       }
                       return null;
                     },
                     textAlign: TextAlign.center,
                     initialValue: widget.StudentEmail,
-                    style: TextStyle(fontSize: 20, fontWeight: FontWeight.w600, color: const Color.fromARGB(255, 0, 0, 0)),
+                    style: TextStyle(
+                        fontSize: 20,
+                        fontWeight: FontWeight.w600,
+                        color: const Color.fromARGB(255, 0, 0, 0)),
                     decoration: InputDecoration(
                         errorBorder: OutlineInputBorder(
-                            borderSide: const BorderSide(color: Color.fromARGB(255, 192, 192, 192)), borderRadius: BorderRadius.circular(20)),
-                        enabledBorder: OutlineInputBorder(borderRadius: BorderRadius.circular(20), borderSide: BorderSide(width: 0)),
-                        focusedBorder: OutlineInputBorder(borderRadius: BorderRadius.circular(20), borderSide: BorderSide(width: 0))),
+                            borderSide: const BorderSide(
+                                color: Color.fromARGB(255, 192, 192, 192)),
+                            borderRadius: BorderRadius.circular(20)),
+                        enabledBorder: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(20),
+                            borderSide: BorderSide(width: 0)),
+                        focusedBorder: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(20),
+                            borderSide: BorderSide(width: 0))),
                   )
-                : TMaker(text: widget.StudentEmail, fontSize: 20, fontWeight: FontWeight.w600, color: const Color.fromARGB(255, 0, 0, 0))),
+                : TMaker(
+                    text: widget.StudentEmail,
+                    fontSize: 20,
+                    fontWeight: FontWeight.w600,
+                    color: const Color.fromARGB(255, 0, 0, 0))),
       ],
     );
     Widget PasswordField = Column(
@@ -303,7 +366,11 @@ class _StudentProfileState extends State<StudentProfile> {
                     ? 80
                     : 80,
             boxShadow: const [
-              BoxShadow(offset: Offset(1, 1), blurRadius: 6, spreadRadius: .03, color: Color.fromARGB(58, 0, 0, 0)),
+              BoxShadow(
+                  offset: Offset(1, 1),
+                  blurRadius: 6,
+                  spreadRadius: .03,
+                  color: Color.fromARGB(58, 0, 0, 0)),
             ],
             circularRadius: 20,
             color: const Color.fromARGB(255, 233, 255, 247),
@@ -324,14 +391,27 @@ class _StudentProfileState extends State<StudentProfile> {
                     },
                     textAlign: TextAlign.center,
                     initialValue: widget.StudentPassword,
-                    style: TextStyle(fontSize: 20, fontWeight: FontWeight.w600, color: const Color.fromARGB(255, 0, 0, 0)),
+                    style: TextStyle(
+                        fontSize: 20,
+                        fontWeight: FontWeight.w600,
+                        color: const Color.fromARGB(255, 0, 0, 0)),
                     decoration: InputDecoration(
                         errorBorder: OutlineInputBorder(
-                            borderSide: const BorderSide(color: Color.fromARGB(255, 192, 192, 192)), borderRadius: BorderRadius.circular(20)),
-                        enabledBorder: OutlineInputBorder(borderRadius: BorderRadius.circular(20), borderSide: BorderSide(width: 0)),
-                        focusedBorder: OutlineInputBorder(borderRadius: BorderRadius.circular(20), borderSide: BorderSide(width: 0))),
+                            borderSide: const BorderSide(
+                                color: Color.fromARGB(255, 192, 192, 192)),
+                            borderRadius: BorderRadius.circular(20)),
+                        enabledBorder: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(20),
+                            borderSide: BorderSide(width: 0)),
+                        focusedBorder: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(20),
+                            borderSide: BorderSide(width: 0))),
                   )
-                : TMaker(text: widget.StudentEmail, fontSize: 20, fontWeight: FontWeight.w600, color: const Color.fromARGB(255, 0, 0, 0))),
+                : TMaker(
+                    text: widget.StudentEmail,
+                    fontSize: 20,
+                    fontWeight: FontWeight.w600,
+                    color: const Color.fromARGB(255, 0, 0, 0))),
       ],
     );
     Widget NumberField = Column(
@@ -355,7 +435,11 @@ class _StudentProfileState extends State<StudentProfile> {
                   ? 80
                   : 80,
           boxShadow: const [
-            BoxShadow(offset: Offset(1, 1), blurRadius: 6, spreadRadius: .03, color: Color.fromARGB(58, 0, 0, 0)),
+            BoxShadow(
+                offset: Offset(1, 1),
+                blurRadius: 6,
+                spreadRadius: .03,
+                color: Color.fromARGB(58, 0, 0, 0)),
           ],
           circularRadius: 20,
           color: const Color.fromARGB(255, 233, 255, 247),
@@ -381,16 +465,31 @@ class _StudentProfileState extends State<StudentProfile> {
                   },
                   textAlign: TextAlign.center,
                   initialValue: widget.StudentNumber,
-                  style: TextStyle(fontSize: 20, fontWeight: FontWeight.w600, color: const Color.fromARGB(255, 0, 0, 0)),
+                  style: TextStyle(
+                      fontSize: 20,
+                      fontWeight: FontWeight.w600,
+                      color: const Color.fromARGB(255, 0, 0, 0)),
                   decoration: InputDecoration(
                       focusedErrorBorder: OutlineInputBorder(
-                          borderSide: const BorderSide(color: Color.fromARGB(255, 192, 192, 192)), borderRadius: BorderRadius.circular(20)),
+                          borderSide: const BorderSide(
+                              color: Color.fromARGB(255, 192, 192, 192)),
+                          borderRadius: BorderRadius.circular(20)),
                       errorBorder: OutlineInputBorder(
-                          borderSide: const BorderSide(color: Color.fromARGB(255, 192, 192, 192)), borderRadius: BorderRadius.circular(20)),
-                      enabledBorder: OutlineInputBorder(borderRadius: BorderRadius.circular(20), borderSide: BorderSide(width: 0)),
-                      focusedBorder: OutlineInputBorder(borderRadius: BorderRadius.circular(20), borderSide: BorderSide(width: 0))),
+                          borderSide: const BorderSide(
+                              color: Color.fromARGB(255, 192, 192, 192)),
+                          borderRadius: BorderRadius.circular(20)),
+                      enabledBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(20),
+                          borderSide: BorderSide(width: 0)),
+                      focusedBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(20),
+                          borderSide: BorderSide(width: 0))),
                 )
-              : TMaker(text: widget.StudentPassword, fontSize: 20, fontWeight: FontWeight.w600, color: const Color.fromARGB(255, 0, 0, 0)),
+              : TMaker(
+                  text: widget.StudentPassword,
+                  fontSize: 20,
+                  fontWeight: FontWeight.w600,
+                  color: const Color.fromARGB(255, 0, 0, 0)),
         ),
       ],
     );
@@ -398,75 +497,98 @@ class _StudentProfileState extends State<StudentProfile> {
       onTap: () {
         if (ProfileKey.currentState!.validate()) {
           if (EditMode) {
-                              ProfileKey.currentState!.save();
-                              widget.StudentEmail = NewProfileEmail;
-                              widget.StudentNumber = NewProfileNumber;
-                              widget.StudentPassword = NewProfilePassword;
+            ProfileKey.currentState!.save();
+            widget.StudentEmail = NewProfileEmail;
+            widget.StudentNumber = NewProfileNumber;
+            widget.StudentPassword = NewProfilePassword;
 
-                              print(widget.StudentEmail);
-                              print(widget.StudentNumber);
-                              print(widget.StudentPassword);
-                              dbService.FiUpdate_profile_data(
-                                    grade, "Students", student_id, widget.StudentEmail, widget.StudentNumber, widget.StudentPassword);
-                                print("======================\n password id correct");
-                                print("======================$Check_pass");
-                                EditMode=false;
-                                setState(() {
-                                });
-                            }else{
-          showDialog(
-              context: context,
-              builder: (context) {
-                return AlertDialog(
-                    title: Text("Enter the password                  "),
-                    content: CMaker(
-                      height: 100,
-                      alignment: Alignment.center,
-                      child: TextFormField(
-                        onChanged: (newValue) {
-                          Check_pass = newValue;
-                        },
-                        obscureText: obscureText,
-                        decoration: InputDecoration(
-                            focusedErrorBorder: OutlineInputBorder(
-                                borderSide: const BorderSide(color: Color.fromARGB(255, 192, 192, 192)), borderRadius: BorderRadius.circular(30)),
-                            errorBorder: OutlineInputBorder(
-                                borderSide: const BorderSide(color: Color.fromARGB(255, 192, 192, 192)), borderRadius: BorderRadius.circular(30)),
-                            label: const Text(
-                              "Password",
-                              style: TextStyle(fontSize: 15, fontWeight: FontWeight.w600),
-                            ),
-                            enabledBorder: OutlineInputBorder(
-                                borderSide: const BorderSide(color: Color.fromARGB(255, 192, 192, 192)), borderRadius: BorderRadius.circular(30)),
-                            focusedBorder: OutlineInputBorder(borderRadius: BorderRadius.circular(15))),
+            print(widget.StudentEmail);
+            print(widget.StudentNumber);
+            print(widget.StudentPassword);
+            dbService.FiUpdate_profile_data(
+                grade,
+                "Students",
+                student_id,
+                widget.StudentEmail,
+                widget.StudentNumber,
+                widget.StudentPassword);
+            print("======================\n password id correct");
+            print("======================$Check_pass");
+            EditMode = false;
+            setState(() {});
+          } else {
+            showDialog(
+                context: context,
+                builder: (context) {
+                  return AlertDialog(
+                      title: Text("Enter the password                  "),
+                      content: CMaker(
+                        height: 100,
+                        alignment: Alignment.center,
+                        child: TextFormField(
+                          validator: (value) {
+                            if (value!.isEmpty) {
+                              return "الحقل فارغ";
+                            }
+                          },
+                          onChanged: (newValue) {
+                            Check_pass = newValue;
+                          },
+                          obscureText: obscureText,
+                          decoration: InputDecoration(
+                              focusedErrorBorder: OutlineInputBorder(
+                                  borderSide: const BorderSide(
+                                      color:
+                                          Color.fromARGB(255, 192, 192, 192)),
+                                  borderRadius: BorderRadius.circular(30)),
+                              errorBorder: OutlineInputBorder(
+                                  borderSide: const BorderSide(
+                                      color:
+                                          Color.fromARGB(255, 192, 192, 192)),
+                                  borderRadius: BorderRadius.circular(30)),
+                              label: const Text(
+                                "Password",
+                                style: TextStyle(
+                                    fontSize: 15, fontWeight: FontWeight.w600),
+                              ),
+                              enabledBorder: OutlineInputBorder(
+                                  borderSide: const BorderSide(
+                                      color:
+                                          Color.fromARGB(255, 192, 192, 192)),
+                                  borderRadius: BorderRadius.circular(30)),
+                              focusedBorder: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(15))),
+                        ),
                       ),
-                    ),
-                    actions: [
-                      TextButton(
-                          onPressed: () {
-                            Navigator.pop(context);
-                          },
-                          child: Text(
-                            "Cancel",
-                          )),
-                      TextButton(
-                          onPressed: () async {
-                            print("####Check_pass ${Check_pass}");
-                            print("####widget.StudentPassword ${widget.StudentPassword}");
-                            print("####EditMode ${EditMode}");
-                              if (Check_pass == widget.StudentPassword && Check_pass != "0") {
-                                EditMode = true;
-                                print(EditMode);
-                                Navigator.pop(context);
-                                setState(() {});
-                            }
-                          },
-                          child: Text(
-                            "ok",
-                          )),
-                    ]);
-              });
-                            }
+                      actions: [
+                        TextButton(
+                            onPressed: () {
+                              Navigator.pop(context);
+                            },
+                            child: Text(
+                              "Cancel",
+                            )),
+                        TextButton(
+                            onPressed: () async {
+                              print("####Check_pass ${Check_pass}");
+                              print(
+                                  "####widget.StudentPassword ${widget.StudentPassword}");
+                              print("####EditMode ${EditMode}");
+                              if (ProfileKey.currentState!.validate()) {
+                                if (Check_pass == widget.StudentPassword) {
+                                  EditMode = true;
+                                  print(EditMode);
+                                  Navigator.pop(context);
+                                  setState(() {});
+                                }
+                              }
+                            },
+                            child: Text(
+                              "ok",
+                            )),
+                      ]);
+                });
+          }
         }
       },
       child: CMaker(
@@ -477,7 +599,11 @@ class _StudentProfileState extends State<StudentProfile> {
                 ? 80
                 : 80,
         boxShadow: const [
-          BoxShadow(offset: Offset(1, 1), blurRadius: 6, spreadRadius: .03, color: Color.fromARGB(58, 0, 0, 0)),
+          BoxShadow(
+              offset: Offset(1, 1),
+              blurRadius: 6,
+              spreadRadius: .03,
+              color: Color.fromARGB(58, 0, 0, 0)),
         ],
         circularRadius: 25,
         color: const Color.fromARGB(255, 233, 255, 247),
@@ -486,8 +612,11 @@ class _StudentProfileState extends State<StudentProfile> {
             Expanded(child: Container()),
             CMaker(
                 padding: EdgeInsets.only(right: 10),
-                child:
-                    TMaker(text: (EditMode) ? "Save" : "Edit", fontSize: 25, fontWeight: FontWeight.w600, color: const Color.fromARGB(255, 0, 0, 0))),
+                child: TMaker(
+                    text: (EditMode) ? "Save" : "Edit",
+                    fontSize: 25,
+                    fontWeight: FontWeight.w600,
+                    color: const Color.fromARGB(255, 0, 0, 0))),
             Expanded(child: Container()),
           ],
         ),
@@ -560,7 +689,7 @@ class _StudentProfileState extends State<StudentProfile> {
                           height: 80,
                           alignment: Alignment.center,
                           child: EditAndSaveButton),
-                          const Padding(padding: EdgeInsets.only(bottom: 10)),
+                      const Padding(padding: EdgeInsets.only(bottom: 10)),
                       (EditMode)
                           ? CMaker(
                               width: double.infinity,
@@ -579,20 +708,29 @@ class _StudentProfileState extends State<StudentProfile> {
                                             ? 80
                                             : 80,
                                     boxShadow: const [
-                                      BoxShadow(offset: Offset(1, 1), blurRadius: 6, spreadRadius: .03, color: Color.fromARGB(58, 0, 0, 0)),
+                                      BoxShadow(
+                                          offset: Offset(1, 1),
+                                          blurRadius: 6,
+                                          spreadRadius: .03,
+                                          color: Color.fromARGB(58, 0, 0, 0)),
                                     ],
                                     circularRadius: 25,
-                                    color: const Color.fromARGB(255, 233, 255, 247),
+                                    color: const Color.fromARGB(
+                                        255, 233, 255, 247),
                                     padding: EdgeInsets.only(right: 10),
-                                    child:
-                                        TMaker(text: "Cancel", fontSize: 25, fontWeight: FontWeight.w600, color: const Color.fromARGB(255, 0, 0, 0))),
+                                    child: TMaker(
+                                        text: "Cancel",
+                                        fontSize: 25,
+                                        fontWeight: FontWeight.w600,
+                                        color: const Color.fromARGB(
+                                            255, 0, 0, 0))),
                               ),
                             )
                           : Container(
                               height: 0,
                               width: 0,
                             ),
-                            const Padding(padding: EdgeInsets.only(bottom: 20)),
+                      const Padding(padding: EdgeInsets.only(bottom: 20)),
                     ],
                   )),
               Expanded(child: Container())
@@ -667,7 +805,7 @@ class _StudentProfileState extends State<StudentProfile> {
                           height: 80,
                           alignment: Alignment.center,
                           child: EditAndSaveButton),
-                          const Padding(padding: EdgeInsets.only(bottom: 10)),
+                      const Padding(padding: EdgeInsets.only(bottom: 10)),
                       (EditMode)
                           ? CMaker(
                               width: double.infinity,
@@ -686,20 +824,29 @@ class _StudentProfileState extends State<StudentProfile> {
                                             ? 80
                                             : 80,
                                     boxShadow: const [
-                                      BoxShadow(offset: Offset(1, 1), blurRadius: 6, spreadRadius: .03, color: Color.fromARGB(58, 0, 0, 0)),
+                                      BoxShadow(
+                                          offset: Offset(1, 1),
+                                          blurRadius: 6,
+                                          spreadRadius: .03,
+                                          color: Color.fromARGB(58, 0, 0, 0)),
                                     ],
                                     circularRadius: 25,
-                                    color: const Color.fromARGB(255, 233, 255, 247),
+                                    color: const Color.fromARGB(
+                                        255, 233, 255, 247),
                                     padding: EdgeInsets.only(right: 10),
-                                    child:
-                                        TMaker(text: "Cancel", fontSize: 25, fontWeight: FontWeight.w600, color: const Color.fromARGB(255, 0, 0, 0))),
+                                    child: TMaker(
+                                        text: "Cancel",
+                                        fontSize: 25,
+                                        fontWeight: FontWeight.w600,
+                                        color: const Color.fromARGB(
+                                            255, 0, 0, 0))),
                               ),
                             )
                           : Container(
                               height: 0,
                               width: 0,
                             ),
-                            const Padding(padding: EdgeInsets.only(bottom: 20)),
+                      const Padding(padding: EdgeInsets.only(bottom: 20)),
                     ],
                   )),
               Expanded(child: Container())
@@ -774,7 +921,7 @@ class _StudentProfileState extends State<StudentProfile> {
                           height: 80,
                           alignment: Alignment.center,
                           child: EditAndSaveButton),
-                          const Padding(padding: EdgeInsets.only(bottom: 10)),
+                      const Padding(padding: EdgeInsets.only(bottom: 10)),
                       (EditMode)
                           ? CMaker(
                               width: double.infinity,
@@ -793,20 +940,29 @@ class _StudentProfileState extends State<StudentProfile> {
                                             ? 80
                                             : 80,
                                     boxShadow: const [
-                                      BoxShadow(offset: Offset(1, 1), blurRadius: 6, spreadRadius: .03, color: Color.fromARGB(58, 0, 0, 0)),
+                                      BoxShadow(
+                                          offset: Offset(1, 1),
+                                          blurRadius: 6,
+                                          spreadRadius: .03,
+                                          color: Color.fromARGB(58, 0, 0, 0)),
                                     ],
                                     circularRadius: 25,
-                                    color: const Color.fromARGB(255, 233, 255, 247),
+                                    color: const Color.fromARGB(
+                                        255, 233, 255, 247),
                                     padding: EdgeInsets.only(right: 10),
-                                    child:
-                                        TMaker(text: "Cancel", fontSize: 25, fontWeight: FontWeight.w600, color: const Color.fromARGB(255, 0, 0, 0))),
+                                    child: TMaker(
+                                        text: "Cancel",
+                                        fontSize: 25,
+                                        fontWeight: FontWeight.w600,
+                                        color: const Color.fromARGB(
+                                            255, 0, 0, 0))),
                               ),
                             )
                           : Container(
                               height: 0,
                               width: 0,
                             ),
-                            const Padding(padding: EdgeInsets.only(bottom: 20)),
+                      const Padding(padding: EdgeInsets.only(bottom: 20)),
                     ],
                   )),
               Expanded(child: Container())
