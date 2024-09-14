@@ -188,12 +188,12 @@ class _SplashViewPageState extends State<SplashViewPage>
   void initState() {
     super.initState();
     animationController = AnimationController(
-        vsync: this, duration: Duration(milliseconds: 3000));
+        vsync: this, duration: const Duration(milliseconds: 3000));
     fading = Tween<double>(begin: 0, end: 1).animate(animationController!)
       ..addListener(() {
         setState(() {
           if (animationController!.isCompleted) {
-            Timer(Duration(milliseconds: 300), () {
+            Timer(const Duration(milliseconds: 300), () {
               Navigator.pushReplacementNamed(context, "LogInPage");
             });
           }
@@ -208,7 +208,7 @@ class _SplashViewPageState extends State<SplashViewPage>
       body: Container(
         height: double.infinity,
         width: double.infinity,
-        decoration: BoxDecoration(
+        decoration: const BoxDecoration(
             gradient: LinearGradient(
                 begin: Alignment.bottomLeft,
                 end: Alignment.topRight,
@@ -232,10 +232,10 @@ class _SplashViewPageState extends State<SplashViewPage>
                           child: Opacity(
                             opacity: fading?.value,
                             child: Container(
-                              child: Image.asset("images/Logo.png"),
                               decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(10),
                               ),
+                              child: Image.asset("images/Logo.png"),
                             ),
                           )),
                     ],
@@ -293,7 +293,7 @@ class _GVBuilderState extends State<GVBuilder> {
     if (widget.scroll ?? true) {
       physi = null;
     } else {
-      physi = NeverScrollableScrollPhysics();
+      physi = const NeverScrollableScrollPhysics();
     }
     return GridView.builder(
       shrinkWrap: widget.scroll!,
@@ -347,8 +347,8 @@ class _DDButtonState extends State<DDButton> {
       for (int i = 0; i < values.length; i++) {
         list.add(
           DropdownMenuItem(
-            child: Text(values[i].toString()),
             value: values[i],
+            child: Text(values[i].toString()),
           ),
         );
       }
@@ -388,7 +388,7 @@ var selected = "";
 class _RButtonState extends State<RButton> {
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return SizedBox(
       width: 300,
       child: GridView.builder(
         itemCount: widget.list.length,
@@ -403,10 +403,10 @@ class _RButtonState extends State<RButton> {
               color: const Color.fromARGB(96, 216, 216, 216),
             ),
             child: RadioListTile(
-                activeColor: Color.fromARGB(255, 74, 193, 241),
+                activeColor: const Color.fromARGB(255, 74, 193, 241),
                 title: Text(
                   widget.list[index],
-                  style: TextStyle(fontSize: 10, fontWeight: FontWeight.w500),
+                  style: const TextStyle(fontSize: 10, fontWeight: FontWeight.w500),
                 ),
                 value: widget.list[index],
                 groupValue: selected,
@@ -583,7 +583,7 @@ class _NavBarState extends State<NavBar> {
                             (widget.iconsList.length + 1),
                     child: ListView.builder(
                       scrollDirection: Axis.vertical,
-                      physics: NeverScrollableScrollPhysics(),
+                      physics: const NeverScrollableScrollPhysics(),
                       shrinkWrap: false,
                       itemCount: widget.iconsList.length,
                       itemBuilder: (context, index) {
@@ -605,7 +605,7 @@ class _NavBarState extends State<NavBar> {
                                       circularRadius: 15,
                                       color: (PageIndex == index)
                                           ? widget.iconBackgroundColor ??
-                                              Color.fromARGB(255, 0, 0, 0)
+                                              const Color.fromARGB(255, 0, 0, 0)
                                           : widget.unselectedIconColor,
                                       child: Icon(
                                         widget.iconsList[index],
@@ -666,7 +666,7 @@ class _NavBarState extends State<NavBar> {
                             (widget.iconsList.length + 1),
                     child: ListView.builder(
                       scrollDirection: Axis.horizontal,
-                      physics: NeverScrollableScrollPhysics(),
+                      physics: const NeverScrollableScrollPhysics(),
                       shrinkWrap: false,
                       itemCount: widget.iconsList.length,
                       itemBuilder: (context, index) {
@@ -688,7 +688,7 @@ class _NavBarState extends State<NavBar> {
                                       circularRadius: 15,
                                       color: (PageIndex == index)
                                           ? widget.iconBackgroundColor ??
-                                              Color.fromARGB(255, 0, 0, 0)
+                                              const Color.fromARGB(255, 0, 0, 0)
                                           : widget.unselectedIconColor,
                                       child: Icon(
                                         widget.iconsList[index],
@@ -743,19 +743,19 @@ class _NowClockState extends State<NowClock> with TickerProviderStateMixin {
         SecondOp = 0;
         ali = Alignment.topCenter;
       });
-      await Future.delayed(Duration(milliseconds: 199));
+      await Future.delayed(const Duration(milliseconds: 199));
       setState(() {
         FadeIn = true;
         SecondOp = 1;
         ali = Alignment.center;
       });
-      await Future.delayed(Duration(milliseconds: 600));
+      await Future.delayed(const Duration(milliseconds: 600));
       setState(() {
         FadeIn = true;
         SecondOp = 0;
         ali = Alignment.bottomCenter;
       });
-      await Future.delayed(Duration(milliseconds: 199));
+      await Future.delayed(const Duration(milliseconds: 199));
       Start = false;
     }
   }
@@ -770,8 +770,8 @@ class _NowClockState extends State<NowClock> with TickerProviderStateMixin {
   Widget build(BuildContext context) {
     Widget HourTW = TMaker(
         text: (DateTime.now().hour.toInt() > 11)
-            ? DateTime.now().add(Duration(hours: -11)).hour.toString()
-            : DateTime.now().add(Duration(hours: 1)).hour.toString(),
+            ? DateTime.now().add(const Duration(hours: -11)).hour.toString()
+            : DateTime.now().add(const Duration(hours: 1)).hour.toString(),
         fontSize: 50,
         fontWeight: FontWeight.w800,
         color: Colors.white);
@@ -876,9 +876,9 @@ class _NowClockState extends State<NowClock> with TickerProviderStateMixin {
               ),
               AnimatedOpacity(
                 opacity: SecondOp,
-                duration: Duration(milliseconds: 100),
+                duration: const Duration(milliseconds: 100),
                 child: AnimatedContainer(
-                    duration: Duration(milliseconds: 100),
+                    duration: const Duration(milliseconds: 100),
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(20),
                       color: widget.BackGroundColor ??

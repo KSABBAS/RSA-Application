@@ -1,14 +1,10 @@
-import 'dart:io';
 
 import 'package:edu_academy/MyTools.dart';
-import 'package:edu_academy/StudentPages/Notifications.dart';
 import 'package:edu_academy/StudentPages/StudentAppBar.dart';
 import 'package:edu_academy/service/Databse_Service.dart';
 import 'package:flutter/material.dart';
 import 'package:edu_academy/StudentPages/StudentMainPage.dart';
 import 'package:flutter/services.dart';
-import 'package:get/get.dart';
-import 'package:pdfx/pdfx.dart';
 import 'package:syncfusion_flutter_pdfviewer/pdfviewer.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:overlay_loading_progress/overlay_loading_progress.dart';
@@ -317,17 +313,35 @@ List<List> Subjects = [
   ["images/SubjectsIcons/هندسة.png", "هندسة"],
   ["images/SubjectsIcons/اكتشف.png", "اكتشف"],
   ["images/SubjectsIcons/عربي.png", "عربي"],
-  ["images/SubjectsIcons/الجغرافيا.png", "دراسات"],
 ];
 //22 /0
 Map<String, dynamic> GradesSubjects = {
+  'KG 1': [30, 7, 14, 29],
+  'KG 2': [30, 7, 14, 29],
   'Grade 1': [30, 7, 14, 29],
   'Grade 2': [30, 7, 14, 29],
   'Grade 3': [30, 7, 14, 29],
   'Grade 4': [30, 20, 8, 26, 17, 7, 14],
   'Grade 5': [30, 20, 8, 26, 17, 7, 14],
   'Grade 6': [30, 20, 8, 26, 17, 7, 14],
-  'Grade 7': [30, 12, 20, 8, 31, 5, 14],
+  'Grade 7': List.generate(32, (index) => index),
+  'Grade 8': [],
+  'Grade 9': [],
+  'Grade 10': [],
+  'Grade 11': [],
+  'Grade 12': [],
+  'Grade 1(Lang)': [],
+  'Grade 2(Lang)': [],
+  'Grade 3(Lang)': [],
+  'Grade 4(Lang)': [],
+  'Grade 5(Lang)': [],
+  'Grade 6(Lang)': [],
+  'Grade 7(Lang)': [],
+  'Grade 8(Lang)': [],
+  'Grade 9(Lang)': [],
+  'Grade 10(Lang)': [],
+  'Grade 11(Lang)': [],
+  'Grade 12(Lang)': [],
 };
 
 bool anySubjectSelected = false;
@@ -442,7 +456,7 @@ class _SecondPageState extends State<SecondPage> {
         setState(() {
           SecondPageContents = Column(
             children: [
-              StudentAppBar(),
+              const StudentAppBar(),
               const Padding(
                 padding: EdgeInsets.only(bottom: 20),
               ),
@@ -482,7 +496,7 @@ class _SecondPageState extends State<SecondPage> {
         setState(() {
           SecondPageContents = Column(
             children: [
-              StudentAppBar(),
+              const StudentAppBar(),
               const Padding(
                 padding: EdgeInsets.only(bottom: 20),
               ),
@@ -524,7 +538,7 @@ class _SecondPageState extends State<SecondPage> {
             child: CMaker(
               child: Column(
                 children: [
-                  StudentAppBar(),
+                  const StudentAppBar(),
                   const Padding(
                     padding: EdgeInsets.only(bottom: 20),
                   ),
@@ -584,7 +598,7 @@ class _SecondPageState extends State<SecondPage> {
                   : 30,
           fontWeight: FontWeight.w700,
           color: Colors.black);
-      Widget PressableBooks = (all_books.length==0)?Center(child: TMaker(text: "لا يوجد كتب", fontSize: 20, fontWeight:FontWeight.w700, color: Colors.black),):ListView.builder(
+      Widget PressableBooks = (all_books.isEmpty)?Center(child: TMaker(text: "لا يوجد كتب", fontSize: 20, fontWeight:FontWeight.w700, color: Colors.black),):ListView.builder(
           itemCount: all_books.length, //all_books.length,
           scrollDirection: Axis.vertical,
           itemBuilder: (context, index) {
@@ -650,7 +664,7 @@ class _SecondPageState extends State<SecondPage> {
         setState(() {
           SecondPageContents = Column(
             children: [
-              StudentAppBar(),
+              const StudentAppBar(),
               const Padding(padding: EdgeInsets.only(bottom: 20)),
               CMaker(
                 height: 50,
@@ -691,7 +705,7 @@ class _SecondPageState extends State<SecondPage> {
         setState(() {
           SecondPageContents = Column(
             children: [
-              StudentAppBar(),
+              const StudentAppBar(),
               const Padding(padding: EdgeInsets.only(bottom: 20)),
               CMaker(
                 height: 50,
@@ -732,7 +746,7 @@ class _SecondPageState extends State<SecondPage> {
             child: CMaker(
               child: Column(
                 children: [
-                  StudentAppBar(),
+                  const StudentAppBar(),
                   const Padding(padding: EdgeInsets.only(bottom: 10)),
                   CMaker(
                     height: 50,
@@ -836,7 +850,7 @@ class _SecondPageState extends State<SecondPage> {
           fontSize: 20,
           fontWeight: FontWeight.w600,
           color: const Color.fromARGB(255, 54, 54, 54));
-      Widget LessonsListView = (all_rec.length==0)?Center(child: TMaker(text: "لا يوجد حصص", fontSize: 20, fontWeight:FontWeight.w700, color: Colors.black),):ListView.builder(
+      Widget LessonsListView = (all_rec.isEmpty)?Center(child: TMaker(text: "لا يوجد حصص", fontSize: 20, fontWeight:FontWeight.w700, color: Colors.black),):ListView.builder(
           itemCount: all_rec.length,
           scrollDirection: Axis.vertical,
           itemBuilder: (context, index) {
@@ -889,7 +903,7 @@ class _SecondPageState extends State<SecondPage> {
         setState(() {
           SecondPageContents = Column(
             children: [
-              StudentAppBar(),
+              const StudentAppBar(),
               const Padding(padding: EdgeInsets.only(bottom: 20)),
               CMaker(
                 height: 50,
@@ -950,7 +964,7 @@ class _SecondPageState extends State<SecondPage> {
         setState(() {
           SecondPageContents = Column(
             children: [
-              StudentAppBar(),
+              const StudentAppBar(),
               const Padding(
                 padding: EdgeInsets.only(bottom: 20),
               ),
@@ -1015,7 +1029,7 @@ class _SecondPageState extends State<SecondPage> {
             child: CMaker(
               child: Column(
                 children: [
-                  StudentAppBar(),
+                  const StudentAppBar(),
                   const Padding(
                     padding: EdgeInsets.only(bottom: 20),
                   ),
@@ -1202,7 +1216,7 @@ class _SecondPageState extends State<SecondPage> {
             width: double.infinity,
             child: Column(
               children: [
-                StudentAppBar(),
+                const StudentAppBar(),
                 const Padding(padding: EdgeInsets.only(top: 20)),
                 CMaker(
                   margin: const EdgeInsets.symmetric(horizontal: 40),
@@ -1223,7 +1237,7 @@ class _SecondPageState extends State<SecondPage> {
             width: double.infinity,
             child: Column(
               children: [
-                StudentAppBar(),
+                const StudentAppBar(),
                 const Padding(padding: EdgeInsets.only(top: 20)),
                 CMaker(
                   margin: const EdgeInsets.symmetric(horizontal: 40),
@@ -1242,7 +1256,7 @@ class _SecondPageState extends State<SecondPage> {
             child: Container(
               child: Column(
                 children: [
-                  StudentAppBar(),
+                  const StudentAppBar(),
                   const Padding(padding: EdgeInsets.only(top: 20)),
                   CMaker(
                     margin: const EdgeInsets.symmetric(horizontal: 40),

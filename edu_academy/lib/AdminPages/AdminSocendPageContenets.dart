@@ -4,7 +4,6 @@ import 'package:edu_academy/StudentPages/SecondPageContents.dart';
 import 'package:edu_academy/service/Databse_Service.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:get/get_connect/http/src/utils/utils.dart';
 import 'package:on_off_switch/on_off_switch.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -16,7 +15,7 @@ class AdminSocendPageContenets extends StatefulWidget {
 }
 
 bool stringToBool(String value) {
-  print("stringToBool ${value} ${value.toLowerCase() == 'true'}");
+  print("stringToBool $value ${value.toLowerCase() == 'true'}");
   return value.toLowerCase() == 'true';
 }
 
@@ -130,7 +129,7 @@ class _AdminSocendPageContenetsState extends State<AdminSocendPageContenets> {
                           TeacherOpend = false;
                         });
                       },
-                      child: CMaker(height: 50, width: 50, circularRadius: 50, child: Icon(Icons.arrow_back))),
+                      child: CMaker(height: 50, width: 50, circularRadius: 50, child: const Icon(Icons.arrow_back))),
                   Expanded(child: Container()),
                   TMaker(text: "Informations", fontSize: 30, fontWeight: FontWeight.w700, color: Colors.black),
                   Expanded(child: Container()),
@@ -139,7 +138,7 @@ class _AdminSocendPageContenetsState extends State<AdminSocendPageContenets> {
           const Padding(padding: EdgeInsets.only(top: 20)),
           Expanded(
               child: CMaker(
-            margin: EdgeInsetsDirectional.only(bottom: 20, start: 20, end: 20),
+            margin: const EdgeInsetsDirectional.only(bottom: 20, start: 20, end: 20),
             width: double.infinity,
             color: Colors.white,
             circularRadius: 20,
@@ -158,12 +157,12 @@ class _AdminSocendPageContenetsState extends State<AdminSocendPageContenets> {
                 CMaker(
                   width: double.infinity,
                   alignment: Alignment.center,
-                  margin: EdgeInsets.symmetric(horizontal: 20),
+                  margin: const EdgeInsets.symmetric(horizontal: 20),
                   child: TMaker(text: Teachers[TeacherSelected][1], fontSize: 30, fontWeight: FontWeight.w700, color: Colors.black),
                 ),
                 const Padding(padding: EdgeInsets.only(top: 20)),
                 CMaker(
-                  margin: EdgeInsets.symmetric(horizontal: 20),
+                  margin: const EdgeInsets.symmetric(horizontal: 20),
                   height: (PageWidth(context) < 550)
                       ? 60
                       : (PageHeight(context) < 900)
@@ -179,7 +178,7 @@ class _AdminSocendPageContenetsState extends State<AdminSocendPageContenets> {
                     children: [
                       Expanded(child: Container()),
                       CMaker(
-                          padding: EdgeInsets.only(right: 10),
+                          padding: const EdgeInsets.only(right: 10),
                           child: TMaker(
                               text: Teachers[TeacherSelected][2],
                               fontSize: (PageWidth(context) < 550)
@@ -195,7 +194,7 @@ class _AdminSocendPageContenetsState extends State<AdminSocendPageContenets> {
                 ),
                 const Padding(padding: EdgeInsets.only(top: 20)),
                 CMaker(
-                  margin: EdgeInsets.symmetric(horizontal: 20),
+                  margin: const EdgeInsets.symmetric(horizontal: 20),
                   height: (PageWidth(context) < 550)
                       ? 60
                       : (PageHeight(context) < 900)
@@ -211,7 +210,7 @@ class _AdminSocendPageContenetsState extends State<AdminSocendPageContenets> {
                     children: [
                       Expanded(child: Container()),
                       CMaker(
-                          padding: EdgeInsets.only(right: 10),
+                          padding: const EdgeInsets.only(right: 10),
                           child: TMaker(
                               text: Teachers[TeacherSelected][3],
                               fontSize: (PageWidth(context) < 550)
@@ -227,7 +226,7 @@ class _AdminSocendPageContenetsState extends State<AdminSocendPageContenets> {
                 ),
                 const Padding(padding: EdgeInsets.only(top: 20)),
                 CMaker(
-                  margin: EdgeInsets.symmetric(horizontal: 20),
+                  margin: const EdgeInsets.symmetric(horizontal: 20),
                   height: (PageWidth(context) < 550)
                       ? 60
                       : (PageHeight(context) < 900)
@@ -243,7 +242,7 @@ class _AdminSocendPageContenetsState extends State<AdminSocendPageContenets> {
                     children: [
                       Expanded(child: Container()),
                       CMaker(
-                          padding: EdgeInsets.only(right: 10),
+                          padding: const EdgeInsets.only(right: 10),
                           child: TMaker(
                               text: Teachers[TeacherSelected][5],
                               fontSize: (PageWidth(context) < 550)
@@ -264,7 +263,7 @@ class _AdminSocendPageContenetsState extends State<AdminSocendPageContenets> {
                           Get.to(() => ChangeSubjectsAndGrades(TeacherSelected: TeacherSelected, TeacherSubject: TeacherSubject1, List_index: 0));
                         },
                         child: CMaker(
-                          margin: EdgeInsets.only(bottom: 20, right: 20, left: 20),
+                          margin: const EdgeInsets.only(bottom: 20, right: 20, left: 20),
                           boxShadow: const [
                             BoxShadow(offset: Offset(1, 1), blurRadius: 6, spreadRadius: .03, color: Color.fromARGB(58, 0, 0, 0)),
                           ],
@@ -275,12 +274,12 @@ class _AdminSocendPageContenetsState extends State<AdminSocendPageContenets> {
                             children: [
                               Expanded(child: Container()),
                               CMaker(
-                                  padding: EdgeInsets.only(right: 10),
+                                  padding: const EdgeInsets.only(right: 10),
                                   child: TMaker(
                                       text: () {
                                         String out = "${Teachers[TeacherSelected][6][0][0]}";
                                         for (var i in (Teachers[TeacherSelected][6][0] as List).sublist(1)) {
-                                          out = out + "\n\t -$i";
+                                          out = "$out\n\t -$i";
                                         }
                                         return out;
                                       }(),
@@ -296,7 +295,7 @@ class _AdminSocendPageContenetsState extends State<AdminSocendPageContenets> {
                           ),
                         ),
                       )
-                    : Container(
+                    : const SizedBox(
                         height: 0,
                         width: 0,
                       ),
@@ -306,7 +305,7 @@ class _AdminSocendPageContenetsState extends State<AdminSocendPageContenets> {
                           Get.to(() => ChangeSubjectsAndGrades(TeacherSelected: TeacherSelected, TeacherSubject: TeacherSubject2, List_index: 1));
                         },
                         child: CMaker(
-                          margin: EdgeInsets.only(bottom: 20, right: 20, left: 20),
+                          margin: const EdgeInsets.only(bottom: 20, right: 20, left: 20),
                           boxShadow: const [
                             BoxShadow(offset: Offset(1, 1), blurRadius: 6, spreadRadius: .03, color: Color.fromARGB(58, 0, 0, 0)),
                           ],
@@ -317,12 +316,12 @@ class _AdminSocendPageContenetsState extends State<AdminSocendPageContenets> {
                             children: [
                               Expanded(child: Container()),
                               CMaker(
-                                  padding: EdgeInsets.only(right: 10),
+                                  padding: const EdgeInsets.only(right: 10),
                                   child: TMaker(
                                       text: () {
                                         String out = "${Teachers[TeacherSelected][6][1][0]}";
                                         for (var i in (Teachers[TeacherSelected][6][1] as List).sublist(1)) {
-                                          out = out + "\n\t -$i";
+                                          out = "$out\n\t -$i";
                                         }
                                         return out;
                                       }(),
@@ -338,7 +337,7 @@ class _AdminSocendPageContenetsState extends State<AdminSocendPageContenets> {
                           ),
                         ),
                       )
-                    : Container(
+                    : const SizedBox(
                         height: 0,
                         width: 0,
                       ),
@@ -348,7 +347,7 @@ class _AdminSocendPageContenetsState extends State<AdminSocendPageContenets> {
                           Get.to(() => ChangeSubjectsAndGrades(TeacherSelected: TeacherSelected, TeacherSubject: TeacherSubject3, List_index: 2));
                         },
                         child: CMaker(
-                          margin: EdgeInsets.only(bottom: 20, right: 20, left: 20),
+                          margin: const EdgeInsets.only(bottom: 20, right: 20, left: 20),
                           boxShadow: const [
                             BoxShadow(offset: Offset(1, 1), blurRadius: 6, spreadRadius: .03, color: Color.fromARGB(58, 0, 0, 0)),
                           ],
@@ -359,12 +358,12 @@ class _AdminSocendPageContenetsState extends State<AdminSocendPageContenets> {
                             children: [
                               Expanded(child: Container()),
                               CMaker(
-                                  padding: EdgeInsets.only(right: 10),
+                                  padding: const EdgeInsets.only(right: 10),
                                   child: TMaker(
                                       text: () {
                                         String out = "${Teachers[TeacherSelected][6][2][0]}";
                                         for (var i in (Teachers[TeacherSelected][6][2] as List).sublist(1)) {
-                                          out = out + "\n\t -$i";
+                                          out = "$out\n\t -$i";
                                         }
                                         return out;
                                       }(),
@@ -380,7 +379,7 @@ class _AdminSocendPageContenetsState extends State<AdminSocendPageContenets> {
                           ),
                         ),
                       )
-                    : Container(
+                    : const SizedBox(
                         height: 0,
                         width: 0,
                       ),
@@ -388,7 +387,7 @@ class _AdminSocendPageContenetsState extends State<AdminSocendPageContenets> {
                   width: double.infinity,
                   alignment: Alignment.center,
                   child: CMaker(
-                    margin: EdgeInsets.symmetric(horizontal: 20),
+                    margin: const EdgeInsets.symmetric(horizontal: 20),
                     height: (PageWidth(context) < 550)
                         ? 60
                         : (PageHeight(context) < 900)
@@ -404,7 +403,7 @@ class _AdminSocendPageContenetsState extends State<AdminSocendPageContenets> {
                       children: [
                         Expanded(child: Container()),
                         CMaker(
-                            padding: EdgeInsets.only(right: 10),
+                            padding: const EdgeInsets.only(right: 10),
                             child: TMaker(
                                 text: "Activate",
                                 fontSize: (PageWidth(context) < 550)
@@ -538,7 +537,7 @@ class _AdminSocendPageContenetsState extends State<AdminSocendPageContenets> {
                                   ],
                                   height: 80,
                                   alignment: Alignment.center,
-                                  color: Color.fromARGB(255, 233, 255, 247),
+                                  color: const Color.fromARGB(255, 233, 255, 247),
                                   margin: const EdgeInsets.only(bottom: 30, right: 20, left: 20),
                                   child: ListTile(
                                     leading: CMaker(height: 70, width: 70, child: CircleAvatar(backgroundImage: NetworkImage(Teachers[index][0]))),
@@ -548,11 +547,11 @@ class _AdminSocendPageContenetsState extends State<AdminSocendPageContenets> {
                                         fontWeight: FontWeight.w700,
                                         color: Colors.black),
                                     trailing: TMaker(
-                                        text: "${(stringToBool(Teachers[index][4])) ? 'Active' : 'Inactive '}",
+                                        text: (stringToBool(Teachers[index][4])) ? 'Active' : 'Inactive ',
                                         fontSize: 18,
                                         fontWeight: FontWeight.w700,
                                         color: (stringToBool(Teachers[index][4]))
-                                            ? Color.fromARGB(255, 73, 213, 31)
+                                            ? const Color.fromARGB(255, 73, 213, 31)
                                             : const Color.fromARGB(255, 224, 9, 9)),
                                   )),
                             );
@@ -658,12 +657,12 @@ class _ChangeSubjectsAndGradesState extends State<ChangeSubjectsAndGrades> {
                             children: [
                               Expanded(
                                   child: CMaker(
-                                margin: EdgeInsets.only(right: 7, left: 20, bottom: 20),
+                                margin: const EdgeInsets.only(right: 7, left: 20, bottom: 20),
                                 circularRadius: 15,
                                 color: const Color.fromARGB(255, 233, 255, 247),
-                                padding: EdgeInsets.symmetric(vertical: 10, horizontal: 15),
+                                padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 15),
                                 child: CheckboxListTile(
-                                    title: Text("${GradesSubjects.keys.elementAt(index * 2)}"),
+                                    title: Text(GradesSubjects.keys.elementAt(index * 2)),
                                     value: () {
                                       print(Teachers[TeacherSelected][6][widget.List_index]);
                                       if ((Teachers[TeacherSelected][6][widget.List_index] as List)
@@ -678,8 +677,7 @@ class _ChangeSubjectsAndGradesState extends State<ChangeSubjectsAndGrades> {
                                       }
                                     }(),
                                     onChanged: (newValue) {
-                                      print("=============" +
-                                          "${sub[GradesSubjects.keys.elementAt(index * 2)]} ** ${GradesSubjects.keys.elementAt(index * 2)}");
+                                      print("=============" "${sub[GradesSubjects.keys.elementAt(index * 2)]} ** ${GradesSubjects.keys.elementAt(index * 2)}");
                                       setState(() {
                                         sub[GradesSubjects.keys.elementAt(index * 2)] = newValue!;
                                         if (sub[GradesSubjects.keys.elementAt(index * 2)] ?? false) {
@@ -688,19 +686,19 @@ class _ChangeSubjectsAndGradesState extends State<ChangeSubjectsAndGrades> {
                                         } else {
                                           (Teachers[TeacherSelected][6][widget.List_index]).remove(GradesSubjects.keys.elementAt(index * 2));
                                         }
-                                        print("2===========" + "${sub[GradesSubjects.keys.elementAt(index * 2)]}");
+                                        print("2===========" "${sub[GradesSubjects.keys.elementAt(index * 2)]}");
                                       });
                                     }),
                               )),
                               (((index * 2) + 1) < GradesSubjects.keys.length)
                                   ? Expanded(
                                       child: CMaker(
-                                      margin: EdgeInsets.only(right: 7, left: 20, bottom: 20),
+                                      margin: const EdgeInsets.only(right: 7, left: 20, bottom: 20),
                                       circularRadius: 15,
                                       color: const Color.fromARGB(255, 233, 255, 247),
-                                      padding: EdgeInsets.symmetric(vertical: 10, horizontal: 15),
+                                      padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 15),
                                       child: CheckboxListTile(
-                                          title: Text("${GradesSubjects.keys.elementAt((index * 2) + 1)}"),
+                                          title: Text(GradesSubjects.keys.elementAt((index * 2) + 1)),
                                           value: () {
                                             print(Teachers[TeacherSelected][6][widget.List_index]);
                                             if ((Teachers[TeacherSelected][6][widget.List_index] as List)
@@ -717,8 +715,7 @@ class _ChangeSubjectsAndGradesState extends State<ChangeSubjectsAndGrades> {
                                             }
                                           }(),
                                           onChanged: (newValue) {
-                                            print("=============" +
-                                                "${sub[GradesSubjects.keys.elementAt((index * 2) + 1)]} ** ${GradesSubjects.keys.elementAt((index * 2) + 1)}");
+                                            print("=============" "${sub[GradesSubjects.keys.elementAt((index * 2) + 1)]} ** ${GradesSubjects.keys.elementAt((index * 2) + 1)}");
                                             setState(() {
                                               sub[GradesSubjects.keys.elementAt((index * 2) + 1)] = newValue!;
                                               if (sub[GradesSubjects.keys.elementAt((index * 2) + 1)] ?? false) {
@@ -728,7 +725,7 @@ class _ChangeSubjectsAndGradesState extends State<ChangeSubjectsAndGrades> {
                                                 (Teachers[TeacherSelected][6][widget.List_index])
                                                     .remove(GradesSubjects.keys.elementAt((index * 2) + 1));
                                               }
-                                              print("2===========" + "${sub[GradesSubjects.keys.elementAt((index * 2) + 1)]}");
+                                              print("2===========" "${sub[GradesSubjects.keys.elementAt((index * 2) + 1)]}");
                                             });
                                           }),
                                     ))
@@ -737,7 +734,7 @@ class _ChangeSubjectsAndGradesState extends State<ChangeSubjectsAndGrades> {
                           );
                         },
                       )),
-                  Padding(padding: EdgeInsets.only(bottom: 150)),
+                  const Padding(padding: EdgeInsets.only(bottom: 150)),
                 ],
               )),
           Positioned(
@@ -756,7 +753,7 @@ class _ChangeSubjectsAndGradesState extends State<ChangeSubjectsAndGrades> {
                               buttonHeight: 70,
                               buttonColor: Colors.red,
                               text: "Cancel")),
-                      Padding(padding: EdgeInsets.only(left: 20)),
+                      const Padding(padding: EdgeInsets.only(left: 20)),
                       Expanded(
                           child: MyButton(
                               onTap: () async {

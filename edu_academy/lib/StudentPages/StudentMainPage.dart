@@ -16,7 +16,6 @@ import 'package:string_extensions/string_extensions.dart';
 import 'package:sidebar_with_animation/animated_side_bar.dart';
 import 'package:liquid_pull_to_refresh/liquid_pull_to_refresh.dart';
 
-import '../TeacherPages/TeacherMainPage.dart';
 
 class StudentMainPage extends StatefulWidget {
   const StudentMainPage({super.key});
@@ -87,7 +86,7 @@ class _StudentMainPageState extends State<StudentMainPage> {
     fetch();
   }
   bool stringToBool(String value) {
-  print("stringToBool ${value} ${value.toLowerCase() == 'true'}");
+  print("stringToBool $value ${value.toLowerCase() == 'true'}");
   return value.toLowerCase() == 'true';
 }
   regetmessages() async {
@@ -97,14 +96,14 @@ class _StudentMainPageState extends State<StudentMainPage> {
     print(ggrtr);
     print("add done");
     print(HomeWorks[HomeWorkIndex][0]);
-    log("#HomeWorks ${HomeWorks}");
+    log("#HomeWorks $HomeWorks");
   }
 
   Future<void> fetch() async {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
-    final List<String>? items = await prefs.getStringList('id');
+    final List<String>? items = prefs.getStringList('id');
 
-    print("==================\n=================\n" + items.toString());
+    print("==================\n=================\n$items");
     if (items != null && items.isNotEmpty) {
       name = items[2].split("-")[0];
       name = "${name.split(" ")[0]} ${name.split(" ")[1]}".toTitleCase;
@@ -230,7 +229,7 @@ class _StudentMainPageState extends State<StudentMainPage> {
                         ],
                       ),
                     ),
-                    Padding(
+                    const Padding(
                       padding: EdgeInsets.only(bottom: 40),
                     ),
                     StudentProfile(
@@ -314,7 +313,7 @@ class _StudentMainPageState extends State<StudentMainPage> {
                             ],
                           ),
                         ),
-                        Padding(
+                        const Padding(
                           padding: EdgeInsets.only(bottom: 40),
                         ),
                         StudentProfile(
@@ -405,7 +404,7 @@ class _StudentMainPageState extends State<StudentMainPage> {
                                   )
                                 ],
                               )),
-                          Padding(
+                          const Padding(
                             padding: EdgeInsets.only(bottom: 40),
                           ),
                           StudentProfile(
@@ -488,9 +487,9 @@ class _StudentMainPageState extends State<StudentMainPage> {
                                   width: double.infinity,
                                   alignment: Alignment.center,
                                   child: CMaker(
-                                    padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                                    padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
                                     circularRadius: 15,
-                                    color: Color.fromARGB(255, 74, 193, 241),
+                                    color: const Color.fromARGB(255, 74, 193, 241),
                                     child: TMaker(
                                         text: "Log Out", fontSize: 20, fontWeight: FontWeight.w700, color: const Color.fromARGB(255, 255, 255, 255)),
                                   )),
@@ -576,9 +575,9 @@ class _StudentMainPageState extends State<StudentMainPage> {
                                       width: double.infinity,
                                       alignment: Alignment.center,
                                       child: CMaker(
-                                        padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                                        padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
                                         circularRadius: 15,
-                                        color: Color.fromARGB(255, 74, 193, 241),
+                                        color: const Color.fromARGB(255, 74, 193, 241),
                                         child: TMaker(
                                             text: "Log Out",
                                             fontSize: 20,
@@ -660,9 +659,9 @@ class _StudentMainPageState extends State<StudentMainPage> {
                                   width: double.infinity,
                                   alignment: Alignment.center,
                                   child: CMaker(
-                                    padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                                    padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
                                     circularRadius: 15,
-                                    color: Color.fromARGB(255, 74, 193, 241),
+                                    color: const Color.fromARGB(255, 74, 193, 241),
                                     child: TMaker(
                                         text: "Log Out", fontSize: 20, fontWeight: FontWeight.w700, color: const Color.fromARGB(255, 255, 255, 255)),
                                   )),
@@ -685,15 +684,15 @@ class _StudentMainPageState extends State<StudentMainPage> {
                 color: Color.fromARGB(255, 74, 193, 241),
               )))
           : Scaffold(
-              backgroundColor: Color.fromARGB(255, 74, 193, 241),
+              backgroundColor: const Color.fromARGB(255, 74, 193, 241),
               body: LiquidPullToRefresh(
                   showChildOpacityTransition: false,
-                  backgroundColor: Color.fromARGB(255, 74, 193, 241),
+                  backgroundColor: const Color.fromARGB(255, 74, 193, 241),
                   color: const Color.fromARGB(255, 233, 255, 247),
                   onRefresh: () async {
                     await fetch();
                     await regetmessages();
-                    await Future.delayed(Duration(milliseconds: 500));
+                    await Future.delayed(const Duration(milliseconds: 500));
                     setState(() {
                       
                     });
@@ -707,7 +706,7 @@ class _StudentMainPageState extends State<StudentMainPage> {
                 height: 150,
                 width: 270,
                 color: Colors.white,
-                boxShadow: [
+                boxShadow: const [
                   BoxShadow(offset: Offset(1, 1), blurRadius: 6, spreadRadius: .03, color: Color.fromARGB(82, 0, 0, 0)),
                 ],
                 circularRadius: 20,

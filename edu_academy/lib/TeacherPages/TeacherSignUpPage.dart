@@ -388,8 +388,8 @@ class _TeacherSignUpPageState extends State<TeacherSignUpPage> {
                         );
     Widget BirthDateW = (kIsWeb)
         ? MyButton(
-          padding: EdgeInsets.all(10),
-            buttonColor: Color.fromARGB(255, 74, 193, 241),
+          padding: const EdgeInsets.all(10),
+            buttonColor: const Color.fromARGB(255, 74, 193, 241),
             text: TeacherDateOfBirth,
             onTap: () async {
               var TimeSelected=await showOmniDateTimePicker(
@@ -431,8 +431,8 @@ class _TeacherSignUpPageState extends State<TeacherSignUpPage> {
                 barrierDismissible: true,
               );
               TeacherDayOfBirth = TimeSelected!.day.toString();
-                  TeacherMonthOfBirth = TimeSelected!.month.toString();
-                  TeacherYearOfBirth = TimeSelected!.year.toString();
+                  TeacherMonthOfBirth = TimeSelected.month.toString();
+                  TeacherYearOfBirth = TimeSelected.year.toString();
                   TeacherDateOfBirth =
                     "$TeacherDayOfBirth / $TeacherMonthOfBirth / $TeacherYearOfBirth";
               setState(() {

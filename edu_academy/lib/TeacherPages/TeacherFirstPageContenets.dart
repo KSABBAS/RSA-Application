@@ -336,7 +336,7 @@ class _TeacherFirstPageContenetsState extends State<TeacherFirstPageContenets> {
             CMaker(
                 margin: const EdgeInsets.symmetric(horizontal: 20),
                 child: OneDayTable),
-            Padding(padding: EdgeInsets.only(top: 20)),
+            const Padding(padding: EdgeInsets.only(top: 20)),
             CMaker(
                 circularRadius: 20,
                 height: 200,
@@ -391,7 +391,7 @@ class _TeacherFirstPageContenetsState extends State<TeacherFirstPageContenets> {
             CMaker(
                 margin: const EdgeInsets.symmetric(horizontal: 20),
                 child: OneDayTable),
-            Padding(padding: EdgeInsets.only(top: 20)),
+            const Padding(padding: EdgeInsets.only(top: 20)),
             CMaker(
                 circularRadius: 20,
                 height: 200,

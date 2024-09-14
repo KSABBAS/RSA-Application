@@ -1,4 +1,5 @@
 import 'package:edu_academy/MyTools.dart';
+import 'package:edu_academy/StudentPages/SecondPageContents.dart';
 import 'package:edu_academy/service/Databse_Service.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
@@ -341,8 +342,8 @@ class _StudentMobileSignUpPageState extends State<StudentMobileSignUpPage> {
     );
     Widget BirthDateW = (kIsWeb )
       ? MyButton(
-          padding: EdgeInsets.all(10),
-            buttonColor: Color.fromARGB(255, 74, 193, 241),
+          padding: const EdgeInsets.all(10),
+            buttonColor: const Color.fromARGB(255, 74, 193, 241),
             text: StudentDateOfBirth,
             onTap: () async {
               var TimeSelected=await showOmniDateTimePicker(
@@ -380,8 +381,8 @@ class _StudentMobileSignUpPageState extends State<StudentMobileSignUpPage> {
                 barrierDismissible: true,
               );
               StudentDayOfBirth = TimeSelected!.day.toString();
-                  StudentMonthOfBirth = TimeSelected!.month.toString();
-                  StudentYearOfBirth = TimeSelected!.year.toString();
+                  StudentMonthOfBirth = TimeSelected.month.toString();
+                  StudentYearOfBirth = TimeSelected.year.toString();
                   StudentDateOfBirth =
                     "$StudentDayOfBirth / $StudentMonthOfBirth / $StudentYearOfBirth";
               setState(() {
@@ -461,72 +462,22 @@ class _StudentMobileSignUpPageState extends State<StudentMobileSignUpPage> {
       alignment: Alignment.center,
       child: SizedBox(
         height: 30,
-        width: 100,
+        // width: 100,
         child: DropdownButton(
             underline: Container(),
             value: StudentGrade,
-            items: const [
-              DropdownMenuItem(
-                value: "KG 1",
-                child: Text("KG 1"),
-              ),
-              DropdownMenuItem(
-                value: "KG 2",
-                child: Text("KG 2"),
-              ),
-              DropdownMenuItem(
-                value: "Grade 1",
-                child: Text("Grade 1"),
-              ),
-              DropdownMenuItem(
-                value: "Grade 2",
-                child: Text("Grade 2"),
-              ),
-              DropdownMenuItem(
-                value: "Grade 3",
-                child: Text("Grade 3"),
-              ),
-              DropdownMenuItem(
-                value: "Grade 4",
-                child: Text("Grade 4"),
-              ),
-              DropdownMenuItem(
-                value: "Grade 5",
-                child: Text("Grade 5"),
-              ),
-              DropdownMenuItem(
-                value: "Grade 6",
-                child: Text("Grade 6"),
-              ),
-              DropdownMenuItem(
-                value: "Grade 7",
-                child: Text("Grade 7"),
-              ),
-              DropdownMenuItem(
-                value: "Grade 8",
-                child: Text("Grade 8"),
-              ),
-              DropdownMenuItem(
-                value: "Grade 9",
-                child: Text("Grade 9"),
-              ),
-              DropdownMenuItem(
-                value: "Grade 10",
-                child: Text("Grade 10"),
-              ),
-              DropdownMenuItem(
-                value: "Grade 11",
-                child: Text("Grade 11"),
-              ),
-              DropdownMenuItem(
-                value: "Grade 12",
-                child: Text("Grade 12"),
-              ),
-              DropdownMenuItem(
-                value: "others",
-                child: Text("others"),
-              ),
-            ],
+            items: (){
+              List<DropdownMenuItem<String>> out = [];
+              for (var i in GradesSubjects.keys) {
+                out.add(
+                  DropdownMenuItem(
+                    value: i, 
+                    child: Text(i)
+                  )
+                );
+              }
+              return out;
+            }(),
             onChanged: (val) {
               setState(() {
                 StudentGrade = val.toString();

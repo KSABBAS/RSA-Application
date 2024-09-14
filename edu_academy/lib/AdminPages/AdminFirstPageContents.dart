@@ -164,9 +164,9 @@ class _AdminFirstPageContentsState extends State<AdminFirstPageContents> {
                 child: InkWell(
                   onTap: () {},
                   child: CMaker(
-                      color: Color.fromARGB(255, 192, 255, 176),
+                      color: const Color.fromARGB(255, 192, 255, 176),
                       padding:
-                          EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                          const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
                       circularRadius: 20,
                       boxShadow: const [
                         BoxShadow(
@@ -183,10 +183,10 @@ class _AdminFirstPageContentsState extends State<AdminFirstPageContents> {
                 )),
             const Padding(padding: EdgeInsets.only(top: 50)),
             CMaker(
-                padding: EdgeInsets.symmetric(horizontal: 10),
+                padding: const EdgeInsets.symmetric(horizontal: 10),
                 height: GradesTablesData.length * 250,
                 child: ListView.builder(
-                  physics: NeverScrollableScrollPhysics(),
+                  physics: const NeverScrollableScrollPhysics(),
                   shrinkWrap: false,
                   itemCount: GradesTablesData.length,
                   itemBuilder: (context, index) {
@@ -206,7 +206,7 @@ class _AdminFirstPageContentsState extends State<AdminFirstPageContents> {
                             child: ListView.builder(
                               scrollDirection: Axis.horizontal,
                               shrinkWrap: false,
-                              physics: NeverScrollableScrollPhysics(),
+                              physics: const NeverScrollableScrollPhysics(),
                               itemCount: GradesTablesData[index][1][0].length,
                               itemBuilder: (context, ColumnIndex) {
                                 return CMaker(
@@ -215,7 +215,7 @@ class _AdminFirstPageContentsState extends State<AdminFirstPageContents> {
                                     child: ListView.builder(
                                       scrollDirection: Axis.vertical,
                                       shrinkWrap: false,
-                                      physics: NeverScrollableScrollPhysics(),
+                                      physics: const NeverScrollableScrollPhysics(),
                                       itemCount:
                                           GradesTablesData[index][1].length,
                                       itemBuilder: (context, RowIndex) {
@@ -225,7 +225,7 @@ class _AdminFirstPageContentsState extends State<AdminFirstPageContents> {
                                                     .length,
                                             child: Container(
                                                 decoration: BoxDecoration(
-                                                  border: Border(
+                                                  border: const Border(
                                                       right: BorderSide(),
                                                       bottom: BorderSide()),
                                                   borderRadius:
@@ -233,35 +233,35 @@ class _AdminFirstPageContentsState extends State<AdminFirstPageContents> {
                                                     topLeft:
                                                         ("$ColumnIndex $RowIndex" ==
                                                                 "0 0")
-                                                            ? Radius.circular(
+                                                            ? const Radius.circular(
                                                                 10)
-                                                            : Radius.circular(
+                                                            : const Radius.circular(
                                                                 0),
                                                     bottomLeft:
                                                         ("$ColumnIndex $RowIndex" ==
                                                                 "0 ${GradesTablesData[index][1].length - 1}")
-                                                            ? Radius.circular(
+                                                            ? const Radius.circular(
                                                                 10)
-                                                            : Radius.circular(
+                                                            : const Radius.circular(
                                                                 0),
                                                     topRight:
                                                         ("$ColumnIndex $RowIndex" ==
                                                                 "${GradesTablesData[index][1][0].length - 1} 0")
-                                                            ? Radius.circular(
+                                                            ? const Radius.circular(
                                                                 10)
-                                                            : Radius.circular(
+                                                            : const Radius.circular(
                                                                 0),
                                                     bottomRight:
                                                         ("$ColumnIndex $RowIndex" ==
                                                                 "${GradesTablesData[index][1][0].length - 1} ${GradesTablesData[index][1].length - 1}")
-                                                            ? Radius.circular(
+                                                            ? const Radius.circular(
                                                                 10)
-                                                            : Radius.circular(
+                                                            : const Radius.circular(
                                                                 0),
                                                   ),
                                                   color: (ColumnIndex == 0 ||
                                                           RowIndex == 0)
-                                                      ? Color.fromARGB(
+                                                      ? const Color.fromARGB(
                                                           255, 36, 160, 209)
                                                       : Colors.white,
                                                 ),
@@ -273,7 +273,7 @@ class _AdminFirstPageContentsState extends State<AdminFirstPageContents> {
                                                     fontWeight: FontWeight.w600,
                                                     color: (ColumnIndex == 0 ||
                                                             RowIndex == 0)
-                                                        ? Color.fromARGB(
+                                                        ? const Color.fromARGB(
                                                             255, 255, 255, 255)
                                                         : const Color.fromARGB(
                                                             255, 0, 0, 0))));
@@ -311,9 +311,9 @@ class _AdminFirstPageContentsState extends State<AdminFirstPageContents> {
                 child: InkWell(
                   onTap: () {},
                   child: CMaker(
-                      color: Color.fromARGB(255, 192, 255, 176),
+                      color: const Color.fromARGB(255, 192, 255, 176),
                       padding:
-                          EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                          const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
                       circularRadius: 20,
                       boxShadow: const [
                         BoxShadow(
@@ -330,10 +330,10 @@ class _AdminFirstPageContentsState extends State<AdminFirstPageContents> {
                 )),
             const Padding(padding: EdgeInsets.only(top: 50)),
             CMaker(
-                padding: EdgeInsets.symmetric(horizontal: 10),
+                padding: const EdgeInsets.symmetric(horizontal: 10),
                 height: GradesTablesData.length * 250,
                 child: ListView.builder(
-                  physics: NeverScrollableScrollPhysics(),
+                  physics: const NeverScrollableScrollPhysics(),
                   shrinkWrap: false,
                   itemCount: TeachersTablesData.length,
                   itemBuilder: (context, index) {
@@ -353,7 +353,7 @@ class _AdminFirstPageContentsState extends State<AdminFirstPageContents> {
                             child: ListView.builder(
                               scrollDirection: Axis.horizontal,
                               shrinkWrap: false,
-                              physics: NeverScrollableScrollPhysics(),
+                              physics: const NeverScrollableScrollPhysics(),
                               itemCount: TeachersTablesData[index][1][0].length,
                               itemBuilder: (context, ColumnIndex) {
                                 return CMaker(
@@ -362,7 +362,7 @@ class _AdminFirstPageContentsState extends State<AdminFirstPageContents> {
                                     child: ListView.builder(
                                       scrollDirection: Axis.vertical,
                                       shrinkWrap: false,
-                                      physics: NeverScrollableScrollPhysics(),
+                                      physics: const NeverScrollableScrollPhysics(),
                                       itemCount:
                                           TeachersTablesData[index][1].length,
                                       itemBuilder: (context, RowIndex) {
@@ -372,7 +372,7 @@ class _AdminFirstPageContentsState extends State<AdminFirstPageContents> {
                                                     .length,
                                             child: Container(
                                                 decoration: BoxDecoration(
-                                                  border: Border(
+                                                  border: const Border(
                                                       right: BorderSide(),
                                                       bottom: BorderSide()),
                                                   borderRadius:
@@ -380,35 +380,35 @@ class _AdminFirstPageContentsState extends State<AdminFirstPageContents> {
                                                     topLeft:
                                                         ("$ColumnIndex $RowIndex" ==
                                                                 "0 0")
-                                                            ? Radius.circular(
+                                                            ? const Radius.circular(
                                                                 10)
-                                                            : Radius.circular(
+                                                            : const Radius.circular(
                                                                 0),
                                                     bottomLeft:
                                                         ("$ColumnIndex $RowIndex" ==
                                                                 "0 ${TeachersTablesData[index][1].length - 1}")
-                                                            ? Radius.circular(
+                                                            ? const Radius.circular(
                                                                 10)
-                                                            : Radius.circular(
+                                                            : const Radius.circular(
                                                                 0),
                                                     topRight:
                                                         ("$ColumnIndex $RowIndex" ==
                                                                 "${TeachersTablesData[index][1][0].length - 1} 0")
-                                                            ? Radius.circular(
+                                                            ? const Radius.circular(
                                                                 10)
-                                                            : Radius.circular(
+                                                            : const Radius.circular(
                                                                 0),
                                                     bottomRight:
                                                         ("$ColumnIndex $RowIndex" ==
                                                                 "${TeachersTablesData[index][1][0].length - 1} ${TeachersTablesData[index][1].length - 1}")
-                                                            ? Radius.circular(
+                                                            ? const Radius.circular(
                                                                 10)
-                                                            : Radius.circular(
+                                                            : const Radius.circular(
                                                                 0),
                                                   ),
                                                   color: (ColumnIndex == 0 ||
                                                           RowIndex == 0)
-                                                      ? Color.fromARGB(
+                                                      ? const Color.fromARGB(
                                                           255, 36, 160, 209)
                                                       : Colors.white,
                                                 ),
@@ -420,7 +420,7 @@ class _AdminFirstPageContentsState extends State<AdminFirstPageContents> {
                                                     fontWeight: FontWeight.w600,
                                                     color: (ColumnIndex == 0 ||
                                                             RowIndex == 0)
-                                                        ? Color.fromARGB(
+                                                        ? const Color.fromARGB(
                                                             255, 255, 255, 255)
                                                         : const Color.fromARGB(
                                                             255, 0, 0, 0))));
@@ -493,19 +493,19 @@ class _AdminFirstPageContentsState extends State<AdminFirstPageContents> {
                         child: CMaker(
                             boxShadow: [
                               BoxShadow(
-                                  offset: Offset(1, 1),
+                                  offset: const Offset(1, 1),
                                   blurRadius: 4,
                                   spreadRadius: .03,
                                   color: (TabBarIndex == 0)
-                                      ? Color.fromARGB(82, 0, 0, 0)
-                                      : Color.fromARGB(0, 255, 255, 255)),
+                                      ? const Color.fromARGB(82, 0, 0, 0)
+                                      : const Color.fromARGB(0, 255, 255, 255)),
                             ],
                             height: 55,
                             width: 90,
                             alignment: Alignment.center,
                             circularRadius: 20,
                             color: (TabBarIndex == 0)
-                                ? Color.fromARGB(255, 233, 255, 247)
+                                ? const Color.fromARGB(255, 233, 255, 247)
                                 : const Color.fromARGB(255, 255, 255, 255),
                             child: TMaker(
                                 text: "Grades",
@@ -523,19 +523,19 @@ class _AdminFirstPageContentsState extends State<AdminFirstPageContents> {
                         child: CMaker(
                             boxShadow: [
                               BoxShadow(
-                                  offset: Offset(1, 1),
+                                  offset: const Offset(1, 1),
                                   blurRadius: 4,
                                   spreadRadius: .03,
                                   color: (TabBarIndex == 1)
-                                      ? Color.fromARGB(82, 0, 0, 0)
-                                      : Color.fromARGB(0, 255, 255, 255)),
+                                      ? const Color.fromARGB(82, 0, 0, 0)
+                                      : const Color.fromARGB(0, 255, 255, 255)),
                             ],
                             height: 55,
                             width: 90,
                             alignment: Alignment.center,
                             circularRadius: 20,
                             color: (TabBarIndex == 1)
-                                ? Color.fromARGB(255, 233, 255, 247)
+                                ? const Color.fromARGB(255, 233, 255, 247)
                                 : const Color.fromARGB(255, 255, 255, 255),
                             child: TMaker(
                                 text: "Teachers",
