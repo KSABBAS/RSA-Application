@@ -2,6 +2,7 @@ import 'dart:async';
 import 'dart:developer';
 
 import 'package:edu_academy/Login/LogInPage.dart';
+import 'package:edu_academy/MyTools.dart';
 import 'package:flutter/material.dart';
 import 'package:internet_connection_checker_plus/internet_connection_checker_plus.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -80,24 +81,28 @@ class _SplashViewPageState extends State<SplashViewPage> with SingleTickerProvid
               Expanded(flex: 10, child: Container()),
               Expanded(
                   flex: 7,
-                  child: Row(
-                    children: [
-                      Expanded(flex: 1, child: Container()),
-                      Expanded(
-                          flex: 8,
-                          child: Opacity(
-                            opacity: fading?.value,
-                            child: Container(
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(10),
+                  child: CMaker(
+                    child: Row(
+                      children: [
+                        Expanded(flex: 1, child: Container()),
+                        Expanded(
+                            flex: 8,
+                            child: Opacity(
+                              opacity: fading?.value,
+                              child: Container(
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(10),
+                                ),
+                                child: Image.asset("images/Logo.png"),
                               ),
-                              child: Image.asset("images/Logo.png"),
-                            ),
-                          )),
-                      Expanded(flex: 1, child: Container()),
-                    ],
+                            )),
+                        Expanded(flex: 1, child: Container()),
+                      ],
+                    ),
                   )),
-              Expanded(flex: 10, child: Container()),
+              Expanded(flex: 5, child: Container()),
+              Expanded(flex: 2,child: CMaker(alignment: Alignment.bottomCenter,child: Opacity(opacity: fading?.value,child: TMaker(text: "Powered By", fontSize: 18, fontWeight:FontWeight.w600, color: const Color.fromARGB(210, 243, 243, 243))))),
+              Expanded(flex: 3,child: CMaker(alignment: Alignment.topCenter,child: Opacity(opacity: fading?.value,child: TextButton(onPressed: (){}, child: TMaker(text: "Codeveloper", fontSize: 25, fontWeight:FontWeight.w600, color: const Color.fromARGB(210, 243, 243, 243))))))
             ],
           ),
         ),
