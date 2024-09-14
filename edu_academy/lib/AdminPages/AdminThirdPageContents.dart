@@ -14,7 +14,7 @@ class AdminThirdPageContenets extends StatefulWidget {
 }
 
 bool stringToBool(String value) {
-  print("stringToBool ${value} ${value.toLowerCase() == 'true'}");
+  print("stringToBool $value ${value.toLowerCase() == 'true'}");
   return value.toLowerCase() == 'true';
 }
 
@@ -136,7 +136,7 @@ class _AdminThirdPageContenetsState extends State<AdminThirdPageContenets> {
                           height: 50,
                           width: 50,
                           circularRadius: 50,
-                          child: Icon(Icons.arrow_back))),
+                          child: const Icon(Icons.arrow_back))),
                   Expanded(child: Container()),
                   TMaker(
                       text: "Informations",
@@ -149,7 +149,7 @@ class _AdminThirdPageContenetsState extends State<AdminThirdPageContenets> {
           const Padding(padding: EdgeInsets.only(top: 20)),
           Expanded(
               child: CMaker(
-            margin: EdgeInsetsDirectional.only(bottom: 20, start: 20, end: 20),
+            margin: const EdgeInsetsDirectional.only(bottom: 20, start: 20, end: 20),
             width: double.infinity,
             color: Colors.white,
             circularRadius: 20,
@@ -181,7 +181,7 @@ class _AdminThirdPageContenetsState extends State<AdminThirdPageContenets> {
                 ),
                 Expanded(child: Container()),
                 CMaker(
-                  margin: EdgeInsets.symmetric(horizontal: 20),
+                  margin: const EdgeInsets.symmetric(horizontal: 20),
                   height: (PageWidth(context) < 550)
                       ? 60
                       : (PageHeight(context) < 900)
@@ -201,7 +201,7 @@ class _AdminThirdPageContenetsState extends State<AdminThirdPageContenets> {
                     children: [
                       Expanded(child: Container()),
                       CMaker(
-                          padding: EdgeInsets.only(right: 10),
+                          padding: const EdgeInsets.only(right: 10),
                           child: TMaker(
                               text: Students[StudentSelected][2],
                               fontSize: (PageWidth(context) < 550)
@@ -217,7 +217,7 @@ class _AdminThirdPageContenetsState extends State<AdminThirdPageContenets> {
                 ),
                 Expanded(child: Container()),
                 CMaker(
-                  margin: EdgeInsets.symmetric(horizontal: 20),
+                  margin: const EdgeInsets.symmetric(horizontal: 20),
                   height: (PageWidth(context) < 550)
                       ? 60
                       : (PageHeight(context) < 900)
@@ -237,7 +237,7 @@ class _AdminThirdPageContenetsState extends State<AdminThirdPageContenets> {
                     children: [
                       Expanded(child: Container()),
                       CMaker(
-                          padding: EdgeInsets.only(right: 10),
+                          padding: const EdgeInsets.only(right: 10),
                           child: TMaker(
                               text: Students[StudentSelected][3],
                               fontSize: (PageWidth(context) < 550)
@@ -253,7 +253,7 @@ class _AdminThirdPageContenetsState extends State<AdminThirdPageContenets> {
                 ),
                 Expanded(child: Container()),
                 CMaker(
-                  margin: EdgeInsets.symmetric(horizontal: 20),
+                  margin: const EdgeInsets.symmetric(horizontal: 20),
                   height: (PageWidth(context) < 550)
                       ? 60
                       : (PageHeight(context) < 900)
@@ -273,7 +273,7 @@ class _AdminThirdPageContenetsState extends State<AdminThirdPageContenets> {
                     children: [
                       Expanded(child: Container()),
                       CMaker(
-                          padding: EdgeInsets.only(right: 10),
+                          padding: const EdgeInsets.only(right: 10),
                           child: TMaker(
                               text: Students[StudentSelected][5],
                               fontSize: (PageWidth(context) < 550)
@@ -292,7 +292,7 @@ class _AdminThirdPageContenetsState extends State<AdminThirdPageContenets> {
                   width: double.infinity,
                   alignment: Alignment.center,
                   child: CMaker(
-                    margin: EdgeInsets.symmetric(horizontal: 20),
+                    margin: const EdgeInsets.symmetric(horizontal: 20),
                     height: (PageWidth(context) < 550)
                         ? 60
                         : (PageHeight(context) < 900)
@@ -312,7 +312,7 @@ class _AdminThirdPageContenetsState extends State<AdminThirdPageContenets> {
                       children: [
                         Expanded(child: Container()),
                         CMaker(
-                            padding: EdgeInsets.only(right: 10),
+                            padding: const EdgeInsets.only(right: 10),
                             child: TMaker(
                                 text: "Activate",
                                 fontSize: (PageWidth(context) < 550)
@@ -433,7 +433,7 @@ class _AdminThirdPageContenetsState extends State<AdminThirdPageContenets> {
                               }(),
                               fontSize: 20,
                               fontWeight: FontWeight.w700,
-                              color: Color.fromARGB(255, 65, 215, 54)),
+                              color: const Color.fromARGB(255, 65, 215, 54)),
                           Expanded(child: Container()),
                         ],
                       ))),
@@ -443,7 +443,7 @@ class _AdminThirdPageContenetsState extends State<AdminThirdPageContenets> {
                     width: double.infinity,
                     alignment: Alignment.center,
                     child: CMaker(
-                        padding: EdgeInsets.only(top: 20),
+                        padding: const EdgeInsets.only(top: 20),
                         boxShadow: const [
                           BoxShadow(
                               offset: Offset(1, 1),
@@ -500,7 +500,7 @@ class _AdminThirdPageContenetsState extends State<AdminThirdPageContenets> {
                                         fontWeight: FontWeight.w700,
                                         color: (stringToBool(
                                                 Students[index][4]))
-                                            ? Color.fromARGB(255, 73, 213, 31)
+                                            ? const Color.fromARGB(255, 73, 213, 31)
                                             : const Color.fromARGB(
                                                 255, 224, 9, 9)),
                                   )),

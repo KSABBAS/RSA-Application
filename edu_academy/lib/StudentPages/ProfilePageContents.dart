@@ -8,11 +8,7 @@ import 'package:edu_academy/TeacherPages/TeacherMainPage.dart';
 import 'package:edu_academy/service/Databse_Service.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/painting.dart';
-import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:panara_dialogs/panara_dialogs.dart';
-import 'package:overlay_loading_progress/overlay_loading_progress.dart';
 import 'package:flutter/foundation.dart' show kIsWeb;
 
 class StudentProfile extends StatefulWidget {
@@ -118,8 +114,8 @@ class _StudentProfileState extends State<StudentProfile> {
                 height: 40,
                 width: 40,
                 circularRadius: 50,
-                color: Color.fromARGB(255, 74, 193, 239),
-                child: Icon(Icons.add, size: 30),
+                color: const Color.fromARGB(255, 74, 193, 239),
+                child: const Icon(Icons.add, size: 30),
               ),
             ),
           ],
@@ -129,7 +125,7 @@ class _StudentProfileState extends State<StudentProfile> {
     Widget NameField = Column(
       children: [
         Padding(
-          padding: EdgeInsets.only(left: 10),
+          padding: const EdgeInsets.only(left: 10),
           child: CMaker(
               width: double.infinity,
               child: TMaker(
@@ -179,7 +175,7 @@ class _StudentProfileState extends State<StudentProfile> {
               child: Column(
                 children: [
                   Padding(
-                    padding: EdgeInsets.only(left: 10),
+                    padding: const EdgeInsets.only(left: 10),
                     child: CMaker(
                         width: double.infinity,
                         child: TMaker(
@@ -222,13 +218,13 @@ class _StudentProfileState extends State<StudentProfile> {
                 ],
               ),
             ),
-            Padding(padding: EdgeInsets.only(left: 10)),
+            const Padding(padding: EdgeInsets.only(left: 10)),
             Expanded(
               flex: 2,
               child: Column(
                 children: [
                   Padding(
-                    padding: EdgeInsets.only(left: 10),
+                    padding: const EdgeInsets.only(left: 10),
                     child: CMaker(
                         width: double.infinity,
                         child: TMaker(
@@ -236,7 +232,7 @@ class _StudentProfileState extends State<StudentProfile> {
                             text: "Grade",
                             fontSize: 20,
                             fontWeight: FontWeight.w400,
-                            color: Color.fromARGB(255, 0, 0, 0))),
+                            color: const Color.fromARGB(255, 0, 0, 0))),
                   ),
                   CMaker(
                     height: (PageWidth(context) < 550)
@@ -258,7 +254,7 @@ class _StudentProfileState extends State<StudentProfile> {
                       children: [
                         Expanded(child: Container()),
                         CMaker(
-                            padding: EdgeInsets.only(right: 10),
+                            padding: const EdgeInsets.only(right: 10),
                             child: TMaker(
                                 text: widget.StudentGrade,
                                 fontSize: 20,
@@ -276,7 +272,7 @@ class _StudentProfileState extends State<StudentProfile> {
     Widget EmailField = Column(
       children: [
         Padding(
-          padding: EdgeInsets.only(left: 10),
+          padding: const EdgeInsets.only(left: 10),
           child: CMaker(
               width: double.infinity,
               child: TMaker(
@@ -284,7 +280,7 @@ class _StudentProfileState extends State<StudentProfile> {
                   text: (EditMode) ? "Edit Email" : "Email",
                   fontSize: 20,
                   fontWeight: FontWeight.w400,
-                  color: Color.fromARGB(255, 0, 0, 0))),
+                  color: const Color.fromARGB(255, 0, 0, 0))),
         ),
         CMaker(
             alignment: Alignment.center,
@@ -348,7 +344,7 @@ class _StudentProfileState extends State<StudentProfile> {
     Widget PasswordField = Column(
       children: [
         Padding(
-          padding: EdgeInsets.only(left: 10),
+          padding: const EdgeInsets.only(left: 10),
           child: CMaker(
               width: double.infinity,
               child: TMaker(
@@ -356,7 +352,7 @@ class _StudentProfileState extends State<StudentProfile> {
                   text: (EditMode) ? "Edit Password" : "Password",
                   fontSize: 20,
                   fontWeight: FontWeight.w400,
-                  color: Color.fromARGB(255, 0, 0, 0))),
+                  color: const Color.fromARGB(255, 0, 0, 0))),
         ),
         CMaker(
             alignment: Alignment.center,
@@ -384,7 +380,7 @@ class _StudentProfileState extends State<StudentProfile> {
                       if (value!.isEmpty) {
                         return "الحقل فارغ";
                       }
-                      if (value!.length < 4) {
+                      if (value.length < 4) {
                         return "يجب ان يكون الرقم السرى اكبر من 3 (حروف او ارقام)";
                       }
                       return null;
@@ -417,7 +413,7 @@ class _StudentProfileState extends State<StudentProfile> {
     Widget NumberField = Column(
       children: [
         Padding(
-          padding: EdgeInsets.only(left: 10),
+          padding: const EdgeInsets.only(left: 10),
           child: CMaker(
               width: double.infinity,
               child: TMaker(
@@ -425,7 +421,7 @@ class _StudentProfileState extends State<StudentProfile> {
                   text: (EditMode) ? "Edit Number" : "Number",
                   fontSize: 20,
                   fontWeight: FontWeight.w400,
-                  color: Color.fromARGB(255, 0, 0, 0))),
+                  color: const Color.fromARGB(255, 0, 0, 0))),
         ),
         CMaker(
           alignment: Alignment.center,
@@ -634,35 +630,35 @@ class _StudentProfileState extends State<StudentProfile> {
               ProfilePicture,
               Expanded(child: Container()),
               CMaker(
-                  padding: EdgeInsets.all(20),
+                  padding: const EdgeInsets.all(20),
                   height: PageHeight(context) - 400,
                   width: double.infinity,
-                  color: Color.fromARGB(255, 74, 193, 239),
+                  color: const Color.fromARGB(255, 74, 193, 239),
                   circularRadius: 25,
-                  margin: EdgeInsets.symmetric(horizontal: 20),
+                  margin: const EdgeInsets.symmetric(horizontal: 20),
                   child: ListView(
                     children: [
                       (!EditMode)
                           ? NameField
-                          : Container(
+                          : const SizedBox(
                               height: 0,
                               width: 0,
                             ),
                       (!EditMode)
                           ? const Padding(padding: EdgeInsets.only(bottom: 10))
-                          : Container(
+                          : const SizedBox(
                               height: 0,
                               width: 0,
                             ),
                       (!EditMode)
                           ? IdAndGradeRow
-                          : Container(
+                          : const SizedBox(
                               height: 0,
                               width: 0,
                             ),
                       (!EditMode)
                           ? const Padding(padding: EdgeInsets.only(bottom: 10))
-                          : Container(
+                          : const SizedBox(
                               height: 0,
                               width: 0,
                             ),
@@ -671,13 +667,13 @@ class _StudentProfileState extends State<StudentProfile> {
                       const Padding(padding: EdgeInsets.only(bottom: 10)),
                       (EditMode)
                           ? const Padding(padding: EdgeInsets.only(bottom: 10))
-                          : Container(
+                          : const SizedBox(
                               height: 0,
                               width: 0,
                             ),
                       (EditMode)
                           ? PasswordField
-                          : Container(
+                          : const SizedBox(
                               height: 0,
                               width: 0,
                             ),
@@ -726,7 +722,7 @@ class _StudentProfileState extends State<StudentProfile> {
                                             255, 0, 0, 0))),
                               ),
                             )
-                          : Container(
+                          : const SizedBox(
                               height: 0,
                               width: 0,
                             ),
@@ -750,35 +746,35 @@ class _StudentProfileState extends State<StudentProfile> {
               ProfilePicture,
               Expanded(child: Container()),
               CMaker(
-                  padding: EdgeInsets.all(20),
+                  padding: const EdgeInsets.all(20),
                   height: PageHeight(context) - 400,
                   width: double.infinity,
-                  color: Color.fromARGB(255, 74, 193, 239),
+                  color: const Color.fromARGB(255, 74, 193, 239),
                   circularRadius: 25,
-                  margin: EdgeInsets.symmetric(horizontal: 20),
+                  margin: const EdgeInsets.symmetric(horizontal: 20),
                   child: ListView(
                     children: [
                       (!EditMode)
                           ? NameField
-                          : Container(
+                          : const SizedBox(
                               height: 0,
                               width: 0,
                             ),
                       (!EditMode)
                           ? const Padding(padding: EdgeInsets.only(bottom: 10))
-                          : Container(
+                          : const SizedBox(
                               height: 0,
                               width: 0,
                             ),
                       (!EditMode)
                           ? IdAndGradeRow
-                          : Container(
+                          : const SizedBox(
                               height: 0,
                               width: 0,
                             ),
                       (!EditMode)
                           ? const Padding(padding: EdgeInsets.only(bottom: 10))
-                          : Container(
+                          : const SizedBox(
                               height: 0,
                               width: 0,
                             ),
@@ -787,13 +783,13 @@ class _StudentProfileState extends State<StudentProfile> {
                       const Padding(padding: EdgeInsets.only(bottom: 10)),
                       (EditMode)
                           ? const Padding(padding: EdgeInsets.only(bottom: 10))
-                          : Container(
+                          : const SizedBox(
                               height: 0,
                               width: 0,
                             ),
                       (EditMode)
                           ? PasswordField
-                          : Container(
+                          : const SizedBox(
                               height: 0,
                               width: 0,
                             ),
@@ -842,7 +838,7 @@ class _StudentProfileState extends State<StudentProfile> {
                                             255, 0, 0, 0))),
                               ),
                             )
-                          : Container(
+                          : const SizedBox(
                               height: 0,
                               width: 0,
                             ),
@@ -866,35 +862,35 @@ class _StudentProfileState extends State<StudentProfile> {
               ProfilePicture,
               Expanded(child: Container()),
               CMaker(
-                  padding: EdgeInsets.all(20),
+                  padding: const EdgeInsets.all(20),
                   height: PageHeight(context) - 400,
                   width: double.infinity,
-                  color: Color.fromARGB(255, 74, 193, 239),
+                  color: const Color.fromARGB(255, 74, 193, 239),
                   circularRadius: 25,
-                  margin: EdgeInsets.symmetric(horizontal: 20),
+                  margin: const EdgeInsets.symmetric(horizontal: 20),
                   child: ListView(
                     children: [
                       (!EditMode)
                           ? NameField
-                          : Container(
+                          : const SizedBox(
                               height: 0,
                               width: 0,
                             ),
                       (!EditMode)
                           ? const Padding(padding: EdgeInsets.only(bottom: 10))
-                          : Container(
+                          : const SizedBox(
                               height: 0,
                               width: 0,
                             ),
                       (!EditMode)
                           ? IdAndGradeRow
-                          : Container(
+                          : const SizedBox(
                               height: 0,
                               width: 0,
                             ),
                       (!EditMode)
                           ? const Padding(padding: EdgeInsets.only(bottom: 10))
-                          : Container(
+                          : const SizedBox(
                               height: 0,
                               width: 0,
                             ),
@@ -903,13 +899,13 @@ class _StudentProfileState extends State<StudentProfile> {
                       const Padding(padding: EdgeInsets.only(bottom: 10)),
                       (EditMode)
                           ? const Padding(padding: EdgeInsets.only(bottom: 10))
-                          : Container(
+                          : const SizedBox(
                               height: 0,
                               width: 0,
                             ),
                       (EditMode)
                           ? PasswordField
-                          : Container(
+                          : const SizedBox(
                               height: 0,
                               width: 0,
                             ),
@@ -958,7 +954,7 @@ class _StudentProfileState extends State<StudentProfile> {
                                             255, 0, 0, 0))),
                               ),
                             )
-                          : Container(
+                          : const SizedBox(
                               height: 0,
                               width: 0,
                             ),

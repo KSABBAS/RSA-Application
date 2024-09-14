@@ -1,13 +1,11 @@
 import 'dart:developer';
 
 import 'package:edu_academy/MyTools.dart';
-import 'package:edu_academy/StudentPages/Notifications.dart';
 import 'package:edu_academy/StudentPages/StudentAppBar.dart';
 import 'package:edu_academy/StudentPages/StudentMainPage.dart';
 // import 'package:edu_academy/service/Databse_Service.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'dart:core';
 
 import 'package:shared_preferences/shared_preferences.dart';
@@ -70,7 +68,7 @@ class _StudentFirstMainPageState extends State<StudentFirstMainPage> {
         },
       );
     } catch (e) {
-      log("e ${e}");
+      log("e $e");
     }
   }
 
@@ -481,7 +479,7 @@ class _StudentFirstMainPageState extends State<StudentFirstMainPage> {
         FirstPageBody = CMaker(
           child: ListView(
             children: [
-              StudentAppBar(),
+              const StudentAppBar(),
               const Padding(padding: EdgeInsets.only(top: 20)),
               Column(
                 children: [
@@ -563,7 +561,7 @@ class _StudentFirstMainPageState extends State<StudentFirstMainPage> {
           width: double.infinity,
           child: ListView(
             children: [
-              StudentAppBar(),
+              const StudentAppBar(),
               const Padding(padding: EdgeInsets.only(top: 20)),
               Column(
                 children: [
@@ -643,7 +641,7 @@ class _StudentFirstMainPageState extends State<StudentFirstMainPage> {
         FirstPageBody = Expanded(
           child: ListView(
             children: [
-              StudentAppBar(),
+              const StudentAppBar(),
               const Padding(padding: EdgeInsets.only(top: 20)),
               Column(
                 children: [

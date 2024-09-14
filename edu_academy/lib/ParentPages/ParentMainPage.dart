@@ -63,13 +63,13 @@ class _ParentMainPageState extends State<ParentMainPage> {
     SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersiveSticky);
       if (ConnectedToInternet) {
       return Scaffold(
-      backgroundColor: Color.fromARGB(255, 74, 193, 241),
+      backgroundColor: const Color.fromARGB(255, 74, 193, 241),
       body: LiquidPullToRefresh(
           showChildOpacityTransition: false,
-          backgroundColor: Color.fromARGB(255, 74, 193, 241),
+          backgroundColor: const Color.fromARGB(255, 74, 193, 241),
               color: const Color.fromARGB(255, 233, 255, 247),
           onRefresh: () async {
-            await Future.delayed(Duration(milliseconds: 500));
+            await Future.delayed(const Duration(milliseconds: 500));
             setState(() {
             });
           },
@@ -85,7 +85,7 @@ class _ParentMainPageState extends State<ParentMainPage> {
           height: 150,
           width: 270,
               color: Colors.white,
-                boxShadow: [
+                boxShadow: const [
                   BoxShadow(
                       offset: Offset(1, 1),
                       blurRadius: 6,

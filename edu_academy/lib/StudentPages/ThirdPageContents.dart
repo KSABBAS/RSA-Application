@@ -2,14 +2,12 @@ import 'dart:developer';
 import 'dart:io';
 
 import 'package:edu_academy/MyTools.dart';
-import 'package:edu_academy/StudentPages/Notifications.dart';
 import 'package:edu_academy/StudentPages/StudentAppBar.dart';
 import 'package:edu_academy/service/Databse_Service.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:edu_academy/StudentPages/StudentMainPage.dart';
 import 'package:get/get.dart';
-import 'package:image_picker/image_picker.dart';
 import 'package:insta_image_viewer/insta_image_viewer.dart';
 import 'package:overlay_loading_progress/overlay_loading_progress.dart';
 import 'package:panara_dialogs/panara_dialogs.dart';
@@ -250,7 +248,7 @@ class _ThirdPageState extends State<ThirdPage> {
     print(ggrtr);
     print("add done");
     print(HomeWorks[HomeWorkIndex][0]);
-    log("#HomeWorks ${HomeWorks}");
+    log("#HomeWorks $HomeWorks");
   }
 
   Future<void> pickImageFromGallery() async {
@@ -321,8 +319,8 @@ class _ThirdPageState extends State<ThirdPage> {
       Widget HomeworkImages = CMaker(
         color: const Color.fromARGB(255, 255, 255, 255),
         circularRadius: 25,
-        padding: EdgeInsets.all(20),
-        margin: EdgeInsets.symmetric(horizontal: 10),
+        padding: const EdgeInsets.all(20),
+        margin: const EdgeInsets.symmetric(horizontal: 10),
         height: (PageWidth(context) >= 550)
             ? (PageHeight(context) > 900)
                 ? 400
@@ -382,6 +380,7 @@ class _ThirdPageState extends State<ThirdPage> {
               if (value!.isEmpty) {
                 return "الحقل فارغ";
               }
+              return null;
             },
             onSaved: (value) {
               StudentHomeWorkAnswer = value!;
@@ -402,7 +401,7 @@ class _ThirdPageState extends State<ThirdPage> {
             setState(() {
               ThirdPageContents = Column(
                 children: [
-                  StudentAppBar(),
+                  const StudentAppBar(),
                   const Padding(padding: EdgeInsets.only(top: 20)),
                   InkWell(
                       onTap: () {
@@ -479,8 +478,8 @@ class _ThirdPageState extends State<ThirdPage> {
                                                         Get.back();
                                                       },
                                                       child: CMaker(
-                                                          padding: EdgeInsets.all(20),
-                                                          color: Color.fromARGB(255, 233, 255, 247),
+                                                          padding: const EdgeInsets.all(20),
+                                                          color: const Color.fromARGB(255, 233, 255, 247),
                                                           circularRadius: 15,
                                                           boxShadow: const [
                                                             BoxShadow(
@@ -516,8 +515,8 @@ class _ThirdPageState extends State<ThirdPage> {
                                                         Get.back();
                                                       },
                                                       child: CMaker(
-                                                          padding: EdgeInsets.all(20),
-                                                          color: Color.fromARGB(255, 233, 255, 247),
+                                                          padding: const EdgeInsets.all(20),
+                                                          color: const Color.fromARGB(255, 233, 255, 247),
                                                           circularRadius: 15,
                                                           boxShadow: const [
                                                             BoxShadow(
@@ -560,10 +559,10 @@ class _ThirdPageState extends State<ThirdPage> {
                                   onTap: () async {
                                     print(
                                         "HomeWorks[HomeWorkIndex][HomeworkSelected + 1][4] ${HomeWorks[HomeWorkIndex][HomeworkSelected + 1][4]}"); // hw files
-                                    print(" StudentHomeWorkAnswer ${StudentHomeWorkAnswer}"); // hw solve body
+                                    print(" StudentHomeWorkAnswer $StudentHomeWorkAnswer"); // hw solve body
                                     print(
                                         "HomeWorks[HomeWorkIndex][HomeworkSelected + 1][8] ${HomeWorks[HomeWorkIndex][HomeworkSelected + 1][8]}"); // hw id
-                                    print("student_id ${student_id}");
+                                    print("student_id $student_id");
                                     // hw id,student_id,hw solve body,hw files
                                     OverlayLoadingProgress.start(context,
                                         widget: CMaker(
@@ -627,7 +626,7 @@ class _ThirdPageState extends State<ThirdPage> {
             setState(() {
               ThirdPageContents = Column(
                 children: [
-                  StudentAppBar(),
+                  const StudentAppBar(),
                   const Padding(padding: EdgeInsets.only(top: 20)),
                   InkWell(
                       onTap: () {
@@ -663,8 +662,8 @@ class _ThirdPageState extends State<ThirdPage> {
                             HomeworkImages,
                             const Padding(padding: EdgeInsets.only(top: 40)),
                             CMaker(
-                                margin: EdgeInsets.all(10),
-                                padding: EdgeInsets.all(10),
+                                margin: const EdgeInsets.all(10),
+                                padding: const EdgeInsets.all(10),
                                 circularRadius: 25,
                                 color: const Color.fromARGB(255, 255, 255, 255),
                                 child: StudentHomeWorkBody),
@@ -680,9 +679,9 @@ class _ThirdPageState extends State<ThirdPage> {
                                   child: CMaker(
                                       circularRadius: 17,
                                       padding: const EdgeInsets.only(top: 10, bottom: 10, left: 30, right: 30),
-                                      color: Color.fromARGB(255, 22, 255, 111),
+                                      color: const Color.fromARGB(255, 22, 255, 111),
                                       child: TMaker(
-                                          text: "Upload a Photo", fontSize: 20, fontWeight: FontWeight.w600, color: Color.fromARGB(255, 71, 69, 69))),
+                                          text: "Upload a Photo", fontSize: 20, fontWeight: FontWeight.w600, color: const Color.fromARGB(255, 71, 69, 69))),
                                 )),
                             const Padding(padding: EdgeInsets.only(top: 30)),
                             HomeworkStudentImages,
@@ -757,7 +756,7 @@ class _ThirdPageState extends State<ThirdPage> {
               ThirdPageContents = Expanded(
                 child: CMaker(
                   child: Column(children: [
-                    StudentAppBar(),
+                    const StudentAppBar(),
                     const Padding(padding: EdgeInsets.only(top: 20)),
                     InkWell(
                         onTap: () {
@@ -807,8 +806,8 @@ class _ThirdPageState extends State<ThirdPage> {
                                     CMaker(height: 100, alignment: Alignment.center, child: ThirdPageHomeworkBody),
                                     const Padding(padding: EdgeInsets.only(top: 40)),
                                     CMaker(
-                                        margin: EdgeInsets.all(10),
-                                        padding: EdgeInsets.all(10),
+                                        margin: const EdgeInsets.all(10),
+                                        padding: const EdgeInsets.all(10),
                                         circularRadius: 25,
                                         color: const Color.fromARGB(255, 255, 255, 255),
                                         child: StudentHomeWorkBody),
@@ -824,12 +823,12 @@ class _ThirdPageState extends State<ThirdPage> {
                                           child: CMaker(
                                               circularRadius: 17,
                                               padding: const EdgeInsets.only(top: 10, bottom: 10, left: 30, right: 30),
-                                              color: Color.fromARGB(255, 22, 255, 111),
+                                              color: const Color.fromARGB(255, 22, 255, 111),
                                               child: TMaker(
                                                   text: "Upload a Photo",
                                                   fontSize: 20,
                                                   fontWeight: FontWeight.w600,
-                                                  color: Color.fromARGB(255, 71, 69, 69))),
+                                                  color: const Color.fromARGB(255, 71, 69, 69))),
                                         )),
                                     const Padding(padding: EdgeInsets.only(top: 30)),
                                     CMaker(
@@ -909,7 +908,7 @@ class _ThirdPageState extends State<ThirdPage> {
             setState(() {
               ThirdPageContents = Column(
                 children: [
-                  StudentAppBar(),
+                  const StudentAppBar(),
                   const Padding(padding: EdgeInsets.only(top: 20)),
                   InkWell(
                       onTap: () {
@@ -973,7 +972,7 @@ class _ThirdPageState extends State<ThirdPage> {
             setState(() {
               ThirdPageContents = Column(
                 children: [
-                  StudentAppBar(),
+                  const StudentAppBar(),
                   const Padding(padding: EdgeInsets.only(top: 20)),
                   InkWell(
                       onTap: () {
@@ -1039,7 +1038,7 @@ class _ThirdPageState extends State<ThirdPage> {
                 child: CMaker(
                   child: Column(
                     children: [
-                      StudentAppBar(),
+                      const StudentAppBar(),
                       const Padding(padding: EdgeInsets.only(top: 20)),
                       InkWell(
                           onTap: () {
@@ -1124,7 +1123,7 @@ class _ThirdPageState extends State<ThirdPage> {
             setState(() {
               ThirdPageContents = Column(
                 children: [
-                  StudentAppBar(),
+                  const StudentAppBar(),
                   const Padding(padding: EdgeInsets.only(top: 20)),
                   InkWell(
                       onTap: () {
@@ -1256,7 +1255,7 @@ class _ThirdPageState extends State<ThirdPage> {
             setState(() {
               ThirdPageContents = Column(
                 children: [
-                  StudentAppBar(),
+                  const StudentAppBar(),
                   const Padding(padding: EdgeInsets.only(top: 20)),
                   InkWell(
                       onTap: () {
@@ -1292,8 +1291,8 @@ class _ThirdPageState extends State<ThirdPage> {
                             HomeworkImages,
                             const Padding(padding: EdgeInsets.only(top: 40)),
                             CMaker(
-                                margin: EdgeInsets.all(10),
-                                padding: EdgeInsets.all(10),
+                                margin: const EdgeInsets.all(10),
+                                padding: const EdgeInsets.all(10),
                                 circularRadius: 25,
                                 color: const Color.fromARGB(255, 255, 255, 255),
                                 child: StudentHomeWorkBody),
@@ -1309,9 +1308,9 @@ class _ThirdPageState extends State<ThirdPage> {
                                   child: CMaker(
                                       circularRadius: 17,
                                       padding: const EdgeInsets.only(top: 10, bottom: 10, left: 30, right: 30),
-                                      color: Color.fromARGB(255, 22, 255, 111),
+                                      color: const Color.fromARGB(255, 22, 255, 111),
                                       child: TMaker(
-                                          text: "Upload a Photo", fontSize: 20, fontWeight: FontWeight.w600, color: Color.fromARGB(255, 71, 69, 69))),
+                                          text: "Upload a Photo", fontSize: 20, fontWeight: FontWeight.w600, color: const Color.fromARGB(255, 71, 69, 69))),
                                 )),
                             const Padding(padding: EdgeInsets.only(top: 30)),
                             HomeworkStudentImages,
@@ -1390,7 +1389,7 @@ class _ThirdPageState extends State<ThirdPage> {
                 child: CMaker(
                   child: Column(
                     children: [
-                      StudentAppBar(),
+                      const StudentAppBar(),
                       const Padding(padding: EdgeInsets.only(top: 20)),
                       InkWell(
                           onTap: () {
@@ -1430,8 +1429,8 @@ class _ThirdPageState extends State<ThirdPage> {
                                       CMaker(height: 100, alignment: Alignment.center, child: ThirdPageHomeworkBody),
                                       const Padding(padding: EdgeInsets.only(top: 40)),
                                       CMaker(
-                                          margin: EdgeInsets.all(10),
-                                          padding: EdgeInsets.all(10),
+                                          margin: const EdgeInsets.all(10),
+                                          padding: const EdgeInsets.all(10),
                                           circularRadius: 25,
                                           color: const Color.fromARGB(255, 255, 255, 255),
                                           child: StudentHomeWorkBody),
@@ -1447,12 +1446,12 @@ class _ThirdPageState extends State<ThirdPage> {
                                             child: CMaker(
                                                 circularRadius: 17,
                                                 padding: const EdgeInsets.only(top: 10, bottom: 10, left: 30, right: 30),
-                                                color: Color.fromARGB(255, 22, 255, 111),
+                                                color: const Color.fromARGB(255, 22, 255, 111),
                                                 child: TMaker(
                                                     text: "Upload a Photo",
                                                     fontSize: 20,
                                                     fontWeight: FontWeight.w600,
-                                                    color: Color.fromARGB(255, 71, 69, 69))),
+                                                    color: const Color.fromARGB(255, 71, 69, 69))),
                                           )),
                                       const Padding(padding: EdgeInsets.only(top: 30)),
                                       HomeworkStudentImages,
@@ -1536,7 +1535,7 @@ class _ThirdPageState extends State<ThirdPage> {
             setState(() {
               ThirdPageContents = Column(
                 children: [
-                  StudentAppBar(),
+                  const StudentAppBar(),
                   const Padding(padding: EdgeInsets.only(top: 20)),
                   InkWell(
                       onTap: () {
@@ -1595,7 +1594,7 @@ class _ThirdPageState extends State<ThirdPage> {
             setState(() {
               ThirdPageContents = Column(
                 children: [
-                  StudentAppBar(),
+                  const StudentAppBar(),
                   const Padding(padding: EdgeInsets.only(top: 20)),
                   InkWell(
                       onTap: () {
@@ -1631,8 +1630,8 @@ class _ThirdPageState extends State<ThirdPage> {
                             HomeworkImages,
                             const Padding(padding: EdgeInsets.only(top: 40)),
                             CMaker(
-                                margin: EdgeInsets.all(10),
-                                padding: EdgeInsets.all(10),
+                                margin: const EdgeInsets.all(10),
+                                padding: const EdgeInsets.all(10),
                                 circularRadius: 25,
                                 color: const Color.fromARGB(255, 255, 255, 255),
                                 child: TMaker(
@@ -1656,7 +1655,7 @@ class _ThirdPageState extends State<ThirdPage> {
                 child: CMaker(
                   child: Column(
                     children: [
-                      StudentAppBar(),
+                      const StudentAppBar(),
                       const Padding(padding: EdgeInsets.only(top: 20)),
                       InkWell(
                           onTap: () {
@@ -1699,8 +1698,8 @@ class _ThirdPageState extends State<ThirdPage> {
                                       CMaker(height: 100, alignment: Alignment.center, child: ThirdPageHomeworkBody),
                                       const Padding(padding: EdgeInsets.only(top: 40)),
                                       CMaker(
-                                          margin: EdgeInsets.all(10),
-                                          padding: EdgeInsets.all(10),
+                                          margin: const EdgeInsets.all(10),
+                                          padding: const EdgeInsets.all(10),
                                           circularRadius: 25,
                                           color: const Color.fromARGB(255, 255, 255, 255),
                                           child: TMaker(
@@ -1732,7 +1731,7 @@ class _ThirdPageState extends State<ThirdPage> {
             setState(() {
               ThirdPageContents = Column(
                 children: [
-                  StudentAppBar(),
+                  const StudentAppBar(),
                   const Padding(padding: EdgeInsets.only(top: 20)),
                   InkWell(
                       onTap: () {
@@ -1831,7 +1830,7 @@ class _ThirdPageState extends State<ThirdPage> {
             setState(() {
               ThirdPageContents = Column(
                 children: [
-                  StudentAppBar(),
+                  const StudentAppBar(),
                   const Padding(padding: EdgeInsets.only(top: 20)),
                   InkWell(
                       onTap: () {
@@ -1932,7 +1931,7 @@ class _ThirdPageState extends State<ThirdPage> {
                 child: CMaker(
                   child: Column(
                     children: [
-                      StudentAppBar(),
+                      const StudentAppBar(),
                       const Padding(padding: EdgeInsets.only(top: 20)),
                       InkWell(
                           onTap: () {
@@ -2051,7 +2050,7 @@ class _ThirdPageState extends State<ThirdPage> {
             setState(() {
               ThirdPageContents = Column(
                 children: [
-                  StudentAppBar(),
+                  const StudentAppBar(),
                   const Padding(padding: EdgeInsets.only(top: 20)),
                   InkWell(
                       onTap: () {
@@ -2110,7 +2109,7 @@ class _ThirdPageState extends State<ThirdPage> {
             setState(() {
               ThirdPageContents = Column(
                 children: [
-                  StudentAppBar(),
+                  const StudentAppBar(),
                   const Padding(padding: EdgeInsets.only(top: 20)),
                   InkWell(
                       onTap: () {
@@ -2146,8 +2145,8 @@ class _ThirdPageState extends State<ThirdPage> {
                             HomeworkImages,
                             const Padding(padding: EdgeInsets.only(top: 40)),
                             CMaker(
-                                margin: EdgeInsets.all(10),
-                                padding: EdgeInsets.all(10),
+                                margin: const EdgeInsets.all(10),
+                                padding: const EdgeInsets.all(10),
                                 circularRadius: 25,
                                 color: const Color.fromARGB(255, 255, 255, 255),
                                 child: TMaker(
@@ -2171,7 +2170,7 @@ class _ThirdPageState extends State<ThirdPage> {
                 child: CMaker(
                   child: Column(
                     children: [
-                      StudentAppBar(),
+                      const StudentAppBar(),
                       const Padding(padding: EdgeInsets.only(top: 20)),
                       InkWell(
                           onTap: () {
@@ -2211,8 +2210,8 @@ class _ThirdPageState extends State<ThirdPage> {
                                     CMaker(height: 100, alignment: Alignment.center, child: ThirdPageHomeworkBody),
                                     const Padding(padding: EdgeInsets.only(top: 40)),
                                     CMaker(
-                                        margin: EdgeInsets.all(10),
-                                        padding: EdgeInsets.all(10),
+                                        margin: const EdgeInsets.all(10),
+                                        padding: const EdgeInsets.all(10),
                                         circularRadius: 25,
                                         color: const Color.fromARGB(255, 255, 255, 255),
                                         child: TMaker(
@@ -2240,7 +2239,7 @@ class _ThirdPageState extends State<ThirdPage> {
             setState(() {
               ThirdPageContents = Column(
                 children: [
-                  StudentAppBar(),
+                  const StudentAppBar(),
                   const Padding(padding: EdgeInsets.only(top: 20)),
                   InkWell(
                       onTap: () {
@@ -2334,7 +2333,7 @@ class _ThirdPageState extends State<ThirdPage> {
             setState(() {
               ThirdPageContents = Column(
                 children: [
-                  StudentAppBar(),
+                  const StudentAppBar(),
                   const Padding(padding: EdgeInsets.only(top: 20)),
                   InkWell(
                       onTap: () {
@@ -2429,7 +2428,7 @@ class _ThirdPageState extends State<ThirdPage> {
                 child: CMaker(
                   child: Column(
                     children: [
-                      StudentAppBar(),
+                      const StudentAppBar(),
                       const Padding(padding: EdgeInsets.only(top: 20)),
                       InkWell(
                           onTap: () {
@@ -2644,7 +2643,7 @@ class _ThirdPageState extends State<ThirdPage> {
                                                       return Dialog(
                                                         child: CMaker(
                                                             circularRadius: 20,
-                                                            padding: EdgeInsets.all(20),
+                                                            padding: const EdgeInsets.all(20),
                                                             child: TMaker(
                                                                 textAlign: TextAlign.start,
                                                                 text: HomeWorks[HomeWorkIndex][index + 1][7][2][1],
@@ -2736,7 +2735,7 @@ class _ThirdPageState extends State<ThirdPage> {
           ThirdPageContents = CMaker(
             child: Column(
               children: [
-                StudentAppBar(),
+                const StudentAppBar(),
                 const Padding(padding: EdgeInsets.only(top: 20)),
                 SecondPageArrowBack,
                 const Padding(padding: EdgeInsets.only(top: 20)),
@@ -2752,7 +2751,7 @@ class _ThirdPageState extends State<ThirdPage> {
           ThirdPageContents = CMaker(
             child: Column(
               children: [
-                StudentAppBar(),
+                const StudentAppBar(),
                 const Padding(padding: EdgeInsets.only(top: 20)),
                 SecondPageArrowBack,
                 const Padding(padding: EdgeInsets.only(bottom: 30)),
@@ -2769,7 +2768,7 @@ class _ThirdPageState extends State<ThirdPage> {
             child: CMaker(
               child: Column(
                 children: [
-                  StudentAppBar(),
+                  const StudentAppBar(),
                   const Padding(padding: EdgeInsets.only(top: 20)),
                   SecondPageArrowBack,
                   const Padding(padding: EdgeInsets.only(bottom: 30)),
@@ -2864,14 +2863,14 @@ class _ThirdPageState extends State<ThirdPage> {
               child: ListView.builder(
                   itemCount: HomeWorks.length,
                   itemBuilder: (context, index) {
-                    int hw_conter = 0;
+                    int hwConter = 0;
                     if ((HomeWorks[index]).length > 1) {
                       for (int i = 0; i < (HomeWorks[index]).length; i++) {
                         if (i == 0) continue;
-                        if (HomeWorks[index][i][7][0] == false) hw_conter += 1;
+                        if (HomeWorks[index][i][7][0] == false) hwConter += 1;
                       }
                     }
-                    print("hw_conter $hw_conter");
+                    print("hw_conter $hwConter");
                     return CMaker(
                       circularRadius: 10,
                       color: const Color.fromARGB(255, 233, 255, 247),
@@ -2895,7 +2894,7 @@ class _ThirdPageState extends State<ThirdPage> {
                                 decoration: BoxDecoration(
                                     borderRadius: BorderRadius.circular(50),
                                     color: () {
-                                      if (hw_conter > 0) {
+                                      if (hwConter > 0) {
                                         return const Color.fromARGB(255, 255, 2, 2);
                                       } else {
                                         return const Color.fromARGB(255, 108, 219, 110);
@@ -2932,15 +2931,15 @@ class _ThirdPageState extends State<ThirdPage> {
                                 padding: const EdgeInsets.only(right: 10),
                                 child: TMaker(
                                     text: () {
-                                      if (hw_conter > 0) {
-                                        return "واجب غير محلول : $hw_conter";
+                                      if (hwConter > 0) {
+                                        return "واجب غير محلول : $hwConter";
                                       } else {
                                         return "جميع الواجبات محلوله ✨";
                                       }
                                     }(),
                                     fontSize: 15,
                                     fontWeight: FontWeight.w500,
-                                    color: (hw_conter > 0) ? const Color.fromARGB(255, 255, 36, 36) : const Color.fromARGB(255, 108, 219, 110)),
+                                    color: (hwConter > 0) ? const Color.fromARGB(255, 255, 36, 36) : const Color.fromARGB(255, 108, 219, 110)),
                               ),
                             ],
                           )
@@ -2959,7 +2958,7 @@ class _ThirdPageState extends State<ThirdPage> {
               Container(
                 child: Column(
                   children: [
-                    StudentAppBar(),
+                    const StudentAppBar(),
                     const Padding(padding: EdgeInsets.only(top: 20)),
                     CMaker(boxShadow: const [
                       BoxShadow(offset: Offset(1, 1), blurRadius: 6, spreadRadius: .03, color: Color.fromARGB(82, 0, 0, 0)),
@@ -2979,7 +2978,7 @@ class _ThirdPageState extends State<ThirdPage> {
               Container(
                 child: Column(
                   children: [
-                    StudentAppBar(),
+                    const StudentAppBar(),
                     const Padding(padding: EdgeInsets.only(top: 20)),
                     CMaker(boxShadow: const [
                       BoxShadow(offset: Offset(1, 1), blurRadius: 6, spreadRadius: .03, color: Color.fromARGB(82, 0, 0, 0)),
@@ -3000,7 +2999,7 @@ class _ThirdPageState extends State<ThirdPage> {
                 Container(
                   child: Column(
                     children: [
-                      StudentAppBar(),
+                      const StudentAppBar(),
                       const Padding(padding: EdgeInsets.only(top: 20)),
                       CMaker(boxShadow: const [
                         BoxShadow(offset: Offset(1, 1), blurRadius: 6, spreadRadius: .03, color: Color.fromARGB(82, 0, 0, 0)),

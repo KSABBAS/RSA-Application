@@ -55,12 +55,12 @@ class _TeacherSecondPageContentsState extends State<TeacherSecondPageContents> {
     BooksAreLoading = true;
     setState(() {});
     print("#### ${widget.ListOfGrades[GradeOpenedIndex][0]}");
-    print("#### ${SubjectThatIsSelected}");
-    var Books_data0 = await dbService.fiRead_Books(
+    print("#### $SubjectThatIsSelected");
+    var booksData0 = await dbService.fiRead_Books(
         widget.ListOfGrades[GradeOpenedIndex][0], SubjectThatIsSelected);
     print("Books_data $Books_data");
     setState(() {
-      Books_data = Books_data0;
+      Books_data = booksData0;
       BooksAreLoading = false;
     });
   }
@@ -86,7 +86,7 @@ class _TeacherSecondPageContentsState extends State<TeacherSecondPageContents> {
               AllMessages = [];
               for (var i in map.keys) {
                 AllMessages.add([map[i][0], map[i][1], map[i][2]]);
-                print("map AllMessages ${AllMessages}");
+                print("map AllMessages $AllMessages");
               }
               AllMessages = AllMessages.reversed.toList();
             } catch (e) {
@@ -96,7 +96,7 @@ class _TeacherSecondPageContentsState extends State<TeacherSecondPageContents> {
         },
       );
     } catch (e) {
-      log("e ${e}");
+      log("e $e");
     }
   }
 
@@ -316,24 +316,24 @@ class _TeacherSecondPageContentsState extends State<TeacherSecondPageContents> {
                   files = await pick_file();
                 }
                 if (files != null) {
-                  List<dynamic>? file_links;
+                  List<dynamic>? fileLinks;
                   if (kIsWeb) {
                     log(files.toString());
                     // print([files]);
                     print("Platform web stBookStore  isweb: true");
-                    file_links = await dbService.stBookStore(files);
+                    fileLinks = await dbService.stBookStore(files);
                   } else {
-                    file_links = await dbService.stBookStore([files]);
+                    fileLinks = await dbService.stBookStore([files]);
                   }
 
-                  print("file_links $file_links");
+                  print("file_links $fileLinks");
                   PanaraInfoDialog.show(
                     context,
                     title: "Sucess",
                     message: "A books is added successfully",
                     buttonText: "Okey",
                     onTapDismiss: () async {
-                      await dbService.FiAdd_book_file(widget.ListOfGrades[GradeOpenedIndex][0], SubjectThatIsSelected, file_links?[0], files?[1]);
+                      await dbService.FiAdd_book_file(widget.ListOfGrades[GradeOpenedIndex][0], SubjectThatIsSelected, fileLinks?[0], files?[1]);
                       books_load();
                       Navigator.pop(context);
                     },
@@ -357,9 +357,9 @@ class _TeacherSecondPageContentsState extends State<TeacherSecondPageContents> {
               ? CMaker(
                   height: PageHeight(context) - 150,
                   width: double.infinity,
-                  child: Center(
+                  child: const Center(
                       child: CircularProgressIndicator(
-                    color: const Color.fromARGB(255, 36, 160, 209),
+                    color: Color.fromARGB(255, 36, 160, 209),
                   )),
                 )
               : CMaker(

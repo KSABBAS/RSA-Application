@@ -1,7 +1,5 @@
 import 'package:edu_academy/MyTools.dart';
-import 'package:edu_academy/StudentPages/StudentMainPage.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'package:liquid_pull_to_refresh/liquid_pull_to_refresh.dart';
 import 'package:intl/intl.dart';
 
@@ -34,16 +32,16 @@ class _StudentNotificationsPageState extends State<StudentNotificationsPage> {
   Widget build(BuildContext context) {
     return LiquidPullToRefresh(
         showChildOpacityTransition: false,
-        backgroundColor: Color.fromARGB(255, 148, 145, 129),
-        color: Color.fromARGB(255, 233, 235, 231),
+        backgroundColor: const Color.fromARGB(255, 148, 145, 129),
+        color: const Color.fromARGB(255, 233, 235, 231),
         onRefresh: () async {
-          await Future.delayed(Duration(milliseconds: 500));
+          await Future.delayed(const Duration(milliseconds: 500));
           setState(() {});
         },
         child: Scaffold(
           backgroundColor: const Color.fromARGB(255, 233, 255, 247),
           body: CMaker(
-            margin: EdgeInsets.symmetric(horizontal: 5),
+            margin: const EdgeInsets.symmetric(horizontal: 5),
             child: Column(
               children: [
                 CMaker(
@@ -58,7 +56,7 @@ class _StudentNotificationsPageState extends State<StudentNotificationsPage> {
                         icon: const Icon(Icons.arrow_back))),
                 Expanded(
                   child: CMaker(
-                    child: (StudentNotiFications.length == 0)
+                    child: (StudentNotiFications.isEmpty)
             ? Center(
                 child: TMaker(
                     text: "No Notifications",

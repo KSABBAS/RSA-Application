@@ -32,10 +32,10 @@ class _TeacherNotificationsPageState extends State<TeacherNotificationsPage> {
   Widget build(BuildContext context) {
     return LiquidPullToRefresh(
         showChildOpacityTransition: false,
-        backgroundColor: Color.fromARGB(255, 148, 145, 129),
-        color: Color.fromARGB(255, 233, 235, 231),
+        backgroundColor: const Color.fromARGB(255, 148, 145, 129),
+        color: const Color.fromARGB(255, 233, 235, 231),
         onRefresh: () async {
-          await Future.delayed(Duration(milliseconds: 500));
+          await Future.delayed(const Duration(milliseconds: 500));
           setState(() {});
         },
         child: Scaffold(
@@ -45,8 +45,8 @@ class _TeacherNotificationsPageState extends State<TeacherNotificationsPage> {
             backgroundColor: const Color.fromARGB(255, 233, 255, 247),
           ),
           body: CMaker(
-            margin: EdgeInsets.symmetric(horizontal: 5),
-            child: (TeacherNotiFications.length == 0)
+            margin: const EdgeInsets.symmetric(horizontal: 5),
+            child: (TeacherNotiFications.isEmpty)
             ? Center(
                 child: TMaker(
                     text: "No Notifications",
@@ -70,7 +70,7 @@ class _TeacherNotificationsPageState extends State<TeacherNotificationsPage> {
                               child: ListView(
                                 children: [
                                   CMaker(
-                                    padding: EdgeInsets.symmetric(vertical: 20),
+                                    padding: const EdgeInsets.symmetric(vertical: 20),
                                     alignment: Alignment.center,
                                     child: TMaker(
                                         textAlign: TextAlign.start,
@@ -80,7 +80,7 @@ class _TeacherNotificationsPageState extends State<TeacherNotificationsPage> {
                                         color: Colors.black),
                                   ),
                                   CMaker(
-                                    padding: EdgeInsets.symmetric(
+                                    padding: const EdgeInsets.symmetric(
                                         vertical: 20, horizontal: 10),
                                     alignment: Alignment.center,
                                     child: TMaker(
@@ -104,7 +104,7 @@ class _TeacherNotificationsPageState extends State<TeacherNotificationsPage> {
                         left: 5,
                         top: ((index == 0) ? 10 : 0)),
                     color: Colors.white,
-                    boxShadow: [
+                    boxShadow: const [
                       BoxShadow(
                           offset: Offset(1, 1),
                           blurRadius: 6,

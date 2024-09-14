@@ -89,11 +89,11 @@ class _AdminMainPageState extends State<AdminMainPage> {
   Widget build(BuildContext context) {
     late Widget AdmintMainPageBody;
     List<Widget> Pages = [
-      AdminFirstPageContents(AdminName: "Kareem said"),
+      AdminFirstPageContents(AdminName: "Admin"),
       AdminSocendPageContenets(
-        AdminName: "Kareem said",
+        AdminName: "Admin",
       ),
-      AdminThirdPageContenets(AdminName: "Kareem said"),
+      AdminThirdPageContenets(AdminName: "Admin"),
     ];
     if (PageWidth(context) < 550) {
       AdmintMainPageBody = Scaffold(
@@ -197,13 +197,13 @@ class _AdminMainPageState extends State<AdminMainPage> {
     SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersiveSticky);
     if (ConnectedToInternet) {
       return Scaffold(
-        backgroundColor: Color.fromARGB(255, 74, 193, 241),
+        backgroundColor: const Color.fromARGB(255, 74, 193, 241),
         body: LiquidPullToRefresh(
             showChildOpacityTransition: false,
-            backgroundColor: Color.fromARGB(255, 74, 193, 241),
+            backgroundColor: const Color.fromARGB(255, 74, 193, 241),
             color: const Color.fromARGB(255, 233, 255, 247),
             onRefresh: () async {
-              await Future.delayed(Duration(milliseconds: 500));
+              await Future.delayed(const Duration(milliseconds: 500));
               setState(() {});
             },
             child: AdmintMainPageBody),
@@ -216,7 +216,7 @@ class _AdminMainPageState extends State<AdminMainPage> {
                 height: 150,
                 width: 270,
                 color: Colors.white,
-                boxShadow: [
+                boxShadow: const [
                   BoxShadow(
                       offset: Offset(1, 1),
                       blurRadius: 6,

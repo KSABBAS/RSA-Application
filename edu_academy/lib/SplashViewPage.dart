@@ -4,7 +4,6 @@ import 'dart:developer';
 import 'package:edu_academy/Login/LogInPage.dart';
 import 'package:edu_academy/MyTools.dart';
 import 'package:flutter/material.dart';
-import 'package:internet_connection_checker_plus/internet_connection_checker_plus.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class SplashViewPage extends StatefulWidget {
@@ -93,7 +92,7 @@ class _SplashViewPageState extends State<SplashViewPage> with SingleTickerProvid
                                 decoration: BoxDecoration(
                                   borderRadius: BorderRadius.circular(10),
                                 ),
-                                child: Image.asset("images/Logo.png"),
+                                child: Image.network("https://firebasestorage.googleapis.com/v0/b/rsa-app-3ec3f.appspot.com/o/Logo.png?alt=media&token=d871e5de-8e8a-489e-a93e-08bda4c65d80"),
                               ),
                             )),
                         Expanded(flex: 1, child: Container()),

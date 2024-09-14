@@ -54,7 +54,7 @@ String Teacher_role = '';
 bool AccountActivation = true;
 
 bool stringToBool(String value) {
-  print("stringToBool ${value} ${value.toLowerCase() == 'true'}");
+  print("stringToBool $value ${value.toLowerCase() == 'true'}");
   return value.toLowerCase() == 'true';
 }
 
@@ -352,7 +352,7 @@ class _TeacherMainPageState extends State<TeacherMainPage> {
                           Expanded(
                               child: InkWell(
                             onTap: () {
-                              Get.to(() => TeacherNotificationsPage());
+                              Get.to(() => const TeacherNotificationsPage());
                             },
                             child: Container(
                               width: 70,
@@ -544,7 +544,7 @@ class _TeacherMainPageState extends State<TeacherMainPage> {
                         Expanded(
                             child: InkWell(
                           onTap: () {
-                            Get.to(() => TeacherNotificationsPage());
+                            Get.to(() => const TeacherNotificationsPage());
                           },
                           child: Container(
                             width: 70,
@@ -740,7 +740,7 @@ class _TeacherMainPageState extends State<TeacherMainPage> {
                             Expanded(
                                 child: InkWell(
                               onTap: () {
-                                Get.to(() => TeacherNotificationsPage());
+                                Get.to(() => const TeacherNotificationsPage());
                               },
                               child: Container(
                                 width: 70,
@@ -940,7 +940,7 @@ class _TeacherMainPageState extends State<TeacherMainPage> {
                           Expanded(
                               child: InkWell(
                             onTap: () {
-                              Get.to(() => TeacherNotificationsPage());
+                              Get.to(() => const TeacherNotificationsPage());
                             },
                             child: Container(
                               width: 70,
@@ -1137,7 +1137,7 @@ class _TeacherMainPageState extends State<TeacherMainPage> {
                           Expanded(
                               child: InkWell(
                             onTap: () {
-                              Get.to(() => TeacherNotificationsPage());
+                              Get.to(() => const TeacherNotificationsPage());
                             },
                             child: Container(
                               width: 70,
@@ -1334,7 +1334,7 @@ class _TeacherMainPageState extends State<TeacherMainPage> {
                         Expanded(
                             child: InkWell(
                           onTap: () {
-                            Get.to(() => TeacherNotificationsPage());
+                            Get.to(() => const TeacherNotificationsPage());
                           },
                           child: Container(
                             width: 70,
@@ -1763,10 +1763,10 @@ class _TeacherMainPageState extends State<TeacherMainPage> {
               ? Pages.elementAt(PageIndex)
               : LiquidPullToRefresh(
                   showChildOpacityTransition: false,
-                  backgroundColor: Color.fromARGB(255, 74, 193, 241),
+                  backgroundColor: const Color.fromARGB(255, 74, 193, 241),
                   color: const Color.fromARGB(255, 233, 255, 247),
                   onRefresh: () async {
-                    await Future.delayed(Duration(milliseconds: 500));
+                    await Future.delayed(const Duration(milliseconds: 500));
                     setState(() {
                       _initializeData();
                     });
@@ -1803,9 +1803,9 @@ class _TeacherMainPageState extends State<TeacherMainPage> {
                                       width: double.infinity,
                                       alignment: Alignment.center,
                                       child: CMaker(
-                                        padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                                        padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
                                         circularRadius: 15,
-                                        color: Color.fromARGB(255, 74, 193, 241),
+                                        color: const Color.fromARGB(255, 74, 193, 241),
                                         child: TMaker(
                                             text: "Log Out",
                                             fontSize: 20,
@@ -1863,10 +1863,10 @@ class _TeacherMainPageState extends State<TeacherMainPage> {
                 ? Pages.elementAt(PageIndex)
                 : LiquidPullToRefresh(
                     showChildOpacityTransition: false,
-                    backgroundColor: Color.fromARGB(255, 74, 193, 241),
+                    backgroundColor: const Color.fromARGB(255, 74, 193, 241),
                     color: const Color.fromARGB(255, 233, 255, 247),
                     onRefresh: () async {
-                      await Future.delayed(Duration(milliseconds: 500));
+                      await Future.delayed(const Duration(milliseconds: 500));
                       setState(() {
                         _initializeData();
                       });
@@ -1903,9 +1903,9 @@ class _TeacherMainPageState extends State<TeacherMainPage> {
                                         width: double.infinity,
                                         alignment: Alignment.center,
                                         child: CMaker(
-                                          padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                                          padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
                                           circularRadius: 15,
-                                          color: Color.fromARGB(255, 74, 193, 241),
+                                          color: const Color.fromARGB(255, 74, 193, 241),
                                           child: TMaker(
                                               text: "Log Out",
                                               fontSize: 20,
@@ -1958,10 +1958,10 @@ class _TeacherMainPageState extends State<TeacherMainPage> {
               ? Pages.elementAt(PageIndex)
               : LiquidPullToRefresh(
                   showChildOpacityTransition: false,
-                  backgroundColor: Color.fromARGB(255, 74, 193, 241),
+                  backgroundColor: const Color.fromARGB(255, 74, 193, 241),
                   color: const Color.fromARGB(255, 233, 255, 247),
                   onRefresh: () async {
-                    await Future.delayed(Duration(milliseconds: 500));
+                    await Future.delayed(const Duration(milliseconds: 500));
                     setState(() {
                       _initializeData();
                     });
@@ -1998,9 +1998,9 @@ class _TeacherMainPageState extends State<TeacherMainPage> {
                                       width: double.infinity,
                                       alignment: Alignment.center,
                                       child: CMaker(
-                                        padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                                        padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
                                         circularRadius: 15,
-                                        color: Color.fromARGB(255, 74, 193, 241),
+                                        color: const Color.fromARGB(255, 74, 193, 241),
                                         child: TMaker(
                                             text: "Log Out",
                                             fontSize: 20,
@@ -2020,20 +2020,20 @@ class _TeacherMainPageState extends State<TeacherMainPage> {
     if (ConnectedToInternet) {
       print("====================================\nConnected to internet");
       return (TeacherMainPageIsLoading)
-          ? Scaffold(
-              backgroundColor: const Color.fromARGB(255, 233, 255, 247),
+          ? const Scaffold(
+              backgroundColor: Color.fromARGB(255, 233, 255, 247),
               body: Center(
                   child: CircularProgressIndicator(
                 color: Color.fromARGB(255, 74, 193, 241),
               )))
           : Scaffold(
-              backgroundColor: Color.fromARGB(255, 74, 193, 241),
+              backgroundColor: const Color.fromARGB(255, 74, 193, 241),
               body: LiquidPullToRefresh(
                   showChildOpacityTransition: false,
-                  backgroundColor: Color.fromARGB(255, 74, 193, 241),
+                  backgroundColor: const Color.fromARGB(255, 74, 193, 241),
                   color: const Color.fromARGB(255, 233, 255, 247),
                   onRefresh: () async {
-                    await Future.delayed(Duration(milliseconds: 500));
+                    await Future.delayed(const Duration(milliseconds: 500));
                     setState(() {
                       _initializeData();
                     });
@@ -2045,10 +2045,10 @@ class _TeacherMainPageState extends State<TeacherMainPage> {
           backgroundColor: const Color.fromARGB(255, 233, 255, 247),
           body: LiquidPullToRefresh(
             showChildOpacityTransition: false,
-            backgroundColor: Color.fromARGB(255, 74, 193, 241),
+            backgroundColor: const Color.fromARGB(255, 74, 193, 241),
             color: const Color.fromARGB(255, 233, 255, 247),
             onRefresh: () async {
-              await Future.delayed(Duration(milliseconds: 500));
+              await Future.delayed(const Duration(milliseconds: 500));
               setState(() {
                 _initializeData();
               });
@@ -2058,7 +2058,7 @@ class _TeacherMainPageState extends State<TeacherMainPage> {
                     height: 150,
                     width: 270,
                     color: Colors.white,
-                    boxShadow: [
+                    boxShadow: const [
                       BoxShadow(offset: Offset(1, 1), blurRadius: 6, spreadRadius: .03, color: Color.fromARGB(82, 0, 0, 0)),
                     ],
                     circularRadius: 20,
