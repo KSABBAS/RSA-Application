@@ -113,6 +113,8 @@ class _StudentMainPageState extends State<StudentMainPage> {
     print(name);
     print(grade);
     profile_data = await dbService.FiGet_profile_data(student_id, "${role}s") as Map<String, dynamic>;
+    print("teacher_profile_data $profile_data");
+    AccountActivation = stringToBool(profile_data['state']);
     await regetmessages();
     setState(() {
       isLoading = false;
