@@ -1,8 +1,10 @@
 import 'dart:developer';
 
 import 'package:edu_academy/MyTools.dart';
+import 'package:edu_academy/PoweredBy.dart';
 import 'package:edu_academy/service/Databse_Service.dart';
 import 'package:flutter/services.dart';
+import 'package:get/get.dart';
 import 'package:panara_dialogs/panara_dialogs.dart';
 import 'package:flutter/material.dart';
 import 'package:overlay_loading_progress/overlay_loading_progress.dart';
@@ -34,80 +36,80 @@ class _LoginPageState extends State<LogInPage> {
     Widget InputPart = SizedBox(
       height: 250,
       width: double.infinity,
-      child:Column(
-          children: [
-            Expanded(
-              child: Container(),
-            ),
-            TextFormField(
-              initialValue: last_input1_value,
-              onSaved: (newValue) {
-                FullName = newValue!;
-              },
-              decoration: InputDecoration(
-                  icon: const Icon(Icons.person_sharp),
-                  focusedErrorBorder: OutlineInputBorder(
-                      borderSide: const BorderSide(
-                          color: Color.fromARGB(255, 192, 192, 192)),
-                      borderRadius: BorderRadius.circular(30)),
-                  errorBorder: OutlineInputBorder(
-                      borderSide: const BorderSide(
-                          color: Color.fromARGB(255, 192, 192, 192)),
-                      borderRadius: BorderRadius.circular(30)),
-                  label: const Text(
-                    "Email or Phone Number",
-                    style: TextStyle(fontSize: 15, fontWeight: FontWeight.w600),
-                  ),
-                  enabledBorder: OutlineInputBorder(
-                      borderSide: const BorderSide(
-                          color: Color.fromARGB(255, 192, 192, 192)),
-                      borderRadius: BorderRadius.circular(30)),
-                  focusedBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(15))),
-            ),
-            Expanded(
-              child: Container(),
-            ),
-            TextFormField(
-              initialValue: last_input2_value,
-              onSaved: (newValue) {
-                Password = newValue!;
-              },
-              obscureText: obscureText,
-              decoration: InputDecoration(
-                  icon: const Icon(Icons.password),
-                  focusedErrorBorder: OutlineInputBorder(
-                      borderSide: const BorderSide(
-                          color: Color.fromARGB(255, 192, 192, 192)),
-                      borderRadius: BorderRadius.circular(30)),
-                  errorBorder: OutlineInputBorder(
-                      borderSide: const BorderSide(
-                          color: Color.fromARGB(255, 192, 192, 192)),
-                      borderRadius: BorderRadius.circular(30)),
-                  suffix: InkWell(
-                    onTap: () {
-                      setState(() {
-                        obscureText = !obscureText;
-                      });
-                    },
-                    child: const Icon(Icons.remove_red_eye_outlined),
-                  ),
-                  label: const Text(
-                    "Password",
-                    style: TextStyle(fontSize: 15, fontWeight: FontWeight.w600),
-                  ),
-                  enabledBorder: OutlineInputBorder(
-                      borderSide: const BorderSide(
-                          color: Color.fromARGB(255, 192, 192, 192)),
-                      borderRadius: BorderRadius.circular(30)),
-                  focusedBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(15))),
-            ),
-            Expanded(
-              child: Container(),
-            ),
-          ],
-        ),
+      child: Column(
+        children: [
+          Expanded(
+            child: Container(),
+          ),
+          TextFormField(
+            initialValue: last_input1_value,
+            onSaved: (newValue) {
+              FullName = newValue!;
+            },
+            decoration: InputDecoration(
+                icon: const Icon(Icons.person_sharp),
+                focusedErrorBorder: OutlineInputBorder(
+                    borderSide: const BorderSide(
+                        color: Color.fromARGB(255, 192, 192, 192)),
+                    borderRadius: BorderRadius.circular(30)),
+                errorBorder: OutlineInputBorder(
+                    borderSide: const BorderSide(
+                        color: Color.fromARGB(255, 192, 192, 192)),
+                    borderRadius: BorderRadius.circular(30)),
+                label: const Text(
+                  "Email or Phone Number",
+                  style: TextStyle(fontSize: 15, fontWeight: FontWeight.w600),
+                ),
+                enabledBorder: OutlineInputBorder(
+                    borderSide: const BorderSide(
+                        color: Color.fromARGB(255, 192, 192, 192)),
+                    borderRadius: BorderRadius.circular(30)),
+                focusedBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(15))),
+          ),
+          Expanded(
+            child: Container(),
+          ),
+          TextFormField(
+            initialValue: last_input2_value,
+            onSaved: (newValue) {
+              Password = newValue!;
+            },
+            obscureText: obscureText,
+            decoration: InputDecoration(
+                icon: const Icon(Icons.password),
+                focusedErrorBorder: OutlineInputBorder(
+                    borderSide: const BorderSide(
+                        color: Color.fromARGB(255, 192, 192, 192)),
+                    borderRadius: BorderRadius.circular(30)),
+                errorBorder: OutlineInputBorder(
+                    borderSide: const BorderSide(
+                        color: Color.fromARGB(255, 192, 192, 192)),
+                    borderRadius: BorderRadius.circular(30)),
+                suffix: InkWell(
+                  onTap: () {
+                    setState(() {
+                      obscureText = !obscureText;
+                    });
+                  },
+                  child: const Icon(Icons.remove_red_eye_outlined),
+                ),
+                label: const Text(
+                  "Password",
+                  style: TextStyle(fontSize: 15, fontWeight: FontWeight.w600),
+                ),
+                enabledBorder: OutlineInputBorder(
+                    borderSide: const BorderSide(
+                        color: Color.fromARGB(255, 192, 192, 192)),
+                    borderRadius: BorderRadius.circular(30)),
+                focusedBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(15))),
+          ),
+          Expanded(
+            child: Container(),
+          ),
+        ],
+      ),
     );
     Widget LoginButton = InkWell(
         child: Container(
@@ -252,8 +254,40 @@ class _LoginPageState extends State<LogInPage> {
                 fontWeight: FontWeight.w700),
           ),
         ));
-    print(PageWidth(context));
-    print(PageHeight(context));
+    Widget PoweredBy = CMaker(
+      child: Row(
+        children: [
+          Expanded(
+              flex: 20,
+              child: CMaker(
+                  alignment: Alignment.centerRight,
+                  child: TMaker(
+                      text: "Powered By",
+                      fontSize: 18,
+                      fontWeight: FontWeight.w600,
+                      color: (PageWidth(context) < 550)
+                          ? const Color.fromARGB(52, 128, 128, 128)
+                          : Colors.white))),
+          Expanded(
+              flex: 25,
+              child: InkWell(
+                onTap: () {
+                  Get.to(()=>PoweredByPage());
+                },
+                child: CMaker(
+                  circularRadius: 15,
+                    alignment: Alignment.centerLeft,
+                    child:TMaker(
+                            text: " Codeveloper",
+                            fontSize: 25,
+                            fontWeight: FontWeight.w600,
+                            color: (PageWidth(context) < 550)
+                                ? Color.fromARGB(211, 255, 217, 0)
+                                : Colors.white)),
+              ))
+        ],
+      ),
+    );
     if (PageWidth(context) <= 550) {
       print("===============================================\nis a phone");
       setState(() {
@@ -277,40 +311,42 @@ class _LoginPageState extends State<LogInPage> {
                         ])),
                     child: Row(
                       children: [
-                          Expanded(
-                            child: LoginCircle,
-                          ),
+                        Expanded(
+                          child: LoginCircle,
+                        ),
                         Expanded(
                             child: CMaker(
-                                alignment: Alignment.center,
-                                child: Logo))
+                                alignment: Alignment.center, child: Logo))
                       ],
                     ),
                   ),
-                  Expanded(flex: 2,child: Container()),
-                  CMaker(margin: const EdgeInsetsDirectional.symmetric(horizontal: 20),child: InputPart),
-                  Expanded(flex: 2,child: Container()),
-                            CMaker(alignment: Alignment.center,child: LoginButton),
-                  Expanded(flex: 1,child: Container()),
-                            CMaker(
-                                child: Row(
-                              children: [
-                                Expanded(
-                                  child: ToWhatAreYouPage[0],
-                                ),
-                                Expanded(
-                                  child: ToWhatAreYouPage[1],
-                                ),
-                              ],
-                            )),
-                  Expanded(flex: 2,child: Container()),
+                  Expanded(flex: 2, child: Container()),
+                  CMaker(
+                      margin:
+                          const EdgeInsetsDirectional.symmetric(horizontal: 20),
+                      child: InputPart),
+                  Expanded(flex: 2, child: Container()),
+                  CMaker(alignment: Alignment.center, child: LoginButton),
+                  Expanded(flex: 1, child: Container()),
+                  CMaker(
+                      child: Row(
+                    children: [
+                      Expanded(
+                        child: ToWhatAreYouPage[0],
+                      ),
+                      Expanded(
+                        child: ToWhatAreYouPage[1],
+                      ),
+                    ],
+                  )),
+                  Expanded(flex: 2, child: PoweredBy),
                 ],
               ),
             ),
           ),
         );
       });
-    } else if(PageWidth(context) >= 550&&PageHeight(context)>=900){
+    } else if (PageWidth(context) >= 550 && PageHeight(context) >= 900) {
       print("===============================================\nnot a phone");
       setState(() {
         LoginBody = Scaffold(
@@ -329,17 +365,17 @@ class _LoginPageState extends State<LogInPage> {
                     ]),
                 child: Column(
                   children: [
-                    Expanded(flex: 3,child: Container()),
+                    Expanded(flex: 3, child: Container()),
                     CMaker(
-                      height: PageHeight(context)/6,
+                      height: PageHeight(context) / 6,
                       child: Row(
                         children: [
-                      Expanded(
-                        child: Image.asset(
-                                                  "images/Logo.png",
-                                                  fit: BoxFit.contain,
-                                                ),
-                      ),
+                          Expanded(
+                            child: Image.asset(
+                              "images/Logo.png",
+                              fit: BoxFit.contain,
+                            ),
+                          ),
                         ],
                       ),
                     ),
@@ -348,12 +384,15 @@ class _LoginPageState extends State<LogInPage> {
                         color: Colors.white,
                         height: 400,
                         width: 450,
-                        padding: const EdgeInsets.only(top: 20, right: 20, left: 20),
+                        padding:
+                            const EdgeInsets.only(top: 20, right: 20, left: 20),
                         child: ListView(
                           children: [
                             InputPart,
-                            CMaker(alignment: Alignment.center,child: LoginButton),
-                            const Padding(padding:EdgeInsets.only(bottom: 20)),
+                            CMaker(
+                                alignment: Alignment.center,
+                                child: LoginButton),
+                            const Padding(padding: EdgeInsets.only(bottom: 20)),
                             Row(
                               children: [
                                 Expanded(
@@ -367,13 +406,13 @@ class _LoginPageState extends State<LogInPage> {
                             Expanded(child: Container()),
                           ],
                         )),
-                    Expanded(flex: 5, child: Container()),
+                    Expanded(flex: 5, child: PoweredBy),
                   ],
                 )),
           ),
         );
       });
-    } else if(PageWidth(context) >= 550&&PageHeight(context)<900){
+    } else if (PageWidth(context) >= 550 && PageHeight(context) < 900) {
       print("===============================================\nnot a phone");
       setState(() {
         LoginBody = Scaffold(
@@ -390,48 +429,76 @@ class _LoginPageState extends State<LogInPage> {
                       Color.fromARGB(255, 8, 125, 159),
                       Color.fromARGB(255, 74, 193, 241)
                     ]),
-                child: Row(
+                child: Column(
                   children: [
                     Expanded(child: Container()),
-                  CMaker(width: PageWidth(context)/3,child: Column(
-                    children: [
-                      Expanded(child: Container(),),
-                      Expanded(flex: 20,child: CMaker(width: 200,
-                        child: Image.asset(
-                                                  "images/Logo.png",
-                                                  fit: BoxFit.contain,
-                                                ),)),
-                      Expanded(child: Container(),),
-                    ],
-                  ),),
-                  Expanded(child: Container()),
-                  CMaker(
-                        circularRadius: 20,
-                        color: Colors.white,
-                        height: 400,
-                        width: (PageWidth(context)<800)? PageWidth(context)/2:400,
-                        padding: const EdgeInsets.only(top: 20, right: 20, left: 20),
-                        child: Column(
+                    Expanded(
+                      flex: 6,
+                      child: CMaker(
+                        child: Row(
                           children: [
-                            InputPart,
-                            CMaker(alignment: Alignment.center,child: LoginButton),
-                            const Padding(padding:EdgeInsets.only(bottom: 20)),
-                              CMaker(
-                                child: Row(
-                                  children: [
-                                    Expanded(
-                                      child: ToWhatAreYouPage[0],
-                                    ),
-                                    Expanded(
-                                      child: ToWhatAreYouPage[1],
-                                    )
-                                  ],
-                                ),
+                            Expanded(child: Container()),
+                            CMaker(
+                              width: PageWidth(context) / 3,
+                              child: Column(
+                                children: [
+                                  Expanded(
+                                    child: Container(),
+                                  ),
+                                  Expanded(
+                                      flex: 20,
+                                      child: CMaker(
+                                        width: 200,
+                                        child: Image.asset(
+                                          "images/Logo.png",
+                                          fit: BoxFit.contain,
+                                        ),
+                                      )),
+                                  Expanded(
+                                    child: Container(),
+                                  ),
+                                ],
                               ),
+                            ),
+                            Expanded(child: Container()),
+                            CMaker(
+                                circularRadius: 20,
+                                color: Colors.white,
+                                height: 400,
+                                width: (PageWidth(context) < 800)
+                                    ? PageWidth(context) / 2
+                                    : 400,
+                                padding: const EdgeInsets.only(
+                                    top: 20, right: 20, left: 20),
+                                child: Column(
+                                  children: [
+                                    InputPart,
+                                    CMaker(
+                                        alignment: Alignment.center,
+                                        child: LoginButton),
+                                    const Padding(
+                                        padding: EdgeInsets.only(bottom: 20)),
+                                    CMaker(
+                                      child: Row(
+                                        children: [
+                                          Expanded(
+                                            child: ToWhatAreYouPage[0],
+                                          ),
+                                          Expanded(
+                                            child: ToWhatAreYouPage[1],
+                                          )
+                                        ],
+                                      ),
+                                    ),
+                                    Expanded(child: Container()),
+                                  ],
+                                )),
                             Expanded(child: Container()),
                           ],
-                        )),
-                    Expanded( child: Container()),
+                        ),
+                      ),
+                    ),
+                    Expanded(child: PoweredBy),
                   ],
                 )),
           ),
