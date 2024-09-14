@@ -16,6 +16,8 @@ import 'package:string_extensions/string_extensions.dart';
 import 'package:sidebar_with_animation/animated_side_bar.dart';
 import 'package:liquid_pull_to_refresh/liquid_pull_to_refresh.dart';
 
+import '../TeacherPages/TeacherMainPage.dart';
+
 class StudentMainPage extends StatefulWidget {
   const StudentMainPage({super.key});
 
