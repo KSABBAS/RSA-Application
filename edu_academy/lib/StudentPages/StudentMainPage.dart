@@ -84,7 +84,10 @@ class _StudentMainPageState extends State<StudentMainPage> {
     });
     fetch();
   }
-
+  bool stringToBool(String value) {
+  print("stringToBool ${value} ${value.toLowerCase() == 'true'}");
+  return value.toLowerCase() == 'true';
+}
   regetmessages() async {
     List ggrtr = await dbService.fiGet_Hw(grade, student_id);
     // HomeWorks.add(ggrtr);
