@@ -102,7 +102,7 @@ class _SplashViewPageState extends State<SplashViewPage> with SingleTickerProvid
                   )),
               Expanded(flex: 5, child: Container()),
               Expanded(flex: 2,child: CMaker(alignment: Alignment.bottomCenter,child: Opacity(opacity: fading?.value,child: TMaker(text: "Powered By", fontSize: 18, fontWeight:FontWeight.w600, color: const Color.fromARGB(210, 243, 243, 243))))),
-              Expanded(flex: 3,child: CMaker(alignment: Alignment.topCenter,child: Opacity(opacity: fading?.value,child: TextButton(onPressed: (){}, child: TMaker(text: "Codeveloper", fontSize: 25, fontWeight:FontWeight.w600, color: const Color.fromARGB(210, 243, 243, 243))))))
+              Expanded(flex: 3,child: CMaker(alignment: Alignment.topCenter,child: Opacity(opacity: fading?.value,child:TMaker(text: "Codeveloper", fontSize: 25, fontWeight:FontWeight.w600, color: const Color.fromARGB(210, 243, 243, 243)))))
             ],
           ),
         ),
