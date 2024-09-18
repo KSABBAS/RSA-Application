@@ -1,6 +1,7 @@
 // import 'dart:convert';
 import 'dart:developer';
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
+import 'package:edu_academy/StudentPages/SecondPageContents.dart';
 import 'package:edu_academy/TeacherPages/Notifications.dart';
 import 'package:edu_academy/TeacherPages/TeacherProfilePage.dart';
 import 'package:edu_academy/TeacherPages/TeacherSecondPageContents.dart';
@@ -81,8 +82,9 @@ List<List> TableData = [
   ["الجمعة", "عربي", "انجليزي", "رياضيات", "رسم", "دين"],
 ];
 
+bool TeacherMainPageIsLoading = true;
+
 class _TeacherMainPageState extends State<TeacherMainPage> {
-  bool TeacherMainPageIsLoading = true;
   bool ConnectedToInternet = true;
   // ListOfGrades = [];
   // data base start
@@ -112,13 +114,16 @@ class _TeacherMainPageState extends State<TeacherMainPage> {
   }
 
   Future<void> _initializeData() async {
+    GradesSubjects = await dbService.FiGet_allSub_indexs();
+    Subjects = await dbService.FiGet_allSub_data();
     print("start .._initializeData ");
     ListOfGrades = [];
     print("ListOfGrades $ListOfGrades");
     final SharedPreferences prefs = await SharedPreferences.getInstance();
-    final List<String>? items = prefs.getStringList('id');
+    final List<String>? items = await prefs.getStringList('id');
     log(items.toString());
     if (items != null && items.isNotEmpty) {
+      print("items != null && items.isNotEmpty ${items != null && items.isNotEmpty}");
       print("start .. setState");
       name = items[2].split("-")[0];
       name = "${name.split(" ")[0]} ${name.split(" ")[1]}".toTitleCase;
@@ -129,6 +134,10 @@ class _TeacherMainPageState extends State<TeacherMainPage> {
       Teacher_Id = items[0].split("#")[1];
       Teacher_role = items[0].toString().split("#")[0];
       print("Teacher_role $Teacher_role");
+      print("Teacher_Id $Teacher_Id");
+    teacher_profile_data = await dbService.FiGet_profile_data(Teacher_Id, Teacher_role) as Map<String, dynamic>;
+    print("teacher_profile_data $teacher_profile_data");
+    AccountActivation = stringToBool(teacher_profile_data['state']);
       subjects_string = items[2]
           .split('-')
           .sublist(1)
@@ -141,6 +150,8 @@ class _TeacherMainPageState extends State<TeacherMainPage> {
       print("data0 $data0");
       sub_data = data0;
       int index_ = 0;
+      
+
       for (String i in sub_data.keys) {
         Subject_techer[index_] = i;
         index_++;
@@ -151,28 +162,28 @@ class _TeacherMainPageState extends State<TeacherMainPage> {
       print("sub_data $sub_data");
       print("Subject_techer $Subject_techer");
       print("sub_data[SubjectThatIsSelected]!.keys ${sub_data[SubjectThatIsSelected]}");
-
-      for (var i in sub_data[SubjectThatIsSelected]!.keys) {
-        print("i $i");
-        print("ii ${sub_data[SubjectThatIsSelected]![i]}");
-        List gg = [];
-        for (var j in sub_data[SubjectThatIsSelected]![i]!) {
-          print("j$j");
-          gg.add(j);
+      if (sub_data.isNotEmpty) {
+        for (var i in sub_data[SubjectThatIsSelected]!.keys) {
+          print("i $i");
+          print("ii ${sub_data[SubjectThatIsSelected]![i]}");
+          List gg = [];
+          for (var j in sub_data[SubjectThatIsSelected]![i]!) {
+            print("j$j");
+            gg.add(j);
+          }
+          print("gg $gg");
+          ListOfGrades.add([i, gg]);
+          gg = [];
+          print("ListOfGrades $ListOfGrades");
         }
-        print("gg $gg");
-        ListOfGrades.add([i, gg]);
-        gg = [];
-        print("ListOfGrades $ListOfGrades");
       }
       // for (var i in sub_data[SubjectThatIsSelected]!.keys) {
       //   print(i);
       // }
-      teacher_profile_data = await dbService.FiGet_profile_data(Teacher_Id, Teacher_role) as Map<String, dynamic>;
-      print("teacher_profile_data $teacher_profile_data");
-      AccountActivation = stringToBool(teacher_profile_data['state']);
-      TeacherMainPageIsLoading = false;
-      setState(() {});
+      
+      setState(() {
+        TeacherMainPageIsLoading = false;
+      });
     }
   }
 

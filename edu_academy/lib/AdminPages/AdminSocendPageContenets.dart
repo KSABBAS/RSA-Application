@@ -660,7 +660,7 @@ class _ChangeSubjectsAndGradesState extends State<ChangeSubjectsAndGrades> {
                                 margin: const EdgeInsets.only(right: 7, left: 20, bottom: 20),
                                 circularRadius: 15,
                                 color: const Color.fromARGB(255, 233, 255, 247),
-                                padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 15),
+                                padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 1),
                                 child: CheckboxListTile(
                                     title: Text(GradesSubjects.keys.elementAt(index * 2)),
                                     value: () {
@@ -696,7 +696,7 @@ class _ChangeSubjectsAndGradesState extends State<ChangeSubjectsAndGrades> {
                                       margin: const EdgeInsets.only(right: 7, left: 20, bottom: 20),
                                       circularRadius: 15,
                                       color: const Color.fromARGB(255, 233, 255, 247),
-                                      padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 15),
+                                      padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 1),
                                       child: CheckboxListTile(
                                           title: Text(GradesSubjects.keys.elementAt((index * 2) + 1)),
                                           value: () {

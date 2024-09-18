@@ -2,6 +2,7 @@ import 'dart:developer';
 
 import 'package:edu_academy/MyTools.dart';
 import 'package:edu_academy/PoweredBy.dart';
+import 'package:edu_academy/StudentPages/SecondPageContents.dart';
 import 'package:edu_academy/service/Databse_Service.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
@@ -49,23 +50,16 @@ class _LoginPageState extends State<LogInPage> {
             decoration: InputDecoration(
                 icon: const Icon(Icons.person_sharp),
                 focusedErrorBorder: OutlineInputBorder(
-                    borderSide: const BorderSide(
-                        color: Color.fromARGB(255, 192, 192, 192)),
-                    borderRadius: BorderRadius.circular(30)),
+                    borderSide: const BorderSide(color: Color.fromARGB(255, 192, 192, 192)), borderRadius: BorderRadius.circular(30)),
                 errorBorder: OutlineInputBorder(
-                    borderSide: const BorderSide(
-                        color: Color.fromARGB(255, 192, 192, 192)),
-                    borderRadius: BorderRadius.circular(30)),
+                    borderSide: const BorderSide(color: Color.fromARGB(255, 192, 192, 192)), borderRadius: BorderRadius.circular(30)),
                 label: const Text(
                   "Email or Phone Number",
                   style: TextStyle(fontSize: 15, fontWeight: FontWeight.w600),
                 ),
                 enabledBorder: OutlineInputBorder(
-                    borderSide: const BorderSide(
-                        color: Color.fromARGB(255, 192, 192, 192)),
-                    borderRadius: BorderRadius.circular(30)),
-                focusedBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(15))),
+                    borderSide: const BorderSide(color: Color.fromARGB(255, 192, 192, 192)), borderRadius: BorderRadius.circular(30)),
+                focusedBorder: OutlineInputBorder(borderRadius: BorderRadius.circular(15))),
           ),
           Expanded(
             child: Container(),
@@ -79,13 +73,9 @@ class _LoginPageState extends State<LogInPage> {
             decoration: InputDecoration(
                 icon: const Icon(Icons.password),
                 focusedErrorBorder: OutlineInputBorder(
-                    borderSide: const BorderSide(
-                        color: Color.fromARGB(255, 192, 192, 192)),
-                    borderRadius: BorderRadius.circular(30)),
+                    borderSide: const BorderSide(color: Color.fromARGB(255, 192, 192, 192)), borderRadius: BorderRadius.circular(30)),
                 errorBorder: OutlineInputBorder(
-                    borderSide: const BorderSide(
-                        color: Color.fromARGB(255, 192, 192, 192)),
-                    borderRadius: BorderRadius.circular(30)),
+                    borderSide: const BorderSide(color: Color.fromARGB(255, 192, 192, 192)), borderRadius: BorderRadius.circular(30)),
                 suffix: InkWell(
                   onTap: () {
                     setState(() {
@@ -99,11 +89,8 @@ class _LoginPageState extends State<LogInPage> {
                   style: TextStyle(fontSize: 15, fontWeight: FontWeight.w600),
                 ),
                 enabledBorder: OutlineInputBorder(
-                    borderSide: const BorderSide(
-                        color: Color.fromARGB(255, 192, 192, 192)),
-                    borderRadius: BorderRadius.circular(30)),
-                focusedBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(15))),
+                    borderSide: const BorderSide(color: Color.fromARGB(255, 192, 192, 192)), borderRadius: BorderRadius.circular(30)),
+                focusedBorder: OutlineInputBorder(borderRadius: BorderRadius.circular(15))),
           ),
           Expanded(
             child: Container(),
@@ -116,15 +103,10 @@ class _LoginPageState extends State<LogInPage> {
           alignment: Alignment.center,
           height: 50,
           width: 120,
-          decoration: BoxDecoration(
-              color: const Color.fromARGB(255, 74, 193, 241),
-              borderRadius: BorderRadius.circular(30)),
+          decoration: BoxDecoration(color: const Color.fromARGB(255, 74, 193, 241), borderRadius: BorderRadius.circular(30)),
           child: const Text(
             "Log in",
-            style: TextStyle(
-                fontSize: 20,
-                color: Color.fromARGB(255, 255, 255, 255),
-                fontWeight: FontWeight.w700),
+            style: TextStyle(fontSize: 20, color: Color.fromARGB(255, 255, 255, 255), fontWeight: FontWeight.w700),
           ),
         ),
         onTap: () async {
@@ -136,8 +118,7 @@ class _LoginPageState extends State<LogInPage> {
             key1.currentState!.save();
           }
           // send data to data base
-          await prefs
-              .setStringList('Login_last_value', <String>[FullName, Password]);
+          await prefs.setStringList('Login_last_value', <String>[FullName, Password]);
           // log("['$FullName', '$Password']" as num);
           OverlayLoadingProgress.start(
             context,
@@ -157,10 +138,12 @@ class _LoginPageState extends State<LogInPage> {
           List data = await dbService.fiRead_ForLogin(FullName, Password);
           OverlayLoadingProgress.stop();
           if (data[0]) {
-            await prefs.setStringList(
-                'id', <String>['${data[1]}', '${data[2]}', '${data[3]}']);
-            log("['${data[1]}', '${data[2]}', '${data[3]}']");
-            print("data from database services $data");
+            await prefs.setStringList('id', <String>['${data[1]}', '${data[2]}', '${data[3]}']);
+            // log("['${data[1]}', '${data[2]}', '${data[3]}']");
+            // print("data from database services $data");
+            //loade data
+            // GradesSubjects = await dbService.FiGet_allSub_indexs();
+            // Subjects = await dbService.FiGet_allSub_data();
             PanaraInfoDialog.show(
               context,
               title: "Success",
@@ -185,8 +168,7 @@ class _LoginPageState extends State<LogInPage> {
             PanaraInfoDialog.show(
               context,
               title: "Sorry",
-              message:
-                  "Email or name does not exist \n or the password is wrong",
+              message: "Email or name does not exist \n or the password is wrong",
               buttonText: "Okay",
               onTapDismiss: () {
                 Navigator.pop(context);
@@ -203,10 +185,7 @@ class _LoginPageState extends State<LogInPage> {
         alignment: Alignment.centerRight,
         child: const Text(
           "New User ? ",
-          style: TextStyle(
-              fontSize: 15,
-              color: Color.fromARGB(255, 206, 206, 206),
-              fontWeight: FontWeight.w500),
+          style: TextStyle(fontSize: 15, color: Color.fromARGB(255, 206, 206, 206), fontWeight: FontWeight.w500),
         ),
       ),
       Container(
@@ -218,10 +197,7 @@ class _LoginPageState extends State<LogInPage> {
             },
             child: const Text(
               "Sign up",
-              style: TextStyle(
-                  fontSize: 15,
-                  color: Color.fromARGB(255, 74, 193, 241),
-                  fontWeight: FontWeight.w500),
+              style: TextStyle(fontSize: 15, color: Color.fromARGB(255, 74, 193, 241), fontWeight: FontWeight.w500),
             )),
       ),
     ];
@@ -240,18 +216,12 @@ class _LoginPageState extends State<LogInPage> {
           height: 160,
           decoration: const BoxDecoration(
             borderRadius: BorderRadius.only(
-                bottomLeft: Radius.zero,
-                topLeft: Radius.circular(10),
-                topRight: Radius.circular(5000),
-                bottomRight: Radius.circular(10)),
+                bottomLeft: Radius.zero, topLeft: Radius.circular(10), topRight: Radius.circular(5000), bottomRight: Radius.circular(10)),
             color: Color.fromARGB(255, 255, 255, 255),
           ),
           child: const Text(
             "Log in",
-            style: TextStyle(
-                fontSize: 35,
-                color: Color.fromARGB(255, 8, 125, 159),
-                fontWeight: FontWeight.w700),
+            style: TextStyle(fontSize: 35, color: Color.fromARGB(255, 8, 125, 159), fontWeight: FontWeight.w700),
           ),
         ));
     Widget PoweredBy = CMaker(
@@ -263,29 +233,25 @@ class _LoginPageState extends State<LogInPage> {
                   alignment: Alignment.centerRight,
                   child: TMaker(
                       text: "Powered By",
-                      fontSize: 18,
+                      fontSize: 14,
                       fontWeight: FontWeight.w600,
-                      color: (PageWidth(context) < 550)
-                          ? const Color.fromARGB(93, 128, 128, 128)
-                          : Colors.white))),
+                      color: (PageWidth(context) < 550) ? const Color.fromARGB(255, 0, 0, 0) : Colors.white))),
           Expanded(
-              flex: 25,
-              child: CMaker(
-                  circularRadius: 15,
-                    alignment: Alignment.centerLeft,
-                    child:TextButton(
-                      onPressed: () {
-                        Get.to(()=>PoweredByPage());
-                      },
-                      child: TMaker(
-                              text: "Codeveloper",
-                              fontSize: 25,
-                              fontWeight: FontWeight.w600,
-                              color: (PageWidth(context) < 550)
-                                  ? Color.fromARGB(138, 82, 82, 82)
-                                  : Colors.white),
-                    )),
-              )
+            flex: 25,
+            child: CMaker(
+                circularRadius: 15,
+                alignment: Alignment.centerLeft,
+                child: TextButton(
+                  onPressed: () {
+                    Get.to(() => PoweredByPage());
+                  },
+                  child: TMaker(
+                      text: "Codeveloper",
+                      fontSize: 20,
+                      fontWeight: FontWeight.w600,
+                      color: (PageWidth(context) < 550) ? Color.fromARGB(255, 178, 212, 28) : Colors.white),
+                )),
+          )
         ],
       ),
     );
@@ -306,26 +272,18 @@ class _LoginPageState extends State<LogInPage> {
                         gradient: LinearGradient(
                             begin: Alignment.bottomLeft,
                             end: Alignment.topRight,
-                            colors: [
-                          Color.fromARGB(255, 8, 125, 159),
-                          Color.fromARGB(255, 74, 193, 241)
-                        ])),
+                            colors: [Color.fromARGB(255, 8, 125, 159), Color.fromARGB(255, 74, 193, 241)])),
                     child: Row(
                       children: [
                         Expanded(
                           child: LoginCircle,
                         ),
-                        Expanded(
-                            child: CMaker(
-                                alignment: Alignment.center, child: Logo))
+                        Expanded(child: CMaker(alignment: Alignment.center, child: Logo))
                       ],
                     ),
                   ),
                   Expanded(flex: 2, child: Container()),
-                  CMaker(
-                      margin:
-                          const EdgeInsetsDirectional.symmetric(horizontal: 20),
-                      child: InputPart),
+                  CMaker(margin: const EdgeInsetsDirectional.symmetric(horizontal: 20), child: InputPart),
                   Expanded(flex: 2, child: Container()),
                   CMaker(alignment: Alignment.center, child: LoginButton),
                   Expanded(flex: 1, child: Container()),
@@ -360,10 +318,7 @@ class _LoginPageState extends State<LogInPage> {
                 gradient: const LinearGradient(
                     begin: Alignment.bottomLeft,
                     end: Alignment.topRight,
-                    colors: [
-                      Color.fromARGB(255, 8, 125, 159),
-                      Color.fromARGB(255, 74, 193, 241)
-                    ]),
+                    colors: [Color.fromARGB(255, 8, 125, 159), Color.fromARGB(255, 74, 193, 241)]),
                 child: Column(
                   children: [
                     Expanded(flex: 3, child: Container()),
@@ -385,14 +340,11 @@ class _LoginPageState extends State<LogInPage> {
                         color: Colors.white,
                         height: 400,
                         width: 450,
-                        padding:
-                            const EdgeInsets.only(top: 20, right: 20, left: 20),
+                        padding: const EdgeInsets.only(top: 20, right: 20, left: 20),
                         child: ListView(
                           children: [
                             InputPart,
-                            CMaker(
-                                alignment: Alignment.center,
-                                child: LoginButton),
+                            CMaker(alignment: Alignment.center, child: LoginButton),
                             const Padding(padding: EdgeInsets.only(bottom: 20)),
                             Row(
                               children: [
@@ -426,10 +378,7 @@ class _LoginPageState extends State<LogInPage> {
                 gradient: const LinearGradient(
                     begin: Alignment.bottomLeft,
                     end: Alignment.topRight,
-                    colors: [
-                      Color.fromARGB(255, 8, 125, 159),
-                      Color.fromARGB(255, 74, 193, 241)
-                    ]),
+                    colors: [Color.fromARGB(255, 8, 125, 159), Color.fromARGB(255, 74, 193, 241)]),
                 child: Column(
                   children: [
                     Expanded(child: Container()),
@@ -466,19 +415,13 @@ class _LoginPageState extends State<LogInPage> {
                                 circularRadius: 20,
                                 color: Colors.white,
                                 height: 400,
-                                width: (PageWidth(context) < 800)
-                                    ? PageWidth(context) / 2
-                                    : 400,
-                                padding: const EdgeInsets.only(
-                                    top: 20, right: 20, left: 20),
+                                width: (PageWidth(context) < 800) ? PageWidth(context) / 2 : 400,
+                                padding: const EdgeInsets.only(top: 20, right: 20, left: 20),
                                 child: Column(
                                   children: [
                                     InputPart,
-                                    CMaker(
-                                        alignment: Alignment.center,
-                                        child: LoginButton),
-                                    const Padding(
-                                        padding: EdgeInsets.only(bottom: 20)),
+                                    CMaker(alignment: Alignment.center, child: LoginButton),
+                                    const Padding(padding: EdgeInsets.only(bottom: 20)),
                                     CMaker(
                                       child: Row(
                                         children: [

@@ -3,6 +3,8 @@ import 'dart:developer';
 
 import 'package:edu_academy/Login/LogInPage.dart';
 import 'package:edu_academy/MyTools.dart';
+import 'package:edu_academy/StudentPages/SecondPageContents.dart';
+import 'package:edu_academy/service/Databse_Service.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -18,6 +20,9 @@ class _SplashViewPageState extends State<SplashViewPage> with SingleTickerProvid
   Animation? fading;
   @override
   void initState() {
+    final dbService = DatabaseService();
+    // GradesSubjects = await dbService.FiGet_allSub_indexs();
+    // Subjects = await dbService.FiGet_allSub_data();
     super.initState();
     animationController = AnimationController(vsync: this, duration: const Duration(milliseconds: 3000));
     fading = Tween<double>(begin: 0, end: 1).animate(animationController!)
@@ -92,7 +97,7 @@ class _SplashViewPageState extends State<SplashViewPage> with SingleTickerProvid
                                 decoration: BoxDecoration(
                                   borderRadius: BorderRadius.circular(10),
                                 ),
-                                child: Image.network("https://firebasestorage.googleapis.com/v0/b/rsa-app-3ec3f.appspot.com/o/Logo.png?alt=media&token=d871e5de-8e8a-489e-a93e-08bda4c65d80"),
+                                child: Image.asset("images/Logo.png"),
                               ),
                             )),
                         Expanded(flex: 1, child: Container()),

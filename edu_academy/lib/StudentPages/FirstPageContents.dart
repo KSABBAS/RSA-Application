@@ -45,9 +45,10 @@ class _StudentFirstMainPageState extends State<StudentFirstMainPage> {
       final SharedPreferences prefs = await SharedPreferences.getInstance();
       final List<String>? items = prefs.getStringList('id');
       grade = items![2].split("-")[1];
+      String grade0 = grade.contains('(Lang)') ? grade.replaceAll('(Lang)', '').trim() : grade;
       final real = FirebaseDatabase.instance;
-      final allMes = real.ref("Messages").child(grade);
-      print("grade $grade");
+      final allMes = real.ref("Messages").child(grade0);
+      print("grade $grade0");
       allMes.onValue.listen(
         (event) {
           setState(() {
@@ -56,11 +57,15 @@ class _StudentFirstMainPageState extends State<StudentFirstMainPage> {
               print("realTimeValues $realTimeValues");
               Map map = realTimeValues as Map;
               print("map.keys ${map.keys}");
+              Messgaes_list = [];
               for (var i in map.keys) {
                 for (var j in map[i].keys) {
                   Messgaes_list.add([i, map[i][j][3], map[i][j][0]]);
                 }
               }
+              print("Messgaes_list ${Messgaes_list}");
+              Messgaes_list.sort((a, b) => b[1].compareTo(a[1]));
+              Messgaes_list = Messgaes_list.reversed.toList();
             } catch (e) {
               print("e $e");
             }
@@ -97,28 +102,19 @@ class _StudentFirstMainPageState extends State<StudentFirstMainPage> {
                         height: (200) / TableData.length,
                         child: Container(
                             decoration: BoxDecoration(
-                              border: const Border(
-                                  right: BorderSide(), bottom: BorderSide()),
+                              border: const Border(right: BorderSide(), bottom: BorderSide()),
                               borderRadius: BorderRadius.only(
-                                topLeft: ("$ColumnIndex $RowIndex" == "0 0")
+                                topLeft: ("$ColumnIndex $RowIndex" == "0 0") ? const Radius.circular(10) : const Radius.circular(0),
+                                bottomLeft:
+                                    ("$ColumnIndex $RowIndex" == "0 ${TableData.length - 1}") ? const Radius.circular(10) : const Radius.circular(0),
+                                topRight: ("$ColumnIndex $RowIndex" == "${TableData[0].length - 1} 0")
                                     ? const Radius.circular(10)
                                     : const Radius.circular(0),
-                                bottomLeft: ("$ColumnIndex $RowIndex" ==
-                                        "0 ${TableData.length - 1}")
-                                    ? const Radius.circular(10)
-                                    : const Radius.circular(0),
-                                topRight: ("$ColumnIndex $RowIndex" ==
-                                        "${TableData[0].length - 1} 0")
-                                    ? const Radius.circular(10)
-                                    : const Radius.circular(0),
-                                bottomRight: ("$ColumnIndex $RowIndex" ==
-                                        "${TableData[0].length - 1} ${TableData.length - 1}")
+                                bottomRight: ("$ColumnIndex $RowIndex" == "${TableData[0].length - 1} ${TableData.length - 1}")
                                     ? const Radius.circular(10)
                                     : const Radius.circular(0),
                               ),
-                              color: (ColumnIndex == 0 || RowIndex == 0)
-                                  ? const Color.fromARGB(255, 36, 160, 209)
-                                  : Colors.white,
+                              color: (ColumnIndex == 0 || RowIndex == 0) ? const Color.fromARGB(255, 36, 160, 209) : Colors.white,
                             ),
                             alignment: Alignment.center,
                             child: TMaker(
@@ -147,11 +143,7 @@ class _StudentFirstMainPageState extends State<StudentFirstMainPage> {
         children: [
           CMaker(
               boxShadow: const [
-                BoxShadow(
-                    offset: Offset(1, 1),
-                    blurRadius: 6,
-                    spreadRadius: .03,
-                    color: Color.fromARGB(82, 0, 0, 0)),
+                BoxShadow(offset: Offset(1, 1), blurRadius: 6, spreadRadius: .03, color: Color.fromARGB(82, 0, 0, 0)),
               ],
               circularRadius: 15,
               child: Column(
@@ -161,20 +153,14 @@ class _StudentFirstMainPageState extends State<StudentFirstMainPage> {
                       Expanded(
                           child: Container(
                         decoration: const BoxDecoration(
-                            borderRadius:
-                                BorderRadius.only(topLeft: Radius.circular(15)),
-                            color: Color.fromARGB(255, 36, 160, 209)),
+                            borderRadius: BorderRadius.only(topLeft: Radius.circular(15)), color: Color.fromARGB(255, 36, 160, 209)),
                         height: (PageWidth(context) < 550)
                             ? 80
                             : (PageHeight(context) < 900)
                                 ? 100
                                 : 150,
-                        child: TMaker(
-                            textAlign: TextAlign.center,
-                            text: "Time and Day",
-                            fontSize: 17,
-                            fontWeight: FontWeight.w500,
-                            color: Colors.white),
+                        child:
+                            TMaker(textAlign: TextAlign.center, text: "Time and Day", fontSize: 17, fontWeight: FontWeight.w500, color: Colors.white),
                       )),
                       Expanded(
                           child: CMaker(
@@ -256,16 +242,14 @@ class _StudentFirstMainPageState extends State<StudentFirstMainPage> {
                           child: Container(
                         alignment: Alignment.center,
                         decoration: const BoxDecoration(
-                            borderRadius: BorderRadius.only(
-                                topRight: Radius.circular(15)),
-                            color: Color.fromARGB(255, 36, 160, 209)),
+                            borderRadius: BorderRadius.only(topRight: Radius.circular(15)), color: Color.fromARGB(255, 36, 160, 209)),
                         height: (PageWidth(context) < 550)
                             ? 80
                             : (PageHeight(context) < 900)
                                 ? 100
                                 : 150,
                         child: TMaker(
-                            text: "12:30\nto\n1:15",//2:00 - 1:15 //2:45 - 2:00
+                            text: "12:30\nto\n1:15", //2:00 - 1:15 //2:45 - 2:00
                             fontSize: (PageWidth(context) < 550)
                                 ? 13
                                 : (PageHeight(context) < 900)
@@ -287,28 +271,16 @@ class _StudentFirstMainPageState extends State<StudentFirstMainPage> {
                         itemBuilder: (context, index) {
                           return CMaker(
                               height: 70,
-                              width: (PageWidth(context) >= 550 &&
-                                      PageWidth(context) < 1200 &&
-                                      PageHeight(context) < 900)
-                                  ? (PageWidth(context) - 165) /
-                                      TableData[0].length
-                                  : (PageWidth(context) >= 550 &&
-                                          PageWidth(context) >= 1200 &&
-                                          PageHeight(context) < 900)
-                                      ? (PageWidth(context) - 790) /
-                                          TableData[0].length
-                                      : ((PageWidth(context) - 40) /
-                                          TableData[0].length),
+                              width: (PageWidth(context) >= 550 && PageWidth(context) < 1200 && PageHeight(context) < 900)
+                                  ? (PageWidth(context) - 165) / TableData[0].length
+                                  : (PageWidth(context) >= 550 && PageWidth(context) >= 1200 && PageHeight(context) < 900)
+                                      ? (PageWidth(context) - 790) / TableData[0].length
+                                      : ((PageWidth(context) - 40) / TableData[0].length),
                               child: Container(
                                   decoration: BoxDecoration(
                                     borderRadius: BorderRadius.only(
-                                        bottomLeft: (index == 0)
-                                            ? const Radius.circular(15)
-                                            : const Radius.circular(0),
-                                        bottomRight:
-                                            (index == TableData[0].length - 1)
-                                                ? const Radius.circular(15)
-                                                : const Radius.circular(0)),
+                                        bottomLeft: (index == 0) ? const Radius.circular(15) : const Radius.circular(0),
+                                        bottomRight: (index == TableData[0].length - 1) ? const Radius.circular(15) : const Radius.circular(0)),
                                     color: Colors.white,
                                   ),
                                   alignment: Alignment.center,
@@ -316,11 +288,7 @@ class _StudentFirstMainPageState extends State<StudentFirstMainPage> {
                                       text: "${TableData[DayIndex][index]}",
                                       fontSize: 15,
                                       fontWeight: FontWeight.w600,
-                                      color: (index == 0)
-                                          ? const Color.fromARGB(
-                                              255, 36, 160, 209)
-                                          : const Color.fromARGB(
-                                              255, 0, 0, 0))));
+                                      color: (index == 0) ? const Color.fromARGB(255, 36, 160, 209) : const Color.fromARGB(255, 0, 0, 0))));
                         },
                       ))
                 ],
@@ -329,12 +297,7 @@ class _StudentFirstMainPageState extends State<StudentFirstMainPage> {
       ),
     );
     Widget NextClassTC = CMaker(
-        width: 130,
-        child: TMaker(
-            text: "Next Class :",
-            fontSize: 20,
-            fontWeight: FontWeight.w600,
-            color: const Color.fromARGB(153, 24, 58, 60)));
+        width: 130, child: TMaker(text: "Next Class :", fontSize: 20, fontWeight: FontWeight.w600, color: const Color.fromARGB(153, 24, 58, 60)));
     Widget LessonAndDate = Container(
         alignment: Alignment.centerLeft,
         width: 150,
@@ -346,8 +309,8 @@ class _StudentFirstMainPageState extends State<StudentFirstMainPage> {
               color: const Color.fromARGB(153, 24, 58, 60)),
           subtitle: TMaker(
               text: () {
-                if (int.parse(grade[grade.length - 1]) <= 6 &&
-                    grade[grade.length - 2] == " ") {
+                String grade_0 = grade.contains('(Lang)') ? grade.replaceAll('(Lang)', '').trim() : grade;
+                if (int.parse(grade_0[grade_0.length - 1]) <= 6 && grade[grade.length - 2] == " ") {
                   return "Password:0000";
                 } else {
                   return "Password:2000";
@@ -360,8 +323,7 @@ class _StudentFirstMainPageState extends State<StudentFirstMainPage> {
     Widget JoinButton = InkWell(
       onTap: () {
         _launchURL(
-            url: (int.parse(grade[grade.length - 1]) <= 6 &&
-                    grade[grade.length - 2] == " ")
+            url: (int.parse(grade[grade.length - 1]) <= 6 && grade[grade.length - 2] == " ")
                 ? "https://us06web.zoom.us/j/3088571822?pwd=E5VM4ANDKYA5jW59RKUuwRvVA2onkA.1"
                 : "https://us06web.zoom.us/j/5052829198");
       },
@@ -402,11 +364,7 @@ class _StudentFirstMainPageState extends State<StudentFirstMainPage> {
         color: const Color.fromARGB(255, 255, 255, 255));
     Widget TeacherNotesWindow = CMaker(
         boxShadow: const [
-          BoxShadow(
-              offset: Offset(1, 1),
-              blurRadius: 6,
-              spreadRadius: .03,
-              color: Color.fromARGB(82, 0, 0, 0)),
+          BoxShadow(offset: Offset(1, 1), blurRadius: 6, spreadRadius: .03, color: Color.fromARGB(82, 0, 0, 0)),
         ],
         circularRadius: 20,
         margin: const EdgeInsets.symmetric(horizontal: 20),
@@ -421,13 +379,11 @@ class _StudentFirstMainPageState extends State<StudentFirstMainPage> {
           itemCount: Messgaes_list.length,
           itemBuilder: (context, index) {
             return CMaker(
-              border: Border.all(
-                  width: 1, color: const Color.fromARGB(31, 78, 78, 78)),
+              border: Border.all(width: 1, color: const Color.fromARGB(31, 78, 78, 78)),
               circularRadius: 20,
               color: const Color.fromARGB(255, 36, 160, 209),
               padding: const EdgeInsets.only(top: 15, right: 15, left: 15),
-              margin: const EdgeInsets.only(
-                  bottom: 0, top: 20, left: 15, right: 15),
+              margin: const EdgeInsets.only(bottom: 0, top: 20, left: 15, right: 15),
               child: Column(
                 children: [
                   Row(
@@ -442,8 +398,7 @@ class _StudentFirstMainPageState extends State<StudentFirstMainPage> {
                                   : 30,
                           padding: const EdgeInsets.symmetric(horizontal: 15),
                           child: TMaker(
-                              text:
-                                  "${Messgaes_list[index][0]} - ${Messgaes_list[index][1]}",
+                              text: "${Messgaes_list[index][0]} - ${Messgaes_list[index][1]}",
                               fontSize: (PageWidth(context) < 550)
                                   ? 22
                                   : (PageHeight(context) < 900)
@@ -483,20 +438,14 @@ class _StudentFirstMainPageState extends State<StudentFirstMainPage> {
               const Padding(padding: EdgeInsets.only(top: 20)),
               Column(
                 children: [
-                  CMaker(
-                      margin: const EdgeInsets.symmetric(horizontal: 20),
-                      child: OneDayTable),
+                  CMaker(margin: const EdgeInsets.symmetric(horizontal: 20), child: OneDayTable),
                   const Padding(padding: EdgeInsets.only(bottom: 20)),
                   CMaker(
                       circularRadius: 20,
                       height: 150,
                       margin: const EdgeInsets.symmetric(horizontal: 20),
                       boxShadow: const [
-                        BoxShadow(
-                            offset: Offset(1, 1),
-                            blurRadius: 6,
-                            spreadRadius: .03,
-                            color: Color.fromARGB(82, 0, 0, 0)),
+                        BoxShadow(offset: Offset(1, 1), blurRadius: 6, spreadRadius: .03, color: Color.fromARGB(82, 0, 0, 0)),
                       ],
                       width: double.infinity,
                       color: Colors.white,
@@ -526,10 +475,7 @@ class _StudentFirstMainPageState extends State<StudentFirstMainPage> {
                               ),
                             ],
                           )),
-                          Expanded(
-                              child: CMaker(
-                                  alignment: Alignment.center,
-                                  child: JoinButton))
+                          Expanded(child: CMaker(alignment: Alignment.center, child: JoinButton))
                         ],
                       )),
                   const Padding(padding: EdgeInsets.only(bottom: 30)),
@@ -565,20 +511,14 @@ class _StudentFirstMainPageState extends State<StudentFirstMainPage> {
               const Padding(padding: EdgeInsets.only(top: 20)),
               Column(
                 children: [
-                  CMaker(
-                      margin: const EdgeInsets.symmetric(horizontal: 20),
-                      child: OneDayTable),
+                  CMaker(margin: const EdgeInsets.symmetric(horizontal: 20), child: OneDayTable),
                   const Padding(padding: EdgeInsets.only(bottom: 40)),
                   CMaker(
                       circularRadius: 20,
                       height: 200,
                       margin: const EdgeInsets.symmetric(horizontal: 20),
                       boxShadow: const [
-                        BoxShadow(
-                            offset: Offset(1, 1),
-                            blurRadius: 6,
-                            spreadRadius: .03,
-                            color: Color.fromARGB(82, 0, 0, 0)),
+                        BoxShadow(offset: Offset(1, 1), blurRadius: 6, spreadRadius: .03, color: Color.fromARGB(82, 0, 0, 0)),
                       ],
                       width: double.infinity,
                       color: Colors.white,
@@ -608,10 +548,7 @@ class _StudentFirstMainPageState extends State<StudentFirstMainPage> {
                               ),
                             ],
                           )),
-                          Expanded(
-                              child: CMaker(
-                                  alignment: Alignment.center,
-                                  child: JoinButton))
+                          Expanded(child: CMaker(alignment: Alignment.center, child: JoinButton))
                         ],
                       )),
                   const Padding(padding: EdgeInsets.only(bottom: 50)),
@@ -648,22 +585,14 @@ class _StudentFirstMainPageState extends State<StudentFirstMainPage> {
                   (PageWidth(context) < 1200)
                       ? Column(
                           children: [
-                            CMaker(
-                                margin:
-                                    const EdgeInsets.symmetric(horizontal: 20),
-                                child: OneDayTable),
+                            CMaker(margin: const EdgeInsets.symmetric(horizontal: 20), child: OneDayTable),
                             const Padding(padding: EdgeInsets.only(bottom: 40)),
                             CMaker(
                                 circularRadius: 20,
                                 height: 200,
-                                margin:
-                                    const EdgeInsets.symmetric(horizontal: 20),
+                                margin: const EdgeInsets.symmetric(horizontal: 20),
                                 boxShadow: const [
-                                  BoxShadow(
-                                      offset: Offset(1, 1),
-                                      blurRadius: 6,
-                                      spreadRadius: .03,
-                                      color: Color.fromARGB(82, 0, 0, 0)),
+                                  BoxShadow(offset: Offset(1, 1), blurRadius: 6, spreadRadius: .03, color: Color.fromARGB(82, 0, 0, 0)),
                                 ],
                                 width: double.infinity,
                                 color: Colors.white,
@@ -693,10 +622,7 @@ class _StudentFirstMainPageState extends State<StudentFirstMainPage> {
                                         ),
                                       ],
                                     )),
-                                    Expanded(
-                                        child: CMaker(
-                                            alignment: Alignment.center,
-                                            child: JoinButton))
+                                    Expanded(child: CMaker(alignment: Alignment.center, child: JoinButton))
                                   ],
                                 )),
                           ],
@@ -705,24 +631,15 @@ class _StudentFirstMainPageState extends State<StudentFirstMainPage> {
                           width: double.infinity,
                           child: Row(
                             children: [
-                              Expanded(
-                                  child: CMaker(
-                                      margin: const EdgeInsets.symmetric(
-                                          horizontal: 20),
-                                      child: OneDayTable)),
+                              Expanded(child: CMaker(margin: const EdgeInsets.symmetric(horizontal: 20), child: OneDayTable)),
                               const Padding(padding: EdgeInsets.only(left: 20)),
                               CMaker(
                                   circularRadius: 20,
                                   height: 200,
                                   width: 350,
-                                  margin: const EdgeInsets.symmetric(
-                                      horizontal: 20),
+                                  margin: const EdgeInsets.symmetric(horizontal: 20),
                                   boxShadow: const [
-                                    BoxShadow(
-                                        offset: Offset(1, 1),
-                                        blurRadius: 6,
-                                        spreadRadius: .03,
-                                        color: Color.fromARGB(82, 0, 0, 0)),
+                                    BoxShadow(offset: Offset(1, 1), blurRadius: 6, spreadRadius: .03, color: Color.fromARGB(82, 0, 0, 0)),
                                   ],
                                   color: Colors.white,
                                   child: Column(
@@ -751,10 +668,7 @@ class _StudentFirstMainPageState extends State<StudentFirstMainPage> {
                                           ),
                                         ],
                                       )),
-                                      Expanded(
-                                          child: CMaker(
-                                              alignment: Alignment.center,
-                                              child: JoinButton))
+                                      Expanded(child: CMaker(alignment: Alignment.center, child: JoinButton))
                                     ],
                                   )),
                             ],

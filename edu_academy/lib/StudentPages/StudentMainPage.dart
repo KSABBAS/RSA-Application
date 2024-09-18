@@ -29,6 +29,7 @@ int PageIndex = 0;
 
 String name = "loading....";
 String grade = "loading....";
+String grade_full = "loading....";
 String student_id = '';
 String role = '';
 GlobalKey<FormState> NewKey = GlobalKey();
@@ -102,6 +103,8 @@ class _StudentMainPageState extends State<StudentMainPage> {
   Future<void> fetch() async {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
     final List<String>? items = prefs.getStringList('id');
+    GradesSubjects = await dbService.FiGet_allSub_indexs();
+    Subjects = await dbService.FiGet_allSub_data();
 
     print("==================\n=================\n$items");
     if (items != null && items.isNotEmpty) {

@@ -915,7 +915,7 @@ class _TeacherThirdPageContentsState extends State<TeacherThirdPageContents> {
                                 circularRadius: 20,
                                 margin: const EdgeInsets.only(left: 20, right: 20),
                                 child: TMaker(
-                                    text: "Grade ${GradeHomeWorkOppenedIndex + 1} Homework",
+                                    text: "$Grade_selected Homework",
                                     fontSize: 30,
                                     fontWeight: FontWeight.w600,
                                     color: const Color.fromARGB(255, 0, 0, 0))),
@@ -924,12 +924,12 @@ class _TeacherThirdPageContentsState extends State<TeacherThirdPageContents> {
                               circularRadius: 20,
                               height: PageHeight(context) - 420,
                               child: ListView.builder(
-                                  itemCount: 3,
-                                  itemBuilder: (context, index) {
+                                  itemCount: all_Homeworks.length,
+                                  itemBuilder: (context, index2) {
                                     return InkWell(
                                         onTap: () {
                                           setState(() {
-                                            IsOpendIndex = index;
+                                            IsOpendIndex = index2;
                                             GradeHomeWorkIsOppened = false;
                                             NewHomeWork = false;
                                             AllhomeWorks = false;
@@ -951,14 +951,14 @@ class _TeacherThirdPageContentsState extends State<TeacherThirdPageContents> {
                                               CMaker(
                                                   alignment: Alignment.centerLeft,
                                                   padding: const EdgeInsets.only(left: 10),
-                                                  child: TMaker(text: "Title", fontSize: 30, fontWeight: FontWeight.w700, color: Colors.black)),
+                                                  child: TMaker(text: all_Homeworks[index2][0], fontSize: 30, fontWeight: FontWeight.w700, color: Colors.black)),
                                               const Padding(padding: EdgeInsets.only(bottom: 10)),
                                               CMaker(
                                                   alignment: Alignment.centerLeft,
                                                   padding: const EdgeInsets.only(left: 10),
                                                   child: TMaker(
                                                       textAlign: TextAlign.start,
-                                                      text: "Body",
+                                                      text: all_Homeworks[index2][1],
                                                       fontSize: 17,
                                                       fontWeight: FontWeight.w700,
                                                       color: const Color.fromARGB(255, 86, 86, 86))),
@@ -967,7 +967,7 @@ class _TeacherThirdPageContentsState extends State<TeacherThirdPageContents> {
                                                 height: 70,
                                                 width: double.infinity,
                                                 child: GridView.builder(
-                                                  itemCount: 4,
+                                                  itemCount: (all_Homeworks[index2][4] as List).length,
                                                   gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                                                       crossAxisCount: 6, crossAxisSpacing: 10, mainAxisSpacing: 10),
                                                   itemBuilder: (context, index) {
@@ -975,8 +975,12 @@ class _TeacherThirdPageContentsState extends State<TeacherThirdPageContents> {
                                                       onTap: () {
                                                         setState(() {});
                                                       },
-                                                      child: Image.asset(
-                                                        "images/Logo.png",
+                                                      child: Image.network(
+                                                        () {
+                                                          print("=================================\n$all_Homeworks");
+                                                          print(index);
+                                                          return all_Homeworks[index2][4][index];
+                                                        }(),
                                                         fit: BoxFit.fitWidth,
                                                       ),
                                                     );
@@ -1393,10 +1397,10 @@ class _TeacherThirdPageContentsState extends State<TeacherThirdPageContents> {
               ),
             );
             List<dynamic> filesList = [];
-            print(HomeworkImagesLinks);
+            print("HomeworkImagesLinks ${HomeworkImagesLinks}");
             if (HomeworkImagesLinks.isNotEmpty) {
               filesList = await dbService.stHwStore(HomeworkImagesLinks);
-              print(filesList);
+              print("filesList ${filesList}");
             }
             //fiAdd_Hw(String Grade, String Subject, String Teacher_Id, List Files_List,
             //String HomeworkTitle, String HomeworkBody, String score)
@@ -2241,7 +2245,7 @@ class _TeacherThirdPageContentsState extends State<TeacherThirdPageContents> {
                                           return "un scored";
                                         } else {
                                           // scored done
-                                          return "${solved_hw_student[index][4]}/${solved_hw_student[index][7]}";
+                                          return "${solved_hw_student[index][7]}/${solved_hw_student[index][4]}";
                                         }
                                       }
                                       // return "hi";

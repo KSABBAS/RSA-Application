@@ -20,17 +20,35 @@ class DatabaseService {
 
   // RealTime
   rePublicMessages_Send(String sub, String Grade, String messgae, String date, String duration, String name) async {
-    try {
-      final allStudents = real.ref("Messages").child(Grade).child(sub);
-      final oness = await allStudents.once();
-      print(oness.snapshot.value);
-      int numS = oness.snapshot.children.length;
-      log(numS.toString());
-      await allStudents.child("messgae${numS + 1}").set([messgae, date, duration, name]);
-    } catch (e) {
-      log(e.toString());
+  Grade = Grade.contains('(Lang)') ? Grade.replaceAll('(Lang)', '').trim() : Grade;
+  print("in rePublicMessages_Send $Grade");
+  try {
+    print("#1");
+    final allStudents = real.ref("Messages").child(Grade).child(sub);
+    print("#2");
+
+    // Replace `once()` with `get()` to fetch the data
+    final snapshot = await allStudents.get();
+
+    if (!snapshot.exists) {
+      print("No data found at this reference.");
+      // return; // Exit if no data exists
     }
+
+    print("#3");
+    print("snapshot.value ${snapshot.value}");
+    
+    int numS = snapshot.children.length; // Get the number of children
+    log(numS.toString());
+
+    // Add new message
+    await allStudents.child("messgae${numS + 1}").set([messgae, date, duration, name]);
+    print("#4");
+  } catch (e) {
+    print("rePublicMessages_Send error ${e.toString()}");
   }
+}
+
 
   // FireStore
   fiCreate(String rref, userData) async {
@@ -101,6 +119,7 @@ class DatabaseService {
   }
 
   fiRead_Records(String grade, String subject) async {
+    grade = grade.contains('(Lang)') ? grade.replaceAll('(Lang)', '').trim() : grade;
     log("fiRead_Records");
     List<List<dynamic>> retList = [];
 
@@ -115,6 +134,7 @@ class DatabaseService {
   }
 
   fiRead_Books(String grade, String subject) async {
+    grade = grade.contains('(Lang)') ? grade.replaceAll('(Lang)', '').trim() : grade;
     log("fiRead_Books");
     log(grade);
     log(subject);
@@ -140,7 +160,13 @@ class DatabaseService {
       }
       Students_in_grades[doc["grade"].toString()]?.add([doc['name'], doc.id, doc['photo']]);
     }
-    print(Students_in_grades);
+    for (var doc in StudentsSnapshot.docs) {
+      //Grade = Grade.contains('(Lang)') ? Grade.replaceAll('(Lang)', '').trim() : Grade;
+      if (doc["grade"].toString().contains('(Lang)')) {
+        Students_in_grades[(doc["grade"].toString()).replaceAll('(Lang)', '').trim()]?.add([doc['name'], doc.id, doc['photo']]);
+      }
+    }
+    print("Students_in_grades ${Students_in_grades}");
   }
 
   fiGrades_and_Students(String teacherId, List<dynamic> Subjects) async {
@@ -151,8 +177,8 @@ class DatabaseService {
     Map<String, Map<String, List<dynamic>>> lastRe = {};
     for (String i in Subjects) {
       List ll = i.replaceAll(RegExp(r"[\[\]']"), '').split(", ");
-      print(ll[0]);
-      print(ll.sublist(1));
+      print("ll[0] ${ll[0]}");
+      print("ll.sublist(1) ${ll.sublist(1)}");
       for (var j in ll.sublist(1)) {
         print(j);
         print(Students_in_grades[j.toString()]);
@@ -163,11 +189,13 @@ class DatabaseService {
         lastRe[ll[0]]![j] = Students_in_grades[j.toString()] ?? [];
       }
     }
-    print(lastRe);
+    print("lastRe ${lastRe}");
     return lastRe;
   }
 
   fiAdd_Hw(String Grade, String Subject, String teacherId, List<dynamic> filesList, String HomeworkTitle, String HomeworkBody, String score) async {
+    Grade = Grade.contains('(Lang)') ? Grade.replaceAll('(Lang)', '').trim() : Grade;
+
     ///Homework/Grade 1/عربي
     CollectionReference Homework = fire.collection('Homework').doc(Grade).collection(Subject);
 
@@ -181,8 +209,9 @@ class DatabaseService {
   }
 
   fiGet_Hw(String Grade, String studentId) async {
+    Grade = Grade.contains('(Lang)') ? Grade.replaceAll('(Lang)', '').trim() : Grade;
     print("fiGet_Hw student_id $studentId");
-// Reference to the specific document within the 'Homework' collection
+    // Reference to the specific document within the 'Homework' collection
     DocumentReference documentReference = fire.collection('Homework').doc(Grade);
 
     // List of known sub-collection names
@@ -311,6 +340,7 @@ class DatabaseService {
 
   FiAdd_Solve(List<dynamic> hwId, String studentId, String hwSolveBody, List<dynamic> hwSolveFiles) async {
     // hw id,student_id,hw solve body,hw files
+    hwId[0] = hwId[0].contains('(Lang)') ? hwId[0].replaceAll('(Lang)', '').trim() : hwId[0];
 
     ///Homework/Grade 1/عربي/NY63UvWuWPWfjzutq745/solve /id
     print("FiAdd_Solve hw_id $hwId $hwSolveFiles");
@@ -322,16 +352,10 @@ class DatabaseService {
     print("FiAdd_Solve hw_id4 $hwId");
 
     return true;
-
-    // DocumentSnapshot documentSnapshot = await documentReference.get();
-
-    // Map<String, dynamic>? data =
-    //     documentSnapshot.data() as Map<String, dynamic>?;
-    // // Now you can access your data using the `data` variable.
-    // print(data);
   }
 
   Fi_getAll_HW(String grade, String subject) async {
+    grade = grade.contains('(Lang)') ? grade.replaceAll('(Lang)', '').trim() : grade;
     CollectionReference collection = fire.collection('Homework').doc(grade).collection(subject);
 
     QuerySnapshot querySnapshot = await collection.get();
@@ -344,11 +368,12 @@ class DatabaseService {
   }
 
   FiGet_profile_data(String id, String role) async {
+    //Users/Teacher/Teacher/CMyGS4GfdOuMDcoEL9nb
     DocumentReference documentReference = fire.collection('Users').doc(role).collection(role).doc(id);
 
     ///Users/Students/Students/S5  Student
     DocumentSnapshot documentSnapshot = await documentReference.get();
-    print(documentSnapshot);
+    print(documentSnapshot.data());
     Map<String, dynamic>? data = documentSnapshot.data() as Map<String, dynamic>?;
     print("FiGet_profile_data $data");
     return data as Map<String, dynamic>;
@@ -391,6 +416,7 @@ class DatabaseService {
   }
 
   FiGet_All_info_with_student_id(String studentId, String garde, String subject) async {
+    garde = garde.contains('(Lang)') ? garde.replaceAll('(Lang)', '').trim() : garde;
     print("## student_id $studentId");
     // /Homework/Grade 1/عربي/NY63UvWuWPWfjzutq745/Solve/S1
     //                                                   doc
@@ -458,14 +484,15 @@ class DatabaseService {
   }
 
   FiAdd_score_and_comment(String garde, String subject, String hwId, String stId, String comment, String score) async {
+    garde = garde.contains('(Lang)') ? garde.replaceAll('(Lang)', '').trim() : garde;
+
     ///Homework/Grade 1/عربي/NY63UvWuWPWfjzutq745/Solve/S1
     print("-$garde-$subject-$hwId-$stId-$comment-$score");
     try {
       // DatabaseReference ref = FirebaseDatabase.instance 1
       //     .ref("Homework/${garde}/${subject}/${Hw_id}/Solve/${St_id}");
 
-      DocumentReference documentReference =
-          fire.collection('Homework').doc(garde).collection(subject).doc(hwId).collection("Solve").doc(stId);
+      DocumentReference documentReference = fire.collection('Homework').doc(garde).collection(subject).doc(hwId).collection("Solve").doc(stId);
 
       print("waselttt");
       await documentReference.update({"score": score, "comment": comment});
@@ -477,6 +504,7 @@ class DatabaseService {
   }
 
   FiAdd_book_file(String grade, String subject, String link, String fileName) async {
+    grade = grade.contains('(Lang)') ? grade.replaceAll('(Lang)', '').trim() : grade;
     //Book/SubjectsBooks/Grades/Grade 1/عربي/Book1
     var studentSnapshot = fire.collection('Book').doc("SubjectsBooks").collection("Grades").doc(grade).collection(subject);
     var docId = studentSnapshot.doc();
@@ -489,6 +517,7 @@ class DatabaseService {
   }
 
   FiDelete_books_file(String grade, String subject, String docId) async {
+    grade = grade.contains('(Lang)') ? grade.replaceAll('(Lang)', '').trim() : grade;
     //Book/SubjectsBooks/Grades/Grade 1/عربي/Book1
     var studentSnapshot = fire.collection('Book').doc("SubjectsBooks").collection("Grades").doc(grade).collection(subject).doc(docId);
 
@@ -496,6 +525,7 @@ class DatabaseService {
   }
 
   FiUpdate_profile_data(String grade, String role, String studentId, String StudentEmail, String NewProfileNumber, String NewProfilePassword) async {
+    grade = grade.contains('(Lang)') ? grade.replaceAll('(Lang)', '').trim() : grade;
     //Users/Students/Students/S1
     var studentSnapshot = fire.collection('Users').doc(role).collection(role).doc(studentId);
     studentSnapshot.update({
@@ -506,6 +536,7 @@ class DatabaseService {
   }
 
   FiDelete_Hw_techer(String garde, String subject, String hwId) async {
+    garde = garde.contains('(Lang)') ? garde.replaceAll('(Lang)', '').trim() : garde;
     DocumentReference studentSnapshot = fire.collection('Homework').doc(garde).collection(subject).doc(hwId);
 
     studentSnapshot.delete();
@@ -538,11 +569,42 @@ class DatabaseService {
     print("--$subjects ${subjects.length}");
     for (int i = 1; i <= subjects.length; i++) {
       print(i);
-    collections.update({"Subject$i":subjects[i-1] });
+      collections.update({"Subject$i": subjects[i - 1]});
     }
 
     // if
   }
+
+  FiGet_allSub_indexs() async {
+    //Subjects/Students
+    DocumentSnapshot<Map<String, dynamic>> documentSnapshot = await fire.collection('Subjects').doc('Students').get();
+
+    if (documentSnapshot.exists) {
+      Map<String, dynamic>? GradesSubjects = documentSnapshot.data();
+      GradesSubjects = Map.fromEntries(GradesSubjects!.entries.toList()..sort((a, b) => a.key.compareTo(b.key)));
+      return GradesSubjects;
+    } else {
+      print("FiGet_allSub_indexs");
+      return null;
+    }
+  }
+
+  FiGet_allSub_data() async {
+    //Subjects/Students_subs
+    DocumentSnapshot<Map<String, dynamic>> documentSnapshot = await fire.collection('Subjects').doc('Students_subs').get();
+
+    if (documentSnapshot.exists) {
+      List<dynamic> Subjects = documentSnapshot.data()?['Subjects'];
+
+      // Convert the list of maps to a List<List>
+      List<List> subjectsList = Subjects.map((subject) => [subject['image'], subject['subject']]).toList();
+      return subjectsList;
+    } else {
+      print("FiGet_allSub_data");
+      return null;
+    }
+  }
+
   //  end Admin data
 
   // Storage
@@ -655,15 +717,13 @@ class DatabaseService {
             return [];
           }
         } else {
-          List<dynamic> nameParts = file[0][1].toString().split(".");
-          String fileName = nameParts[0];
+          // List<dynamic> nameParts = file[0][1].toString().split(".");
+          // String fileName = nameParts[0];
 
           try {
-            var snapshot = await FirebaseStorage.instance.ref('Homeworks/$fileName').putData(
-                  file[0][0],
-                  SettableMetadata(
-                    contentType: lookupMimeType(file[0][1]),
-                  ),
+            var snapshot = await FirebaseStorage.instance.ref('Homeworks/${DateTime.now().millisecondsSinceEpoch}').putData(
+                  file[0],
+                  SettableMetadata(contentType: 'image/png'),
                 );
 
             print("Upload complete");
@@ -673,7 +733,8 @@ class DatabaseService {
 
             return [downloadUrl];
           } catch (e) {
-            print("Error during upload: $e");
+            print("Error during upload2: $e");
+            return [];
           }
         }
       }
@@ -703,6 +764,7 @@ class DatabaseService {
         }
       } else {
         print("emty files");
+        return [];
       }
     }
   }
@@ -758,5 +820,46 @@ class DatabaseService {
         print("emty files");
       }
     }
+  }
+
+  one_time_set() async {
+    return null;
+    // List<Map<String, String>> Subjects = [
+    //   {"image": "images/SubjectsIcons/ألماني.png", "subject": "ألماني"},
+    //   {"image": "images/SubjectsIcons/إيطالي.png", "subject": "إيطالي"},
+    //   {"image": "images/SubjectsIcons/استاتيكا.png", "subject": "استاتيكا"},
+    //   {"image": "images/SubjectsIcons/الأحياء.png", "subject": "الأحياء"},
+    //   {"image": "images/SubjectsIcons/التوكاتسو.png", "subject": "التوكاتسو"},
+    //   {"image": "images/SubjectsIcons/الجغرافيا.png", "subject": "الجغرافيا"},
+    //   {"image": "images/SubjectsIcons/الجيولوجيا.png", "subject": "الجيولوجيا"},
+    //   {"image": "images/SubjectsIcons/الرياضيات.png", "subject": "الرياضيات"},
+    //   {"image": "images/SubjectsIcons/العلوم.png", "subject": "العلوم"},
+    //   {"image": "images/SubjectsIcons/الفيزياء.png", "subject": "الفيزياء"},
+    //   {"image": "images/SubjectsIcons/الكيمياء.png", "subject": "الكيمياء"},
+    //   {"image": "images/SubjectsIcons/اللغة الأسبانية.png", "subject": "اللغة الأسبانية"},
+    //   {"image": "images/SubjectsIcons/اللغه الانجليزية.png", "subject": "اللغه الانجليزية"},
+    //   {"image": "images/SubjectsIcons/تاريخ.png", "subject": "تاريخ"},
+    //   {"image": "images/SubjectsIcons/تربية دينية.png", "subject": "تربية دينية"},
+    //   {"image": "images/SubjectsIcons/تربية فنية.png", "subject": "تربية فنية"},
+    //   {"image": "images/SubjectsIcons/تفاضل وتكامل.png", "subject": "تفاضل وتكامل"},
+    //   {"image": "images/SubjectsIcons/تكنولوجيا المعلومات.png", "subject": "تكنولوجيا المعلومات"},
+    //   {"image": "images/SubjectsIcons/جبر.png", "subject": "جبر"},
+    //   {"image": "images/SubjectsIcons/حاسب آلي.png", "subject": "حاسب آلي"},
+    //   {"image": "images/SubjectsIcons/دراسات .png", "subject": "دراسات"},
+    //   {"image": "images/SubjectsIcons/ديناميكا.png", "subject": "ديناميكا"},
+    //   {"image": "images/SubjectsIcons/علم النفس.png", "subject": "علم النفس"},
+    //   {"image": "images/SubjectsIcons/فرنساوي.png", "subject": "فرنساوي"},
+    //   {"image": "images/SubjectsIcons/فلسفه.png", "subject": "فلسفه"},
+    //   {"image": "images/SubjectsIcons/قيم واحترام الآخر.png", "subject": "قيم واحترام الآخر"},
+    //   {"image": "images/SubjectsIcons/مهارات المهنية.png", "subject": "مهارات المهنية"},
+    //   {"image": "images/SubjectsIcons/هندسة فراغيه.png", "subject": "هندسة فراغيه"},
+    //   {"image": "images/SubjectsIcons/هندسة.png", "subject": "هندسة"},
+    //   {"image": "images/SubjectsIcons/اكتشف.png", "subject": "اكتشف"},
+    //   {"image": "images/SubjectsIcons/عربي.png", "subject": "عربي"},
+    // ];
+    // //Subjects/Students
+    // await fire.collection('Subjects').doc('Students_subs').set({
+    //   'Subjects': Subjects,
+    // });
   }
 }

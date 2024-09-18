@@ -3,6 +3,7 @@ import 'package:edu_academy/AdminPages/AdminFirstPageContents.dart';
 import 'package:edu_academy/AdminPages/AdminSocendPageContenets.dart';
 import 'package:edu_academy/AdminPages/AdminThirdPageContents.dart';
 import 'package:edu_academy/MyTools.dart';
+import 'package:edu_academy/StudentPages/SecondPageContents.dart';
 import 'package:edu_academy/service/Databse_Service.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -51,6 +52,9 @@ class _AdminMainPageState extends State<AdminMainPage> {
 
   @override
   Teacher_data() async {
+    GradesSubjects = await dbService.FiGet_allSub_indexs();
+    Subjects = await dbService.FiGet_allSub_data();
+    
     var da_ = await dbService.FiGet_all_users_data("Teacher");
     Teachers = [];
     for (var i in da_) {
