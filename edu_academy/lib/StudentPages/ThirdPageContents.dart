@@ -457,13 +457,7 @@ class _ThirdPageState extends State<ThirdPage> {
                                             child: Row(
                                               children: [
                                                 Expanded(child: Container()),
-                                                Row(
-                                                  children: [
-                                                    const Icon(
-                                                      Icons.camera_alt,
-                                                      color: Colors.black,
-                                                    ),
-                                                    InkWell(
+                                                InkWell(
                                                       onTap: () async {
                                                         if (kIsWeb) {
                                                           pickImageFromGallery();
@@ -489,17 +483,19 @@ class _ThirdPageState extends State<ThirdPage> {
                                                                 color: Color.fromARGB(58, 0, 0, 0)),
                                                           ],
                                                           child:
-                                                              TMaker(text: "Camera", fontSize: 20, fontWeight: FontWeight.w600, color: Colors.black)),
-                                                    ),
-                                                  ],
-                                                ),
-                                                Expanded(child: Container()),
-                                                Row(
-                                                  children: [
-                                                    const Icon(
-                                                      Icons.image,
+                                                              Row(
+                                                                children: [
+                                                                  const Icon(
+                                                      Icons.camera_alt,
                                                       color: Colors.black,
                                                     ),
+                                                    Padding(padding:EdgeInsets.only(left: 20)),
+                                                                  TMaker(text: "Camera", fontSize: 20, fontWeight: FontWeight.w600, color: Colors.black),
+                                                                ],
+                                                              )),
+                                                    ),
+                                                Expanded(child: Container()),
+                                                
                                                     InkWell(
                                                       onTap: () async {
                                                         if (kIsWeb) {
@@ -526,10 +522,17 @@ class _ThirdPageState extends State<ThirdPage> {
                                                                 color: Color.fromARGB(58, 0, 0, 0)),
                                                           ],
                                                           child:
-                                                              TMaker(text: "Galary", fontSize: 20, fontWeight: FontWeight.w600, color: Colors.black)),
+                                                              Row(
+                                                                children: [
+                                                                  const Icon(
+                                                      Icons.image,
+                                                      color: Colors.black,
                                                     ),
-                                                  ],
-                                                ),
+                                                    Padding(padding:EdgeInsets.only(left: 20)),
+                                                                  TMaker(text: "Galary", fontSize: 20, fontWeight: FontWeight.w600, color: Colors.black),
+                                                                ],
+                                                              )),
+                                                    ),
                                                 Expanded(child: Container()),
                                               ],
                                             ),
