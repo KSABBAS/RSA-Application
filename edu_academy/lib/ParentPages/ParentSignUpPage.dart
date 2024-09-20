@@ -406,7 +406,10 @@ class _ParentSignUpPageState extends State<ParentSignUpPage> {
     );
     if (PageWidth(context) < 550) {
       setState(() {
-        ParentSignUpBody = Scaffold(
+        ParentSignUpBody = (true) ? Scaffold(
+              backgroundColor: const Color.fromARGB(255, 233, 255, 247),
+              body: Center(
+                  child: TMaker(text: "قيد التطوير", fontSize: 20, fontWeight:FontWeight.w700, color: Colors.black))):Scaffold(
           body: Form(
             key: key2,
             child: CMaker(
@@ -484,7 +487,10 @@ class _ParentSignUpPageState extends State<ParentSignUpPage> {
       });
     } else if (PageWidth(context) >= 550 && PageHeight(context) >= 900) {
       setState(() {
-        ParentSignUpBody = Scaffold(
+        ParentSignUpBody = (true) ? Scaffold(
+              backgroundColor: const Color.fromARGB(255, 233, 255, 247),
+              body: Center(
+                  child: TMaker(text: "قيد التطوير", fontSize: 20, fontWeight:FontWeight.w700, color: Colors.black))):Scaffold(
           body: Form(
             key: key2,
             child: CMaker(
@@ -564,7 +570,10 @@ class _ParentSignUpPageState extends State<ParentSignUpPage> {
       });
     } else if (PageWidth(context) >= 550 && PageHeight(context) < 900) {
       setState(() {
-        ParentSignUpBody = Scaffold(
+        ParentSignUpBody = (true) ? Scaffold(
+              backgroundColor: const Color.fromARGB(255, 233, 255, 247),
+              body: Center(
+                  child: TMaker(text: "قيد التطوير", fontSize: 20, fontWeight:FontWeight.w700, color: Colors.black))):Scaffold(
           body: Form(
             key: key2,
             child: CMaker(

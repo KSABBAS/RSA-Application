@@ -387,7 +387,7 @@ class _ThirdPageState extends State<ThirdPage> {
             },
             maxLines: 8,
             decoration: InputDecoration(
-                hintText: "Write Something",
+                hintText: "اكتب هنا",
                 enabledBorder: OutlineInputBorder(
                     borderSide: const BorderSide(color: Color.fromARGB(255, 192, 192, 192)), borderRadius: BorderRadius.circular(30)),
                 focusedBorder: OutlineInputBorder(borderRadius: BorderRadius.circular(15))),
@@ -395,7 +395,7 @@ class _ThirdPageState extends State<ThirdPage> {
         ),
       );
       //Third
-      if (HomeworkSelectedState == "Un Solved") {
+      if (HomeworkSelectedState == "غير محلول") {
         if (StartedSoving) {
           if (PageWidth(context) < 550) {
             setState(() {
@@ -489,7 +489,7 @@ class _ThirdPageState extends State<ThirdPage> {
                                                                 color: Color.fromARGB(58, 0, 0, 0)),
                                                           ],
                                                           child:
-                                                              TMaker(text: "Camera", fontSize: 20, fontWeight: FontWeight.w600, color: Colors.black)),
+                                                              TMaker(text: "الكاميرا", fontSize: 20, fontWeight: FontWeight.w600, color: Colors.black)),
                                                     ),
                                                   ],
                                                 ),
@@ -526,7 +526,7 @@ class _ThirdPageState extends State<ThirdPage> {
                                                                 color: Color.fromARGB(58, 0, 0, 0)),
                                                           ],
                                                           child:
-                                                              TMaker(text: "Galary", fontSize: 20, fontWeight: FontWeight.w600, color: Colors.black)),
+                                                              TMaker(text: "المعرض", fontSize: 20, fontWeight: FontWeight.w600, color: Colors.black)),
                                                     ),
                                                   ],
                                                 ),
@@ -544,7 +544,7 @@ class _ThirdPageState extends State<ThirdPage> {
                                       padding: const EdgeInsets.only(top: 10, bottom: 10, left: 30, right: 30),
                                       color: const Color.fromARGB(255, 22, 255, 111),
                                       child: TMaker(
-                                          text: "Upload a Photo",
+                                          text: "رفع صورة",
                                           fontSize: 20,
                                           fontWeight: FontWeight.w600,
                                           color: const Color.fromARGB(255, 71, 69, 69))),
@@ -612,7 +612,7 @@ class _ThirdPageState extends State<ThirdPage> {
                                       padding: const EdgeInsets.only(top: 10, bottom: 10, left: 30, right: 30),
                                       color: const Color.fromARGB(255, 233, 255, 247),
                                       child:
-                                          TMaker(text: "Send", fontSize: 20, fontWeight: FontWeight.w600, color: const Color.fromARGB(255, 0, 0, 0))),
+                                          TMaker(text: "ارسال", fontSize: 20, fontWeight: FontWeight.w600, color: const Color.fromARGB(255, 0, 0, 0))),
                                 )),
                             const Padding(padding: EdgeInsets.only(top: 30)),
                           ],
@@ -681,7 +681,7 @@ class _ThirdPageState extends State<ThirdPage> {
                                       padding: const EdgeInsets.only(top: 10, bottom: 10, left: 30, right: 30),
                                       color: const Color.fromARGB(255, 22, 255, 111),
                                       child: TMaker(
-                                          text: "Upload a Photo", fontSize: 20, fontWeight: FontWeight.w600, color: const Color.fromARGB(255, 71, 69, 69))),
+                                          text: "رفع صورة", fontSize: 20, fontWeight: FontWeight.w600, color: const Color.fromARGB(255, 71, 69, 69))),
                                 )),
                             const Padding(padding: EdgeInsets.only(top: 30)),
                             HomeworkStudentImages,
@@ -741,7 +741,7 @@ class _ThirdPageState extends State<ThirdPage> {
                                       padding: const EdgeInsets.only(top: 10, bottom: 10, left: 30, right: 30),
                                       color: const Color.fromARGB(255, 233, 255, 247),
                                       child:
-                                          TMaker(text: "Send", fontSize: 20, fontWeight: FontWeight.w600, color: const Color.fromARGB(255, 0, 0, 0))),
+                                          TMaker(text: "ارسال", fontSize: 20, fontWeight: FontWeight.w600, color: const Color.fromARGB(255, 0, 0, 0))),
                                 )),
                             const Padding(padding: EdgeInsets.only(top: 30)),
                           ],
@@ -825,7 +825,7 @@ class _ThirdPageState extends State<ThirdPage> {
                                               padding: const EdgeInsets.only(top: 10, bottom: 10, left: 30, right: 30),
                                               color: const Color.fromARGB(255, 22, 255, 111),
                                               child: TMaker(
-                                                  text: "Upload a Photo",
+                                                  text: "رفع صورة",
                                                   fontSize: 20,
                                                   fontWeight: FontWeight.w600,
                                                   color: const Color.fromARGB(255, 71, 69, 69))),
@@ -885,7 +885,7 @@ class _ThirdPageState extends State<ThirdPage> {
                                               padding: const EdgeInsets.only(top: 10, bottom: 10, left: 30, right: 30),
                                               color: const Color.fromARGB(255, 233, 255, 247),
                                               child: TMaker(
-                                                  text: "Send",
+                                                  text: "ارسال",
                                                   fontSize: 20,
                                                   fontWeight: FontWeight.w600,
                                                   color: const Color.fromARGB(255, 0, 0, 0))),
@@ -1117,7 +1117,7 @@ class _ThirdPageState extends State<ThirdPage> {
             });
           }
         }
-      } else if (HomeworkSelectedState == "Being Marked") {
+      } else if (HomeworkSelectedState == "في انتظار التصحيح") {
         if (EditSolution) {
           if (PageWidth(context) < 550) {
             setState(() {
@@ -1178,7 +1178,7 @@ class _ThirdPageState extends State<ThirdPage> {
                                       padding: const EdgeInsets.only(top: 10, bottom: 10, left: 30, right: 30),
                                       color: const Color.fromARGB(255, 22, 255, 111),
                                       child: TMaker(
-                                          text: "Upload a Photo",
+                                          text: "رفع صورة",
                                           fontSize: 20,
                                           fontWeight: FontWeight.w600,
                                           color: const Color.fromARGB(255, 71, 69, 69))),
@@ -1241,7 +1241,7 @@ class _ThirdPageState extends State<ThirdPage> {
                                       padding: const EdgeInsets.only(top: 10, bottom: 10, left: 30, right: 30),
                                       color: const Color.fromARGB(255, 233, 255, 247),
                                       child:
-                                          TMaker(text: "Send", fontSize: 20, fontWeight: FontWeight.w600, color: const Color.fromARGB(255, 0, 0, 0))),
+                                          TMaker(text: "ارسال", fontSize: 20, fontWeight: FontWeight.w600, color: const Color.fromARGB(255, 0, 0, 0))),
                                 )),
                             const Padding(padding: EdgeInsets.only(top: 30)),
                           ],
@@ -1310,7 +1310,7 @@ class _ThirdPageState extends State<ThirdPage> {
                                       padding: const EdgeInsets.only(top: 10, bottom: 10, left: 30, right: 30),
                                       color: const Color.fromARGB(255, 22, 255, 111),
                                       child: TMaker(
-                                          text: "Upload a Photo", fontSize: 20, fontWeight: FontWeight.w600, color: const Color.fromARGB(255, 71, 69, 69))),
+                                          text: "رفع صورة", fontSize: 20, fontWeight: FontWeight.w600, color: const Color.fromARGB(255, 71, 69, 69))),
                                 )),
                             const Padding(padding: EdgeInsets.only(top: 30)),
                             HomeworkStudentImages,
@@ -1373,7 +1373,7 @@ class _ThirdPageState extends State<ThirdPage> {
                                       padding: const EdgeInsets.only(top: 10, bottom: 10, left: 30, right: 30),
                                       color: const Color.fromARGB(255, 233, 255, 247),
                                       child:
-                                          TMaker(text: "Send", fontSize: 20, fontWeight: FontWeight.w600, color: const Color.fromARGB(255, 0, 0, 0))),
+                                          TMaker(text: "ارسال", fontSize: 20, fontWeight: FontWeight.w600, color: const Color.fromARGB(255, 0, 0, 0))),
                                 )),
                             const Padding(padding: EdgeInsets.only(top: 30)),
                           ],
@@ -1448,7 +1448,7 @@ class _ThirdPageState extends State<ThirdPage> {
                                                 padding: const EdgeInsets.only(top: 10, bottom: 10, left: 30, right: 30),
                                                 color: const Color.fromARGB(255, 22, 255, 111),
                                                 child: TMaker(
-                                                    text: "Upload a Photo",
+                                                    text: "رفع صورة",
                                                     fontSize: 20,
                                                     fontWeight: FontWeight.w600,
                                                     color: const Color.fromARGB(255, 71, 69, 69))),
@@ -1511,7 +1511,7 @@ class _ThirdPageState extends State<ThirdPage> {
                                                 padding: const EdgeInsets.only(top: 10, bottom: 10, left: 30, right: 30),
                                                 color: const Color.fromARGB(255, 233, 255, 247),
                                                 child: TMaker(
-                                                    text: "Send",
+                                                    text: "ارسال",
                                                     fontSize: 20,
                                                     fontWeight: FontWeight.w600,
                                                     color: const Color.fromARGB(255, 0, 0, 0))),
@@ -2592,14 +2592,14 @@ class _ThirdPageState extends State<ThirdPage> {
                                 }
                               } else {
                                 return [
-                                  // Being Marked
+                                  // في انتظار التصحيح
                                   const Color.fromARGB(255, 82, 55, 255),
                                   const Color.fromARGB(255, 255, 255, 255),
                                 ];
                               }
                             } else {
                               return [
-                                // Un Solved
+                                // غير محلول
                                 const Color.fromARGB(255, 255, 59, 59),
                                 const Color.fromARGB(255, 255, 255, 255),
                               ];
@@ -2624,9 +2624,9 @@ class _ThirdPageState extends State<ThirdPage> {
                                             : const Color.fromARGB(255, 32, 222, 32),
                                     child: TMaker(
                                         text: (HomeWorks[HomeWorkIndex][index + 1][7][0] == false)
-                                            ? "Un Solved"
+                                            ? "غير محلول"
                                             : (HomeWorks[HomeWorkIndex][index + 1][7].length == 2)
-                                                ? "Being Marked"
+                                                ? "في انتظار التصحيح"
                                                 : "${HomeWorks[HomeWorkIndex][index + 1][7][2][0]} / ${HomeWorks[HomeWorkIndex][index + 1][6]}",
                                         fontSize: 15,
                                         fontWeight: FontWeight.w800,
@@ -2677,9 +2677,9 @@ class _ThirdPageState extends State<ThirdPage> {
                                       ThirdPageThirdPage = true;
                                       HomeworkSelected = index;
                                       HomeworkSelectedState = (HomeWorks[HomeWorkIndex][index + 1][7][0] == false)
-                                          ? "Un Solved"
+                                          ? "غير محلول"
                                           : (HomeWorks[HomeWorkIndex][index + 1][7].length == 2)
-                                              ? "Being Marked"
+                                              ? "في انتظار التصحيح"
                                               : HomeWorks[HomeWorkIndex][index + 1][7][2][0];
                                     });
                                   },
@@ -2692,7 +2692,7 @@ class _ThirdPageState extends State<ThirdPage> {
                                           margin: const EdgeInsets.symmetric(horizontal: 15),
                                           height: 40,
                                           child: TMaker(
-                                              text: "View", fontSize: 18, fontWeight: FontWeight.w600, color: const Color.fromARGB(255, 0, 0, 0)))
+                                              text: "عرض", fontSize: 18, fontWeight: FontWeight.w600, color: const Color.fromARGB(255, 0, 0, 0)))
                                       : Container(),
                                 ),
                               ],

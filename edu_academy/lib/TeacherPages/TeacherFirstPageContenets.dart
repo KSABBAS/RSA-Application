@@ -29,7 +29,7 @@ class _TeacherFirstPageContenetsState extends State<TeacherFirstPageContenets> {
     Widget NewClassTC = CMaker(
         width: 130,
         child: TMaker(
-            text: "Next Class :",
+            text: "الابتدائي",
             fontSize: 20,
             fontWeight: FontWeight.w600,
             color: const Color.fromARGB(153, 24, 58, 60)));
@@ -38,12 +38,12 @@ class _TeacherFirstPageContenetsState extends State<TeacherFirstPageContenets> {
         width: 150,
         child: ListTile(
           title: TMaker(
-              text: "loading...",
-              fontSize: 20,
+              text: "الرقم السري👇",
+              fontSize: 18,
               fontWeight: FontWeight.w600,
               color: const Color.fromARGB(153, 24, 58, 60)),
           subtitle: TMaker(
-              text: "AT 00:00",
+              text: "0000",
               fontSize: 13,
               fontWeight: FontWeight.w600,
               color: const Color.fromARGB(153, 24, 58, 60)),
@@ -53,6 +53,60 @@ class _TeacherFirstPageContenetsState extends State<TeacherFirstPageContenets> {
         _launchURL(
             url:
                 "https://us06web.zoom.us/j/3088571822?pwd=E5VM4ANDKYA5jW59RKUuwRvVA2onkA.1");
+      },
+      child: CMaker(
+        alignment: Alignment.center,
+        circularRadius: 13,
+        height: (PageWidth(context) < 550)
+            ? 40
+            : (PageHeight(context) < 900)
+                ? 60
+                : 70,
+        width: (PageWidth(context) < 550)
+            ? 120
+            : (PageHeight(context) < 900)
+                ? 120
+                : 200,
+        padding: const EdgeInsets.symmetric(horizontal: 15),
+        color: const Color.fromARGB(255, 36, 160, 209),
+        child: TMaker(
+            text: "Join",
+            fontSize: (PageWidth(context) < 550)
+                ? 20
+                : (PageHeight(context) < 900)
+                    ? 25
+                    : 30,
+            fontWeight: FontWeight.w600,
+            color: Colors.white),
+      ),
+    );
+    Widget NewClassTC1 = CMaker(
+        width: 130,
+        child: TMaker(
+            text: "الاعدادي ",
+            fontSize: 20,
+            fontWeight: FontWeight.w600,
+            color: const Color.fromARGB(153, 24, 58, 60)));
+    Widget LessonAndDate1 = Container(
+        alignment: Alignment.centerLeft,
+        width: 150,
+        child: ListTile(
+          title: TMaker(
+              text: "الرقم السري 👇",
+              fontSize: 18,
+              fontWeight: FontWeight.w600,
+              color: const Color.fromARGB(153, 24, 58, 60)),
+          subtitle: TMaker(
+              text: "2000",
+              fontSize: 13,
+              fontWeight: FontWeight.w600,
+              color: const Color.fromARGB(153, 24, 58, 60)),
+        ));
+    Widget JoinButton1 = InkWell(
+      onTap: () {
+        _launchURL(
+            url:
+                "https://us06web.zoom.us/j/5052829198");
       },
       child: CMaker(
         alignment: Alignment.center,
@@ -379,6 +433,51 @@ class _TeacherFirstPageContenetsState extends State<TeacherFirstPageContenets> {
                     Expanded(
                         child: CMaker(
                             alignment: Alignment.center, child: JoinButton))
+                  ],
+                )),
+            const Padding(padding: EdgeInsets.only(top: 20)),
+            CMaker(
+                circularRadius: 20,
+                height: 200,
+                margin: const EdgeInsets.symmetric(horizontal: 20),
+                boxShadow: const [
+                  BoxShadow(
+                      offset: Offset(1, 1),
+                      blurRadius: 6,
+                      spreadRadius: .03,
+                      color: Color.fromARGB(82, 0, 0, 0)),
+                ],
+                width: (PageWidth(context) < 650) ? double.infinity : 500,
+                color: Colors.white,
+                child: Column(
+                  children: [
+                    Expanded(
+                        child: Row(
+                      children: [
+                        Expanded(
+                          flex: 2,
+                          child: Container(),
+                        ),
+                        Expanded(
+                          flex: 6,
+                          child: NewClassTC1,
+                        ),
+                        Expanded(
+                          child: Container(),
+                        ),
+                        Expanded(
+                          flex: 6,
+                          child: LessonAndDate1,
+                        ),
+                        Expanded(
+                          flex: 2,
+                          child: Container(),
+                        ),
+                      ],
+                    )),
+                    Expanded(
+                        child: CMaker(
+                            alignment: Alignment.center, child: JoinButton1))
                   ],
                 )),
           ],

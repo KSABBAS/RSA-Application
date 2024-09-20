@@ -54,7 +54,7 @@ class _LoginPageState extends State<LogInPage> {
                 errorBorder: OutlineInputBorder(
                     borderSide: const BorderSide(color: Color.fromARGB(255, 192, 192, 192)), borderRadius: BorderRadius.circular(30)),
                 label: const Text(
-                  "Email or Phone Number",
+                  "الإيميل او رقم الهاتف",
                   style: TextStyle(fontSize: 15, fontWeight: FontWeight.w600),
                 ),
                 enabledBorder: OutlineInputBorder(
@@ -85,7 +85,7 @@ class _LoginPageState extends State<LogInPage> {
                   child: const Icon(Icons.remove_red_eye_outlined),
                 ),
                 label: const Text(
-                  "Password",
+                  "الرقم السري",
                   style: TextStyle(fontSize: 15, fontWeight: FontWeight.w600),
                 ),
                 enabledBorder: OutlineInputBorder(
@@ -105,7 +105,7 @@ class _LoginPageState extends State<LogInPage> {
           width: 120,
           decoration: BoxDecoration(color: const Color.fromARGB(255, 74, 193, 241), borderRadius: BorderRadius.circular(30)),
           child: const Text(
-            "Log in",
+            "تسجيل دخول",
             style: TextStyle(fontSize: 20, color: Color.fromARGB(255, 255, 255, 255), fontWeight: FontWeight.w700),
           ),
         ),
@@ -146,9 +146,9 @@ class _LoginPageState extends State<LogInPage> {
             // Subjects = await dbService.FiGet_allSub_data();
             PanaraInfoDialog.show(
               context,
-              title: "Success",
-              message: "Now you are good to go",
-              buttonText: "Okay",
+              title: "نجاح",
+              message: "تم الدخول بنجاح انت جاهز للبدأ",
+              buttonText: "انطلق",
               onTapDismiss: () {
                 Navigator.pop(context);
                 if (data[1].toString().split("#")[0] == "Student") {
@@ -167,9 +167,9 @@ class _LoginPageState extends State<LogInPage> {
           } else {
             PanaraInfoDialog.show(
               context,
-              title: "Sorry",
-              message: "Email or name does not exist \n or the password is wrong",
-              buttonText: "Okay",
+              title: "خطأ",
+              message: "يوجد خطأ في الايميل او الرقم السري\nالرجاء التأكد من البيانات و حاول مره اخرى",
+              buttonText: "حاول مره اخرى",
               onTapDismiss: () {
                 Navigator.pop(context);
                 FullName = "";
@@ -184,7 +184,7 @@ class _LoginPageState extends State<LogInPage> {
       Container(
         alignment: Alignment.centerRight,
         child: const Text(
-          "New User ? ",
+          "هل انت مستخدم جديد؟",
           style: TextStyle(fontSize: 15, color: Color.fromARGB(255, 206, 206, 206), fontWeight: FontWeight.w500),
         ),
       ),
@@ -196,7 +196,7 @@ class _LoginPageState extends State<LogInPage> {
               Navigator.pushNamed(context, "WhatAreYouPage");
             },
             child: const Text(
-              "Sign up",
+              "انشاء حساب",
               style: TextStyle(fontSize: 15, color: Color.fromARGB(255, 74, 193, 241), fontWeight: FontWeight.w500),
             )),
       ),
@@ -220,7 +220,7 @@ class _LoginPageState extends State<LogInPage> {
             color: Color.fromARGB(255, 255, 255, 255),
           ),
           child: const Text(
-            "Log in",
+            "تسجيل دخول",
             style: TextStyle(fontSize: 35, color: Color.fromARGB(255, 8, 125, 159), fontWeight: FontWeight.w700),
           ),
         ));

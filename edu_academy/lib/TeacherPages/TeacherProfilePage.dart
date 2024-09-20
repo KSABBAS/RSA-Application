@@ -112,7 +112,7 @@ class _TeacherProfilePageState extends State<TeacherProfilePage> {
               width: double.infinity,
               child: TMaker(
                   textAlign: TextAlign.start,
-                  text: "Name",
+                  text: "الاسم",
                   fontSize: (PageWidth(context) < 550)
                       ? 20
                       : (PageHeight(context) < 900)
@@ -160,7 +160,7 @@ class _TeacherProfilePageState extends State<TeacherProfilePage> {
             width: double.infinity,
             child: TMaker(
                 textAlign: TextAlign.start,
-                text: "Id",
+                text: "الرقم السري",
                 fontSize: (PageWidth(context) < 550)
                     ? 20
                     : (PageHeight(context) < 900)
@@ -187,7 +187,7 @@ class _TeacherProfilePageState extends State<TeacherProfilePage> {
               CMaker(
                   padding: const EdgeInsets.only(right: 10),
                   child: TMaker(
-                      text: "12345",
+                      text: widget.TeacherPassword,
                       fontSize: (PageWidth(context) < 550)
                           ? 20
                           : (PageHeight(context) < 900)
@@ -207,7 +207,7 @@ class _TeacherProfilePageState extends State<TeacherProfilePage> {
               width: double.infinity,
               child: TMaker(
                   textAlign: TextAlign.start,
-                  text: "Grade",
+                  text: "المواد",
                   fontSize: (PageWidth(context) < 550)
                       ? 20
                       : (PageHeight(context) < 900)
@@ -256,7 +256,7 @@ class _TeacherProfilePageState extends State<TeacherProfilePage> {
               width: double.infinity,
               child: TMaker(
                   textAlign: TextAlign.start,
-                  text: (EditMode) ? "Edit Email" : "Email",
+                  text: (EditMode) ? "تعديل الايميل" : "الايميل",
                   fontSize: (PageWidth(context) < 550)
                       ? 20
                       : (PageHeight(context) < 900)
@@ -327,7 +327,7 @@ class _TeacherProfilePageState extends State<TeacherProfilePage> {
               width: double.infinity,
               child: TMaker(
                   textAlign: TextAlign.start,
-                  text: (EditMode) ? "Edit Password" : "Password",
+                  text: (EditMode) ? "تغيير الرقم السري" : "الرقم السري",
                   fontSize: (PageWidth(context) < 550)
                       ? 20
                       : (PageHeight(context) < 900)
@@ -398,7 +398,7 @@ class _TeacherProfilePageState extends State<TeacherProfilePage> {
               width: double.infinity,
               child: TMaker(
                   textAlign: TextAlign.start,
-                  text: (EditMode) ? "Edit Number" : "Number",
+                  text: (EditMode) ? "تعديل رقم الهاتف" : "رقم الهاتف",
                   fontSize: (PageWidth(context) < 550)
                       ? 20
                       : (PageHeight(context) < 900)
@@ -471,13 +471,13 @@ class _TeacherProfilePageState extends State<TeacherProfilePage> {
     );
     Widget EditAndSaveButton = InkWell(
       onTap: () {
-        if (false) {
+        if (ProfileKey.currentState!.validate()) {
           //ProfileKey.currentState!.validate()
           showDialog(
               context: context,
               builder: (context) {
                 return AlertDialog(
-                    title: const Text("Enter the password                  "),
+                    title: const Text("ادخل رقم الرقم السري                  "),
                     content: CMaker(
                       height: 100,
                       alignment: Alignment.center,
@@ -488,7 +488,7 @@ class _TeacherProfilePageState extends State<TeacherProfilePage> {
                             errorBorder: OutlineInputBorder(
                                 borderSide: const BorderSide(color: Color.fromARGB(255, 192, 192, 192)), borderRadius: BorderRadius.circular(30)),
                             label: const Text(
-                              "Password",
+                              "الرقم السري",
                               style: TextStyle(fontSize: 15, fontWeight: FontWeight.w600),
                             ),
                             enabledBorder: OutlineInputBorder(
@@ -502,7 +502,7 @@ class _TeacherProfilePageState extends State<TeacherProfilePage> {
                             Navigator.pop(context);
                           },
                           child: const Text(
-                            "Cancel",
+                            "الغاء",
                           )),
                       TextButton(
                           onPressed: () async {
@@ -521,7 +521,7 @@ class _TeacherProfilePageState extends State<TeacherProfilePage> {
                             });
                           },
                           child: const Text(
-                            "ok",
+                            "تم",
                           )),
                     ]);
               });
@@ -545,7 +545,7 @@ class _TeacherProfilePageState extends State<TeacherProfilePage> {
             CMaker(
                 padding: const EdgeInsets.only(right: 10),
                 child: TMaker(
-                    text: (EditMode) ? "Save" : "Edit (soon)",
+                    text: (EditMode) ? "حفظ" : "تعديل (قريبا)",
                     fontSize: (PageWidth(context) < 550)
                         ? 25
                         : (PageHeight(context) < 900)
@@ -651,7 +651,7 @@ class _TeacherProfilePageState extends State<TeacherProfilePage> {
                                     color: const Color.fromARGB(255, 233, 255, 247),
                                     padding: const EdgeInsets.only(right: 10),
                                     child:
-                                        TMaker(text: "Cancel", fontSize: 25, fontWeight: FontWeight.w600, color: const Color.fromARGB(255, 0, 0, 0))),
+                                        TMaker(text: "الغاء", fontSize: 25, fontWeight: FontWeight.w600, color: const Color.fromARGB(255, 0, 0, 0))),
                               ),
                             )
                           : const SizedBox(
@@ -758,7 +758,7 @@ class _TeacherProfilePageState extends State<TeacherProfilePage> {
                                     color: const Color.fromARGB(255, 233, 255, 247),
                                     padding: const EdgeInsets.only(right: 10),
                                     child:
-                                        TMaker(text: "Cancel", fontSize: 25, fontWeight: FontWeight.w600, color: const Color.fromARGB(255, 0, 0, 0))),
+                                        TMaker(text: "الغاء", fontSize: 25, fontWeight: FontWeight.w600, color: const Color.fromARGB(255, 0, 0, 0))),
                               ),
                             )
                           : const SizedBox(
@@ -865,7 +865,7 @@ class _TeacherProfilePageState extends State<TeacherProfilePage> {
                                     color: const Color.fromARGB(255, 233, 255, 247),
                                     padding: const EdgeInsets.only(right: 10),
                                     child:
-                                        TMaker(text: "Cancel", fontSize: 25, fontWeight: FontWeight.w600, color: const Color.fromARGB(255, 0, 0, 0))),
+                                        TMaker(text: "الغاء", fontSize: 25, fontWeight: FontWeight.w600, color: const Color.fromARGB(255, 0, 0, 0))),
                               ),
                             )
                           : const SizedBox(

@@ -160,7 +160,7 @@ class _StudentFirstMainPageState extends State<StudentFirstMainPage> {
                                 ? 100
                                 : 150,
                         child:
-                            TMaker(textAlign: TextAlign.center, text: "Time and Day", fontSize: 17, fontWeight: FontWeight.w500, color: Colors.white),
+                            TMaker(textAlign: TextAlign.center, text: "الوقت و اليوم", fontSize: 17, fontWeight: FontWeight.w500, color: Colors.white),
                       )),
                       Expanded(
                           child: CMaker(
@@ -297,26 +297,26 @@ class _StudentFirstMainPageState extends State<StudentFirstMainPage> {
       ),
     );
     Widget NextClassTC = CMaker(
-        width: 130, child: TMaker(text: "Next Class :", fontSize: 20, fontWeight: FontWeight.w600, color: const Color.fromARGB(153, 24, 58, 60)));
+        width: 130, child: TMaker(text: "الحصة القادمة", fontSize: 20, fontWeight: FontWeight.w600, color: const Color.fromARGB(153, 24, 58, 60)));
     Widget LessonAndDate = Container(
         alignment: Alignment.centerLeft,
         width: 150,
         child: ListTile(
           title: TMaker(
-              text: "join 👇", //
-              fontSize: 25,
+              text: "دخول 👇", //
+              fontSize: 20,
               fontWeight: FontWeight.w600,
               color: const Color.fromARGB(153, 24, 58, 60)),
           subtitle: TMaker(
               text: () {
                 String grade_0 = grade.contains('(Lang)') ? grade.replaceAll('(Lang)', '').trim() : grade;
                 if (int.parse(grade_0[grade_0.length - 1]) <= 6 && grade[grade.length - 2] == " ") {
-                  return "Password:0000";
+                  return "الرقم السري:0000";
                 } else {
-                  return "Password:2000";
+                  return "الرقم السري:2000";
                 }
               }(),
-              fontSize: 12,
+              fontSize: 10,
               fontWeight: FontWeight.w600,
               color: const Color.fromARGB(153, 24, 58, 60)),
         ));
@@ -343,7 +343,7 @@ class _StudentFirstMainPageState extends State<StudentFirstMainPage> {
         padding: const EdgeInsets.symmetric(horizontal: 15),
         color: const Color.fromARGB(255, 36, 160, 209),
         child: TMaker(
-            text: "Join",
+            text: "انضم",
             fontSize: (PageWidth(context) < 550)
                 ? 20
                 : (PageHeight(context) < 900)
@@ -354,7 +354,7 @@ class _StudentFirstMainPageState extends State<StudentFirstMainPage> {
       ),
     );
     Widget TeacherNotesT = TMaker(
-        text: "Notes form teachers",
+        text: "رسائل من المعلمين",
         fontSize: (PageWidth(context) < 550)
             ? 20
             : (PageHeight(context) < 900)

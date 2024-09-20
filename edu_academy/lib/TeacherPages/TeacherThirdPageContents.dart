@@ -277,7 +277,7 @@ class _TeacherThirdPageContentsState extends State<TeacherThirdPageContents> {
           circularRadius: 20,
           margin: const EdgeInsets.only(left: 20, right: 20),
           color: const Color.fromARGB(255, 61, 197, 255),
-          child: TMaker(text: "$Grade_selected Homework", fontSize: 20, fontWeight: FontWeight.w600, color: Colors.white)),
+          child: TMaker(text: "$Grade_selected واجب", fontSize: 20, fontWeight: FontWeight.w600, color: Colors.white)),
     );
     if (AllHomeworksAndOneIsOpend) {
       // third page
@@ -309,7 +309,7 @@ class _TeacherThirdPageContentsState extends State<TeacherThirdPageContents> {
                       circularRadius: 20,
                       margin: const EdgeInsets.only(right: 20),
                       height: 70,
-                      child: TMaker(text: "All Homeworks", fontSize: 30, fontWeight: FontWeight.w700, color: const Color.fromARGB(255, 0, 0, 0)),
+                      child: TMaker(text: "كل الواجبات", fontSize: 30, fontWeight: FontWeight.w700, color: const Color.fromARGB(255, 0, 0, 0)),
                     ))
                   ])),
               const Padding(padding: EdgeInsets.only(bottom: 20)),
@@ -382,7 +382,7 @@ class _TeacherThirdPageContentsState extends State<TeacherThirdPageContents> {
                                 BoxShadow(color: Color.fromARGB(61, 0, 0, 0), offset: Offset(1, 1), blurRadius: 1, spreadRadius: .06)
                               ],
                               color: const Color.fromARGB(255, 233, 255, 247),
-                              child: TMaker(text: "Edit(soon)", fontSize: 20, fontWeight: FontWeight.w600, color: Colors.black))),
+                              child: TMaker(text: "التعديل(قريبا)", fontSize: 20, fontWeight: FontWeight.w600, color: Colors.black))),
                     ),
                     const Padding(padding: EdgeInsets.all(20)),
                     CMaker(
@@ -390,9 +390,9 @@ class _TeacherThirdPageContentsState extends State<TeacherThirdPageContents> {
                           onTap: () async {
                             PanaraInfoDialog.show(
                               context,
-                              title: "Wait",
-                              message: "Are you sure you want to delete this homework",
-                              buttonText: "Delete",
+                              title: "تمهل",
+                              message: "هل انت متأكد انك تريد حذف الواجب",
+                              buttonText: "حذف",
                               onTapDismiss: () async {
                                 //delete hw start
                                 await dbService.FiDelete_Hw_techer(Grade_selected, SubjectThatIsSelected, all_Homeworks[IsOpendIndex][5] as String);
@@ -418,7 +418,7 @@ class _TeacherThirdPageContentsState extends State<TeacherThirdPageContents> {
                                 ],
                                 color: const Color.fromARGB(255, 233, 255, 247),
                                 child: TMaker(
-                                    text: "Delete Homework", fontSize: 20, fontWeight: FontWeight.w600, color: const Color.fromARGB(255, 191, 0, 0))),
+                                    text: "حذف الواجب", fontSize: 20, fontWeight: FontWeight.w600, color: const Color.fromARGB(255, 191, 0, 0))),
                           )),
                     ),
                     const Padding(padding: EdgeInsets.only(bottom: 20)),
@@ -457,7 +457,7 @@ class _TeacherThirdPageContentsState extends State<TeacherThirdPageContents> {
                       circularRadius: 20,
                       margin: const EdgeInsets.only(right: 20),
                       height: 70,
-                      child: TMaker(text: "All Homeworks", fontSize: 30, fontWeight: FontWeight.w700, color: const Color.fromARGB(255, 0, 0, 0)),
+                      child: TMaker(text: "كل الواجبات", fontSize: 30, fontWeight: FontWeight.w700, color: const Color.fromARGB(255, 0, 0, 0)),
                     ))
                   ])),
               const Padding(padding: EdgeInsets.only(bottom: 20)),
@@ -478,7 +478,7 @@ class _TeacherThirdPageContentsState extends State<TeacherThirdPageContents> {
                         circularRadius: 20,
                         margin: const EdgeInsets.only(left: 20, right: 20),
                         child: TMaker(
-                            text: "Title ${IsOpendIndex + 1}", fontSize: 30, fontWeight: FontWeight.w600, color: const Color.fromARGB(255, 0, 0, 0))),
+                            text: "العنوان ${IsOpendIndex + 1}", fontSize: 30, fontWeight: FontWeight.w600, color: const Color.fromARGB(255, 0, 0, 0))),
                     const Padding(padding: EdgeInsets.only(bottom: 20)),
                     CMaker(
                         alignment: Alignment.centerLeft,
@@ -525,7 +525,7 @@ class _TeacherThirdPageContentsState extends State<TeacherThirdPageContents> {
                                 BoxShadow(color: Color.fromARGB(61, 0, 0, 0), offset: Offset(1, 1), blurRadius: 1, spreadRadius: .06)
                               ],
                               color: const Color.fromARGB(255, 233, 255, 247),
-                              child: TMaker(text: "Edit", fontSize: 20, fontWeight: FontWeight.w600, color: Colors.black))),
+                              child: TMaker(text: "تعديل(قريبا)", fontSize: 20, fontWeight: FontWeight.w600, color: Colors.black))),
                     ),
                     const Padding(padding: EdgeInsets.only(bottom: 20)),
                     CMaker(
@@ -533,9 +533,9 @@ class _TeacherThirdPageContentsState extends State<TeacherThirdPageContents> {
                           onTap: () async {
                             PanaraInfoDialog.show(
                               context,
-                              title: "Wait",
-                              message: "Are you sure you want to delete this homework",
-                              buttonText: "Delete",
+                              title: "تمهل",
+                              message: "هل انت متأكد انك تريد حذف الواجب",
+                              buttonText: "حذف",
                               onTapDismiss: () async {
                                 //delete hw start
                                 await dbService.FiDelete_Hw_techer(Grade_selected, SubjectThatIsSelected, all_Homeworks[IsOpendIndex][5] as String);
@@ -559,7 +559,7 @@ class _TeacherThirdPageContentsState extends State<TeacherThirdPageContents> {
                                 ],
                                 color: const Color.fromARGB(255, 233, 255, 247),
                                 child: TMaker(
-                                    text: "Delete Homework", fontSize: 20, fontWeight: FontWeight.w600, color: const Color.fromARGB(255, 191, 0, 0))),
+                                    text: "حذف الواجب", fontSize: 20, fontWeight: FontWeight.w600, color: const Color.fromARGB(255, 191, 0, 0))),
                           )),
                     ),
                     const Padding(padding: EdgeInsets.only(bottom: 20)),
@@ -598,7 +598,7 @@ class _TeacherThirdPageContentsState extends State<TeacherThirdPageContents> {
                       circularRadius: 20,
                       margin: const EdgeInsets.only(right: 20),
                       height: 70,
-                      child: TMaker(text: "All Homeworks", fontSize: 30, fontWeight: FontWeight.w700, color: const Color.fromARGB(255, 0, 0, 0)),
+                      child: TMaker(text: "كل الواجبات", fontSize: 30, fontWeight: FontWeight.w700, color: const Color.fromARGB(255, 0, 0, 0)),
                     ))
                   ])),
               const Padding(padding: EdgeInsets.only(bottom: 20)),
@@ -619,7 +619,7 @@ class _TeacherThirdPageContentsState extends State<TeacherThirdPageContents> {
                         circularRadius: 20,
                         margin: const EdgeInsets.only(left: 20, right: 20),
                         child: TMaker(
-                            text: "Title ${IsOpendIndex + 1}", fontSize: 30, fontWeight: FontWeight.w600, color: const Color.fromARGB(255, 0, 0, 0))),
+                            text: "العنوان ${IsOpendIndex + 1}", fontSize: 30, fontWeight: FontWeight.w600, color: const Color.fromARGB(255, 0, 0, 0))),
                     const Padding(padding: EdgeInsets.only(bottom: 20)),
                     CMaker(
                         alignment: Alignment.centerLeft,
@@ -666,7 +666,7 @@ class _TeacherThirdPageContentsState extends State<TeacherThirdPageContents> {
                                 BoxShadow(color: Color.fromARGB(61, 0, 0, 0), offset: Offset(1, 1), blurRadius: 1, spreadRadius: .06)
                               ],
                               color: const Color.fromARGB(255, 233, 255, 247),
-                              child: TMaker(text: "Edit", fontSize: 20, fontWeight: FontWeight.w600, color: Colors.black))),
+                              child: TMaker(text: "تعديل (قريبا)", fontSize: 20, fontWeight: FontWeight.w600, color: Colors.black))),
                     ),
                     const Padding(padding: EdgeInsets.only(bottom: 20)),
                     CMaker(
@@ -674,9 +674,9 @@ class _TeacherThirdPageContentsState extends State<TeacherThirdPageContents> {
                           onTap: () async {
                             PanaraInfoDialog.show(
                               context,
-                              title: "Wait",
-                              message: "Are you sure you want to delete this homework",
-                              buttonText: "Delete",
+                              title: "تمهل",
+                              message: "هل انت متأكد انك تريد حذف الواجب",
+                              buttonText: "حذف",
                               onTapDismiss: () async {
                                 //delete hw start
                                 await dbService.FiDelete_Hw_techer(Grade_selected, SubjectThatIsSelected, all_Homeworks[IsOpendIndex][5] as String);
@@ -700,7 +700,7 @@ class _TeacherThirdPageContentsState extends State<TeacherThirdPageContents> {
                                 ],
                                 color: const Color.fromARGB(255, 233, 255, 247),
                                 child: TMaker(
-                                    text: "Delete Homework", fontSize: 20, fontWeight: FontWeight.w600, color: const Color.fromARGB(255, 191, 0, 0))),
+                                    text: "حذف الواجب", fontSize: 20, fontWeight: FontWeight.w600, color: const Color.fromARGB(255, 191, 0, 0))),
                           )),
                     ),
                     const Padding(padding: EdgeInsets.only(bottom: 20)),
@@ -748,7 +748,7 @@ class _TeacherThirdPageContentsState extends State<TeacherThirdPageContents> {
                             margin: const EdgeInsets.only(right: 20),
                             height: 70,
                             child:
-                                TMaker(text: "All Homeworks", fontSize: 30, fontWeight: FontWeight.w700, color: const Color.fromARGB(255, 0, 0, 0)),
+                                TMaker(text: "كل الواجبات", fontSize: 30, fontWeight: FontWeight.w700, color: const Color.fromARGB(255, 0, 0, 0)),
                           ))
                         ])),
                     const Padding(padding: EdgeInsets.only(bottom: 20)),
@@ -769,7 +769,7 @@ class _TeacherThirdPageContentsState extends State<TeacherThirdPageContents> {
                                 circularRadius: 20,
                                 margin: const EdgeInsets.only(left: 20, right: 20),
                                 child: TMaker(
-                                    text: "$Grade_selected Homework",
+                                    text: "$Grade_selected واجبات",
                                     fontSize: 30,
                                     fontWeight: FontWeight.w600,
                                     color: const Color.fromARGB(255, 0, 0, 0))),
@@ -894,7 +894,7 @@ class _TeacherThirdPageContentsState extends State<TeacherThirdPageContents> {
                             margin: const EdgeInsets.only(right: 20),
                             height: 70,
                             child:
-                                TMaker(text: "All Homeworks", fontSize: 30, fontWeight: FontWeight.w700, color: const Color.fromARGB(255, 0, 0, 0)),
+                                TMaker(text: "كل الواجبات", fontSize: 30, fontWeight: FontWeight.w700, color: const Color.fromARGB(255, 0, 0, 0)),
                           ))
                         ])),
                     const Padding(padding: EdgeInsets.only(bottom: 20)),
@@ -915,7 +915,7 @@ class _TeacherThirdPageContentsState extends State<TeacherThirdPageContents> {
                                 circularRadius: 20,
                                 margin: const EdgeInsets.only(left: 20, right: 20),
                                 child: TMaker(
-                                    text: "$Grade_selected Homework",
+                                    text: "$Grade_selected واجبات",
                                     fontSize: 30,
                                     fontWeight: FontWeight.w600,
                                     color: const Color.fromARGB(255, 0, 0, 0))),
@@ -1033,7 +1033,7 @@ class _TeacherThirdPageContentsState extends State<TeacherThirdPageContents> {
                             margin: const EdgeInsets.only(right: 20),
                             height: 70,
                             child:
-                                TMaker(text: "All Homeworks", fontSize: 30, fontWeight: FontWeight.w700, color: const Color.fromARGB(255, 0, 0, 0)),
+                                TMaker(text: "كل الواجبات", fontSize: 30, fontWeight: FontWeight.w700, color: const Color.fromARGB(255, 0, 0, 0)),
                           ))
                         ])),
                     const Padding(padding: EdgeInsets.only(bottom: 20)),
@@ -1054,7 +1054,7 @@ class _TeacherThirdPageContentsState extends State<TeacherThirdPageContents> {
                                 circularRadius: 20,
                                 margin: const EdgeInsets.only(left: 20, right: 20),
                                 child: TMaker(
-                                    text: "Grade ${GradeHomeWorkOppenedIndex + 1} Homework",
+                                    text: "$Grade_selected واجبات",
                                     fontSize: 30,
                                     fontWeight: FontWeight.w600,
                                     color: const Color.fromARGB(255, 0, 0, 0))),
@@ -1183,7 +1183,7 @@ class _TeacherThirdPageContentsState extends State<TeacherThirdPageContents> {
                       errorBorder: OutlineInputBorder(
                           borderSide: const BorderSide(color: Color.fromARGB(255, 192, 192, 192)), borderRadius: BorderRadius.circular(30)),
                       label: const Text(
-                        "Add Title",
+                        "اضف عنوان",
                         style: TextStyle(fontSize: 15, fontWeight: FontWeight.w600),
                       ),
                       enabledBorder: OutlineInputBorder(
@@ -1206,7 +1206,7 @@ class _TeacherThirdPageContentsState extends State<TeacherThirdPageContents> {
             children: [
               CMaker(
                   width: double.infinity,
-                  child: TMaker(textAlign: TextAlign.start, text: "Body", fontSize: 25, fontWeight: FontWeight.w700, color: Colors.black)),
+                  child: TMaker(textAlign: TextAlign.start, text: "الموضوع", fontSize: 25, fontWeight: FontWeight.w700, color: Colors.black)),
               SizedBox(
                 height: 220,
                 child: TextFormField(
@@ -1232,7 +1232,7 @@ class _TeacherThirdPageContentsState extends State<TeacherThirdPageContents> {
                       errorBorder: OutlineInputBorder(
                           borderSide: const BorderSide(color: Color.fromARGB(255, 192, 192, 192)), borderRadius: BorderRadius.circular(30)),
                       label: const Text(
-                        "Add Body",
+                        "اضف موضوع",
                         style: TextStyle(fontSize: 15, fontWeight: FontWeight.w600),
                       ),
                       enabledBorder: OutlineInputBorder(
@@ -1255,7 +1255,7 @@ class _TeacherThirdPageContentsState extends State<TeacherThirdPageContents> {
               Expanded(child: Container()),
               CMaker(
                   width: 80,
-                  child: TMaker(textAlign: TextAlign.start, text: "Score", fontSize: 25, fontWeight: FontWeight.w700, color: Colors.black)),
+                  child: TMaker(textAlign: TextAlign.start, text: "الدرجة", fontSize: 25, fontWeight: FontWeight.w700, color: Colors.black)),
               CMaker(
                 alignment: Alignment.center,
                 height: 60,
@@ -1281,7 +1281,7 @@ class _TeacherThirdPageContentsState extends State<TeacherThirdPageContents> {
                       errorBorder: OutlineInputBorder(
                           borderSide: const BorderSide(color: Color.fromARGB(255, 192, 192, 192)), borderRadius: BorderRadius.circular(30)),
                       label: const Text(
-                        "Add Score",
+                        "اضف درجة",
                         style: TextStyle(fontSize: 15, fontWeight: FontWeight.w600),
                       ),
                       enabledBorder: OutlineInputBorder(
@@ -1321,7 +1321,7 @@ class _TeacherThirdPageContentsState extends State<TeacherThirdPageContents> {
                     child: Row(
                       children: [
                         Expanded(child: Container()),
-                        TMaker(text: "add a photo", fontSize: 15, fontWeight: FontWeight.w800, color: Colors.black),
+                        TMaker(text: "اضف صورة", fontSize: 15, fontWeight: FontWeight.w800, color: Colors.black),
                         Expanded(child: Container()),
                         const Icon(Icons.photo_library),
                         Expanded(child: Container()),
@@ -1431,7 +1431,7 @@ class _TeacherThirdPageContentsState extends State<TeacherThirdPageContents> {
             color: const Color.fromARGB(255, 61, 197, 255),
             alignment: Alignment.center,
             circularRadius: 15,
-            child: TMaker(text: "Send", fontSize: 20, fontWeight: FontWeight.w700, color: Colors.white)),
+            child: TMaker(text: "ارسال", fontSize: 20, fontWeight: FontWeight.w700, color: Colors.white)),
       );
       if (PageWidth(context) < 550) {
         setState(() {
@@ -1461,7 +1461,7 @@ class _TeacherThirdPageContentsState extends State<TeacherThirdPageContents> {
                           width: 140,
                           height: 70,
                           alignment: Alignment.bottomCenter,
-                          child: TMaker(text: "Final Look", fontSize: 28, fontWeight: FontWeight.w700, color: Colors.black))),
+                          child: TMaker(text: "شكل الواجب النهائي", fontSize: 28, fontWeight: FontWeight.w700, color: Colors.black))),
                   const Padding(padding: EdgeInsets.only(bottom: 20)),
                   CMaker(
                       width: double.infinity,
@@ -1510,7 +1510,7 @@ class _TeacherThirdPageContentsState extends State<TeacherThirdPageContents> {
                           width: 140,
                           height: 70,
                           alignment: Alignment.bottomCenter,
-                          child: TMaker(text: "Final Look", fontSize: 28, fontWeight: FontWeight.w700, color: Colors.black))),
+                          child: TMaker(text: "شكل الواجب النهائي", fontSize: 28, fontWeight: FontWeight.w700, color: Colors.black))),
                   const Padding(padding: EdgeInsets.only(bottom: 20)),
                   CMaker(
                       width: double.infinity,
@@ -1559,7 +1559,7 @@ class _TeacherThirdPageContentsState extends State<TeacherThirdPageContents> {
                             width: 140,
                             height: 70,
                             alignment: Alignment.bottomCenter,
-                            child: TMaker(text: "Final Look", fontSize: 28, fontWeight: FontWeight.w700, color: Colors.black))),
+                            child: TMaker(text: "شكل الواجب النهائي", fontSize: 28, fontWeight: FontWeight.w700, color: Colors.black))),
                     const Padding(padding: EdgeInsets.only(bottom: 20)),
                     CMaker(
                         width: double.infinity,
@@ -1732,7 +1732,7 @@ class _TeacherThirdPageContentsState extends State<TeacherThirdPageContents> {
           },
           maxLines: 4,
           decoration: InputDecoration(
-              hintText: "add a comment",
+              hintText: "اضف تعليق",
               enabledBorder: OutlineInputBorder(
                   borderSide: const BorderSide(color: Color.fromARGB(255, 192, 192, 192)), borderRadius: BorderRadius.circular(30)),
               focusedBorder: OutlineInputBorder(borderRadius: BorderRadius.circular(15))),
@@ -1774,7 +1774,7 @@ class _TeacherThirdPageContentsState extends State<TeacherThirdPageContents> {
           onTap: () async {
             if (ScoreKey.currentState!.validate()) {
               ScoreKey.currentState!.save();
-              print("/tadd score");
+              print("/tاضف درجة");
               print(await dbService.FiAdd_score_and_comment(
                   Grade_selected,
                   SubjectThatIsSelected,
@@ -1843,7 +1843,7 @@ class _TeacherThirdPageContentsState extends State<TeacherThirdPageContents> {
                       children: [
                         const Padding(padding: EdgeInsets.only(top: 20)),
                         TMaker(
-                            text: "Homework",
+                            text: "واجب",
                             fontSize: (PageWidth(context) < 550)
                                 ? 30
                                 : (PageHeight(context) < 900)
@@ -1858,7 +1858,7 @@ class _TeacherThirdPageContentsState extends State<TeacherThirdPageContents> {
                         HomeworkImages,
                         const Padding(padding: EdgeInsets.only(top: 20)),
                         TMaker(
-                            text: "Student's Answer",
+                            text: "حل الطالب",
                             fontSize: (PageWidth(context) < 550)
                                 ? 30
                                 : (PageHeight(context) < 900)
@@ -1954,7 +1954,7 @@ class _TeacherThirdPageContentsState extends State<TeacherThirdPageContents> {
                       children: [
                         const Padding(padding: EdgeInsets.only(top: 20)),
                         TMaker(
-                            text: "Homework",
+                            text: "الواجب",
                             fontSize: (PageWidth(context) < 550)
                                 ? 30
                                 : (PageHeight(context) < 900)
@@ -1984,7 +1984,7 @@ class _TeacherThirdPageContentsState extends State<TeacherThirdPageContents> {
                       children: [
                         const Padding(padding: EdgeInsets.only(top: 20)),
                         TMaker(
-                            text: "Student's Answer",
+                            text: "حل الطالب",
                             fontSize: (PageWidth(context) < 550)
                                 ? 30
                                 : (PageHeight(context) < 900)
@@ -2080,7 +2080,7 @@ class _TeacherThirdPageContentsState extends State<TeacherThirdPageContents> {
                       children: [
                         const Padding(padding: EdgeInsets.only(top: 20)),
                         TMaker(
-                            text: "Homework",
+                            text: "الواجب",
                             fontSize: (PageWidth(context) < 550)
                                 ? 30
                                 : (PageHeight(context) < 900)
@@ -2110,7 +2110,7 @@ class _TeacherThirdPageContentsState extends State<TeacherThirdPageContents> {
                       children: [
                         const Padding(padding: EdgeInsets.only(top: 20)),
                         TMaker(
-                            text: "Student's Answer",
+                            text: "حل الطالب",
                             fontSize: (PageWidth(context) < 550)
                                 ? 30
                                 : (PageHeight(context) < 900)
@@ -2238,11 +2238,11 @@ class _TeacherThirdPageContentsState extends State<TeacherThirdPageContents> {
                                     text: () {
                                       if ((solved_hw_student[index] as List).length <= 5) {
                                         // unsolve
-                                        return "Un Solve";
+                                        return "غير محلول";
                                       } else {
                                         if (solved_hw_student[index][7] == '0') {
                                           // un scored
-                                          return "un scored";
+                                          return "لم يقيم";
                                         } else {
                                           // scored done
                                           return "${solved_hw_student[index][7]}/${solved_hw_student[index][4]}";
@@ -2281,7 +2281,7 @@ class _TeacherThirdPageContentsState extends State<TeacherThirdPageContents> {
                                       margin: const EdgeInsets.symmetric(horizontal: 15),
                                       height: 40,
                                       child:
-                                          TMaker(text: "View", fontSize: 18, fontWeight: FontWeight.w600, color: const Color.fromARGB(255, 0, 0, 0))),
+                                          TMaker(text: "عرض", fontSize: 18, fontWeight: FontWeight.w600, color: const Color.fromARGB(255, 0, 0, 0))),
                                 ),
                           ],
                         ),
@@ -2473,7 +2473,7 @@ class _TeacherThirdPageContentsState extends State<TeacherThirdPageContents> {
                                     height: 40,
                                     width: 80,
                                     color: const Color.fromARGB(255, 70, 183, 66),
-                                    child: TMaker(text: "show", fontSize: 18, fontWeight: FontWeight.w700, color: Colors.white),
+                                    child: TMaker(text: "عرض", fontSize: 18, fontWeight: FontWeight.w700, color: Colors.white),
                                   ),
                                 ],
                               ),
@@ -2512,7 +2512,7 @@ class _TeacherThirdPageContentsState extends State<TeacherThirdPageContents> {
             child: Row(
               children: [
                 Expanded(flex: 2, child: Container()),
-                TMaker(text: "All Homeworks", fontSize: 25, fontWeight: FontWeight.w700, color: const Color.fromARGB(255, 0, 0, 0)),
+                TMaker(text: "كل الواجبات", fontSize: 25, fontWeight: FontWeight.w700, color: const Color.fromARGB(255, 0, 0, 0)),
                 Expanded(child: Container()),
                 const Icon(Icons.edit),
                 Expanded(flex: 2, child: Container()),
@@ -2536,7 +2536,7 @@ class _TeacherThirdPageContentsState extends State<TeacherThirdPageContents> {
             child: Row(
               children: [
                 Expanded(flex: 2, child: Container()),
-                TMaker(text: "Add new Homworks", fontSize: 25, fontWeight: FontWeight.w700, color: const Color.fromARGB(255, 0, 0, 0)),
+                TMaker(text: "اضف واجب جديد", fontSize: 25, fontWeight: FontWeight.w700, color: const Color.fromARGB(255, 0, 0, 0)),
                 Expanded(child: Container()),
                 const Icon(Icons.edit_document),
                 Expanded(flex: 2, child: Container()),
@@ -2672,7 +2672,7 @@ class _TeacherThirdPageContentsState extends State<TeacherThirdPageContents> {
           alignment: Alignment.center,
           margin: const EdgeInsets.symmetric(horizontal: 10),
           color: Colors.white,
-          child: TMaker(text: "Homeworks", fontSize: 30, fontWeight: FontWeight.w700, color: Colors.black));
+          child: TMaker(text: "الواجبات", fontSize: 30, fontWeight: FontWeight.w700, color: Colors.black));
       Widget ThirdPageGrades = CMaker(
           margin: const EdgeInsets.symmetric(horizontal: 20),
           circularRadius: 20,

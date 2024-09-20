@@ -1184,7 +1184,7 @@ class _SecondPageState extends State<SecondPage> {
                         child: Container(
                       alignment: Alignment.centerRight,
                       child: Text(
-                        "${Subjects[GradesSubjects[grade][index]][1]} $index",
+                        "${Subjects[GradesSubjects[grade][index]][1]}",
                         style: TextStyle(
                             fontSize: (PageWidth(context) < 550)
                                 ? 17

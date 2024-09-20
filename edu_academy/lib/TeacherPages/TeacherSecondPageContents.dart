@@ -177,7 +177,7 @@ class _TeacherSecondPageContentsState extends State<TeacherSecondPageContents> {
         child: Column(
           children: [
             const Padding(padding: EdgeInsets.only(bottom: 10)),
-            TMaker(text: "Books and Files", fontSize: 30, fontWeight: FontWeight.w600, color: const Color.fromARGB(255, 0, 0, 0)),
+            TMaker(text: "الكتب و الملفات", fontSize: 30, fontWeight: FontWeight.w600, color: const Color.fromARGB(255, 0, 0, 0)),
             const Padding(padding: EdgeInsets.only(bottom: 20)),
             CMaker(
               circularRadius: 20,
@@ -244,9 +244,9 @@ class _TeacherSecondPageContentsState extends State<TeacherSecondPageContents> {
                                     // delete
                                     PanaraInfoDialog.show(
                                       context,
-                                      title: "Wait",
-                                      message: "Do you want to delete this book?",
-                                      buttonText: "Delete",
+                                      title: "تمهل",
+                                      message: "هل تريد حذف هذا الملف؟",
+                                      buttonText: "حذف",
                                       onTapDismiss: () async {
                                         print("book deleted");
                                         await dbService.FiDelete_books_file(
@@ -303,9 +303,9 @@ class _TeacherSecondPageContentsState extends State<TeacherSecondPageContents> {
                   print("file_links $fileLinks");
                   PanaraInfoDialog.show(
                     context,
-                    title: "Sucess",
-                    message: "A books is added successfully",
-                    buttonText: "Okey",
+                    title: "نجاح",
+                    message: "تم اضافة الواجب بنجاح",
+                    buttonText: "تم",
                     onTapDismiss: () async {
                       await dbService.FiAdd_book_file(widget.ListOfGrades[GradeOpenedIndex][0], SubjectThatIsSelected, fileLinks?[0], files?[1]);
                       books_load();
@@ -426,7 +426,7 @@ class _TeacherSecondPageContentsState extends State<TeacherSecondPageContents> {
           child: Row(
             children: [
               const Padding(padding: EdgeInsets.only(left: 20)),
-              TMaker(text: "books and files", fontSize: 25, fontWeight: FontWeight.w400, color: const Color.fromARGB(255, 0, 0, 0)),
+              TMaker(text: "الكتب و الملفات", fontSize: 25, fontWeight: FontWeight.w400, color: const Color.fromARGB(255, 0, 0, 0)),
               Expanded(child: Container()),
               Expanded(child: Container()),
               Expanded(child: Container()),
@@ -524,7 +524,7 @@ class _TeacherSecondPageContentsState extends State<TeacherSecondPageContents> {
                                       alignment: Alignment.centerLeft,
                                       child: TMaker(
                                           textAlign: TextAlign.start,
-                                          text: "Date : ${AllMessages[index][1]}",
+                                          text: "التاريخ : ${AllMessages[index][1]}",
                                           fontSize: 15,
                                           fontWeight: FontWeight.w600,
                                           color: Colors.black),
@@ -539,7 +539,7 @@ class _TeacherSecondPageContentsState extends State<TeacherSecondPageContents> {
                   },
                 );
               },
-              child: const Text("All messages")));
+              child: const Text("كل الرسائل")));
       Widget LastMessageWindow = CMaker(
           padding: const EdgeInsets.all(20),
           alignment: Alignment.topLeft,
@@ -565,7 +565,7 @@ class _TeacherSecondPageContentsState extends State<TeacherSecondPageContents> {
                 alignment: Alignment.centerLeft,
                 child: TMaker(
                     textAlign: TextAlign.start,
-                    text: "Date : ${AllMessages[AllMessages.length - 1][1]}",
+                    text: "التاريخ : ${AllMessages[AllMessages.length - 1][1]}",
                     fontSize: 15,
                     fontWeight: FontWeight.w600,
                     color: Colors.black),
@@ -587,7 +587,7 @@ class _TeacherSecondPageContentsState extends State<TeacherSecondPageContents> {
                   padding: const EdgeInsets.only(left: 15),
                   child: TMaker(
                       textAlign: TextAlign.start,
-                      text: "send a message to all students",
+                      text: "ارسل رسالة لكل الطلاب",
                       fontSize: 20,
                       fontWeight: FontWeight.w600,
                       color: Colors.black)),
@@ -635,7 +635,7 @@ class _TeacherSecondPageContentsState extends State<TeacherSecondPageContents> {
                       errorBorder: OutlineInputBorder(
                           borderSide: const BorderSide(color: Color.fromARGB(255, 192, 192, 192)), borderRadius: BorderRadius.circular(15)),
                       label: const Text(
-                        "enter a message",
+                        "ادخل الرسالة",
                         textAlign: TextAlign.start,
                         style: TextStyle(fontSize: 15, fontWeight: FontWeight.w600),
                       ),
@@ -656,27 +656,6 @@ class _TeacherSecondPageContentsState extends State<TeacherSecondPageContents> {
                           value: "for 24 hours",
                           child: Text("for 24 hours"),
                         ),
-                        // DropdownMenuItem(
-                        //     value: "for 2 days", child: Text("for 2 days")),
-                        // DropdownMenuItem(
-                        //     value: "for 3 days",
-                        //     child: Text(
-                        //       "for 3 days",
-                        //     )),
-                        // DropdownMenuItem(
-                        //     value: "for 4 days", child: Text("for 4 days")),
-                        // DropdownMenuItem(
-                        //     value: "for 5 days", child: Text("for 5 days")),
-                        // DropdownMenuItem(
-                        //     value: "for 6 days", child: Text("for 6 days")),
-                        // DropdownMenuItem(
-                        //     value: "for a week", child: Text("for a week")),
-                        // DropdownMenuItem(
-                        //     value: "for 2 weeks", child: Text("for 2 weeks")),
-                        // DropdownMenuItem(
-                        //     value: "for 3 weeks", child: Text("for 3 weeks")),
-                        // DropdownMenuItem(
-                        //     value: "for a month", child: Text("for a month")),
                       ],
                       onChanged: (value) {
                         setState(() {
@@ -914,7 +893,7 @@ class _TeacherSecondPageContentsState extends State<TeacherSecondPageContents> {
                                       );
                                     })
                                 : const Text(
-                                    "No students Added",
+                                    "لا يوجد طلاب مضافة",
                                     style: TextStyle(fontSize: 20, fontWeight: FontWeight.w800),
                                   ),
                           ),

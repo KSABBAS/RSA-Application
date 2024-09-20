@@ -19,10 +19,11 @@ class _SplashViewPageState extends State<SplashViewPage> with SingleTickerProvid
   AnimationController? animationController;
   Animation? fading;
   @override
-  void initState() {
+  void initState()  {
     final dbService = DatabaseService();
     // GradesSubjects = await dbService.FiGet_allSub_indexs();
     // Subjects = await dbService.FiGet_allSub_data();
+    
     super.initState();
     animationController = AnimationController(vsync: this, duration: const Duration(milliseconds: 3000));
     fading = Tween<double>(begin: 0, end: 1).animate(animationController!)
@@ -30,6 +31,7 @@ class _SplashViewPageState extends State<SplashViewPage> with SingleTickerProvid
         setState(() {
           if (animationController!.isCompleted) {
             Timer(const Duration(milliseconds: 300), () async {
+              
               final SharedPreferences prefs = await SharedPreferences.getInstance();
               //  satrt save data writen in login page
               final List<String>? loginLastValue = prefs.getStringList("Login_last_value");

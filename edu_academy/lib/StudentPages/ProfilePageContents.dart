@@ -130,7 +130,7 @@ class _StudentProfileState extends State<StudentProfile> {
               width: double.infinity,
               child: TMaker(
                   textAlign: TextAlign.start,
-                  text: "Name",
+                  text: "الاسم",
                   fontSize: 20,
                   fontWeight: FontWeight.w400,
                   color: Color.fromARGB(255, 0, 0, 0))),
@@ -180,7 +180,7 @@ class _StudentProfileState extends State<StudentProfile> {
                         width: double.infinity,
                         child: TMaker(
                             textAlign: TextAlign.start,
-                            text: "Id",
+                            text: "الرقم السري",
                             fontSize: 20,
                             fontWeight: FontWeight.w400,
                             color: Color.fromARGB(255, 0, 0, 0))),
@@ -207,7 +207,7 @@ class _StudentProfileState extends State<StudentProfile> {
                         CMaker(
                             padding: EdgeInsets.only(right: 10),
                             child: TMaker(
-                                text: "12345",
+                                text: widget.StudentPassword,
                                 fontSize: 20,
                                 fontWeight: FontWeight.w600,
                                 color: const Color.fromARGB(255, 0, 0, 0))),
@@ -229,7 +229,7 @@ class _StudentProfileState extends State<StudentProfile> {
                         width: double.infinity,
                         child: TMaker(
                             textAlign: TextAlign.start,
-                            text: "Grade",
+                            text: "الصف",
                             fontSize: 20,
                             fontWeight: FontWeight.w400,
                             color: const Color.fromARGB(255, 0, 0, 0))),
@@ -277,7 +277,7 @@ class _StudentProfileState extends State<StudentProfile> {
               width: double.infinity,
               child: TMaker(
                   textAlign: TextAlign.start,
-                  text: (EditMode) ? "Edit Email" : "Email",
+                  text: (EditMode) ? "تعديل الايميل" : "الايميل",
                   fontSize: 20,
                   fontWeight: FontWeight.w400,
                   color: const Color.fromARGB(255, 0, 0, 0))),
@@ -349,7 +349,7 @@ class _StudentProfileState extends State<StudentProfile> {
               width: double.infinity,
               child: TMaker(
                   textAlign: TextAlign.start,
-                  text: (EditMode) ? "Edit Password" : "Password",
+                  text: (EditMode) ? "تعديل الرقم السري" : "الرقم السري",
                   fontSize: 20,
                   fontWeight: FontWeight.w400,
                   color: const Color.fromARGB(255, 0, 0, 0))),
@@ -418,7 +418,7 @@ class _StudentProfileState extends State<StudentProfile> {
               width: double.infinity,
               child: TMaker(
                   textAlign: TextAlign.start,
-                  text: (EditMode) ? "Edit Number" : "Number",
+                  text: (EditMode) ? "تعديل رقم الهاتف" : "رقم الهاتف",
                   fontSize: 20,
                   fontWeight: FontWeight.w400,
                   color: const Color.fromARGB(255, 0, 0, 0))),
@@ -517,7 +517,7 @@ class _StudentProfileState extends State<StudentProfile> {
                 context: context,
                 builder: (context) {
                   return AlertDialog(
-                      title: Text("Enter the password                  "),
+                      title: Text("ادخل كلمة السر                  "),
                       content: CMaker(
                         height: 100,
                         alignment: Alignment.center,
@@ -543,7 +543,7 @@ class _StudentProfileState extends State<StudentProfile> {
                                           Color.fromARGB(255, 192, 192, 192)),
                                   borderRadius: BorderRadius.circular(30)),
                               label: const Text(
-                                "Password",
+                                "الرقم السري",
                                 style: TextStyle(
                                     fontSize: 15, fontWeight: FontWeight.w600),
                               ),
@@ -562,7 +562,7 @@ class _StudentProfileState extends State<StudentProfile> {
                               Navigator.pop(context);
                             },
                             child: Text(
-                              "Cancel",
+                              "الغاء",
                             )),
                         TextButton(
                             onPressed: () async {
@@ -580,7 +580,7 @@ class _StudentProfileState extends State<StudentProfile> {
                               }
                             },
                             child: Text(
-                              "ok",
+                              "ارسال",
                             )),
                       ]);
                 });
@@ -609,7 +609,7 @@ class _StudentProfileState extends State<StudentProfile> {
             CMaker(
                 padding: EdgeInsets.only(right: 10),
                 child: TMaker(
-                    text: (EditMode) ? "Save" : "Edit",
+                    text: (EditMode) ? "حفظ" : "تعديل",
                     fontSize: 25,
                     fontWeight: FontWeight.w600,
                     color: const Color.fromARGB(255, 0, 0, 0))),
@@ -715,7 +715,7 @@ class _StudentProfileState extends State<StudentProfile> {
                                         255, 233, 255, 247),
                                     padding: EdgeInsets.only(right: 10),
                                     child: TMaker(
-                                        text: "Cancel",
+                                        text: "الغاء",
                                         fontSize: 25,
                                         fontWeight: FontWeight.w600,
                                         color: const Color.fromARGB(
