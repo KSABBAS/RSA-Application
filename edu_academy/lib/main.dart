@@ -20,7 +20,7 @@ import 'service/firebase_options.dart' ;
 //firebase deploy --only hosting -m "V 1.0.1"
 //firebase init hosting
 //flutter build web  --web-renderer html --release
-// flutter clean+
+// flutter clean; flutter build web --web-renderer html --release; firebase init hosting; firebase deploy --only hosting -m "V 1.0.2"
 
 void main() async {
   try{

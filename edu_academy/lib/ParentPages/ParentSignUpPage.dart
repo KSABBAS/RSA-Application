@@ -366,7 +366,7 @@ class _ParentSignUpPageState extends State<ParentSignUpPage> {
           await dbService.fiCreate('Parent', {
             "name": ParentName,
             "phone": ParentNumber,
-            "email": ParentEmail,
+            "email": ParentEmail.toLowerCase(),
             "password": ParentPassword,
             "gender": "not added yet",
             "photo" : 'https://firebasestorage.googleapis.com/v0/b/rsa-app-3ec3f.appspot.com/o/Profiles%2FPerson.png?alt=media&token=9a526b63-e8ff-40ec-b831-088e270a0013',

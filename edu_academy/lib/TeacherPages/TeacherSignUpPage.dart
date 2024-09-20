@@ -573,7 +573,7 @@ class _TeacherSignUpPageState extends State<TeacherSignUpPage> {
           await dbService.fiCreate('Teacher', {
             "name": TeacherName,
             "phone": TeacherNumber,
-            "email": TeacherEmail,
+            "email": TeacherEmail.toLowerCase(),
             "password": TeacherPassword,
             "birth_date": TeacherDateOfBirth,
             "gender": TeacherGeneder,

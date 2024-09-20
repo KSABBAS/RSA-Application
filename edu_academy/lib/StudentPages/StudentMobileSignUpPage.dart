@@ -509,7 +509,7 @@ class _StudentMobileSignUpPageState extends State<StudentMobileSignUpPage> {
             "name": StudentName,
             "phone": StudentMobileNumber,
             "par_phone": StudentParentMobileNumber,
-            "email": StudentEmail,
+            "email": StudentEmail.toLowerCase(),
             "password": StudentPassword,
             "birth_date": StudentDateOfBirth,
             "gender": StudentGender,
