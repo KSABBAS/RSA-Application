@@ -2190,6 +2190,7 @@ class _TeacherThirdPageContentsState extends State<TeacherThirdPageContents> {
                 size: 28,
               )));
       Widget HomeWorksBuilder = CMaker(
+        height: PageHeight(context)-200,
           padding: const EdgeInsets.only(top: 50, right: 15, left: 15),
           circularRadius: 25,
           margin: const EdgeInsets.only(right: 20, left: 20, bottom: 40),
@@ -2378,7 +2379,7 @@ class _TeacherThirdPageContentsState extends State<TeacherThirdPageContents> {
                         const Padding(padding: EdgeInsets.only(top: 20)),
                         SecondPageArrowBack,
                         const Padding(padding: EdgeInsets.only(bottom: 30)),
-                        Expanded(flex: 13, child: HomeWorksBuilder)
+                        HomeWorksBuilder
                       ],
                     ),
                   ),

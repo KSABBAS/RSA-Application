@@ -263,7 +263,7 @@ class _LoginPageState extends State<LogInPage> {
             key: key1,
             child: CMaker(
               height: PageHeight(context),
-              child: Column(
+              child: ListView(
                 children: [
                   Container(
                     width: double.infinity,
@@ -282,11 +282,14 @@ class _LoginPageState extends State<LogInPage> {
                       ],
                     ),
                   ),
-                  Expanded(flex: 2, child: Container()),
-                  CMaker(margin: const EdgeInsetsDirectional.symmetric(horizontal: 20), child: InputPart),
-                  Expanded(flex: 2, child: Container()),
+                  Padding(padding:EdgeInsets.only(top: 30)),
+                  CMaker(
+                      margin:
+                          const EdgeInsetsDirectional.symmetric(horizontal: 20),
+                      child: InputPart),
+                  Padding(padding:EdgeInsets.only(top: 50)),
                   CMaker(alignment: Alignment.center, child: LoginButton),
-                  Expanded(flex: 1, child: Container()),
+                  Padding(padding:EdgeInsets.only(top: 30)),
                   CMaker(
                       child: Row(
                     children: [
@@ -298,7 +301,8 @@ class _LoginPageState extends State<LogInPage> {
                       ),
                     ],
                   )),
-                  Expanded(flex: 2, child: PoweredBy),
+                  CMaker(height: 100,child: PoweredBy),
+                  Padding(padding:EdgeInsets.only(top: 20)),
                 ],
               ),
             ),
