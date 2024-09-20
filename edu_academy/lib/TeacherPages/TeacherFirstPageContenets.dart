@@ -350,7 +350,7 @@ class _TeacherFirstPageContenetsState extends State<TeacherFirstPageContenets> {
                                   : (PageWidth(context) >= 550 &&
                                           PageWidth(context) >= 1200 &&
                                           PageHeight(context) < 900)
-                                      ? (PageWidth(context) - 790) /
+                                      ? (PageWidth(context) - 380) /
                                           TableData[0].length
                                       : ((PageWidth(context) - 40) /
                                           TableData[0].length),
@@ -532,7 +532,52 @@ class _TeacherFirstPageContenetsState extends State<TeacherFirstPageContenets> {
                     )),
                     Expanded(
                         child: CMaker(
-                            alignment: Alignment.center, child: JoinButton))
+                            alignment: Alignment.center, child: JoinButton)),
+                  ],
+                )),
+                const Padding(padding: EdgeInsets.only(top: 20)),
+            CMaker(
+                circularRadius: 20,
+                height: 200,
+                margin: const EdgeInsets.symmetric(horizontal: 20),
+                boxShadow: const [
+                  BoxShadow(
+                      offset: Offset(1, 1),
+                      blurRadius: 6,
+                      spreadRadius: .03,
+                      color: Color.fromARGB(82, 0, 0, 0)),
+                ],
+                width: (PageWidth(context) < 650) ? double.infinity : 500,
+                color: Colors.white,
+                child: Column(
+                  children: [
+                    Expanded(
+                        child: Row(
+                      children: [
+                        Expanded(
+                          flex: 2,
+                          child: Container(),
+                        ),
+                        Expanded(
+                          flex: 6,
+                          child: NewClassTC1,
+                        ),
+                        Expanded(
+                          child: Container(),
+                        ),
+                        Expanded(
+                          flex: 6,
+                          child: LessonAndDate1,
+                        ),
+                        Expanded(
+                          flex: 2,
+                          child: Container(),
+                        ),
+                      ],
+                    )),
+                    Expanded(
+                        child: CMaker(
+                            alignment: Alignment.center, child: JoinButton1))
                   ],
                 )),
           ],
@@ -599,67 +644,168 @@ class _TeacherFirstPageContenetsState extends State<TeacherFirstPageContenets> {
                                             child: JoinButton))
                                   ],
                                 )),
+                                const Padding(padding: EdgeInsets.only(top: 20)),
+            CMaker(
+                circularRadius: 20,
+                height: 200,
+                margin: const EdgeInsets.symmetric(horizontal: 20),
+                boxShadow: const [
+                  BoxShadow(
+                      offset: Offset(1, 1),
+                      blurRadius: 6,
+                      spreadRadius: .03,
+                      color: Color.fromARGB(82, 0, 0, 0)),
+                ],
+                width: (PageWidth(context) < 650) ? double.infinity : 500,
+                color: Colors.white,
+                child: Column(
+                  children: [
+                    Expanded(
+                        child: Row(
+                      children: [
+                        Expanded(
+                          flex: 2,
+                          child: Container(),
+                        ),
+                        Expanded(
+                          flex: 6,
+                          child: NewClassTC1,
+                        ),
+                        Expanded(
+                          child: Container(),
+                        ),
+                        Expanded(
+                          flex: 6,
+                          child: LessonAndDate1,
+                        ),
+                        Expanded(
+                          flex: 2,
+                          child: Container(),
+                        ),
+                      ],
+                    )),
+                    Expanded(
+                        child: CMaker(
+                            alignment: Alignment.center, child: JoinButton1))
+                  ],
+                )),
                           ],
                         )
                       : CMaker(
-                          width: double.infinity,
-                          child: Row(
-                            children: [
-                              Expanded(
-                                  child: CMaker(
+                        width: double.infinity,
+                        height: PageHeight(context)-200,
+                        child: Column(
+                          children: [
+                            CMaker(
                                       margin: const EdgeInsets.symmetric(
                                           horizontal: 20),
-                                      child: OneDayTable)),
-                              const Padding(padding: EdgeInsets.only(left: 20)),
-                              CMaker(
-                                  circularRadius: 20,
-                                  height: 200,
-                                  width: 350,
-                                  margin: const EdgeInsets.symmetric(
-                                      horizontal: 20),
-                                  boxShadow: const [
-                                    BoxShadow(
-                                        offset: Offset(1, 1),
-                                        blurRadius: 6,
-                                        spreadRadius: .03,
-                                        color: Color.fromARGB(82, 0, 0, 0)),
-                                  ],
-                                  color: Colors.white,
-                                  child: Column(
-                                    children: [
-                                      Expanded(
-                                          child: Row(
-                                        children: [
-                                          Expanded(
-                                            flex: 3,
-                                            child: Container(),
-                                          ),
-                                          Expanded(
-                                            flex: 6,
-                                            child: NewClassTC,
-                                          ),
-                                          Expanded(
-                                            child: Container(),
-                                          ),
-                                          Expanded(
-                                            flex: 6,
-                                            child: LessonAndDate,
-                                          ),
-                                          Expanded(
-                                            flex: 3,
-                                            child: Container(),
-                                          ),
-                                        ],
-                                      )),
-                                      Expanded(
+                                      child: OneDayTable),
+                                      const Padding(padding: EdgeInsets.only(top: 20)),
+                            CMaker(
+                                width: double.infinity,
+                                child: Row(
+                                  children: [
+                                    const Padding(padding: EdgeInsets.only(top: 20)),
+                                        Expanded(
                                           child: CMaker(
-                                              alignment: Alignment.center,
-                                              child: JoinButton))
-                                    ],
-                                  )),
-                            ],
-                          ),
-                        )])]);
+                                              circularRadius: 20,
+                                              height: 200,
+                                              margin: const EdgeInsets.symmetric(horizontal: 20),
+                                              boxShadow: const [
+                                                BoxShadow(
+                              offset: Offset(1, 1),
+                              blurRadius: 6,
+                              spreadRadius: .03,
+                              color: Color.fromARGB(82, 0, 0, 0)),
+                                              ],
+                                              width: (PageWidth(context) < 650) ? double.infinity : 500,
+                                              color: Colors.white,
+                                              child: Column(
+                                                children: [
+                            Expanded(
+                                child: Row(
+                              children: [
+                                Expanded(
+                                  flex: 2,
+                                  child: Container(),
+                                ),
+                                Expanded(
+                                  flex: 6,
+                                  child: NewClassTC1,
+                                ),
+                                Expanded(
+                                  child: Container(),
+                                ),
+                                Expanded(
+                                  flex: 6,
+                                  child: LessonAndDate1,
+                                ),
+                                Expanded(
+                                  flex: 2,
+                                  child: Container(),
+                                ),
+                              ],
+                            )),
+                            Expanded(
+                                child: CMaker(
+                                    alignment: Alignment.center, child: JoinButton1))
+                                                ],
+                                              )),
+                                        ),
+                                    const Padding(padding: EdgeInsets.only(left: 20)),
+                                    Expanded(
+                                      child: CMaker(
+                                          circularRadius: 20,
+                                          height: 200,
+                                          margin: const EdgeInsets.symmetric(
+                                              horizontal: 20),
+                                          boxShadow: const [
+                                            BoxShadow(
+                                                offset: Offset(1, 1),
+                                                blurRadius: 6,
+                                                spreadRadius: .03,
+                                                color: Color.fromARGB(82, 0, 0, 0)),
+                                          ],
+                                          color: Colors.white,
+                                          child: Column(
+                                            children: [
+                                              Expanded(
+                                                  child: Row(
+                                                children: [
+                                                  Expanded(
+                                                    flex: 3,
+                                                    child: Container(),
+                                                  ),
+                                                  Expanded(
+                                                    flex: 6,
+                                                    child: NewClassTC,
+                                                  ),
+                                                  Expanded(
+                                                    child: Container(),
+                                                  ),
+                                                  Expanded(
+                                                    flex: 6,
+                                                    child: LessonAndDate,
+                                                  ),
+                                                  Expanded(
+                                                    flex: 3,
+                                                    child: Container(),
+                                                  ),
+                                                ],
+                                              )),
+                                              Expanded(
+                                                  child: CMaker(
+                                                      alignment: Alignment.center,
+                                                      child: JoinButton))
+                                            ],
+                                          )),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                          ],
+                        ),
+                      )])]);
       });
     }
     return FirstPageBody;
