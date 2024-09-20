@@ -656,7 +656,6 @@ class _TeacherFirstPageContenetsState extends State<TeacherFirstPageContenets> {
                       spreadRadius: .03,
                       color: Color.fromARGB(82, 0, 0, 0)),
                 ],
-                width: (PageWidth(context) < 650) ? double.infinity : 500,
                 color: Colors.white,
                 child: Column(
                   children: [
