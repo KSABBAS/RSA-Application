@@ -528,7 +528,7 @@ class _TeacherProfilePageState extends State<TeacherProfilePage> {
         }
       },
       child: CMaker(
-        width: 170,
+        width: 220,
         height: (PageWidth(context) < 550)
             ? 60
             : (PageHeight(context) < 900)
@@ -777,7 +777,7 @@ class _TeacherProfilePageState extends State<TeacherProfilePage> {
         TeacherProfileBody = Form(
           key: ProfileKey,
           child: CMaker(
-            height: PageHeight(context) - 200,
+            height: PageHeight(context) - 100,
             width: double.infinity,
             child: Column(children: [
               const Padding(padding: EdgeInsets.only(bottom: 20)),
@@ -785,7 +785,7 @@ class _TeacherProfilePageState extends State<TeacherProfilePage> {
               Expanded(child: Container()),
               CMaker(
                   padding: const EdgeInsets.all(20),
-                  height: PageHeight(context) - 400,
+                  height: PageHeight(context) - 320,
                   width: double.infinity,
                   color: const Color.fromARGB(255, 74, 193, 239),
                   circularRadius: 25,
