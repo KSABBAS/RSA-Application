@@ -20,35 +20,34 @@ class DatabaseService {
 
   // RealTime
   rePublicMessages_Send(String sub, String Grade, String messgae, String date, String duration, String name) async {
-  Grade = Grade.contains('(Lang)') ? Grade.replaceAll('(Lang)', '').trim() : Grade;
-  print("in rePublicMessages_Send $Grade");
-  try {
-    print("#1");
-    final allStudents = real.ref("Messages").child(Grade).child(sub);
-    print("#2");
+    Grade = Grade.contains('(Lang)') ? Grade.replaceAll('(Lang)', '').trim() : Grade;
+    print("in rePublicMessages_Send $Grade");
+    try {
+      print("#1");
+      final allStudents = real.ref("Messages").child(Grade).child(sub);
+      print("#2");
 
-    // Replace `once()` with `get()` to fetch the data
-    final snapshot = await allStudents.get();
+      // Replace `once()` with `get()` to fetch the data
+      final snapshot = await allStudents.get();
 
-    if (!snapshot.exists) {
-      print("No data found at this reference.");
-      // return; // Exit if no data exists
+      if (!snapshot.exists) {
+        print("No data found at this reference.");
+        // return; // Exit if no data exists
+      }
+
+      print("#3");
+      print("snapshot.value ${snapshot.value}");
+
+      int numS = snapshot.children.length; // Get the number of children
+      log(numS.toString());
+
+      // Add new message
+      await allStudents.child("messgae${numS + 1}").set([messgae, date, duration, name]);
+      print("#4");
+    } catch (e) {
+      print("rePublicMessages_Send error ${e.toString()}");
     }
-
-    print("#3");
-    print("snapshot.value ${snapshot.value}");
-    
-    int numS = snapshot.children.length; // Get the number of children
-    log(numS.toString());
-
-    // Add new message
-    await allStudents.child("messgae${numS + 1}").set([messgae, date, duration, name]);
-    print("#4");
-  } catch (e) {
-    print("rePublicMessages_Send error ${e.toString()}");
   }
-}
-
 
   // FireStore
   fiCreate(String rref, userData) async {
@@ -505,15 +504,23 @@ class DatabaseService {
 
   FiAdd_book_file(String grade, String subject, String link, String fileName) async {
     grade = grade.contains('(Lang)') ? grade.replaceAll('(Lang)', '').trim() : grade;
-    //Book/SubjectsBooks/Grades/Grade 1/عربي/Book1
+    print("$grade $subject $link $fileName");
+
     var studentSnapshot = fire.collection('Book').doc("SubjectsBooks").collection("Grades").doc(grade).collection(subject);
-    var docId = studentSnapshot.doc();
-    docId.set({
-      "title": fileName,
-      "link": link,
-      "date": CurrentDateTime,
-      "id": docId.id,
-    });
+
+    var docRef = studentSnapshot.doc();
+
+    try {
+      await docRef.set({
+        "title": fileName,
+        "link": link,
+        "date": CurrentDateTime,
+        "id": docRef.id,
+      });
+      print("Document added successfully with ID: ${docRef.id}");
+    } catch (error) {
+      print("Failed to add document: $error");
+    }
   }
 
   FiDelete_books_file(String grade, String subject, String docId) async {

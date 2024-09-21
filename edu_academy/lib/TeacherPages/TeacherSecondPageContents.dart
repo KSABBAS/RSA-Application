@@ -301,19 +301,41 @@ class _TeacherSecondPageContentsState extends State<TeacherSecondPageContents> {
                   }
 
                   print("file_links $fileLinks");
+                  try {
+                    // print("widget.ListOfGrades[GradeOpenedIndex][0] ${widget.ListOfGrades[GradeOpenedIndex][0]}");
+                    // print("SubjectThatIsSelected ${SubjectThatIsSelected}");
+                    // print("fileLinks?[0] ${fileLinks?[0]}");
+                    // // print("files ${files}");
+                    // print("files?[1] ${files?[0][1]}");
+                    await dbService.FiAdd_book_file(widget.ListOfGrades[GradeOpenedIndex][0], SubjectThatIsSelected, fileLinks?[0], files?[0][1]);
                   PanaraInfoDialog.show(
                     context,
                     title: "نجاح",
-                    message: "تم اضافة الواجب بنجاح",
+                    message: "تم اضافة الكتاب بنجاح",
                     buttonText: "تم",
                     onTapDismiss: () async {
-                      await dbService.FiAdd_book_file(widget.ListOfGrades[GradeOpenedIndex][0], SubjectThatIsSelected, fileLinks?[0], files?[1]);
-                      books_load();
                       Navigator.pop(context);
+                      await books_load();
                     },
                     panaraDialogType: PanaraDialogType.warning,
                     barrierDismissible: false,
                   );
+                    
+                  } catch (e) {
+                    log("fileLinks0 ${e.toString()}");
+                    PanaraInfoDialog.show(
+                    context,
+                    title: "خطأ",
+                    message: "يوجد خطأ اثناء رفع الكتاب ",
+                    buttonText: "تم",
+                    onTapDismiss: () async {
+                      Navigator.pop(context);
+                      await books_load();
+                    },
+                    panaraDialogType: PanaraDialogType.error,
+                    barrierDismissible: false,
+                  );
+                  }
                 }
               },
               child: TMaker(text: " (Only PDF) إضافة", fontSize: 22, fontWeight: FontWeight.w700, color: Colors.white),
@@ -586,11 +608,7 @@ class _TeacherSecondPageContentsState extends State<TeacherSecondPageContents> {
                   width: double.infinity,
                   padding: const EdgeInsets.only(left: 15),
                   child: TMaker(
-                      textAlign: TextAlign.start,
-                      text: "ارسل رسالة لكل الطلاب",
-                      fontSize: 20,
-                      fontWeight: FontWeight.w600,
-                      color: Colors.black)),
+                      textAlign: TextAlign.start, text: "ارسل رسالة لكل الطلاب", fontSize: 20, fontWeight: FontWeight.w600, color: Colors.black)),
               const Padding(padding: EdgeInsets.only(top: 20)),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 20),
