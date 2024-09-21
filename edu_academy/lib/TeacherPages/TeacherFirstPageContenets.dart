@@ -502,7 +502,7 @@ class _TeacherFirstPageContenetsState extends State<TeacherFirstPageContenets> {
                       spreadRadius: .03,
                       color: Color.fromARGB(82, 0, 0, 0)),
                 ],
-                width: (PageWidth(context) < 650) ? double.infinity : 500,
+                width: double.infinity ,
                 color: Colors.white,
                 child: Column(
                   children: [
@@ -547,7 +547,7 @@ class _TeacherFirstPageContenetsState extends State<TeacherFirstPageContenets> {
                       spreadRadius: .03,
                       color: Color.fromARGB(82, 0, 0, 0)),
                 ],
-                width: (PageWidth(context) < 650) ? double.infinity : 500,
+                width: double.infinity ,
                 color: Colors.white,
                 child: Column(
                   children: [
@@ -695,117 +695,119 @@ class _TeacherFirstPageContenetsState extends State<TeacherFirstPageContenets> {
                             )
                           : CMaker(
                             width: double.infinity,
-                            height: PageHeight(context)-200,
-                            child: Column(
-                              children: [
-                                CMaker(
-                                          margin: const EdgeInsets.symmetric(
-                                              horizontal: 20),
-                                          child: OneDayTable),
+                            height: PageHeight(context)-140,
+                            child: SingleChildScrollView(
+                              child: Column(
+                                children: [
+                                  CMaker(
+                                            margin: const EdgeInsets.symmetric(
+                                                horizontal: 20),
+                                            child: OneDayTable),
+                                            const Padding(padding: EdgeInsets.only(top: 20)),
+                                  CMaker(
+                                      width: double.infinity,
+                                      child: Row(
+                                        children: [
                                           const Padding(padding: EdgeInsets.only(top: 20)),
-                                CMaker(
-                                    width: double.infinity,
-                                    child: Row(
-                                      children: [
-                                        const Padding(padding: EdgeInsets.only(top: 20)),
-                                            Expanded(
-                                              child: CMaker(
-                                                  circularRadius: 20,
-                                                  height: 200,
-                                                  margin: const EdgeInsets.symmetric(horizontal: 20),
-                                                  boxShadow: const [
-                                                    BoxShadow(
-                                  offset: Offset(1, 1),
-                                  blurRadius: 6,
-                                  spreadRadius: .03,
-                                  color: Color.fromARGB(82, 0, 0, 0)),
-                                                  ],
-                                                  width: (PageWidth(context) < 650) ? double.infinity : 500,
-                                                  color: Colors.white,
-                                                  child: Column(
-                                                    children: [
-                                Expanded(
-                                    child: Row(
-                                  children: [
-                                    Expanded(
-                                      flex: 2,
-                                      child: Container(),
-                                    ),
-                                    Expanded(
-                                      flex: 6,
-                                      child: NewClassTC1,
-                                    ),
-                                    Expanded(
-                                      child: Container(),
-                                    ),
-                                    Expanded(
-                                      flex: 6,
-                                      child: LessonAndDate1,
-                                    ),
-                                    Expanded(
-                                      flex: 2,
-                                      child: Container(),
-                                    ),
-                                  ],
-                                )),
-                                Expanded(
-                                    child: CMaker(
-                                        alignment: Alignment.center, child: JoinButton1))
+                                              Expanded(
+                                                child: CMaker(
+                                                    circularRadius: 20,
+                                                    height: 200,
+                                                    margin: const EdgeInsets.symmetric(horizontal: 20),
+                                                    boxShadow: const [
+                                                      BoxShadow(
+                                    offset: Offset(1, 1),
+                                    blurRadius: 6,
+                                    spreadRadius: .03,
+                                    color: Color.fromARGB(82, 0, 0, 0)),
                                                     ],
-                                                  )),
-                                            ),
-                                        const Padding(padding: EdgeInsets.only(left: 20)),
-                                        Expanded(
-                                          child: CMaker(
-                                              circularRadius: 20,
-                                              height: 200,
-                                              margin: const EdgeInsets.symmetric(
-                                                  horizontal: 20),
-                                              boxShadow: const [
-                                                BoxShadow(
-                                                    offset: Offset(1, 1),
-                                                    blurRadius: 6,
-                                                    spreadRadius: .03,
-                                                    color: Color.fromARGB(82, 0, 0, 0)),
-                                              ],
-                                              color: Colors.white,
-                                              child: Column(
-                                                children: [
-                                                  Expanded(
-                                                      child: Row(
-                                                    children: [
-                                                      Expanded(
-                                                        flex: 3,
-                                                        child: Container(),
-                                                      ),
-                                                      Expanded(
-                                                        flex: 6,
-                                                        child: NewClassTC,
-                                                      ),
-                                                      Expanded(
-                                                        child: Container(),
-                                                      ),
-                                                      Expanded(
-                                                        flex: 6,
-                                                        child: LessonAndDate,
-                                                      ),
-                                                      Expanded(
-                                                        flex: 3,
-                                                        child: Container(),
-                                                      ),
-                                                    ],
-                                                  )),
-                                                  Expanded(
-                                                      child: CMaker(
-                                                          alignment: Alignment.center,
-                                                          child: JoinButton))
+                                                    width: (PageWidth(context) < 650) ? double.infinity : 500,
+                                                    color: Colors.white,
+                                                    child: Column(
+                                                      children: [
+                                  Expanded(
+                                      child: Row(
+                                    children: [
+                                      Expanded(
+                                        flex: 2,
+                                        child: Container(),
+                                      ),
+                                      Expanded(
+                                        flex: 6,
+                                        child: NewClassTC1,
+                                      ),
+                                      Expanded(
+                                        child: Container(),
+                                      ),
+                                      Expanded(
+                                        flex: 6,
+                                        child: LessonAndDate1,
+                                      ),
+                                      Expanded(
+                                        flex: 2,
+                                        child: Container(),
+                                      ),
+                                    ],
+                                  )),
+                                  Expanded(
+                                      child: CMaker(
+                                          alignment: Alignment.center, child: JoinButton1))
+                                                      ],
+                                                    )),
+                                              ),
+                                          const Padding(padding: EdgeInsets.only(left: 20)),
+                                          Expanded(
+                                            child: CMaker(
+                                                circularRadius: 20,
+                                                height: 200,
+                                                margin: const EdgeInsets.symmetric(
+                                                    horizontal: 20),
+                                                boxShadow: const [
+                                                  BoxShadow(
+                                                      offset: Offset(1, 1),
+                                                      blurRadius: 6,
+                                                      spreadRadius: .03,
+                                                      color: Color.fromARGB(82, 0, 0, 0)),
                                                 ],
-                                              )),
-                                        ),
-                                      ],
+                                                color: Colors.white,
+                                                child: Column(
+                                                  children: [
+                                                    Expanded(
+                                                        child: Row(
+                                                      children: [
+                                                        Expanded(
+                                                          flex: 3,
+                                                          child: Container(),
+                                                        ),
+                                                        Expanded(
+                                                          flex: 6,
+                                                          child: NewClassTC,
+                                                        ),
+                                                        Expanded(
+                                                          child: Container(),
+                                                        ),
+                                                        Expanded(
+                                                          flex: 6,
+                                                          child: LessonAndDate,
+                                                        ),
+                                                        Expanded(
+                                                          flex: 3,
+                                                          child: Container(),
+                                                        ),
+                                                      ],
+                                                    )),
+                                                    Expanded(
+                                                        child: CMaker(
+                                                            alignment: Alignment.center,
+                                                            child: JoinButton))
+                                                  ],
+                                                )),
+                                          ),
+                                        ],
+                                      ),
                                     ),
-                                  ),
-                              ],
+                                ],
+                              ),
                             ),
                           )])]),
           ),

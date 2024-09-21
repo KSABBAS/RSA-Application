@@ -766,29 +766,32 @@ class _TeacherSecondPageContentsState extends State<TeacherSecondPageContents> {
                           Expanded(
                               flex: 6,
                               child: CMaker(
-                                  height: PageHeight(context) - 300,
-                                  child: Column(
+                                  height: PageHeight(context) - 220,
+                                  child: ListView(
                                     children: [
-                                      Expanded(child: Container()),
-                                      Expanded(child: Container()),
-                                      GoToBooksWindow,
-                                      Expanded(child: Container()),
+                                      const Padding(padding: EdgeInsets.only(bottom: 30)),
+                                      CMaker(
+                                          margin: const EdgeInsets.symmetric(horizontal: 20), alignment: Alignment.centerLeft, child: GoToBooksWindow,),
+                                      const Padding(padding: EdgeInsets.only(bottom: 20)),
                                       CMaker(
                                           margin: const EdgeInsets.symmetric(horizontal: 20), alignment: Alignment.centerLeft, child: StudentsWindow),
-                                      Expanded(child: Container()),
+                                      const Padding(padding: EdgeInsets.only(bottom: 20)),
                                     ],
                                   ))),
                           Expanded(child: Container()),
                           Expanded(
                             flex: 6,
                             child: CMaker(
-                              height: PageHeight(context) - 300,
+                              height: PageHeight(context) - 220,
                               child: ListView(
                                 children: [
-                                  AllMessagesButton,
-                                  LastMessageWindow,
+                                  CMaker(
+                                          margin: const EdgeInsets.symmetric(horizontal: 20), alignment: Alignment.centerLeft, child: AllMessagesButton,),
+                                  CMaker(
+                                          margin: const EdgeInsets.symmetric(horizontal: 20), alignment: Alignment.centerLeft, child: LastMessageWindow,),
                                   const Padding(padding: EdgeInsets.only(top: 20)),
-                                  EnterAMessage,
+                                  CMaker(
+                                          margin: const EdgeInsets.symmetric(horizontal: 20), alignment: Alignment.centerLeft, child: EnterAMessage,)
                                 ],
                               ),
                             ),

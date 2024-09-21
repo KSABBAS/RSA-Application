@@ -777,7 +777,7 @@ class _TeacherProfilePageState extends State<TeacherProfilePage> {
         TeacherProfileBody = Form(
           key: ProfileKey,
           child: CMaker(
-            height: PageHeight(context) - 100,
+            height: PageHeight(context) - 140,
             width: double.infinity,
             child: Column(children: [
               const Padding(padding: EdgeInsets.only(bottom: 20)),

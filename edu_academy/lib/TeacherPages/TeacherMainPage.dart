@@ -251,8 +251,8 @@ class _TeacherMainPageState extends State<TeacherMainPage> {
                                     child: CMaker(
                                       padding: const EdgeInsets.only(bottom: 13),
                                       alignment: Alignment.bottomCenter,
-                                      child: const Text(
-                                        "kareem said",
+                                      child: Text(
+                                        name,
                                         style: TextStyle(fontSize: 17, fontWeight: FontWeight.w500, color: Color.fromARGB(255, 5, 123, 151)),
                                       ),
                                     ),
@@ -639,8 +639,8 @@ class _TeacherMainPageState extends State<TeacherMainPage> {
                                       child: CMaker(
                                         padding: const EdgeInsets.only(bottom: 13),
                                         alignment: Alignment.bottomCenter,
-                                        child: const Text(
-                                          "kareem said",
+                                        child: Text(
+                                          name,
                                           style: TextStyle(fontSize: 17, fontWeight: FontWeight.w500, color: Color.fromARGB(255, 5, 123, 151)),
                                         ),
                                       ),
@@ -1036,8 +1036,8 @@ class _TeacherMainPageState extends State<TeacherMainPage> {
                                     child: CMaker(
                                       padding: const EdgeInsets.only(bottom: 13),
                                       alignment: Alignment.bottomCenter,
-                                      child: const Text(
-                                        "kareem said",
+                                      child: Text(
+                                        name,
                                         style: TextStyle(fontSize: 17, fontWeight: FontWeight.w500, color: Color.fromARGB(255, 5, 123, 151)),
                                       ),
                                     ),
@@ -1430,8 +1430,8 @@ class _TeacherMainPageState extends State<TeacherMainPage> {
                                   child: CMaker(
                                     padding: const EdgeInsets.only(bottom: 13),
                                     alignment: Alignment.bottomCenter,
-                                    child: const Text(
-                                      "kareem said",
+                                    child: Text(
+                                      name,
                                       style: TextStyle(fontSize: 17, fontWeight: FontWeight.w500, color: Color.fromARGB(255, 5, 123, 151)),
                                     ),
                                   ),
@@ -1893,7 +1893,6 @@ class _TeacherMainPageState extends State<TeacherMainPage> {
                               width: double.infinity,
                               alignment: Alignment.center,
                               height: PageHeight(context) - 90,
-                              color: const Color.fromARGB(168, 137, 137, 137),
                               child: CMaker(
                                 boxShadow: const [
                       BoxShadow(offset: Offset(1, 1), blurRadius: 6, spreadRadius: .03, color: Color.fromARGB(82, 0, 0, 0)),

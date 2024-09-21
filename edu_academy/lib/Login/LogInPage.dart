@@ -35,7 +35,7 @@ class _LoginPageState extends State<LogInPage> {
     late Widget LoginBody;
     print(PageWidth(context));
     Widget InputPart = SizedBox(
-      height: 250,
+      height: 280,
       width: double.infinity,
       child: Column(
         children: [
@@ -282,14 +282,14 @@ class _LoginPageState extends State<LogInPage> {
                       ],
                     ),
                   ),
-                  Padding(padding:EdgeInsets.only(top: 30)),
+                  Padding(padding:EdgeInsets.only(top: 40)),
                   CMaker(
                       margin:
                           const EdgeInsetsDirectional.symmetric(horizontal: 20),
                       child: InputPart),
-                  Padding(padding:EdgeInsets.only(top: 50)),
+                  Padding(padding:EdgeInsets.only(top: 60)),
                   CMaker(alignment: Alignment.center, child: LoginButton),
-                  Padding(padding:EdgeInsets.only(top: 30)),
+                  Padding(padding:EdgeInsets.only(top: 10)),
                   CMaker(
                       child: Row(
                     children: [
@@ -302,7 +302,7 @@ class _LoginPageState extends State<LogInPage> {
                     ],
                   )),
                   CMaker(height: 100,child: PoweredBy),
-                  Padding(padding:EdgeInsets.only(top: 20)),
+                  Padding(padding:EdgeInsets.only(top: 10)),
                 ],
               ),
             ),
@@ -342,7 +342,7 @@ class _LoginPageState extends State<LogInPage> {
                     CMaker(
                         circularRadius: 20,
                         color: Colors.white,
-                        height: 400,
+                        height: 420,
                         width: 450,
                         padding: const EdgeInsets.only(top: 20, right: 20, left: 20),
                         child: ListView(
@@ -385,10 +385,9 @@ class _LoginPageState extends State<LogInPage> {
                     colors: [Color.fromARGB(255, 8, 125, 159), Color.fromARGB(255, 74, 193, 241)]),
                 child: Column(
                   children: [
-                    Expanded(child: Container()),
-                    Expanded(
-                      flex: 6,
-                      child: CMaker(
+                    Container(height: (PageHeight(context)*(1/8)),),
+                    CMaker(
+                      height: (PageHeight(context)*(6/8)),
                         child: Row(
                           children: [
                             Expanded(child: Container()),
@@ -418,7 +417,7 @@ class _LoginPageState extends State<LogInPage> {
                             CMaker(
                                 circularRadius: 20,
                                 color: Colors.white,
-                                height: 400,
+                                height: 420,
                                 width: (PageWidth(context) < 800) ? PageWidth(context) / 2 : 400,
                                 padding: const EdgeInsets.only(top: 20, right: 20, left: 20),
                                 child: Column(
@@ -445,8 +444,7 @@ class _LoginPageState extends State<LogInPage> {
                           ],
                         ),
                       ),
-                    ),
-                    Expanded(child: PoweredBy),
+                    CMaker(height: (PageHeight(context)*(1/8)),child: PoweredBy),
                   ],
                 )),
           ),
