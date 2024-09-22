@@ -421,7 +421,6 @@ class _AdminSocendPageContenetsState extends State<AdminSocendPageContenets> {
                           onChanged: (bool newValue) async {
                             await dbService.FiChange_state('Teacher', Teachers[TeacherSelected][5], stringToBool(Teachers[TeacherSelected][4]));
                             setState(() {
-                              TeacherOpend = false;
                               Teacher_data();
                               // TeacherState = newValue;
                             });

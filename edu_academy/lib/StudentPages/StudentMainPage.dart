@@ -546,54 +546,58 @@ class _StudentMainPageState extends State<StudentMainPage> {
             ),
             (AccountActivation)
                 ? Pages.elementAt(PageIndex)
-                : Stack(
-                    children: [
-                      Opacity(
-                        opacity: .4,
-                        child: Pages.elementAt(PageIndex),
-                      ),
-                      CMaker(
-                          width: double.infinity,
-                          alignment: Alignment.center,
-                          height: PageHeight(context) - 90,
-                          color: const Color.fromARGB(168, 137, 137, 137),
-                          child: CMaker(
+                : Expanded(
+                  child: Stack(
+                      children: [
+                        Opacity(
+                          opacity: .2,
+                          child: Pages.elementAt(PageIndex),
+                        ),
+                        CMaker(
+                            width: double.infinity,
                             alignment: Alignment.center,
-                            circularRadius: 20,
-                            width: PageWidth(context) / 1.5,
-                            height: PageHeight(context) / 5,
-                            color: Colors.white,
-                            child: Column(
-                              children: [
-                                Expanded(child: Container()),
-                                TMaker(text: "Your Account Is Not Activated", fontSize: 20, fontWeight: FontWeight.w700, color: Colors.black),
-                                Expanded(child: Container()),
-                                InkWell(
-                                  onTap: () async {
-                                    final SharedPreferences prefs = await SharedPreferences.getInstance();
-                                    prefs.remove("id");
-                                    Navigator.pushReplacementNamed(context, "SplashView");
-                                  },
-                                  child: CMaker(
-                                      width: double.infinity,
-                                      alignment: Alignment.center,
-                                      child: CMaker(
-                                        padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-                                        circularRadius: 15,
-                                        color: const Color.fromARGB(255, 74, 193, 241),
-                                        child: TMaker(
-                                            text: "Log Out",
-                                            fontSize: 20,
-                                            fontWeight: FontWeight.w700,
-                                            color: const Color.fromARGB(255, 255, 255, 255)),
-                                      )),
-                                ),
-                                Expanded(child: Container()),
-                              ],
-                            ),
-                          )),
+                            height: PageHeight(context) - 90,
+                            child: CMaker(
+                              boxShadow: const [
+                      BoxShadow(offset: Offset(1, 1), blurRadius: 6, spreadRadius: .03, color: Color.fromARGB(82, 0, 0, 0)),
                     ],
-                  ),
+                              alignment: Alignment.center,
+                              circularRadius: 20,
+                              width: PageWidth(context) / 1.5,
+                              height: PageHeight(context) / 5,
+                              color: Colors.white,
+                              child: Column(
+                                children: [
+                                  Expanded(child: Container()),
+                                  TMaker(text: "Your Account Is Not Activated", fontSize: 20, fontWeight: FontWeight.w700, color: Colors.black),
+                                  Expanded(child: Container()),
+                                  InkWell(
+                                    onTap: () async {
+                                      final SharedPreferences prefs = await SharedPreferences.getInstance();
+                                      prefs.remove("id");
+                                      Navigator.pushReplacementNamed(context, "SplashView");
+                                    },
+                                    child: CMaker(
+                                        width: double.infinity,
+                                        alignment: Alignment.center,
+                                        child: CMaker(
+                                          padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                                          circularRadius: 15,
+                                          color: const Color.fromARGB(255, 74, 193, 241),
+                                          child: TMaker(
+                                              text: "Log Out",
+                                              fontSize: 20,
+                                              fontWeight: FontWeight.w700,
+                                              color: const Color.fromARGB(255, 255, 255, 255)),
+                                        )),
+                                  ),
+                                  Expanded(child: Container()),
+                                ],
+                              ),
+                            )),
+                      ],
+                    ),
+                ),
           ],
         ),
       );

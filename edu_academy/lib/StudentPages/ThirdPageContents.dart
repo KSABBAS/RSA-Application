@@ -2729,7 +2729,7 @@ class _ThirdPageState extends State<ThirdPage> {
                   circularRadius: 20,
                   color: const Color.fromARGB(255, 36, 160, 209),
                   child: const Text(
-                    "لا يوجد واجبات مضافه",
+                    "لا يوجد واجبات مضافة",
                     style: TextStyle(fontSize: 30, fontWeight: FontWeight.w500, color: Color.fromARGB(255, 255, 255, 255)),
                   )),
             );

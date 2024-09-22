@@ -831,7 +831,7 @@ class _StudentProfileState extends State<StudentProfile> {
                                         255, 233, 255, 247),
                                     padding: EdgeInsets.only(right: 10),
                                     child: TMaker(
-                                        text: "Cancel",
+                                        text: "الغاء",
                                         fontSize: 25,
                                         fontWeight: FontWeight.w600,
                                         color: const Color.fromARGB(
@@ -855,7 +855,7 @@ class _StudentProfileState extends State<StudentProfile> {
         StudentProfileBody = Form(
           key: ProfileKey,
           child: CMaker(
-            height: PageHeight(context) - 200,
+            height: PageHeight(context) - 140,
             width: double.infinity,
             child: Column(children: [
               const Padding(padding: EdgeInsets.only(bottom: 20)),
@@ -863,7 +863,7 @@ class _StudentProfileState extends State<StudentProfile> {
               Expanded(child: Container()),
               CMaker(
                   padding: const EdgeInsets.all(20),
-                  height: PageHeight(context) - 400,
+                  height: PageHeight(context) - 320,
                   width: double.infinity,
                   color: const Color.fromARGB(255, 74, 193, 239),
                   circularRadius: 25,
@@ -947,7 +947,7 @@ class _StudentProfileState extends State<StudentProfile> {
                                         255, 233, 255, 247),
                                     padding: EdgeInsets.only(right: 10),
                                     child: TMaker(
-                                        text: "Cancel",
+                                        text: "الغاء",
                                         fontSize: 25,
                                         fontWeight: FontWeight.w600,
                                         color: const Color.fromARGB(
