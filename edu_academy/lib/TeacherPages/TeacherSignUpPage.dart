@@ -43,6 +43,7 @@ class _TeacherSignUpPageState extends State<TeacherSignUpPage> {
   bool ThirdDropdownVisible = false;
   String TeacherDemoPassword = "";
   String TeacherDemoConfirmPassword = "";
+  final TextEditingController _MessageController = TextEditingController();
   final dbService = DatabaseService();
   List<DropdownMenuItem<String>>? SubjectsMaker(String TeacherSubjectNumber) {
     List<DropdownMenuItem<String>>? list = [
@@ -540,10 +541,11 @@ class _TeacherSignUpPageState extends State<TeacherSignUpPage> {
     Widget BreefWidge = SizedBox(
       height: 210,
       child: TextField(
+        controller: _MessageController,
+        maxLines: 8,
         onChanged: (newValue) {
           TeacherDes = newValue;
         },
-        maxLines: 8,
         decoration: InputDecoration(
             hintText: "اخبرنا اكثر عن نفسك",
             enabledBorder:
@@ -586,6 +588,7 @@ class _TeacherSignUpPageState extends State<TeacherSignUpPage> {
             "state": "false"
           });
           OverlayLoadingProgress.stop();
+          _MessageController.clear();
           PanaraInfoDialog.show(
             context,
             title: "تم حفظ البيانات بنجاح",
