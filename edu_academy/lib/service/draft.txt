@@ -912,11 +912,17 @@ image
 subject
 "عربي"
 
-
-
-
-
-
+all_Homeworks.length
+index1
+text: all_Homeworks[index1][0]
+text: all_Homeworks[index1][1],
+itemCount: (all_Homeworks[index1][4] as List).length,
+Image.network(
+() {
+print("=================================\n$all_Homeworks");
+print(index);
+return all_Homeworks[index1][4][index];
+}(),
 
 
 

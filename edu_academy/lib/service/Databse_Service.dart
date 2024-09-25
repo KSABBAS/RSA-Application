@@ -11,7 +11,7 @@ import 'package:flutter/foundation.dart' show kIsWeb;
 
 Map<String, List<List<String>>> Students_in_grades = {};
 
-String CurrentDateTime = DateFormat('MMMM dd, HH:mm').format(DateTime.now());
+String CurrentDateTime = DateFormat('MMMM dd, HH:mm:ss').format(DateTime.now());
 
 class DatabaseService {
   final real = FirebaseDatabase.instance;

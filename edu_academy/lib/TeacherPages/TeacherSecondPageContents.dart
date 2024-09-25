@@ -45,7 +45,7 @@ class _TeacherSecondPageContentsState extends State<TeacherSecondPageContents> {
   @override
   void initState() {
     super.initState();
-    regetmessages();
+    // regetmessages();
   }
 
   books_load() async {
@@ -62,13 +62,14 @@ class _TeacherSecondPageContentsState extends State<TeacherSecondPageContents> {
   }
 
   regetmessages() async {
+    //GradeOpenedIndex
     try {
-      widget.ListOfGrades[GradeOpenedIndex][0] = widget.ListOfGrades[GradeOpenedIndex][0].contains('(Lang)')
+      String grades_ = widget.ListOfGrades[GradeOpenedIndex][0].contains('(Lang)')
           ? widget.ListOfGrades[GradeOpenedIndex][0].replaceAll('(Lang)', '').trim()
           : widget.ListOfGrades[GradeOpenedIndex][0];
       final real = FirebaseDatabase.instance;
-      final allMes = real.ref("Messages").child(widget.ListOfGrades[GradeOpenedIndex][0]).child(SubjectThatIsSelected);
-      print("widget.ListOfGrades[GradeOpenedIndex][0] ${widget.ListOfGrades[GradeOpenedIndex][0]}");
+      final allMes = real.ref("Messages").child(grades_).child(SubjectThatIsSelected);
+      print("grades_ $grades_");
       allMes.onValue.listen(
         (event) {
           setState(() {
@@ -83,10 +84,12 @@ class _TeacherSecondPageContentsState extends State<TeacherSecondPageContents> {
                 AllMessages.add([map[i][0], map[i][1], map[i][2]]);
                 print("map AllMessages $AllMessages");
               }
+              if  (AllMessages.isEmpty) AllMessages = [["Messgae", "Time", "Duration"]];
               AllMessages.sort((a, b) => b[1].compareTo(a[1]));
               AllMessages = AllMessages.reversed.toList();
             } catch (e) {
-              print("map e $e");
+              AllMessages = [["Messgae", "Time", "Duration"]];
+              print("listen map $e");
             }
           });
         },
@@ -308,33 +311,32 @@ class _TeacherSecondPageContentsState extends State<TeacherSecondPageContents> {
                     // // print("files ${files}");
                     // print("files?[1] ${files?[0][1]}");
                     await dbService.FiAdd_book_file(widget.ListOfGrades[GradeOpenedIndex][0], SubjectThatIsSelected, fileLinks?[0], files?[0][1]);
-                  PanaraInfoDialog.show(
-                    context,
-                    title: "نجاح",
-                    message: "تم اضافة الكتاب بنجاح",
-                    buttonText: "تم",
-                    onTapDismiss: () async {
-                      Navigator.pop(context);
-                      await books_load();
-                    },
-                    panaraDialogType: PanaraDialogType.warning,
-                    barrierDismissible: false,
-                  );
-                    
+                    PanaraInfoDialog.show(
+                      context,
+                      title: "نجاح",
+                      message: "تم اضافة الكتاب بنجاح",
+                      buttonText: "تم",
+                      onTapDismiss: () async {
+                        Navigator.pop(context);
+                        await books_load();
+                      },
+                      panaraDialogType: PanaraDialogType.warning,
+                      barrierDismissible: false,
+                    );
                   } catch (e) {
                     log("fileLinks0 ${e.toString()}");
                     PanaraInfoDialog.show(
-                    context,
-                    title: "خطأ",
-                    message: "يوجد خطأ اثناء رفع الكتاب ",
-                    buttonText: "تم",
-                    onTapDismiss: () async {
-                      Navigator.pop(context);
-                      await books_load();
-                    },
-                    panaraDialogType: PanaraDialogType.error,
-                    barrierDismissible: false,
-                  );
+                      context,
+                      title: "خطأ",
+                      message: "يوجد خطأ اثناء رفع الكتاب ",
+                      buttonText: "تم",
+                      onTapDismiss: () async {
+                        Navigator.pop(context);
+                        await books_load();
+                      },
+                      panaraDialogType: PanaraDialogType.error,
+                      barrierDismissible: false,
+                    );
                   }
                 }
               },
@@ -512,7 +514,8 @@ class _TeacherSecondPageContentsState extends State<TeacherSecondPageContents> {
           width: double.infinity,
           alignment: Alignment.centerLeft,
           child: TextButton(
-              onPressed: () {
+              onPressed: () async{
+                await regetmessages();
                 showDialog(
                   context: context,
                   builder: (context) {
@@ -624,14 +627,18 @@ class _TeacherSecondPageContentsState extends State<TeacherSecondPageContents> {
                           onTap: () async {
                             if (CurrentMessage != "") {
                               print("CurrentMessage !=  ${CurrentMessage != ""}");
+                              //widget.ListOfGrades[GradeOpenedIndex][0]
+                              //widget.ListOfGrades[GradeHomeWorkOppenedIndex][0]
+                              print("widget.ListOfGrades[GradeOpenedIndex][0] ${widget.ListOfGrades[GradeOpenedIndex][0]} ");
+                              print("SubjectThatIsSelected ${SubjectThatIsSelected} ");
                               // AllMessages.add([
                               //   CurrentMessage,
                               //   CurrentMessageTime,
                               //   TheMessageDuration
                               // ]);
                               //rePublicMessages_Send(String sub, String Grade,String messgae,String date,String duration)
-                              await dbService.rePublicMessages_Send(SubjectThatIsSelected, widget.ListOfGrades[GradeHomeWorkOppenedIndex][0],
-                                  CurrentMessage, CurrentMessageTime, TheMessageDuration, name);
+                              await dbService.rePublicMessages_Send(SubjectThatIsSelected, widget.ListOfGrades[GradeOpenedIndex][0], CurrentMessage,
+                                  CurrentMessageTime, TheMessageDuration, name);
                               CurrentMessage = "";
                               _MessageController.clear();
                               print("AllMessages ${AllMessages}");
@@ -771,7 +778,10 @@ class _TeacherSecondPageContentsState extends State<TeacherSecondPageContents> {
                                     children: [
                                       const Padding(padding: EdgeInsets.only(bottom: 30)),
                                       CMaker(
-                                          margin: const EdgeInsets.symmetric(horizontal: 20), alignment: Alignment.centerLeft, child: GoToBooksWindow,),
+                                        margin: const EdgeInsets.symmetric(horizontal: 20),
+                                        alignment: Alignment.centerLeft,
+                                        child: GoToBooksWindow,
+                                      ),
                                       const Padding(padding: EdgeInsets.only(bottom: 20)),
                                       CMaker(
                                           margin: const EdgeInsets.symmetric(horizontal: 20), alignment: Alignment.centerLeft, child: StudentsWindow),
@@ -786,12 +796,21 @@ class _TeacherSecondPageContentsState extends State<TeacherSecondPageContents> {
                               child: ListView(
                                 children: [
                                   CMaker(
-                                          margin: const EdgeInsets.symmetric(horizontal: 20), alignment: Alignment.centerLeft, child: AllMessagesButton,),
+                                    margin: const EdgeInsets.symmetric(horizontal: 20),
+                                    alignment: Alignment.centerLeft,
+                                    child: AllMessagesButton,
+                                  ),
                                   CMaker(
-                                          margin: const EdgeInsets.symmetric(horizontal: 20), alignment: Alignment.centerLeft, child: LastMessageWindow,),
+                                    margin: const EdgeInsets.symmetric(horizontal: 20),
+                                    alignment: Alignment.centerLeft,
+                                    child: LastMessageWindow,
+                                  ),
                                   const Padding(padding: EdgeInsets.only(top: 20)),
                                   CMaker(
-                                          margin: const EdgeInsets.symmetric(horizontal: 20), alignment: Alignment.centerLeft, child: EnterAMessage,)
+                                    margin: const EdgeInsets.symmetric(horizontal: 20),
+                                    alignment: Alignment.centerLeft,
+                                    child: EnterAMessage,
+                                  )
                                 ],
                               ),
                             ),
@@ -867,11 +886,11 @@ class _TeacherSecondPageContentsState extends State<TeacherSecondPageContents> {
                                       color: const Color.fromARGB(255, 0, 0, 0)),
                                   Expanded(flex: 10, child: Container()),
                                   InkWell(
-                                    onTap: () {
-                                      setState(() {
-                                        GradeIsOpened = true;
-                                        GradeOpenedIndex = index;
-                                      });
+                                    onTap: () async {
+                                      GradeIsOpened = true;
+                                      GradeOpenedIndex = index;
+                                      await regetmessages();
+                                      setState(() {});
                                     },
                                     child: CMaker(
                                       alignment: Alignment.center,

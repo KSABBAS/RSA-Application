@@ -1063,12 +1063,12 @@ class _TeacherThirdPageContentsState extends State<TeacherThirdPageContents> {
                               circularRadius: 20,
                               height: PageHeight(context) - 420,
                               child: ListView.builder(
-                                  itemCount: 3,
-                                  itemBuilder: (context, index) {
+                                  itemCount: all_Homeworks.length,
+                                  itemBuilder: (context, index1) {
                                     return InkWell(
                                         onTap: () {
                                           setState(() {
-                                            IsOpendIndex = index;
+                                            IsOpendIndex = index1;
                                             GradeHomeWorkIsOppened = false;
                                             NewHomeWork = false;
                                             AllhomeWorks = false;
@@ -1090,14 +1090,14 @@ class _TeacherThirdPageContentsState extends State<TeacherThirdPageContents> {
                                               CMaker(
                                                   alignment: Alignment.centerLeft,
                                                   padding: const EdgeInsets.only(left: 10),
-                                                  child: TMaker(text: "Title", fontSize: 30, fontWeight: FontWeight.w700, color: Colors.black)),
+                                                  child: TMaker(text: all_Homeworks[index1][0], fontSize: 30, fontWeight: FontWeight.w700, color: Colors.black)),
                                               const Padding(padding: EdgeInsets.only(bottom: 10)),
                                               CMaker(
                                                   alignment: Alignment.centerLeft,
                                                   padding: const EdgeInsets.only(left: 10),
                                                   child: TMaker(
                                                       textAlign: TextAlign.start,
-                                                      text: "Body",
+                                                      text: all_Homeworks[index1][1],
                                                       fontSize: 17,
                                                       fontWeight: FontWeight.w700,
                                                       color: const Color.fromARGB(255, 86, 86, 86))),
@@ -1106,7 +1106,7 @@ class _TeacherThirdPageContentsState extends State<TeacherThirdPageContents> {
                                                 height: 70,
                                                 width: double.infinity,
                                                 child: GridView.builder(
-                                                  itemCount: 4,
+                                                  itemCount: (all_Homeworks[index1][4] as List).length,
                                                   gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                                                       crossAxisCount: 6, crossAxisSpacing: 10, mainAxisSpacing: 10),
                                                   itemBuilder: (context, index) {
@@ -1114,8 +1114,12 @@ class _TeacherThirdPageContentsState extends State<TeacherThirdPageContents> {
                                                       onTap: () {
                                                         setState(() {});
                                                       },
-                                                      child: Image.asset(
-                                                        "images/Logo.png",
+                                                      child: Image.network(
+                                                        () {
+                                                        print("=================================\n$all_Homeworks");
+                                                        print(index);
+                                                        return all_Homeworks[index1][4][index];
+                                                        }(),
                                                         fit: BoxFit.fitWidth,
                                                       ),
                                                     );
