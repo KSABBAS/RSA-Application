@@ -1,7 +1,7 @@
 import 'dart:io';
 
 import 'package:edu_academy/MyTools.dart';
-import 'package:edu_academy/TeacherPages/TeacherMainPage.dart';
+import 'package:edu_academy/view/TeacherPages/TeacherMainPage.dart';
 import 'package:edu_academy/service/Databse_Service.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';

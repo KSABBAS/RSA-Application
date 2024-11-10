@@ -1,12 +1,12 @@
 // import 'dart:convert';
 import 'dart:developer';
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
-import 'package:edu_academy/StudentPages/SecondPageContents.dart';
-import 'package:edu_academy/TeacherPages/Notifications.dart';
-import 'package:edu_academy/TeacherPages/TeacherProfilePage.dart';
-import 'package:edu_academy/TeacherPages/TeacherSecondPageContents.dart';
-import 'package:edu_academy/TeacherPages/TeacherFirstPageContenets.dart';
-import 'package:edu_academy/TeacherPages/TeacherThirdPageContents.dart';
+import 'package:edu_academy/view/StudentPages/PageTwo/SecondPageContents.dart';
+import 'package:edu_academy/view/TeacherPages/Notifications.dart';
+import 'package:edu_academy/view/TeacherPages/TeacherProfilePage.dart';
+import 'package:edu_academy/view/TeacherPages/TeacherSecondPageContents.dart';
+import 'package:edu_academy/view/TeacherPages/TeacherFirstPageContenets.dart';
+import 'package:edu_academy/view/TeacherPages/TeacherThirdPageContents.dart';
 import 'package:edu_academy/MyTools.dart';
 import 'package:edu_academy/service/Databse_Service.dart';
 import 'package:flutter/material.dart';

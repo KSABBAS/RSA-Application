@@ -1,12 +1,13 @@
 import 'dart:developer';
 import 'dart:io';
-
+import 'package:edu_academy/Data/StudentData/Schedule.dart';
+import 'package:edu_academy/Data/StudentData/StudentData.dart';
 import 'package:edu_academy/MyTools.dart';
-import 'package:edu_academy/StudentPages/StudentAppBar.dart';
+import 'package:edu_academy/view/StudentPages/Other/StudentAppBar.dart';
 import 'package:edu_academy/service/Databse_Service.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
-import 'package:edu_academy/StudentPages/StudentMainPage.dart';
+import 'package:edu_academy/view/StudentPages/HomePage.dart';
 import 'package:get/get.dart';
 import 'package:insta_image_viewer/insta_image_viewer.dart';
 import 'package:overlay_loading_progress/overlay_loading_progress.dart';
@@ -242,7 +243,7 @@ class _ThirdPageState extends State<ThirdPage> {
   }
 
   regetmessages() async {
-    List ggrtr = await dbService.fiGet_Hw(grade, student_id);
+    List ggrtr = await dbService.fiGet_Hw(StudentData.grade, student_id);
     // HomeWorks.add(ggrtr);
     HomeWorks = ggrtr;
     print(ggrtr);
@@ -495,7 +496,6 @@ class _ThirdPageState extends State<ThirdPage> {
                                                               )),
                                                     ),
                                                 Expanded(child: Container()),
-                                                
                                                     InkWell(
                                                       onTap: () async {
                                                         if (kIsWeb) {
@@ -586,7 +586,7 @@ class _ThirdPageState extends State<ThirdPage> {
                                     }
 
                                     await dbService.FiAdd_Solve([
-                                      grade,
+                                      StudentData.grade,
                                       HomeWorks[HomeWorkIndex][HomeworkSelected],
                                       HomeWorks[HomeWorkIndex][HomeworkSelected + 1][8],
                                       HomeWorks[HomeWorkIndex][0]
@@ -715,7 +715,7 @@ class _ThirdPageState extends State<ThirdPage> {
                                       ),
                                     );
                                     dbService.FiAdd_Solve([
-                                      grade,
+                                      StudentData.grade,
                                       HomeWorks[HomeWorkIndex][HomeworkSelected],
                                       HomeWorks[HomeWorkIndex][HomeworkSelected + 1][8],
                                       HomeWorks[HomeWorkIndex][0]
@@ -860,7 +860,7 @@ class _ThirdPageState extends State<ThirdPage> {
                                               ),
                                             );
                                             dbService.FiAdd_Solve([
-                                              grade,
+                                              StudentData.grade,
                                               HomeWorks[HomeWorkIndex][HomeworkSelected],
                                               HomeWorks[HomeWorkIndex][HomeworkSelected + 1][8],
                                               HomeWorks[HomeWorkIndex][0]
@@ -1215,7 +1215,7 @@ class _ThirdPageState extends State<ThirdPage> {
                                       ),
                                     );
                                     dbService.FiAdd_Solve([
-                                      grade,
+                                      StudentData.grade,
                                       HomeWorks[HomeWorkIndex][HomeworkSelected],
                                       HomeWorks[HomeWorkIndex][HomeworkSelected + 1][8],
                                       HomeWorks[HomeWorkIndex][0]
@@ -1347,7 +1347,7 @@ class _ThirdPageState extends State<ThirdPage> {
                                       ),
                                     );
                                     dbService.FiAdd_Solve([
-                                      grade,
+                                      StudentData.grade,
                                       HomeWorks[HomeWorkIndex][HomeworkSelected],
                                       HomeWorks[HomeWorkIndex][HomeworkSelected + 1][8],
                                       HomeWorks[HomeWorkIndex][0]
@@ -1485,7 +1485,7 @@ class _ThirdPageState extends State<ThirdPage> {
                                                 ),
                                               );
                                               dbService.FiAdd_Solve([
-                                                grade,
+                                                StudentData.grade,
                                                 HomeWorks[HomeWorkIndex][HomeworkSelected],
                                                 HomeWorks[HomeWorkIndex][HomeworkSelected + 1][8],
                                                 HomeWorks[HomeWorkIndex][0]
@@ -2793,34 +2793,34 @@ class _ThirdPageState extends State<ThirdPage> {
             scrollDirection: Axis.horizontal,
             shrinkWrap: false,
             physics: const NeverScrollableScrollPhysics(),
-            itemCount: TableData[0].length,
+            itemCount: StudentSchedule.TableData[0].length,
             itemBuilder: (context, ColumnIndex) {
               return CMaker(
                   width: (PageWidth(context) > 550 && PageHeight(context) < 900)
                       ? (PageWidth(context) < 1200)
-                          ? (PageWidth(context) - 164.5) / TableData[0].length
-                          : (PageWidth(context) - 379) / TableData[0].length
-                      : (PageWidth(context) - 41) / TableData[0].length,
+                          ? (PageWidth(context) - 164.5) / StudentSchedule.TableData[0].length
+                          : (PageWidth(context) - 379) / StudentSchedule.TableData[0].length
+                      : (PageWidth(context) - 41) / StudentSchedule.TableData[0].length,
                   child: ListView.builder(
                     scrollDirection: Axis.vertical,
                     shrinkWrap: false,
                     physics: const NeverScrollableScrollPhysics(),
-                    itemCount: TableData.length,
+                    itemCount: StudentSchedule.TableData.length,
                     itemBuilder: (context, RowIndex) {
                       return CMaker(
-                          height: (200) / TableData.length,
+                          height: (200) / StudentSchedule.TableData.length,
                           child: Container(
                               decoration: BoxDecoration(
                                 border: const Border(right: BorderSide(), bottom: BorderSide()),
                                 borderRadius: BorderRadius.only(
                                   topLeft: ("$ColumnIndex $RowIndex" == "0 0") ? const Radius.circular(10) : const Radius.circular(0),
-                                  bottomLeft: ("$ColumnIndex $RowIndex" == "0 ${TableData.length - 1}")
+                                  bottomLeft: ("$ColumnIndex $RowIndex" == "0 ${StudentSchedule.TableData.length - 1}")
                                       ? const Radius.circular(10)
                                       : const Radius.circular(0),
-                                  topRight: ("$ColumnIndex $RowIndex" == "${TableData[0].length - 1} 0")
+                                  topRight: ("$ColumnIndex $RowIndex" == "${StudentSchedule.TableData[0].length - 1} 0")
                                       ? const Radius.circular(10)
                                       : const Radius.circular(0),
-                                  bottomRight: ("$ColumnIndex $RowIndex" == "${TableData[0].length - 1} ${TableData.length - 1}")
+                                  bottomRight: ("$ColumnIndex $RowIndex" == "${StudentSchedule.TableData[0].length - 1} ${StudentSchedule.TableData.length - 1}")
                                       ? const Radius.circular(10)
                                       : const Radius.circular(0),
                                 ),
@@ -2828,7 +2828,7 @@ class _ThirdPageState extends State<ThirdPage> {
                               ),
                               alignment: Alignment.center,
                               child: TMaker(
-                                  text: "${TableData[RowIndex][ColumnIndex]}",
+                                  text: "${StudentSchedule.TableData[RowIndex][ColumnIndex]}",
                                   fontSize: 15,
                                   fontWeight: FontWeight.w600,
                                   color: (ColumnIndex == 0 || RowIndex == 0)

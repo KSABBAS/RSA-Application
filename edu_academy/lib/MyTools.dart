@@ -1,9 +1,8 @@
 import 'dart:async';
-import 'dart:convert';
 // import 'package:get/get.dart';
 // import 'package:http/http.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get_connect/http/src/utils/utils.dart';
+import 'package:image_picker/image_picker.dart';
 // import 'package:http/http.dart' as http;
 // import 'package:html/parser.dart' as Parser;
 // import 'package:html/dom.dart' as dom;
@@ -1769,4 +1768,10 @@ List<Widget>? WidgetListMaker(int number, Widget widget) {
     list.add(widget);
   }
   return list;
+}
+Future PhotoImageFromGalary() async {
+  return await ImagePicker().pickImage(source: ImageSource.gallery);
+}
+Future PhotoImageFromCamera() async {
+  return await ImagePicker().pickImage(source: ImageSource.camera);
 }

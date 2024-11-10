@@ -1,9 +1,9 @@
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
-import 'package:edu_academy/AdminPages/AdminFirstPageContents.dart';
-import 'package:edu_academy/AdminPages/AdminSocendPageContenets.dart';
-import 'package:edu_academy/AdminPages/AdminThirdPageContents.dart';
+import 'package:edu_academy/view/AdminPages/AdminFirstPageContents.dart';
+import 'package:edu_academy/view/AdminPages/AdminSocendPageContenets.dart';
+import 'package:edu_academy/view/AdminPages/AdminThirdPageContents.dart';
 import 'package:edu_academy/MyTools.dart';
-import 'package:edu_academy/StudentPages/SecondPageContents.dart';
+import 'package:edu_academy/view/StudentPages/PageTwo/SecondPageContents.dart';
 import 'package:edu_academy/service/Databse_Service.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';

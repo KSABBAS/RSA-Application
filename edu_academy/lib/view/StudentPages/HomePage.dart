@@ -1,10 +1,11 @@
 import 'dart:developer';
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
-import 'package:edu_academy/StudentPages/FirstPageContents.dart';
-import 'package:edu_academy/StudentPages/Notifications.dart';
-import 'package:edu_academy/StudentPages/ProfilePageContents.dart';
-import 'package:edu_academy/StudentPages/SecondPageContents.dart';
-import 'package:edu_academy/StudentPages/ThirdPageContents.dart';
+import 'package:edu_academy/Data/StudentData/StudentData.dart';
+import 'package:edu_academy/view/StudentPages/PageOne/PageOne.dart';
+import 'package:edu_academy/view/StudentPages/Other/Notifications.dart';
+import 'package:edu_academy/view/StudentPages/Profle/ProfilePageContents.dart';
+import 'package:edu_academy/view/StudentPages/PageTwo/SecondPageContents.dart';
+import 'package:edu_academy/view/StudentPages/PageThree/ThirdPageContents.dart';
 import 'package:edu_academy/MyTools.dart';
 import 'package:edu_academy/service/Databse_Service.dart';
 import 'package:flutter/material.dart';
@@ -28,7 +29,6 @@ bool AccountActivation = true;
 int PageIndex = 0;
 
 String name = "loading....";
-String grade = "loading....";
 String grade_full = "loading....";
 String student_id = '';
 String role = '';
@@ -36,16 +36,6 @@ GlobalKey<FormState> NewKey = GlobalKey();
 String NewEmail = "";
 String NewPassWord = "";
 String NewPhoneNumber = "";
-List<List> TableData = [
-  ["الوقت//التاريخ", "الحصة الاولى", "الحصة الثانية", "الحصة الثالثة", "الحصة الرابعه", "الحصة الخامسة"],
-  ["الاثنين", "قريبا", "قريبا", "قريبا", "قريبا", "قريبا"],
-  ["الثلاثاء", "قريبا", "قريبا", "قريبا", "قريبا", "قريبا"],
-  ["الاربعاء", "قريبا", "قريبا", "قريبا", "قريبا", "قريبا"],
-  ["الخميس", "قريبا", "قريبا", "قريبا", "قريبا", "قريبا"],
-  ["الجمعة", "قريبا", "قريبا", "قريبا", "قريبا", "قريبا"],
-  ["السبت", "قريبا", "قريبا", "قريبا", "قريبا", "قريبا"],
-  ["الاحد", "قريبا", "قريبا", "قريبا", "قريبا", "قريبا"],
-];
 Map<String, dynamic> profile_data = {};
 
 bool ThereIsNotifications = () {
@@ -91,7 +81,7 @@ class _StudentMainPageState extends State<StudentMainPage> {
   return value.toLowerCase() == 'true';
 }
   regetmessages() async {
-    List ggrtr = await dbService.fiGet_Hw(grade, student_id);
+    List ggrtr = await dbService.fiGet_Hw(StudentData.grade, student_id);
     // HomeWorks.add(ggrtr);
     HomeWorks = ggrtr;
     print(ggrtr);
@@ -110,7 +100,7 @@ class _StudentMainPageState extends State<StudentMainPage> {
     if (items != null && items.isNotEmpty) {
       name = items[2].split("-")[0];
       name = "${name.split(" ")[0]} ${name.split(" ")[1]}".toTitleCase;
-      grade = items[2].split("-")[1];
+      StudentData.grade = items[2].split("-")[1];
       student_id = items[0].toString().split("#")[1];
       role = items[0].toString().split("#")[0];
       // userData = jsonDecode(items[2]) as Map<String, dynamic>;
@@ -118,7 +108,7 @@ class _StudentMainPageState extends State<StudentMainPage> {
     print("student_id $student_id");
     print("role $role");
     print(name);
-    print(grade);
+    print(StudentData.grade);
     profile_data = await dbService.FiGet_profile_data(student_id, "${role}s") as Map<String, dynamic>;
     print("teacher_profile_data $profile_data");
     AccountActivation = stringToBool(profile_data['state']);
@@ -204,7 +194,7 @@ class _StudentMainPageState extends State<StudentMainPage> {
                                     child: CMaker(
                                       alignment: Alignment.bottomCenter,
                                       child: Text(
-                                        grade,
+                                        StudentData.grade,
                                         style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w500, color: Color.fromARGB(255, 89, 89, 87)),
                                       ),
                                     ),
@@ -290,7 +280,7 @@ class _StudentMainPageState extends State<StudentMainPage> {
                                         child: CMaker(
                                           alignment: Alignment.bottomCenter,
                                           child: Text(
-                                            grade,
+                                            StudentData.grade,
                                             style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w500, color: Color.fromARGB(255, 89, 89, 87)),
                                           ),
                                         ),
@@ -377,7 +367,7 @@ class _StudentMainPageState extends State<StudentMainPage> {
                                       child: CMaker(
                                         alignment: Alignment.bottomCenter,
                                         child: Text(
-                                          grade,
+                                          StudentData.grade,
                                           style: TextStyle(
                                               fontSize: (PageWidth(context) < 550)
                                                   ? 17

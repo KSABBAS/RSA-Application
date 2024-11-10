@@ -2,7 +2,7 @@
 import 'dart:developer';
 
 import 'package:edu_academy/MyTools.dart';
-import 'package:edu_academy/ParentPages/ParentMainPageContents.dart';
+import 'package:edu_academy/view/ParentPages/ParentMainPageContents.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:internet_connection_checker_plus/internet_connection_checker_plus.dart';

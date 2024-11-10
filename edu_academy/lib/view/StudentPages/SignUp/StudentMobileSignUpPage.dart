@@ -1,5 +1,5 @@
-import 'package:edu_academy/StudentPages/SecondPageContents.dart';
 import 'package:edu_academy/MyTools.dart';
+import 'package:edu_academy/view/StudentPages/PageTwo/SecondPageContents.dart';
 import 'package:edu_academy/service/Databse_Service.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
@@ -10,62 +10,426 @@ import 'package:panara_dialogs/panara_dialogs.dart';
 import 'package:time_picker_spinner_pop_up/time_picker_spinner_pop_up.dart';
 import 'package:omni_datetime_picker/omni_datetime_picker.dart';
 
-class TeacherSignUpPage extends StatefulWidget {
-  const TeacherSignUpPage({super.key});
+class StudentMobileSignUpPage extends StatefulWidget {
+  const StudentMobileSignUpPage({super.key});
 
   @override
-  State<TeacherSignUpPage> createState() => _TeacherSignUpPageState();
+  State<StudentMobileSignUpPage> createState() => _StudentMobileSignUpPageState();
 }
 
 var obscureText = true;
-
-String TeacherName = "";
-String TeacherNumber = "";
-String TeacherEmail = "";
-String TeacherPassword = "";
-String TeacherConfirmPassword = "";
-String TeacherGeneder = "";
-String TeacherDayOfBirth = "";
-String TeacherDateOfBirth = "Select a Date";
-String TeacherMonthOfBirth = "";
-String TeacherYearOfBirth = "";
-String TeacherSubject1 = "null";
-String TeacherSubject2 = "null";
-String TeacherSubject3 = "null";
-String TeacherDes = "";
-// bool SecondDropdownVisible = false;
-// bool ThirdDropdownVisible = false;
-GlobalKey<FormState> key3 = GlobalKey();
+String StudentDayOfBirth = "";
+String StudentMonthOfBirth = "";
+String StudentYearOfBirth = "";
+String StudentGender = "";
+String StudentName = "";
+String StudentGrade = "Grade 1";
+String StudentEmail = "";
+String StudentPassword = "";
+String StudentConfirmPassword = "";
+String StudentMobileNumber = "";
+String StudentParentMobileNumber = "";
+String StudentDateOfBirth = "اختر تاريخ الميلاد";
+int StudentAge = 6;
+var now = DateTime.now();
+GlobalKey<FormState> key = GlobalKey();
 var forDateInput = DateTime.now().subtract(const Duration(days: 1926));
 
-class _TeacherSignUpPageState extends State<TeacherSignUpPage> {
-  bool SecondDropdownVisible = false;
-  bool ThirdDropdownVisible = false;
-  String TeacherDemoPassword = "";
-  String TeacherDemoConfirmPassword = "";
-  final TextEditingController _MessageController = TextEditingController();
+class _StudentMobileSignUpPageState extends State<StudentMobileSignUpPage> {
+  String StudentDemoPassword = "";
+  String StudentDemoConfirmPassword = "";
   final dbService = DatabaseService();
-  List<DropdownMenuItem<String>>? SubjectsMaker(String TeacherSubjectNumber) {
-    List<DropdownMenuItem<String>>? list = [
-      DropdownMenuItem(
-        value: "null",
-        child: CMaker(child: TMaker(text: "null", fontSize: 20, fontWeight: FontWeight.w600, color: Colors.black)),
-      ),
-    ];
-    for (int i = 0; i < Subjects.length; i++) {
-      list.add(
-        DropdownMenuItem(
-          value: Subjects[i][1],
-          child: CMaker(child: TMaker(text: Subjects[i][1], fontSize: 20, fontWeight: FontWeight.w600, color: Colors.black)),
-        ),
-      );
-    }
-    return list;
-  }
-
   @override
   Widget build(BuildContext context) {
-    late Widget TeacherSignUpBody;
+    late Widget StudentSignUpBody;
+    Widget NameTFF = SizedBox(
+      height: 80,
+      child: TextFormField(
+        autovalidateMode: AutovalidateMode.onUserInteraction,
+        onChanged: (value) {
+          key.currentState!.validate();
+        },
+        initialValue: StudentName,
+        onSaved: (newValue) {
+          StudentName = newValue!;
+        },
+        validator: (value) {
+          if (value!.isEmpty) {
+            return "الحقل فارغ";
+          }
+          if (value.split(" ").length < 3) {
+            return "الاسم يجب ان يكون ثلاثى او رباعى";
+          }
+          return null;
+        },
+        decoration: InputDecoration(
+            focusedErrorBorder:
+                OutlineInputBorder(borderSide: const BorderSide(color: Color.fromARGB(255, 192, 192, 192)), borderRadius: BorderRadius.circular(30)),
+            errorBorder:
+                OutlineInputBorder(borderSide: const BorderSide(color: Color.fromARGB(255, 192, 192, 192)), borderRadius: BorderRadius.circular(30)),
+            label: const Text(
+              "الاسم كامل*",
+              style: TextStyle(fontSize: 15, fontWeight: FontWeight.w600),
+            ),
+            enabledBorder:
+                OutlineInputBorder(borderSide: const BorderSide(color: Color.fromARGB(255, 192, 192, 192)), borderRadius: BorderRadius.circular(30)),
+            focusedBorder: OutlineInputBorder(borderRadius: BorderRadius.circular(15))),
+      ),
+    );
+    Widget GardianPhoneTFF = SizedBox(
+      height: 80,
+      child: TextFormField(
+        autovalidateMode: AutovalidateMode.onUserInteraction,
+        onChanged: (value) {
+          key.currentState!.validate();
+        },
+        initialValue: StudentParentMobileNumber,
+        onSaved: (newValue) {
+          StudentParentMobileNumber = newValue!;
+        },
+        validator: (value) {
+          if (value!.isEmpty) {
+            return "الحقل فارغ";
+          }
+          if (!value.startsWith("01") && !value.startsWith("05")) {
+            return "الرقم يجب ان يبدا الرقمين 01 او 05";
+          }
+          if (value.startsWith("01") && value.length != 11) {
+            return "الرقم يجب ان يكون 11 رقم";
+          }
+          if (value.startsWith("05") && value.length != 10) {
+            return "الرقم يجب ان يكون 10 رقم";
+          }
+          return null;
+        },
+        decoration: InputDecoration(
+            focusedErrorBorder:
+                OutlineInputBorder(borderSide: const BorderSide(color: Color.fromARGB(255, 192, 192, 192)), borderRadius: BorderRadius.circular(30)),
+            errorBorder:
+                OutlineInputBorder(borderSide: const BorderSide(color: Color.fromARGB(255, 192, 192, 192)), borderRadius: BorderRadius.circular(30)),
+            label: const Text(
+              "رقم هاتف ولي الامر*",
+              style: TextStyle(fontSize: 15, fontWeight: FontWeight.w600),
+            ),
+            enabledBorder:
+                OutlineInputBorder(borderSide: const BorderSide(color: Color.fromARGB(255, 192, 192, 192)), borderRadius: BorderRadius.circular(30)),
+            focusedBorder: OutlineInputBorder(borderRadius: BorderRadius.circular(15))),
+      ),
+    );
+    Widget PhoneNumberTFF = SizedBox(
+      height: 80,
+      child: TextFormField(
+        autovalidateMode: AutovalidateMode.onUserInteraction,
+        onChanged: (value) {
+          key.currentState!.validate();
+        },
+        initialValue: StudentMobileNumber,
+        onSaved: (newValue) {
+          StudentMobileNumber = newValue!;
+        },
+        validator: (value) {
+          if (value!.isNotEmpty) {
+            if (!value.startsWith("01") && !value.startsWith("05")) {
+              return "الرقم يجب ان يبدا الرقمين 01 او 05";
+            }
+            if (value.startsWith("01") && value.length != 11) {
+              return "الرقم يجب ان يكون 11 رقم";
+            }
+            if (value.startsWith("05") && value.length != 10) {
+              return "الرقم يجب ان يكون 10 رقم";
+            }
+          }
+          return null;
+        },
+        decoration: InputDecoration(
+            focusedErrorBorder:
+                OutlineInputBorder(borderSide: const BorderSide(color: Color.fromARGB(255, 192, 192, 192)), borderRadius: BorderRadius.circular(30)),
+            errorBorder:
+                OutlineInputBorder(borderSide: const BorderSide(color: Color.fromARGB(255, 192, 192, 192)), borderRadius: BorderRadius.circular(30)),
+            label: const Row(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Text(
+                  "رقم الهاتف",
+                  style: TextStyle(fontSize: 15, fontWeight: FontWeight.w600),
+                ),
+                Text(
+                  "  ( اذا كان متوفر )",
+                  style: TextStyle(fontSize: 12, fontWeight: FontWeight.w500, color: Color.fromARGB(255, 183, 183, 183)),
+                ),
+              ],
+            ),
+            enabledBorder:
+                OutlineInputBorder(borderSide: const BorderSide(color: Color.fromARGB(255, 192, 192, 192)), borderRadius: BorderRadius.circular(30)),
+            focusedBorder: OutlineInputBorder(borderRadius: BorderRadius.circular(15))),
+      ),
+    );
+    Widget EmailTFF = SizedBox(
+      height: 80,
+      child: TextFormField(
+        autovalidateMode: AutovalidateMode.onUserInteraction,
+        onChanged: (value) {
+          key.currentState!.validate();
+        },
+        initialValue: StudentEmail,
+        onSaved: (newValue) {
+          StudentEmail = newValue!;
+        },
+        validator: (value) {
+          if (value!.isEmpty) {
+            return "الحقل فارغ";
+          }
+          if ((!value.endsWith("@gmail.com") || !(value.length > 10)) && (!value.endsWith("@yahoo.com") || !(value.length > 10))) {
+            return "صيغة الايميل ليسة صحيحة";
+          }
+          return null;
+        },
+        decoration: InputDecoration(
+            focusedErrorBorder:
+                OutlineInputBorder(borderSide: const BorderSide(color: Color.fromARGB(255, 192, 192, 192)), borderRadius: BorderRadius.circular(30)),
+            errorBorder:
+                OutlineInputBorder(borderSide: const BorderSide(color: Color.fromARGB(255, 192, 192, 192)), borderRadius: BorderRadius.circular(30)),
+            label: const Text(
+              "الايميل*",
+              style: TextStyle(fontSize: 15, fontWeight: FontWeight.w600),
+            ),
+            enabledBorder:
+                OutlineInputBorder(borderSide: const BorderSide(color: Color.fromARGB(255, 192, 192, 192)), borderRadius: BorderRadius.circular(30)),
+            focusedBorder: OutlineInputBorder(borderRadius: BorderRadius.circular(15))),
+      ),
+    );
+    Widget PasswordTFF = SizedBox(
+      height: 80,
+      child: TextFormField(
+        autovalidateMode: AutovalidateMode.onUserInteraction,
+        initialValue: StudentPassword,
+        onSaved: (newValue) {
+          StudentPassword = newValue!;
+        },
+        onChanged: (value) {
+          StudentDemoPassword = value;
+          key.currentState!.validate();
+        },
+        validator: (value) {
+          if (value!.length < 4) {
+            return "يجب ان يكون الرقم السرى اكبر من 3 (حروف او ارقام)";
+          }
+          if (StudentDemoPassword != StudentDemoConfirmPassword) {
+            return "الكلمتان السريتان غير متشابهتان";
+          }
+          return null;
+        },
+        obscureText: obscureText,
+        decoration: InputDecoration(
+            focusedErrorBorder:
+                OutlineInputBorder(borderSide: const BorderSide(color: Color.fromARGB(255, 192, 192, 192)), borderRadius: BorderRadius.circular(30)),
+            errorBorder:
+                OutlineInputBorder(borderSide: const BorderSide(color: Color.fromARGB(255, 192, 192, 192)), borderRadius: BorderRadius.circular(30)),
+            suffix: InkWell(
+              onTap: () {
+                setState(() {
+                  obscureText = !obscureText;
+                });
+              },
+              child: const Icon(Icons.remove_red_eye_outlined),
+            ),
+            label: const Text(
+              "الرقم السري*",
+              style: TextStyle(fontSize: 15, fontWeight: FontWeight.w600),
+            ),
+            enabledBorder:
+                OutlineInputBorder(borderSide: const BorderSide(color: Color.fromARGB(255, 192, 192, 192)), borderRadius: BorderRadius.circular(30)),
+            focusedBorder: OutlineInputBorder(borderRadius: BorderRadius.circular(15))),
+      ),
+    );
+    Widget ConfirmTFF = SizedBox(
+      height: 80,
+      child: TextFormField(
+        autovalidateMode: AutovalidateMode.onUserInteraction,
+        initialValue: StudentConfirmPassword,
+        onSaved: (newValue) {
+          StudentConfirmPassword = newValue!;
+        },
+        onChanged: (value) {
+          StudentDemoConfirmPassword = value;
+          key.currentState!.validate();
+        },
+        validator: (value) {
+          if (value!.length < 4) {
+            return "يجب ان يكون الرقم السرى اكبر من 3 (حروف او ارقام)";
+          }
+          if (StudentDemoPassword != StudentDemoConfirmPassword) {
+            return "الكلمتان السريتان غير متشابهتان";
+          }
+          return null;
+        },
+        obscureText: obscureText,
+        decoration: InputDecoration(
+            focusedErrorBorder:
+                OutlineInputBorder(borderSide: const BorderSide(color: Color.fromARGB(255, 192, 192, 192)), borderRadius: BorderRadius.circular(30)),
+            errorBorder:
+                OutlineInputBorder(borderSide: const BorderSide(color: Color.fromARGB(255, 192, 192, 192)), borderRadius: BorderRadius.circular(30)),
+            suffix: InkWell(
+              onTap: () {
+                setState(() {
+                  obscureText = !obscureText;
+                });
+              },
+              child: const Icon(Icons.remove_red_eye_outlined),
+            ),
+            label: const Text(
+              "تأكيد كلمة السر",
+              style: TextStyle(fontSize: 15, fontWeight: FontWeight.w600),
+            ),
+            enabledBorder:
+                OutlineInputBorder(borderSide: const BorderSide(color: Color.fromARGB(255, 192, 192, 192)), borderRadius: BorderRadius.circular(30)),
+            focusedBorder: OutlineInputBorder(borderRadius: BorderRadius.circular(15))),
+      ),
+    );
+    Widget BirthDateTC = Container(
+      alignment: Alignment.centerLeft,
+      child: const Text(
+        "تاريخ الميلاد",
+        style: TextStyle(fontSize: 25, fontWeight: FontWeight.w600),
+      ),
+    );
+    Widget BirthDateW = (kIsWeb)
+        ? MyButton(
+            padding: const EdgeInsets.all(10),
+            buttonColor: const Color.fromARGB(255, 74, 193, 241),
+            text: StudentDateOfBirth,
+            onTap: () async {
+              var TimeSelected = await showOmniDateTimePicker(
+                context: context,
+                initialDate: DateTime.now(),
+                type: OmniDateTimePickerType.date,
+                is24HourMode: false,
+                isShowSeconds: false,
+                minutesInterval: 1,
+                secondsInterval: 1,
+                borderRadius: const BorderRadius.all(Radius.circular(16)),
+                constraints: const BoxConstraints(
+                  maxWidth: 350,
+                  maxHeight: 650,
+                ),
+                transitionBuilder: (context, anim1, anim2, child) {
+                  return FadeTransition(
+                    opacity: anim1.drive(
+                      Tween(
+                        begin: 0,
+                        end: 1,
+                      ),
+                    ),
+                    child: child,
+                  );
+                },
+                selectableDayPredicate: (p0) {
+                  if (p0 == DateTime.now()) {
+                    return false;
+                  } else {
+                    return true;
+                  }
+                },
+                transitionDuration: const Duration(milliseconds: 200),
+                barrierDismissible: true,
+              );
+              StudentDayOfBirth = TimeSelected!.day.toString();
+              StudentMonthOfBirth = TimeSelected.month.toString();
+              StudentYearOfBirth = TimeSelected.year.toString();
+              StudentDateOfBirth = "$StudentDayOfBirth / $StudentMonthOfBirth / $StudentYearOfBirth";
+              setState(() {});
+            })
+        : TimePickerSpinnerPopUp(
+            textStyle: const TextStyle(fontSize: 25),
+            iconSize: 40,
+            minTime: DateTime.now().subtract(const Duration(days: 36525)),
+            maxTime: DateTime.now().subtract(const Duration(days: 1824)),
+            mode: CupertinoDatePickerMode.date,
+            initTime: forDateInput,
+            onChange: (dateTime) {
+              setState(() {
+                forDateInput = dateTime;
+                StudentDayOfBirth = dateTime.day.toString();
+                StudentMonthOfBirth = dateTime.month.toString();
+                StudentYearOfBirth = dateTime.year.toString();
+                StudentDateOfBirth = "$StudentDayOfBirth/$StudentMonthOfBirth/$StudentYearOfBirth";
+                print(StudentDateOfBirth);
+              });
+            },
+          );
+    Widget GenederText = Container(
+      alignment: Alignment.centerLeft,
+      child: const Text(
+        "النوع",
+        style: TextStyle(fontSize: 25, fontWeight: FontWeight.w600),
+      ),
+    );
+    List<Widget> GenederWidgets = [
+      Container(
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(20),
+            color: const Color.fromARGB(96, 216, 216, 216),
+          ),
+          child: RadioListTile(
+              activeColor: const Color.fromARGB(255, 74, 193, 241),
+              title: const Text(
+                "ذكر",
+                style: TextStyle(fontSize: 10, fontWeight: FontWeight.w500),
+              ),
+              value: "Male",
+              groupValue: StudentGender,
+              onChanged: (val) {
+                setState(() {
+                  StudentGender = val.toString();
+                });
+              })),
+      Container(
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(20),
+            color: const Color.fromARGB(96, 216, 216, 216),
+          ),
+          child: RadioListTile(
+              activeColor: const Color.fromARGB(255, 74, 193, 241),
+              title: const Text("انثى", style: TextStyle(fontSize: 10, fontWeight: FontWeight.w500)),
+              value: "Female",
+              groupValue: StudentGender,
+              onChanged: (val) {
+                setState(() {
+                  StudentGender = val.toString();
+                });
+              }))
+    ];
+    Widget GradeText = CMaker(
+      width: double.infinity,
+      alignment: Alignment.centerLeft,
+      child: const Text(
+        "الصف",
+        style: TextStyle(fontSize: 25, fontWeight: FontWeight.w600),
+      ),
+    );
+    Widget GradeDDB = Container(
+      alignment: Alignment.center,
+      child: SizedBox(
+        height: 30,
+        // width: 100,
+        child: DropdownButton(
+            underline: Container(),
+            value: StudentGrade,
+            items: () {
+              List<DropdownMenuItem<String>> out = [];
+              for (var i in GradesSubjects.keys) {
+                out.add(DropdownMenuItem(value: i, child: Text(i)));
+              }
+              print("items out ${out}");
+              return out;
+            }(),
+            onChanged: (val) {
+              setState(() {
+                StudentGrade = val.toString();
+              });
+            }),
+      ),
+    );
     Widget SignUpCircle = Container(
         alignment: Alignment.bottomLeft,
         child: Container(
@@ -99,12 +463,12 @@ class _TeacherSignUpPageState extends State<TeacherSignUpPage> {
           "images/Logo.png",
           fit: BoxFit.contain,
         ));
-    Widget TeacherWithArrow = Container(
+    Widget StudentWithArro = Container(
       child: Row(
         children: [
           Container(
               alignment: Alignment.centerLeft,
-              child: const Text("معلم  ", style: TextStyle(fontSize: 25, fontWeight: FontWeight.w600, color: Color.fromARGB(255, 8, 125, 159)))),
+              child: const Text("طالب  ", style: TextStyle(fontSize: 25, fontWeight: FontWeight.w600, color: Color.fromARGB(255, 8, 125, 159)))),
           Expanded(
               child: Container(
                   margin: const EdgeInsets.only(bottom: 20),
@@ -117,446 +481,15 @@ class _TeacherSignUpPageState extends State<TeacherSignUpPage> {
         ],
       ),
     );
-    List<Widget> AlreadyHaveAnAccountElements = [
-      Container(
-        alignment: Alignment.centerRight,
-        child: const Text(
-          "هل تلمك حساب؟",
-          style: TextStyle(fontSize: 15, color: Color.fromARGB(255, 206, 206, 206), fontWeight: FontWeight.w500),
-        ),
-      ),
-      Container(
-        margin: const EdgeInsets.only(left: 20),
-        alignment: Alignment.centerLeft,
-        child: TextButton(
-          onPressed: () {
-            Navigator.pushNamed(context, "LogInPage");
-          },
-          child: const Text(
-            "تسجيل دخول",
-            style: TextStyle(fontSize: 15, color: Color.fromARGB(255, 74, 193, 241), fontWeight: FontWeight.w500),
-          ),
-        ),
-      ),
-    ];
-    Widget NameTFF = SizedBox(
-        height: 80,
-        child: TextFormField(
-          onSaved: (newValue) {
-            TeacherName = newValue!;
-          },
-          validator: (value) {
-            if (value!.isEmpty) {
-              return "الحقل فارغ";
-            }
-            if (value.split(" ").length < 3) {
-              return "الاسم يجب ان يكون ثلاثى او رباعى";
-            }
-            return null;
-          },
-          decoration: InputDecoration(
-              focusedErrorBorder: OutlineInputBorder(
-                  borderSide: const BorderSide(color: Color.fromARGB(255, 192, 192, 192)), borderRadius: BorderRadius.circular(30)),
-              errorBorder: OutlineInputBorder(
-                  borderSide: const BorderSide(color: Color.fromARGB(255, 192, 192, 192)), borderRadius: BorderRadius.circular(30)),
-              label: const Text(
-                "الاسم كامل",
-                style: TextStyle(fontSize: 15, fontWeight: FontWeight.w600),
-              ),
-              enabledBorder: OutlineInputBorder(
-                  borderSide: const BorderSide(color: Color.fromARGB(255, 192, 192, 192)), borderRadius: BorderRadius.circular(30)),
-              focusedBorder: OutlineInputBorder(borderRadius: BorderRadius.circular(15))),
-        ));
-    Widget PhoneTFF = SizedBox(
-        height: 80,
-        child: TextFormField(
-          onSaved: (newValue) {
-            TeacherNumber = newValue!;
-          },
-          validator: (value) {
-            if (value!.isEmpty) {
-              return "الحقل فارغ";
-            }
-            if (!value.startsWith("01") && !value.startsWith("05")) {
-              return "الرقم يجب ان يبدا الرقمين 01 او 05";
-            }
-            if (value.startsWith("01") && value.length != 11) {
-              return "الرقم يجب ان يكون 11 رقم";
-            }
-            if (value.startsWith("05") && value.length != 10) {
-              return "الرقم يجب ان يكون 10 رقم";
-            }
-            return null;
-          },
-          decoration: InputDecoration(
-              focusedErrorBorder: OutlineInputBorder(
-                  borderSide: const BorderSide(color: Color.fromARGB(255, 192, 192, 192)), borderRadius: BorderRadius.circular(30)),
-              errorBorder: OutlineInputBorder(
-                  borderSide: const BorderSide(color: Color.fromARGB(255, 192, 192, 192)), borderRadius: BorderRadius.circular(30)),
-              label: const Text(
-                "رقم الهاتف",
-                style: TextStyle(fontSize: 15, fontWeight: FontWeight.w600),
-              ),
-              enabledBorder: OutlineInputBorder(
-                  borderSide: const BorderSide(color: Color.fromARGB(255, 192, 192, 192)), borderRadius: BorderRadius.circular(30)),
-              focusedBorder: OutlineInputBorder(borderRadius: BorderRadius.circular(15))),
-        ));
-    Widget EmailTFF = SizedBox(
-        height: 80,
-        child: TextFormField(
-          onSaved: (newValue) {
-            TeacherEmail = newValue!;
-          },
-          validator: (value) {
-            if (value!.isEmpty) {
-              return "الحقل فارغ";
-            }
-            if ((!value.endsWith("@gmail.com") || !(value.length > 10)) && (!value.endsWith("@yahoo.com") || !(value.length > 10))) {
-              return "صيغة الايميل ليسة صحيحة";
-            }
-            return null;
-          },
-          decoration: InputDecoration(
-              focusedErrorBorder: OutlineInputBorder(
-                  borderSide: const BorderSide(color: Color.fromARGB(255, 192, 192, 192)), borderRadius: BorderRadius.circular(30)),
-              errorBorder: OutlineInputBorder(
-                  borderSide: const BorderSide(color: Color.fromARGB(255, 192, 192, 192)), borderRadius: BorderRadius.circular(30)),
-              label: const Text(
-                "الايميل",
-                style: TextStyle(fontSize: 15, fontWeight: FontWeight.w600),
-              ),
-              enabledBorder: OutlineInputBorder(
-                  borderSide: const BorderSide(color: Color.fromARGB(255, 192, 192, 192)), borderRadius: BorderRadius.circular(30)),
-              focusedBorder: OutlineInputBorder(borderRadius: BorderRadius.circular(15))),
-        ));
-    Widget PasswordTFF = SizedBox(
-        height: 80,
-        child: TextFormField(
-          onSaved: (newValue) {
-            TeacherPassword = newValue!;
-          },
-          onChanged: (value) {
-            TeacherDemoPassword = value;
-          },
-          validator: (value) {
-            if (value!.length < 4) {
-              return "يجب ان يكون الرقم السرى اكبر من 3 (حروف او ارقام)";
-            }
-            if (TeacherDemoPassword != TeacherDemoConfirmPassword) {
-              return "الكلمتان السريتان غير متشابهتان";
-            }
-            return null;
-          },
-          obscureText: obscureText,
-          decoration: InputDecoration(
-              focusedErrorBorder: OutlineInputBorder(
-                  borderSide: const BorderSide(color: Color.fromARGB(255, 192, 192, 192)), borderRadius: BorderRadius.circular(30)),
-              errorBorder: OutlineInputBorder(
-                  borderSide: const BorderSide(color: Color.fromARGB(255, 192, 192, 192)), borderRadius: BorderRadius.circular(30)),
-              suffix: InkWell(
-                onTap: () {
-                  setState(() {
-                    obscureText = !obscureText;
-                  });
-                },
-                child: const Icon(Icons.remove_red_eye_outlined),
-              ),
-              label: const Text(
-                "الرقم السري",
-                style: TextStyle(fontSize: 15, fontWeight: FontWeight.w600),
-              ),
-              enabledBorder: OutlineInputBorder(
-                  borderSide: const BorderSide(color: Color.fromARGB(255, 192, 192, 192)), borderRadius: BorderRadius.circular(30)),
-              focusedBorder: OutlineInputBorder(borderRadius: BorderRadius.circular(15))),
-        ));
-    Widget ConfirmTFF = SizedBox(
-        height: 80,
-        child: TextFormField(
-          onSaved: (newValue) {
-            TeacherConfirmPassword = newValue!;
-          },
-          onChanged: (value) {
-            TeacherDemoConfirmPassword = value;
-          },
-          validator: (value) {
-            if (value!.length < 4) {
-              return "يجب ان يكون الرقم السرى اكبر من 3 (حروف او ارقام)";
-            }
-            if (TeacherDemoPassword != TeacherDemoConfirmPassword) {
-              return "الكلمتان السريتان غير متشابهتان";
-            }
-            return null;
-          },
-          obscureText: obscureText,
-          decoration: InputDecoration(
-              focusedErrorBorder: OutlineInputBorder(
-                  borderSide: const BorderSide(color: Color.fromARGB(255, 192, 192, 192)), borderRadius: BorderRadius.circular(30)),
-              errorBorder: OutlineInputBorder(
-                  borderSide: const BorderSide(color: Color.fromARGB(255, 192, 192, 192)), borderRadius: BorderRadius.circular(30)),
-              suffix: InkWell(
-                onTap: () {
-                  setState(() {
-                    obscureText = !obscureText;
-                  });
-                },
-                child: const Icon(Icons.remove_red_eye_outlined),
-              ),
-              label: const Text(
-                "تأكيد كلمة السر",
-                style: TextStyle(fontSize: 15, fontWeight: FontWeight.w600),
-              ),
-              enabledBorder: OutlineInputBorder(
-                  borderSide: const BorderSide(color: Color.fromARGB(255, 192, 192, 192)), borderRadius: BorderRadius.circular(30)),
-              focusedBorder: OutlineInputBorder(borderRadius: BorderRadius.circular(15))),
-        ));
-    Widget BirthDateTC = Container(
-      alignment: Alignment.centerLeft,
-      child: const Text(
-        "تاريخ الميلاد",
-        style: TextStyle(fontSize: 25, fontWeight: FontWeight.w600),
-      ),
-    );
-    Widget BirthDateW = (kIsWeb)
-        ? MyButton(
-            padding: const EdgeInsets.all(10),
-            buttonColor: const Color.fromARGB(255, 74, 193, 241),
-            text: TeacherDateOfBirth,
-            onTap: () async {
-              var TimeSelected = await showOmniDateTimePicker(
-                context: context,
-                initialDate: DateTime.now(),
-                // firstDate: DateTime.now().subtract(const Duration(days: 36525)),
-                // lastDate: DateTime.now().subtract(
-                //   const Duration(days: 1824),
-                // ),
-                type: OmniDateTimePickerType.date,
-                is24HourMode: false,
-                isShowSeconds: false,
-                minutesInterval: 1,
-                secondsInterval: 1,
-                borderRadius: const BorderRadius.all(Radius.circular(16)),
-                constraints: const BoxConstraints(
-                  maxWidth: 350,
-                  maxHeight: 650,
-                ),
-                transitionBuilder: (context, anim1, anim2, child) {
-                  return FadeTransition(
-                    opacity: anim1.drive(
-                      Tween(
-                        begin: 0,
-                        end: 1,
-                      ),
-                    ),
-                    child: child,
-                  );
-                },
-                selectableDayPredicate: (p0) {
-                  if (p0 == DateTime.now()) {
-                    return false;
-                  } else {
-                    return true;
-                  }
-                },
-                transitionDuration: const Duration(milliseconds: 200),
-                barrierDismissible: true,
-              );
-              TeacherDayOfBirth = TimeSelected!.day.toString();
-              TeacherMonthOfBirth = TimeSelected.month.toString();
-              TeacherYearOfBirth = TimeSelected.year.toString();
-              TeacherDateOfBirth = "$TeacherDayOfBirth / $TeacherMonthOfBirth / $TeacherYearOfBirth";
-              setState(() {});
-            })
-        : TimePickerSpinnerPopUp(
-            textStyle: const TextStyle(fontSize: 25),
-            iconSize: 40,
-            minTime: DateTime.now().subtract(const Duration(days: 36525)),
-            maxTime: DateTime.now().subtract(const Duration(days: 1824)),
-            mode: CupertinoDatePickerMode.date,
-            initTime: forDateInput,
-            onChange: (dateTime) {
-              setState(() {
-                forDateInput = dateTime;
-                TeacherDayOfBirth = dateTime.day.toString();
-                TeacherMonthOfBirth = dateTime.month.toString();
-                TeacherYearOfBirth = dateTime.year.toString();
-                TeacherDateOfBirth = "$TeacherDayOfBirth/$TeacherMonthOfBirth/$TeacherYearOfBirth";
-                print(TeacherDateOfBirth);
-              });
-            },
-          );
-    Widget GenederTC = Container(
-      alignment: Alignment.centerLeft,
-      child: const Text(
-        "النوع",
-        style: TextStyle(fontSize: 25, fontWeight: FontWeight.w600),
-      ),
-    );
-    List<Widget> GenederWidegts = [
-      Container(
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(20),
-            color: const Color.fromARGB(96, 216, 216, 216),
-          ),
-          child: RadioListTile(
-              activeColor: const Color.fromARGB(255, 74, 193, 241),
-              title: const Text(
-                "ذكر",
-                style: TextStyle(fontSize: 10, fontWeight: FontWeight.w500),
-              ),
-              value: "Male",
-              groupValue: TeacherGeneder,
-              onChanged: (val) {
-                setState(() {
-                  TeacherGeneder = val.toString();
-                });
-              })),
-      Container(
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(20),
-            color: const Color.fromARGB(96, 216, 216, 216),
-          ),
-          child: RadioListTile(
-              activeColor: const Color.fromARGB(255, 74, 193, 241),
-              title: const Text("انثى", style: TextStyle(fontSize: 10, fontWeight: FontWeight.w500)),
-              value: "Female",
-              groupValue: TeacherGeneder,
-              onChanged: (val) {
-                setState(() {
-                  TeacherGeneder = val.toString();
-                });
-              }))
-    ];
-    Widget SubjectsTC = Container(
-      alignment: Alignment.centerLeft,
-      child: const Text(
-        "اختر المادة",
-        style: TextStyle(fontSize: 20, fontWeight: FontWeight.w600),
-      ),
-    );
-    Widget SubjectsWidgets = CMaker(
-      height: 300,
-      width: double.infinity,
-      child: Column(
-        children: [
-          Expanded(child: Container()),
-          Expanded(
-            child: Row(
-              children: [
-                Container(
-                  alignment: Alignment.centerLeft,
-                  child: const Text(
-                    "المادة الاولى",
-                    style: TextStyle(fontSize: 20, fontWeight: FontWeight.w600),
-                  ),
-                ),
-                Expanded(child: Container()),
-                DropdownButton<String>(
-                  items: SubjectsMaker(TeacherSubject1),
-                  value: TeacherSubject1,
-                  onChanged: (s1) {
-                    setState(() {
-                      TeacherSubject1 = s1!.toString();
-                    });
-                  },
-                ),
-              ],
-            ),
-          ),
-          Expanded(child: Container()),
-          Visibility(
-            visible: SecondDropdownVisible,
-            replacement: ElevatedButton(
-              onPressed: () {
-                setState(() {
-                  SecondDropdownVisible = true;
-                });
-              },
-              child: const Text("اظهر خانت اضافة المادة الثانية"),
-            ),
-            child: Expanded(
-              child: Row(
-                children: [
-                  Container(
-                    alignment: Alignment.centerLeft,
-                    child: const Text(
-                      "المادة الثانيه",
-                      style: TextStyle(fontSize: 20, fontWeight: FontWeight.w600),
-                    ),
-                  ),
-                  Expanded(child: Container()),
-                  DropdownButton<String>(
-                    items: SubjectsMaker(TeacherSubject2),
-                    value: TeacherSubject2,
-                    onChanged: (s2) {
-                      setState(() {
-                        TeacherSubject2 = s2!.toString();
-                      });
-                    },
-                  ),
-                ],
-              ),
-            ),
-          ),
-          Expanded(child: Container()),
-          Visibility(
-            visible: ThirdDropdownVisible,
-            replacement: SecondDropdownVisible
-                ? ElevatedButton(
-                    onPressed: () {
-                      setState(() {
-                        ThirdDropdownVisible = true;
-                      });
-                    },
-                    child: const Text("اظهر خانت اضافة المادة الثالثة"),
-                  )
-                : const SizedBox.shrink(),
-            child: Expanded(
-              child: Row(
-                children: [
-                  Container(
-                    alignment: Alignment.centerLeft,
-                    child: const Text(
-                      "المادة الثالثة",
-                      style: TextStyle(fontSize: 20, fontWeight: FontWeight.w600),
-                    ),
-                  ),
-                  Expanded(child: Container()),
-                  DropdownButton<String>(
-                    items: SubjectsMaker(TeacherSubject3),
-                    value: TeacherSubject3,
-                    onChanged: (s3) {
-                      setState(() {
-                        TeacherSubject3 = s3!.toString();
-                      });
-                    },
-                  ),
-                ],
-              ),
-            ),
-          ),
-          Expanded(child: Container()),
-        ],
-      ),
-    );
-    Widget BreefWidge = SizedBox(
-      height: 210,
-      child: TextField(
-        controller: _MessageController,
-        maxLines: 8,
-        onChanged: (newValue) {
-          TeacherDes = newValue;
-        },
-        decoration: InputDecoration(
-            hintText: "اخبرنا اكثر عن نفسك",
-            enabledBorder:
-                OutlineInputBorder(borderSide: const BorderSide(color: Color.fromARGB(255, 192, 192, 192)), borderRadius: BorderRadius.circular(30)),
-            focusedBorder: OutlineInputBorder(borderRadius: BorderRadius.circular(15))),
-      ),
-    );
     Widget SignUpButton = InkWell(
       onTap: () async {
-        if (key3.currentState!.validate()) {
-          key3.currentState!.save();
+        if (key.currentState!.validate() &&
+            StudentName != "0" &&
+            StudentParentMobileNumber != "0" &&
+            StudentEmail != "0" &&
+            StudentPassword != "0" &&
+            StudentConfirmPassword != "0") {
+          key.currentState!.save();
           OverlayLoadingProgress.start(
             context,
             widget: CMaker(
@@ -572,27 +505,24 @@ class _TeacherSignUpPageState extends State<TeacherSignUpPage> {
               ),
             ),
           );
-          await dbService.fiCreate('Teacher', {
-            "name": TeacherName,
-            "phone": TeacherNumber,
-            "email": TeacherEmail.toLowerCase(),
-            "password": TeacherPassword,
-            "birth_date": TeacherDateOfBirth,
-            "gender": TeacherGeneder,
-            "Subject1": [TeacherSubject1],
-            "Subject2": (TeacherSubject2 == "null") ? TeacherSubject2 : [TeacherSubject2],
-            "Subject3": (TeacherSubject3 == "null") ? TeacherSubject3 : [TeacherSubject3],
-            "Description": TeacherDes,
+          await dbService.fiCreate('Students', {
+            "name": StudentName,
+            "phone": StudentMobileNumber,
+            "par_phone": StudentParentMobileNumber,
+            "email": StudentEmail.toLowerCase(),
+            "password": StudentPassword,
+            "birth_date": StudentDateOfBirth,
+            "gender": StudentGender,
+            "grade": StudentGrade,
             "photo":
                 'https://firebasestorage.googleapis.com/v0/b/rsa-app-3ec3f.appspot.com/o/Profiles%2FPerson.png?alt=media&token=9a526b63-e8ff-40ec-b831-088e270a0013',
             "state": "false"
           });
           OverlayLoadingProgress.stop();
-          _MessageController.clear();
           PanaraInfoDialog.show(
             context,
             title: "تم حفظ البيانات بنجاح",
-            message: "الان يمكنك تسجيل الدخول ",
+            message: "انتقل الان لصفحة تسجيل الدخول",
             buttonText: "تسجيل الدخول",
             onTapDismiss: () {
               Navigator.pop(context);
@@ -615,11 +545,34 @@ class _TeacherSignUpPageState extends State<TeacherSignUpPage> {
         ),
       ),
     );
+    List<Widget> AlreadyHaveAnAccountElements = [
+      Container(
+        alignment: Alignment.centerRight,
+        child: const Text(
+          "هل لديك حساب بالفعل؟",
+          style: TextStyle(fontSize: 15, color: Color.fromARGB(255, 206, 206, 206), fontWeight: FontWeight.w500),
+        ),
+      ),
+      Container(
+        margin: const EdgeInsets.only(left: 20),
+        alignment: Alignment.centerLeft,
+        child: TextButton(
+          onPressed: () {
+            Navigator.pushNamed(context, "LogInPage");
+          },
+          child: const Text(
+            "تسجيل الدخول",
+            style: TextStyle(fontSize: 15, color: Color.fromARGB(255, 74, 193, 241), fontWeight: FontWeight.w500),
+          ),
+        ),
+      ),
+    ];
+    SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersiveSticky);
     if (PageWidth(context) < 550) {
       setState(() {
-        TeacherSignUpBody = Scaffold(
+        StudentSignUpBody = Scaffold(
           body: Form(
-            key: key3,
+            key: key,
             child: CMaker(
               height: PageHeight(context),
               child: SingleChildScrollView(
@@ -654,10 +607,11 @@ class _TeacherSignUpPageState extends State<TeacherSignUpPage> {
                         child: Column(
                           children: [
                             const Padding(padding: EdgeInsets.only(bottom: 20)),
-                            TeacherWithArrow,
+                            StudentWithArro,
                             const Padding(padding: EdgeInsets.only(bottom: 20)),
                             NameTFF,
-                            PhoneTFF,
+                            GardianPhoneTFF,
+                            PhoneNumberTFF,
                             EmailTFF,
                             PasswordTFF,
                             ConfirmTFF,
@@ -666,7 +620,7 @@ class _TeacherSignUpPageState extends State<TeacherSignUpPage> {
                             const Padding(padding: EdgeInsets.only(bottom: 40)),
                             CMaker(alignment: Alignment.center, child: BirthDateW),
                             const Padding(padding: EdgeInsets.only(bottom: 40)),
-                            GenederTC,
+                            GenederText,
                             const Padding(padding: EdgeInsets.only(bottom: 20)),
                             CMaker(
                                 padding: const EdgeInsets.symmetric(horizontal: 20),
@@ -674,18 +628,18 @@ class _TeacherSignUpPageState extends State<TeacherSignUpPage> {
                                 width: double.infinity,
                                 child: Row(
                                   children: [
-                                    Expanded(flex: 5, child: GenederWidegts[0]),
+                                    Expanded(flex: 5, child: GenederWidgets[0]),
                                     Expanded(
                                       child: Container(),
                                     ),
-                                    Expanded(flex: 5, child: GenederWidegts[1]),
+                                    Expanded(flex: 5, child: GenederWidgets[1]),
                                   ],
                                 )),
                             const Padding(padding: EdgeInsets.only(bottom: 20)),
-                            SubjectsWidgets,
+                            GradeText,
                             const Padding(padding: EdgeInsets.only(bottom: 20)),
-                            BreefWidge,
-                            const Padding(padding: EdgeInsets.only(bottom: 20)),
+                            GradeDDB,
+                            const Padding(padding: EdgeInsets.only(bottom: 60)),
                             CMaker(alignment: Alignment.center, child: SignUpButton),
                             const Padding(padding: EdgeInsets.only(bottom: 20)),
                             CMaker(
@@ -711,9 +665,9 @@ class _TeacherSignUpPageState extends State<TeacherSignUpPage> {
       });
     } else if (PageWidth(context) >= 550 && PageHeight(context) >= 900) {
       setState(() {
-        TeacherSignUpBody = Scaffold(
+        StudentSignUpBody = Scaffold(
           body: Form(
-            key: key3,
+            key: key,
             child: CMaker(
                 alignment: Alignment.center,
                 width: double.infinity,
@@ -757,10 +711,11 @@ class _TeacherSignUpPageState extends State<TeacherSignUpPage> {
                           child: Column(
                             children: [
                               const Padding(padding: EdgeInsets.only(bottom: 20)),
-                              TeacherWithArrow,
+                              StudentWithArro,
                               const Padding(padding: EdgeInsets.only(bottom: 20)),
                               NameTFF,
-                              PhoneTFF,
+                              GardianPhoneTFF,
+                              PhoneNumberTFF,
                               EmailTFF,
                               PasswordTFF,
                               ConfirmTFF,
@@ -769,7 +724,7 @@ class _TeacherSignUpPageState extends State<TeacherSignUpPage> {
                               const Padding(padding: EdgeInsets.only(bottom: 40)),
                               CMaker(alignment: Alignment.center, child: BirthDateW),
                               const Padding(padding: EdgeInsets.only(bottom: 40)),
-                              GenederTC,
+                              GenederText,
                               const Padding(padding: EdgeInsets.only(bottom: 20)),
                               CMaker(
                                   padding: const EdgeInsets.symmetric(horizontal: 20),
@@ -777,18 +732,18 @@ class _TeacherSignUpPageState extends State<TeacherSignUpPage> {
                                   width: double.infinity,
                                   child: Row(
                                     children: [
-                                      Expanded(flex: 5, child: GenederWidegts[0]),
+                                      Expanded(flex: 5, child: GenederWidgets[0]),
                                       Expanded(
                                         child: Container(),
                                       ),
-                                      Expanded(flex: 5, child: GenederWidegts[1]),
+                                      Expanded(flex: 5, child: GenederWidgets[1]),
                                     ],
                                   )),
                               const Padding(padding: EdgeInsets.only(bottom: 20)),
-                              SubjectsWidgets,
+                              GradeText,
                               const Padding(padding: EdgeInsets.only(bottom: 20)),
-                              BreefWidge,
-                              const Padding(padding: EdgeInsets.only(bottom: 20)),
+                              GradeDDB,
+                              const Padding(padding: EdgeInsets.only(bottom: 60)),
                               CMaker(alignment: Alignment.center, child: SignUpButton),
                               const Padding(padding: EdgeInsets.only(bottom: 20)),
                               CMaker(
@@ -814,9 +769,9 @@ class _TeacherSignUpPageState extends State<TeacherSignUpPage> {
       });
     } else if (PageWidth(context) >= 550 && PageHeight(context) < 900) {
       setState(() {
-        TeacherSignUpBody = Scaffold(
+        StudentSignUpBody = Scaffold(
           body: Form(
-            key: key3,
+            key: key,
             child: CMaker(
                 alignment: Alignment.center,
                 width: double.infinity,
@@ -876,10 +831,11 @@ class _TeacherSignUpPageState extends State<TeacherSignUpPage> {
                           child: Column(
                             children: [
                               const Padding(padding: EdgeInsets.only(bottom: 20)),
-                              TeacherWithArrow,
+                              StudentWithArro,
                               const Padding(padding: EdgeInsets.only(bottom: 20)),
                               NameTFF,
-                              PhoneTFF,
+                              GardianPhoneTFF,
+                              PhoneNumberTFF,
                               EmailTFF,
                               PasswordTFF,
                               ConfirmTFF,
@@ -888,7 +844,7 @@ class _TeacherSignUpPageState extends State<TeacherSignUpPage> {
                               const Padding(padding: EdgeInsets.only(bottom: 40)),
                               CMaker(alignment: Alignment.center, child: BirthDateW),
                               const Padding(padding: EdgeInsets.only(bottom: 40)),
-                              GenederTC,
+                              GenederText,
                               const Padding(padding: EdgeInsets.only(bottom: 20)),
                               CMaker(
                                   padding: const EdgeInsets.symmetric(horizontal: 20),
@@ -896,18 +852,18 @@ class _TeacherSignUpPageState extends State<TeacherSignUpPage> {
                                   width: double.infinity,
                                   child: Row(
                                     children: [
-                                      Expanded(flex: 5, child: GenederWidegts[0]),
+                                      Expanded(flex: 5, child: GenederWidgets[0]),
                                       Expanded(
                                         child: Container(),
                                       ),
-                                      Expanded(flex: 5, child: GenederWidegts[1]),
+                                      Expanded(flex: 5, child: GenederWidgets[1]),
                                     ],
                                   )),
                               const Padding(padding: EdgeInsets.only(bottom: 20)),
-                              SubjectsWidgets,
+                              GradeText,
                               const Padding(padding: EdgeInsets.only(bottom: 20)),
-                              BreefWidge,
-                              const Padding(padding: EdgeInsets.only(bottom: 20)),
+                              GradeDDB,
+                              const Padding(padding: EdgeInsets.only(bottom: 60)),
                               CMaker(alignment: Alignment.center, child: SignUpButton),
                               const Padding(padding: EdgeInsets.only(bottom: 20)),
                               CMaker(
@@ -932,7 +888,6 @@ class _TeacherSignUpPageState extends State<TeacherSignUpPage> {
         );
       });
     }
-    SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersiveSticky);
-    return TeacherSignUpBody;
+    return StudentSignUpBody;
   }
 }

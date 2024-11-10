@@ -1,9 +1,10 @@
 
+import 'package:edu_academy/Data/StudentData/StudentData.dart';
 import 'package:edu_academy/MyTools.dart';
-import 'package:edu_academy/StudentPages/StudentAppBar.dart';
+import 'package:edu_academy/view/StudentPages/Other/StudentAppBar.dart';
 import 'package:edu_academy/service/Databse_Service.dart';
 import 'package:flutter/material.dart';
-import 'package:edu_academy/StudentPages/StudentMainPage.dart';
+import 'package:edu_academy/view/StudentPages/HomePage.dart';
 import 'package:flutter/services.dart';
 import 'package:syncfusion_flutter_pdfviewer/pdfviewer.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -394,7 +395,7 @@ class _SecondPageState extends State<SecondPage> {
       Widget ForthPageBackButton = IconButton(
           onPressed: () async {
             List<List<dynamic>> records_ = await dbService.fiRead_Books(
-                grade, "${Subjects[GradesSubjects[grade][0]][1]}");
+                StudentData.grade, "${Subjects[GradesSubjects[StudentData.grade][0]][1]}");
 
             setState(() {
               anySubjectSelected = false;
@@ -815,7 +816,7 @@ class _SecondPageState extends State<SecondPage> {
             ),
           );
           List<List<dynamic>> records_ = await dbService.fiRead_Books(
-              grade, "${Subjects[SubjectSelected][1]}");
+              StudentData.grade, "${Subjects[SubjectSelected][1]}");
           OverlayLoadingProgress.stop();
           setState(() {
             OpenBooks = true;
@@ -1121,7 +1122,7 @@ class _SecondPageState extends State<SecondPage> {
       Widget GridViewWidget = Container(
         margin: const EdgeInsets.symmetric(horizontal: 20),
         child: GridView.builder(
-          itemCount: (GradesSubjects[grade] as List<dynamic>).length,
+          itemCount: (GradesSubjects[StudentData.grade] as List<dynamic>).length,
           gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
               crossAxisCount: (PageWidth(context) < 550)
                   ? 2
@@ -1158,10 +1159,10 @@ class _SecondPageState extends State<SecondPage> {
                   ),
                 );
                 List<List<dynamic>> records = await dbService.fiRead_Records(
-                    grade, "${Subjects[GradesSubjects[grade][index]][1]}");
+                    StudentData.grade, "${Subjects[GradesSubjects[StudentData.grade][index]][1]}");
                 OverlayLoadingProgress.stop();
                 setState(() {
-                  SubjectSelected = GradesSubjects[grade][index];
+                  SubjectSelected = GradesSubjects[StudentData.grade][index];
                   anySubjectSelected = true;
                   all_rec = records;
                 });
@@ -1174,8 +1175,8 @@ class _SecondPageState extends State<SecondPage> {
                       begin: Alignment.bottomLeft,
                       end: Alignment.topRight,
                       colors: [
-                        col[GradesSubjects[grade][index]][0],
-                        col[GradesSubjects[grade][index]][1],
+                        col[GradesSubjects[StudentData.grade][index]][0],
+                        col[GradesSubjects[StudentData.grade][index]][1],
                       ]),
                 ),
                 child: Column(
@@ -1184,7 +1185,7 @@ class _SecondPageState extends State<SecondPage> {
                         child: Container(
                       alignment: Alignment.centerRight,
                       child: Text(
-                        "${Subjects[GradesSubjects[grade][index]][1]}",
+                        "${Subjects[GradesSubjects[StudentData.grade][index]][1]}",
                         style: TextStyle(
                             fontSize: (PageWidth(context) < 550)
                                 ? 17
@@ -1200,7 +1201,7 @@ class _SecondPageState extends State<SecondPage> {
                           width: double.infinity,
                           alignment: Alignment.centerLeft,
                           child: Image.network(
-                              Subjects[GradesSubjects[grade][index]][0])),
+                              Subjects[GradesSubjects[StudentData.grade][index]][0])),
                     ),
                   ],
                 ),

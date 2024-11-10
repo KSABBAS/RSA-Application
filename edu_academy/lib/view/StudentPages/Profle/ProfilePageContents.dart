@@ -1,10 +1,11 @@
 import 'dart:io';
 import 'dart:typed_data';
 
+import 'package:edu_academy/Data/StudentData/StudentData.dart';
 import 'package:edu_academy/Login/LogInPage.dart';
 import 'package:edu_academy/MyTools.dart';
-import 'package:edu_academy/StudentPages/StudentMainPage.dart';
-import 'package:edu_academy/TeacherPages/TeacherMainPage.dart';
+import 'package:edu_academy/view/StudentPages/HomePage.dart';
+import 'package:edu_academy/view/TeacherPages/TeacherMainPage.dart';
 import 'package:edu_academy/service/Databse_Service.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
@@ -502,7 +503,7 @@ class _StudentProfileState extends State<StudentProfile> {
             print(widget.StudentNumber);
             print(widget.StudentPassword);
             dbService.FiUpdate_profile_data(
-                grade,
+                StudentData.grade,
                 "Students",
                 student_id,
                 widget.StudentEmail,

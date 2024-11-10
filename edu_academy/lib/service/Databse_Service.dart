@@ -2,7 +2,7 @@ import 'dart:developer';
 // import 'dart:io';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:edu_academy/StudentPages/SecondPageContents.dart';
+import 'package:edu_academy/view/StudentPages/PageTwo/SecondPageContents.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:intl/intl.dart';

@@ -1,6 +1,7 @@
+import 'package:edu_academy/Data/StudentData/StudentData.dart';
 import 'package:edu_academy/MyTools.dart';
-import 'package:edu_academy/StudentPages/Notifications.dart';
-import 'package:edu_academy/StudentPages/StudentMainPage.dart';
+import 'package:edu_academy/view/StudentPages/Other/Notifications.dart';
+import 'package:edu_academy/view/StudentPages/HomePage.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 class StudentAppBar extends StatefulWidget {
@@ -38,7 +39,7 @@ class _StudentAppBarState extends State<StudentAppBar> {
     Widget StudentGradeTC = CMaker(
       alignment: Alignment.bottomCenter,
       child: Text(
-        grade,
+        StudentData.grade,
         style: TextStyle(
             fontSize: (PageWidth(context) < 550)
                 ? 17
