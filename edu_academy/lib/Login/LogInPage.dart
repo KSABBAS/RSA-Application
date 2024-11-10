@@ -287,9 +287,9 @@ class _LoginPageState extends State<LogInPage> {
                       margin:
                           const EdgeInsetsDirectional.symmetric(horizontal: 20),
                       child: InputPart),
-                  Padding(padding:EdgeInsets.only(top: 60)),
+                  Padding(padding:EdgeInsets.only(top: 80)),
                   CMaker(alignment: Alignment.center, child: LoginButton),
-                  Padding(padding:EdgeInsets.only(top: 10)),
+                  Padding(padding:EdgeInsets.only(top: 60)),
                   CMaker(
                       child: Row(
                     children: [
@@ -301,7 +301,7 @@ class _LoginPageState extends State<LogInPage> {
                       ),
                     ],
                   )),
-                  CMaker(height: 100,child: PoweredBy),
+                  CMaker(height: 50,child: PoweredBy),
                   Padding(padding:EdgeInsets.only(top: 10)),
                 ],
               ),

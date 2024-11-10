@@ -15,7 +15,7 @@ import 'package:get/get.dart';
 import 'package:edu_academy/SplashViewPage.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'service/firebase_options.dart' ;
-//hh@gmail.com 1234  00 22 
+//hh@gmail.com 1234  00 22
 //flutter build web --web-renderer canvaskit --release
 //firebase deploy --only hosting -m "V 1.0.1"
 //firebase init hosting
