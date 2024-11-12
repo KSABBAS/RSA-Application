@@ -1,6 +1,6 @@
 import 'package:edu_academy/MyTools.dart';
 import 'package:edu_academy/view/StudentPages/Other/StudentAppBar.dart';
-import 'package:edu_academy/view/StudentPages/PageTwo/WhenASubjectIsSelected/contents/BackButton.dart';
+import 'package:edu_academy/view/StudentPages/PageTwo/PageTwo.dart';
 import 'package:edu_academy/view/StudentPages/PageTwo/WhenASubjectIsSelected/contents/OpenTheBooksButton.dart';
 import 'package:edu_academy/view/StudentPages/PageTwo/WhenASubjectIsSelected/contents/SubjectSelectedImage.dart';
 import 'package:edu_academy/view/StudentPages/PageTwo/WhenASubjectIsSelected/contents/SubjectSelectedName.dart';
@@ -29,11 +29,14 @@ class _WhenASebjectIsSelectedState extends State<WhenASebjectIsSelected> {
               width: double.infinity,
               child: Row(
                 children: [
-                  PageBackButton(
-                    Refresh: () {
-                      widget.Refresh!();
-                    },
-                  ),
+                  IconButton(
+                      onPressed: () {
+                        anySubjectSelected = false;
+                        OpenBooks = false;
+                        OpenBook = false;
+                        widget.Refresh!();
+                      },
+                      icon: const Icon(Icons.arrow_back)),
                   Expanded(child: Container()),
                   Row(
                     children: [
@@ -91,7 +94,8 @@ class _WhenASebjectIsSelectedState extends State<WhenASebjectIsSelected> {
                 ],
               )),
           const Padding(padding: EdgeInsets.only(top: 20)),
-          SizedBox(height: PageHeight(context) - (380), child: LessonsListView()),
+          SizedBox(
+              height: PageHeight(context) - (380), child: LessonsListView()),
         ],
       );
     } else if (PageWidth(context) >= 550 && PageHeight(context) >= 900) {
@@ -108,11 +112,14 @@ class _WhenASebjectIsSelectedState extends State<WhenASebjectIsSelected> {
               width: double.infinity,
               child: Row(
                 children: [
-                  PageBackButton(
-                    Refresh: () {
-                      widget.Refresh!();
-                    },
-                  ),
+                  IconButton(
+                      onPressed: () {
+                        anySubjectSelected = false;
+                        OpenBooks = false;
+                        OpenBook = false;
+                        widget.Refresh!();
+                      },
+                      icon: const Icon(Icons.arrow_back)),
                   Expanded(child: Container()),
                   Row(
                     children: [
@@ -170,7 +177,8 @@ class _WhenASebjectIsSelectedState extends State<WhenASebjectIsSelected> {
                 ],
               )),
           const Padding(padding: EdgeInsets.only(top: 20)),
-          SizedBox(height: PageHeight(context) - (380), child: LessonsListView()),
+          SizedBox(
+              height: PageHeight(context) - (380), child: LessonsListView()),
         ],
       );
     } else if (PageWidth(context) >= 550 && PageHeight(context) < 900) {
@@ -189,11 +197,14 @@ class _WhenASebjectIsSelectedState extends State<WhenASebjectIsSelected> {
                   width: double.infinity,
                   child: Row(
                     children: [
-                      PageBackButton(
-                        Refresh: () {
-                          widget.Refresh!();
-                        },
-                      ),
+                      IconButton(
+                          onPressed: () {
+                            anySubjectSelected = false;
+                            OpenBooks = false;
+                            OpenBook = false;
+                            widget.Refresh!();
+                          },
+                          icon: const Icon(Icons.arrow_back)),
                       Expanded(child: Container()),
                       Row(
                         children: [
@@ -253,7 +264,8 @@ class _WhenASebjectIsSelectedState extends State<WhenASebjectIsSelected> {
                   )),
               const Padding(padding: EdgeInsets.only(top: 20)),
               SizedBox(
-                  height: PageHeight(context) - (380), child: LessonsListView()),
+                  height: PageHeight(context) - (380),
+                  child: LessonsListView()),
             ],
           ),
         ),

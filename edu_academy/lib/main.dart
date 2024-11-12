@@ -2,7 +2,7 @@ import 'package:edu_academy/Data/StudentData/GradesAndSubjects.dart';
 import 'package:edu_academy/view/AdminPages/AdminMainPage.dart';
 import 'package:edu_academy/Login/LogInPage.dart';
 import 'package:edu_academy/view/ParentPages/ParentMainPage.dart';
-import 'package:edu_academy/view/StudentPages/PageTwo/SecondPageContents.dart';
+import 'package:edu_academy/view/StudentPages/PageTwo/PageTwo.dart';
 import 'package:edu_academy/view/TeacherPages/TeacherMainPage.dart';
 import 'package:edu_academy/view/ParentPages/ParentSignUpPage.dart';
 import 'package:edu_academy/view/StudentPages/SignUp/StudentMobileSignUpPage.dart';

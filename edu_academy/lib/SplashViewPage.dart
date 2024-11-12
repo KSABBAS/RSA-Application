@@ -3,7 +3,7 @@ import 'dart:developer';
 
 import 'package:edu_academy/Login/LogInPage.dart';
 import 'package:edu_academy/MyTools.dart';
-import 'package:edu_academy/view/StudentPages/PageTwo/SecondPageContents.dart';
+import 'package:edu_academy/view/StudentPages/PageTwo/PageTwo.dart';
 import 'package:edu_academy/service/Databse_Service.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
