@@ -1,5 +1,5 @@
+import 'package:edu_academy/Data/StudentData/GradesAndSubjects.dart';
 import 'package:edu_academy/MyTools.dart';
-import 'package:edu_academy/view/StudentPages/PageTwo/SecondPageContents.dart';
 import 'package:edu_academy/service/Databse_Service.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
@@ -417,7 +417,7 @@ class _StudentMobileSignUpPageState extends State<StudentMobileSignUpPage> {
             value: StudentGrade,
             items: () {
               List<DropdownMenuItem<String>> out = [];
-              for (var i in GradesSubjects.keys) {
+              for (var i in GradesAndsubjects.GradesSubjects.keys) {
                 out.add(DropdownMenuItem(value: i, child: Text(i)));
               }
               print("items out ${out}");

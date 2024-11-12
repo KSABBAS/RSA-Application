@@ -1,8 +1,12 @@
-
+import 'package:edu_academy/Data/StudentData/GradesAndSubjects.dart';
 import 'package:edu_academy/Data/StudentData/StudentData.dart';
 import 'package:edu_academy/MyTools.dart';
 import 'package:edu_academy/view/StudentPages/Other/StudentAppBar.dart';
 import 'package:edu_academy/service/Databse_Service.dart';
+import 'package:edu_academy/view/StudentPages/PageTwo/FirstPage/Page.dart';
+import 'package:edu_academy/view/StudentPages/PageTwo/WhenASubjectIsSelected/Page.dart';
+import 'package:edu_academy/view/StudentPages/PageTwo/WhenASubjectIsSelected/contents/SubjectSelectedImage.dart';
+import 'package:edu_academy/view/StudentPages/PageTwo/WhenASubjectIsSelected/contents/SubjectSelectedName.dart';
 import 'package:flutter/material.dart';
 import 'package:edu_academy/view/StudentPages/HomePage.dart';
 import 'package:flutter/services.dart';
@@ -16,335 +20,6 @@ class SecondPage extends StatefulWidget {
   State<SecondPage> createState() => _SecondPageState();
 }
 
-List<List<Color>> col = [
-  [
-    const Color.fromARGB(255, 9, 220, 206),
-    const Color.fromARGB(255, 146, 206, 22)
-  ],
-  [
-    const Color.fromARGB(255, 247, 68, 110),
-    const Color.fromARGB(255, 148, 80, 225)
-  ],
-  [
-    const Color.fromARGB(255, 214, 128, 12),
-    const Color.fromARGB(255, 254, 197, 44)
-  ],
-  [
-    const Color.fromARGB(255, 248, 67, 114),
-    const Color.fromARGB(255, 248, 152, 68)
-  ],
-  [
-    const Color.fromARGB(255, 254, 165, 41),
-    const Color.fromARGB(255, 251, 99, 26)
-  ],
-  [
-    const Color.fromARGB(255, 31, 229, 175),
-    const Color.fromARGB(255, 55, 114, 242)
-  ],
-  [
-    const Color.fromARGB(255, 9, 220, 206),
-    const Color.fromARGB(255, 146, 206, 22)
-  ],
-  [
-    const Color.fromARGB(255, 247, 68, 110),
-    const Color.fromARGB(255, 148, 80, 225)
-  ],
-  [
-    const Color.fromARGB(255, 214, 128, 12),
-    const Color.fromARGB(255, 254, 197, 44)
-  ],
-  [
-    const Color.fromARGB(255, 248, 67, 114),
-    const Color.fromARGB(255, 248, 152, 68)
-  ],
-  [
-    const Color.fromARGB(255, 254, 165, 41),
-    const Color.fromARGB(255, 251, 99, 26)
-  ],
-  [
-    const Color.fromARGB(255, 31, 229, 175),
-    const Color.fromARGB(255, 55, 114, 242)
-  ],
-  [
-    const Color.fromARGB(255, 9, 220, 206),
-    const Color.fromARGB(255, 146, 206, 22)
-  ],
-  [
-    const Color.fromARGB(255, 247, 68, 110),
-    const Color.fromARGB(255, 148, 80, 225)
-  ],
-  [
-    const Color.fromARGB(255, 214, 128, 12),
-    const Color.fromARGB(255, 254, 197, 44)
-  ],
-  [
-    const Color.fromARGB(255, 248, 67, 114),
-    const Color.fromARGB(255, 248, 152, 68)
-  ],
-  [
-    const Color.fromARGB(255, 254, 165, 41),
-    const Color.fromARGB(255, 251, 99, 26)
-  ],
-  [
-    const Color.fromARGB(255, 31, 229, 175),
-    const Color.fromARGB(255, 55, 114, 242)
-  ],
-  [
-    const Color.fromARGB(255, 9, 220, 206),
-    const Color.fromARGB(255, 146, 206, 22)
-  ],
-  [
-    const Color.fromARGB(255, 247, 68, 110),
-    const Color.fromARGB(255, 148, 80, 225)
-  ],
-  [
-    const Color.fromARGB(255, 214, 128, 12),
-    const Color.fromARGB(255, 254, 197, 44)
-  ],
-  [
-    const Color.fromARGB(255, 248, 67, 114),
-    const Color.fromARGB(255, 248, 152, 68)
-  ],
-  [
-    const Color.fromARGB(255, 254, 165, 41),
-    const Color.fromARGB(255, 251, 99, 26)
-  ],
-  [
-    const Color.fromARGB(255, 31, 229, 175),
-    const Color.fromARGB(255, 55, 114, 242)
-  ],
-  [
-    const Color.fromARGB(255, 9, 220, 206),
-    const Color.fromARGB(255, 146, 206, 22)
-  ],
-  [
-    const Color.fromARGB(255, 247, 68, 110),
-    const Color.fromARGB(255, 148, 80, 225)
-  ],
-  [
-    const Color.fromARGB(255, 214, 128, 12),
-    const Color.fromARGB(255, 254, 197, 44)
-  ],
-  [
-    const Color.fromARGB(255, 248, 67, 114),
-    const Color.fromARGB(255, 248, 152, 68)
-  ],
-  [
-    const Color.fromARGB(255, 254, 165, 41),
-    const Color.fromARGB(255, 251, 99, 26)
-  ],
-  [
-    const Color.fromARGB(255, 31, 229, 175),
-    const Color.fromARGB(255, 55, 114, 242)
-  ],
-  [
-    const Color.fromARGB(255, 9, 220, 206),
-    const Color.fromARGB(255, 146, 206, 22)
-  ],
-  [
-    const Color.fromARGB(255, 214, 128, 12),
-    const Color.fromARGB(255, 254, 197, 44)
-  ],
-  [
-    const Color.fromARGB(255, 214, 128, 12),
-    const Color.fromARGB(255, 254, 197, 44)
-  ],
-  [
-    const Color.fromARGB(255, 9, 220, 206),
-    const Color.fromARGB(255, 146, 206, 22)
-  ],
-  [
-    const Color.fromARGB(255, 247, 68, 110),
-    const Color.fromARGB(255, 148, 80, 225)
-  ],
-  [
-    const Color.fromARGB(255, 214, 128, 12),
-    const Color.fromARGB(255, 254, 197, 44)
-  ],
-  [
-    const Color.fromARGB(255, 248, 67, 114),
-    const Color.fromARGB(255, 248, 152, 68)
-  ],
-  [
-    const Color.fromARGB(255, 254, 165, 41),
-    const Color.fromARGB(255, 251, 99, 26)
-  ],
-  [
-    const Color.fromARGB(255, 31, 229, 175),
-    const Color.fromARGB(255, 55, 114, 242)
-  ],
-  [
-    const Color.fromARGB(255, 9, 220, 206),
-    const Color.fromARGB(255, 146, 206, 22)
-  ],
-  [
-    const Color.fromARGB(255, 247, 68, 110),
-    const Color.fromARGB(255, 148, 80, 225)
-  ],
-  [
-    const Color.fromARGB(255, 214, 128, 12),
-    const Color.fromARGB(255, 254, 197, 44)
-  ],
-  [
-    const Color.fromARGB(255, 248, 67, 114),
-    const Color.fromARGB(255, 248, 152, 68)
-  ],
-  [
-    const Color.fromARGB(255, 254, 165, 41),
-    const Color.fromARGB(255, 251, 99, 26)
-  ],
-  [
-    const Color.fromARGB(255, 31, 229, 175),
-    const Color.fromARGB(255, 55, 114, 242)
-  ],
-  [
-    const Color.fromARGB(255, 9, 220, 206),
-    const Color.fromARGB(255, 146, 206, 22)
-  ],
-  [
-    const Color.fromARGB(255, 247, 68, 110),
-    const Color.fromARGB(255, 148, 80, 225)
-  ],
-  [
-    const Color.fromARGB(255, 214, 128, 12),
-    const Color.fromARGB(255, 254, 197, 44)
-  ],
-  [
-    const Color.fromARGB(255, 248, 67, 114),
-    const Color.fromARGB(255, 248, 152, 68)
-  ],
-  [
-    const Color.fromARGB(255, 254, 165, 41),
-    const Color.fromARGB(255, 251, 99, 26)
-  ],
-  [
-    const Color.fromARGB(255, 31, 229, 175),
-    const Color.fromARGB(255, 55, 114, 242)
-  ],
-  [
-    const Color.fromARGB(255, 9, 220, 206),
-    const Color.fromARGB(255, 146, 206, 22)
-  ],
-  [
-    const Color.fromARGB(255, 247, 68, 110),
-    const Color.fromARGB(255, 148, 80, 225)
-  ],
-  [
-    const Color.fromARGB(255, 214, 128, 12),
-    const Color.fromARGB(255, 254, 197, 44)
-  ],
-  [
-    const Color.fromARGB(255, 248, 67, 114),
-    const Color.fromARGB(255, 248, 152, 68)
-  ],
-  [
-    const Color.fromARGB(255, 254, 165, 41),
-    const Color.fromARGB(255, 251, 99, 26)
-  ],
-  [
-    const Color.fromARGB(255, 31, 229, 175),
-    const Color.fromARGB(255, 55, 114, 242)
-  ],
-  [
-    const Color.fromARGB(255, 9, 220, 206),
-    const Color.fromARGB(255, 146, 206, 22)
-  ],
-  [
-    const Color.fromARGB(255, 247, 68, 110),
-    const Color.fromARGB(255, 148, 80, 225)
-  ],
-  [
-    const Color.fromARGB(255, 214, 128, 12),
-    const Color.fromARGB(255, 254, 197, 44)
-  ],
-  [
-    const Color.fromARGB(255, 248, 67, 114),
-    const Color.fromARGB(255, 248, 152, 68)
-  ],
-  [
-    const Color.fromARGB(255, 254, 165, 41),
-    const Color.fromARGB(255, 251, 99, 26)
-  ],
-  [
-    const Color.fromARGB(255, 31, 229, 175),
-    const Color.fromARGB(255, 55, 114, 242)
-  ],
-  [
-    const Color.fromARGB(255, 9, 220, 206),
-    const Color.fromARGB(255, 146, 206, 22)
-  ],
-  [
-    const Color.fromARGB(255, 214, 128, 12),
-    const Color.fromARGB(255, 254, 197, 44)
-  ],
-  [
-    const Color.fromARGB(255, 214, 128, 12),
-    const Color.fromARGB(255, 254, 197, 44)
-  ],
-];
-List<List> Subjects = [
-  // ["images/SubjectsIcons/ألماني.png", "ألماني"],
-  // ["images/SubjectsIcons/إيطالي.png", "إيطالي"],
-  // ["images/SubjectsIcons/استاتيكا.png", "استاتيكا"],
-  // ["images/SubjectsIcons/الأحياء.png", "الأحياء"],
-  // ["images/SubjectsIcons/التوكاتسو.png", "التوكاتسو"],
-  // ["images/SubjectsIcons/الجغرافيا.png", "الجغرافيا"],
-  // ["images/SubjectsIcons/الجيولوجيا.png", "الجيولوجيا"],
-  // ["images/SubjectsIcons/الرياضيات.png", "الرياضيات"],
-  // ["images/SubjectsIcons/العلوم.png", "العلوم"],
-  // ["images/SubjectsIcons/الفيزياء.png", "الفيزياء"],
-  // ["images/SubjectsIcons/الكيمياء.png", "الكيمياء"],
-  // ["images/SubjectsIcons/اللغة الأسبانية.png", "اللغة الأسبانية"],
-  // ["images/SubjectsIcons/اللغه الانجليزية.png", "اللغه الانجليزية"],
-  // ["images/SubjectsIcons/تاريخ.png", "تاريخ"],
-  // ["images/SubjectsIcons/تربية دينية.png", "تربية دينية"],
-  // ["images/SubjectsIcons/تربية فنية.png", "تربية فنية"],
-  // ["images/SubjectsIcons/تفاضل وتكامل.png", "تفاضل وتكامل"],
-  // ["images/SubjectsIcons/تكنولوجيا المعلومات.png", "تكنولوجيا المعلومات"],
-  // ["images/SubjectsIcons/جبر.png", "جبر"],
-  // ["images/SubjectsIcons/حاسب آلي.png", "حاسب آلي"],
-  // ["images/SubjectsIcons/دراسات .png", "دراسات "],
-  // ["images/SubjectsIcons/ديناميكا.png", "ديناميكا"],
-  // ["images/SubjectsIcons/علم النفس.png", "علم النفس"],
-  // ["images/SubjectsIcons/فرنساوي.png", "فرنساوي"],
-  // ["images/SubjectsIcons/فلسفه.png", "فلسفه"],
-  // ["images/SubjectsIcons/قيم واحترام الآخر.png", "قيم واحترام الآخر"],
-  // ["images/SubjectsIcons/مهارات المهنية.png", "مهارات المهنية"],
-  // ["images/SubjectsIcons/هندسة فراغيه.png", "هندسة فراغيه"],
-  // ["images/SubjectsIcons/هندسة.png", "هندسة"],
-  // ["images/SubjectsIcons/اكتشف.png", "اكتشف"],
-  // ["images/SubjectsIcons/عربي.png", "عربي"],
-];
-//22 /0
-Map<String, dynamic> GradesSubjects = {
-  // 'KG 1': [30, 7, 14, 29],
-  // 'KG 2': [30, 7, 14, 29],
-  // 'Grade 1': [30, 7, 14, 29],
-  // 'Grade 2': [30, 7, 14, 29],
-  // 'Grade 3': [30, 7, 14, 29],
-  // 'Grade 4': [30, 20, 8, 26, 17, 7, 14],
-  // 'Grade 5': [30, 20, 8, 26, 17, 7, 14],
-  // 'Grade 6': [30, 20, 8, 26, 17, 7, 14],
-  // 'Grade 7': [30, 20, 8, 26, 17, 7, 14],
-  // 'Grade 8': [],
-  // 'Grade 9': [],
-  // 'Grade 10': [],
-  // 'Grade 11': [],
-  // 'Grade 12': [],
-  // 'Grade 1(Lang)': [],
-  // 'Grade 2(Lang)': [],
-  // 'Grade 3(Lang)': [],
-  // 'Grade 4(Lang)': [],
-  // 'Grade 5(Lang)': [],
-  // 'Grade 6(Lang)': [],
-  // 'Grade 7(Lang)': [],
-  // 'Grade 8(Lang)': [],
-  // 'Grade 9(Lang)': [],
-  // 'Grade 10(Lang)': [],
-  // 'Grade 11(Lang)': [],
-  // 'Grade 12(Lang)': [],
-};
-
 bool anySubjectSelected = false;
 int index_SubjectSelected = 0;
 int SubjectSelected = 0;
@@ -354,15 +29,7 @@ bool OpenBooks = false;
 bool OpenBook = false;
 int bookOpend = 0;
 
-class _SecondPageState extends State<SecondPage> {
-  final dbService = DatabaseService();
-
-  @override
-  void initState() {
-    super.initState();
-  }
-
-  Future<void> _launchURL({required String url}) async {
+  Future<void> launchURL({required String url}) async {
     try {
       if (!await launchUrl(Uri.parse(url))) {
         throw 'Could not launch $url';
@@ -371,31 +38,25 @@ class _SecondPageState extends State<SecondPage> {
       //mj
     }
   }
+final dbService = DatabaseService();
+
+class _SecondPageState extends State<SecondPage> {
+  @override
+  void initState() {
+    super.initState();
+  }
+
 
   @override
   Widget build(BuildContext context) {
     late Widget SecondPageContents;
-    Widget SubjectSelectedImage = Image.asset(Subjects[SubjectSelected][0]);
-    Widget SubjectSelectedName = TMaker(
-      text: Subjects[SubjectSelected][1],
-      fontSize: 20,
-      fontWeight: FontWeight.w700,
-      color: const Color.fromARGB(255, 96, 123, 137),
-    );
-    Widget Logo = InkWell(
-        onTap: () {
-          setState(() {
-            PageIndex = 0;
-          });
-        },
-        child:
-            CircleAvatar(backgroundImage: NetworkImage(profile_data['photo'])));
     if (OpenBook) {
       //Fourth
       Widget ForthPageBackButton = IconButton(
           onPressed: () async {
             List<List<dynamic>> records_ = await dbService.fiRead_Books(
-                StudentData.grade, "${Subjects[GradesSubjects[StudentData.grade][0]][1]}");
+                StudentData.grade,
+                "${GradesAndsubjects.Subjects[GradesAndsubjects.GradesSubjects[StudentData.grade][0]][1]}");
 
             setState(() {
               anySubjectSelected = false;
@@ -417,14 +78,15 @@ class _SecondPageState extends State<SecondPage> {
               Expanded(child: Container()),
               TMaker(
                   // book name text
-                  text: "${(all_books[bookOpend][2].length>10)?all_books[bookOpend][2].substring(0,10)+"....":all_books[bookOpend][2]}",
+                  text:
+                      "${(all_books[bookOpend][2].length > 10) ? all_books[bookOpend][2].substring(0, 10) + "...." : all_books[bookOpend][2]}",
                   fontSize: 30,
                   fontWeight: FontWeight.w600,
                   color: const Color.fromARGB(255, 255, 255, 255)),
               Expanded(child: Container()),
               InkWell(
                 onTap: () {
-                  _launchURL(url: all_books[bookOpend][0]);
+                  launchURL(url: all_books[bookOpend][0]);
                   //${all_books[bookOpend][0]}
                   // in here you must add ,the download function and its animation all by yourself
                 },
@@ -451,8 +113,8 @@ class _SecondPageState extends State<SecondPage> {
           color: const Color.fromARGB(255, 217, 216, 216),
           width: (PageWidth(context) < 800) ? double.infinity : 600,
           height: (PageHeight(context) - 420),
-          child: SfPdfViewer.network(maxZoomLevel: 20,all_books[bookOpend][0])
-          );
+          child:
+              SfPdfViewer.network(maxZoomLevel: 20, all_books[bookOpend][0]));
       if (PageWidth(context) < 550) {
         setState(() {
           SecondPageContents = Column(
@@ -472,9 +134,9 @@ class _SecondPageState extends State<SecondPage> {
                       Expanded(child: Container()),
                       Row(
                         children: [
-                          SubjectSelectedImage,
+                          SubjectSelectedImage(),
                           const Padding(padding: EdgeInsets.only(left: 5)),
-                          SubjectSelectedName
+                          SubjectSelectedName()
                         ],
                       ),
                       Expanded(child: Container())
@@ -512,9 +174,9 @@ class _SecondPageState extends State<SecondPage> {
                       Expanded(child: Container()),
                       Row(
                         children: [
-                          SubjectSelectedImage,
+                          SubjectSelectedImage(),
                           const Padding(padding: EdgeInsets.only(left: 5)),
-                          SubjectSelectedName
+                          SubjectSelectedName()
                         ],
                       ),
                       Expanded(child: Container())
@@ -554,9 +216,9 @@ class _SecondPageState extends State<SecondPage> {
                           Expanded(child: Container()),
                           Row(
                             children: [
-                              SubjectSelectedImage,
+                              SubjectSelectedImage(),
                               const Padding(padding: EdgeInsets.only(left: 5)),
-                              SubjectSelectedName
+                              SubjectSelectedName()
                             ],
                           ),
                           Expanded(child: Container())
@@ -599,68 +261,77 @@ class _SecondPageState extends State<SecondPage> {
                   : 30,
           fontWeight: FontWeight.w700,
           color: Colors.black);
-      Widget PressableBooks = (all_books.isEmpty)?Center(child: TMaker(text: "لا يوجد كتب", fontSize: 20, fontWeight:FontWeight.w700, color: Colors.black),):ListView.builder(
-          itemCount: all_books.length, //all_books.length,
-          scrollDirection: Axis.vertical,
-          itemBuilder: (context, index) {
-            return Column(
-              children: [
-                InkWell(
-                    onTap: () {
-                      OverlayLoadingProgress.start(
-                        context,
-                        widget: CMaker(
-                          circularRadius: 15,
-                          color: const Color.fromARGB(198, 255, 255, 255),
-                          width: MediaQuery.of(context).size.width / 3.6,
-                          padding: EdgeInsets.all(
-                              MediaQuery.of(context).size.width / 13),
-                          child: const AspectRatio(
-                            aspectRatio: 1,
-                            child: CircularProgressIndicator(
-                              color: Color.fromARGB(255, 36, 160, 209),
+      Widget PressableBooks = (all_books.isEmpty)
+          ? Center(
+              child: TMaker(
+                  text: "لا يوجد كتب",
+                  fontSize: 20,
+                  fontWeight: FontWeight.w700,
+                  color: Colors.black),
+            )
+          : ListView.builder(
+              itemCount: all_books.length, //all_books.length,
+              scrollDirection: Axis.vertical,
+              itemBuilder: (context, index) {
+                return Column(
+                  children: [
+                    InkWell(
+                        onTap: () {
+                          OverlayLoadingProgress.start(
+                            context,
+                            widget: CMaker(
+                              circularRadius: 15,
+                              color: const Color.fromARGB(198, 255, 255, 255),
+                              width: MediaQuery.of(context).size.width / 3.6,
+                              padding: EdgeInsets.all(
+                                  MediaQuery.of(context).size.width / 13),
+                              child: const AspectRatio(
+                                aspectRatio: 1,
+                                child: CircularProgressIndicator(
+                                  color: Color.fromARGB(255, 36, 160, 209),
+                                ),
+                              ),
                             ),
-                          ),
-                        ),
-                      );
-                      // add database action here
-                      OverlayLoadingProgress.stop();
-                      setState(() {
-                        OpenBook = true;
-                        OpenBooks = false;
-                        anySubjectSelected = false;
-                        bookOpend = index;
-                      });
-                    },
-                    child: CMaker(
-                        height: (PageWidth(context) < 550)
-                            ? 50
-                            : (PageHeight(context) < 900)
-                                ? 80
-                                : 80,
-                        alignment: Alignment.centerLeft,
-                        padding: const EdgeInsets.symmetric(horizontal: 20),
-                        circularRadius: 5,
-                        color: const Color.fromARGB(255, 19, 218, 132),
-                        margin: const EdgeInsets.symmetric(horizontal: 15),
-                        // height: 40
-                        width: double.infinity,
-                        child: TMaker(
-                            text:
-                                "${index + 1}- ${"${(all_books[index][2].length>15)?all_books[index][2].substring(0,15)+"....":all_books[index][2]}"}", //////
-                            fontSize: (PageWidth(context) < 550)
-                                ? 30
+                          );
+                          // add database action here
+                          OverlayLoadingProgress.stop();
+                          setState(() {
+                            OpenBook = true;
+                            OpenBooks = false;
+                            anySubjectSelected = false;
+                            bookOpend = index;
+                          });
+                        },
+                        child: CMaker(
+                            height: (PageWidth(context) < 550)
+                                ? 50
                                 : (PageHeight(context) < 900)
-                                    ? 40
-                                    : 40,
-                            fontWeight: FontWeight.w500,
-                            color: const Color.fromARGB(255, 255, 255, 255)))),
-                const Padding(
-                  padding: EdgeInsets.only(bottom: 20),
-                )
-              ],
-            );
-          });
+                                    ? 80
+                                    : 80,
+                            alignment: Alignment.centerLeft,
+                            padding: const EdgeInsets.symmetric(horizontal: 20),
+                            circularRadius: 5,
+                            color: const Color.fromARGB(255, 19, 218, 132),
+                            margin: const EdgeInsets.symmetric(horizontal: 15),
+                            // height: 40
+                            width: double.infinity,
+                            child: TMaker(
+                                text:
+                                    "${index + 1}- ${"${(all_books[index][2].length > 15) ? all_books[index][2].substring(0, 15) + "...." : all_books[index][2]}"}", //////
+                                fontSize: (PageWidth(context) < 550)
+                                    ? 30
+                                    : (PageHeight(context) < 900)
+                                        ? 40
+                                        : 40,
+                                fontWeight: FontWeight.w500,
+                                color:
+                                    const Color.fromARGB(255, 255, 255, 255)))),
+                    const Padding(
+                      padding: EdgeInsets.only(bottom: 20),
+                    )
+                  ],
+                );
+              });
       if (PageWidth(context) < 550) {
         setState(() {
           SecondPageContents = Column(
@@ -679,9 +350,9 @@ class _SecondPageState extends State<SecondPage> {
                       CMaker(
                         child: Row(
                           children: [
-                            SubjectSelectedImage,
+                            SubjectSelectedImage(),
                             const Padding(padding: EdgeInsets.only(left: 5)),
-                            SubjectSelectedName
+                            SubjectSelectedName()
                           ],
                         ),
                       ),
@@ -719,9 +390,9 @@ class _SecondPageState extends State<SecondPage> {
                       Expanded(child: Container()),
                       Row(
                         children: [
-                          SubjectSelectedImage,
+                          SubjectSelectedImage(),
                           const Padding(padding: EdgeInsets.only(left: 5)),
-                          SubjectSelectedName
+                          SubjectSelectedName()
                         ],
                       ),
                       Expanded(child: Container())
@@ -760,9 +431,9 @@ class _SecondPageState extends State<SecondPage> {
                           Expanded(child: Container()),
                           Row(
                             children: [
-                              SubjectSelectedImage,
+                              SubjectSelectedImage(),
                               const Padding(padding: EdgeInsets.only(left: 5)),
-                              SubjectSelectedName
+                              SubjectSelectedName()
                             ],
                           ),
                           Expanded(child: Container())
@@ -789,489 +460,18 @@ class _SecondPageState extends State<SecondPage> {
       }
     } else if (anySubjectSelected) {
       // second
-      Widget SecondPageBackButton = IconButton(
-          onPressed: () {
-            setState(() {
-              anySubjectSelected = false;
-              OpenBooks = false;
-              OpenBook = false;
-            });
-          },
-          icon: const Icon(Icons.arrow_back));
-      Widget OpenTheBooksButton = InkWell(
-        onTap: () async {
-          OverlayLoadingProgress.start(
-            context,
-            widget: CMaker(
-              circularRadius: 15,
-              color: const Color.fromARGB(198, 255, 255, 255),
-              width: MediaQuery.of(context).size.width / 3.6,
-              padding: EdgeInsets.all(MediaQuery.of(context).size.width / 13),
-              child: const AspectRatio(
-                aspectRatio: 1,
-                child: CircularProgressIndicator(
-                  color: Color.fromARGB(255, 36, 160, 209),
-                ),
-              ),
-            ),
-          );
-          List<List<dynamic>> records_ = await dbService.fiRead_Books(
-              StudentData.grade, "${Subjects[SubjectSelected][1]}");
-          OverlayLoadingProgress.stop();
-          setState(() {
-            OpenBooks = true;
-            anySubjectSelected = false;
-            all_books = records_;
-          });
+      return WhenASebjectIsSelected(
+        Refresh: () {
+          setState(() {});
         },
-        child: CMaker(
-          circularRadius: 15,
-          alignment: Alignment.center,
-          width: 55,
-          height: 35,
-          color: const Color.fromARGB(255, 255, 255, 255),
-          child: TMaker(
-              text: "فتح",
-              fontSize: 20,
-              fontWeight: FontWeight.w700,
-              color: Colors.black),
-        ),
       );
-      Widget OpenTheBooksTC = CMaker(
-          width: double.infinity,
-          alignment: Alignment.centerRight,
-          child: TMaker(
-              text: "عرض الكتب",
-              fontSize: 22,
-              fontWeight: FontWeight.w800,
-              color: Colors.white));
-      Widget RecoredeLessonsImage = Image.asset("images/webinar.png");
-      Widget RecoredeLessonsT = TMaker(
-          text: "الحصص المسجلة",
-          fontSize: 20,
-          fontWeight: FontWeight.w600,
-          color: const Color.fromARGB(255, 54, 54, 54));
-      Widget LessonsListView = (all_rec.isEmpty)?Center(child: TMaker(text: "لا يوجد حصص", fontSize: 20, fontWeight:FontWeight.w700, color: Colors.black),):ListView.builder(
-          itemCount: all_rec.length,
-          scrollDirection: Axis.vertical,
-          itemBuilder: (context, index) {
-            return CMaker(
-                padding: const EdgeInsets.symmetric(horizontal: 20),
-                circularRadius: 15,
-                margin: const EdgeInsets.only(left: 30, right: 30, bottom: 15),
-                color: const Color.fromARGB(255, 19, 218, 132),
-                height: 90,
-                child: Row(
-                  children: [
-                    InkWell(
-                      onTap: () {
-                        _launchURL(url: all_rec[index][0]);
-                      },
-                      child: CMaker(
-                        alignment: Alignment.center,
-                        circularRadius: 15,
-                        width: 70,
-                        height: 40,
-                        color: const Color.fromARGB(255, 233, 255, 247),
-                        child: TMaker(
-                            text: "تشغيل",
-                            fontSize: 20,
-                            fontWeight: FontWeight.w700,
-                            color: const Color.fromARGB(255, 0, 0, 0)),
-                      ),
-                    ),
-                    Expanded(
-                      child: Container(),
-                    ),
-                    Column(
-                      children: [
-                        TMaker(
-                            text: "الحصه ${index + 1}",
-                            fontSize: 35,
-                            fontWeight: FontWeight.w600,
-                            color: Colors.white),
-                        TMaker(
-                            text: "التاريخ : ${all_rec[index][1]}",
-                            fontSize: 18,
-                            fontWeight: FontWeight.w600,
-                            color: Colors.white)
-                      ],
-                    )
-                  ],
-                ));
-          });
-      if (PageWidth(context) < 550) {
-        setState(() {
-          SecondPageContents = Column(
-            children: [
-              const StudentAppBar(),
-              const Padding(padding: EdgeInsets.only(bottom: 20)),
-              CMaker(
-                height: 50,
-                child: CMaker(
-                  height: double.infinity,
-                  width: double.infinity,
-                  child: Row(
-                    children: [
-                      SecondPageBackButton,
-                      Expanded(child: Container()),
-                      Row(
-                        children: [
-                          SubjectSelectedImage,
-                          const Padding(padding: EdgeInsets.only(left: 5)),
-                          SubjectSelectedName
-                        ],
-                      ),
-                      Expanded(child: Container())
-                    ],
-                  ),
-                ),
-              ),
-              const Padding(
-                padding: EdgeInsets.only(bottom: 10),
-              ),
-              CMaker(
-                  circularRadius: 20,
-                  color: const Color.fromARGB(255, 36, 160, 209),
-                  margin: const EdgeInsets.symmetric(horizontal: 15),
-                  height: 60,
-                  padding:
-                      const EdgeInsets.symmetric(vertical: 5, horizontal: 30),
-                  child: Row(
-                    children: [
-                      OpenTheBooksButton,
-                      Expanded(child: OpenTheBooksTC)
-                    ],
-                  )),
-              const Padding(padding: EdgeInsets.only(bottom: 10)),
-              CMaker(
-                  height: 50,
-                  child: Row(
-                    children: [
-                      Expanded(child: Container()),
-                      RecoredeLessonsImage,
-                      const Padding(padding: EdgeInsets.only(left: 5)),
-                      RecoredeLessonsT,
-                      Expanded(child: Container())
-                    ],
-                  )),
-              const Padding(padding: EdgeInsets.only(top: 20)),
-              SizedBox(
-                  height: PageHeight(context) - (380), child: LessonsListView),
-            ],
-          );
-        });
-      } else if (PageWidth(context) >= 550 && PageHeight(context) >= 900) {
-        setState(() {
-          SecondPageContents = Column(
-            children: [
-              const StudentAppBar(),
-              const Padding(
-                padding: EdgeInsets.only(bottom: 20),
-              ),
-              CMaker(
-                height: 50,
-                child: CMaker(
-                  height: double.infinity,
-                  width: double.infinity,
-                  child: Row(
-                    children: [
-                      SecondPageBackButton,
-                      Expanded(child: Container()),
-                      Row(
-                        children: [
-                          SubjectSelectedImage,
-                          const Padding(padding: EdgeInsets.only(left: 5)),
-                          SubjectSelectedName
-                        ],
-                      ),
-                      Expanded(child: Container())
-                    ],
-                  ),
-                ),
-              ),
-              const Padding(
-                padding: EdgeInsets.only(bottom: 10),
-              ),
-              CMaker(
-                  circularRadius: 20,
-                  color: const Color.fromARGB(255, 36, 160, 209),
-                  margin: const EdgeInsets.symmetric(horizontal: 15),
-                  height: 60,
-                  padding:
-                      const EdgeInsets.symmetric(vertical: 5, horizontal: 30),
-                  child: Row(
-                    children: [
-                      OpenTheBooksButton,
-                      Expanded(child: OpenTheBooksTC)
-                    ],
-                  )),
-              const Padding(padding: EdgeInsets.only(bottom: 10)),
-              CMaker(
-                  height: 50,
-                  child: Row(
-                    children: [
-                      Expanded(child: Container()),
-                      RecoredeLessonsImage,
-                      const Padding(padding: EdgeInsets.only(left: 5)),
-                      RecoredeLessonsT,
-                      Expanded(child: Container())
-                    ],
-                  )),
-              const Padding(padding: EdgeInsets.only(top: 20)),
-              SizedBox(
-                  height: PageHeight(context) - (380), child: LessonsListView),
-            ],
-          );
-        });
-      } else if (PageWidth(context) >= 550 && PageHeight(context) < 900) {
-        setState(() {
-          SecondPageContents = Expanded(
-            child: CMaker(
-              child: Column(
-                children: [
-                  const StudentAppBar(),
-                  const Padding(
-                    padding: EdgeInsets.only(bottom: 20),
-                  ),
-                  CMaker(
-                    height: 50,
-                    child: CMaker(
-                      height: double.infinity,
-                      width: double.infinity,
-                      child: Row(
-                        children: [
-                          SecondPageBackButton,
-                          Expanded(child: Container()),
-                          Row(
-                            children: [
-                              SubjectSelectedImage,
-                              const Padding(padding: EdgeInsets.only(left: 5)),
-                              SubjectSelectedName
-                            ],
-                          ),
-                          Expanded(child: Container())
-                        ],
-                      ),
-                    ),
-                  ),
-                  const Padding(
-                    padding: EdgeInsets.only(bottom: 10),
-                  ),
-                  CMaker(
-                      circularRadius: 20,
-                      color: const Color.fromARGB(255, 36, 160, 209),
-                      margin: const EdgeInsets.symmetric(horizontal: 15),
-                      height: 60,
-                      padding: const EdgeInsets.symmetric(
-                          vertical: 5, horizontal: 30),
-                      child: Row(
-                        children: [
-                          OpenTheBooksButton,
-                          Expanded(child: OpenTheBooksTC)
-                        ],
-                      )),
-                  const Padding(padding: EdgeInsets.only(bottom: 10)),
-                  CMaker(
-                      height: 50,
-                      child: Row(
-                        children: [
-                          Expanded(child: Container()),
-                          RecoredeLessonsImage,
-                          const Padding(padding: EdgeInsets.only(left: 5)),
-                          RecoredeLessonsT,
-                          Expanded(child: Container())
-                        ],
-                      )),
-                  const Padding(padding: EdgeInsets.only(top: 20)),
-                  SizedBox(
-                      height: PageHeight(context) - (380),
-                      child: LessonsListView),
-                ],
-              ),
-            ),
-          );
-        });
-      }
     } else {
       // first
-      Widget GridBooksTitleC = Container(
-        alignment: Alignment.center,
-        width: double.infinity,
-        height: (PageWidth(context) < 550)
-            ? 50
-            : (PageHeight(context) < 900)
-                ? 70
-                : 70,
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(15),
-          color: const Color.fromARGB(255, 36, 160, 209),
-        ),
-        child: Text(
-          "الكتب الدراسية",
-          style: TextStyle(
-              fontSize: (PageWidth(context) < 550)
-                  ? 30
-                  : (PageHeight(context) < 900)
-                      ? 40
-                      : 30,
-              color: const Color.fromARGB(255, 255, 255, 255),
-              fontWeight: FontWeight.w600),
-        ),
+      return AllSubjectsPage(
+        Refresh: () {
+          setState(() {});
+        },
       );
-      Widget GridViewWidget = Container(
-        margin: const EdgeInsets.symmetric(horizontal: 20),
-        child: GridView.builder(
-          itemCount: (GradesSubjects[StudentData.grade] as List<dynamic>).length,
-          gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-              crossAxisCount: (PageWidth(context) < 550)
-                  ? 2
-                  : (PageHeight(context) >= 900)
-                      ? 3
-                      : (PageWidth(context) > 550 && PageWidth(context) < 700)
-                          ? 2
-                          : (PageWidth(context) >= 700 &&
-                                  PageWidth(context) < 900)
-                              ? 3
-                              : (PageWidth(context) >= 900 &&
-                                      PageWidth(context) < 1200)
-                                  ? 4
-                                  : 5,
-              mainAxisSpacing: 10,
-              crossAxisSpacing: 10),
-          itemBuilder: (context, index) {
-            return InkWell(
-              onTap: () async {
-                OverlayLoadingProgress.start(
-                  context,
-                  widget: CMaker(
-                    circularRadius: 15,
-                    color: const Color.fromARGB(198, 255, 255, 255),
-                    width: MediaQuery.of(context).size.width / 3.6,
-                    padding:
-                        EdgeInsets.all(MediaQuery.of(context).size.width / 13),
-                    child: const AspectRatio(
-                      aspectRatio: 1,
-                      child: CircularProgressIndicator(
-                        color: Color.fromARGB(255, 36, 160, 209),
-                      ),
-                    ),
-                  ),
-                );
-                List<List<dynamic>> records = await dbService.fiRead_Records(
-                    StudentData.grade, "${Subjects[GradesSubjects[StudentData.grade][index]][1]}");
-                OverlayLoadingProgress.stop();
-                setState(() {
-                  SubjectSelected = GradesSubjects[StudentData.grade][index];
-                  anySubjectSelected = true;
-                  all_rec = records;
-                });
-              },
-              child: Container(
-                padding: const EdgeInsets.all(10),
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(10),
-                  gradient: LinearGradient(
-                      begin: Alignment.bottomLeft,
-                      end: Alignment.topRight,
-                      colors: [
-                        col[GradesSubjects[StudentData.grade][index]][0],
-                        col[GradesSubjects[StudentData.grade][index]][1],
-                      ]),
-                ),
-                child: Column(
-                  children: [
-                    Expanded(
-                        child: Container(
-                      alignment: Alignment.centerRight,
-                      child: Text(
-                        "${Subjects[GradesSubjects[StudentData.grade][index]][1]}",
-                        style: TextStyle(
-                            fontSize: (PageWidth(context) < 550)
-                                ? 17
-                                : (PageHeight(context) < 900)
-                                    ? 20
-                                    : 20,
-                            fontWeight: FontWeight.w700,
-                            color: Colors.white),
-                      ),
-                    )),
-                    Expanded(
-                      child: Container(
-                          width: double.infinity,
-                          alignment: Alignment.centerLeft,
-                          child: Image.network(
-                              Subjects[GradesSubjects[StudentData.grade][index]][0])),
-                    ),
-                  ],
-                ),
-              ),
-            );
-          },
-        ),
-      );
-      if (PageWidth(context) < 550) {
-        setState(() {
-          SecondPageContents = SizedBox(
-            height: double.infinity,
-            width: double.infinity,
-            child: Column(
-              children: [
-                const StudentAppBar(),
-                const Padding(padding: EdgeInsets.only(top: 20)),
-                CMaker(
-                  margin: const EdgeInsets.symmetric(horizontal: 40),
-                  child: GridBooksTitleC,
-                ),
-                const Padding(padding: EdgeInsets.only(top: 20)),
-                Expanded(child: GridViewWidget),
-                const Padding(padding: EdgeInsets.only(top: 20)),
-              ],
-            ),
-          );
-        });
-      }
-      if (PageWidth(context) >= 550 && PageHeight(context) >= 900) {
-        setState(() {
-          SecondPageContents = SizedBox(
-            height: double.infinity,
-            width: double.infinity,
-            child: Column(
-              children: [
-                const StudentAppBar(),
-                const Padding(padding: EdgeInsets.only(top: 20)),
-                CMaker(
-                  margin: const EdgeInsets.symmetric(horizontal: 40),
-                  child: GridBooksTitleC,
-                ),
-                const Padding(padding: EdgeInsets.only(top: 20)),
-                Expanded(child: GridViewWidget),
-              ],
-            ),
-          );
-        });
-      }
-      if (PageWidth(context) >= 550 && PageHeight(context) < 900) {
-        setState(() {
-          SecondPageContents = Expanded(
-            child: Container(
-              child: Column(
-                children: [
-                  const StudentAppBar(),
-                  const Padding(padding: EdgeInsets.only(top: 20)),
-                  CMaker(
-                    margin: const EdgeInsets.symmetric(horizontal: 40),
-                    child: GridBooksTitleC,
-                  ),
-                  const Padding(padding: EdgeInsets.only(top: 20)),
-                  Expanded(child: GridViewWidget),
-                  const Padding(padding: EdgeInsets.only(top: 20)),
-                ],
-              ),
-            ),
-          );
-        });
-      }
     }
     SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersiveSticky);
     return SecondPageContents;

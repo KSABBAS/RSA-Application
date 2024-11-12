@@ -1,7 +1,7 @@
 // import 'dart:convert';
 import 'dart:developer';
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
-import 'package:edu_academy/view/StudentPages/PageTwo/SecondPageContents.dart';
+import 'package:edu_academy/Data/StudentData/GradesAndSubjects.dart';
 import 'package:edu_academy/view/TeacherPages/Notifications.dart';
 import 'package:edu_academy/view/TeacherPages/TeacherProfilePage.dart';
 import 'package:edu_academy/view/TeacherPages/TeacherSecondPageContents.dart';
@@ -114,8 +114,8 @@ class _TeacherMainPageState extends State<TeacherMainPage> {
   }
 
   Future<void> _initializeData() async {
-    GradesSubjects = await dbService.FiGet_allSub_indexs();
-    Subjects = await dbService.FiGet_allSub_data();
+    GradesAndsubjects.GradesSubjects = await dbService.FiGet_allSub_indexs();
+    GradesAndsubjects.Subjects = await dbService.FiGet_allSub_data();
     print("start .._initializeData ");
     ListOfGrades = [];
     print("ListOfGrades $ListOfGrades");

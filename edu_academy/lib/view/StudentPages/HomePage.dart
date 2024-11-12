@@ -1,5 +1,6 @@
 import 'dart:developer';
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
+import 'package:edu_academy/Data/StudentData/GradesAndSubjects.dart';
 import 'package:edu_academy/Data/StudentData/StudentData.dart';
 import 'package:edu_academy/view/StudentPages/PageOne/PageOne.dart';
 import 'package:edu_academy/view/StudentPages/Other/Notifications.dart';
@@ -74,6 +75,7 @@ class _StudentMainPageState extends State<StudentMainPage> {
           break;
       }
     });
+    print("================================\n fetch \n=====================================");
     fetch();
   }
   bool stringToBool(String value) {
@@ -93,8 +95,8 @@ class _StudentMainPageState extends State<StudentMainPage> {
   Future<void> fetch() async {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
     final List<String>? items = prefs.getStringList('id');
-    GradesSubjects = await dbService.FiGet_allSub_indexs();
-    Subjects = await dbService.FiGet_allSub_data();
+    GradesAndsubjects.GradesSubjects = await dbService.FiGet_allSub_indexs();
+    GradesAndsubjects.Subjects = await dbService.FiGet_allSub_data();
 
     print("==================\n=================\n$items");
     if (items != null && items.isNotEmpty) {

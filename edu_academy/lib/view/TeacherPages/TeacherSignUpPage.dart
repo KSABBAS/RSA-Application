@@ -1,4 +1,4 @@
-import 'package:edu_academy/view/StudentPages/PageTwo/SecondPageContents.dart';
+import 'package:edu_academy/Data/StudentData/GradesAndSubjects.dart';
 import 'package:edu_academy/MyTools.dart';
 import 'package:edu_academy/service/Databse_Service.dart';
 import 'package:flutter/cupertino.dart';
@@ -52,11 +52,11 @@ class _TeacherSignUpPageState extends State<TeacherSignUpPage> {
         child: CMaker(child: TMaker(text: "null", fontSize: 20, fontWeight: FontWeight.w600, color: Colors.black)),
       ),
     ];
-    for (int i = 0; i < Subjects.length; i++) {
+    for (int i = 0; i < GradesAndsubjects.Subjects.length; i++) {
       list.add(
         DropdownMenuItem(
-          value: Subjects[i][1],
-          child: CMaker(child: TMaker(text: Subjects[i][1], fontSize: 20, fontWeight: FontWeight.w600, color: Colors.black)),
+          value: GradesAndsubjects.Subjects[i][1],
+          child: CMaker(child: TMaker(text: GradesAndsubjects.Subjects[i][1], fontSize: 20, fontWeight: FontWeight.w600, color: Colors.black)),
         ),
       );
     }

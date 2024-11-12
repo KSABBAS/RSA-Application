@@ -1,6 +1,6 @@
+import 'package:edu_academy/Data/StudentData/GradesAndSubjects.dart';
 import 'package:edu_academy/view/AdminPages/AdminMainPage.dart';
 import 'package:edu_academy/MyTools.dart';
-import 'package:edu_academy/view/StudentPages/PageTwo/SecondPageContents.dart';
 import 'package:edu_academy/service/Databse_Service.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -583,11 +583,11 @@ class _ChangeSubjectsAndGradesState extends State<ChangeSubjectsAndGrades> {
             child: TMaker(text: Teachers[TeacherSelected][6][widget.List_index][0], fontSize: 20, fontWeight: FontWeight.w600, color: Colors.black)),
       ),
     ];
-    for (int i = 0; i < Subjects.length; i++) {
+    for (int i = 0; i < GradesAndsubjects.Subjects.length; i++) {
       list.add(
         DropdownMenuItem(
-          value: Subjects[i][1],
-          child: CMaker(child: TMaker(text: Subjects[i][1], fontSize: 20, fontWeight: FontWeight.w600, color: Colors.black)),
+          value: GradesAndsubjects.Subjects[i][1],
+          child: CMaker(child: TMaker(text: GradesAndsubjects.Subjects[i][1], fontSize: 20, fontWeight: FontWeight.w600, color: Colors.black)),
         ),
       );
     }
@@ -649,7 +649,7 @@ class _ChangeSubjectsAndGradesState extends State<ChangeSubjectsAndGrades> {
                   CMaker(
                       height: 600,
                       child: ListView.builder(
-                        itemCount: GradesSubjects.keys.length - ((GradesSubjects.keys.length / 2).floor()),
+                        itemCount: GradesAndsubjects.GradesSubjects.keys.length - ((GradesAndsubjects.GradesSubjects.keys.length / 2).floor()),
                         itemBuilder: (context, index) {
                           bool SelectedCheckBoxGrade = false;
                           return Row(
@@ -661,35 +661,35 @@ class _ChangeSubjectsAndGradesState extends State<ChangeSubjectsAndGrades> {
                                 color: const Color.fromARGB(255, 233, 255, 247),
                                 padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 1),
                                 child: CheckboxListTile(
-                                    title: Text(GradesSubjects.keys.elementAt(index * 2)),
+                                    title: Text(GradesAndsubjects.GradesSubjects.keys.elementAt(index * 2)),
                                     value: () {
                                       print(Teachers[TeacherSelected][6][widget.List_index]);
                                       if ((Teachers[TeacherSelected][6][widget.List_index] as List)
-                                          .contains(GradesSubjects.keys.elementAt(index * 2))) {
-                                        print("sub[GradesSubjects.keys.elementAt(index * 2)] ${sub[GradesSubjects.keys.elementAt(index * 2)]}");
-                                        sub[GradesSubjects.keys.elementAt(index * 2)] = true;
-                                        return sub[GradesSubjects.keys.elementAt(index * 2)];
+                                          .contains(GradesAndsubjects.GradesSubjects.keys.elementAt(index * 2))) {
+                                        print("sub[GradesSubjects.keys.elementAt(index * 2)] ${sub[GradesAndsubjects.GradesSubjects.keys.elementAt(index * 2)]}");
+                                        sub[GradesAndsubjects.GradesSubjects.keys.elementAt(index * 2)] = true;
+                                        return sub[GradesAndsubjects.GradesSubjects.keys.elementAt(index * 2)];
                                       } else {
-                                        print("-- sub[GradesSubjects.keys.elementAt(index * 2)] ${sub[GradesSubjects.keys.elementAt(index * 2)]}");
-                                        sub[GradesSubjects.keys.elementAt(index * 2)] = false;
-                                        return sub[GradesSubjects.keys.elementAt(index * 2)];
+                                        print("-- sub[GradesSubjects.keys.elementAt(index * 2)] ${sub[GradesAndsubjects.GradesSubjects.keys.elementAt(index * 2)]}");
+                                        sub[GradesAndsubjects.GradesSubjects.keys.elementAt(index * 2)] = false;
+                                        return sub[GradesAndsubjects.GradesSubjects.keys.elementAt(index * 2)];
                                       }
                                     }(),
                                     onChanged: (newValue) {
-                                      print("=============" "${sub[GradesSubjects.keys.elementAt(index * 2)]} ** ${GradesSubjects.keys.elementAt(index * 2)}");
+                                      print("=============" "${sub[GradesAndsubjects.GradesSubjects.keys.elementAt(index * 2)]} ** ${GradesAndsubjects.GradesSubjects.keys.elementAt(index * 2)}");
                                       setState(() {
-                                        sub[GradesSubjects.keys.elementAt(index * 2)] = newValue!;
-                                        if (sub[GradesSubjects.keys.elementAt(index * 2)] ?? false) {
-                                          (Teachers[TeacherSelected][6][widget.List_index]).add(GradesSubjects.keys.elementAt(index * 2));
+                                        sub[GradesAndsubjects.GradesSubjects.keys.elementAt(index * 2)] = newValue!;
+                                        if (sub[GradesAndsubjects.GradesSubjects.keys.elementAt(index * 2)] ?? false) {
+                                          (Teachers[TeacherSelected][6][widget.List_index]).add(GradesAndsubjects.GradesSubjects.keys.elementAt(index * 2));
                                           print("Teachers[TeacherSelected][6] ${Teachers[TeacherSelected][6][widget.List_index]}");
                                         } else {
-                                          (Teachers[TeacherSelected][6][widget.List_index]).remove(GradesSubjects.keys.elementAt(index * 2));
+                                          (Teachers[TeacherSelected][6][widget.List_index]).remove(GradesAndsubjects.GradesSubjects.keys.elementAt(index * 2));
                                         }
-                                        print("2===========" "${sub[GradesSubjects.keys.elementAt(index * 2)]}");
+                                        print("2===========" "${sub[GradesAndsubjects.GradesSubjects.keys.elementAt(index * 2)]}");
                                       });
                                     }),
                               )),
-                              (((index * 2) + 1) < GradesSubjects.keys.length)
+                              (((index * 2) + 1) < GradesAndsubjects.GradesSubjects.keys.length)
                                   ? Expanded(
                                       child: CMaker(
                                       margin: const EdgeInsets.only(right: 7, left: 20, bottom: 20),
@@ -697,34 +697,34 @@ class _ChangeSubjectsAndGradesState extends State<ChangeSubjectsAndGrades> {
                                       color: const Color.fromARGB(255, 233, 255, 247),
                                       padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 1),
                                       child: CheckboxListTile(
-                                          title: Text(GradesSubjects.keys.elementAt((index * 2) + 1)),
+                                          title: Text(GradesAndsubjects.GradesSubjects.keys.elementAt((index * 2) + 1)),
                                           value: () {
                                             print(Teachers[TeacherSelected][6][widget.List_index]);
                                             if ((Teachers[TeacherSelected][6][widget.List_index] as List)
-                                                .contains(GradesSubjects.keys.elementAt((index * 2) + 1))) {
+                                                .contains(GradesAndsubjects.GradesSubjects.keys.elementAt((index * 2) + 1))) {
                                               print(
-                                                  "sub[GradesSubjects.keys.elementAt((index * 2) + 1)] ${sub[GradesSubjects.keys.elementAt((index * 2) + 1)]}");
-                                              sub[GradesSubjects.keys.elementAt((index * 2) + 1)] = true;
-                                              return sub[GradesSubjects.keys.elementAt((index * 2) + 1)];
+                                                  "sub[GradesSubjects.keys.elementAt((index * 2) + 1)] ${sub[GradesAndsubjects.GradesSubjects.keys.elementAt((index * 2) + 1)]}");
+                                              sub[GradesAndsubjects.GradesSubjects.keys.elementAt((index * 2) + 1)] = true;
+                                              return sub[GradesAndsubjects.GradesSubjects.keys.elementAt((index * 2) + 1)];
                                             } else {
                                               print(
-                                                  "-- sub[GradesSubjects.keys.elementAt((index * 2) + 1)] ${sub[GradesSubjects.keys.elementAt((index * 2) + 1)]}");
-                                              sub[GradesSubjects.keys.elementAt((index * 2) + 1)] = false;
-                                              return sub[GradesSubjects.keys.elementAt((index * 2) + 1)];
+                                                  "-- sub[GradesSubjects.keys.elementAt((index * 2) + 1)] ${sub[GradesAndsubjects.GradesSubjects.keys.elementAt((index * 2) + 1)]}");
+                                              sub[GradesAndsubjects.GradesSubjects.keys.elementAt((index * 2) + 1)] = false;
+                                              return sub[GradesAndsubjects.GradesSubjects.keys.elementAt((index * 2) + 1)];
                                             }
                                           }(),
                                           onChanged: (newValue) {
-                                            print("=============" "${sub[GradesSubjects.keys.elementAt((index * 2) + 1)]} ** ${GradesSubjects.keys.elementAt((index * 2) + 1)}");
+                                            print("=============" "${sub[GradesAndsubjects.GradesSubjects.keys.elementAt((index * 2) + 1)]} ** ${GradesAndsubjects.GradesSubjects.keys.elementAt((index * 2) + 1)}");
                                             setState(() {
-                                              sub[GradesSubjects.keys.elementAt((index * 2) + 1)] = newValue!;
-                                              if (sub[GradesSubjects.keys.elementAt((index * 2) + 1)] ?? false) {
-                                                (Teachers[TeacherSelected][6][widget.List_index]).add(GradesSubjects.keys.elementAt((index * 2) + 1));
+                                              sub[GradesAndsubjects.GradesSubjects.keys.elementAt((index * 2) + 1)] = newValue!;
+                                              if (sub[GradesAndsubjects.GradesSubjects.keys.elementAt((index * 2) + 1)] ?? false) {
+                                                (Teachers[TeacherSelected][6][widget.List_index]).add(GradesAndsubjects.GradesSubjects.keys.elementAt((index * 2) + 1));
                                                 print("Teachers[TeacherSelected][6] ${Teachers[TeacherSelected][6][widget.List_index]}");
                                               } else {
                                                 (Teachers[TeacherSelected][6][widget.List_index])
-                                                    .remove(GradesSubjects.keys.elementAt((index * 2) + 1));
+                                                    .remove(GradesAndsubjects.GradesSubjects.keys.elementAt((index * 2) + 1));
                                               }
-                                              print("2===========" "${sub[GradesSubjects.keys.elementAt((index * 2) + 1)]}");
+                                              print("2===========" "${sub[GradesAndsubjects.GradesSubjects.keys.elementAt((index * 2) + 1)]}");
                                             });
                                           }),
                                     ))

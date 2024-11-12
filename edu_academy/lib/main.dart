@@ -1,3 +1,4 @@
+import 'package:edu_academy/Data/StudentData/GradesAndSubjects.dart';
 import 'package:edu_academy/view/AdminPages/AdminMainPage.dart';
 import 'package:edu_academy/Login/LogInPage.dart';
 import 'package:edu_academy/view/ParentPages/ParentMainPage.dart';
@@ -33,8 +34,8 @@ void main() async {
     print('Failed to initialize');
   }
   final dbService = DatabaseService();
-  GradesSubjects = await dbService.FiGet_allSub_indexs();
-  Subjects = await dbService.FiGet_allSub_data();
+  GradesAndsubjects.GradesSubjects= await dbService.FiGet_allSub_indexs();
+  GradesAndsubjects.Subjects = await dbService.FiGet_allSub_data();
 
   SystemChrome.setPreferredOrientations([
     DeviceOrientation.portraitUp,
