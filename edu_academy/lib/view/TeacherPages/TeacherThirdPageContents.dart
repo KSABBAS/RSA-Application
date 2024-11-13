@@ -1,6 +1,7 @@
 import 'dart:io';
 import 'dart:typed_data';
 
+import 'package:edu_academy/Data/TeacherData/TeacherData.dart';
 import 'package:edu_academy/view/TeacherPages/TeacherMainPage.dart';
 import 'package:edu_academy/MyTools.dart';
 import 'package:edu_academy/service/Databse_Service.dart';
@@ -243,7 +244,7 @@ class _TeacherThirdPageContentsState extends State<TeacherThirdPageContents> {
   final dbService = DatabaseService();
   //3
   solved_hw_student_re() async {
-    solved_hw_student = await dbService.FiGet_All_info_with_student_id(student_selected_list[1], Grade_selected, SubjectThatIsSelected);
+    solved_hw_student = await dbService.FiGet_All_info_with_student_id(student_selected_list[1], Grade_selected, TeacherData.SubjectThatIsSelected);
     setState(() {});
   }
 
@@ -395,8 +396,8 @@ class _TeacherThirdPageContentsState extends State<TeacherThirdPageContents> {
                               buttonText: "حذف",
                               onTapDismiss: () async {
                                 //delete hw start
-                                await dbService.FiDelete_Hw_techer(Grade_selected, SubjectThatIsSelected, all_Homeworks[IsOpendIndex][5] as String);
-                                all_Homeworks = await dbService.Fi_getAll_HW(Grade_selected, SubjectThatIsSelected);
+                                await dbService.FiDelete_Hw_techer(Grade_selected, TeacherData.SubjectThatIsSelected, all_Homeworks[IsOpendIndex][5] as String);
+                                all_Homeworks = await dbService.Fi_getAll_HW(Grade_selected, TeacherData.SubjectThatIsSelected);
                                 AllhomeWorks = true;
                                 AllHomeworksAndOneIsOpend = false; // update all hw data
                                 Navigator.pop(context);
@@ -438,7 +439,7 @@ class _TeacherThirdPageContentsState extends State<TeacherThirdPageContents> {
                   child: Row(children: [
                     InkWell(
                       onTap: () async {
-                        all_Homeworks = await dbService.Fi_getAll_HW(Grade_selected, SubjectThatIsSelected);
+                        all_Homeworks = await dbService.Fi_getAll_HW(Grade_selected, TeacherData.SubjectThatIsSelected);
                         setState(() {
                           AllhomeWorks = true;
                           AllHomeworksAndOneIsOpend = false;
@@ -538,8 +539,8 @@ class _TeacherThirdPageContentsState extends State<TeacherThirdPageContents> {
                               buttonText: "حذف",
                               onTapDismiss: () async {
                                 //delete hw start
-                                await dbService.FiDelete_Hw_techer(Grade_selected, SubjectThatIsSelected, all_Homeworks[IsOpendIndex][5] as String);
-                                all_Homeworks = await dbService.Fi_getAll_HW(Grade_selected, SubjectThatIsSelected); // update all hw data
+                                await dbService.FiDelete_Hw_techer(Grade_selected, TeacherData.SubjectThatIsSelected, all_Homeworks[IsOpendIndex][5] as String);
+                                all_Homeworks = await dbService.Fi_getAll_HW(Grade_selected, TeacherData.SubjectThatIsSelected); // update all hw data
                                 Navigator.pop(context);
                                 setState(() {});
                               },
@@ -579,7 +580,7 @@ class _TeacherThirdPageContentsState extends State<TeacherThirdPageContents> {
                   child: Row(children: [
                     InkWell(
                       onTap: () async {
-                        all_Homeworks = await dbService.Fi_getAll_HW(Grade_selected, SubjectThatIsSelected);
+                        all_Homeworks = await dbService.Fi_getAll_HW(Grade_selected, TeacherData.SubjectThatIsSelected);
                         setState(() {
                           AllhomeWorks = true;
                           AllHomeworksAndOneIsOpend = false;
@@ -679,8 +680,8 @@ class _TeacherThirdPageContentsState extends State<TeacherThirdPageContents> {
                               buttonText: "حذف",
                               onTapDismiss: () async {
                                 //delete hw start
-                                await dbService.FiDelete_Hw_techer(Grade_selected, SubjectThatIsSelected, all_Homeworks[IsOpendIndex][5] as String);
-                                all_Homeworks = await dbService.Fi_getAll_HW(Grade_selected, SubjectThatIsSelected); // update all hw data
+                                await dbService.FiDelete_Hw_techer(Grade_selected, TeacherData.SubjectThatIsSelected, all_Homeworks[IsOpendIndex][5] as String);
+                                all_Homeworks = await dbService.Fi_getAll_HW(Grade_selected, TeacherData.SubjectThatIsSelected); // update all hw data
                                 Navigator.pop(context);
                                 setState(() {});
                               },
@@ -1420,7 +1421,7 @@ class _TeacherThirdPageContentsState extends State<TeacherThirdPageContents> {
             //fiAdd_Hw(String Grade, String Subject, String Teacher_Id, List Files_List,
             //String HomeworkTitle, String HomeworkBody, String score)
             await dbService.fiAdd_Hw(
-                ListOfGrades[GradeHomeWorkOppenedIndex][0], SubjectThatIsSelected, Teacher_Id, filesList, HomeworkTitle, HomeworkBody, score);
+                TeacherData.ListOfGrades[GradeHomeWorkOppenedIndex][0], TeacherData.SubjectThatIsSelected, Teacher_Id, filesList, HomeworkTitle, HomeworkBody, score);
 
             OverlayLoadingProgress.stop();
             PanaraInfoDialog.show(
@@ -1792,7 +1793,7 @@ class _TeacherThirdPageContentsState extends State<TeacherThirdPageContents> {
               print("/tاضف درجة");
               print(await dbService.FiAdd_score_and_comment(
                   Grade_selected,
-                  SubjectThatIsSelected,
+                  TeacherData.SubjectThatIsSelected,
                   solved_hw_student[HomeworkSelected][0], // hw id
                   student_selected_list[1], // st id
                   TeacherComment,
@@ -2416,7 +2417,7 @@ class _TeacherThirdPageContentsState extends State<TeacherThirdPageContents> {
           margin: const EdgeInsets.symmetric(horizontal: 20),
           color: const Color.fromARGB(255, 255, 255, 255),
           child: ListView.builder(
-            itemCount: (ListOfGrades[GradeHomeWorkOppenedIndex][1] as List).length,
+            itemCount: (TeacherData.ListOfGrades[GradeHomeWorkOppenedIndex][1] as List).length,
             itemBuilder: (context, index) {
               return Column(
                 children: [
@@ -2425,7 +2426,7 @@ class _TeacherThirdPageContentsState extends State<TeacherThirdPageContents> {
                       OneStudentHomeWorks = true;
                       OneStudentHomeWorksIsLoading = true;
                       setState(() {
-                        student_selected_list = ListOfGrades[GradeHomeWorkOppenedIndex][1][index];
+                        student_selected_list = TeacherData.ListOfGrades[GradeHomeWorkOppenedIndex][1][index];
                         HomeWorkIndex = index;
                         GradeHomeWorkIsOppened = false;
                       });
@@ -2503,7 +2504,7 @@ class _TeacherThirdPageContentsState extends State<TeacherThirdPageContents> {
           NewHomeWork = false;
           AllhomeWorks = true;
           setState(() {});
-          all_Homeworks = await dbService.Fi_getAll_HW(Grade_selected, SubjectThatIsSelected);
+          all_Homeworks = await dbService.Fi_getAll_HW(Grade_selected, TeacherData.SubjectThatIsSelected);
           print("Loading is done");
           AllHomeWorksLoading = false;
           setState(() {});
@@ -2689,7 +2690,7 @@ class _TeacherThirdPageContentsState extends State<TeacherThirdPageContents> {
           child: CMaker(
             height: PageHeight(context) - 350,
             child: ListView.builder(
-              itemCount: ListOfGrades.length,
+              itemCount: TeacherData.ListOfGrades.length,
               itemBuilder: (context, index) {
                 return Column(
                   children: [
@@ -2703,7 +2704,7 @@ class _TeacherThirdPageContentsState extends State<TeacherThirdPageContents> {
                           children: [
                             const Padding(padding: EdgeInsets.only(left: 20)),
                             TMaker(
-                                text: "${ListOfGrades[index][0]}",
+                                text: "${TeacherData.ListOfGrades[index][0]}",
                                 fontSize: 25,
                                 fontWeight: FontWeight.w700,
                                 color: const Color.fromARGB(255, 0, 0, 0)),
@@ -2714,7 +2715,7 @@ class _TeacherThirdPageContentsState extends State<TeacherThirdPageContents> {
                                   GradeHomeWorkIsOppened = true;
                                   NewHomeWork = false;
                                   GradeHomeWorkOppenedIndex = index;
-                                  Grade_selected = ListOfGrades[index][0];
+                                  Grade_selected = TeacherData.ListOfGrades[index][0];
                                 });
                               },
                               child: CMaker(

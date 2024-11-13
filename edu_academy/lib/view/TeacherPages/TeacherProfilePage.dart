@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:edu_academy/Data/TeacherData/TeacherData.dart';
 import 'package:edu_academy/MyTools.dart';
 import 'package:edu_academy/view/TeacherPages/TeacherMainPage.dart';
 import 'package:edu_academy/service/Databse_Service.dart';
@@ -71,7 +72,7 @@ class _TeacherProfilePageState extends State<TeacherProfilePage> {
           }
         }
         // refresh
-        teacher_profile_data = await dbService.FiGet_profile_data(Teacher_Id, Teacher_role) as Map<String, dynamic>;
+        TeacherData.teacher_profile_data = await dbService.FiGet_profile_data(Teacher_Id, Teacher_role) as Map<String, dynamic>;
         setState(() {});
       },
       child: CMaker(

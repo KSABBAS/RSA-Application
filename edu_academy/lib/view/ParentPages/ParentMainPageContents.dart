@@ -90,7 +90,6 @@ class _ParentMainPageContentsState extends State<ParentMainPageContents> {
                     Expanded(child: Container()),
                     InkWell(
                       onTap: () {
-
                         sonSelectedIndex=index;
                         Navigator.of(context).push(MaterialPageRoute(builder: (context) =>SonPage(SonIndex: sonSelectedIndex,SonsList: Sons,ParentName: widget.ParentName,)));
                       },
