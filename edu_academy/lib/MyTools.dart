@@ -596,7 +596,6 @@ class _MultiRButtonState extends State<MultiRButton> {
                         color: widget.childColor ??
                             Color.fromARGB(96, 216, 216, 216),
                         child: RadioListTile(
-                            hoverColor: widget.hoverColor,
                             tileColor: widget.tileColor,
                             fillColor: widget.fillColor,
                             overlayColor: widget.overlayColor,

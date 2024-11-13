@@ -1,6 +1,7 @@
 import 'package:edu_academy/Data/StudentData/GradesAndSubjects.dart';
 import 'package:edu_academy/MyTools.dart';
 import 'package:edu_academy/service/Databse_Service.dart';
+import 'package:edu_academy/view/StudentPages/SignUp/contents/BirthDateWidget.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -14,7 +15,8 @@ class StudentMobileSignUpPage extends StatefulWidget {
   const StudentMobileSignUpPage({super.key});
 
   @override
-  State<StudentMobileSignUpPage> createState() => _StudentMobileSignUpPageState();
+  State<StudentMobileSignUpPage> createState() =>
+      _StudentMobileSignUpPageState();
 }
 
 var obscureText = true;
@@ -43,46 +45,30 @@ class _StudentMobileSignUpPageState extends State<StudentMobileSignUpPage> {
   Widget build(BuildContext context) {
     late Widget StudentSignUpBody;
     Widget NameTFF = SizedBox(
-      height: 80,
-      child: TextFormField(
-        autovalidateMode: AutovalidateMode.onUserInteraction,
-        onChanged: (value) {
-          key.currentState!.validate();
-        },
-        initialValue: StudentName,
-        onSaved: (newValue) {
-          StudentName = newValue!;
-        },
-        validator: (value) {
-          if (value!.isEmpty) {
-            return "الحقل فارغ";
-          }
-          if (value.split(" ").length < 3) {
-            return "الاسم يجب ان يكون ثلاثى او رباعى";
-          }
-          return null;
-        },
-        decoration: InputDecoration(
-            focusedErrorBorder:
-                OutlineInputBorder(borderSide: const BorderSide(color: Color.fromARGB(255, 192, 192, 192)), borderRadius: BorderRadius.circular(30)),
-            errorBorder:
-                OutlineInputBorder(borderSide: const BorderSide(color: Color.fromARGB(255, 192, 192, 192)), borderRadius: BorderRadius.circular(30)),
-            label: const Text(
-              "الاسم كامل*",
-              style: TextStyle(fontSize: 15, fontWeight: FontWeight.w600),
-            ),
-            enabledBorder:
-                OutlineInputBorder(borderSide: const BorderSide(color: Color.fromARGB(255, 192, 192, 192)), borderRadius: BorderRadius.circular(30)),
-            focusedBorder: OutlineInputBorder(borderRadius: BorderRadius.circular(15))),
-      ),
-    );
+        height: 80,
+        child: TFFMaker(
+          initialValue: StudentName,
+          onSaved: (newValue) {
+            StudentName = newValue!;
+          },
+          validator: (value) {
+            if (value!.isEmpty) {
+              return "الحقل فارغ";
+            }
+            if (value.split(" ").length < 3) {
+              return "الاسم يجب ان يكون ثلاثى او رباعى";
+            }
+            return null;
+          },
+          label: const Text(
+            "الاسم كامل*",
+            style: TextStyle(fontSize: 15, fontWeight: FontWeight.w600),
+          ),
+          enabledBorderColor: Color.fromARGB(255, 192, 192, 192),
+        ));
     Widget GardianPhoneTFF = SizedBox(
       height: 80,
-      child: TextFormField(
-        autovalidateMode: AutovalidateMode.onUserInteraction,
-        onChanged: (value) {
-          key.currentState!.validate();
-        },
+      child: TFFMaker(
         initialValue: StudentParentMobileNumber,
         onSaved: (newValue) {
           StudentParentMobileNumber = newValue!;
@@ -102,27 +88,16 @@ class _StudentMobileSignUpPageState extends State<StudentMobileSignUpPage> {
           }
           return null;
         },
-        decoration: InputDecoration(
-            focusedErrorBorder:
-                OutlineInputBorder(borderSide: const BorderSide(color: Color.fromARGB(255, 192, 192, 192)), borderRadius: BorderRadius.circular(30)),
-            errorBorder:
-                OutlineInputBorder(borderSide: const BorderSide(color: Color.fromARGB(255, 192, 192, 192)), borderRadius: BorderRadius.circular(30)),
-            label: const Text(
-              "رقم هاتف ولي الامر*",
-              style: TextStyle(fontSize: 15, fontWeight: FontWeight.w600),
-            ),
-            enabledBorder:
-                OutlineInputBorder(borderSide: const BorderSide(color: Color.fromARGB(255, 192, 192, 192)), borderRadius: BorderRadius.circular(30)),
-            focusedBorder: OutlineInputBorder(borderRadius: BorderRadius.circular(15))),
+        label: const Text(
+          "رقم هاتف ولي الامر*",
+          style: TextStyle(fontSize: 15, fontWeight: FontWeight.w600),
+        ),
+        enabledBorderColor: Color.fromARGB(255, 192, 192, 192),
       ),
     );
     Widget PhoneNumberTFF = SizedBox(
       height: 80,
-      child: TextFormField(
-        autovalidateMode: AutovalidateMode.onUserInteraction,
-        onChanged: (value) {
-          key.currentState!.validate();
-        },
+      child: TFFMaker(
         initialValue: StudentMobileNumber,
         onSaved: (newValue) {
           StudentMobileNumber = newValue!;
@@ -141,36 +116,28 @@ class _StudentMobileSignUpPageState extends State<StudentMobileSignUpPage> {
           }
           return null;
         },
-        decoration: InputDecoration(
-            focusedErrorBorder:
-                OutlineInputBorder(borderSide: const BorderSide(color: Color.fromARGB(255, 192, 192, 192)), borderRadius: BorderRadius.circular(30)),
-            errorBorder:
-                OutlineInputBorder(borderSide: const BorderSide(color: Color.fromARGB(255, 192, 192, 192)), borderRadius: BorderRadius.circular(30)),
-            label: const Row(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                Text(
-                  "رقم الهاتف",
-                  style: TextStyle(fontSize: 15, fontWeight: FontWeight.w600),
-                ),
-                Text(
-                  "  ( اذا كان متوفر )",
-                  style: TextStyle(fontSize: 12, fontWeight: FontWeight.w500, color: Color.fromARGB(255, 183, 183, 183)),
-                ),
-              ],
+        label: const Row(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Text(
+              "رقم الهاتف",
+              style: TextStyle(fontSize: 15, fontWeight: FontWeight.w600),
             ),
-            enabledBorder:
-                OutlineInputBorder(borderSide: const BorderSide(color: Color.fromARGB(255, 192, 192, 192)), borderRadius: BorderRadius.circular(30)),
-            focusedBorder: OutlineInputBorder(borderRadius: BorderRadius.circular(15))),
+            Text(
+              "  ( اذا كان متوفر )",
+              style: TextStyle(
+                  fontSize: 12,
+                  fontWeight: FontWeight.w500,
+                  color: Color.fromARGB(255, 183, 183, 183)),
+            ),
+          ],
+        ),
+        enabledBorderColor: Color.fromARGB(255, 192, 192, 192),
       ),
     );
     Widget EmailTFF = SizedBox(
       height: 80,
-      child: TextFormField(
-        autovalidateMode: AutovalidateMode.onUserInteraction,
-        onChanged: (value) {
-          key.currentState!.validate();
-        },
+      child: TFFMaker(
         initialValue: StudentEmail,
         onSaved: (newValue) {
           StudentEmail = newValue!;
@@ -179,23 +146,17 @@ class _StudentMobileSignUpPageState extends State<StudentMobileSignUpPage> {
           if (value!.isEmpty) {
             return "الحقل فارغ";
           }
-          if ((!value.endsWith("@gmail.com") || !(value.length > 10)) && (!value.endsWith("@yahoo.com") || !(value.length > 10))) {
+          if ((!value.endsWith("@gmail.com") || !(value.length > 10)) &&
+              (!value.endsWith("@yahoo.com") || !(value.length > 10))) {
             return "صيغة الايميل ليسة صحيحة";
           }
           return null;
         },
-        decoration: InputDecoration(
-            focusedErrorBorder:
-                OutlineInputBorder(borderSide: const BorderSide(color: Color.fromARGB(255, 192, 192, 192)), borderRadius: BorderRadius.circular(30)),
-            errorBorder:
-                OutlineInputBorder(borderSide: const BorderSide(color: Color.fromARGB(255, 192, 192, 192)), borderRadius: BorderRadius.circular(30)),
-            label: const Text(
-              "الايميل*",
-              style: TextStyle(fontSize: 15, fontWeight: FontWeight.w600),
-            ),
-            enabledBorder:
-                OutlineInputBorder(borderSide: const BorderSide(color: Color.fromARGB(255, 192, 192, 192)), borderRadius: BorderRadius.circular(30)),
-            focusedBorder: OutlineInputBorder(borderRadius: BorderRadius.circular(15))),
+        label: const Text(
+          "الايميل*",
+          style: TextStyle(fontSize: 15, fontWeight: FontWeight.w600),
+        ),
+        enabledBorderColor: Color.fromARGB(255, 192, 192, 192),
       ),
     );
     Widget PasswordTFF = SizedBox(
@@ -221,10 +182,14 @@ class _StudentMobileSignUpPageState extends State<StudentMobileSignUpPage> {
         },
         obscureText: obscureText,
         decoration: InputDecoration(
-            focusedErrorBorder:
-                OutlineInputBorder(borderSide: const BorderSide(color: Color.fromARGB(255, 192, 192, 192)), borderRadius: BorderRadius.circular(30)),
-            errorBorder:
-                OutlineInputBorder(borderSide: const BorderSide(color: Color.fromARGB(255, 192, 192, 192)), borderRadius: BorderRadius.circular(30)),
+            focusedErrorBorder: OutlineInputBorder(
+                borderSide:
+                    const BorderSide(color: Color.fromARGB(255, 192, 192, 192)),
+                borderRadius: BorderRadius.circular(30)),
+            errorBorder: OutlineInputBorder(
+                borderSide:
+                    const BorderSide(color: Color.fromARGB(255, 192, 192, 192)),
+                borderRadius: BorderRadius.circular(30)),
             suffix: InkWell(
               onTap: () {
                 setState(() {
@@ -237,9 +202,12 @@ class _StudentMobileSignUpPageState extends State<StudentMobileSignUpPage> {
               "الرقم السري*",
               style: TextStyle(fontSize: 15, fontWeight: FontWeight.w600),
             ),
-            enabledBorder:
-                OutlineInputBorder(borderSide: const BorderSide(color: Color.fromARGB(255, 192, 192, 192)), borderRadius: BorderRadius.circular(30)),
-            focusedBorder: OutlineInputBorder(borderRadius: BorderRadius.circular(15))),
+            enabledBorder: OutlineInputBorder(
+                borderSide:
+                    const BorderSide(color: Color.fromARGB(255, 192, 192, 192)),
+                borderRadius: BorderRadius.circular(30)),
+            focusedBorder:
+                OutlineInputBorder(borderRadius: BorderRadius.circular(15))),
       ),
     );
     Widget ConfirmTFF = SizedBox(
@@ -265,10 +233,14 @@ class _StudentMobileSignUpPageState extends State<StudentMobileSignUpPage> {
         },
         obscureText: obscureText,
         decoration: InputDecoration(
-            focusedErrorBorder:
-                OutlineInputBorder(borderSide: const BorderSide(color: Color.fromARGB(255, 192, 192, 192)), borderRadius: BorderRadius.circular(30)),
-            errorBorder:
-                OutlineInputBorder(borderSide: const BorderSide(color: Color.fromARGB(255, 192, 192, 192)), borderRadius: BorderRadius.circular(30)),
+            focusedErrorBorder: OutlineInputBorder(
+                borderSide:
+                    const BorderSide(color: Color.fromARGB(255, 192, 192, 192)),
+                borderRadius: BorderRadius.circular(30)),
+            errorBorder: OutlineInputBorder(
+                borderSide:
+                    const BorderSide(color: Color.fromARGB(255, 192, 192, 192)),
+                borderRadius: BorderRadius.circular(30)),
             suffix: InkWell(
               onTap: () {
                 setState(() {
@@ -281,9 +253,12 @@ class _StudentMobileSignUpPageState extends State<StudentMobileSignUpPage> {
               "تأكيد كلمة السر",
               style: TextStyle(fontSize: 15, fontWeight: FontWeight.w600),
             ),
-            enabledBorder:
-                OutlineInputBorder(borderSide: const BorderSide(color: Color.fromARGB(255, 192, 192, 192)), borderRadius: BorderRadius.circular(30)),
-            focusedBorder: OutlineInputBorder(borderRadius: BorderRadius.circular(15))),
+            enabledBorder: OutlineInputBorder(
+                borderSide:
+                    const BorderSide(color: Color.fromARGB(255, 192, 192, 192)),
+                borderRadius: BorderRadius.circular(30)),
+            focusedBorder:
+                OutlineInputBorder(borderRadius: BorderRadius.circular(15))),
       ),
     );
     Widget BirthDateTC = Container(
@@ -293,70 +268,6 @@ class _StudentMobileSignUpPageState extends State<StudentMobileSignUpPage> {
         style: TextStyle(fontSize: 25, fontWeight: FontWeight.w600),
       ),
     );
-    Widget BirthDateW = (kIsWeb)
-        ? MyButton(
-            padding: const EdgeInsets.all(10),
-            buttonColor: const Color.fromARGB(255, 74, 193, 241),
-            text: StudentDateOfBirth,
-            onTap: () async {
-              var TimeSelected = await showOmniDateTimePicker(
-                context: context,
-                initialDate: DateTime.now(),
-                type: OmniDateTimePickerType.date,
-                is24HourMode: false,
-                isShowSeconds: false,
-                minutesInterval: 1,
-                secondsInterval: 1,
-                borderRadius: const BorderRadius.all(Radius.circular(16)),
-                constraints: const BoxConstraints(
-                  maxWidth: 350,
-                  maxHeight: 650,
-                ),
-                transitionBuilder: (context, anim1, anim2, child) {
-                  return FadeTransition(
-                    opacity: anim1.drive(
-                      Tween(
-                        begin: 0,
-                        end: 1,
-                      ),
-                    ),
-                    child: child,
-                  );
-                },
-                selectableDayPredicate: (p0) {
-                  if (p0 == DateTime.now()) {
-                    return false;
-                  } else {
-                    return true;
-                  }
-                },
-                transitionDuration: const Duration(milliseconds: 200),
-                barrierDismissible: true,
-              );
-              StudentDayOfBirth = TimeSelected!.day.toString();
-              StudentMonthOfBirth = TimeSelected.month.toString();
-              StudentYearOfBirth = TimeSelected.year.toString();
-              StudentDateOfBirth = "$StudentDayOfBirth / $StudentMonthOfBirth / $StudentYearOfBirth";
-              setState(() {});
-            })
-        : TimePickerSpinnerPopUp(
-            textStyle: const TextStyle(fontSize: 25),
-            iconSize: 40,
-            minTime: DateTime.now().subtract(const Duration(days: 36525)),
-            maxTime: DateTime.now().subtract(const Duration(days: 1824)),
-            mode: CupertinoDatePickerMode.date,
-            initTime: forDateInput,
-            onChange: (dateTime) {
-              setState(() {
-                forDateInput = dateTime;
-                StudentDayOfBirth = dateTime.day.toString();
-                StudentMonthOfBirth = dateTime.month.toString();
-                StudentYearOfBirth = dateTime.year.toString();
-                StudentDateOfBirth = "$StudentDayOfBirth/$StudentMonthOfBirth/$StudentYearOfBirth";
-                print(StudentDateOfBirth);
-              });
-            },
-          );
     Widget GenederText = Container(
       alignment: Alignment.centerLeft,
       child: const Text(
@@ -364,41 +275,47 @@ class _StudentMobileSignUpPageState extends State<StudentMobileSignUpPage> {
         style: TextStyle(fontSize: 25, fontWeight: FontWeight.w600),
       ),
     );
-    List<Widget> GenederWidgets = [
-      Container(
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(20),
-            color: const Color.fromARGB(96, 216, 216, 216),
-          ),
-          child: RadioListTile(
-              activeColor: const Color.fromARGB(255, 74, 193, 241),
-              title: const Text(
-                "ذكر",
-                style: TextStyle(fontSize: 10, fontWeight: FontWeight.w500),
-              ),
-              value: "Male",
-              groupValue: StudentGender,
-              onChanged: (val) {
-                setState(() {
-                  StudentGender = val.toString();
-                });
-              })),
-      Container(
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(20),
-            color: const Color.fromARGB(96, 216, 216, 216),
-          ),
-          child: RadioListTile(
-              activeColor: const Color.fromARGB(255, 74, 193, 241),
-              title: const Text("انثى", style: TextStyle(fontSize: 10, fontWeight: FontWeight.w500)),
-              value: "Female",
-              groupValue: StudentGender,
-              onChanged: (val) {
-                setState(() {
-                  StudentGender = val.toString();
-                });
-              }))
-    ];
+    Widget GenederWidgets = MultiRButton(
+      list: ["Male", "Female"],
+      crossAxisCount: 2,
+      columnSpaces: PageWidth(context)-465,
+      onChanged: (val) {
+        setState(() {
+          StudentGender = val.toString();
+        });
+      },
+    );
+    //           [
+    //   Container(
+    //       decoration: BoxDecoration(
+    //         borderRadius: BorderRadius.circular(20),
+    //         color: const Color.fromARGB(96, 216, 216, 216),
+    //       ),
+    //       child: RadioListTile(
+    //           activeColor: const Color.fromARGB(255, 74, 193, 241),
+    //           title: const Text(
+    //             "ذكر",
+    //             style: TextStyle(fontSize: 10, fontWeight: FontWeight.w500),
+    //           ),
+    //           value: "Male",
+    //           groupValue: StudentGender,
+    //           )),
+    //   Container(
+    //       decoration: BoxDecoration(
+    //         borderRadius: BorderRadius.circular(20),
+    //         color: const Color.fromARGB(96, 216, 216, 216),
+    //       ),
+    //       child: RadioListTile(
+    //           activeColor: const Color.fromARGB(255, 74, 193, 241),
+    //           title: const Text("انثى", style: TextStyle(fontSize: 10, fontWeight: FontWeight.w500)),
+    //           value: "Female",
+    //           groupValue: StudentGender,
+    //           onChanged: (val) {
+    //             setState(() {
+    //               StudentGender = val.toString();
+    //             });
+    //           }))
+    // ];;
     Widget GradeText = CMaker(
       width: double.infinity,
       alignment: Alignment.centerLeft,
@@ -412,22 +329,11 @@ class _StudentMobileSignUpPageState extends State<StudentMobileSignUpPage> {
       child: SizedBox(
         height: 30,
         // width: 100,
-        child: DropdownButton(
-            underline: Container(),
-            value: StudentGrade,
-            items: () {
-              List<DropdownMenuItem<String>> out = [];
-              for (var i in GradesAndsubjects.GradesSubjects.keys) {
-                out.add(DropdownMenuItem(value: i, child: Text(i)));
-              }
-              print("items out ${out}");
-              return out;
-            }(),
-            onChanged: (val) {
+        child:DDButton(values:GradesAndsubjects.GradesSubjects.keys.toList(),onChanged: (val) {
               setState(() {
                 StudentGrade = val.toString();
               });
-            }),
+            }, )
       ),
     );
     Widget SignUpCircle = Container(
@@ -439,12 +345,18 @@ class _StudentMobileSignUpPageState extends State<StudentMobileSignUpPage> {
           height: 160,
           decoration: const BoxDecoration(
             borderRadius: BorderRadius.only(
-                bottomLeft: Radius.zero, topLeft: Radius.circular(10), topRight: Radius.circular(5000), bottomRight: Radius.circular(10)),
+                bottomLeft: Radius.zero,
+                topLeft: Radius.circular(10),
+                topRight: Radius.circular(5000),
+                bottomRight: Radius.circular(10)),
             color: Color.fromARGB(255, 255, 255, 255),
           ),
           child: const Text(
             "انشاء حساب",
-            style: TextStyle(fontSize: 35, color: Color.fromARGB(255, 8, 125, 159), fontWeight: FontWeight.w700),
+            style: TextStyle(
+                fontSize: 35,
+                color: Color.fromARGB(255, 8, 125, 159),
+                fontWeight: FontWeight.w700),
           ),
         ));
     Widget BackButton = Container(
@@ -468,7 +380,11 @@ class _StudentMobileSignUpPageState extends State<StudentMobileSignUpPage> {
         children: [
           Container(
               alignment: Alignment.centerLeft,
-              child: const Text("طالب  ", style: TextStyle(fontSize: 25, fontWeight: FontWeight.w600, color: Color.fromARGB(255, 8, 125, 159)))),
+              child: const Text("طالب  ",
+                  style: TextStyle(
+                      fontSize: 25,
+                      fontWeight: FontWeight.w600,
+                      color: Color.fromARGB(255, 8, 125, 159)))),
           Expanded(
               child: Container(
                   margin: const EdgeInsets.only(bottom: 20),
@@ -538,10 +454,15 @@ class _StudentMobileSignUpPageState extends State<StudentMobileSignUpPage> {
         alignment: Alignment.center,
         height: 50,
         width: 120,
-        decoration: BoxDecoration(color: const Color.fromARGB(255, 74, 193, 241), borderRadius: BorderRadius.circular(30)),
+        decoration: BoxDecoration(
+            color: const Color.fromARGB(255, 74, 193, 241),
+            borderRadius: BorderRadius.circular(30)),
         child: const Text(
           "انشاء حساب",
-          style: TextStyle(fontSize: 20, color: Color.fromARGB(255, 255, 255, 255), fontWeight: FontWeight.w700),
+          style: TextStyle(
+              fontSize: 20,
+              color: Color.fromARGB(255, 255, 255, 255),
+              fontWeight: FontWeight.w700),
         ),
       ),
     );
@@ -550,7 +471,10 @@ class _StudentMobileSignUpPageState extends State<StudentMobileSignUpPage> {
         alignment: Alignment.centerRight,
         child: const Text(
           "هل لديك حساب بالفعل؟",
-          style: TextStyle(fontSize: 15, color: Color.fromARGB(255, 206, 206, 206), fontWeight: FontWeight.w500),
+          style: TextStyle(
+              fontSize: 15,
+              color: Color.fromARGB(255, 206, 206, 206),
+              fontWeight: FontWeight.w500),
         ),
       ),
       Container(
@@ -562,7 +486,10 @@ class _StudentMobileSignUpPageState extends State<StudentMobileSignUpPage> {
           },
           child: const Text(
             "تسجيل الدخول",
-            style: TextStyle(fontSize: 15, color: Color.fromARGB(255, 74, 193, 241), fontWeight: FontWeight.w500),
+            style: TextStyle(
+                fontSize: 15,
+                color: Color.fromARGB(255, 74, 193, 241),
+                fontWeight: FontWeight.w500),
           ),
         ),
       ),
@@ -585,7 +512,10 @@ class _StudentMobileSignUpPageState extends State<StudentMobileSignUpPage> {
                           gradient: LinearGradient(
                               begin: Alignment.bottomLeft,
                               end: Alignment.topRight,
-                              colors: [Color.fromARGB(255, 8, 125, 159), Color.fromARGB(255, 74, 193, 241)])),
+                              colors: [
+                            Color.fromARGB(255, 8, 125, 159),
+                            Color.fromARGB(255, 74, 193, 241)
+                          ])),
                       child: Row(
                         children: [
                           Expanded(
@@ -598,7 +528,11 @@ class _StudentMobileSignUpPageState extends State<StudentMobileSignUpPage> {
                               child: SignUpCircle,
                             ),
                           ])),
-                          Expanded(child: CMaker(height: double.infinity, alignment: Alignment.center, child: Logo))
+                          Expanded(
+                              child: CMaker(
+                                  height: double.infinity,
+                                  alignment: Alignment.center,
+                                  child: Logo))
                         ],
                       ),
                     ),
@@ -618,38 +552,39 @@ class _StudentMobileSignUpPageState extends State<StudentMobileSignUpPage> {
                             const Padding(padding: EdgeInsets.only(bottom: 20)),
                             BirthDateTC,
                             const Padding(padding: EdgeInsets.only(bottom: 40)),
-                            CMaker(alignment: Alignment.center, child: BirthDateW),
+                            CMaker(
+                                alignment: Alignment.center,
+                                child: BirthDateWidget()),
                             const Padding(padding: EdgeInsets.only(bottom: 40)),
                             GenederText,
                             const Padding(padding: EdgeInsets.only(bottom: 20)),
                             CMaker(
-                                padding: const EdgeInsets.symmetric(horizontal: 20),
+                                padding:
+                                    const EdgeInsets.symmetric(horizontal: 20),
                                 height: 100,
                                 width: double.infinity,
-                                child: Row(
-                                  children: [
-                                    Expanded(flex: 5, child: GenederWidgets[0]),
-                                    Expanded(
-                                      child: Container(),
-                                    ),
-                                    Expanded(flex: 5, child: GenederWidgets[1]),
-                                  ],
-                                )),
+                                child: GenederWidgets),
                             const Padding(padding: EdgeInsets.only(bottom: 20)),
                             GradeText,
                             const Padding(padding: EdgeInsets.only(bottom: 20)),
                             GradeDDB,
                             const Padding(padding: EdgeInsets.only(bottom: 60)),
-                            CMaker(alignment: Alignment.center, child: SignUpButton),
+                            CMaker(
+                                alignment: Alignment.center,
+                                child: SignUpButton),
                             const Padding(padding: EdgeInsets.only(bottom: 20)),
                             CMaker(
                                 width: double.infinity,
                                 child: Row(
                                   children: [
                                     Expanded(child: Container()),
-                                    Expanded(flex: 10, child: AlreadyHaveAnAccountElements[0]),
+                                    Expanded(
+                                        flex: 10,
+                                        child: AlreadyHaveAnAccountElements[0]),
                                     Expanded(child: Container()),
-                                    Expanded(flex: 6, child: AlreadyHaveAnAccountElements[1]),
+                                    Expanded(
+                                        flex: 6,
+                                        child: AlreadyHaveAnAccountElements[1]),
                                     Expanded(child: Container()),
                                   ],
                                 )),
@@ -675,7 +610,10 @@ class _StudentMobileSignUpPageState extends State<StudentMobileSignUpPage> {
                 gradient: const LinearGradient(
                     begin: Alignment.bottomLeft,
                     end: Alignment.topRight,
-                    colors: [Color.fromARGB(255, 8, 125, 159), Color.fromARGB(255, 74, 193, 241)]),
+                    colors: [
+                      Color.fromARGB(255, 8, 125, 159),
+                      Color.fromARGB(255, 74, 193, 241)
+                    ]),
                 child: Column(
                   children: [
                     Expanded(child: Container()),
@@ -706,58 +644,73 @@ class _StudentMobileSignUpPageState extends State<StudentMobileSignUpPage> {
                         color: Colors.white,
                         height: 800,
                         width: 450,
-                        padding: const EdgeInsets.only(top: 20, right: 20, left: 20),
+                        padding:
+                            const EdgeInsets.only(top: 20, right: 20, left: 20),
                         child: SingleChildScrollView(
                           child: Column(
                             children: [
-                              const Padding(padding: EdgeInsets.only(bottom: 20)),
+                              const Padding(
+                                  padding: EdgeInsets.only(bottom: 20)),
                               StudentWithArro,
-                              const Padding(padding: EdgeInsets.only(bottom: 20)),
+                              const Padding(
+                                  padding: EdgeInsets.only(bottom: 20)),
                               NameTFF,
                               GardianPhoneTFF,
                               PhoneNumberTFF,
                               EmailTFF,
                               PasswordTFF,
                               ConfirmTFF,
-                              const Padding(padding: EdgeInsets.only(bottom: 20)),
+                              const Padding(
+                                  padding: EdgeInsets.only(bottom: 20)),
                               BirthDateTC,
-                              const Padding(padding: EdgeInsets.only(bottom: 40)),
-                              CMaker(alignment: Alignment.center, child: BirthDateW),
-                              const Padding(padding: EdgeInsets.only(bottom: 40)),
-                              GenederText,
-                              const Padding(padding: EdgeInsets.only(bottom: 20)),
+                              const Padding(
+                                  padding: EdgeInsets.only(bottom: 40)),
                               CMaker(
-                                  padding: const EdgeInsets.symmetric(horizontal: 20),
+                                  alignment: Alignment.center,
+                                  child: BirthDateWidget()),
+                              const Padding(
+                                  padding: EdgeInsets.only(bottom: 40)),
+                              GenederText,
+                              const Padding(
+                                  padding: EdgeInsets.only(bottom: 20)),
+                              CMaker(
+                                  padding: const EdgeInsets.symmetric(
+                                      horizontal: 20),
                                   height: 100,
                                   width: double.infinity,
-                                  child: Row(
-                                    children: [
-                                      Expanded(flex: 5, child: GenederWidgets[0]),
-                                      Expanded(
-                                        child: Container(),
-                                      ),
-                                      Expanded(flex: 5, child: GenederWidgets[1]),
-                                    ],
-                                  )),
-                              const Padding(padding: EdgeInsets.only(bottom: 20)),
+                                  child: GenederWidgets),
+                              const Padding(
+                                  padding: EdgeInsets.only(bottom: 20)),
                               GradeText,
-                              const Padding(padding: EdgeInsets.only(bottom: 20)),
+                              const Padding(
+                                  padding: EdgeInsets.only(bottom: 20)),
                               GradeDDB,
-                              const Padding(padding: EdgeInsets.only(bottom: 60)),
-                              CMaker(alignment: Alignment.center, child: SignUpButton),
-                              const Padding(padding: EdgeInsets.only(bottom: 20)),
+                              const Padding(
+                                  padding: EdgeInsets.only(bottom: 60)),
+                              CMaker(
+                                  alignment: Alignment.center,
+                                  child: SignUpButton),
+                              const Padding(
+                                  padding: EdgeInsets.only(bottom: 20)),
                               CMaker(
                                   width: double.infinity,
                                   child: Row(
                                     children: [
                                       Expanded(child: Container()),
-                                      Expanded(flex: 10, child: AlreadyHaveAnAccountElements[0]),
+                                      Expanded(
+                                          flex: 10,
+                                          child:
+                                              AlreadyHaveAnAccountElements[0]),
                                       Expanded(child: Container()),
-                                      Expanded(flex: 6, child: AlreadyHaveAnAccountElements[1]),
+                                      Expanded(
+                                          flex: 6,
+                                          child:
+                                              AlreadyHaveAnAccountElements[1]),
                                       Expanded(child: Container()),
                                     ],
                                   )),
-                              const Padding(padding: EdgeInsets.only(bottom: 40)),
+                              const Padding(
+                                  padding: EdgeInsets.only(bottom: 40)),
                             ],
                           ),
                         )),
@@ -779,7 +732,10 @@ class _StudentMobileSignUpPageState extends State<StudentMobileSignUpPage> {
                 gradient: const LinearGradient(
                     begin: Alignment.bottomLeft,
                     end: Alignment.topRight,
-                    colors: [Color.fromARGB(255, 8, 125, 159), Color.fromARGB(255, 74, 193, 241)]),
+                    colors: [
+                      Color.fromARGB(255, 8, 125, 159),
+                      Color.fromARGB(255, 74, 193, 241)
+                    ]),
                 child: Row(
                   children: [
                     Expanded(child: Container()),
@@ -825,59 +781,76 @@ class _StudentMobileSignUpPageState extends State<StudentMobileSignUpPage> {
                         circularRadius: 20,
                         color: Colors.white,
                         height: 400,
-                        width: (PageWidth(context) < 800) ? PageWidth(context) / 2 : 400,
-                        padding: const EdgeInsets.only(top: 20, right: 20, left: 20),
+                        width: (PageWidth(context) < 800)
+                            ? PageWidth(context) / 2
+                            : 400,
+                        padding:
+                            const EdgeInsets.only(top: 20, right: 20, left: 20),
                         child: SingleChildScrollView(
                           child: Column(
                             children: [
-                              const Padding(padding: EdgeInsets.only(bottom: 20)),
+                              const Padding(
+                                  padding: EdgeInsets.only(bottom: 20)),
                               StudentWithArro,
-                              const Padding(padding: EdgeInsets.only(bottom: 20)),
+                              const Padding(
+                                  padding: EdgeInsets.only(bottom: 20)),
                               NameTFF,
                               GardianPhoneTFF,
                               PhoneNumberTFF,
                               EmailTFF,
                               PasswordTFF,
                               ConfirmTFF,
-                              const Padding(padding: EdgeInsets.only(bottom: 20)),
+                              const Padding(
+                                  padding: EdgeInsets.only(bottom: 20)),
                               BirthDateTC,
-                              const Padding(padding: EdgeInsets.only(bottom: 40)),
-                              CMaker(alignment: Alignment.center, child: BirthDateW),
-                              const Padding(padding: EdgeInsets.only(bottom: 40)),
-                              GenederText,
-                              const Padding(padding: EdgeInsets.only(bottom: 20)),
+                              const Padding(
+                                  padding: EdgeInsets.only(bottom: 40)),
                               CMaker(
-                                  padding: const EdgeInsets.symmetric(horizontal: 20),
+                                  alignment: Alignment.center,
+                                  child: BirthDateWidget()),
+                              const Padding(
+                                  padding: EdgeInsets.only(bottom: 40)),
+                              GenederText,
+                              const Padding(
+                                  padding: EdgeInsets.only(bottom: 20)),
+                              CMaker(
+                                  padding: const EdgeInsets.symmetric(
+                                      horizontal: 20),
                                   height: 100,
                                   width: double.infinity,
-                                  child: Row(
-                                    children: [
-                                      Expanded(flex: 5, child: GenederWidgets[0]),
-                                      Expanded(
-                                        child: Container(),
-                                      ),
-                                      Expanded(flex: 5, child: GenederWidgets[1]),
-                                    ],
-                                  )),
-                              const Padding(padding: EdgeInsets.only(bottom: 20)),
+                                  child: GenederWidgets),
+                              const Padding(
+                                  padding: EdgeInsets.only(bottom: 20)),
                               GradeText,
-                              const Padding(padding: EdgeInsets.only(bottom: 20)),
+                              const Padding(
+                                  padding: EdgeInsets.only(bottom: 20)),
                               GradeDDB,
-                              const Padding(padding: EdgeInsets.only(bottom: 60)),
-                              CMaker(alignment: Alignment.center, child: SignUpButton),
-                              const Padding(padding: EdgeInsets.only(bottom: 20)),
+                              const Padding(
+                                  padding: EdgeInsets.only(bottom: 60)),
+                              CMaker(
+                                  alignment: Alignment.center,
+                                  child: SignUpButton),
+                              const Padding(
+                                  padding: EdgeInsets.only(bottom: 20)),
                               CMaker(
                                   width: double.infinity,
                                   child: Row(
                                     children: [
                                       Expanded(child: Container()),
-                                      Expanded(flex: 10, child: AlreadyHaveAnAccountElements[0]),
+                                      Expanded(
+                                          flex: 10,
+                                          child:
+                                              AlreadyHaveAnAccountElements[0]),
                                       Expanded(child: Container()),
-                                      Expanded(flex: 6, child: AlreadyHaveAnAccountElements[1]),
+                                      Expanded(
+                                          flex: 6,
+                                          child:
+                                              AlreadyHaveAnAccountElements[1]),
                                       Expanded(child: Container()),
                                     ],
                                   )),
-                              const Padding(padding: EdgeInsets.only(bottom: 40)),
+                              const Padding(
+                                  padding: EdgeInsets.only(bottom: 40)),
                             ],
                           ),
                         )),
