@@ -12,5 +12,8 @@ class TeacherData {
   static int numberOfSubjects = 1;
   static Map<String, dynamic> teacher_profile_data = {};
   static bool AccountActivation = true;
-
+  static List AllMessages = [
+    ["Messgae", "Time", "Duration"] 
+  ];
+  
 }

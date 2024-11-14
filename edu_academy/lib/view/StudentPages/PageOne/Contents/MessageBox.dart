@@ -11,8 +11,8 @@ class MessagesFromTeachers extends StatefulWidget {
   State<MessagesFromTeachers> createState() => _MessagesFromTeachersState();
 }
 
-class _MessagesFromTeachersState extends State<MessagesFromTeachers> {
   Object? realTimeValues;
+class _MessagesFromTeachersState extends State<MessagesFromTeachers> {
   late Future<void> _dataFuture;
   @override
   void initState() {

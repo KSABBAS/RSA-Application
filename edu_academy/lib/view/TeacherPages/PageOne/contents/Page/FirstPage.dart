@@ -1,5 +1,5 @@
 import 'package:edu_academy/MyTools.dart';
-import 'package:edu_academy/view/TeacherPages/PageOne/contents/oneDaySchedule.dart';
+import 'package:edu_academy/view/TeacherPages/PageOne/contents/Page/Contents/oneDaySchedule.dart';
 import 'package:edu_academy/view/TeacherPages/TeacherMainPage.dart';
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
