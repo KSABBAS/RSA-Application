@@ -1,5 +1,6 @@
 import 'package:edu_academy/Data/TeacherData/TeacherData.dart';
 import 'package:edu_academy/MyTools.dart';
+import 'package:edu_academy/service/Databse_Service.dart';
 import 'package:edu_academy/view/StudentPages/PageTwo/PageTwo.dart';
 import 'package:edu_academy/view/TeacherPages/PageTwo/Contents/Pages/Page.dart';
 import 'package:flutter/material.dart';
@@ -7,8 +8,9 @@ import 'package:flutter/material.dart';
 final TextEditingController _MessageController = TextEditingController();
 
 class EnterAMessageWindow extends StatelessWidget {
-  const EnterAMessageWindow({super.key, required this.Refresh});
+  EnterAMessageWindow({super.key, required this.Refresh});
   final Function()? Refresh;
+  final dbService = DatabaseService();
   @override
   Widget build(BuildContext context) {
     return CMaker(

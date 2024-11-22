@@ -511,7 +511,6 @@ class _PageTwoState extends State<PageTwo> {
                   const Padding(padding: EdgeInsets.only(top: 10)),
                   TeacherSecondPageContents(
                     Refresh: () {setState(() {
-                      
                     });},
                     ListOfGrades: TeacherData
                         .ListOfGrades, // put the list of grades and its students from the database here

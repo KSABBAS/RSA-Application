@@ -3,6 +3,7 @@ import 'dart:io';
 import 'dart:typed_data';
 
 import 'package:edu_academy/Data/TeacherData/TeacherData.dart';
+import 'package:edu_academy/service/Databse_Service.dart';
 import 'package:edu_academy/view/StudentPages/PageOne/Contents/MessageBox.dart';
 import 'package:edu_academy/view/StudentPages/PageTwo/PageTwo.dart';
 import 'package:edu_academy/view/TeacherPages/PageTwo/Contents/Pages/Page.dart';
@@ -12,6 +13,7 @@ import 'package:mime/mime.dart';
 
 class TeacherFunctions {
   TeacherFunctions({required this.SetStateCallback});
+  final dbService = DatabaseService();
   Function()? SetStateCallback;
   void update() {
     // Use setStateCallback if it is provided
