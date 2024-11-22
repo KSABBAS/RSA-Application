@@ -6,6 +6,7 @@ import 'package:edu_academy/Data/TeacherData/TeacherData.dart';
 import 'package:edu_academy/service/Databse_Service.dart';
 import 'package:edu_academy/view/StudentPages/PageOne/Contents/MessageBox.dart';
 import 'package:edu_academy/view/StudentPages/PageTwo/PageTwo.dart';
+import 'package:edu_academy/view/TeacherPages/PageThree/Page.dart';
 import 'package:edu_academy/view/TeacherPages/PageTwo/Contents/Pages/Page.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:firebase_database/firebase_database.dart';
@@ -19,6 +20,34 @@ class TeacherFunctions {
     // Use setStateCallback if it is provided
     if (SetStateCallback != null) {
       SetStateCallback!();
+    }
+  }
+
+  solved_hw_student_re() async {
+    solved_hw_student = await dbService.FiGet_All_info_with_student_id(
+        student_selected_list[1],
+        Grade_selected,
+        TeacherData.SubjectThatIsSelected);
+    update();
+  }
+
+  Future<void> pickImageFromGallery() async {
+    try {
+      FilePickerResult? result = await FilePicker.platform.pickFiles(
+        type: FileType.image,
+        allowMultiple: false,
+      );
+
+      if (result != null) {
+        PlatformFile file = result.files.single;
+        // Access file data as Uint8List
+        Uint8List fileBytes = file.bytes!;
+
+        HomeworkImagesLinks.add(fileBytes);
+        update();
+      }
+    } catch (e) {
+      print("Error picking file: $e");
     }
   }
 

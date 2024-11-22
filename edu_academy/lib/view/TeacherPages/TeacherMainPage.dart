@@ -8,7 +8,7 @@ import 'package:edu_academy/view/TeacherPages/PageOne/Page.dart';
 import 'package:edu_academy/view/TeacherPages/PageTwo/Page.dart';
 import 'package:edu_academy/view/TeacherPages/TeacherProfilePage.dart';
 import 'package:edu_academy/view/TeacherPages/PageTwo/Contents/Pages/Page.dart';
-import 'package:edu_academy/view/TeacherPages/PageThree/PageThree.dart';
+import 'package:edu_academy/view/TeacherPages/PageThree/Page.dart';
 import 'package:edu_academy/MyTools.dart';
 import 'package:edu_academy/service/Databse_Service.dart';
 import 'package:flutter/material.dart';
