@@ -4,6 +4,12 @@ class TeacherData {
   static String number="";
   static String password="";
   static List ListOfGrades=[];
+  static String TeacherDateOfBirth = "Select a Date";
+  static String TeacherDayOfBirth = "";
+  static String TeacherMonthOfBirth = "";
+  static String TeacherYearOfBirth = "";
+  static String TeacherGeneder = "";
+  static String TeacherDescription = "";
   static List<String> TeacherSubjects = ['null', 'null', 'null'];
   static String Subject1 = "Loading....";
   static String Subject2 = "null";

@@ -1,5 +1,6 @@
 import 'package:edu_academy/view/AdminPages/AdminMainPage.dart';
-import 'package:edu_academy/MyTools.dart';
+import 'package:edu_academy/MyTools/MyFunctionTools.dart';
+import 'package:edu_academy/MyTools/MyTools.dart';
 import 'package:edu_academy/service/Databse_Service.dart';
 import 'package:flutter/material.dart';
 import 'package:on_off_switch/on_off_switch.dart';

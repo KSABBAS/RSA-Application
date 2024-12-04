@@ -2,7 +2,8 @@ import 'dart:developer';
 
 import 'package:edu_academy/Data/TeacherData/TeacherData.dart';
 import 'package:edu_academy/Data/TeacherData/TeacherFunctions.dart';
-import 'package:edu_academy/MyTools.dart';
+import 'package:edu_academy/MyTools/MyFunctionTools.dart';
+import 'package:edu_academy/MyTools/MyTools.dart';
 import 'package:edu_academy/view/TeacherPages/PageTwo/Contents/Pages/Page.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';

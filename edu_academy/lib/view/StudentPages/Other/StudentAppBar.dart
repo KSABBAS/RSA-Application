@@ -1,5 +1,6 @@
 import 'package:edu_academy/Data/StudentData/StudentData.dart';
-import 'package:edu_academy/MyTools.dart';
+import 'package:edu_academy/MyTools/MyFunctionTools.dart';
+import 'package:edu_academy/MyTools/MyTools.dart';
 import 'package:edu_academy/view/StudentPages/Other/Notifications.dart';
 import 'package:edu_academy/view/StudentPages/HomePage.dart';
 import 'package:flutter/material.dart';

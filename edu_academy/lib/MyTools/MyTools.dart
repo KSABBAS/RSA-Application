@@ -1,17 +1,15 @@
 import 'dart:async';
-// import 'package:get/get.dart';
-// import 'package:http/http.dart';
+import 'dart:io';
+import 'dart:typed_data';
+// import 'package:chewie/chewie.dart';
+import 'package:edu_academy/MyTools/MyFunctionTools.dart';
 import 'package:flutter/material.dart';
-import 'package:image_picker/image_picker.dart';
-// import 'package:http/http.dart' as http;
-// import 'package:html/parser.dart' as Parser;
-// import 'package:html/dom.dart' as dom;
-// import 'package:html/dom_parsing.dart';
-// import 'package:html/html_escape.dart';
+
+import 'package:insta_image_viewer/insta_image_viewer.dart';
+// import 'package:my_tools_development/MyTools/MyFunctionTools.dart';
+// import 'package:my_tools_development/main.dart';
+// import 'package:video_player/video_player.dart';
 // import 'package:beautiful_soup_dart/beautiful_soup.dart';
-// import 'package:geolocator/geolocator.dart';
-// import 'package:lottie/lottie.dart';
-// import 'package:connectivity_plus/connectivity_plus.dart';
 
 class CMaker extends StatefulWidget {
   CMaker(
@@ -67,6 +65,17 @@ class _CMakerState extends State<CMaker> {
   }
 }
 
+//----------------------------------------------------------
+
+//===========================================
+
+// AnimatedCMaker(){
+
+// }
+
+//===========================================
+
+//----------------------------------------------------------
 class TMaker extends StatelessWidget {
   TMaker(
       {super.key,
@@ -94,10 +103,6 @@ class TMaker extends StatelessWidget {
           color: color),
     );
   }
-}
-
-dynamic TStyle(double fontSize, FontWeight fontWeight, Color color) {
-  return TextStyle(fontSize: fontSize, fontWeight: fontWeight, color: color);
 }
 
 class TFMaker extends StatefulWidget {
@@ -297,24 +302,6 @@ class _TFFMakerState extends State<TFFMaker> {
   }
 }
 
-double PageHeight(BuildContext context) {
-  List l = [2.2];
-  final Sheigt = MediaQuery.of(context).size.height;
-  l.add(Sheigt);
-  return l[1];
-}
-
-double PageWidth(BuildContext context) {
-  List l = [2.2];
-  final Swidth = MediaQuery.of(context).size.width;
-  l.add(Swidth);
-  return l[1];
-}
-
-// status bar code , inset it in the runApp (SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersiveSticky);)
-
-// to remove the red debug , insert it inside the materialApp (debugShowCheckedModeBanner: false,)
-
 class SplashViewPage extends StatefulWidget {
   SplashViewPage(
       {super.key,
@@ -443,7 +430,8 @@ class _SplashViewPageState extends State<SplashViewPage>
 }
 
 class DDButton extends StatefulWidget {
-  DDButton({super.key, required this.values, this.onChanged,this.initValueIndex});
+  DDButton(
+      {super.key, required this.values, this.onChanged, this.initValueIndex});
   Function(dynamic value)? onChanged;
   List values = [];
   int? initValueIndex;
@@ -452,11 +440,11 @@ class DDButton extends StatefulWidget {
 }
 
 class _DDButtonState extends State<DDButton> {
-  int? indexChosen ;
+  int? indexChosen;
   var commonVar;
   @override
   Widget build(BuildContext context) {
-    commonVar = widget.values[indexChosen??widget.initValueIndex??0];
+    commonVar = widget.values[indexChosen ?? widget.initValueIndex ?? 0];
     List<DropdownMenuItem<Object?>>? t(List values) {
       List<DropdownMenuItem<Object?>>? list = [];
       for (int i = 0; i < values.length; i++) {
@@ -1017,93 +1005,306 @@ class _WGridBuilderState extends State<WGridBuilder> {
   }
 }
 
-// Future<List> getjasonData(String link) async {
-//   var res = await get(Uri.parse("$link"));
-//   List resDecoded = jsonDecode(res.body);
-//   return resDecoded;
-// }
+//----------------------------------------------------------
 
-// class GetAndDisplayTextJsonData extends StatefulWidget {
-//   GetAndDisplayTextJsonData({super.key, required this.link, required this.tag});
-//   String link;
-//   String tag;
+//===========================================
+// import 'package:google_maps_flutter/google_maps_flutter.dart';
+// package: google_maps_flutter 2.10.0
+// add: flutter pub add google_maps_flutter
+
+//===========================================
+
+//----------------------------------------------------------
+
+// //===========================================
+// // addectional package: {
+// // import 'package:video_player/video_player.dart';
+// // Package : video_player: ^2.9.2
+// // add : flutter pub add video_player
+// // }
+// // import 'package:chewie/chewie.dart';
+// // Package : chewie 1.8.5
+// // add : flutter pub add chewie
+// // ==
+// // main looks like :
+// // void main() async {
+// //   WidgetsFlutterBinding.ensureInitialized();
+// //   runApp(App());
+// // }
+// // ==
+// // works on : Android
+// // link type : direct mp4 link
+// class ChewieVideoPlayer extends StatefulWidget {
+//   ChewieVideoPlayer(
+//       {super.key, this.url, this.height, this.width, this.path, this.file});
+
+//   final double? height;
+//   final double? width;
+//   final String? url;
+//   final String? path;
+//   final File? file;
+
 //   @override
-//   State<GetAndDisplayTextJsonData> createState() =>
-//       _GetAndDisplayTextJsonDataState();
+//   State<ChewieVideoPlayer> createState() => _ChewieVideoPlayerState();
 // }
 
-// class _GetAndDisplayTextJsonDataState extends State<GetAndDisplayTextJsonData> {
+// class _ChewieVideoPlayerState extends State<ChewieVideoPlayer> {
+//   VideoPlayerController? _videoPlayerController;
+//   ChewieController? _chewieController;
+
+//   @override
+//   void initState() {
+//     super.initState();
+//     _initializeVideoPlayer();
+//   }
+
+//   Future<void> _initializeVideoPlayer() async {
+//     _videoPlayerController = (widget.path != null)
+//         ? VideoPlayerController.asset(widget.path!,)
+//         : (widget.file != null)
+//             ? VideoPlayerController.file(widget.file!)
+//             : VideoPlayerController.networkUrl(
+//                 Uri.parse(widget.url ??
+//                     "https://flutter.github.io/assets-for-api-docs/assets/videos/butterfly.mp4"),
+//               );
+
+//     await _videoPlayerController!.initialize();
+
+//     setState(() {
+//       _chewieController = ChewieController(
+//         videoPlayerController: _videoPlayerController!,
+//         autoPlay: false,
+//         looping: false,
+//       );
+//     });
+//   }
+
+//   @override
+//   void dispose() {
+//     _chewieController?.dispose();
+//     _videoPlayerController?.dispose();
+//     super.dispose();
+//   }
+
 //   @override
 //   Widget build(BuildContext context) {
-//     return FutureBuilder<List>(
-//         future: getjasonData("${widget.link}"),
-//         builder: (context, t) {
-//           if (t.connectionState == ConnectionState.waiting) {
-//             return Center(child: Expanded(child: CircularProgressIndicator()));
-//           } else {
-//             return ListView.builder(
-//                 itemCount: t.data!.length,
-//                 itemBuilder: (context, ind) {
-//                   return Card(
-//                     child: Container(
-//                         margin: EdgeInsets.all(10),
-//                         alignment: Alignment.center,
-//                         child: Text("${t.data![ind]["${widget.tag}"]}")),
-//                   );
-//                 });
-//           }
-//         });
+//     if (_chewieController == null) {
+//       return SizedBox(
+//         height: widget.height ?? 235,
+//         width: widget.width ?? double.infinity,
+//         child: const Center(child: CircularProgressIndicator()),
+//       );
+//     }
+
+//     return SizedBox(
+//       height: widget.height ?? 235,
+//       width: widget.width ?? double.infinity,
+//       child: Chewie(controller: _chewieController!),
+//     );
 //   }
 // }
 
-// Future<List> ScrapeByClass(String link, String tag, String class_) async {
-//   String html = "";
-//   List result = [];
-//   http.Response t = await http.get(Uri.parse(link));
-//   html = dom.Document.html(t.body).outerHtml;
-//   BeautifulSoup soup = BeautifulSoup(html);
-//   for (var vercs in soup.findAll(tag, class_: class_)) {
-//     result.add(vercs.text);
-//   }
-//   return result;
-// }
+// //===========================================
 
-// class Scrape extends StatefulWidget {
-//   Scrape(
-//       {super.key, required this.link, required this.tag, required this.class_});
-//   String link;
-//   String tag;
-//   String class_;
-//   @override
-//   State<Scrape> createState() => _ScrapeState();
-// }
+//----------------------------------------------------------
 
-// class _ScrapeState extends State<Scrape> {
+// //===========================================
+// // import 'package:insta_image_viewer/insta_image_viewer.dart';
+// // package: insta_image_viewer 1.0.4
+// // add : flutter pub add insta_image_viewer
+// class ViewImage extends StatelessWidget {
+//   const ViewImage(
+//       {super.key,
+//       this.ImageLink,
+//       this.ImagePath,
+//       this.file,
+//       this.bytes,
+//       this.Height,
+//       this.Width});
+//   final String? ImageLink;
+//   final String? ImagePath;
+//   final File? file;
+//   final Uint8List? bytes;
+//   final double? Height;
+//   final double? Width;
 //   @override
 //   Widget build(BuildContext context) {
-//     return FutureBuilder<List>(
-//         future: ScrapeByClass(widget.link, widget.tag, widget.class_),
-//         builder: (context, snapshot) {
-//           if (snapshot.connectionState == ConnectionState.waiting) {
-//             return Center(child: CircularProgressIndicator());
-//           } else {
-//             return Container();
-//           }
-//         });
+//     if (ImagePath != null &&
+//         ImageLink == null &&
+//         file == null &&
+//         bytes == null) {
+//       return SizedBox(
+//         width: Width ?? 100,
+//         height: Height ?? 100,
+//         child: InstaImageViewer(
+//           child: Image(
+//             image: Image.asset(ImagePath!).image,
+//           ),
+//         ),
+//       );
+//     } else if (ImageLink == null && file != null && bytes == null) {
+//       return SizedBox(
+//         width: Width ?? double.infinity,
+//         height: Height ?? double.infinity,
+//         child: InstaImageViewer(
+//           child: Image(
+//             image: Image.file(file!).image,
+//           ),
+//         ),
+//       );
+//     } else if (ImageLink == null && bytes != null) {
+//       return SizedBox(
+//         width: Width ?? double.infinity,
+//         height: Height ?? double.infinity,
+//         child: InstaImageViewer(
+//           child: Image(
+//             image: Image.memory(bytes!).image,
+//           ),
+//         ),
+//       );
+//     } else {
+//       return SizedBox(
+//         width: Width ?? double.infinity,
+//         height: Height ?? double.infinity,
+//         child: InstaImageViewer(
+//           child: Image(
+//             image:
+//                 Image.network(ImageLink ?? "https://picsum.photos/id/507/1000")
+//                     .image,
+//           ),
+//         ),
+//       );
+//     }
 //   }
 // }
 
-// bool IsConnectedToInternet() {
-//   Future<bool> check() async {
-//     var state = await Connectivity().checkConnectivity();
-//     print(state.first);
-//     return state.first.toString() == "ConnectivityResult.none";
-//   }
-//   return true;
+// //===========================================
+
+//----------------------------------------------------------
+
+//===========================================
+
+// ImageEditor(){
+
 // }
-// Future PhotoImageFromGalary() async {
-//   return await ImagePicker().pickImage(source: ImageSource.gallery);
+
+//===========================================
+
+//----------------------------------------------------------
+
+//===========================================
+
+// StoryViewer(){
+
 // }
+
+//===========================================
+
+//----------------------------------------------------------
+
+//===========================================
+
+// PlayAudio(){
+
+// }
+
+//===========================================
+
+//----------------------------------------------------------
+
+//===========================================
+
+// SendNotification(){
+
+// }
+
+//===========================================
+
+//----------------------------------------------------------
+
+//===========================================
+
+// ViewPdf(){
+
+// }
+
+//===========================================
+
+//----------------------------------------------------------
+
+//===========================================
+
+// DownloadFile(){
+
+// }
+
+//===========================================
+
+//----------------------------------------------------------
+
+//===========================================
+
+// UploadFile(){
+
+// }
+
+//===========================================
+
+//----------------------------------------------------------
+
+//===========================================
+
+// VibrateTheDevice(){
+
+// }
+
+//===========================================
+
+//----------------------------------------------------------
+
+//===========================================
+
+// RecordAudio(){
+
+// }
+
+//===========================================
+
+//----------------------------------------------------------
+
+//===========================================
+
+// GetAproximitySensorData(){
+
+// }
+
+//===========================================
+
+//----------------------------------------------------------
+
+//===========================================
+
+// TurnAudioIntoText(){
+
+// }
+
+//===========================================
+
+//----------------------------------------------------------
+
+//===========================================
+// Prevent taking screenshots
+
+//===========================================
+
+//----------------------------------------------------------
+
+//===========================================
+
+//===========================================
+
+//----------------------------------------------------------
+
 class NavBar extends StatefulWidget {
   NavBar(
       {super.key,
@@ -1761,16 +1962,8 @@ class CenterVertical extends StatelessWidget {
 //   }
 // }
 
-List<Widget>? WidgetListMaker(int number, Widget widget) {
-  List<Widget>? list = [];
-  for (int i = 0; i < number; i++) {
-    list.add(widget);
-  }
-  return list;
-}
-Future PhotoImageFromGalary() async {
-  return await ImagePicker().pickImage(source: ImageSource.gallery);
-}
-Future PhotoImageFromCamera() async {
-  return await ImagePicker().pickImage(source: ImageSource.camera);
-}
+
+
+//=================================================
+
+//=================================================

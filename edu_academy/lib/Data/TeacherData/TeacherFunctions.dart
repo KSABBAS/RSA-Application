@@ -153,4 +153,20 @@ class TeacherFunctions {
     BooksAreLoading = false;
     update();
   }
+  web_pick_file() async {
+  Uint8List? file;
+  FilePickerResult? result;
+  String? name = '';
+  result = await FilePicker.platform.pickFiles(type: FileType.image, allowMultiple: false);
+  if (result != null) {
+    // file = File(result.files.single.path!);
+    file = result.files.single.bytes;
+    name = result.files.first.name;
+    print("##-#name $name");
+    return file;
+  } else {
+    // User canceled the picker
+  }
+  // print("#-file $file");
+}
 }

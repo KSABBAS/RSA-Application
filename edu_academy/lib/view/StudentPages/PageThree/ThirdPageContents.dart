@@ -2,7 +2,8 @@ import 'dart:developer';
 import 'dart:io';
 import 'package:edu_academy/Data/StudentData/Schedule.dart';
 import 'package:edu_academy/Data/StudentData/StudentData.dart';
-import 'package:edu_academy/MyTools.dart';
+import 'package:edu_academy/MyTools/MyFunctionTools.dart';
+import 'package:edu_academy/MyTools/MyTools.dart';
 import 'package:edu_academy/view/StudentPages/Other/StudentAppBar.dart';
 import 'package:edu_academy/service/Databse_Service.dart';
 import 'package:file_picker/file_picker.dart';
@@ -501,7 +502,7 @@ class _ThirdPageState extends State<ThirdPage> {
                                                         if (kIsWeb) {
                                                           pickImageFromGallery();
                                                         } else {
-                                                          var Galary = await PhotoImageFromGalary();
+                                                          var Galary = await PickImageFromGalary();
                                                           if (Galary != null) {
                                                             HomeWorks[HomeWorkIndex][HomeworkSelected + 1][4].add(File(Galary.path));
                                                             print("#Galary# ${HomeWorks[HomeWorkIndex][HomeworkSelected + 1][4]}");
@@ -676,7 +677,7 @@ class _ThirdPageState extends State<ThirdPage> {
                                 alignment: Alignment.center,
                                 child: InkWell(
                                   onTap: () async {
-                                    HomeWorks[HomeWorkIndex][HomeworkSelected + 1][4].add(File((await PhotoImageFromGalary()).path));
+                                    HomeWorks[HomeWorkIndex][HomeworkSelected + 1][4].add(File((await PickImageFromGalary()).path));
                                     setState(() {});
                                   },
                                   child: CMaker(
@@ -820,7 +821,7 @@ class _ThirdPageState extends State<ThirdPage> {
                                         alignment: Alignment.center,
                                         child: InkWell(
                                           onTap: () async {
-                                            HomeWorks[HomeWorkIndex][HomeworkSelected + 1][4].add(File((await PhotoImageFromGalary()).path));
+                                            HomeWorks[HomeWorkIndex][HomeworkSelected + 1][4].add(File((await PickImageFromGalary()).path));
                                             setState(() {});
                                           },
                                           child: CMaker(
@@ -1173,7 +1174,7 @@ class _ThirdPageState extends State<ThirdPage> {
                                 alignment: Alignment.center,
                                 child: InkWell(
                                   onTap: () async {
-                                    HomeWorks[HomeWorkIndex][HomeworkSelected + 1][4].add(File((await PhotoImageFromGalary()).path));
+                                    HomeWorks[HomeWorkIndex][HomeworkSelected + 1][4].add(File((await PickImageFromGalary()).path));
                                     setState(() {});
                                   },
                                   child: CMaker(
@@ -1305,7 +1306,7 @@ class _ThirdPageState extends State<ThirdPage> {
                                 alignment: Alignment.center,
                                 child: InkWell(
                                   onTap: () async {
-                                    HomeWorks[HomeWorkIndex][HomeworkSelected + 1][4].add(File((await PhotoImageFromGalary()).path));
+                                    HomeWorks[HomeWorkIndex][HomeworkSelected + 1][4].add(File((await PickImageFromGalary()).path));
                                     setState(() {});
                                   },
                                   child: CMaker(
@@ -1443,7 +1444,7 @@ class _ThirdPageState extends State<ThirdPage> {
                                           alignment: Alignment.center,
                                           child: InkWell(
                                             onTap: () async {
-                                              HomeWorks[HomeWorkIndex][HomeworkSelected + 1][4].add(File((await PhotoImageFromGalary()).path));
+                                              HomeWorks[HomeWorkIndex][HomeworkSelected + 1][4].add(File((await PickImageFromGalary()).path));
                                               setState(() {});
                                             },
                                             child: CMaker(

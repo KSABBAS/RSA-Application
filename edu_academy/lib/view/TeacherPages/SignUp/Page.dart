@@ -1,5 +1,7 @@
 import 'package:edu_academy/Data/StudentData/GradesAndSubjects.dart';
-import 'package:edu_academy/MyTools.dart';
+import 'package:edu_academy/Data/TeacherData/TeacherData.dart';
+import 'package:edu_academy/MyTools/MyFunctionTools.dart';
+import 'package:edu_academy/MyTools/MyTools.dart';
 import 'package:edu_academy/service/Databse_Service.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
@@ -19,22 +21,14 @@ class TeacherSignUpPage extends StatefulWidget {
 
 var obscureText = true;
 
-String TeacherName = "";
-String TeacherNumber = "";
-String TeacherEmail = "";
-String TeacherPassword = "";
 String TeacherConfirmPassword = "";
-String TeacherGeneder = "";
-String TeacherDayOfBirth = "";
-String TeacherDateOfBirth = "Select a Date";
-String TeacherMonthOfBirth = "";
-String TeacherYearOfBirth = "";
-String TeacherSubject1 = "null";
-String TeacherSubject2 = "null";
-String TeacherSubject3 = "null";
-String TeacherDes = "";
-// bool SecondDropdownVisible = false;
-// bool ThirdDropdownVisible = false;
+
+// String TeacherSubject1 = "null";
+// String TeacherSubject2 = "null";
+// String TeacherSubject3 = "null";
+// String TeacherData.TeacherDescription = "";
+bool SecondDropdownVisible = false;
+bool ThirdDropdownVisible = false;
 GlobalKey<FormState> key3 = GlobalKey();
 var forDateInput = DateTime.now().subtract(const Duration(days: 1926));
 
@@ -143,7 +137,7 @@ class _TeacherSignUpPageState extends State<TeacherSignUpPage> {
         height: 80,
         child: TextFormField(
           onSaved: (newValue) {
-            TeacherName = newValue!;
+            TeacherData.name = newValue!;
           },
           validator: (value) {
             if (value!.isEmpty) {
@@ -171,7 +165,7 @@ class _TeacherSignUpPageState extends State<TeacherSignUpPage> {
         height: 80,
         child: TextFormField(
           onSaved: (newValue) {
-            TeacherNumber = newValue!;
+            TeacherData.number = newValue!;
           },
           validator: (value) {
             if (value!.isEmpty) {
@@ -205,7 +199,7 @@ class _TeacherSignUpPageState extends State<TeacherSignUpPage> {
         height: 80,
         child: TextFormField(
           onSaved: (newValue) {
-            TeacherEmail = newValue!;
+            TeacherData.email = newValue!;
           },
           validator: (value) {
             if (value!.isEmpty) {
@@ -233,7 +227,7 @@ class _TeacherSignUpPageState extends State<TeacherSignUpPage> {
         height: 80,
         child: TextFormField(
           onSaved: (newValue) {
-            TeacherPassword = newValue!;
+            TeacherData.password = newValue!;
           },
           onChanged: (value) {
             TeacherDemoPassword = value;
@@ -320,7 +314,7 @@ class _TeacherSignUpPageState extends State<TeacherSignUpPage> {
         ? MyButton(
             padding: const EdgeInsets.all(10),
             buttonColor: const Color.fromARGB(255, 74, 193, 241),
-            text: TeacherDateOfBirth,
+            text: TeacherData.TeacherDateOfBirth,
             onTap: () async {
               var TimeSelected = await showOmniDateTimePicker(
                 context: context,
@@ -360,10 +354,10 @@ class _TeacherSignUpPageState extends State<TeacherSignUpPage> {
                 transitionDuration: const Duration(milliseconds: 200),
                 barrierDismissible: true,
               );
-              TeacherDayOfBirth = TimeSelected!.day.toString();
-              TeacherMonthOfBirth = TimeSelected.month.toString();
-              TeacherYearOfBirth = TimeSelected.year.toString();
-              TeacherDateOfBirth = "$TeacherDayOfBirth / $TeacherMonthOfBirth / $TeacherYearOfBirth";
+              TeacherData.TeacherDayOfBirth = TimeSelected!.day.toString();
+              TeacherData.TeacherMonthOfBirth = TimeSelected.month.toString();
+              TeacherData.TeacherYearOfBirth = TimeSelected.year.toString();
+              TeacherData.TeacherDateOfBirth = "$TeacherData.TeacherDayOfBirth / $TeacherData.TeacherMonthOfBirth / $TeacherData.TeacherYearOfBirth";
               setState(() {});
             })
         : TimePickerSpinnerPopUp(
@@ -376,11 +370,11 @@ class _TeacherSignUpPageState extends State<TeacherSignUpPage> {
             onChange: (dateTime) {
               setState(() {
                 forDateInput = dateTime;
-                TeacherDayOfBirth = dateTime.day.toString();
-                TeacherMonthOfBirth = dateTime.month.toString();
-                TeacherYearOfBirth = dateTime.year.toString();
-                TeacherDateOfBirth = "$TeacherDayOfBirth/$TeacherMonthOfBirth/$TeacherYearOfBirth";
-                print(TeacherDateOfBirth);
+                TeacherData.TeacherDayOfBirth = dateTime.day.toString();
+                TeacherData.TeacherMonthOfBirth = dateTime.month.toString();
+                TeacherData.TeacherYearOfBirth = dateTime.year.toString();
+                TeacherData.TeacherDateOfBirth = "$TeacherData.TeacherDayOfBirth/$TeacherData.TeacherMonthOfBirth/$TeacherData.TeacherYearOfBirth";
+                print(TeacherData.TeacherDateOfBirth);
               });
             },
           );
@@ -404,10 +398,10 @@ class _TeacherSignUpPageState extends State<TeacherSignUpPage> {
                 style: TextStyle(fontSize: 10, fontWeight: FontWeight.w500),
               ),
               value: "Male",
-              groupValue: TeacherGeneder,
+              groupValue: TeacherData.TeacherGeneder,
               onChanged: (val) {
                 setState(() {
-                  TeacherGeneder = val.toString();
+                  TeacherData.TeacherGeneder = val.toString();
                 });
               })),
       Container(
@@ -419,10 +413,10 @@ class _TeacherSignUpPageState extends State<TeacherSignUpPage> {
               activeColor: const Color.fromARGB(255, 74, 193, 241),
               title: const Text("انثى", style: TextStyle(fontSize: 10, fontWeight: FontWeight.w500)),
               value: "Female",
-              groupValue: TeacherGeneder,
+              groupValue: TeacherData.TeacherGeneder,
               onChanged: (val) {
                 setState(() {
-                  TeacherGeneder = val.toString();
+                  TeacherData.TeacherGeneder = val.toString();
                 });
               }))
     ];
@@ -451,11 +445,11 @@ class _TeacherSignUpPageState extends State<TeacherSignUpPage> {
                 ),
                 Expanded(child: Container()),
                 DropdownButton<String>(
-                  items: SubjectsMaker(TeacherSubject1),
-                  value: TeacherSubject1,
+                  items: SubjectsMaker(TeacherData.Subject1),
+                  value: TeacherData.Subject1,
                   onChanged: (s1) {
                     setState(() {
-                      TeacherSubject1 = s1!.toString();
+                      TeacherData.Subject1 = s1!.toString();
                     });
                   },
                 ),
@@ -485,11 +479,11 @@ class _TeacherSignUpPageState extends State<TeacherSignUpPage> {
                   ),
                   Expanded(child: Container()),
                   DropdownButton<String>(
-                    items: SubjectsMaker(TeacherSubject2),
-                    value: TeacherSubject2,
+                    items: SubjectsMaker(TeacherData.Subject2),
+                    value: TeacherData.Subject2,
                     onChanged: (s2) {
                       setState(() {
-                        TeacherSubject2 = s2!.toString();
+                        TeacherData.Subject2 = s2!.toString();
                       });
                     },
                   ),
@@ -522,11 +516,11 @@ class _TeacherSignUpPageState extends State<TeacherSignUpPage> {
                   ),
                   Expanded(child: Container()),
                   DropdownButton<String>(
-                    items: SubjectsMaker(TeacherSubject3),
-                    value: TeacherSubject3,
+                    items: SubjectsMaker(TeacherData.Subject3),
+                    value: TeacherData.Subject3,
                     onChanged: (s3) {
                       setState(() {
-                        TeacherSubject3 = s3!.toString();
+                        TeacherData.Subject3 = s3!.toString();
                       });
                     },
                   ),
@@ -544,7 +538,7 @@ class _TeacherSignUpPageState extends State<TeacherSignUpPage> {
         controller: _MessageController,
         maxLines: 8,
         onChanged: (newValue) {
-          TeacherDes = newValue;
+          TeacherData.TeacherDescription = newValue;
         },
         decoration: InputDecoration(
             hintText: "اخبرنا اكثر عن نفسك",
@@ -573,16 +567,16 @@ class _TeacherSignUpPageState extends State<TeacherSignUpPage> {
             ),
           );
           await dbService.fiCreate('Teacher', {
-            "name": TeacherName,
-            "phone": TeacherNumber,
-            "email": TeacherEmail.toLowerCase(),
-            "password": TeacherPassword,
-            "birth_date": TeacherDateOfBirth,
-            "gender": TeacherGeneder,
-            "Subject1": [TeacherSubject1],
-            "Subject2": (TeacherSubject2 == "null") ? TeacherSubject2 : [TeacherSubject2],
-            "Subject3": (TeacherSubject3 == "null") ? TeacherSubject3 : [TeacherSubject3],
-            "Description": TeacherDes,
+            "name": TeacherData.name,
+            "phone": TeacherData.number,
+            "email": TeacherData.email.toLowerCase(),
+            "password": TeacherData.password,
+            "birth_date": TeacherData.TeacherDateOfBirth,
+            "gender": TeacherData.TeacherGeneder,
+            "Subject1": [TeacherData.Subject1],
+            "Subject2": (TeacherData.Subject2 == "null") ? TeacherData.Subject2 : [TeacherData.Subject2],
+            "Subject3": (TeacherData.Subject3 == "null") ? TeacherData.Subject3 : [TeacherData.Subject3],
+            "Description": TeacherData.TeacherDescription,
             "photo":
                 'https://firebasestorage.googleapis.com/v0/b/rsa-app-3ec3f.appspot.com/o/Profiles%2FPerson.png?alt=media&token=9a526b63-e8ff-40ec-b831-088e270a0013',
             "state": "false"

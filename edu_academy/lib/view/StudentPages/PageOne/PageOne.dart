@@ -1,4 +1,5 @@
-import 'package:edu_academy/MyTools.dart';
+import 'package:edu_academy/MyTools/MyFunctionTools.dart';
+import 'package:edu_academy/MyTools/MyTools.dart';
 import 'package:edu_academy/view/StudentPages/Other/StudentAppBar.dart';
 import 'package:edu_academy/view/StudentPages/PageOne/Contents/JoinNextClass.dart';
 import 'package:edu_academy/view/StudentPages/PageOne/Contents/MessageBox.dart';

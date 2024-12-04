@@ -6,7 +6,7 @@ import 'package:edu_academy/view/StudentPages/PageTwo/PageTwo.dart';
 import 'package:edu_academy/view/TeacherPages/TeacherMainPage.dart';
 import 'package:edu_academy/view/ParentPages/ParentSignUpPage.dart';
 import 'package:edu_academy/view/StudentPages/SignUp/StudentMobileSignUpPage.dart';
-import 'package:edu_academy/view/TeacherPages/TeacherSignUpPage.dart';
+import 'package:edu_academy/view/TeacherPages/SignUp/Page.dart';
 import 'package:edu_academy/Login/WhatAreYouPage.dart';
 import 'package:edu_academy/view/StudentPages/HomePage.dart';
 import 'package:edu_academy/service/Databse_Service.dart';

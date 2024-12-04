@@ -1,5 +1,6 @@
 import 'package:edu_academy/Data/TeacherData/ScheduleDart.dart';
-import 'package:edu_academy/MyTools.dart';
+import 'package:edu_academy/MyTools/MyFunctionTools.dart';
+import 'package:edu_academy/MyTools/MyTools.dart';
 import 'package:edu_academy/view/TeacherPages/PageOne/contents/Page/FirstPage.dart';
 import 'package:edu_academy/view/TeacherPages/PageOne/contents/Page/Contents/FullSchedule.dart';
 import 'package:flutter/material.dart';

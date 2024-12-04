@@ -11,7 +11,8 @@ import 'package:edu_academy/view/TeacherPages/PageThree/contents/OneHomeworkOpen
 import 'package:edu_academy/view/TeacherPages/PageThree/contents/OneSutdentHomework/Page.dart';
 import 'package:edu_academy/view/TeacherPages/PageThree/contents/ViewSentSolution/Page.dart';
 import 'package:edu_academy/view/TeacherPages/TeacherMainPage.dart';
-import 'package:edu_academy/MyTools.dart';
+import 'package:edu_academy/MyTools/MyFunctionTools.dart';
+import 'package:edu_academy/MyTools/MyTools.dart';
 import 'package:edu_academy/service/Databse_Service.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';

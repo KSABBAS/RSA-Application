@@ -3,7 +3,8 @@ import 'dart:typed_data';
 
 import 'package:edu_academy/Data/StudentData/StudentData.dart';
 import 'package:edu_academy/Login/LogInPage.dart';
-import 'package:edu_academy/MyTools.dart';
+import 'package:edu_academy/MyTools/MyFunctionTools.dart';
+import 'package:edu_academy/MyTools/MyTools.dart';
 import 'package:edu_academy/view/StudentPages/HomePage.dart';
 import 'package:edu_academy/view/TeacherPages/TeacherMainPage.dart';
 import 'package:edu_academy/service/Databse_Service.dart';
@@ -70,7 +71,7 @@ class _StudentProfileState extends State<StudentProfile> {
           widget.profile_photo =
               await dbService.FiAdd_photo0(student_id, "${role}s", image_data);
         } else {
-          XFile? Avatar = await PhotoImageFromGalary();
+          XFile? Avatar = await PickImageFromGalary();
           if (Avatar != null) {
             final dbService = DatabaseService();
             ProfileAvatar = Avatar;
