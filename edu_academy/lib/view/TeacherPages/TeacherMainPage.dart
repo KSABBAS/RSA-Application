@@ -8,7 +8,7 @@ import 'package:edu_academy/view/TeacherPages/PageOne/Page.dart';
 import 'package:edu_academy/view/TeacherPages/PageTwo/Page.dart';
 import 'package:edu_academy/view/TeacherPages/ProfilePage/Page.dart';
 import 'package:edu_academy/view/TeacherPages/PageTwo/Contents/Pages/Page.dart';
-import 'package:edu_academy/view/TeacherPages/PageThree/Page.dart';
+import 'package:edu_academy/view/TeacherPages/PageOne/PageThree/Page.dart';
 import 'package:edu_academy/MyTools/MyFunctionTools.dart';
 import 'package:edu_academy/MyTools/MyTools.dart';
 import 'package:edu_academy/service/Databse_Service.dart';
