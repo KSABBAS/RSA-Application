@@ -464,7 +464,7 @@ class _ThirdPageState extends State<ThirdPage> {
                                                         if (kIsWeb) {
                                                           pickImageFromGallery();
                                                         } else {
-                                                          var Camera = await PhotoImageFromCamera();
+                                                          var Camera = await PickImageFromCamera();
                                                           if (Camera != null) {
                                                             HomeWorks[HomeWorkIndex][HomeworkSelected + 1][4].add(File(Camera.path));
                                                             print("#Camera# ${HomeWorks[HomeWorkIndex][HomeworkSelected + 1][4]}");
